@@ -24,8 +24,15 @@ Terapia:
 - [Gastroprotezione: pantoprazolo 20 mg 1 compressa al mattino a digiuno finché assume antinfiammatorio/cortisone.]
 
 Indicazioni:
-- Beva almeno 2 litri di acqua al giorno, distribuiti nella giornata.
-- Urini in un colino o in una garza per recuperare il calcolo e lo porti al medico per l'analisi.
+- Urini sempre in un colino o attraverso una garza finché il calcolo non viene espulso; lo conservi asciutto in un contenitore e lo porti al medico curante per l'analisi chimica: serve a scegliere la prevenzione giusta.
+
+Prevenzione di nuovi calcoli:
+- Beva 2,5–3 litri al giorno, distribuiti nella giornata, in modo da urinare almeno 2–2,5 litri (urine chiare); di più se suda molto o fa caldo.
+- Riduca il sale (niente sale aggiunto, pochi insaccati, formaggi stagionati, cibi pronti) e non ecceda con le proteine animali (carne, pesce, uova).
+- Non riduca latte, yogurt e formaggi freschi: un apporto normale di calcio protegge dai calcoli. Eviti invece integratori di calcio e di vitamina C ad alte dosi, salvo diversa indicazione medica.
+- Molta frutta e verdura; eviti eccessi di cibi ricchi di ossalati (spinaci, bietole, rabarbaro, cioccolato, tè nero) e di bevande zuccherate.
+- Mantenga il peso forma e faccia attività fisica regolare.
+- [Gli integratori in commercio «contro i calcoli» non hanno dimostrato efficacia; un'eventuale terapia preventiva (es. citrato di potassio) verrà valutata dal medico in base al tipo di calcolo e agli esami.]
 
 ${controlli('[Si allega richiesta per ecografia dell\'apparato urinario e visita urologica.]')}
 
@@ -355,6 +362,8 @@ ${RITORNO}
 Terapia:
 - Ibuprofene 600 mg 1 compressa ogni 8 ore dopo i pasti per 5 giorni, oppure paracetamolo 1 g fino a 3 volte al giorno.
 - [Tutore/cavigliera: da indossare quando cammina per 2–3 settimane.]
+- [Diclofenac gel (es. Voltaren Emulgel 1%): applicare sulla zona dolente 3–4 volte al giorno per 7–14 giorni, spalmando senza massaggiare con forza, su cute integra; lavarsi le mani dopo.]
+- [In alternativa ketoprofene schiuma/gel (es. Artrosilene schiuma 15%): 2–3 applicazioni al giorno per massimo 7–10 giorni. Non esporre la zona trattata al sole o a lampade abbronzanti durante la terapia e per 2 settimane dopo (rischio di reazioni da fotosensibilità); coprire la zona.]
 
 Indicazioni per i primi 2–3 giorni:
 - Riposo relativo; ghiaccio avvolto in un panno per 15–20 minuti ogni 2–3 ore; fasciatura elastica; piede sollevato sopra il livello del cuore quando è seduto o sdraiato.
@@ -362,7 +371,7 @@ Indicazioni per i primi 2–3 giorni:
 - Dopo 3–5 giorni inizi a muovere la caviglia (cerchi, flesso-estensione) e riprenda gradualmente a camminare normalmente. Lo sport dopo 4–6 settimane.
 - [Immobilizzazione rigida: profilassi antitrombotica con enoxaparina 4000 UI sottocute 1 volta al giorno fino alla rimozione.]
 
-${controlli('[Si allega richiesta per visita ortopedica.]')}
+${controlli('[Si allega richiesta per visita ortopedica.]', '[Si consiglia valutazione fisioterapica per la rieducazione (equilibrio e propriocezione), che riduce il rischio di nuove distorsioni.]')}
 
 ${RITORNO}
 - dolore che peggiora nonostante la terapia;
@@ -376,13 +385,15 @@ ${RITORNO}
 Terapia:
 - Ibuprofene 600 mg 1 compressa ogni 8 ore dopo i pasti per 5 giorni, oppure paracetamolo 1 g fino a 3 volte al giorno.
 - [Ginocchiera elastica / tutore articolato.] [Stampelle con carico parziale.]
+- [Diclofenac gel (es. Voltaren Emulgel 1%): applicare sulla zona dolente 3–4 volte al giorno per 7–14 giorni, spalmando senza massaggiare con forza, su cute integra; lavarsi le mani dopo.]
+- [In alternativa ketoprofene schiuma/gel (es. Artrosilene schiuma 15%): 2–3 applicazioni al giorno per massimo 7–10 giorni. Non esporre la zona trattata al sole o a lampade abbronzanti durante la terapia e per 2 settimane dopo (rischio di reazioni da fotosensibilità); coprire la zona.]
 
 Indicazioni:
 - Primi 2–3 giorni: riposo relativo, ghiaccio in un panno 15–20 minuti ogni 2–3 ore, gamba sollevata.
 - Carico quanto tollerato dal dolore; dopo qualche giorno inizi a piegare ed estendere il ginocchio senza forzare.
 - [Profilassi antitrombotica con enoxaparina 4000 UI sottocute 1 volta al giorno se immobilizzato.]
 
-${controlli('[Si allega richiesta per visita ortopedica entro 7–10 giorni.]')}
+${controlli('[Si allega richiesta per visita ortopedica entro 7–10 giorni.]', '[Si consiglia valutazione fisioterapica per il recupero del movimento e della forza.]')}
 
 ${RITORNO}
 - il ginocchio si blocca e non riesce a stenderlo;
@@ -395,12 +406,15 @@ ${RITORNO}
 
 Terapia:
 - Paracetamolo 1 g fino a 3 volte al giorno; [ibuprofene 600 mg ogni 8 ore dopo i pasti dal 3° giorno, per 5 giorni].
+- [Diclofenac gel (es. Voltaren Emulgel 1%): applicare sulla zona dolente 3–4 volte al giorno per 7–14 giorni, spalmando senza massaggiare con forza, su cute integra; lavarsi le mani dopo.]
+- [In alternativa ketoprofene schiuma/gel (es. Artrosilene schiuma 15%): 2–3 applicazioni al giorno per massimo 7–10 giorni. Non esporre la zona trattata al sole o a lampade abbronzanti durante la terapia e per 2 settimane dopo (rischio di reazioni da fotosensibilità); coprire la zona.]
 
 Indicazioni:
-- Primi 2–3 giorni: riposo del muscolo, ghiaccio in un panno 15–20 minuti ogni 2–3 ore, eventuale fasciatura compressiva, arto sollevato. Niente calore e massaggi in questa fase.
-- Poi ripresa graduale del movimento e stretching leggero senza dolore; ritorno allo sport solo quando il movimento è completo e senza dolore (di solito 2–6 settimane).
+- Primi 3 giorni (fase acuta): riposo del muscolo, ghiaccio in un panno 15–20 minuti ogni 2–3 ore, eventuale fasciatura compressiva, arto sollevato. NON applichi calore, NON massaggi e non faccia stretching: aumentano il sanguinamento nel muscolo e il gonfiore. Niente alcol.
+- Dal 4° giorno, se gonfiore e livido stanno diminuendo: calore locale (20 minuti 2–3 volte al giorno) e massaggio leggero, ripresa graduale del movimento e stretching dolce senza dolore.
+- Ritorno allo sport solo quando il movimento è completo, senza dolore e con forza recuperata (di solito 2–6 settimane, di più per le lesioni estese).
 
-${controlli('[Si allega richiesta per ecografia muscolare a 5–7 giorni.]')}
+${controlli('[Si allega richiesta per ecografia muscolare a 5–7 giorni.]', '[Si consiglia valutazione fisioterapica per un programma di recupero graduale prima del ritorno allo sport.]')}
 
 ${RITORNO}
 - gonfiore importante e duro, livido che si allarga rapidamente;
@@ -414,12 +428,15 @@ ${RITORNO}
 Terapia:
 - Ibuprofene 600 mg 1 compressa ogni 8 ore dopo i pasti per 5 giorni, oppure paracetamolo 1 g fino a 3 volte al giorno.
 - [Tiocolchicoside 4 mg: 1 capsula ogni 12 ore per massimo 7 giorni. Non in gravidanza o allattamento.]
+- [Diclofenac gel (es. Voltaren Emulgel 1%): applicare sulla zona dolente 3–4 volte al giorno per 7–14 giorni, spalmando senza massaggiare con forza, su cute integra; lavarsi le mani dopo.]
+- [In alternativa ketoprofene schiuma/gel (es. Artrosilene schiuma 15%): 2–3 applicazioni al giorno per massimo 7–10 giorni. Non esporre la zona trattata al sole o a lampade abbronzanti durante la terapia e per 2 settimane dopo (rischio di reazioni da fotosensibilità); coprire la zona.]
 
 Indicazioni:
-- Calore locale (borsa dell'acqua calda, cerotti autoriscaldanti) 20 minuti più volte al giorno.
+- Nella contrattura (senza trauma diretto né livido) il calore è utile da subito: borsa dell'acqua calda o cerotti autoriscaldanti 20 minuti più volte al giorno; non applicare calore sullo stesso punto del gel/schiuma antinfiammatoria e non dormire con fonti di calore sulla pelle.
+- Massaggio leggero e decontratturante consentito da subito, senza provocare dolore.
 - Movimento leggero e stretching dolce; eviti posture fisse prolungate e sforzi.
 
-${controlli()}
+${controlli('[Si consiglia valutazione fisioterapica se il dolore persiste oltre 1–2 settimane o se gli episodi si ripetono.]')}
 
 ${RITORNO}
 - debolezza o formicolio di braccia o gambe;
