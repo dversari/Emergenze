@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/*
+ * Stessa palette del Cruscotto: fondo carta chiaro,
+ * verde salvia per positivo/azioni, bordeaux per negativo, oro per avvisi.
+ * Usare sempre questi nomi (bg-carta, text-tenue, border-linea…), non i colori Tailwind.
+ */
+@theme {
+  --color-fondo: #f2f0eb;
+  --color-carta: #fbfaf7;
+  --color-sabbia: #f0ede7;
+  --color-testo: #1f2b26;
+  --color-tenue: #737b76;
+  --color-linea: #d9d7d0;
+  --color-linea-forte: #c9c6bd;
+  --color-verde: #2f6652;
+  --color-verde-scuro: #264f40;
+  --color-verde2: #6f8f7d;
+  --color-verde3: #dfe8e2;
+  --color-bordeaux: #7b3f4a;
+  --color-bordeaux2: #a66a74;
+  --color-bordeaux3: #eadde0;
+  --color-oro: #92794e;
+  --color-oro2: #b9a06f;
+  --color-oro3: #f1eadb;
+  --shadow-card: 0 8px 28px rgba(45, 55, 49, 0.06);
+}
+
+/* Card: il mattone di tutte le pagine */
+@utility card {
+  background-color: var(--color-carta);
+  border: 1px solid var(--color-linea);
+  border-radius: 18px;
+  padding: 1rem;
+  box-shadow: var(--shadow-card);
+}
+
+/* Etichetta piccola maiuscola sopra i valori (come .k del portafoglio) */
+@utility etichetta {
+  font-size: 10px;
+  line-height: 1.2;
+  color: var(--color-tenue);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+@utility valore {
+  font-size: 23px;
+  line-height: 1.15;
+  font-weight: 780;
+  letter-spacing: -0.02em;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-fondo);
+  color: var(--color-testo);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+/* Campi: fondo bianco e bordo come nel portafoglio */
+@layer base {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), select, textarea {
+    background-color: #fff;
+    color: var(--color-testo);
+  }
+}
+
+/* Evita lo zoom automatico su iOS quando si tocca un input */
+input, select, textarea {
+  font-size: 16px;
+}
+
