@@ -41,7 +41,8 @@ ${RITORNO}
     testo: `Diagnosi: colica biliare [da calcolosi della colecisti].
 
 Terapia:
-- Al bisogno per il dolore: Valpinax 20 mg + 2,5 mg (ottatropina + diazepam): 1 compressa fino a 3 volte al giorno, oppure Valpinax gocce 2%: 25–30 gocce fino a 3 volte al giorno. Contiene una benzodiazepina: può dare sonnolenza, non guidi e non beva alcolici mentre lo assume.
+- Al bisogno per il dolore: Spasmomen Somatico 40 mg + 2 mg (otilonio bromuro + diazepam): 1 compressa dopo i pasti, fino a 3 volte al giorno.
+  Attenzione: contiene diazepam (benzodiazepina). Può dare sonnolenza, vertigini, rallentamento dei riflessi: non guidi e non usi macchinari pericolosi mentre lo assume. Non beva alcolici e non lo associ ad altri sedativi, sonniferi o oppioidi (es. codeina, tramadolo). Possibili anche bocca secca e difficoltà a urinare. Non usare in gravidanza (primo trimestre), glaucoma, ipertrofia prostatica, miastenia. Negli anziani usare la dose minima.
 - In aggiunta, se serve: paracetamolo 1 g fino a 3 volte al giorno.
 
 Indicazioni:
@@ -62,7 +63,8 @@ ${RITORNO}
 
 Terapia:
 - Simeticone 80–120 mg: 1 compressa masticabile dopo i pasti principali, per alcuni giorni.
-- Al bisogno per il dolore: Valpinax 20 mg + 2,5 mg (ottatropina + diazepam): 1 compressa fino a 3 volte al giorno, oppure Valpinax gocce 2%: 25–30 gocce fino a 3 volte al giorno. Contiene una benzodiazepina: può dare sonnolenza, non guidi e non beva alcolici mentre lo assume.
+- Al bisogno per il dolore: Spasmomen Somatico 40 mg + 2 mg (otilonio bromuro + diazepam): 1 compressa dopo i pasti, fino a 3 volte al giorno.
+  Attenzione: contiene diazepam (benzodiazepina). Può dare sonnolenza, vertigini, rallentamento dei riflessi: non guidi e non usi macchinari pericolosi mentre lo assume. Non beva alcolici e non lo associ ad altri sedativi, sonniferi o oppioidi (es. codeina, tramadolo). Possibili anche bocca secca e difficoltà a urinare. Non usare in gravidanza (primo trimestre), glaucoma, ipertrofia prostatica, miastenia. Negli anziani usare la dose minima.
 
 Indicazioni:
 - Mangi lentamente, eviti bevande gassate, legumi, cavoli, chewing-gum, dolcificanti (sorbitolo).
