@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { LINEE_GUIDA, lineaGuida } from '../lib/lineeGuida'
+import ChiediLineaGuida from '../components/ChiediLineaGuida'
+
+/** «ESC 2024», oppure l'ente così com'è se contiene già gli anni (confronti tra società). */
+const enteAnno = (l: { ente: string; anno: number }) => (/\d{4}/.test(l.ente) ? l.ente : `${l.ente} ${l.anno}`)
 
 const data = (iso: string) =>
   new Date(iso + 'T12:00:00').toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -17,11 +21,11 @@ export function ElencoLineeGuida() {
       {voci.map((l) => (
         <Link key={l.id} to={`/linee-guida/${l.id}`} className="card !py-3 flex items-center gap-3 active:bg-sabbia">
           <div className="w-11 h-11 rounded-xl bg-bordeaux3 text-bordeaux flex items-center justify-center font-extrabold text-sm shrink-0">
-            {l.titolo.split(' ').map((p) => p[0]).join('').slice(0, 2).toUpperCase()}
+            {(l.titolo.includes(' ') ? l.titolo.split(' ').map((p) => p[0]).join('') : l.titolo).slice(0, 2).toUpperCase()}
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-bold leading-tight">{l.titolo}</p>
-            <p className="text-xs text-tenue">{l.ente} {l.anno} · {l.area}</p>
+            <p className="text-xs text-tenue">{enteAnno(l)} · {l.area}</p>
             <p className="text-[11px] text-verde mt-0.5">✓ controllata il {data(l.controllata)}</p>
           </div>
           <span className="text-tenue">›</span>
@@ -45,7 +49,7 @@ export function RiassuntoLineaGuida() {
       <Link to="/linee-guida" className="text-sm text-tenue">‹ Linee guida</Link>
 
       <div>
-        <p className="text-[11px] uppercase tracking-[0.12em] text-bordeaux font-bold">{l.ente} {l.anno} · {l.area}</p>
+        <p className="text-[11px] uppercase tracking-[0.12em] text-bordeaux font-bold">{enteAnno(l)} · {l.area}</p>
         <h2 className="font-extrabold text-2xl tracking-tight leading-tight">{l.titolo}</h2>
         <a href={l.fonte.url} target="_blank" rel="noreferrer" className="text-sm text-verde font-semibold underline">
           Testo completo: {l.fonte.etichetta} ↗
@@ -99,6 +103,8 @@ export function RiassuntoLineaGuida() {
           ))}
         </ol>
       </section>
+
+      {l.fonti && <ChiediLineaGuida key={l.id} fonti={l.fonti} />}
 
       <p className="text-[11px] text-tenue px-1">Riassunto personale: le dosi vanno verificate su linee guida e scheda tecnica.</p>
     </div>

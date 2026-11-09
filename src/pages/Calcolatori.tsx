@@ -122,6 +122,23 @@ const PUNTEGGI: Punteggio[] = [
     formato: (t) => (t === 0 ? 'neg' : `${t}/8`),
   },
   {
+    id: 'spesi',
+    nome: 'sPESI',
+    ambito: 'EP · gravità e dimissione',
+    voci: [
+      { tipo: 'si', id: 'eta', testo: 'Età >80 anni', punti: 1 },
+      { tipo: 'si', id: 'k', testo: 'Neoplasia', punti: 1 },
+      { tipo: 'si', id: 'cp', testo: 'Scompenso o malattia polmonare cronica', punti: 1 },
+      { tipo: 'si', id: 'fc', testo: 'FC ≥110', punti: 1 },
+      { tipo: 'si', id: 'pas', testo: 'PAS <100 mmHg', punti: 1 },
+      { tipo: 'si', id: 'sat', testo: 'SpO₂ <90%', punti: 1 },
+    ],
+    esito: (t) =>
+      t === 0 ? { livello: 'basso', testo: 'Basso rischio: mortalità a 30 giorni ~1%. Dimissione possibile se VD e troponina normali.' }
+      : { livello: 'alto', testo: 'Rischio non basso: mortalità ~11%. Valutare VD e troponina (ESC intermedio; AHA categoria C o superiore).' },
+    fonte: 'Jiménez, Arch Intern Med 2010',
+  },
+  {
     id: 'curb65',
     nome: 'CURB-65',
     ambito: 'Polmonite comunitaria',
