@@ -1,20 +1,23 @@
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { DIMISSIONI, type Dimissione } from '../lib/dimissioni'
 
-const chiave = (id: string) => `emergenze.dimissione.${id}`
-function leggi(id: string): string | null {
-  try { return localStorage.getItem(chiave(id)) } catch { return null }
+/** Testo modificabile con versione salvata sul telefono (dimissioni, anamnesi…). */
+export interface TestoModificabile { id: string; nome: string; gruppo: string; testo: string }
+type Dimissione = TestoModificabile
+
+// La chiave include il prefisso della pagina (es. «dimissione», «anamnesi»).
+function leggi(k: string): string | null {
+  try { return localStorage.getItem(k) } catch { return null }
 }
-function salva(id: string, testo: string | null) {
+function salva(k: string, testo: string | null) {
   try {
-    if (testo === null) localStorage.removeItem(chiave(id))
-    else localStorage.setItem(chiave(id), testo)
+    if (testo === null) localStorage.removeItem(k)
+    else localStorage.setItem(k, testo)
   } catch { /* storage non disponibile */ }
 }
 
-function Editor({ d, onSalvato, onSporco }: { d: Dimissione; onSalvato: () => void; onSporco: (sporco: boolean) => void }) {
-  const [salvato, setSalvato] = useState(() => leggi(d.id) ?? d.testo)
+function Editor({ d, k, onSalvato, onSporco }: { d: Dimissione; k: string; onSalvato: () => void; onSporco: (sporco: boolean) => void }) {
+  const [salvato, setSalvato] = useState(() => leggi(k) ?? d.testo)
   const [testo, setTesto] = useState(salvato)
   const [msg, setMsg] = useState('')
   const sporco = testo !== salvato
@@ -24,7 +27,7 @@ function Editor({ d, onSalvato, onSporco }: { d: Dimissione; onSalvato: () => vo
 
   const avviso = (m: string) => { setMsg(m); setTimeout(() => setMsg(''), 1800) }
   const registra = (t: string) => {
-    salva(d.id, t === d.testo ? null : t)
+    salva(k, t === d.testo ? null : t)
     setSalvato(t); setTesto(t); onSalvato()
   }
 
@@ -67,8 +70,9 @@ function Editor({ d, onSalvato, onSporco }: { d: Dimissione; onSalvato: () => vo
   )
 }
 
-/** Formule di dimissione: card che aprono un testo modificabile. */
-export default function Dimissioni() {
+/** Elenco di card che aprono un testo modificabile, salvabile e copiabile. */
+export default function PaginaTesti({ voci: tutte, prefisso, segnaposto, nota }: { voci: TestoModificabile[]; prefisso: string; segnaposto: string; nota: string }) {
+  const chiave = (id: string) => `emergenze.${prefisso}.${id}`
   const [params, setParams] = useSearchParams()
   const [aperto, setAperto] = useState<string | null>(params.get('apri'))
   const [cerca, setCerca] = useState('')
@@ -90,19 +94,19 @@ export default function Dimissioni() {
     setParams(nuovo ? { apri: nuovo } : {}, { replace: true })
   }
 
-  const voci = DIMISSIONI.filter((d) => !q || `${d.nome} ${d.gruppo}`.toLowerCase().includes(q))
+  const voci = tutte.filter((d) => !q || `${d.nome} ${d.gruppo}`.toLowerCase().includes(q))
   const gruppi = [...new Set(voci.map((d) => d.gruppo))]
 
   return (
     <div className="flex flex-col gap-2.5">
-      <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder="Cerca una diagnosi…"
+      <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder={segnaposto}
         className="rounded-xl border border-linea px-3 py-2.5 text-base" />
       {gruppi.map((g) => (
         <Fragment key={g}>
           <p className="etichetta px-1 mt-1">{g}</p>
           {voci.filter((d) => d.gruppo === g).map((d) => {
             const open = aperto === d.id
-            const mod = leggi(d.id) !== null
+            const mod = leggi(chiave(d.id)) !== null
             return (
               <section key={d.id} id={`d-${d.id}`} className="card !p-0 overflow-hidden scroll-mt-24">
                 <button onClick={() => toggle(d.id)} className="w-full flex items-center gap-3 px-4 py-3 text-left">
@@ -110,14 +114,14 @@ export default function Dimissioni() {
                   {mod && <span className="text-[10px] font-bold uppercase tracking-wide text-oro bg-oro3 rounded-full px-2 py-0.5">personalizzata</span>}
                   <span className={`text-tenue transition-transform shrink-0 ${open ? 'rotate-90' : ''}`}>›</span>
                 </button>
-                {open && <Editor d={d} onSalvato={() => forza((n) => n + 1)} onSporco={segnaSporco} />}
+                {open && <Editor d={d} k={chiave(d.id)} onSalvato={() => forza((n) => n + 1)} onSporco={segnaSporco} />}
               </section>
             )
           })}
         </Fragment>
       ))}
       {!voci.length && <p className="text-sm text-tenue px-1">Nessun risultato.</p>}
-      <p className="text-[11px] text-tenue px-1 mt-1">Dosi per adulto: verificare allergie, funzione renale, gravidanza e terapie in corso.</p>
+      <p className="text-[11px] text-tenue px-1 mt-1">{nota}</p>
     </div>
   )
 }
