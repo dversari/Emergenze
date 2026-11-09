@@ -263,7 +263,7 @@ ${RITORNO}
 
 Terapia:
 - Cetirizina 10 mg: 1 compressa la sera per [5–7] giorni, poi al bisogno. [Se il prurito persiste: 1 compressa mattina e sera.] Può dare sonnolenza: non guidi se si sente assonnato.
-- [Prednisone (Deltacortene) 25 mg: 2 compresse al mattino dopo colazione per 3 giorni, poi stop.]
+- [Solo se forma estesa o non risponde all'antistaminico: prednisone (Deltacortene) 25 mg, 1–2 compresse al mattino dopo colazione per 3–5 giorni, poi stop senza scalare.]
 
 Indicazioni:
 - [Non assuma più ... e farmaci della stessa famiglia; lo riferisca sempre a medici, dentisti e farmacisti.]
