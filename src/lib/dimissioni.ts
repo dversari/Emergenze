@@ -296,7 +296,7 @@ Prevenzione:
 - Nei primi giorni eviti attività in cui uno svenimento sarebbe pericoloso: salire su scale o in altezza, nuotare da solo, usare macchinari pericolosi.
 - Guida: [può guidare normalmente: gli episodi sono rari e preceduti da avvisaglie] / [non guidi fino alla valutazione del medico curante/cardiologo].
 
-${controlli('[Si allega richiesta per ...]')}
+${controlli('[Si allega richiesta per visita cardiologica / ECG Holter / ecocardiogramma / tilt test.]')}
 
 ${RITORNO}
 - svenimento durante uno sforzo o da sdraiato;
