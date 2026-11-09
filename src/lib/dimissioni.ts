@@ -507,7 +507,7 @@ ${RITORNO}
 
 Terapia:
 - Ibuprofene 600 mg 1 compressa ogni 8 ore dopo i pasti per 5 giorni, oppure paracetamolo 1 g fino a 3 volte al giorno.
-- [Tiocolchicoside 4 mg: 1 capsula ogni 12 ore per massimo 7 giorni. Non in gravidanza o allattamento.]
+- [Eperisone (Expose) 50 mg: 1 compressa 3 volte al giorno dopo i pasti, per 7–10 giorni (massimo 150 mg al giorno). Può ridurre l'attenzione: cautela alla guida. Sospenda e contatti il medico se compaiono arrossamento, prurito, orticaria o gonfiore. Non in gravidanza e allattamento.]
 - [Diclofenac gel (es. Voltaren Emulgel 1%): applicare sulla zona dolente 3–4 volte al giorno per 7–14 giorni, spalmando senza massaggiare con forza, su cute integra; lavarsi le mani dopo.]
 - [In alternativa ketoprofene schiuma/gel (es. Artrosilene schiuma 15%): 2–3 applicazioni al giorno per massimo 7–10 giorni. Non esporre la zona trattata al sole o a lampade abbronzanti durante la terapia e per 2 settimane dopo (rischio di reazioni da fotosensibilità); coprire la zona.]
 
@@ -531,7 +531,7 @@ Il mal di schiena acuto migliora nella maggior parte dei casi in 2–6 settimane
 
 Terapia:
 - Ibuprofene 600 mg 1 compressa ogni 8 ore dopo i pasti per 5–7 giorni, oppure paracetamolo 1 g fino a 3 volte al giorno.
-- [Tiocolchicoside 4 mg: 1 capsula ogni 12 ore per massimo 7 giorni.]
+- [Eperisone (Expose) 50 mg: 1 compressa 3 volte al giorno dopo i pasti, per 7–10 giorni (massimo 150 mg al giorno). Può ridurre l'attenzione: cautela alla guida. Sospenda e contatti il medico se compaiono arrossamento, prurito, orticaria o gonfiore. Non in gravidanza e allattamento.]
 
 Indicazioni:
 - Resti attivo: il riposo a letto rallenta la guarigione. Cammini e riprenda gradualmente le attività abituali, anche con un po' di dolore.
@@ -553,7 +553,7 @@ Nella maggior parte dei casi migliora in 4–6 settimane.
 
 Terapia:
 - Ibuprofene 600 mg 1 compressa ogni 8 ore dopo i pasti per 7 giorni, con [pantoprazolo 20 mg al mattino], oppure paracetamolo 1 g fino a 3 volte al giorno.
-- [Tiocolchicoside 4 mg: 1 capsula ogni 12 ore per massimo 7 giorni.]
+- [Eperisone (Expose) 50 mg: 1 compressa 3 volte al giorno dopo i pasti, per 7–10 giorni (massimo 150 mg al giorno). Può ridurre l'attenzione: cautela alla guida. Sospenda e contatti il medico se compaiono arrossamento, prurito, orticaria o gonfiore. Non in gravidanza e allattamento.]
 - [Prednisone (Deltacortene) 25 mg: 2 compresse al mattino dopo colazione per 5 giorni, poi 1 compressa per 5 giorni, poi stop. Con il cortisone prenda il protettore gastrico; se diabetico controlli la glicemia più spesso.]
 - [Per il dolore forte: paracetamolo/codeina 500/30 mg, 1 compressa fino a 3 volte al giorno per pochi giorni. Può dare sonnolenza e stitichezza: non guidi.]
 
@@ -823,7 +823,7 @@ ${RITORNO}
 
 Terapia:
 - Paracetamolo 1 g fino a 3 volte al giorno e/o ibuprofene 600 mg ogni 8 ore dopo i pasti per 5–7 giorni.
-- [Tiocolchicoside 4 mg: 1 capsula ogni 12 ore per massimo 7 giorni.]
+- [Eperisone (Expose) 50 mg: 1 compressa 3 volte al giorno dopo i pasti, per 7–10 giorni (massimo 150 mg al giorno). Può ridurre l'attenzione: cautela alla guida. Sospenda e contatti il medico se compaiono arrossamento, prurito, orticaria o gonfiore. Non in gravidanza e allattamento.]
 - [Diclofenac gel 1%: sulla zona dolente 3–4 volte al giorno.]
 
 Indicazioni:
