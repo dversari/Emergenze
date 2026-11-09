@@ -41,7 +41,8 @@ ${RITORNO}
     testo: `Diagnosi: colica biliare [da calcolosi della colecisti].
 
 Terapia:
-- Al bisogno per il dolore: butilscopolamina 10 mg, 1–2 compresse fino a 3 volte al giorno, e/o paracetamolo 1 g fino a 3 volte al giorno.
+- Al bisogno per il dolore: Valpinax 20 mg + 2,5 mg (ottatropina + diazepam): 1 compressa fino a 3 volte al giorno, oppure Valpinax gocce 2%: 25–30 gocce fino a 3 volte al giorno. Contiene una benzodiazepina: può dare sonnolenza, non guidi e non beva alcolici mentre lo assume.
+- In aggiunta, se serve: paracetamolo 1 g fino a 3 volte al giorno.
 
 Indicazioni:
 - Dieta povera di grassi: eviti fritti, insaccati, formaggi grassi, burro, panna, uova, cioccolato. Pasti piccoli e frequenti.
@@ -61,7 +62,7 @@ ${RITORNO}
 
 Terapia:
 - Simeticone 80–120 mg: 1 compressa masticabile dopo i pasti principali, per alcuni giorni.
-- Al bisogno per il dolore: butilscopolamina 10 mg, 1–2 compresse fino a 3 volte al giorno.
+- Al bisogno per il dolore: Valpinax 20 mg + 2,5 mg (ottatropina + diazepam): 1 compressa fino a 3 volte al giorno, oppure Valpinax gocce 2%: 25–30 gocce fino a 3 volte al giorno. Contiene una benzodiazepina: può dare sonnolenza, non guidi e non beva alcolici mentre lo assume.
 
 Indicazioni:
 - Mangi lentamente, eviti bevande gassate, legumi, cavoli, chewing-gum, dolcificanti (sorbitolo).
