@@ -14,6 +14,7 @@ Strumenti per il pronto soccorso, in un'app web installabile sul telefono: calco
 | **Antibiotici** | `src/lib/antibiotici.ts`: `CONDIZIONI` (card per condizione; nel testo `{id}` diventa il collegamento alla scheda del farmaco), `FARMACI` (confezioni, preparazione, dose, aggiustamento per CrCl, monitoraggio), `REGOLE` (allergia, rene). Pagina `src/pages/Antibiotici.tsx` |
 | **Procedure / Sedazione** | `src/lib/schede.ts` (`PROCEDURE`, `SEDAZIONE`): card con blocchi; `numerato: true` per i passaggi in sequenza. Pagina generica `src/components/PaginaSchede.tsx` |
 | **Linee guida** | `src/lib/lineeGuida.ts`: per ogni linea guida fonte, data dell'ultimo controllo, punti «In PS, in breve», sezioni, registro degli aggiornamenti e calcolatori collegati |
+| **Dimissioni** | `src/lib/dimissioni.ts` (`DIMISSIONI`: testo predefinito per diagnosi, campi tra [parentesi] da completare). Le modifiche fatte nell'app restano sul telefono (`localStorage`, chiave `emergenze.dimissione.<id>`) finché non si preme «Ripristina originale» |
 
 Le dosi riportate vanno sempre verificate su linee guida e scheda tecnica.
 
