@@ -12,7 +12,8 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # Non annullare una pubblicazione in corso: interromperla può bloccare Pages per diversi minuti.
+  cancel-in-progress: false
 
 jobs:
   build:
