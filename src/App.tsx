@@ -5,6 +5,8 @@ import PaginaSchede from './components/PaginaSchede'
 import { PROCEDURE, SEDAZIONE } from './lib/schede'
 import { ElencoLineeGuida, RiassuntoLineaGuida } from './pages/LineeGuida'
 
+declare const __VERSIONE__: string
+
 const schede = [
   { to: '/', label: 'Calcolatori', icona: '±', end: true },
   { to: '/antibiotici', label: 'Antibiotici', icona: '℞' },
@@ -23,6 +25,7 @@ function Guscio() {
           <p className="text-[10px] uppercase tracking-[0.12em] text-bordeaux font-bold leading-none">Pronto soccorso</p>
           <h1 className="font-extrabold text-2xl tracking-tight leading-none">Emergenze</h1>
         </div>
+        <span className="ml-auto text-[10px] text-tenue text-right leading-tight">versione<br />{__VERSIONE__}</span>
       </header>
 
       <main className="px-3.5 py-3 pb-[calc(90px+env(safe-area-inset-bottom))] max-w-3xl mx-auto">

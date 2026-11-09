@@ -7,8 +7,12 @@ import { VitePWA } from 'vite-plugin-pwa'
 // così funziona su GitHub Pages qualunque sia il nome del repository.
 const base = './'
 
+// Data e ora della compilazione, mostrate nell'app per sapere quale versione si sta usando.
+const versione = new Date().toLocaleString('it-IT', { timeZone: 'Europe/Rome', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+
 export default defineConfig({
   base,
+  define: { __VERSIONE__: JSON.stringify(versione) },
   plugins: [
     react(),
     tailwindcss(),
