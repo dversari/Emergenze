@@ -72,7 +72,7 @@ function CardFarmaco({ id, aperto, onToggle }: { id: string; aperto: boolean; on
     <section id={`f-${f.id}`} className="card !p-0 overflow-hidden scroll-mt-24">
       <button onClick={onToggle} className="w-full flex items-center gap-3 px-4 py-3 text-left">
         <div className="flex-1 min-w-0">
-          <p className="font-bold leading-tight">{f.nome}</p>
+          <p className="font-bold leading-tight">{f.nome} <span className="ml-1 align-middle text-[10px] font-extrabold uppercase tracking-wide rounded-full px-2 py-0.5 bg-verde3 text-verde-scuro">{f.via}</span></p>
           <p className="text-xs text-tenue leading-snug mt-0.5">{f.dose}</p>
         </div>
         <Freccia aperto={aperto} />
