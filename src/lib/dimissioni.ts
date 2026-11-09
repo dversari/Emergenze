@@ -7,6 +7,9 @@
 export interface Dimissione { id: string; nome: string; gruppo: string; testo: string }
 
 const RITORNO = 'Torni in Pronto Soccorso o chiami il 112 se:'
+const CURANTE = 'Si rimanda al medico curante per competenza, per il proseguimento delle cure e per eventuali ulteriori accertamenti a sua discrezione.'
+/** Sezione Controlli standard; le richieste specifiche vanno come «Si allega richiesta per …». */
+const controlli = (...extra: string[]) => ['Controlli:', `- ${CURANTE}`, ...extra.map((e) => `- ${e}`)].join('\n')
 
 export const DIMISSIONI: Dimissione[] = [
   // ─── Addome ───
@@ -16,15 +19,15 @@ export const DIMISSIONI: Dimissione[] = [
 
 Terapia:
 - Ibuprofene 600 mg: 1 compressa ogni 8 ore dopo i pasti, per 5 giorni o finché c'è dolore. In alternativa o in aggiunta paracetamolo 1 g: 1 compressa fino a 3 volte al giorno (almeno 6 ore tra una dose e l'altra).
-- [Tamsulosina 0,4 mg: 1 compressa la sera fino all'espulsione del calcolo, per massimo 4 settimane. Può dare capogiri alzandosi in piedi.]
-- [Gastroprotezione: pantoprazolo 20 mg 1 compressa al mattino a digiuno finché assume l'antinfiammatorio.]
+- [Tamsulosina 0,4 mg: 1 compressa la sera fino all'espulsione del calcolo, per massimo 4 settimane. Può dare capogiri alzandosi in piedi. Uso off-label: il farmaco è registrato solo per l'ipertrofia prostatica (nella donna non ha indicazioni autorizzate); è prescritto perché favorisce l'espulsione dei calcoli dell'uretere distale. Il paziente è stato informato e acconsente.]
+- [Deltacortene (prednisone) 25 mg: 1 compressa al mattino dopo colazione per ... giorni, insieme alla tamsulosina. Se diabetico controlli la glicemia.]
+- [Gastroprotezione: pantoprazolo 20 mg 1 compressa al mattino a digiuno finché assume antinfiammatorio/cortisone.]
 
 Indicazioni:
 - Beva almeno 2 litri di acqua al giorno, distribuiti nella giornata.
 - Urini in un colino o in una garza per recuperare il calcolo e lo porti al medico per l'analisi.
 
-Controlli:
-- Ecografia dell'apparato urinario e visita urologica entro [2–4] settimane, con richiesta del medico curante.
+${controlli('[Si allega richiesta per ecografia dell\'apparato urinario e visita urologica.]')}
 
 ${RITORNO}
 - febbre sopra 38 °C o brividi;
@@ -44,8 +47,7 @@ Indicazioni:
 - Dieta povera di grassi: eviti fritti, insaccati, formaggi grassi, burro, panna, uova, cioccolato. Pasti piccoli e frequenti.
 - Niente alcol.
 
-Controlli:
-- Visita chirurgica per valutare l'asportazione della colecisti (colecistectomia), con richiesta del medico curante [ecografia addome se non eseguita].
+${controlli('[Si allega richiesta per ecografia dell\'addome superiore e visita chirurgica (valutazione colecistectomia).]')}
 
 ${RITORNO}
 - il dolore dura più di 6 ore o non passa con la terapia;
@@ -65,8 +67,7 @@ Indicazioni:
 - Mangi lentamente, eviti bevande gassate, legumi, cavoli, chewing-gum, dolcificanti (sorbitolo).
 - Regolarizzi l'intestino: acqua, frutta e verdura; movimento.
 
-Controlli:
-- Dal medico curante se i disturbi si ripetono.
+${controlli()}
 
 ${RITORNO}
 - il dolore aumenta, diventa continuo o si localizza in un punto preciso (soprattutto in basso a destra);
@@ -86,16 +87,13 @@ Indicazioni:
 - Eviti antinfiammatori (ibuprofene, ketoprofene, aspirina, ecc.): per il dolore usi paracetamolo.
 - Eviti alcol, fumo, caffè, cibi piccanti, fritti, pasti abbondanti e pasti nelle 3 ore prima di coricarsi.
 
-Controlli:
-- Dal medico curante tra 4 settimane; se i disturbi persistono, ricerca dell'Helicobacter pylori e/o gastroscopia.
+${controlli()}
 
 ${RITORNO}
 - vomito con sangue o materiale scuro «a fondo di caffè»;
+- difficoltà a deglutire;
 - feci nere o con sangue;
-- dolore molto forte o improvviso;
-- difficoltà a deglutire, vomito continuo.
-
-Si rivolga al medico curante se perde peso senza motivo.`,
+- dolore molto forte o improvviso, vomito continuo.`,
   },
   {
     id: 'gastroenterite', nome: 'Gastroenterite', gruppo: 'Addome',
@@ -110,6 +108,8 @@ Indicazioni:
 - Riprenda gradualmente l'alimentazione: riso, pasta in bianco, patate, carne o pesce magri, banane, mele, crackers. Eviti latte, latticini, fritti, alcol e caffè per qualche giorno.
 - Si lavi spesso le mani e non condivida asciugamani: l'infezione è contagiosa.
 - Non prenda antidiarroici se ha febbre o sangue nelle feci.
+
+${controlli()}
 
 ${RITORNO}
 - segni di disidratazione: bocca molto secca, urina poco o niente da più di 8–12 ore, capogiri alzandosi;
@@ -130,9 +130,7 @@ Indicazioni:
 - Per 2–3 giorni dieta leggera e povera di scorie (brodo, riso, pasta, carne e pesce magri), poi ritorno graduale all'alimentazione normale.
 - Dopo la guarigione: dieta ricca di fibre (frutta, verdura, cereali integrali) e molta acqua per prevenire nuovi episodi.
 
-Controlli:
-- Dal medico curante entro 2–3 giorni.
-- [Colonscopia a 6–8 settimane dalla guarigione, se non eseguita negli ultimi anni.]
+${controlli('[Si allega richiesta per colonscopia da eseguire a 6–8 settimane dalla guarigione.]')}
 
 ${RITORNO}
 - febbre sopra 38 °C;
@@ -154,8 +152,7 @@ Indicazioni:
 - Feci morbide: almeno 1,5–2 litri di acqua al giorno, frutta, verdura e fibre; [macrogol 1 bustina al giorno] se stitichezza.
 - Eviti di stare a lungo seduto sul water e gli sforzi; eviti cibi piccanti e alcol.
 
-Controlli:
-- Dal medico curante; visita proctologica se i disturbi si ripetono o il sanguinamento continua.
+${controlli('[Si allega richiesta per visita proctologica.]')}
 
 ${RITORNO}
 - sanguinamento abbondante o con capogiri/svenimento;
@@ -177,8 +174,7 @@ Terapia:
 Indicazioni:
 - Beva molto, riposi, non fumi.
 
-Controlli:
-- Dal medico curante se dopo 3 settimane la tosse non migliora.
+${controlli()}
 
 ${RITORNO}
 - fiato corto o respiro difficoltoso;
@@ -198,6 +194,8 @@ Indicazioni:
 - Beva molto anche se deglutire fa male; cibi morbidi e tiepidi.
 - [Se streptococco: dopo 24 ore di antibiotico non è più contagioso.]
 
+${controlli()}
+
 ${RITORNO}
 - non riesce a deglutire nemmeno la saliva o a bere;
 - non riesce ad aprire la bocca, voce «ovattata», gonfiore da un lato della gola o del collo;
@@ -216,6 +214,8 @@ Terapia:
 - [Spray nasale cortisonico (mometasone): 2 spruzzi per narice una volta al giorno per 10–14 giorni.]
 - [Decongestionante nasale: al massimo 5 giorni.]
 - [Antibiotico (se sintomi oltre 10 giorni o peggioramento dopo un miglioramento): amoxicillina/acido clavulanico 875/125 mg ogni 12 ore per 5–7 giorni.]
+
+${controlli()}
 
 ${RITORNO}
 - gonfiore o arrossamento attorno all'occhio, vista doppia o calo della vista;
@@ -237,9 +237,7 @@ Indicazioni:
 - [Ossigeno: come già prescritto.]
 - Se diabetico: controlli la glicemia più spesso durante il cortisone.
 
-Controlli:
-- Dal medico curante entro 1 settimana; visita pneumologica [entro 4–6 settimane].
-- Vaccinazioni antinfluenzale e antipneumococcica se non eseguite.
+${controlli('[Si allega richiesta per visita pneumologica.]', 'Vaccinazioni antinfluenzale e antipneumococcica, se non eseguite.')}
 
 ${RITORNO}
 - il fiato corto peggiora o non migliora con lo spray;
@@ -261,8 +259,7 @@ Indicazioni:
 - Tenga un diario degli attacchi (giorno, durata, farmaci, possibili cause: sonno, pasti saltati, alcol, ciclo).
 - Sonno e pasti regolari, idratazione, riduca caffè e alcol.
 
-Controlli:
-- Dal medico curante; [visita neurologica / centro cefalee] se gli attacchi sono frequenti.
+${controlli('[Si allega richiesta per visita neurologica / centro cefalee.]')}
 
 ${RITORNO}
 - il mal di testa più forte della sua vita, comparso all'improvviso;
@@ -272,43 +269,57 @@ ${RITORNO}
   },
   {
     id: 'trauma-cranico', nome: 'Trauma cranico lieve', gruppo: 'Neurologia',
-    testo: `Diagnosi: trauma cranico lieve [senza perdita di coscienza] [TC encefalo negativa].
+    testo: `Diagnosi: trauma cranico lieve [non commotivo / commotivo] [TC encefalo del ...: negativa per lesioni acute]. GCS 15 alla dimissione.
 
-Indicazioni per le prossime 24–48 ore:
-- Resti in compagnia di un adulto responsabile per le prime 24 ore, che controlli che sia sveglio e orientato.
-- Riposo; eviti sport, sforzi e alcol. Non guidi finché non si sente perfettamente bene.
-- Per il dolore: paracetamolo 1 g fino a 3 volte al giorno. Eviti sonniferi e tranquillanti.
-- Nei giorni successivi possono comparire mal di testa leggero, stanchezza, difficoltà di concentrazione, capogiri: di solito passano in 1–2 settimane. Riduca schermi e attività impegnative finché ci sono.
+Si consegna il foglio informativo per l'osservazione domiciliare dopo trauma cranico.
 
-${RITORNO} (chi è con lei deve conoscere questi segni):
-- sonnolenza, difficoltà a svegliarsi, confusione o comportamento strano;
-- vomito ripetuto;
-- mal di testa che peggiora;
+Indicazioni:
+- Un familiare o un amico deve sapere quanto accaduto e controllare le sue condizioni per almeno 24 ore.
+- Riprenda gradualmente le normali attività. Nei primi giorni: cibi semplici e digeribili, niente alcol, eviti attività che possano causare un nuovo trauma, buona igiene del sonno, eviti esposizione prolungata a schermi e rumori intensi.
+- Per il dolore: paracetamolo 1000 mg 1 compressa ogni 8 ore, oppure ibuprofene 400 mg 1 compressa ogni 8 ore a stomaco pieno, se non controindicati.
+- Nei giorni successivi sono normali e tendono a migliorare: mal di testa, stanchezza, sensazione di instabilità, fastidio per luci e rumori, difficoltà di concentrazione o memoria, irritabilità, sonno alterato. Se non migliorano o la preoccupano, contatti il medico curante.
+- Può aver bisogno di alcuni giorni di riposo dal lavoro o dalla scuola (di solito non più di 2–3).
+
+${controlli('Il medico curante darà indicazioni sul ritorno al lavoro, alla scuola e all\'attività fisica.')}
+
+Rivalutazione medica urgente (torni in Pronto Soccorso o chiami il 112) se:
+- mal di testa che peggiora e non passa con gli antidolorifici;
+- nausea importante o vomito ripetuto;
+- comportamento insolito, confusione, agitazione, aggressività;
+- sonnolenza, difficoltà a restare sveglio;
+- difficoltà a parlare o nella coordinazione, debolezza o impossibilità a muovere un braccio o una gamba;
 - convulsioni;
-- debolezza o formicolio di braccio/gamba, difficoltà a parlare, disturbi della vista, pupille diverse;
-- liquido chiaro o sangue da naso o orecchie.`,
+- perdita di coscienza.
+Questi sintomi possono comparire anche a distanza di settimane, soprattutto negli anziani o in chi assume antiaggreganti o anticoagulanti: in quel caso riferisca al medico il trauma recente.`,
   },
   {
     id: 'trauma-cranico-tao', nome: 'Trauma cranico in terapia anticoagulante', gruppo: 'Neurologia',
-    testo: `Diagnosi: trauma cranico lieve in paziente in terapia anticoagulante con [warfarin / apixaban / rivaroxaban / dabigatran / edoxaban] [/ antiaggregante].
-[TC encefalo eseguita il ... alle ore ...: non sanguinamenti.] [Periodo di osservazione in Pronto Soccorso di ... ore senza peggioramenti.]
+    testo: `Diagnosi: trauma cranico lieve in paziente in terapia [anticoagulante con warfarin / apixaban / rivaroxaban / dabigatran / edoxaban] [antiaggregante con ...]. [TC encefalo del ... ore ...: negativa per lesioni acute.] GCS 15 alla dimissione.
 
-Anticoagulante:
-- [Prosegua la terapia come di consueto.] / [Sospenda ... per ... giorni e ricontatti il medico curante/centro TAO prima di riprenderla.]
-- [INR del ...: ... — controllo INR il ... presso il centro TAO.]
+Si consegna il foglio informativo per l'osservazione domiciliare dopo trauma cranico.
 
-Indicazioni per i prossimi 7 giorni:
-- Resti in compagnia di un adulto responsabile almeno per le prime 24–48 ore.
-- Riposo; niente alcol, sport, guida, sforzi. Per il dolore solo paracetamolo 1 g fino a 3 volte al giorno: niente antinfiammatori o aspirina.
-- Chi assume anticoagulanti ha un rischio più alto di sanguinamento anche nei giorni successivi: al minimo dubbio torni.
+Terapia anticoagulante/antiaggregante:
+- [Prosegua la terapia come di consueto.] / [Sospenda ... fino al ... e ricontatti il medico curante/centro TAO prima di riprenderla.]
+- [INR del ...: ... Controllo INR il ... presso il centro TAO.]
 
-${RITORNO} (chi è con lei deve conoscere questi segni):
-- sonnolenza, confusione, comportamento strano;
-- mal di testa che compare o peggiora;
-- vomito;
+Indicazioni:
+- Un familiare o un amico deve sapere quanto accaduto e controllare le sue condizioni per almeno 24 ore.
+- Riprenda gradualmente le normali attività. Nei primi giorni: cibi semplici e digeribili, niente alcol, eviti attività che possano causare un nuovo trauma, buona igiene del sonno, eviti esposizione prolungata a schermi e rumori intensi.
+- Per il dolore: paracetamolo 1000 mg 1 compressa ogni 8 ore. Eviti antinfiammatori (ibuprofene, ketoprofene, aspirina, ecc.), che aumentano il rischio di sanguinamento.
+- Nei giorni successivi sono normali e tendono a migliorare: mal di testa lieve, stanchezza, sensazione di instabilità, fastidio per luci e rumori, difficoltà di concentrazione o memoria, irritabilità, sonno alterato. Se non migliorano o la preoccupano, contatti il medico curante.
+
+${controlli()}
+
+Rivalutazione medica urgente (torni in Pronto Soccorso o chiami il 112) se:
+- mal di testa che peggiora e non passa con il paracetamolo;
+- nausea importante o vomito ripetuto;
+- comportamento insolito, confusione, agitazione, aggressività;
+- sonnolenza, difficoltà a restare sveglio;
+- difficoltà a parlare o nella coordinazione, debolezza o impossibilità a muovere un braccio o una gamba;
 - convulsioni;
-- debolezza o formicolio di braccio/gamba, difficoltà a parlare, disturbi della vista;
-- nuove cadute o nuovi sanguinamenti (naso, gengive, urine, feci nere).`,
+- perdita di coscienza;
+- nuove cadute.
+Chi assume anticoagulanti o antiaggreganti può avere questi sintomi anche a distanza di settimane dal trauma: in quel caso torni subito e riferisca il trauma recente e la terapia che assume.`,
   },
   // ─── Muscoli, articolazioni, cute ───
   {
@@ -325,6 +336,8 @@ Indicazioni:
 
 Rimozione dei punti tra [indicare]:
 - viso 5 giorni; cuoio capelluto 7–10 giorni; tronco e braccia 10 giorni; gambe e piedi 12–14 giorni; sopra le articolazioni 14 giorni.
+
+${controlli()}
 
 ${RITORNO}
 - arrossamento che si allarga, calore, gonfiore, pus o cattivo odore;
@@ -346,8 +359,7 @@ Indicazioni per i primi 2–3 giorni:
 - Dopo 3–5 giorni inizi a muovere la caviglia (cerchi, flesso-estensione) e riprenda gradualmente a camminare normalmente. Lo sport dopo 4–6 settimane.
 - [Immobilizzazione rigida: profilassi antitrombotica con enoxaparina 4000 UI sottocute 1 volta al giorno fino alla rimozione.]
 
-Controlli:
-- Dal medico curante o ortopedico se dopo 7–10 giorni non riesce ancora a caricare o il dolore non migliora.
+${controlli('[Si allega richiesta per visita ortopedica.]')}
 
 ${RITORNO}
 - dolore che peggiora nonostante la terapia;
@@ -367,8 +379,7 @@ Indicazioni:
 - Carico quanto tollerato dal dolore; dopo qualche giorno inizi a piegare ed estendere il ginocchio senza forzare.
 - [Profilassi antitrombotica con enoxaparina 4000 UI sottocute 1 volta al giorno se immobilizzato.]
 
-Controlli:
-- Visita ortopedica entro [7–10] giorni, quando il gonfiore è diminuito, per valutare legamenti e menischi [eventuale risonanza].
+${controlli('[Si allega richiesta per visita ortopedica entro 7–10 giorni.]')}
 
 ${RITORNO}
 - il ginocchio si blocca e non riesce a stenderlo;
@@ -386,8 +397,7 @@ Indicazioni:
 - Primi 2–3 giorni: riposo del muscolo, ghiaccio in un panno 15–20 minuti ogni 2–3 ore, eventuale fasciatura compressiva, arto sollevato. Niente calore e massaggi in questa fase.
 - Poi ripresa graduale del movimento e stretching leggero senza dolore; ritorno allo sport solo quando il movimento è completo e senza dolore (di solito 2–6 settimane).
 
-Controlli:
-- [Ecografia muscolare a 5–7 giorni] / dal medico curante se il dolore non migliora entro 1–2 settimane.
+${controlli('[Si allega richiesta per ecografia muscolare a 5–7 giorni.]')}
 
 ${RITORNO}
 - gonfiore importante e duro, livido che si allarga rapidamente;
@@ -406,8 +416,7 @@ Indicazioni:
 - Calore locale (borsa dell'acqua calda, cerotti autoriscaldanti) 20 minuti più volte al giorno.
 - Movimento leggero e stretching dolce; eviti posture fisse prolungate e sforzi.
 
-Controlli:
-- Dal medico curante se il dolore non migliora entro 1–2 settimane.
+${controlli()}
 
 ${RITORNO}
 - debolezza o formicolio di braccia o gambe;
@@ -428,8 +437,7 @@ Indicazioni:
 - Resti attivo: il riposo a letto rallenta la guarigione. Cammini e riprenda gradualmente le attività abituali, anche con un po' di dolore.
 - Calore locale; eviti di sollevare pesi e di stare fermo a lungo nella stessa posizione.
 
-Controlli:
-- Dal medico curante se il dolore non migliora entro 2–4 settimane.
+${controlli()}
 
 ${RITORNO}
 - perdita di urine o feci, oppure non riesce a urinare;
@@ -451,8 +459,7 @@ Terapia:
 Indicazioni:
 - Resti attivo per quanto possibile; eviti il riposo a letto prolungato, i sollevamenti e le posizioni che scatenano il dolore.
 
-Controlli:
-- Dal medico curante entro 1–2 settimane; [visita fisiatrica/neurochirurgica] se il dolore non migliora dopo 6 settimane.
+${controlli('[Si allega richiesta per visita fisiatrica.]')}
 
 ${RITORNO}
 - perdita di urine o feci, oppure non riesce a urinare;

@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { DIMISSIONI, type Dimissione } from '../lib/dimissioni'
 
@@ -13,17 +13,20 @@ function salva(id: string, testo: string | null) {
   } catch { /* storage non disponibile */ }
 }
 
-function Editor({ d, onCambio }: { d: Dimissione; onCambio: () => void }) {
-  const [testo, setTesto] = useState(() => leggi(d.id) ?? d.testo)
+function Editor({ d, onSalvato, onSporco }: { d: Dimissione; onSalvato: () => void; onSporco: (sporco: boolean) => void }) {
+  const [salvato, setSalvato] = useState(() => leggi(d.id) ?? d.testo)
+  const [testo, setTesto] = useState(salvato)
   const [msg, setMsg] = useState('')
-  const modificato = testo !== d.testo
+  const sporco = testo !== salvato
+  const diversoDaOriginale = salvato !== d.testo
 
-  const aggiorna = (t: string) => {
-    setTesto(t)
-    salva(d.id, t === d.testo ? null : t)
-    onCambio()
-  }
+  useEffect(() => { onSporco(sporco) }, [sporco, onSporco])
+
   const avviso = (m: string) => { setMsg(m); setTimeout(() => setMsg(''), 1800) }
+  const registra = (t: string) => {
+    salva(d.id, t === d.testo ? null : t)
+    setSalvato(t); setTesto(t); onSalvato()
+  }
 
   const copia = async () => {
     try { await navigator.clipboard.writeText(testo); avviso('Copiato') }
@@ -33,25 +36,33 @@ function Editor({ d, onCambio }: { d: Dimissione; onCambio: () => void }) {
     try { await navigator.share({ title: d.nome, text: testo }) } catch { /* annullato */ }
   }
   const ripristina = () => {
-    if (modificato && !confirm('Ripristinare il testo originale? Le modifiche andranno perse.')) return
-    aggiorna(d.testo)
+    if (!confirm('Tornare al testo originale dell’app? La tua versione salvata andrà persa.')) return
+    registra(d.testo); avviso('Ripristinato')
   }
 
   return (
     <div className="px-3 pb-3 pt-1 border-t border-linea flex flex-col gap-2">
-      <textarea value={testo} onChange={(e) => aggiorna(e.target.value)}
-        className="w-full rounded-xl border border-linea bg-white px-3 py-2.5 text-[15px] leading-snug font-[inherit]"
+      <textarea value={testo} onChange={(e) => setTesto(e.target.value)}
+        className={`w-full rounded-xl border bg-white px-3 py-2.5 text-[15px] leading-snug font-[inherit] ${sporco ? 'border-oro2' : 'border-linea'}`}
         style={{ minHeight: '60vh' }} spellCheck />
       <div className="flex gap-2 items-center flex-wrap">
+        <button onClick={() => { registra(testo); avviso('Salvato') }} disabled={!sporco}
+          className="rounded-xl bg-bordeaux text-white font-bold text-sm px-4 py-2 disabled:opacity-35">Salva</button>
+        {sporco && <button onClick={() => setTesto(salvato)} className="rounded-xl border border-linea text-tenue font-bold text-sm px-3 py-2">Annulla</button>}
         <button onClick={copia} className="rounded-xl bg-verde text-white font-bold text-sm px-4 py-2">Copia</button>
         {'share' in navigator && (
           <button onClick={condividi} className="rounded-xl border border-verde text-verde font-bold text-sm px-4 py-2">Condividi</button>
         )}
-        <button onClick={ripristina} disabled={!modificato}
-          className="rounded-xl border border-linea text-tenue font-bold text-sm px-3 py-2 disabled:opacity-40">Ripristina originale</button>
         {msg && <span className="text-xs text-verde font-bold">{msg}</span>}
       </div>
-      <p className="text-[11px] text-tenue">Le modifiche si salvano da sole su questo telefono. Completa o togli le parti tra [parentesi].</p>
+      <div className="flex items-center gap-2">
+        <p className="flex-1 text-[11px] text-tenue">
+          {sporco ? 'Modifiche non salvate: «Salva» le rende il testo fisso di questa diagnosi.' : 'Copia usa il testo così com’è; «Salva» solo per renderlo fisso.'}
+        </p>
+        {diversoDaOriginale && !sporco && (
+          <button onClick={ripristina} className="text-[11px] text-tenue underline shrink-0">Ripristina originale</button>
+        )}
+      </div>
     </div>
   )
 }
@@ -68,7 +79,12 @@ export default function Dimissioni() {
     if (aperto) document.getElementById(`d-${aperto}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [aperto])
 
+  const sporco = useRef(false)
+  const segnaSporco = useCallback((v: boolean) => { sporco.current = v }, [])
+
   const toggle = (id: string) => {
+    if (sporco.current && !confirm('Ci sono modifiche non salvate. Chiudere comunque?')) return
+    sporco.current = false
     const nuovo = aperto === id ? null : id
     setAperto(nuovo)
     setParams(nuovo ? { apri: nuovo } : {}, { replace: true })
@@ -91,10 +107,10 @@ export default function Dimissioni() {
               <section key={d.id} id={`d-${d.id}`} className="card !p-0 overflow-hidden scroll-mt-24">
                 <button onClick={() => toggle(d.id)} className="w-full flex items-center gap-3 px-4 py-3 text-left">
                   <p className="flex-1 min-w-0 font-bold leading-tight">{d.nome}</p>
-                  {mod && <span className="text-[10px] font-bold uppercase tracking-wide text-oro bg-oro3 rounded-full px-2 py-0.5">modificata</span>}
+                  {mod && <span className="text-[10px] font-bold uppercase tracking-wide text-oro bg-oro3 rounded-full px-2 py-0.5">personalizzata</span>}
                   <span className={`text-tenue transition-transform shrink-0 ${open ? 'rotate-90' : ''}`}>›</span>
                 </button>
-                {open && <Editor d={d} onCambio={() => forza((n) => n + 1)} />}
+                {open && <Editor d={d} onSalvato={() => forza((n) => n + 1)} onSporco={segnaSporco} />}
               </section>
             )
           })}
