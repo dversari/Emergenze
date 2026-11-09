@@ -4,7 +4,7 @@ import type { Scheda } from '../lib/schede'
 
 // Nomi dei farmaci evidenziati in rosso grassetto dentro i testi.
 const FARMACI = [
-  'ketamina', 'propofol', 'ketofol', 'etomidate', 'midazolam', 'dexmedetomidina', 'fentanil', 'morfina',
+  'ketamina', 'propofol', 'ketofol', 'midazolam', 'fentanil', 'morfina',
   'rocuronio', 'succinilcolina', 'sugammadex', 'naloxone', 'flumazenil', 'noradrenalina', 'adrenalina',
   'ondansetron', 'olanzapina', 'lorazepam', 'aloperidolo', 'diazepam', 'tiamina', 'quetiapina',
   'clorpromazina', 'levomepromazina', 'butilscopolamina', 'lidocaina', 'atropina', 'albumina', 'caffeina',

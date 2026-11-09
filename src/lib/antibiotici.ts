@@ -119,7 +119,7 @@ export const FARMACI: Farmaco[] = [
   {
     id: 'vancomicina', via: 'ev', nome: 'Vancomicina', fiale: 'fl 500 mg e 1 g',
     prep: 'Massimo 10 mg/min e 5 mg/mL: 1 g in 250 mL di SF in 100 min; 1,5 g in 300–500 mL in 150 min. Più veloce = sindrome dell’uomo rosso.',
-    dose: 'Paziente di 70 kg: carico 2 g ev (25–30 mg/kg di peso reale, massimo 3 g), poi 1–1,5 g ogni 12 h (15–20 mg/kg)',
+    dose: 'Paziente di 70 kg: carico 2 g ev = 2 fiale da 1 g (25–30 mg/kg di peso reale, massimo 3 g), poi 1–1,5 g ogni 12 h = 1 fiala da 1 g + 1 da 500 mg (15–20 mg/kg)',
     rene: [
       'Carico sempre pieno',
       'CrCl 50–90: 1–1,5 g ogni 12 h',
@@ -224,8 +224,8 @@ export const FARMACI: Farmaco[] = [
   {
     id: 'aciclovir', via: 'ev', nome: 'Aciclovir', fiale: 'fl 250 mg',
     prep: 'Concentrazione ≤5 mg/mL (es. 750 mg in 250 mL di SF), in 60 min. Idratare bene.',
-    dose: 'Paziente di 70 kg: 700 mg ev ogni 8 h (10 mg/kg; peso ideale se obeso)',
-    rene: ['CrCl 25–50: 700 mg ogni 12 h', 'CrCl 10–25: 700 mg ogni 24 h', 'CrCl <10: 350 mg ogni 24 h'],
+    dose: 'Paziente di 70 kg: 750 mg ev ogni 8 h = 3 fiale da 250 mg (10 mg/kg; peso ideale se obeso)',
+    rene: ['CrCl 25–50: 750 mg ogni 12 h', 'CrCl 10–25: 750 mg ogni 24 h', 'CrCl <10: 375 mg ogni 24 h (1 fiala e mezza)'],
     monitor: ['Creatinina: nefropatia da cristalli', 'Neurotossicità se accumulo'],
   },
   {
@@ -284,7 +284,7 @@ export const CONDIZIONI: Condizione[] = [
     blocchi: [
       { titolo: 'Non grave, senza fattori di rischio MDR', righe: ['{piptazo} 4,5 g ev ogni 6 h', 'Oppure {cefepime} 2 g ev ogni 8 h', 'Oppure {levofloxacina} 500 mg ev ogni 12 h'] },
       { titolo: 'Shock, ventilazione o antibiotici ev negli ultimi 90 giorni', righe: ['Due anti-Pseudomonas di classi diverse: {piptazo} o {cefepime} o {meropenem} 1 g ev ogni 8 h + {levofloxacina} 500 mg ev ogni 12 h o {amikacina} 1–1,5 g ev ogni 24 h (15–20 mg/kg)', '{meropenem} se colonizzazione nota da ESBL'] },
-      { titolo: 'Rischio MRSA (MRSA noto, reparto con MRSA >20%, antibiotici ev nei 90 giorni)', righe: ['Aggiungere {vancomicina} carico 2 g ev (25–30 mg/kg) o {linezolid} 600 mg ev/os ogni 12 h'] },
+      { titolo: 'Rischio MRSA (MRSA noto, reparto con MRSA >20%, antibiotici ev nei 90 giorni)', righe: ['Aggiungere {vancomicina} carico 2 g ev = 2 fiale da 1 g (25–30 mg/kg) o {linezolid} 600 mg ev/os ogni 12 h'] },
       { titolo: 'Allergia grave ai betalattamici', righe: ['{levofloxacina} 500 mg ev ogni 12 h + {amikacina} + {vancomicina} o {linezolid}; consulenza infettivologica'] },
     ],
     durata: '7 giorni.',
@@ -447,9 +447,9 @@ export const CONDIZIONI: Condizione[] = [
     sintesi: 'Desametasone + ceftriaxone 2 g ogni 12 h ± ampicillina ± vancomicina. Entro 1 h.',
     blocchi: [
       { titolo: 'Subito (anche prima della TC se ritarda; emocolture prima)', righe: ['{desametasone} 10 mg ev prima o con la prima dose, poi ogni 6 h per 4 giorni', '{ceftriaxone} 2 g ev ogni 12 h'] },
-      { titolo: 'Aggiungere', righe: ['Età >50 anni, immunodepressione, alcolismo, gravidanza, diabete (Listeria): {ampicillina} 2 g ev ogni 4 h', 'Pneumococco resistente probabile (viaggi, area con resistenza alla penicillina): {vancomicina} carico 2 g ev (25–30 mg/kg)'] },
+      { titolo: 'Aggiungere', righe: ['Età >50 anni, immunodepressione, alcolismo, gravidanza, diabete (Listeria): {ampicillina} 2 g ev ogni 4 h', 'Pneumococco resistente probabile (viaggi, area con resistenza alla penicillina): {vancomicina} carico 2 g ev = 2 fiale da 1 g (25–30 mg/kg)'] },
       { titolo: 'Postneurochirurgica, derivazione, trauma penetrante', righe: ['{meropenem} 2 g ev ogni 8 h (o {cefepime} 2 g ev ogni 8 h) + {vancomicina}'] },
-      { titolo: 'Sospetta encefalite (confusione, crisi, segni focali)', righe: ['Aggiungere {aciclovir} 700 mg ev ogni 8 h (10 mg/kg)'] },
+      { titolo: 'Sospetta encefalite (confusione, crisi, segni focali)', righe: ['Aggiungere {aciclovir} 750 mg ev ogni 8 h = 3 fiale da 250 mg (10 mg/kg)'] },
       { titolo: 'Allergia grave ai betalattamici', righe: ['{vancomicina} + {meropenem} 2 g ev ogni 8 h (reattività crociata <1%) oppure, se anafilassi anche ai carbapenemi, moxifloxacina 400 mg/die + {vancomicina}; Listeria: {cotrimossazolo} 350 mg di trimetoprim ev ogni 6–8 h (5 mg/kg)'] },
     ],
     durata: 'Meningococco 7 giorni; H. influenzae 7–10; pneumococco 10–14; Listeria 21.',
@@ -477,7 +477,7 @@ export const CONDIZIONI: Condizione[] = [
     sintesi: 'Chirurgia subito + piperacillina/tazobactam + clindamicina + vancomicina.',
     blocchi: [
       { titolo: 'Segni', righe: ['Dolore sproporzionato, rapida progressione, bolle, crepitio, anestesia cutanea, shock; LRINEC aiuta ma non esclude'] },
-      { titolo: 'Terapia', righe: ['Debridement chirurgico urgente', '{piptazo} 4,5 g ev ogni 6 h (o {meropenem} 1 g ev ogni 8 h) + {clindamicina} 900 mg ev ogni 8 h (antitossina) + {vancomicina} carico 2 g ev (25–30 mg/kg) (o {linezolid} 600 mg ev/os ogni 12 h, che è anche antitossina)'] },
+      { titolo: 'Terapia', righe: ['Debridement chirurgico urgente', '{piptazo} 4,5 g ev ogni 6 h (o {meropenem} 1 g ev ogni 8 h) + {clindamicina} 900 mg ev ogni 8 h (antitossina) + {vancomicina} carico 2 g ev = 2 fiale da 1 g (25–30 mg/kg) (o {linezolid} 600 mg ev/os ogni 12 h, che è anche antitossina)'] },
       { titolo: 'Allergia grave ai betalattamici', righe: ['{vancomicina} o {linezolid} + {clindamicina} + {ciprofloxacina} 400 mg ev ogni 8 h + {metronidazolo}'] },
     ],
     durata: 'Fino a nessun nuovo debridement necessario + 48–72 h senza febbre.',
@@ -488,7 +488,7 @@ export const CONDIZIONI: Condizione[] = [
     sintesi: 'Piperacillina/tazobactam ± vancomicina entro 1 h; meropenem se ESBL o shock.',
     blocchi: [
       { titolo: 'Entro 1 h (shock) o 3 h (sepsi possibile senza shock)', righe: ['Emocolture ×2 prima, senza ritardare l’antibiotico', '{piptazo} 4,5 g ev ogni 6 h (prima dose subito, in 30 min)'] },
-      { titolo: 'Aggiungere', righe: ['ESBL noto, antibiotici recenti con shock: {meropenem} 1 g ev ogni 8 h al posto di piperacillina/tazobactam', 'MRSA noto, catetere venoso, cute: {vancomicina} carico 2 g ev (25–30 mg/kg)', 'Shock con rischio di germi resistenti: valutare {amikacina} 1–1,5 g ev (15–20 mg/kg) in dose singola'] },
+      { titolo: 'Aggiungere', righe: ['ESBL noto, antibiotici recenti con shock: {meropenem} 1 g ev ogni 8 h al posto di piperacillina/tazobactam', 'MRSA noto, catetere venoso, cute: {vancomicina} carico 2 g ev = 2 fiale da 1 g (25–30 mg/kg)', 'Shock con rischio di germi resistenti: valutare {amikacina} 1–1,5 g ev (15–20 mg/kg) in dose singola'] },
       { titolo: 'Comunitaria, giovane, sospetta meningococcemia', righe: ['{ceftriaxone} 2 g ev ogni 12 h'] },
       { titolo: 'Colonizzazione o infezione nota da enterobatteri resistenti ai carbapenemi (CRE)', righe: ['Consulenza infettivologica subito; il tipo di carbapenemasi decide il farmaco', 'KPC (prevalente in ASL Toscana Centro): ceftazidime/avibactam 2,5 g ev ogni 8 h in 2 h', 'NDM o altre metallo-β-lattamasi (frequenti in Toscana Nord-Ovest e AOU Pisana): ceftazidime/avibactam 2,5 g ev ogni 8 h + aztreonam 2 g ev ogni 8 h, in contemporanea', 'Toscana 2024: Klebsiella delle emocolture resistente ai carbapenemi nel 19,7%'] },
       { titolo: 'Allergia grave ai betalattamici', righe: ['{vancomicina} + {amikacina} 1–1,5 g ev (15–20 mg/kg) + {ciprofloxacina} 400 mg ev ogni 8 h; consulenza infettivologica'] },
