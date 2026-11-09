@@ -255,6 +255,86 @@ ${RITORNO}
 - sonnolenza, confusione, mal di testa al risveglio;
 - febbre alta, dolore toracico, gonfiore alle gambe.`,
   },
+  // ─── Cardiovascolare e allergie ───
+  {
+    id: 'orticaria', nome: 'Orticaria / reazione allergica senza anafilassi', gruppo: 'Cardiovascolare e allergie',
+    testo: `Diagnosi: orticaria acuta [con angioedema del ...] [reazione allergica cutanea] senza segni di anafilassi, [verosimilmente da ... / causa non identificata].
+[In Pronto Soccorso ha ricevuto: ... Osservazione di ... ore senza ricomparsa dei sintomi.]
+
+Terapia:
+- Cetirizina 10 mg: 1 compressa la sera per [5–7] giorni, poi al bisogno. [Se il prurito persiste: 1 compressa mattina e sera.] Può dare sonnolenza: non guidi se si sente assonnato.
+- [Prednisone (Deltacortene) 25 mg: 2 compresse al mattino dopo colazione per 3 giorni, poi stop.]
+
+Indicazioni:
+- [Non assuma più ... e farmaci della stessa famiglia; lo riferisca sempre a medici, dentisti e farmacisti.]
+- Eviti la causa sospetta. Finché ha i ponfi eviti anche antinfiammatori e aspirina (ibuprofene, ketoprofene, ecc.: per il dolore usi paracetamolo), alcol, docce molto calde, sforzi intensi, indumenti stretti.
+- I ponfi possono ricomparire per qualche giorno anche con la terapia: se sono solo sulla pelle, senza altri sintomi, non è un segno di gravità.
+
+${controlli('[Si allega richiesta per visita allergologica.]')}
+
+Chiami subito il 112 se, anche a distanza di ore:
+- gonfiore di labbra, lingua o gola, voce cambiata, difficoltà a deglutire;
+- difficoltà a respirare, fischi nel petto, tosse insistente;
+- capogiri, sensazione di svenimento, palpitazioni;
+- vomito ripetuto o forti dolori alla pancia insieme ai ponfi.`,
+  },
+  {
+    id: 'sincope-vasovagale', nome: 'Sincope vasovagale', gruppo: 'Cardiovascolare e allergie',
+    testo: `Diagnosi: sincope riflessa (vasovagale) [scatenata da ...]. [ECG, esami del sangue e visita senza alterazioni significative.]
+
+È uno svenimento benigno dovuto a un riflesso che abbassa per pochi secondi pressione e battito. Può ripetersi, ma non indica una malattia del cuore.
+
+Come riconoscerla e cosa fare:
+- Di solito è preceduta da avvisaglie: calore, sudore freddo, nausea, pallore, vista che si annebbia, orecchie ovattate.
+- Alle prime avvisaglie si sdrai subito con le gambe sollevate, oppure si sieda con la testa tra le ginocchia: non cerchi di restare in piedi o di raggiungere un'altra stanza.
+- Se non può sdraiarsi: incroci le gambe stringendo forte cosce e glutei, oppure stringa le mani a pugno e tiri le braccia agganciando le dita, finché i sintomi passano.
+- Si rialzi lentamente quando si sente bene.
+
+Prevenzione:
+- Beva almeno 2–2,5 litri al giorno. [Se non ha pressione alta, problemi di cuore o di reni: non limiti il sale.]
+- Eviti le situazioni scatenanti: stare a lungo in piedi fermo, ambienti caldi e affollati, disidratazione, digiuno, alcol, alzarsi di colpo; [vista di sangue/aghi: si faccia prelievi e iniezioni da sdraiato].
+- Nei primi giorni eviti attività in cui uno svenimento sarebbe pericoloso: salire su scale o in altezza, nuotare da solo, usare macchinari pericolosi.
+- Guida: [può guidare normalmente: gli episodi sono rari e preceduti da avvisaglie] / [non guidi fino alla valutazione del medico curante/cardiologo].
+
+${controlli('[Si allega richiesta per ...]')}
+
+${RITORNO}
+- svenimento durante uno sforzo o da sdraiato;
+- svenimento improvviso senza avvisaglie, o preceduto da palpitazioni o dolore al torace;
+- fiato corto, dolore al torace, battito molto veloce o irregolare;
+- si è fatto male cadendo;
+- svenimenti ripetuti a breve distanza.
+
+Riferisca al medico se in famiglia ci sono state morti improvvise in giovane età.`,
+  },
+  {
+    id: 'sincope-ortostatica', nome: 'Sincope ortostatica', gruppo: 'Cardiovascolare e allergie',
+    testo: `Diagnosi: sincope da ipotensione ortostatica [verosimilmente da disidratazione / farmaci / ...]. [Pressione sdraiato ... mmHg, in piedi ... mmHg.]
+
+È uno svenimento dovuto al calo della pressione quando ci si alza in piedi.
+
+Terapia:
+- [Modifiche alla terapia: ... ridotto/sospeso fino a rivalutazione del medico curante.] Non sospenda di sua iniziativa gli altri farmaci.
+
+Precauzioni:
+- Si alzi in tre tempi: da sdraiato si sieda sul bordo del letto per 1–2 minuti muovendo le gambe, poi si alzi restando vicino a un appoggio, e cammini solo se non ha capogiri. Molta attenzione al mattino, dopo i pasti e di notte (per andare in bagno usi la luce e si sieda sul water).
+- Prima di alzarsi muova piedi e gambe e stringa i pugni per alcuni secondi.
+- Beva almeno 2 litri al giorno [salvo restrizioni per cuore o reni]; un bicchiere d'acqua prima di alzarsi può aiutare.
+- Pasti piccoli e frequenti, pochi carboidrati semplici; eviti alcol, bagni e docce molto caldi, ambienti caldi, stare fermo a lungo in piedi.
+- [Dorma con la testata del letto sollevata di 10–15 cm.] [Calze elastiche a compressione graduata, da indossare al mattino prima di alzarsi.]
+- Alle prime avvisaglie (capogiro, vista annebbiata, debolezza) si sieda o si sdrai subito con le gambe sollevate.
+- In casa: luce notturna, tolga tappeti e ostacoli, usi appoggi in bagno. Non salga su scale o sgabelli.
+- Guida: [non guidi finché i capogiri non sono scomparsi e la terapia non è stata rivalutata].
+
+${controlli('[Si allega richiesta per controllo della pressione sdraiato e in piedi presso il medico curante entro 1 settimana.]', '[Si allega richiesta per esami del sangue: ...]')}
+
+${RITORNO}
+- svenimento durante uno sforzo o da sdraiato;
+- svenimento improvviso senza avvisaglie, o con palpitazioni o dolore al torace;
+- fiato corto, battito molto veloce o irregolare;
+- feci nere o vomito con sangue;
+- si è fatto male cadendo, o gli svenimenti si ripetono nonostante le precauzioni.`,
+  },
   // ─── Neurologia e traumi cranici ───
   {
     id: 'cefalea', nome: 'Cefalea / emicrania', gruppo: 'Neurologia',
