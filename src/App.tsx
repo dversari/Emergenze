@@ -1,9 +1,11 @@
 import { HashRouter, NavLink, Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import Calcolatori from './pages/Calcolatori'
+import Antibiotici from './pages/Antibiotici'
 import { ElencoLineeGuida, RiassuntoLineaGuida } from './pages/LineeGuida'
 
 const schede = [
   { to: '/', label: 'Calcolatori', icona: '±', end: true },
+  { to: '/antibiotici', label: 'Antibiotici', icona: '℞' },
   { to: '/linee-guida', label: 'Linee guida', icona: '▤︎' },
 ]
 
@@ -23,12 +25,12 @@ function Guscio() {
         <Outlet />
       </main>
 
-      <nav className="fixed bottom-0 inset-x-0 z-20 bg-fondo/95 backdrop-blur-md border-t border-linea px-6 pt-2 pb-[max(14px,calc(env(safe-area-inset-bottom)+6px))]">
-        <div className="grid grid-cols-2 gap-2 max-w-md mx-auto">
+      <nav className="fixed bottom-0 inset-x-0 z-20 bg-fondo/95 backdrop-blur-md border-t border-linea px-3 pt-2 pb-[max(14px,calc(env(safe-area-inset-bottom)+6px))]">
+        <div className="grid grid-cols-3 gap-1.5 max-w-md mx-auto">
           {schede.map((s) => (
             <NavLink key={s.to} to={s.to} end={s.end}
               className={({ isActive }) =>
-                `flex items-center justify-center gap-2 rounded-[14px] py-2.5 text-sm font-bold transition-colors ${
+                `flex flex-col items-center justify-center gap-0.5 rounded-[14px] py-1.5 text-[12px] font-bold transition-colors ${
                   isActive ? 'bg-verde text-white' : 'text-tenue'}`}>
               <span className="text-lg leading-none">{s.icona}</span>
               {s.label}
@@ -46,6 +48,7 @@ export default function App() {
       <Routes>
         <Route element={<Guscio />}>
           <Route index element={<Calcolatori />} />
+          <Route path="antibiotici" element={<Antibiotici />} />
           <Route path="linee-guida" element={<ElencoLineeGuida />} />
           <Route path="linee-guida/:id" element={<RiassuntoLineaGuida />} />
           <Route path="*" element={<Navigate to="/" replace />} />
