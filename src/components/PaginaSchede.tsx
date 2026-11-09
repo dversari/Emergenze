@@ -2,6 +2,21 @@ import { Fragment, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { Scheda } from '../lib/schede'
 
+// Nomi dei farmaci evidenziati in rosso grassetto dentro i testi.
+const FARMACI = [
+  'ketamina', 'propofol', 'ketofol', 'etomidate', 'midazolam', 'dexmedetomidina', 'fentanil', 'morfina',
+  'rocuronio', 'succinilcolina', 'sugammadex', 'naloxone', 'flumazenil', 'noradrenalina', 'adrenalina',
+  'ondansetron', 'olanzapina', 'lorazepam', 'aloperidolo', 'diazepam', 'tiamina', 'quetiapina',
+  'clorpromazina', 'levomepromazina', 'butilscopolamina', 'lidocaina', 'atropina', 'albumina', 'caffeina',
+  'desametasone', 'clorexidina', 'eparina',
+]
+const RE_FARMACI = new RegExp(`\\b(${FARMACI.join('|')})\\b`, 'gi')
+
+function Evidenzia({ t }: { t: string }) {
+  const parti = t.split(RE_FARMACI)
+  return <>{parti.map((p, i) => (i % 2 === 1 ? <strong key={i} className="font-extrabold text-bordeaux">{p}</strong> : p))}</>
+}
+
 /** Elenco di card raggruppate che si aprono sui passaggi (Procedure, Sedazione). */
 export default function PaginaSchede({ schede, segnaposto }: { schede: Scheda[]; segnaposto: string }) {
   const [params, setParams] = useSearchParams()
@@ -37,7 +52,7 @@ export default function PaginaSchede({ schede, segnaposto }: { schede: Scheda[];
                 <button onClick={() => toggle(s.id)} className="w-full flex items-center gap-3 px-4 py-3 text-left">
                   <div className="flex-1 min-w-0">
                     <p className="font-bold leading-tight">{s.nome}</p>
-                    <p className="text-xs text-tenue leading-snug mt-0.5">{s.sintesi}</p>
+                    <p className="text-xs text-tenue leading-snug mt-0.5"><Evidenzia t={s.sintesi} /></p>
                   </div>
                   <span className={`text-tenue transition-transform shrink-0 ${open ? 'rotate-90' : ''}`}>›</span>
                 </button>
@@ -51,7 +66,7 @@ export default function PaginaSchede({ schede, segnaposto }: { schede: Scheda[];
                             {b.righe.map((r, i) => (
                               <li key={i} className="flex gap-2.5 text-sm leading-snug">
                                 <span className="shrink-0 w-5 h-5 rounded-full bg-verde text-white text-[11px] font-bold flex items-center justify-center mt-px">{i + 1}</span>
-                                <span>{r}</span>
+                                <span><Evidenzia t={r} /></span>
                               </li>
                             ))}
                           </ol>
@@ -59,7 +74,7 @@ export default function PaginaSchede({ schede, segnaposto }: { schede: Scheda[];
                           <ul className="flex flex-col gap-1">
                             {b.righe.map((r, i) => (
                               <li key={i} className="text-sm leading-snug pl-3 relative">
-                                <span className="absolute left-0 top-[0.55em] w-1 h-1 rounded-full bg-tenue" />{r}
+                                <span className="absolute left-0 top-[0.55em] w-1 h-1 rounded-full bg-tenue" /><Evidenzia t={r} />
                               </li>
                             ))}
                           </ul>
