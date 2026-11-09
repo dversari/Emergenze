@@ -554,6 +554,7 @@ Nella maggior parte dei casi migliora in 4–6 settimane.
 Terapia:
 - Ibuprofene 600 mg 1 compressa ogni 8 ore dopo i pasti per 7 giorni, con [pantoprazolo 20 mg al mattino], oppure paracetamolo 1 g fino a 3 volte al giorno.
 - [Tiocolchicoside 4 mg: 1 capsula ogni 12 ore per massimo 7 giorni.]
+- [Prednisone (Deltacortene) 25 mg: 2 compresse al mattino dopo colazione per 5 giorni, poi 1 compressa per 5 giorni, poi stop. Con il cortisone prenda il protettore gastrico; se diabetico controlli la glicemia più spesso.]
 - [Per il dolore forte: paracetamolo/codeina 500/30 mg, 1 compressa fino a 3 volte al giorno per pochi giorni. Può dare sonnolenza e stitichezza: non guidi.]
 
 Indicazioni:
