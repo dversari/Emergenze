@@ -3,6 +3,7 @@ import type { Nodo, Ramo, Tono } from '../lib/algoritmi'
 import { Link } from 'react-router-dom'
 import { Evidenzia } from './PaginaSchede'
 import { apriManovra } from './Manovre'
+import { apriEcg, ECG } from './EcgEquivalenti'
 import { manovra } from '../lib/manovre'
 import { useConRitorno } from '../lib/ritorno'
 
@@ -173,6 +174,15 @@ function Blocco({ n, piccolo }: { n: Extract<Nodo, { titolo: string }>; piccolo?
             <button key={id} onClick={() => apriManovra(id)}
               className="text-[11px] font-bold rounded-full px-2 py-1 bg-oro text-white">
               ▶ {manovra(id)?.nome.replace(/ \(.*\)$/, '') ?? id}
+            </button>
+          ))}
+        </div>
+      )}
+      {n.ecg && (
+        <div className="flex flex-wrap gap-1 mt-2">
+          {n.ecg.map((id) => (
+            <button key={id} onClick={() => apriEcg(id)} className="text-[11px] font-bold rounded-full px-2 py-1 bg-bordeaux text-white">
+              ♡&#xFE0E; ECG {ECG.find((e) => e.id === id)?.breve ?? id}
             </button>
           ))}
         </div>

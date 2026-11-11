@@ -12,6 +12,7 @@ import PaginaSchede from './components/PaginaSchede'
 import { PROCEDURE, SEDAZIONE } from './lib/schede'
 import { ElencoLineeGuida, RiassuntoLineaGuida } from './pages/LineeGuida'
 import Monogramma from './components/Monogramma'
+import { PopupEcg } from './components/EcgEquivalenti'
 
 declare const __VERSIONE__: string
 
@@ -49,6 +50,7 @@ function Guscio() {
         <Outlet />
         </div>
         <TornaA />
+        <PopupEcg />
       </main>
 
       <nav className="hidden lg:flex fixed left-0 top-[63px] bottom-0 w-56 z-20 flex-col gap-1 border-r border-linea bg-fondo px-3 py-4">

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { RitornoCtx, riprendiScroll, useConRitorno } from '../lib/ritorno'
 import Algoritmo, { idSezione } from '../components/Algoritmo'
 import Manovre from '../components/Manovre'
+import EcgEquivalenti from '../components/EcgEquivalenti'
 import { ALGORITMI } from '../lib/algoritmi'
 import { Link, useParams } from 'react-router-dom'
 import { LINEE_GUIDA, lineaGuida } from '../lib/lineeGuida'
@@ -113,6 +114,8 @@ export function RiassuntoLineaGuida() {
           </div>
         )}
       </section>
+
+      {(l.id === 'stemi' || l.id === 'nste-sca') && <EcgEquivalenti />}
 
       <div className="flex flex-col gap-3 lg:hidden">
         {ALGORITMI[l.id] && <Algoritmo {...ALGORITMI[l.id]} sezioni={l.sezioni} />}

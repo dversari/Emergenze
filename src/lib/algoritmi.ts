@@ -7,7 +7,7 @@
 export type Tono = 'avvio' | 'passo' | 'decisione' | 'allarme' | 'terapia' | 'esito' | 'nota' | 'checklist'
 
 export type Nodo =
-  | { tipo: Tono; titolo: string; righe?: string[]; tempo?: string; /** titolo di una sezione del riassunto da aprire */ vedi?: string; /** id delle manovre illustrate (lib/manovre) */ manovre?: string[]; /** collegamenti ad altre pagine dell'app, con ritorno */ vai?: { etichetta: string; to: string }[] }
+  | { tipo: Tono; titolo: string; righe?: string[]; tempo?: string; /** titolo di una sezione del riassunto da aprire */ vedi?: string; /** id delle manovre illustrate (lib/manovre) */ manovre?: string[]; /** collegamenti ad altre pagine dell'app, con ritorno */ vai?: { etichetta: string; to: string }[]; /** ECG schematici in popup (components/EcgEquivalenti) */ ecg?: string[] }
   | { tipo: 'rami'; rami: Ramo[] }
 
 /** fine: il ramo termina qui (non prosegue nel flusso principale). */
@@ -2454,6 +2454,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                   'V7–V9 ≥ 0,5 mm (infarto posteriore); V3R–V4R ≥ 0,5 mm (ventricolo destro).',
                   'Equivalenti: blocco di branca sinistro o destro o ritmo da pacemaker con sintomi ischemici in atto (Sgarbossa); onde T iperacute; pattern di de Winter.',
                 ],
+                ecg: ['bbsx', 'posteriore', 'de-winter', 'iperacute', 'vd'],
               },
               {
                 tipo: 'allarme', titolo: 'Prima degli antitrombotici: è una dissezione?',
@@ -2479,6 +2480,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                   'Instabilità emodinamica o shock, dolore refrattario, aritmie maligne o arresto cardiaco, complicanze meccaniche, scompenso acuto da ischemia.',
                   'ST↓ > 1 mm in ≥ 6 derivazioni con ST↑ in aVR e/o V1 (malattia del tronco o trivasale), ST↓ ricorrente dinamico.',
                 ],
+                ecg: ['avr', 'wellens'],
               },
               {
                 tipo: 'nota', titolo: 'NSTEMI confermato (troponina) → coronarografia entro 24 h; altrimenti percorso dolore toracico.',
