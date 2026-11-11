@@ -111,49 +111,32 @@ const PAGINE = [
   { id: 'rubrica', to: '/rubrica', nome: 'Rubrica', testo: 'Numeri interni ed esterni' },
 ]
 
-const ALGORITMI = [
-  { id: 'stemi', nome: 'STEMI' },
-  { id: 'scompenso-cardiaco', nome: 'Scompenso / EPA' },
-  { id: 'embolia-polmonare', nome: 'Embolia polmonare' },
-  { id: 'fibrillazione-atriale', nome: 'Fibrillazione atriale' },
-]
-
 /** Schermata iniziale. */
 export default function Home() {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2.5">
       <section className="card !p-0 overflow-hidden">
-        <div className="bg-sabbia px-5 pt-5 pb-2">
-          <Giglio />
+        <div className="bg-sabbia px-4 pt-2 flex justify-center">
+          <div style={{ height: 'clamp(70px, 20svh, 190px)' }} className="aspect-[22/15]"><Giglio /></div>
         </div>
-        <div className="px-5 pt-3 pb-5">
-          <h2 className="font-black text-[34px] leading-none tracking-tight text-verde-scuro">
+        <div className="px-4 pt-2 pb-3">
+          <h2 className="font-black text-[28px] leading-none tracking-tight text-verde-scuro">
             DEA<span className="text-bordeaux">-</span>LIRIO
           </h2>
-          <p className="mt-2 text-[15px] leading-snug">
+          <p className="mt-1 text-[13.5px] leading-snug">
             Algoritmi, calcolatori e numeri utili per sopravvivere al Pronto Soccorso di Prato.
           </p>
         </div>
       </section>
 
-      <section>
-        <p className="etichetta px-1 mb-1.5">Algoritmi</p>
-        <div className="flex flex-wrap gap-1.5">
-          {ALGORITMI.map((a) => (
-            <Link key={a.id} to={`/linee-guida/${a.id}`}
-              className="rounded-full bg-bordeaux text-white text-[13px] font-bold px-3.5 py-2 active:opacity-80">
-              {a.nome} →
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="grid grid-cols-2 gap-2.5">
+      <section className="grid grid-cols-2 gap-2">
         {PAGINE.map((p) => (
-          <Link key={p.id} to={p.to} className="card !p-3 flex flex-col gap-1.5 active:bg-sabbia">
-            <svg viewBox="0 0 64 64" className="w-14 h-14" aria-hidden>{DISEGNI[p.id]}</svg>
-            <p className="font-extrabold leading-tight">{p.nome}</p>
-            <p className="text-[12px] text-tenue leading-snug">{p.testo}</p>
+          <Link key={p.id} to={p.to} className="card !p-2 !rounded-2xl flex items-center gap-2 active:bg-sabbia">
+            <svg viewBox="0 0 64 64" className="w-10 h-10 shrink-0" aria-hidden>{DISEGNI[p.id]}</svg>
+            <div className="min-w-0">
+              <p className="font-extrabold text-[14px] leading-tight">{p.nome}</p>
+              <p className="text-[10.5px] text-tenue leading-tight">{p.testo}</p>
+            </div>
           </Link>
         ))}
       </section>
