@@ -18,14 +18,14 @@ export interface Numero {
 export interface Voce { id: string; cat: string; nome: string; numeri: Numero[]; guardia: boolean; nota: string }
 
 export const CATEGORIE: Categoria[] = [
-  { id: 'ps', nome: 'Pronto Soccorso · HDU · OBI', tono: 'bordeaux', parole: 'dea triage obi hdu bed manager capoturno' },
+  { id: 'ps', nome: 'Pronto Soccorso · HDU (OBI incluso)', tono: 'bordeaux', parole: 'dea triage obi hdu bed manager capoturno' },
   { id: 'neuro', nome: 'Neurologia · Neurochirurgia · Stroke', tono: 'verde', parole: 'nrch nch neuro ictus stroke cervello eeg angio cto neurorianimazione' },
   { id: 'cardio', nome: 'Cardiologia · Cardiochirurgia', tono: 'bordeaux', parole: 'cuore utic emodinamica stemi pmk holter' },
   { id: 'anest', nome: 'Anestesia · Rianimazione', tono: 'verde', parole: 'rianimatore anestesista intensiva subintensiva' },
   { id: 'chir', nome: 'Chirurgia · Vascolare · Toracica · Ustioni', tono: 'oro', parole: 'chirurgo sala operatoria ustionati pisa' },
   { id: 'orto', nome: 'Ortopedia', tono: 'oro', parole: 'ortopedico gessi frattura' },
   { id: 'rad', nome: 'Radiologia · Diagnostica', tono: 'verde', parole: 'rx tac tc rmn eco ecografia nucleare doppler interventista' },
-  { id: 'med', nome: 'Medicina interna · Guardie mediche', tono: 'verde', parole: 'internista medicina guardia polo ama' },
+  { id: 'med', nome: 'Medicina interna · AMA · Guardie mediche', tono: 'verde', parole: 'internista medicina guardia polo ama' },
   { id: 'geri', nome: 'Geriatria', tono: 'oro', parole: 'geriatra anziano dh' },
   { id: 'nefro', nome: 'Nefrologia · Dialisi', tono: 'oro', parole: 'rene nefrologo dialisi' },
   { id: 'pneumo', nome: 'Pneumologia', tono: 'verde', parole: 'polmone pneumologo' },
@@ -56,8 +56,7 @@ ps:[
  ['Capoturno medico / dott.ssa Lombardi','4736 4204',{ g: 1 }],['Capoturno infermieristico','1169',{ g: 1 }],
  ['Dott. Baldini','4685'],['Coordinatore infermieristico PS','1741'],['Coordinatore infermieristico 3° piano','1751'],['GPA PS','1704'],
  ['Bed manager','4024 4885 4624 4675',{n:'Numeri presenti su fogli diversi'}],['Accoglienza amministrativi','1729 1730'],
- ['HDU – postazione medico','1746'],['HDU – postazione infermieri 1','1743'],['HDU – postazione infermieri 2','1744'],['HDU COVID','1734'],
- ['OBI – bancone accoglienza','2200'],['OBI – bancone infermieri','2202'],['OBI – team A','2211 2203'],['OBI – team B','2208 2210'],['OBI – team C','2207 2205'],['Coordinatore infermieristico OBI','2206']
+ ['HDU – postazione medico','1746'],['HDU – postazione infermieri 1','1743'],['HDU – postazione infermieri 2','1744'],['HDU – bolla','1734']
 ],
 neuro:[
  ['Neurologo di guardia per PS / OBI','4029',{ g: 1 }],['Neurologo di guardia per ospedale','4737',{ g: 1 }],
@@ -93,7 +92,8 @@ rad:[
 ],
 med:[
  ['Guardia polo 1 (Polo 1 + 2A, area medica)','4738',{ g: 1 }],['Guardia polo 2 / Medicina 1','4742',{ g: 1 }],
- ['Medico AMA','4001'],['Medicina 1 – reparto','4410 4411 4412'],
+ ['Medico AMA','4001'],
+ ['AMA – bancone accoglienza','2200'],['AMA – bancone infermieri','2202'],['AMA – team A','2211 2203'],['AMA – team B','2208 2210'],['AMA – team C','2207 2205'],['Coordinatore infermieristico AMA','2206',{n:'Sul foglio era il coordinatore OBI: verificare'}],['Medicina 1 – reparto','4410 4411 4412'],
  ['Medicina 2 (8–20)','4738'],['Medicina 2 – medico','6224'],['Medicina 2 – reparto','4310 4311 4312'],
  ['Medicina 2A','4724'],['Medicina 2A – reparto NOP','4212'],['Medicina 3','4889'],['Medicina 3 – reparto onco/reu/nefro','3402'],
  ['Day service medico / DS internistico','4876'],['GPA AMA','1168'],
