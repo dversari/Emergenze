@@ -93,7 +93,7 @@ rad:[
 ],
 med:[
  ['Guardia polo 1 (Polo 1 + 2A, area medica)','4738',{ g: 1 }],['Guardia polo 2 / Medicina 1','4742',{ g: 1 }],
- ['Medicina 1 – AMA','4001'],['Medicina 1 – reparto','4410 4411 4412'],
+ ['Medico AMA','4001'],['Medicina 1 – reparto','4410 4411 4412'],
  ['Medicina 2 (8–20)','4738'],['Medicina 2 – medico','6224'],['Medicina 2 – reparto','4310 4311 4312'],
  ['Medicina 2A','4724'],['Medicina 2A – reparto NOP','4212'],['Medicina 3','4889'],['Medicina 3 – reparto onco/reu/nefro','3402'],
  ['Day service medico / DS internistico','4876'],['GPA AMA','1168'],
@@ -128,7 +128,7 @@ tox:[
 amb:[['Dermatologia','7333 7335'],['Allergologia','7344 7339'],['Reumatologia','4648 1209+'],['Reumatologia – ambulatorio','7578 7579']],
 lab:[
  ['Laboratorio urgenze','3812 3822 3828 3826'],['Laboratorio – medico','1165'],['Laboratorio – annotazione','4407+',{n:'Manoscritto vicino a 3812'}],
- ['Trasfusionale','1391'],['Trasfusionale – ambulatorio','1380 1383'],['Anatomia patologica – dott. Ferrucci?','0574 807802?']
+ ['Trasfusionale','1391'],['Trasfusionale – ambulatorio','1380 1383'],['Microbiologia Careggi','055 7945120'],['Anatomia patologica – dott. Ferrucci?','0574 807802?']
 ],
 osp:[
  ['DEA Careggi','055 7947243 055 7947235~ 055 7947088~'],['Centralino Careggi','055 794111'],['Ispettore AOUC','055 7947292'],
@@ -143,7 +143,7 @@ terr:[
 ],
 serv:[
  ['Centralino','1300 1301 1302'],['Securitas','1163'],['Vigilanza','4739'],
- ['Medico di direzione','1614+'],['CED','5101'],['Assistenza postazioni PC','800 800567'],
+ ['Medico di direzione','1614+'],['CED','5101'],['CED – assistenza informatica','800 800567'],['Portantini','4026'],
  ['Amministrativi','2201+'],['Stanza steward, 3° piano','4010+'],['Progetto PASS','4740'],
  ['Mediazione cinese','3227'],['Mediazione urdu','1166'],['Mediazione farsi – Alessandra','338 6755057']
 ],
