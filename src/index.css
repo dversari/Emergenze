@@ -120,3 +120,8 @@ input, select, textarea {
   .foglio textarea::placeholder, .foglio input::placeholder { color: transparent; }
   .no-print { display: none !important; }
 }
+
+/* Cattura per il PDF su iPhone: stesso aspetto della stampa */
+.foglio.in-pdf { box-shadow: none; border: 0; margin: 0; width: 210mm; min-height: 0; padding: 7mm 9mm; line-height: 1.25; }
+.foglio.in-pdf .campo, .foglio.in-pdf .box { background: transparent !important; }
+.foglio.in-pdf textarea::placeholder, .foglio.in-pdf input::placeholder { color: transparent; }

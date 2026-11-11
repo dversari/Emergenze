@@ -8,6 +8,25 @@ import { Link } from 'react-router-dom'
  * restano solo nella pagina finché non la si chiude; si ricordano solo nome e telefono del medico.
  */
 
+const IOS = typeof navigator !== 'undefined' && (/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+
+/** Su iPhone window.print() non funziona nell'app installata: si genera un PDF A4 da condividere/stampare. */
+async function creaPdf(): Promise<File> {
+  const el = document.getElementById('modulo-stampa')!
+  const [{ toPng }, { jsPDF }] = await Promise.all([import('html-to-image'), import('jspdf')])
+  el.classList.add('in-pdf')
+  const ph = [...el.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[placeholder]')].map((i) => [i, i.placeholder] as const)
+  ph.forEach(([i]) => { i.placeholder = '' })
+  try {
+    const png = await toPng(el, { pixelRatio: 3, backgroundColor: '#ffffff' })
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' })
+    const r = el.offsetHeight / el.offsetWidth
+    const w = 210, h = Math.min(297, w * r)
+    doc.addImage(png, 'PNG', 0, 0, h < 297 ? w : 297 / r, h)
+    return new File([doc.output('blob')], 'richiesta-trasfusione.pdf', { type: 'application/pdf' })
+  } finally { el.classList.remove('in-pdf'); ph.forEach(([i, t]) => { i.placeholder = t }) }
+}
+
 const CHIAVE_MEDICO = 'emergenze.trasfusione.medico'
 const leggiMedico = () => { try { return JSON.parse(localStorage.getItem(CHIAVE_MEDICO) ?? '{}') as { nome?: string; tel?: string } } catch { return {} } }
 
@@ -58,13 +77,42 @@ export default function ModuloTrasfusione() {
     setSesso(''); setIntervento(''); setPregresse(''); setReazioni(''); setUrgenza(''); setNonUrg(''); setChiave((k) => k + 1)
   }
 
+  const [pdf, setPdf] = useState<File | null>(null)
+  const [preparo, setPreparo] = useState(false)
+  const stampa = async () => {
+    if (!IOS) { window.print(); return }
+    setPreparo(true)
+    try { setPdf(await creaPdf()) } catch (e) { alert('Non riesco a creare il PDF: ' + (e as Error).message) } finally { setPreparo(false) }
+  }
+  const apriPdf = async () => {
+    if (!pdf) return
+    try {
+      if (navigator.canShare?.({ files: [pdf] })) { await navigator.share({ files: [pdf], title: 'Richiesta trasfusione' }); return }
+    } catch (e) { if ((e as Error).name === 'AbortError') return }
+    const url = URL.createObjectURL(pdf)
+    const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.download = pdf.name; a.click()
+    setTimeout(() => URL.revokeObjectURL(url), 60000)
+  }
+
   return (
     <div className="flex flex-col gap-3 lg:max-w-4xl lg:mx-auto">
+      {pdf && (
+        <div className="no-print fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4" onClick={() => setPdf(null)}>
+          <div className="w-full max-w-sm rounded-2xl bg-white p-5 shadow-xl" onClick={(e) => e.stopPropagation()}>
+            <div className="text-lg font-extrabold">PDF pronto</div>
+            <p className="mt-1 text-sm text-tenue">Tocca «Stampa», poi nel menu di condivisione scegli <b>Stampa</b> (AirPrint) o salvalo/invialo.</p>
+            <div className="mt-4 flex gap-2">
+              <button onClick={() => setPdf(null)} className="flex-1 rounded-full border border-linea-forte py-2.5 font-bold text-tenue">Chiudi</button>
+              <button onClick={apriPdf} className="flex-1 rounded-full bg-verde py-2.5 font-extrabold text-white">🖨︎ Stampa</button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="no-print flex flex-wrap items-center gap-2">
         <span className="flex gap-4"><Link to="/moduli" className="text-sm text-tenue">‹ Moduli</Link><Link to="/linee-guida/anemia-acuta" className="text-sm text-tenue">PDTA anemia acuta</Link></span>
         <span className="flex-1" />
         <button onClick={svuota} className="rounded-full border border-linea-forte px-4 py-2 text-sm font-bold text-tenue">Svuota</button>
-        <button onClick={() => window.print()} className="rounded-full bg-verde text-white px-5 py-2 text-sm font-extrabold">🖨︎ Stampa</button>
+        <button onClick={stampa} disabled={preparo} className="rounded-full bg-verde text-white px-5 py-2 text-sm font-extrabold disabled:opacity-60">{preparo ? 'Preparo…' : '🖨︎ Stampa'}</button>
       </div>
       <p className="no-print text-[12px] text-tenue leading-snug">Compila i campi (anche incollando da FirstAid) e premi Stampa. Centro di costo e struttura sono già impostati. I dati del paziente non vengono salvati: restano solo finché la pagina è aperta. Nome e telefono del medico vengono ricordati su questo dispositivo.</p>
 
