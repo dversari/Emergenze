@@ -283,6 +283,105 @@ export const PROCEDURE: Scheda[] = [
     ],
     fonte: 'ERC 2025',
   },
+  // ─── Blocchi nervosi ecoguidati ───
+  {
+    id: 'anestetici-locali', nome: 'Anestetici locali: dosi massime e tossicità (LAST)', gruppo: 'Blocchi nervosi ecoguidati',
+    sintesi: 'Ropivacaina max 3 mg/kg (≈ 200 mg a 70 kg); lipidi 20% 1,5 mL/kg se tossicità.',
+    blocchi: [
+      { titolo: 'Dosi massime (70 kg)', righe: [
+        'Ropivacaina (Naropina): 3 mg/kg = 210 mg (es. 40 mL allo 0,375% = 150 mg; 40 mL allo 0,5% = 200 mg). Fiale 7,5 mg/mL da 10 mL; 2 mg/mL da 100 mL.',
+        'Levobupivacaina (Chirocaina): 2 mg/kg = 150 mg.',
+        'Lidocaina: 4,5 mg/kg = 300 mg senza adrenalina; 7 mg/kg con adrenalina.',
+        'Anziano, fragile, insufficienza epatica o cardiaca: ridurre del 20–30%. Più blocchi insieme: le dosi si sommano.',
+      ] },
+      { titolo: 'Sicurezza', righe: [
+        'Monitor (ECG, SpO₂, PA), accesso venoso, emulsione lipidica e materiale per le vie aeree pronti.',
+        'Aspirare prima di ogni iniezione, iniettare 3–5 mL alla volta, controllare la diffusione all’eco e parlare con il paziente.',
+        'Consenso; anticoagulati: i blocchi superficiali (fascia iliaca, serrato) sono di solito accettabili, l’ESP è considerato a basso rischio ma va valutato.',
+      ] },
+      { titolo: 'Tossicità (LAST): cosa fare', numerato: true, righe: [
+        'Segni: sapore metallico, formicolio periorale, acufeni, agitazione, convulsioni; poi bradicardia, aritmie, arresto.',
+        'Sospendere l’iniezione, chiamare aiuto, ossigeno 100%, ventilare (evitare ipossia e acidosi).',
+        'Convulsioni: midazolam (Ipnovel) 2–5 mg ev (non propofol se instabile).',
+        'Emulsione lipidica 20% (Intralipid): bolo 1,5 mL/kg = 100 mL in 2–3 min, poi 0,25 mL/kg/min = circa 1.000 mL/h.',
+        'Se instabile: ripetere il bolo fino a 2 volte e raddoppiare l’infusione; massimo 12 mL/kg.',
+        'Arresto: RCP prolungata (anche > 1 h); adrenalina a dosi ridotte (≤ 1 µg/kg); niente lidocaina, beta-bloccanti, calcio-antagonisti; considerare ECMO.',
+      ] },
+    ],
+    fonte: 'ASRA 2020 (LAST checklist); AAGBI 2020',
+  },
+  {
+    id: 'fascia-iliaca', nome: 'Blocco della fascia iliaca infrainguinale', gruppo: 'Blocchi nervosi ecoguidati',
+    sintesi: 'Frattura di femore: sonda trasversale sotto il legamento, ago sotto la fascia iliaca; 30–40 mL di ropivacaina 0,2–0,375%.',
+    blocchi: [
+      { titolo: 'Indicazioni', righe: [
+        'Frattura del collo o della diafisi del femore (raccomandato in PS dalle linee guida sulla frattura di femore), dolore all’anca o alla coscia.',
+        'Copre soprattutto il nervo femorale; il cutaneo laterale e l’otturatorio in modo variabile.',
+      ] },
+      { titolo: 'Passaggi', numerato: true, righe: [
+        'Supino; disinfezione; sonda lineare trasversale sotto il legamento inguinale, si individua l’arteria femorale e si scorre lateralmente fino al terzo laterale.',
+        'Identificare fascia lata, fascia iliaca (linea iperecogena sopra l’ileopsoas) e sartorio.',
+        'Ago da blocco (80–100 mm) in piano da laterale a mediale, fino sotto la fascia iliaca.',
+        'Iniettare a piccoli boli dopo aspirazione: l’anestetico deve scollare la fascia dal muscolo e diffondersi verso il nervo femorale e lateralmente.',
+        'Dose: 30–40 mL di ropivacaina (Naropina) 0,2–0,375% (es. 20 mL di 7,5 mg/mL + 20 mL di SF = 40 mL allo 0,375% = 150 mg).',
+        'Effetto in 15–30 min; durata 8–12 h. Annotare ora e dose in cartella.',
+      ] },
+    ],
+    fonte: 'NYSORA; AAGBI/BOA 2020 (fratture di femore)',
+  },
+  {
+    id: 'fascia-iliaca-sopra', nome: 'Blocco della fascia iliaca soprainguinale', gruppo: 'Blocchi nervosi ecoguidati',
+    sintesi: 'Più prossimale: diffusione craniale verso il plesso lombare; 40 mL di ropivacaina 0,2–0,25%.',
+    blocchi: [
+      { titolo: 'Indicazioni', righe: [
+        'Frattura di femore prossimale e anca: copre in modo più affidabile femorale e cutaneo laterale della coscia rispetto all’infrainguinale.',
+      ] },
+      { titolo: 'Passaggi', numerato: true, righe: [
+        'Supino; sonda lineare parasagittale appena medialmente alla SIAS, sopra il legamento inguinale, ruotata verso l’ombelico.',
+        'Cercare l’immagine a «papillon»: sartorio (caudale) e obliquo interno (craniale) che si incontrano; sotto, la fascia iliaca e il muscolo iliaco; l’arteria circonflessa iliaca profonda come repere.',
+        'Ago in piano da caudale a craniale, sotto la fascia iliaca sopra il muscolo iliaco.',
+        'Iniettare: la fascia si solleva e l’anestetico scorre cranialmente sotto l’obliquo interno.',
+        'Dose: 40 mL di ropivacaina (Naropina) 0,2–0,25% (80–100 mg).',
+      ] },
+    ],
+    fonte: 'NYSORA; Hebbard 2011',
+  },
+  {
+    id: 'esp', nome: 'Blocco del piano dell’erettore della spina (ESP)', gruppo: 'Blocchi nervosi ecoguidati',
+    sintesi: 'Fratture costali posteriori e laterali, dolore toracico o lombare: 20–30 mL sul processo trasverso.',
+    blocchi: [
+      { titolo: 'Indicazioni', righe: [
+        'Fratture costali multiple (anche posteriori), herpes zoster toracico, dolore lombare acuto, drenaggio toracico.',
+        'Effetto su più metameri (di solito 3–6) dal livello dell’iniezione; meno potente di un’epidurale ma molto sicuro.',
+      ] },
+      { titolo: 'Passaggi', numerato: true, righe: [
+        'Seduto o sul fianco; contare le vertebre (T4–T5 per le coste medie, livello della frattura centrale).',
+        'Sonda lineare (o convex se obeso) parasagittale a 3 cm dalla linea mediana: si vedono i processi trasversi «a dente» e sopra il muscolo erettore.',
+        'Ago in piano da craniale a caudale fino a toccare il processo trasverso.',
+        'Iniettare 2–3 mL di prova: l’anestetico deve sollevare l’erettore e stendersi in senso craniocaudale.',
+        'Dose: 20–30 mL di ropivacaina (Naropina) 0,25–0,375% per lato (bilaterale: rispettare la dose massima totale).',
+      ] },
+    ],
+    fonte: 'NYSORA; Forero 2016',
+  },
+  {
+    id: 'serrato', nome: 'Blocco del piano del serrato anteriore', gruppo: 'Blocchi nervosi ecoguidati',
+    sintesi: 'Fratture costali antero-laterali e drenaggio toracico: 20–30 mL sopra o sotto il serrato, ascellare media.',
+    blocchi: [
+      { titolo: 'Indicazioni', righe: [
+        'Fratture costali laterali e anteriori, posizionamento di drenaggio toracico, dolore della parete toracica laterale.',
+        'Non copre bene le coste posteriori (per quelle: ESP).',
+      ] },
+      { titolo: 'Passaggi', numerato: true, righe: [
+        'Supino o sul fianco con il braccio abdotto; sonda lineare sulla linea ascellare media, 4ª–5ª costa.',
+        'Identificare gran dorsale (in alto, posteriore), serrato anteriore, costa e pleura.',
+        'Ago in piano verso la costa: iniezione sopra il serrato (tra gran dorsale e serrato) o sotto il serrato (sulla costa, più semplice).',
+        'Dose: 20–30 mL di ropivacaina (Naropina) 0,25–0,375%.',
+        'Attenzione alla pleura: vedere sempre la punta dell’ago; dopo, controllare la SpO₂ e l’eco polmonare.',
+      ] },
+    ],
+    fonte: 'NYSORA; Blanco 2013',
+  },
   {
     id: 'cve', nome: 'Cardioversione elettrica sincronizzata', gruppo: 'Accessi',
     sintesi: 'Sedazione, placche, SYNC verificato prima di ogni shock; FA all’energia massima, flutter/TPSV 70–120 J, TV 120–150 J.',

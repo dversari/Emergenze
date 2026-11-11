@@ -11,7 +11,7 @@ const FARMACI = [
   'rocuronio', 'succinilcolina', 'sugammadex', 'naloxone', 'flumazenil', 'noradrenalina', 'adrenalina',
   'ondansetron', 'olanzapina', 'lorazepam', 'aloperidolo', 'diazepam', 'tiamina', 'quetiapina',
   'clorpromazina', 'levomepromazina', 'butilscopolamina', 'lidocaina', 'atropina', 'albumina', 'caffeina',
-  'desametasone', 'clorexidina', 'eparina',
+  'desametasone', 'clorexidina', 'eparina', 'ropivacaina', 'levobupivacaina',
 ]
 const RE_FARMACI = new RegExp(`\\b(${FARMACI.join('|')})\\b`, 'gi')
 

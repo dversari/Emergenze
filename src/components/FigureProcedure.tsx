@@ -262,7 +262,113 @@ const Placche = ({ didascalia, cve }: { didascalia: string; cve?: boolean }) => 
   </Fig>
 )
 
+
+/* ─── Blocchi nervosi ecoguidati: a sinistra dove va la sonda, a destra l'immagine ecografica schematica ─── */
+const Eco = ({ children, x = 168 }: { children: ReactNode; x?: number }) => (
+  <g transform={`translate(${x} 10)`}>
+    <rect width="146" height="160" rx="6" className="fill-testo" />
+    <path d="M0 2 L146 2" {...T} strokeWidth={5} className="stroke-verde" />
+    {children}
+  </g>
+)
+const Sonda = ({ x, y, w = 34, r = 0 }: { x: number; y: number; w?: number; r?: number }) => (
+  <rect x={x - w / 2} y={y - 5} width={w} height={10} rx={3} transform={`rotate(${r} ${x} ${y})`} className="fill-verde stroke-verde-scuro" strokeWidth={1.5} />
+)
+const ago = (d: string) => <path d={d} {...T} strokeWidth={2.2} className="stroke-oro" />
+const anest = (cx: number, cy: number, rx: number, ry: number) => <ellipse cx={cx} cy={cy} rx={rx} ry={ry} className="fill-verde3" opacity={0.75} />
+const t = (x: number, y: number, s: string, cls = 'fill-linea', size = 8.5, a: 'start' | 'middle' | 'end' = 'middle') => testo(x, y, s, cls, size, a)
+
+const FasciaIliaca = () => (
+  <Fig didascalia="Infrainguinale: sonda trasversale sotto il legamento inguinale, al terzo laterale. Ago in piano da laterale verso mediale fino SOTTO la fascia iliaca, sopra l’ileopsoas, lontano dall’arteria: l’anestetico si deve aprire verso il nervo femorale.">
+    <path d="M20 20 L150 20 L140 190 L30 190 Z" className={pelle} strokeWidth={1.5} />
+    <path d="M30 60 Q85 92 140 60" {...T} strokeWidth={2} className="stroke-tenue" />
+    {t(85, 92, 'legamento inguinale', 'fill-tenue', 8.5)}
+    <circle cx="34" cy="56" r="4" className="fill-oro" />{t(40, 46, 'SIAS', 'fill-oro', 8.5, 'start')}
+    <circle cx="140" cy="56" r="4" className="fill-oro" />{t(136, 46, 'pube', 'fill-oro', 8.5, 'end')}
+    <Sonda x={62} y={118} w={40} />
+    {t(62, 138, 'terzo laterale', 'fill-verde', 9)}
+    <Eco>
+      {t(20, 18, 'lat', 'fill-linea', 8, 'start')}{t(126, 18, 'med', 'fill-linea', 8, 'end')}
+      <path d="M0 40 Q40 32 70 46" {...T} strokeWidth={1.5} className="stroke-linea" />{t(30, 34, 'sartorio', 'fill-linea', 8)}
+      <path d="M0 62 L146 70" {...T} strokeWidth={3} className="stroke-carta" />{t(30, 58, 'fascia iliaca', 'fill-carta', 8.5)}
+      <path d="M0 110 Q60 80 110 100 L146 104" {...T} strokeWidth={1.5} className="stroke-linea" />{t(40, 126, 'ileopsoas', 'fill-linea', 8.5)}
+      <ellipse cx="88" cy="78" rx="12" ry="6" className="fill-oro2" />{t(88, 96, 'n. femorale', 'fill-oro2', 8)}
+      <circle cx="122" cy="80" r="9" className="fill-black stroke-bordeaux2" strokeWidth={2} />{t(122, 100, 'arteria', 'fill-bordeaux2', 8)}
+      {anest(52, 72, 30, 6)}
+      {ago('M0 30 L46 70')}
+      {t(73, 150, 'ago sotto la fascia', 'fill-oro', 9)}
+    </Eco>
+  </Fig>
+)
+
+const Soprainguinale = () => (
+  <Fig didascalia="Soprainguinale: sonda parasagittale medialmente alla SIAS, inclinata verso l’ombelico. Immagine a «papillon» (sartorio e obliquo interno). Ago in piano da caudale a craniale, sotto la fascia iliaca sopra il muscolo iliaco: l’anestetico deve sollevare la fascia verso l’alto (craniale). Copre femorale e cutaneo laterale (ottimo per l’anca).">
+    <path d="M20 20 L150 20 L140 190 L30 190 Z" className={pelle} strokeWidth={1.5} />
+    <path d="M30 100 Q85 132 140 100" {...T} strokeWidth={2} className="stroke-tenue" />
+    {t(95, 140, 'legamento inguinale', 'fill-tenue', 8.5)}
+    <circle cx="34" cy="96" r="4" className="fill-oro" />{t(30, 84, 'SIAS', 'fill-oro', 8.5, 'start')}
+    <circle cx="85" cy="40" r="4" className="fill-tenue" />{t(85, 32, 'ombelico', 'fill-tenue', 8.5)}
+    <Sonda x={56} y={78} w={40} r={-55} />
+    <Eco>
+      {t(18, 18, 'craniale', 'fill-linea', 8, 'start')}{t(128, 18, 'caudale', 'fill-linea', 8, 'end')}
+      <path d="M0 40 L60 70 L0 100 M146 40 L86 70 L146 100" {...T} strokeWidth={1.5} className="stroke-linea" />
+      {t(20, 74, 'obliquo int.', 'fill-linea', 8, 'start')}{t(126, 74, 'sartorio', 'fill-linea', 8, 'end')}
+      <path d="M0 112 L146 120" {...T} strokeWidth={3} className="stroke-carta" />{t(110, 112, 'fascia iliaca', 'fill-carta', 8.5)}
+      <path d="M0 142 L146 146" {...T} strokeWidth={1} className="stroke-linea" />{t(73, 140, 'm. iliaco', 'fill-linea', 8.5)}
+      <circle cx="96" cy="108" r="4" className="fill-bordeaux2" />{t(96, 98, 'a. circonflessa', 'fill-bordeaux2', 7.5)}
+      {anest(44, 122, 34, 6)}
+      {ago('M146 150 L70 120')}
+      {freccia('M40 118 L10 116')}
+    </Eco>
+  </Fig>
+)
+
+const ESP = () => (
+  <Fig didascalia="Erettore della spina (ESP): paziente seduto o sul fianco. Sonda parasagittale a circa 3 cm dalla linea mediana sul processo trasverso del livello voluto (T4–T5 per fratture costali). Ago in piano da craniale a caudale fino a toccare il processo trasverso; l’anestetico si deve stendere sotto il muscolo erettore, in senso craniocaudale.">
+    <path d="M30 10 Q90 0 150 10 L150 190 L30 190 Z" className={pelle} strokeWidth={1.5} />
+    <path d="M90 14 L90 186" {...T} strokeDasharray="3 5" strokeWidth={3} className="stroke-tenue" />
+    {[40, 66, 92, 118, 144].map((y) => <rect key={y} x="98" y={y} width="20" height="8" rx="3" className="fill-carta stroke-tenue" />)}
+    {t(132, 34, 'processi trasversi', 'fill-tenue', 8)}
+    <Sonda x={108} y={92} w={44} r={90} />
+    {t(74, 96, '3 cm', 'fill-verde', 9, 'end')}
+    <Eco>
+      {t(18, 18, 'craniale', 'fill-linea', 8, 'start')}{t(128, 18, 'caudale', 'fill-linea', 8, 'end')}
+      <path d="M0 34 L146 34" {...T} strokeWidth={1} className="stroke-linea" />{t(73, 30, 'trapezio / romboide', 'fill-linea', 8)}
+      <path d="M0 50 L146 50 M0 92 L146 92" {...T} strokeWidth={1} className="stroke-linea" />{t(73, 74, 'erettore della spina', 'fill-linea', 9)}
+      {[20, 73, 126].map((x) => <path key={x} d={`M${x - 16} 104 Q${x} 94 ${x + 16} 104`} {...T} strokeWidth={4} className="stroke-carta" />)}
+      {t(73, 124, 'processi trasversi', 'fill-carta', 8.5)}
+      {anest(73, 96, 60, 5)}
+      {ago('M2 46 L66 96')}
+      {freccia('M90 96 L130 96')}
+    </Eco>
+  </Fig>
+)
+
+const Serrato = () => (
+  <Fig didascalia="Serrato anteriore: paziente supino con il braccio abdotto. Sonda sulla linea ascellare media all’altezza della 4ª–5ª costa. Ago in piano verso la costa: iniezione SOPRA il serrato (tra gran dorsale e serrato) o SOTTO il serrato (sulla costa). Per fratture costali laterali e drenaggi toracici.">
+    <path d="M60 196 L74 70 Q80 40 110 34 L160 30 Q196 34 206 70 L222 196 Z" transform="translate(-50 0) scale(0.95 1)" className={pelle} strokeWidth={1.5} />
+    {[90, 110, 130, 150].map((y) => <path key={y} d={`M40 ${y} Q90 ${y - 10} 140 ${y}`} {...T} strokeWidth={1.2} className="stroke-linea-forte" />)}
+    <Sonda x={92} y={118} w={40} r={-20} />
+    {t(92, 140, 'ascellare media, 4ª–5ª costa', 'fill-verde', 8.5)}
+    <Eco>
+      <path d="M0 36 L146 36" {...T} strokeWidth={1} className="stroke-linea" />{t(73, 30, 'sottocute', 'fill-linea', 8)}
+      <path d="M0 62 L146 58" {...T} strokeWidth={1.5} className="stroke-linea" />{t(73, 52, 'gran dorsale', 'fill-linea', 8.5)}
+      <path d="M0 88 L146 84" {...T} strokeWidth={1.5} className="stroke-linea" />{t(73, 78, 'serrato anteriore', 'fill-linea', 8.5)}
+      <path d="M40 112 Q73 98 106 112" {...T} strokeWidth={5} className="stroke-carta" />{t(73, 126, 'costa', 'fill-carta', 8.5)}
+      <path d="M0 140 L146 140" {...T} strokeWidth={2} className="stroke-linea" strokeDasharray="6 4" />{t(73, 152, 'pleura', 'fill-linea', 8.5)}
+      {anest(73, 66, 46, 4)}
+      {anest(73, 94, 40, 4)}
+      {ago('M0 30 L64 64')}
+      {t(122, 72, 'sopra', 'fill-verde2', 8)}{t(122, 98, 'sotto', 'fill-verde2', 8)}
+    </Eco>
+  </Fig>
+)
+
 export const FIGURE: Record<string, () => ReactNode> = {
+  'fascia-iliaca': FasciaIliaca,
+  'fascia-iliaca-sopra': Soprainguinale,
+  esp: ESP,
+  serrato: Serrato,
   rsi: RSI,
   crico: Crico,
   toracentesi: Toracentesi,
