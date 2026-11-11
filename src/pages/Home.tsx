@@ -115,7 +115,7 @@ const PAGINE = [
 ]
 
 const AVVERTENZE = [
-  'Non è approvata da nessuno: né dall’ASL, né dalla Regione, né dal Ministero, né dal primario (che forse non sa nemmeno che esiste). È un quaderno di appunti con l’ambizione di un’app.',
+  'Non è approvata da nessuno: né dall’ASL, né dalla Regione, né dal Ministero, né dal primario. È un quaderno di appunti con l’ambizione di un’app.',
   'Chi la usa lo fa sotto la propria responsabilità. Le dosi sono per un adulto di 70 kg che, statisticamente, non è il paziente che hai davanti.',
   'Non sostituisce lo studio: le linee guida originali, i protocolli aziendali e la scheda tecnica vanno letti da sé. Questa serve a ricordare, non a imparare.',
   'Se qualcosa non torna, hanno ragione la scheda tecnica e il buon senso (e quasi sempre il collega più anziano).',
@@ -141,7 +141,7 @@ export default function Home() {
       <div className="flex flex-col gap-2.5 lg:gap-4">
         <section className="card !p-0 overflow-hidden">
           <div className="bg-sabbia px-4 pt-2 flex justify-center">
-            <div className="aspect-[22/15] h-[clamp(48px,13svh,180px)] lg:h-[230px]"><Giglio /></div>
+            <div className="aspect-[22/15] h-[clamp(44px,9svh,180px)] lg:h-[230px]"><Giglio /></div>
           </div>
           <div className="px-4 pt-2 pb-3 lg:px-6 lg:pb-5 flex items-end gap-3">
             <div className="flex-1">
@@ -192,6 +192,8 @@ export default function Home() {
           <Segnala etichetta="Segnala errori e idee" className="text-[12px] font-bold text-verde underline underline-offset-2" />
         </div>
       </div>
+
+      <p className="lg:col-span-2 text-center text-[12px] lg:text-[14px] italic text-tenue -mt-1 lg:mt-2">Prato, il DEA dove tutto può succedere.</p>
 
       {avvisi && (
         <div className="fixed inset-0 z-50 bg-black/40 flex items-end justify-center" onClick={() => setAvvisi(false)}>
