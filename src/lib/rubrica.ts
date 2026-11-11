@@ -135,7 +135,7 @@ osp:[
  ['DEA Pistoia','0573 351750'],['Torregalli – centralino','055 69321']
 ],
 terr:[
- ['Centrale 118','800 118118'],['Trasferimenti','055 227677430!',{n:'Così stampato'}],['Coordinatore infermieristico trasferimenti','1750 340 3141601'],
+ ['Centrale 118','800 118118'],['Centrale 118 – trasferimenti','055 227677430!',{n:'12 cifre: un numero fisso italiano ne ha al massimo 11, verificare'}],['Coordinatore infermieristico trasferimenti','1750 340 3141601'],
  ['SEUS','800 010622?',{n:'Manoscritto sopra un numero barrato'}],['SEUS – altro recapito','0573 573180?'],['SEUS – centrale operativa','0571 1833792'],
  ['Cure intermedie','7363 7309 7355 7685+ 7749+'],['CoDeCaSa','347 0749988?'],
  ['Medicina del lavoro','0574 805506 0574 805507~ 0574 805508~'],
