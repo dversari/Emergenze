@@ -5,6 +5,7 @@ import Acr from './pages/Acr'
 import Calcolatori from './pages/Calcolatori'
 import Antibiotici from './pages/Antibiotici'
 import Rubrica from './pages/Rubrica'
+import ModuloTrasfusione from './pages/ModuloTrasfusione'
 import PaginaTesti from './components/PaginaTesti'
 import { DIMISSIONI } from './lib/dimissioni'
 import { ANAMNESI } from './lib/anamnesi'
@@ -97,6 +98,7 @@ export default function App() {
           <Route path="anamnesi" element={<PaginaTesti key="a" voci={ANAMNESI} prefisso="anamnesi" segnaposto="Cerca un sintomo…" nota="Testo da adattare al paziente prima di copiarlo in cartella; cancella la sezione «Da non dimenticare» se non serve." />} />
           <Route path="dimissioni" element={<PaginaTesti key="d" voci={DIMISSIONI} prefisso="dimissione" segnaposto="Cerca una diagnosi…" nota="Dosi per adulto: verificare allergie, funzione renale, gravidanza e terapie in corso." />} />
           <Route path="rubrica" element={<Rubrica />} />
+          <Route path="modulo-trasfusione" element={<ModuloTrasfusione />} />
           <Route path="linee-guida" element={<ElencoLineeGuida />} />
           <Route path="linee-guida/:id" element={<RiassuntoLineaGuida />} />
           <Route path="*" element={<Navigate to="/" replace />} />

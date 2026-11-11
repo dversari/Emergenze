@@ -14,6 +14,39 @@ export type Nodo =
 export interface Ramo { etichetta: string; tono?: 'si' | 'no' | 'neutro'; nodi: Nodo[]; fine?: string }
 
 export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: Nodo[] }> = {
+  'anemia-acuta': {
+    titolo: 'Algoritmo anemia acuta',
+    nota: 'AABB 2023. Modulo di richiesta compilabile e stampabile nell’app.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Hb bassa o anemia sintomatica', righe: ['Parametri, segni di sanguinamento, esplorazione rettale, farmaci (anticoagulanti, FANS).'] },
+      { tipo: 'decisione', titolo: 'Sanguinamento attivo con instabilità?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'Emorragia: rianimazione emostatica',
+                righe: ['Due accessi grossi, prove crociate; richiesta URGENTISSIMA: emazie 0 negativo/0 positivo senza prove.', 'Plasma, piastrine, fibrinogeno, acido tranexamico; controllo della fonte (endoscopia, chirurgia, radiologia interventistica).'],
+                vai: [{ etichetta: 'Modulo trasfusione', to: '/modulo-trasfusione' }, { etichetta: 'Trauma maggiore', to: '/linee-guida/trauma-maggiore' }, { etichetta: 'Emorragia digestiva', to: '/linee-guida/emorragia-digestiva' }],
+              },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'checklist', titolo: 'Prima di trasfondere', righe: ['Gruppo e prove crociate (2 provette EDTA)', 'Reticolociti, ferritina, B12/folati', 'LDH, bilirubina, aptoglobina, Coombs', 'Creatinina, coagulazione'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Soglia raggiunta?', righe: ['Hb < 7 g/dL; < 8 se cardiopatia/vasculopatia; SCA in atto: 8–10; sintomi (dispnea, angina, sincope) a qualunque valore.'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: '1 unità di emazie, poi rivalutare', righe: ['Richiesta URGENTE; in 1–2 h; furosemide 20 mg ev se scompenso.'], vai: [{ etichetta: 'Compila la richiesta', to: '/modulo-trasfusione' }] }] },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'Trattare la causa', righe: ['Sideropenia: ferro orale o ev; B12/folati; sospendere FANS; percorso ambulatoriale (gastroscopia/colonscopia se sideropenica).'] }] },
+        ],
+      },
+    ],
+  },
   'trauma-cranico': {
     titolo: 'Algoritmo trauma cranico lieve (PDTA aziendale)',
     nota: 'Flow chart del PDTA aziendale (GCS 14–15), integrata con NICE 2023.',

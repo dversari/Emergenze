@@ -2425,6 +2425,64 @@ export const LINEE_GUIDA: LineaGuida[] = [
       { data: '2021-02-01', testo: 'ESO 2021: valutazione entro 24 h in centro dedicato; ABCD² da solo non sufficiente per il triage; doppia antiaggregazione breve nel TIA ad alto rischio.' },
     ],
   },
+  {
+    id: 'anemia-acuta',
+    titolo: 'Anemia acuta e trasfusione',
+    ente: 'AABB / NICE',
+    anno: 2023,
+    area: 'Ematologia · Emergenze',
+    fonte: { etichetta: 'Carson et al., JAMA 2023 (AABB, soglie trasfusionali)', url: 'https://doi.org/10.1001/jama.2023.12914' },
+    controllata: '2026-11-12',
+    vediAnche: [
+      { etichetta: 'Modulo richiesta trasfusione', to: '/modulo-trasfusione' },
+      { etichetta: 'Emorragia digestiva', to: '/linee-guida/emorragia-digestiva' },
+      { etichetta: 'Trauma maggiore', to: '/linee-guida/trauma-maggiore' },
+      { etichetta: 'Anticoagulato che sanguina', to: '/linee-guida/anticoagulato-sanguinamento' },
+      { etichetta: 'Extrauterina', to: '/linee-guida/extrauterina' },
+    ],
+    inBreve: [
+      'Prima domanda: sta sanguinando ed è instabile? Allora si tratta l’emorragia (accessi, emoderivati, controllo della fonte), non il valore di Hb.',
+      'Prima di trasfondere: gruppo e prove crociate (2 provette EDTA etichettate al letto), e i prelievi per la causa (reticolociti, ferro, B12/folati, emolisi) che dopo la trasfusione non sono più interpretabili.',
+      'Soglie (paziente stabile): Hb < 7 g/dL; < 8 g/dL se cardiopatia ischemica/vascolare nota o chirurgia ortopedica; nella SCA in atto soglia più alta (8–10, dati in evoluzione).',
+      'Paziente stabile non sanguinante: 1 unità alla volta, poi rivalutare clinica e Hb (1 unità ≈ +1 g/dL).',
+      'Urgentissima (senza prove di compatibilità): emazie 0 Rh negativo (donne in età fertile) o 0 positivo, poi prove appena possibile.',
+      'Anemia sideropenica stabile: ferro (orale o ev) invece della trasfusione.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Emocomponenti (70 kg)',
+        punti: [
+          'Emazie concentrate: 1 unità ≈ +1 g/dL di Hb; in 1–2 h (più lenta se scompenso: considerare furosemide 20 mg ev tra le unità).',
+          'Piastrine: < 10.000 profilassi; < 50.000 se sanguinamento o procedura invasiva; < 100.000 se sanguinamento cerebrale o neurochirurgia. 1 pool ≈ +20–30.000.',
+          'Plasma fresco congelato: sanguinamento con PT/INR > 1,5 o aPTT > 1,5 volte: 15 mL/kg ≈ 1.000 mL (4 unità). Dicumarolici: complesso protrombinico, non plasma.',
+          'Fibrinogeno < 1,5 g/L con sanguinamento: fibrinogeno concentrato 3–4 g.',
+          'Emorragia massiva: emazie e plasma presto (almeno 1:2), acido tranexamico, calcio; vedi PDTA trauma maggiore.',
+        ],
+      },
+      {
+        titolo: 'Esami prima della trasfusione',
+        punti: [
+          'Emocromo con MCV, reticolociti, striscio periferico.',
+          'Ferritina, sideremia, transferrina; vitamina B12 e folati.',
+          'Emolisi: LDH, bilirubina indiretta, aptoglobina, test di Coombs diretto.',
+          'Creatinina, funzione epatica, PT/INR, aPTT, fibrinogeno.',
+          'Esplorazione rettale (melena); test di gravidanza; gruppo e prove crociate.',
+        ],
+      },
+      {
+        titolo: 'Reazioni trasfusionali',
+        punti: [
+          'Febbre, brividi, orticaria, dispnea, ipotensione, dolore lombare, urine scure: fermare subito la trasfusione, mantenere l’accesso con SF, controllare identità e sacca.',
+          'Anafilassi: adrenalina 0,5 mg im. Sovraccarico (TACO): diuretico, ossigeno. Sospetta emolisi o TRALI: rianimatore e Medicina trasfusionale.',
+          'Rimandare la sacca e le provette al Centro trasfusionale con la segnalazione.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2023-11-01', testo: 'AABB 2023: strategia restrittiva (Hb 7 g/dL) per la maggior parte dei ricoverati; 7,5 in cardiochirurgia, 8 in ortopedia o con malattia cardiovascolare; evidenze insufficienti per la SCA (trial MINT a favore di soglie più alte).' },
+      { data: '2026-11-12', testo: 'Aggiunto il modulo aziendale di richiesta di sangue e emocomponenti compilabile e stampabile.' },
+    ],
+  },
 ]
 
 export const lineaGuida = (id: string) => LINEE_GUIDA.find((l) => l.id === id)
