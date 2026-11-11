@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 /*
@@ -210,6 +210,55 @@ const PUNTEGGI: Punteggio[] = [
       : { livello: 'alto', testo: 'Mortalità > 15% (BISAP ≥ 3): rischio di pancreatite grave, monitoraggio stretto.' },
     fonte: 'Wu, Gut 2008',
   },
+  {
+    id: 'ich',
+    nome: 'ICH score',
+    ambito: 'Emorragia cerebrale spontanea · mortalità a 30 giorni',
+    voci: [
+      { tipo: 'scelta', id: 'g', testo: 'GCS', opzioni: [{ testo: '13–15', punti: 0 }, { testo: '5–12', punti: 1 }, { testo: '3–4', punti: 2 }] },
+      { tipo: 'si', id: 'v', testo: 'Volume ≥ 30 mL (A×B×C/2)', punti: 1 },
+      { tipo: 'si', id: 'i', testo: 'Emorragia intraventricolare', punti: 1 },
+      { tipo: 'si', id: 'o', testo: 'Origine sottotentoriale', punti: 1 },
+      { tipo: 'si', id: 'a', testo: 'Età ≥ 80 anni', punti: 1 },
+    ],
+    esito: (t) => {
+      const m = ['0%', '13%', '26%', '72%', '97%', '100%', '100%'][t]
+      return { livello: t <= 1 ? 'basso' : t === 2 ? 'medio' : 'alto', testo: `Mortalità a 30 giorni nella coorte originale: ${m}. Non usarlo per limitare le cure nelle prime 24 h.` }
+    },
+    fonte: 'Hemphill, Stroke 2001',
+  },
+  {
+    id: 'ottawa-esa',
+    nome: 'Regola di Ottawa per ESA',
+    ambito: 'Cefalea improvvisa · escludere l’emorragia subaracnoidea (vigili, > 15 anni, al massimo entro 1 h)',
+    voci: [
+      { tipo: 'si', id: 'e', testo: 'Età ≥ 40 anni', punti: 1 },
+      { tipo: 'si', id: 'c', testo: 'Dolore o rigidità al collo', punti: 1 },
+      { tipo: 'si', id: 'p', testo: 'Perdita di coscienza testimoniata', punti: 1 },
+      { tipo: 'si', id: 's', testo: 'Esordio durante sforzo', punti: 1 },
+      { tipo: 'si', id: 't', testo: 'Esordio a colpo di tuono (massimo istantaneo)', punti: 1 },
+      { tipo: 'si', id: 'f', testo: 'Flessione del collo limitata alla visita', punti: 1 },
+    ],
+    esito: (t) =>
+      t === 0 ? { livello: 'basso', testo: 'Nessun criterio: ESA esclusa clinicamente (sensibilità ~100% nello studio di validazione).' }
+      : { livello: 'alto', testo: 'Almeno un criterio: ESA non escludibile, eseguire la TC.' },
+    formato: (t) => (t === 0 ? 'negativa' : 'positiva'),
+    fonte: 'Perry, JAMA 2013',
+  },
+  {
+    id: 'addrs',
+    nome: 'ADD-RS',
+    ambito: 'Sospetta sindrome aortica acuta · 1 punto per categoria (0–3)',
+    voci: [
+      { tipo: 'si', id: 'c', testo: 'Condizioni ad alto rischio: Marfan/connettivopatia, familiarità, valvulopatia aortica, manipolazione aortica recente, aneurisma toracico noto', punti: 1 },
+      { tipo: 'si', id: 'd', testo: 'Dolore ad alto rischio: improvviso, intenso, lacerante', punti: 1 },
+      { tipo: 'si', id: 'e', testo: 'Esame ad alto rischio: deficit di polso o differenza di PAS, deficit neurologico con dolore, soffio nuovo di insufficienza aortica, ipotensione/shock', punti: 1 },
+    ],
+    esito: (t) =>
+      t <= 1 ? { livello: t === 0 ? 'basso' : 'medio', testo: 'Probabilità bassa: D-dimero (< 500 ng/mL con ADD-RS ≤ 1 rende improbabile la sindrome aortica) ed eco.' }
+      : { livello: 'alto', testo: 'Probabilità alta: angio-TC aorta subito.' },
+    fonte: 'ESC 2024; Nazerian, Circulation 2018 (ADvISED)',
+  },
 ]
 
 // ─── Componenti ───────────────────────────────────────────────────────────────
@@ -225,7 +274,7 @@ function Scheda({ id, nome, ambito, aperto, onToggle, riassunto, livello, childr
   riassunto?: string; livello?: Livello; children: React.ReactNode
 }) {
   return (
-    <section id={`calc-${id}`} className="card !p-0 overflow-hidden">
+    <section id={`calc-${id}`} className="card !p-0 overflow-hidden scroll-mt-24">
       <button onClick={onToggle} className="w-full flex items-center gap-3 px-4 py-3 text-left">
         <div className="flex-1 min-w-0">
           <p className="font-bold leading-tight">{nome}</p>
@@ -404,6 +453,10 @@ export default function EmergenzeCalcolatori() {
   )
   const altri = ALTRI.filter((a) => !q || a.nome.toLowerCase().includes(q))
   const toggle = (id: string) => setAperto((a) => (a === id ? null : id))
+  useEffect(() => {
+    const id = params.get('apri')
+    if (id) requestAnimationFrame(() => document.getElementById(`calc-${id}`)?.scrollIntoView({ block: 'start' }))
+  }, [params])
 
   return (
     <div className="flex flex-col gap-2.5">

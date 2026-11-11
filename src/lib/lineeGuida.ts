@@ -1114,6 +1114,416 @@ export const LINEE_GUIDA: LineaGuida[] = [
       { data: '2019-12-01', testo: 'Linee guida Australia/NZ: N-acetilcisteina a due sacche (meno reazioni), dose aumentata nelle intossicazioni massive, rilascio modificato sempre trattato.' },
     ],
   },
+  {
+    id: 'emorragia-cerebrale',
+    titolo: 'Emorragia cerebrale spontanea',
+    ente: 'AHA/ASA',
+    anno: 2022,
+    area: 'Neurologia',
+    fonte: { etichetta: 'Greenberg et al., Stroke 2022 (AHA/ASA)', url: 'https://doi.org/10.1161/STR.0000000000000407' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'ich', nome: 'ICH score' }, { id: 'gcs', nome: 'GCS' }],
+    vediAnche: [{ etichetta: 'Anticoagulato che sanguina', to: '/linee-guida/anticoagulato-sanguinamento' }, { etichetta: 'Codice ictus', to: '/linee-guida/ictus' }],
+    inBreve: [
+      'TC senza contrasto subito; angio-TC per spot sign e lesioni sottostanti (soprattutto se < 70 anni, lobare, senza ipertensione).',
+      'PAS 150–220: portarla a 140 e mantenerla 130–150, in modo graduale e senza oscillazioni; iniziare entro 2 h dall’esordio e arrivare all’obiettivo entro 1 h. Evitare PAS < 130.',
+      'Anticoagulante: sospendere e antagonizzare subito (PCC + vitamina K per i dicumarolici, idarucizumab per dabigatran, PCC per gli anti-Xa).',
+      'Antiaggregante: niente trasfusione di piastrine se non va in sala operatoria.',
+      'Neurochirurgo subito per emorragia cerebellare con compressione del tronco o idrocefalo, o deterioramento.',
+      'No corticosteroidi, no antiepilettici in profilassi, no acido tranexamico di routine.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Pressione arteriosa (70 kg)',
+        punti: [
+          'Labetalolo (Trandate 100 mg/20 mL): 10–20 mg ev in 2 min, ripetibile ogni 10 min fino a 300 mg; poi 0,5–2 mg/min.',
+          'Urapidil (Ebrantil 50 mg/10 mL): 10–25 mg ev lento, ripetibile dopo 5 min; poi 5–30 mg/h.',
+          'PAS > 220: infusione continua con controllo ravvicinato (ogni 5–10 min o arteriosa).',
+        ],
+      },
+      {
+        titolo: 'Antagonizzare (70 kg)',
+        punti: [
+          'Dicumarolico con INR ≥ 2: complesso protrombinico (PCC) 25–50 UI/kg secondo INR (INR 2–4: 25 UI/kg = 1.750 UI; 4–6: 35 UI/kg = 2.450 UI; > 6: 50 UI/kg = 3.500 UI) + vitamina K 10 mg ev lenta (1 fiala). INR 1,3–1,9: PCC da considerare.',
+          'Dabigatran: idarucizumab 5 g ev (2 flaconi da 2,5 g).',
+          'Apixaban, rivaroxaban, edoxaban: PCC 50 UI/kg = 3.500 UI. Andexanet alfa: ritirato negli USA nel 2025 per eventi trombotici; in Europa autorizzazione condizionata.',
+          'Eparina non frazionata: protamina 1 mg ogni 100 UI somministrate nelle ultime 2–3 h (max 50 mg). Enoxaparina < 8 h: protamina 1 mg per mg (effetto parziale).',
+          'Ultima assunzione < 2 h di un anticoagulante orale: carbone attivo 50 g se protegge le vie aeree.',
+        ],
+      },
+      {
+        titolo: 'Altro',
+        punti: [
+          'Testa a 30°, glicemia 80–180 mg/dL, normotermia, trattare le crisi solo se presenti.',
+          'TC di controllo entro 24 h o subito se peggiora.',
+          'L’ICH score stima la prognosi ma non deve far limitare le cure nelle prime 24 h.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2022-05-17', testo: 'AHA/ASA 2022: obiettivo PAS 140 (130–150) con controllo graduale, PCC preferito al plasma, andexanet ragionevole per gli anti-Xa, no piastrine se non chirurgico.' },
+      { data: '2025-12-22', testo: 'Andexanet alfa ritirato dal mercato USA (FDA: rischi trombotici superiori ai benefici); in Europa resta con autorizzazione condizionata. PCC prima scelta pratica per gli anti-Xa.' },
+    ],
+  },
+  {
+    id: 'esa',
+    titolo: 'Emorragia subaracnoidea',
+    ente: 'AHA/ASA',
+    anno: 2023,
+    area: 'Neurologia',
+    fonte: { etichetta: 'Hoh et al., Stroke 2023 (AHA/ASA)', url: 'https://doi.org/10.1161/STR.0000000000000436' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'ottawa-esa', nome: 'Regola di Ottawa per ESA' }, { id: 'gcs', nome: 'GCS' }],
+    vediAnche: [{ etichetta: 'Emorragia cerebrale', to: '/linee-guida/emorragia-cerebrale' }, { etichetta: 'Dimissione cefalea', to: '/dimissioni?apri=cefalea' }],
+    inBreve: [
+      'Cefalea improvvisa che raggiunge il massimo in meno di 1 ora: pensarci. La regola di Ottawa aiuta a escluderla nei pazienti vigili.',
+      'TC entro 6 h dall’esordio, letta da un radiologo esperto e negativa: ESA esclusa. Oltre 6 h: rachicentesi (xantocromia, almeno 12 h dall’esordio) o angio-TC.',
+      'ESA confermata: neurochirurgia/neuroradiologia di riferimento per trattare l’aneurisma il prima possibile.',
+      'Nimodipina 60 mg per bocca ogni 4 h; antagonizzare gli anticoagulanti; controllare la PA (obiettivo esatto non definito; spesso PAS < 160).',
+      'Idrocefalo acuto con peggioramento: derivazione ventricolare esterna.',
+      'No acido tranexamico, no antiepilettici in profilassi di routine.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Regola di Ottawa',
+        punti: [
+          'Per: vigili (GCS 15), > 15 anni, cefalea nuova, grave, non traumatica, al massimo entro 1 h.',
+          'Non escludibile se uno qualsiasi: età ≥ 40; dolore o rigidità al collo; perdita di coscienza testimoniata; esordio sotto sforzo; esordio a colpo di tuono (massimo istantaneo); flessione del collo limitata alla visita.',
+          'Non vale per: deficit neurologici nuovi, aneurisma o ESA o tumore cerebrale noti, cefalee ricorrenti simili.',
+        ],
+      },
+      {
+        titolo: 'Farmaci (70 kg)',
+        punti: [
+          'Nimodipina 60 mg = 2 compresse da 30 mg ogni 4 h per 21 giorni; se ipotensione, 30 mg ogni 2 h.',
+          'Pressione: labetalolo 10–20 mg ev o urapidil 10–25 mg ev, evitando ipotensione.',
+          'Analgesia: paracetamolo 1 g ev; oppioide a basse dosi se serve. Antiemetico.',
+          'Anticoagulanti: vedi il PDTA «Anticoagulato che sanguina».',
+        ],
+      },
+      {
+        titolo: 'Gravità e trasferimento',
+        punti: [
+          'WFNS (basata su GCS e deficit motorio) o Hunt-Hess per descrivere la gravità al centro di riferimento.',
+          'Intubazione se GCS ≤ 8 o vie aeree non protette; evitare iper- e ipocapnia, ipotensione, ipossia.',
+          'Glicemia, sodio (rischio di iponatriemia), temperatura.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2023-05-22', testo: 'AHA/ASA 2023: trattamento precoce dell’aneurisma, nimodipina, no acido tranexamico (studio ULTRA), no statine/magnesio per il vasospasmo.' },
+    ],
+  },
+  {
+    id: 'anticoagulato-sanguinamento',
+    titolo: 'Anticoagulato che sanguina',
+    ente: 'ACC',
+    anno: 2020,
+    area: 'Ematologia · Emergenze',
+    fonte: { etichetta: 'Tomaselli et al., J Am Coll Cardiol 2020 (ACC ECDP)', url: 'https://doi.org/10.1016/j.jacc.2020.04.053' },
+    controllata: '2026-11-11',
+    vediAnche: [
+      { etichetta: 'Emorragia cerebrale', to: '/linee-guida/emorragia-cerebrale' },
+      { etichetta: 'Emorragia digestiva', to: '/linee-guida/emorragia-digestiva' },
+      { etichetta: 'Trauma cranico in TAO', to: '/dimissioni?apri=trauma-cranico-tao' },
+    ],
+    inBreve: [
+      'Sanguinamento maggiore: instabilità emodinamica, sede critica (cranio, rachide, pericardio, occhio, retroperitoneo, articolazione, muscolo con sindrome compartimentale), Hb ↓ ≥ 2 g/dL o ≥ 2 unità di emazie.',
+      'Maggiore: sospendere anticoagulante e antiaggreganti, emostasi locale, trasfondere, antagonizzare (se c’è un antidoto) senza ritardare la rianimazione.',
+      'Non maggiore: niente antagonista; sospensione temporanea fino all’emostasi, emostasi locale.',
+      'Sempre: quale farmaco, dose, ora dell’ultima assunzione, funzione renale.',
+      'Ripresa dell’anticoagulante: decisione condivisa dopo l’emostasi (digestivo spesso entro 1–2 settimane; intracranico dopo almeno 4 settimane).',
+    ],
+    sezioni: [
+      {
+        titolo: 'Antidoti (70 kg)',
+        punti: [
+          'Dicumarolico (warfarin, acenocumarolo): PCC 25–50 UI/kg secondo INR (1.750–3.500 UI) + vitamina K 5–10 mg ev lenta.',
+          'Dabigatran: idarucizumab 5 g ev (2 flaconi da 2,5 g); dialisi se non disponibile.',
+          'Apixaban, rivaroxaban, edoxaban: PCC 50 UI/kg = 3.500 UI (alternativa a dose fissa 2.000 UI). Andexanet alfa solo dove disponibile: segnale di trombosi, ritirato negli USA.',
+          'Eparina non frazionata: protamina 1 mg ogni 100 UI delle ultime 2–3 h (max 50 mg).',
+          'Enoxaparina: protamina 1 mg per mg se < 8 h (0,5 mg per mg se 8–12 h); neutralizzazione parziale.',
+          'Assunzione dell’anticoagulante orale < 2–4 h: carbone attivo 50 g.',
+        ],
+      },
+      {
+        titolo: 'INR alto senza sanguinamento (dicumarolici)',
+        punti: [
+          'INR sopra il range e < 10: sospendere 1–2 dosi, ridurre la dose; niente vitamina K di routine.',
+          'INR > 10: sospendere e vitamina K 2–5 mg per bocca; ricontrollo a 24 h.',
+        ],
+      },
+      {
+        titolo: 'Misure generali',
+        punti: [
+          'Due accessi venosi grossi, emocromo, PT/INR, aPTT, fibrinogeno, creatinina, gruppo e prove crociate.',
+          'Acido tranexamico 1 g ev in 10 min (2 fiale da 500 mg) nel trauma entro 3 h; non nel sanguinamento digestivo (HALT-IT).',
+          'Antiaggreganti: trasfusione di piastrine solo se procedura urgente o sanguinamento critico, con specialista.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2020-07-14', testo: 'ACC 2020: algoritmi per sanguinamento maggiore/non maggiore, antidoti per DOAC e dicumarolici, criteri di ripresa.' },
+      { data: '2025-12-22', testo: 'Andexanet alfa ritirato dal mercato USA per eventi trombotici; PCC prima scelta pratica per gli anti-Xa.' },
+    ],
+  },
+  {
+    id: 'nste-sca',
+    titolo: 'SCA senza sopraslivellamento ST (NSTE-SCA)',
+    ente: 'ESC',
+    anno: 2023,
+    area: 'Cardiologia',
+    fonte: { etichetta: 'Byrne et al., Eur Heart J 2023 (ESC)', url: 'https://doi.org/10.1093/eurheartj/ehad191' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'heart', nome: 'HEART' }],
+    vediAnche: [
+      { etichetta: 'STEMI', to: '/linee-guida/stemi' },
+      { etichetta: 'Dissezione aortica', to: '/linee-guida/dissezione-aortica' },
+      { etichetta: 'Dimissione dolore toracico', to: '/dimissioni?apri=dolore-toracico' },
+    ],
+    inBreve: [
+      'ECG entro 10 min. Troponina ad alta sensibilità con algoritmo 0/1 h (o 0/2 h) e soglie del dosaggio in uso.',
+      'Invasiva immediata (< 2 h) se rischio molto alto: instabilità o shock, dolore refrattario, aritmie maligne o arresto, complicanze meccaniche, scompenso acuto, sopraslivellamenti ST intermittenti.',
+      'Invasiva precoce (< 24 h) se rischio alto: NSTEMI confermato, alterazioni ST-T dinamiche, sopraslivellamento ST transitorio, GRACE > 140.',
+      'ASA a tutti; pretrattamento con inibitore P2Y12 non di routine se la coronarografia è prevista entro 24 h.',
+      'Anticoagulante: eparina non frazionata se coronarografia subito; enoxaparina in alternativa; fondaparinux se la coronarografia non è precoce.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (70 kg)',
+        punti: [
+          'ASA: 150–300 mg per bocca masticata o 75–250 mg ev.',
+          'Eparina non frazionata: 70–100 UI/kg = 5.000–7.000 UI ev in sala.',
+          'Enoxaparina 1 mg/kg = 70 mg sc ogni 12 h (dimezzare la frequenza se clearance < 30).',
+          'Fondaparinux 2,5 mg sc al giorno (se coronarografia non precoce).',
+          'P2Y12 (con il cardiologo): ticagrelor 180 mg, prasugrel 60 mg (se anatomia nota; no se ictus/TIA pregresso), clopidogrel 300–600 mg se anticoagulato o gli altri non indicati.',
+          'Nitrati se dolore o ipertensione (no se PAS < 90, infarto del ventricolo destro, inibitori PDE5 recenti); metoprololo 5 mg ev se tachicardia e ipertensione senza scompenso; morfina 2–4 mg ev se dolore forte; ossigeno solo se SpO₂ < 90%.',
+        ],
+      },
+      {
+        titolo: 'Algoritmo 0/1 h',
+        punti: [
+          'Esclusione: troponina molto bassa all’arrivo (se dolore da > 3 h) oppure bassa all’arrivo e senza variazione a 1 h.',
+          'Conferma: troponina alta all’arrivo o aumento significativo a 1 h.',
+          'Zona grigia: terzo prelievo a 3 h e valutazione clinica (eco).',
+          'Soglie: quelle del laboratorio per il dosaggio in uso.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2023-08-25', testo: 'ESC 2023: unica linea guida per tutte le SCA, pretrattamento P2Y12 non di routine nella strategia invasiva precoce, terapia antitrombotica personalizzata.' },
+    ],
+  },
+  {
+    id: 'dissezione-aortica',
+    titolo: 'Dissezione aortica e sindromi aortiche acute',
+    ente: 'ESC',
+    anno: 2024,
+    area: 'Cardiologia · Chirurgia vascolare',
+    fonte: { etichetta: 'Mazzolai et al., Eur Heart J 2024 (ESC)', url: 'https://academic.oup.com/eurheartj/article/45/36/3538/7738955' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'addrs', nome: 'ADD-RS' }],
+    vediAnche: [{ etichetta: 'Pericardiocentesi', to: '/procedure?apri=pericardiocentesi' }, { etichetta: 'NSTE-SCA', to: '/linee-guida/nste-sca' }],
+    inBreve: [
+      'Sospetto con ADD-RS: 0–1 → D-dimero (e eco); ≥ 2 → angio-TC aorta subito.',
+      'ADD-RS ≤ 1 e D-dimero < 500 ng/mL: sindrome aortica acuta improbabile.',
+      'Terapia: analgesia con oppioide, poi beta-bloccante ev per FC ≤ 60, poi vasodilatatore per PAS < 120 (100–120).',
+      'Tipo A (aorta ascendente): cardiochirurgia d’urgenza. Tipo B complicato (malperfusione, rottura, dolore o ipertensione refrattari): endoprotesi.',
+      'Niente anticoagulanti, antiaggreganti o fibrinolitici finché il sospetto non è escluso.',
+    ],
+    sezioni: [
+      {
+        titolo: 'ADD-RS (1 punto per categoria)',
+        punti: [
+          'Condizioni ad alto rischio: Marfan o altra connettivopatia, familiarità per patologia aortica, valvulopatia aortica nota, manipolazione aortica recente, aneurisma toracico noto.',
+          'Dolore ad alto rischio: improvviso, intenso, lacerante.',
+          'Esame ad alto rischio: deficit di polso o differenza di PAS tra le braccia, deficit neurologico con dolore, soffio nuovo di insufficienza aortica con dolore, ipotensione o shock.',
+        ],
+      },
+      {
+        titolo: 'Farmaci (70 kg)',
+        punti: [
+          'Morfina 2–4 mg ev ripetibile o fentanil 50 µg ev.',
+          'Esmololo: 0,5 mg/kg = 35 mg in 1 min, poi 50–200 µg/kg/min (3,5–14 mg/min).',
+          'Labetalolo 20 mg ev in 2 min, poi 20–80 mg ogni 10 min (max 300 mg) o 0,5–2 mg/min.',
+          'Metoprololo 5 mg ev ogni 5 min fino a 15 mg.',
+          'Beta-bloccante controindicato: diltiazem 0,25 mg/kg = 17,5 mg ev in 2 min.',
+          'Dopo il controllo della FC: urapidil 10–25 mg ev poi 5–30 mg/h (o nitroprussiato).',
+        ],
+      },
+      {
+        titolo: 'Ipotensione o shock',
+        punti: [
+          'Cercare con l’eco: tamponamento, insufficienza aortica acuta, rottura, ischemia miocardica.',
+          'Liquidi e emoderivati; cardiochirurgo subito.',
+          'Tamponamento senza chirurgia immediata: drenaggio pericardico controllato di piccoli volumi solo per mantenere la perfusione.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2024-08-30', testo: 'ESC 2024 (malattie arteriose periferiche e aortiche): percorso diagnostico con ADD-RS e D-dimero, obiettivi FC ≤ 60 e PAS 100–120.' },
+    ],
+  },
+  {
+    id: 'asma',
+    titolo: 'Asma acuto',
+    ente: 'GINA',
+    anno: 2025,
+    area: 'Pneumologia',
+    fonte: { etichetta: 'GINA 2025 Report', url: 'https://ginasthma.org/reports/' },
+    controllata: '2026-11-11',
+    vediAnche: [{ etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' }, { etichetta: 'Anafilassi', to: '/linee-guida/anafilassi' }],
+    inBreve: [
+      'Grave: parla a parole, seduto in avanti, agitato, FR > 30, muscoli accessori, FC > 120, SpO₂ < 90%, PEF ≤ 50%.',
+      'Pericolo di vita: sopore, confusione, torace silente → rianimatore, preparare l’intubazione.',
+      'Salbutamolo ripetuto nella prima ora + ipratropio nelle forme gravi; ossigeno per SpO₂ 93–95%; cortisone sistemico entro 1 h.',
+      'Magnesio solfato ev nelle forme gravi che non rispondono.',
+      'Niente antibiotici di routine, niente sedativi.',
+      'Dimissione: iniziare o aumentare la terapia inalatoria con cortisone, prednisone 5–7 giorni, controllo entro 2–7 giorni.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (70 kg)',
+        punti: [
+          'Salbutamolo spray 100 µg: 4–10 puff con distanziatore ogni 20 min per 1 h; oppure nebulizzato 2,5–5 mg (0,5–1 mL della soluzione 5 mg/mL) ogni 20 min.',
+          'Ipratropio 0,5 mg nebulizzato (1 fiala) ogni 20 min per 1 h, nelle forme gravi.',
+          'Prednisone 50 mg per bocca (2 compresse da 25 mg) oppure metilprednisolone 40 mg ev se non deglutisce.',
+          'Magnesio solfato 2 g ev in 20 min (verificare la concentrazione delle fiale).',
+          'Adrenalina im 0,5 mg solo se anafilassi o asma quasi fatale senza risposta.',
+        ],
+      },
+      {
+        titolo: 'Ricovero o dimissione',
+        punti: [
+          'Rivalutare a 1 h: sintomi, SpO₂, PEF.',
+          'Ricovero se PEF < 60% dopo il trattamento, SpO₂ bassa, peggioramento o fattori di rischio di asma fatale (intubazioni precedenti, ricoveri recenti, uso eccessivo di salbutamolo).',
+          'Dimissione se PEF > 60–80%, SpO₂ > 94% in aria e sintomi migliorati.',
+          'RX torace solo se sospetto di complicanza (pneumotorace, polmonite) o mancata risposta.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2025-05-01', testo: 'GINA 2025: terapia con cortisone inalatorio sempre (no salbutamolo da solo); in acuto salbutamolo, ipratropio se grave, cortisone sistemico, magnesio ev nelle forme gravi.' },
+    ],
+  },
+  {
+    id: 'bpco',
+    titolo: 'BPCO riacutizzata',
+    ente: 'GOLD',
+    anno: 2026,
+    area: 'Pneumologia',
+    fonte: { etichetta: 'GOLD 2026 Report', url: 'https://goldcopd.org/' },
+    controllata: '2026-11-11',
+    vediAnche: [
+      { etichetta: 'Antibiotici: BPCO', to: '/antibiotici?apri=bpco' },
+      { etichetta: 'Dimissione BPCO', to: '/dimissioni?apri=bpco' },
+      { etichetta: 'Scompenso', to: '/linee-guida/scompenso-cardiaco' },
+      { etichetta: 'Embolia polmonare', to: '/linee-guida/embolia-polmonare' },
+    ],
+    inBreve: [
+      'Escludere ciò che la imita: polmonite, scompenso, embolia polmonare, pneumotorace, SCA, aritmie.',
+      'Ossigeno con obiettivo SpO₂ 88–92%; EGA all’arrivo e dopo 30–60 min.',
+      'Broncodilatatori a breve durata (salbutamolo ± ipratropio); prednisone 40 mg per 5 giorni.',
+      'Antibiotico se espettorato purulento con aumento del volume o della dispnea, o se serve la ventilazione; 5–7 giorni.',
+      'NIV se acidosi respiratoria (pH ≤ 7,35 e PaCO₂ ≥ 45) o dispnea grave con fatica; alti flussi nasali come alternativa in casi selezionati.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (70 kg)',
+        punti: [
+          'Salbutamolo 2,5–5 mg nebulizzato (0,5–1 mL) ogni 20 min per 1 h, poi ogni 4–6 h; con aria compressa se ipercapnia (o ossigeno a basso flusso a parte).',
+          'Ipratropio 0,5 mg nebulizzato (1 fiala) ogni 6–8 h.',
+          'Prednisone 40 mg (1 compressa da 25 mg + 3 da 5 mg) per 5 giorni, o metilprednisolone 40 mg ev.',
+        ],
+      },
+      {
+        titolo: 'Ventilazione e destinazione',
+        punti: [
+          'NIV: partire con IPAP 12–15 e EPAP 4–5 cmH₂O, salire con l’IPAP secondo la PaCO₂; EGA dopo 1 h.',
+          'Intubazione se NIV fallisce o non tollerata, arresto respiratorio, coma, instabilità, aspirazione.',
+          'Ricovero se dispnea grave, cianosi o edemi nuovi, mancata risposta, comorbidità gravi, insufficienza respiratoria.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2025-11-10', testo: 'GOLD 2026: capitolo sulle riacutizzazioni riscritto (diagnosi differenziale, sede di cura, indicazioni ad alti flussi e NIV); una sola riacutizzazione moderata basta per intensificare la terapia di fondo.' },
+    ],
+  },
+  {
+    id: 'bradicardia',
+    titolo: 'Bradicardia',
+    ente: 'ERC',
+    anno: 2025,
+    area: 'Cardiologia',
+    fonte: { etichetta: 'ERC Guidelines 2025 Adult ALS, Resuscitation 2025', url: 'https://doi.org/10.1016/j.resuscitation.2025.110769' },
+    controllata: '2026-11-11',
+    vediAnche: [{ etichetta: 'Pacing', to: '/procedure?apri=pacing' }, { etichetta: 'Iperkaliemia', to: '/linee-guida/iperkaliemia' }, { etichetta: 'Timer ACR', to: '/acr' }],
+    inBreve: [
+      'Segni di pericolo: shock, sincope, ischemia miocardica, scompenso.',
+      'Con segni di pericolo: atropina 0,5 mg ev ogni 3–5 min fino a 3 mg.',
+      'Se non risponde: isoprenalina 5 µg/min o adrenalina 2–10 µg/min, pacing transcutaneo come ponte al transvenoso.',
+      'Anche senza segni di pericolo, rischio di asistolia: BAV Mobitz II, BAV completo con QRS largo, pause > 3 s, asistolia recente → pacing.',
+      'Atropina inefficace (e può peggiorare) nel BAV avanzato a QRS largo e nel trapiantato cardiaco.',
+      'Cause: iperkaliemia, farmaci (beta-bloccanti, calcio-antagonisti, digossina), ischemia inferiore, ipotermia, ipotiroidismo.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (70 kg)',
+        punti: [
+          'Atropina 0,5 mg ev (1 fiala da 0,5 mg) ogni 3–5 min, massimo 3 mg.',
+          'Isoprenalina: 1 fiala da 0,2 mg in 50 mL di glucosata 5% (4 µg/mL): 5 µg/min = 75 mL/h, titolare.',
+          'Adrenalina: 1 mg in 50 mL di SF (20 µg/mL): 2–10 µg/min = 6–30 mL/h.',
+          'Beta-bloccante o calcio-antagonista: glucagone 2–10 mg ev (con calcio e insulina ad alte dosi su consiglio del tossicologo).',
+          'Digossina: anticorpi antidigossina (Tossicologia).',
+          'Trapiantato o lesione midollare: aminofillina 100–200 mg ev lenta.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2025-10-22', testo: 'ERC 2025: atropina 0,5 mg fino a 3 mg, poi isoprenalina o adrenalina; pacing transvenoso precoce nella bradicardia instabile refrattaria, transcutaneo come ponte.' },
+    ],
+  },
+  {
+    id: 'tachicardia',
+    titolo: 'Tachicardia con polso',
+    ente: 'ERC',
+    anno: 2025,
+    area: 'Cardiologia',
+    fonte: { etichetta: 'ERC Guidelines 2025 Adult ALS, Resuscitation 2025', url: 'https://doi.org/10.1016/j.resuscitation.2025.110769' },
+    controllata: '2026-11-11',
+    vediAnche: [{ etichetta: 'Fibrillazione atriale', to: '/linee-guida/fibrillazione-atriale' }, { etichetta: 'Sedazione procedurale', to: '/sedazione?apri=procedurale' }, { etichetta: 'Timer ACR', to: '/acr' }],
+    inBreve: [
+      'Instabile (shock, sincope, ischemia, scompenso): cardioversione sincronizzata in sedazione, fino a 3 tentativi; se fallisce, amiodarone 300 mg in 10–20 min e ritentare.',
+      'Stabile, QRS stretto regolare: manovra vagale (Valsalva modificata), poi adenosina 6–12–18 mg.',
+      'Stabile, QRS stretto irregolare: probabile FA → controllo della frequenza (vedi PDTA FA).',
+      'Stabile, QRS largo regolare: considerarla TV → amiodarone 300 mg in 10–60 min (o procainamide), o cardioversione elettiva.',
+      'Torsione di punta: magnesio solfato 2 g ev in 10 min; correggere K e Mg, sospendere i farmaci che allungano il QT.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Cardioversione sincronizzata',
+        punti: [
+          'Fibrillazione atriale: primo shock all’energia massima.',
+          'Flutter e tachicardia sopraventricolare: 70–120 J, poi a salire.',
+          'TV con polso: 120–150 J, poi a salire.',
+          'TV polimorfa instabile: defibrillazione (non sincronizzata).',
+          'Amiodarone dopo la cardioversione fallita: 300 mg in 10–20 min, poi 900 mg in 24 h.',
+        ],
+      },
+      {
+        titolo: 'Farmaci (70 kg)',
+        punti: [
+          'Valsalva modificata: soffiare 15 s in una siringa da 10 mL (40 mmHg) da semiseduto, poi subito supino con gambe sollevate a 45° per 15 s.',
+          'Adenosina 6 mg (1 fiala) in bolo rapido + 20 mL di SF in vena grossa; poi 12 mg, poi 18 mg. Avvisare del malessere; evitare nell’asma grave e nella preeccitazione con FA.',
+          'Alternativa nella TPSV: verapamil 5 mg ev in 2 min (no se QRS largo o scompenso) o metoprololo 5 mg ev.',
+          'Amiodarone 300 mg = 2 fiale da 150 mg in 250 mL di glucosata 5%.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2025-10-22', testo: 'ERC 2025: FA instabile con primo shock all’energia massima; amiodarone 300 mg dopo cardioversione fallita; adenosina e manovre vagali nella tachicardia a QRS stretto regolare.' },
+    ],
+  },
 ]
 
 export const lineaGuida = (id: string) => LINEE_GUIDA.find((l) => l.id === id)

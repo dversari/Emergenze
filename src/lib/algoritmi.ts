@@ -14,6 +14,402 @@ export type Nodo =
 export interface Ramo { etichetta: string; tono?: 'si' | 'no' | 'neutro'; nodi: Nodo[]; fine?: string }
 
 export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: Nodo[] }> = {
+  'emorragia-cerebrale': {
+    titolo: 'Algoritmo emorragia cerebrale spontanea',
+    nota: 'AHA/ASA 2022. Dosi per 70 kg.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'TC: emorragia intraparenchimale', righe: ['GCS, NIHSS, ora di esordio, farmaci (anticoagulanti, antiaggreganti) e ora dell’ultima dose.'] },
+      {
+        tipo: 'checklist', titolo: 'Subito',
+        righe: [
+          'Vie aeree: GCS ≤ 8 o vomito/aspirazione → intubazione',
+          'Angio-TC (spot sign, malformazioni)',
+          'Esami: emocromo, PT/INR, aPTT, fibrinogeno, creatinina, gruppo',
+          'Testa a 30°, glicemia 80–180, temperatura',
+          'ICH score per descrivere la gravità (non per limitare le cure)',
+        ],
+        vai: [{ etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' }],
+      },
+      { tipo: 'decisione', titolo: 'Anticoagulato?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Dicumarolico', tono: 'no', nodi: [
+              { tipo: 'terapia', titolo: 'PCC + vitamina K', righe: ['INR ≥ 2: PCC 25–50 UI/kg (1.750–3.500 UI) + vitamina K 10 mg ev.'], vedi: 'Antagonizzare (70 kg)' },
+            ],
+          },
+          {
+            etichetta: 'DOAC', tono: 'no', nodi: [
+              { tipo: 'terapia', titolo: 'Antidoto', righe: ['Dabigatran: idarucizumab 5 g ev. Anti-Xa: PCC 50 UI/kg = 3.500 UI.'], vedi: 'Antagonizzare (70 kg)' },
+            ],
+          },
+          {
+            etichetta: 'No / antiaggregante', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'Niente piastrine', righe: ['Salvo intervento neurochirurgico.'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'PAS 150–220?' },
+      {
+        tipo: 'terapia', titolo: 'PAS 140 (130–150) entro 1 h', tempo: 'inizio ≤ 2 h',
+        righe: ['Labetalolo 10–20 mg ev ogni 10 min o urapidil 10–25 mg ev, poi infusione. Gradualmente, senza oscillazioni; mai PAS < 130.'],
+        vedi: 'Pressione arteriosa (70 kg)',
+      },
+      { tipo: 'decisione', titolo: 'Cerebellare con compressione, idrocefalo, effetto massa, peggioramento?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Neurochirurgo subito', righe: ['Evacuazione o derivazione ventricolare.'] }] },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Stroke unit / terapia intensiva', righe: ['TC di controllo entro 24 h o se peggiora.'] }] },
+        ],
+      },
+    ],
+  },
+  esa: {
+    titolo: 'Algoritmo cefalea improvvisa / emorragia subaracnoidea',
+    nota: 'AHA/ASA 2023. Dosi per 70 kg.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Cefalea improvvisa, al massimo in < 1 h', righe: ['Vigile? Applicare la regola di Ottawa per ESA.'] },
+      { tipo: 'decisione', titolo: 'Ottawa negativa (nessun criterio)?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'ESA esclusa clinicamente', righe: ['Cercare altre cause.'] }], fine: 'altre cause' },
+          { etichetta: 'No o non applicabile', tono: 'no', nodi: [{ tipo: 'passo', titolo: 'TC encefalo senza contrasto' }] },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'TC?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sangue', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'ESA', righe: ['Angio-TC; neurochirurgia/neuroradiologia di riferimento.'] }] },
+          { etichetta: 'Negativa ≤ 6 h', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'ESA esclusa', righe: ['Se TC di ultima generazione letta da radiologo esperto.'] }] },
+          { etichetta: 'Negativa > 6 h', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Rachicentesi o angio-TC', righe: ['Rachicentesi almeno 12 h dall’esordio: xantocromia.'] }] },
+        ],
+      },
+      {
+        tipo: 'checklist', titolo: 'ESA confermata',
+        righe: [
+          'GCS ≤ 8 o vie aeree non protette → intubazione',
+          'Antagonizzare gli anticoagulanti',
+          'Nimodipina 60 mg per bocca (2 cp da 30 mg) ogni 4 h',
+          'PA controllata evitando ipotensione (spesso PAS < 160)',
+          'Analgesia (paracetamolo 1 g ev, oppioide a basse dosi), antiemetico',
+          'Idrocefalo con peggioramento → derivazione ventricolare',
+          'No acido tranexamico, no antiepilettici in profilassi',
+        ],
+        vai: [{ etichetta: 'Anticoagulato che sanguina', to: '/linee-guida/anticoagulato-sanguinamento' }],
+      },
+      { tipo: 'esito', titolo: 'Trasferimento al centro neurochirurgico', righe: ['Comunicare GCS, deficit motorio (WFNS), ora di esordio, terapie.'] },
+    ],
+  },
+  'anticoagulato-sanguinamento': {
+    titolo: 'Algoritmo sanguinamento in anticoagulante',
+    nota: 'ACC 2020. Dosi per 70 kg.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Paziente in anticoagulante che sanguina',
+        righe: ['Quale farmaco, dose, ora dell’ultima assunzione, creatinina; antiaggreganti associati.'],
+      },
+      { tipo: 'decisione', titolo: 'Sanguinamento maggiore?', righe: ['Instabile, sede critica, Hb ↓ ≥ 2 g/dL, ≥ 2 unità di emazie.'] },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'Non maggiore', righe: ['Emostasi locale, sospensione temporanea, niente antidoto. Riprendere quando l’emostasi è ottenuta.'] },
+            ],
+            fine: 'nessun antidoto',
+          },
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              {
+                tipo: 'checklist', titolo: 'Maggiore: insieme',
+                righe: [
+                  'Sospendere anticoagulante e antiaggreganti',
+                  'Due accessi grossi, prelievi (emocromo, PT/INR, aPTT, fibrinogeno, creatinina, gruppo)',
+                  'Emostasi locale / endoscopia / chirurgia / radiologia interventistica',
+                  'Trasfusione; carbone attivo se ultima dose < 2–4 h',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Quale anticoagulante?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Dicumarolico', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'PCC + vitamina K', righe: ['PCC 25–50 UI/kg secondo INR + vitamina K 5–10 mg ev lenta.'] }] },
+          { etichetta: 'Dabigatran', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Idarucizumab 5 g ev', righe: ['2 flaconi da 2,5 g; dialisi se non disponibile.'] }] },
+          { etichetta: 'Anti-Xa', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'PCC 50 UI/kg = 3.500 UI', righe: ['Apixaban, rivaroxaban, edoxaban.'] }] },
+          { etichetta: 'Eparine', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Protamina', righe: ['1 mg ogni 100 UI di eparina (ultime 2–3 h) o per mg di enoxaparina (< 8 h); max 50 mg.'] }] },
+        ],
+      },
+      {
+        tipo: 'esito', titolo: 'Dopo l’emostasi',
+        righe: ['Rivalutare indicazione e ripresa con lo specialista: digestivo spesso in 1–2 settimane, intracranico ≥ 4 settimane.'],
+      },
+    ],
+  },
+  'nste-sca': {
+    titolo: 'Algoritmo dolore toracico senza sopraslivellamento ST',
+    nota: 'ESC 2023. Dosi per 70 kg. Prato ha l’emodinamica.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Dolore toracico sospetto', righe: ['ECG entro 10 min. STEMI o equivalente → PDTA STEMI.'], vai: [{ etichetta: 'STEMI', to: '/linee-guida/stemi' }] },
+      { tipo: 'decisione', titolo: 'Rischio molto alto?', righe: ['Shock/instabilità, dolore refrattario, aritmie maligne o arresto, complicanze meccaniche, scompenso acuto, ST sopraslivellato intermittente.'] },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Coronarografia immediata', tempo: '< 2 h', righe: ['ASA 250 mg ev o 300 mg per bocca; eparina 5.000–7.000 UI ev. Emodinamista subito.'] },
+            ],
+            fine: 'emodinamica',
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'Troponina hs 0/1 h (o 0/2 h)', righe: ['Diagnosi differenziale: dissezione, embolia, pericardite. Eco al letto.'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Troponina' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Esclusa', tono: 'si', nodi: [
+              { tipo: 'esito', titolo: 'Infarto escluso', righe: ['HEART per decidere la dimissione e il percorso ambulatoriale.'], vai: [{ etichetta: 'Dimissione dolore toracico', to: '/dimissioni?apri=dolore-toracico' }] },
+            ],
+          },
+          {
+            etichetta: 'Zona grigia', tono: 'neutro', nodi: [
+              { tipo: 'passo', titolo: 'Terzo prelievo a 3 h', righe: ['Eco; rivalutazione clinica.'] },
+            ],
+          },
+          {
+            etichetta: 'Confermata', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'NSTEMI: rischio alto', righe: ['Coronarografia entro 24 h.'] },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'checklist', titolo: 'Terapia NSTEMI',
+        righe: [
+          'ASA 150–300 mg per bocca',
+          'Enoxaparina 70 mg sc ogni 12 h (o fondaparinux 2,5 mg se coronarografia non precoce)',
+          'P2Y12: decidere col cardiologo (non di routine se coronarografia < 24 h)',
+          'Nitrati se dolore/ipertensione; metoprololo 5 mg ev se tachicardico e iperteso senza scompenso',
+          'Monitor ECG; ossigeno solo se SpO₂ < 90%',
+        ],
+      },
+    ],
+  },
+  'dissezione-aortica': {
+    titolo: 'Algoritmo sindrome aortica acuta',
+    nota: 'ESC 2024. Dosi per 70 kg.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Dolore toracico, dorsale o addominale sospetto', righe: ['Calcolare l’ADD-RS; eco al letto (flap, versamento pericardico, insufficienza aortica, radice dilatata).'] },
+      { tipo: 'decisione', titolo: 'ADD-RS?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: '0–1', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'D-dimero', righe: ['< 500 ng/mL: improbabile, cercare altre cause. Positivo → angio-TC.'] },
+            ],
+          },
+          {
+            etichetta: '2–3', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Angio-TC aorta subito' },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: 'Mentre si conferma',
+        righe: [
+          '1. Analgesia: morfina 2–4 mg ev o fentanil 50 µg.',
+          '2. FC ≤ 60: esmololo 35 mg ev poi infusione, o labetalolo 20 mg ev, o metoprololo 5 mg ev.',
+          '3. Poi PAS 100–120: urapidil 10–25 mg ev poi infusione.',
+          'Niente ASA, eparina o fibrinolitici.',
+        ],
+        vedi: 'Farmaci (70 kg)',
+      },
+      { tipo: 'decisione', titolo: 'Tipo?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'A (ascendente)', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Cardiochirurgia d’urgenza', righe: ['Trasferimento immediato.'] }] },
+          {
+            etichetta: 'B (discendente)', tono: 'neutro', nodi: [
+              { tipo: 'decisione', titolo: 'Complicata?', righe: ['Malperfusione, rottura, dolore o ipertensione refrattari, espansione rapida.'] },
+              { tipo: 'passo', titolo: 'Sì: chirurgo vascolare per endoprotesi. No: terapia medica in terapia intensiva.' },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'nota', titolo: 'Ipotensione',
+        righe: ['Pensare a tamponamento, rottura, insufficienza aortica acuta. Drenaggio pericardico solo di piccoli volumi se la chirurgia non è subito disponibile.'],
+        vai: [{ etichetta: 'Pericardiocentesi', to: '/procedure?apri=pericardiocentesi' }],
+      },
+    ],
+  },
+  asma: {
+    titolo: 'Algoritmo asma acuto',
+    nota: 'GINA 2025. Dosi per adulto.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Dispnea con broncospasmo', righe: ['Gravità: parola, posizione, FR, FC, SpO₂, PEF. Anafilassi? → adrenalina im.'], vai: [{ etichetta: 'Anafilassi', to: '/linee-guida/anafilassi' }] },
+      { tipo: 'decisione', titolo: 'Segni di pericolo di vita?', righe: ['Sopore, confusione, torace silente, bradicardia, ipotensione.'] },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Rianimatore', righe: ['Salbutamolo + ipratropio continui, metilprednisolone 40 mg ev, magnesio 2 g ev; intubazione da esperto (ketamina).'], vai: [{ etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' }] },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              {
+                tipo: 'checklist', titolo: 'Prima ora',
+                righe: [
+                  'Salbutamolo 4–10 puff con distanziatore o 2,5–5 mg nebulizzato ogni 20 min',
+                  'Grave: ipratropio 0,5 mg nebulizzato ogni 20 min',
+                  'Ossigeno per SpO₂ 93–95%',
+                  'Prednisone 50 mg per bocca (o metilprednisolone 40 mg ev)',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Dopo 1 h: grave e senza risposta?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Magnesio solfato 2 g ev in 20 min', righe: ['Continuare salbutamolo; EGA; RX se sospetto pneumotorace; ricovero.'] }] },
+          { etichetta: 'No, migliorato', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Dimissione se PEF > 60–80%, SpO₂ > 94%', righe: ['Prednisone 5–7 giorni, cortisone inalatorio iniziato o aumentato, controllo entro 2–7 giorni.'] }] },
+        ],
+      },
+    ],
+  },
+  bpco: {
+    titolo: 'Algoritmo BPCO riacutizzata',
+    nota: 'GOLD 2026. Dosi per adulto.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'BPCO con dispnea, tosse o espettorato aumentati', righe: ['EGA, RX torace, ECG, troponina e BNP se dubbio, D-dimero se sospetto embolia.'] },
+      {
+        tipo: 'checklist', titolo: 'Escludere ciò che la imita',
+        righe: ['Polmonite', 'Scompenso', 'Embolia polmonare', 'Pneumotorace', 'SCA o aritmia'],
+      },
+      {
+        tipo: 'terapia', titolo: 'Terapia',
+        righe: [
+          'Ossigeno per SpO₂ 88–92%.',
+          'Salbutamolo 2,5–5 mg + ipratropio 0,5 mg nebulizzati (con aria se ipercapnico).',
+          'Prednisone 40 mg per 5 giorni.',
+          'Antibiotico se espettorato purulento + più volume o dispnea, o se ventilato.',
+        ],
+        vai: [{ etichetta: 'Antibiotici: BPCO', to: '/antibiotici?apri=bpco' }],
+      },
+      { tipo: 'decisione', titolo: 'EGA: pH ≤ 7,35 e PaCO₂ ≥ 45?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'NIV', righe: ['IPAP 12–15, EPAP 4–5; EGA dopo 1 h. Fallimento o controindicazioni → intubazione.'], vedi: 'Ventilazione e destinazione' },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'Rivalutare', righe: ['Ricovero se dispnea grave, mancata risposta, insufficienza respiratoria, comorbidità; altrimenti dimissione.'], vai: [{ etichetta: 'Dimissione BPCO', to: '/dimissioni?apri=bpco' }] },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  bradicardia: {
+    titolo: 'Algoritmo bradicardia',
+    nota: 'ERC 2025. Dosi per adulto.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'FC bassa', righe: ['ABCDE, ossigeno, accesso venoso, ECG a 12 derivazioni, K, digossinemia se in terapia.'] },
+      { tipo: 'decisione', titolo: 'Segni di pericolo?', righe: ['Shock, sincope, ischemia miocardica, scompenso.'] },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'terapia', titolo: 'Atropina 0,5 mg ev', righe: ['Ripetere ogni 3–5 min fino a 3 mg. Inutile nel BAV avanzato a QRS largo.'] },
+              { tipo: 'decisione', titolo: 'Risposta?' },
+              {
+                tipo: 'allarme', titolo: 'No: farmaci e pacing',
+                righe: ['Isoprenalina 5 µg/min (0,2 mg in 50 mL: 75 mL/h) o adrenalina 2–10 µg/min (1 mg in 50 mL: 6–30 mL/h).', 'Pacing transcutaneo come ponte; cardiologo per il transvenoso.'],
+                vai: [{ etichetta: 'Pacing', to: '/procedure?apri=pacing' }],
+              },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'decisione', titolo: 'Rischio di asistolia?', righe: ['BAV Mobitz II, BAV completo a QRS largo, pause > 3 s, asistolia recente.'] },
+              { tipo: 'passo', titolo: 'Sì: monitor e cardiologo per il pacing. No: osservare e cercare la causa.' },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'checklist', titolo: 'Cause da correggere',
+        righe: [
+          'Iperkaliemia → calcio gluconato',
+          'Beta-bloccanti/calcio-antagonisti → glucagone, calcio (Tossicologia)',
+          'Digossina → anticorpi antidigossina',
+          'IMA inferiore → coronarografia',
+          'Ipotermia, ipotiroidismo, ipertensione endocranica',
+        ],
+        vai: [{ etichetta: 'Iperkaliemia', to: '/linee-guida/iperkaliemia' }, { etichetta: 'Rubrica: Tossicologia', to: '/rubrica' }],
+      },
+    ],
+  },
+  tachicardia: {
+    titolo: 'Algoritmo tachicardia con polso',
+    nota: 'ERC 2025. Dosi per adulto.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'FC alta con polso', righe: ['ABCDE, ossigeno, accesso venoso, ECG a 12 derivazioni, elettroliti.'] },
+      { tipo: 'decisione', titolo: 'Segni di pericolo?', righe: ['Shock, sincope, ischemia miocardica, scompenso.'] },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'Cardioversione sincronizzata',
+                righe: ['In sedazione, fino a 3 tentativi. FA: energia massima; flutter/TPSV 70–120 J; TV 120–150 J.', 'Fallisce: amiodarone 300 mg in 10–20 min e ritentare.'],
+                vai: [{ etichetta: 'Sedazione procedurale', to: '/sedazione?apri=procedurale' }],
+              },
+            ],
+            fine: 'poi amiodarone 900 mg/24 h',
+          },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'decisione', titolo: 'QRS stretto o largo? Regolare?' }] },
+        ],
+      },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Stretto regolare', tono: 'neutro', nodi: [
+              { tipo: 'terapia', titolo: 'Vagale, poi adenosina', righe: ['Valsalva modificata; adenosina 6 → 12 → 18 mg in bolo rapido. Flutter: controllo della frequenza.'], vedi: 'Farmaci (70 kg)' },
+            ],
+          },
+          {
+            etichetta: 'Stretto irregolare', tono: 'neutro', nodi: [
+              { tipo: 'passo', titolo: 'Probabile FA', righe: ['Beta-bloccante o diltiazem; amiodarone/digossina se scompenso.'], vai: [{ etichetta: 'Fibrillazione atriale', to: '/linee-guida/fibrillazione-atriale' }] },
+            ],
+          },
+          {
+            etichetta: 'Largo regolare', tono: 'no', nodi: [
+              { tipo: 'terapia', titolo: 'Considerarla TV', righe: ['Amiodarone 300 mg in 10–60 min o cardioversione elettiva. Adenosina solo se aberranza nota.'] },
+            ],
+          },
+          {
+            etichetta: 'Largo irregolare', tono: 'no', nodi: [
+              { tipo: 'passo', titolo: 'FA con blocco di branca, FA preeccitata o torsione', righe: ['Preeccitata: no adenosina, digossina, verapamil, diltiazem → cardioversione. Torsione: magnesio solfato 2 g ev in 10 min.'] },
+            ],
+          },
+        ],
+      },
+    ],
+  },
   sepsi: {
     titolo: 'Algoritmo sepsi — prima ora',
     nota: 'SSC 2026. Dosi per 70 kg; verificare formati e diluizioni in reparto.',

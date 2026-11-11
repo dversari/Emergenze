@@ -19,6 +19,9 @@ const SCORE: [RegExp, string][] = [
   [/CURB-65/, 'curb65'],
   [/Glasgow-Blatchford/, 'gbs'],
   [/BISAP/, 'bisap'],
+  [/ICH score/, 'ich'],
+  [/ADD-RS/, 'addrs'],
+  [/regola di Ottawa per ESA|Ottawa/, 'ottawa-esa'],
 ]
 const RE_SCORE = new RegExp(`(${SCORE.map(([r]) => r.source).join('|')})`, 'g')
 
