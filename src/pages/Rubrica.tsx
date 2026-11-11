@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { CATEGORIE, ICONE, VOCI, type Numero, type Tono, type Voce } from '../lib/rubrica'
+import { CATEGORIE, ICONE, costruisciVoci, type DatiRubrica, type Numero, type Tono, type Voce } from '../lib/rubrica'
 
 /* ---------- Segnalazioni (restano sul telefono, si inviano con Copia/Condividi) ---------- */
 interface Segnalazione { id: string; voce: string; cat: string; numero: string; tipo: 'modifica' | 'elimina' | 'nota'; nuovo: string; nota: string; data: string; vid: string }
@@ -18,11 +18,69 @@ const COLORE: Record<Tono, { fondo: string; tratto: string }> = {
   tenue: { fondo: 'var(--color-sabbia)', tratto: 'var(--color-tenue)' },
 }
 const catDi = Object.fromEntries(CATEGORIE.map((c) => [c.id, c]))
-const vocePer = Object.fromEntries(VOCI.map((v) => [v.id, v]))
-
-// Interni a 4 cifre presenti in più voci: li segnalo sotto la voce.
+// Le voci arrivano dalla Edge Function (PIN) e restano in cache sul telefono per l'uso offline.
+let VOCI: Voce[] = []
+let vocePer: Record<string, Voce> = {}
 const usi: Record<string, string[]> = {}
-VOCI.forEach((v) => v.numeri.forEach((n) => { if (!n.esterno && n.cifre.length === 4) (usi[n.cifre] ??= []).push(v.id) }))
+function impostaVoci(d: DatiRubrica) {
+  VOCI = costruisciVoci(d)
+  vocePer = Object.fromEntries(VOCI.map((v) => [v.id, v]))
+  for (const k of Object.keys(usi)) delete usi[k]
+  VOCI.forEach((v) => v.numeri.forEach((n) => { if (!n.esterno && n.cifre.length === 4) (usi[n.cifre] ??= []).push(v.id) }))
+}
+const URL_RUBRICA = 'https://djruxnduelhzxkomxvcb.supabase.co/functions/v1/emergenze-rubrica'
+const CHIAVE_DATI = 'emergenze.rubrica.dati'
+const CHIAVE_PIN = 'emergenze.rubrica.pin'
+const leggi = (k: string) => { try { return localStorage.getItem(k) } catch { return null } }
+const scrivi = (k: string, v: string | null) => { try { if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v) } catch { /* privata */ } }
+{ const c = leggi(CHIAVE_DATI); if (c) try { impostaVoci(JSON.parse(c).dati) } catch { /* cache rovinata */ } }
+
+async function scarica(pin: string) {
+  const res = await fetch(URL_RUBRICA, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ pin }) })
+  const j = await res.json().catch(() => ({}))
+  if (!res.ok) throw Object.assign(new Error(j.error ?? `Errore ${res.status}`), { status: res.status })
+  scrivi(CHIAVE_DATI, JSON.stringify(j)); scrivi(CHIAVE_PIN, pin)
+  impostaVoci(j.dati)
+}
+
+/** Rubrica protetta: PIN una volta, poi dati in cache; si aggiorna in silenzio quando c'è rete. */
+export default function Rubrica() {
+  const [pronta, setPronta] = useState(VOCI.length > 0)
+  const [, ridisegna] = useState(0)
+  const [pin, setPin] = useState('')
+  const [errore, setErrore] = useState<string | null>(null)
+  const [attesa, setAttesa] = useState(false)
+
+  useEffect(() => {
+    const p = leggi(CHIAVE_PIN)
+    if (!p) return
+    scarica(p).then(() => { setPronta(true); ridisegna((n) => n + 1) }).catch((e: Error & { status?: number }) => {
+      if (e.status === 401) { scrivi(CHIAVE_PIN, null); scrivi(CHIAVE_DATI, null); VOCI = []; setPronta(false) }
+    })
+  }, [])
+
+  const entra = async () => {
+    setAttesa(true); setErrore(null)
+    try { await scarica(pin.trim()); setPronta(true) } catch (e) { setErrore((e as Error).message) } finally { setAttesa(false) }
+  }
+
+  if (pronta) return <RubricaInterna />
+  return (
+    <div className="flex flex-col gap-3 max-w-md mx-auto w-full">
+      <section className="card text-center">
+        <p className="text-3xl">☎︎</p>
+        <h2 className="font-black text-xl mt-1">Rubrica del PS</h2>
+        <p className="text-[13px] text-tenue mt-1 leading-snug">I numeri (anche i cellulari di reperibilità) sono riservati ai colleghi. Inserisci il PIN una volta: resta salvato su questo telefono e la rubrica funziona anche senza rete.</p>
+        <input value={pin} onChange={(e) => setPin(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && entra()}
+          inputMode="numeric" autoComplete="off" placeholder="PIN" className="mt-3 w-full rounded-xl border border-linea px-3 py-3 text-center text-xl tracking-[0.4em] font-bold" />
+        {errore && <p className="text-sm text-bordeaux mt-2">{errore}</p>}
+        <button onClick={entra} disabled={!pin.trim() || attesa} className="mt-3 w-full rounded-full bg-verde text-white py-3 font-extrabold disabled:opacity-40">{attesa ? 'Verifica…' : 'Apri la rubrica'}</button>
+        <p className="text-[11px] text-tenue mt-2">Il PIN te lo dà chi ti ha passato l’app.</p>
+      </section>
+    </div>
+  )
+}
+
 
 const dubbia = (v: Voce) => v.cat === 'dub' || v.numeri.some((n) => n.incerto || n.anomalo || n.barrato)
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -39,7 +97,7 @@ function Icona({ cat, size = 40 }: { cat: string; size?: number }) {
 
 type Filtro = 'tutti' | 'guardie' | 'esterni' | 'verificare'
 
-export default function Rubrica() {
+function RubricaInterna() {
   const [cerca, setCerca] = useState('')
   const [tendina, setTendina] = useState(false)
   const [filtro, setFiltro] = useState<Filtro>('tutti')

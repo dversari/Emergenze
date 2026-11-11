@@ -1,6 +1,7 @@
 /**
  * Rubrica telefonica del PS di Prato: interni ed esterni, raggruppati per specialità.
  * Trascritta dalle foto dei fogli affissi: le voci segnate vanno verificate.
+ * I numeri NON sono nel codice (il repository è pubblico): stanno in Supabase e si scaricano con il PIN.
  *
  * Formato dei numeri (stringa separata da spazi; prefisso + numero esterno vengono uniti):
  *   ?  lettura incerta    !  formato anomalo    ~  ricostruito da notazione abbreviata
@@ -9,7 +10,7 @@
  */
 export type Tono = 'verde' | 'bordeaux' | 'oro' | 'tenue'
 export interface Categoria { id: string; nome: string; tono: Tono; parole: string }
-type Riga = [string, string, { g?: 1; n?: string }?]
+export type Riga = [string, string, { g?: 1; n?: string }?]
 
 export interface Numero {
   n: string; cifre: string; esterno: boolean
@@ -47,111 +48,8 @@ export const CATEGORIE: Categoria[] = [
   { id: 'dub', nome: 'Annotazioni non attribuite', tono: 'oro', parole: '' },
 ]
 
-const D: Record<string, Riga[]> = {
-ps:[
- ['Triage interno','1702'],['Triage esterno','1727'],['Flusso 1','1714'],['Flusso 2','1752'],
- ['Sala rossa','1721 1722'],['Corridoio triage','1749'],['Sala arancio','1753'],['Sala rosa','1736'],['Sala 5','1735'],
- ['Stanza briefing','1739'],['Open – postazione infermieri 1','1731'],['Open – postazione infermieri 2','1738'],['Open – postazione infermieri 3','1737'],
- ['Open – postazione medico 1','1740'],['Open – postazione medico 2','1715'],['Stanza ordini','1728 1742'],
- ['Capoturno medico / dott.ssa Lombardi','4736 4204',{ g: 1 }],['Capoturno infermieristico','1169',{ g: 1 }],
- ['Dott. Baldini','4685'],['Coordinatore infermieristico PS','1741'],['Coordinatore infermieristico 3° piano','1751'],['GPA PS','1704'],
- ['Bed manager','4024 4885 4624 4675',{n:'Numeri presenti su fogli diversi'}],['Accoglienza amministrativi','1729 1730'],
- ['HDU – postazione medico','1746'],['HDU – postazione infermieri 1','1743'],['HDU – postazione infermieri 2','1744'],['HDU – bolla','1734']
-],
-neuro:[
- ['Neurologo di guardia per PS / OBI','4029',{ g: 1 }],['Neurologo di guardia per ospedale','4737',{ g: 1 }],
- ['Neurologo – altri recapiti','4700 4701'],['Neurologia / stroke – reparto','4202'],['Elettrofisiologo – portatile','1625'],
- ['Ambulatorio elettrofisiologia – EEG','1442'],['Ambulatorio neurologia – botox','1429'],
- ['Neurochirurgo (Careggi)','331 6225069',{ g: 1 }],['Neuroradiologo interventista','348 6527779',{ g: 1 }],
- ['Neurochirurgia Careggi','055 7947530 055 7947885~'],['Neurochirurgia – fax','055 7947756'],
- ['Stroke team Careggi','055 7947665',{ g: 1 }],['Sala angiografica Careggi','055 79472892! 055 7946949',{n:'Primo numero con una cifra in più'}],['Sala angiografica – fax','055 7947087'],
- ['Neurorianimazione CTO','055 7948419 055 7948416~']
-],
-cardio:[
- ['Cardiologo di guardia','4731 6273+ 4870',{ g: 1 }],['UTIC','3732 3733 3766'],['Cardiologia – reparto','x3772'],
- ['Emodinamica','3760'],['Elettrofisiologia','3761'],['PMK','1409'],['Test da sforzo','1410'],['Holter ECG','1415'],
- ['Cardiochirurgo (Careggi)','349 2229724',{ g: 1 }]
-],
-anest:[
- ['Anestesista di guardia','4734',{ g: 1 }],['Rianimatore di guardia','4735 2222 6248 4871',{ g: 1 }],['Anestesista per ostetricia','4873',{ g: 1 }],
- ['Rianimazione – reparto','3712 3702'],['Subintensiva','3762']
-],
-chir:[
- ['Chirurgo di guardia','4730 6228 4874',{ g: 1 }],['Chirurgo vascolare di guardia','3664',{ g: 1 }],
- ['Chirurgo toracico Prato – dott. Francesco Falli','333 2235953',{ g: 1, n: 'Riferimento per i problemi toracici' }],['Chirurgo vascolare Prato – dott. Francesco Menici','333 3720557',{ g: 1, n: 'Riferimento per i problemi vascolari' }],['Ambulatorio chirurgia vascolare','1437'],
- ['Chirurgia – settore 1','3250'],['Settore 1, 2° piano – infermieri','3250'],['Chirurgia – settore 2','3300'],
- ['Settore 2, 2° piano – medici','3308 3311 3224'],['Settore 2, 2° piano – infermieri','3300 3301'],['Sala operatoria','3600'],
- ['Chirurgo vascolare Torregalli','055 6932038',{ g: 1, n:'Solo giorno'}],['Chirurgo toracico','335 7914233',{ g: 1 }],
- ['Chirurgia toracica – visite ambulatoriali','055 7947943 055 7947856'],
- ['Centro ustioni Pisa','050 996894 050 996966'],['Ambulatorio ustioni Pisa','050 996594'],['Centro ustioni Pisa – fax','050 995239']
-],
-orto:[['Ortopedico di guardia PS','4877',{ g: 1 }],['Sala gessi','1726'],['Ortopedia – reparto','3301 3302 3300']],
-rad:[
- ['Radiologo di guardia','4732 1830 1848',{ g: 1 }],['Ecografia','1724 1826',{n:'1724 annotato “eco immagini”'}],['TAC','1826 1843'],['RMN','1823'],
- ['Angiologia Doppler','1820'],['Medicina nucleare','1874 1866 1867 1891 1861 1876'],['Coordinatore medicina nucleare','x1837? 1406 1870'],
- ['Radiologo interventista Careggi','347 6619120',{ g: 1 }],['Radiologo interventista Torregalli – dott. Falchini','333 6191285',{ g: 1 }]
-],
-med:[
- ['Guardia polo 1 (Polo 1 + 2A, area medica)','4738',{ g: 1 }],['Guardia polo 2 / Medicina 1','4742',{ g: 1 }],
- ['Medico AMA','4001'],
- ['AMA – bancone accoglienza','2200'],['AMA – bancone infermieri','2202'],['AMA – team A','2211 2203'],['AMA – team B','2208 2210'],['AMA – team C','2207 2205'],['Coordinatore infermieristico AMA','2206',{n:'Sul foglio era il coordinatore OBI: verificare'}],['Medicina 1 – reparto','4410 4411 4412'],
- ['Medicina 2 (8–20)','4738'],['Medicina 2 – medico','6224'],['Medicina 2 – reparto','4310 4311 4312'],
- ['Medicina 2A','4724'],['Medicina 2A – reparto NOP','4212'],['Medicina 3','4889'],['Medicina 3 – reparto onco/reu/nefro','3402'],
- ['Day service medico / DS internistico','4876'],['GPA AMA','1168'],
- ['Settore 6, 2° piano – medici','1173 3510',{n:'Specialità non indicata sul foglio'}],['Settore 6, 2° piano – infermieri','3502 3503']],
-geri:[['Geriatra di guardia','4007',{ g: 1 }],['Geriatria','6223 4057?'],['Geriatria – reparto','2302 4206'],['DH geriatrico','2610']],
-nefro:[['Nefrologo di guardia','1621',{ g: 1 }],['Nefrologia','6250'],['Dialisi','1224']],
-pneumo:[['Pneumologo di guardia','4009',{ g: 1 }],['Pneumologia – guardia','6346'],['Pneumologia – stanza','4630'],['Pneumologia – ambulatorio','1425 1426 4009+']],
-gastro:[['Endoscopista di guardia – cordless','3469',{ g: 1 }],['Gastroenterologia / endoscopia','4006 1611'],['Sala endoscopica','1602 1603'],['Gastroenterologia Careggi','348 8511849?']],
-infett:[['Infettivologo di guardia','4733',{ g: 1 }],['Malattie infettive – reparto','6221 3208 3220'],['COVID 1 – medico','3256'],['Malattie infettive Pistoia','0573 351562 0573 351511']],
-onco:[['Oncologo di guardia','4008',{ g: 1 }],['Oncologia – reparto','6227 2764'],['Ematologia','2226 2752 2758',{n:'Annotazione in alto: “2226 / 2754?”'}]],
-gin:[
- ['Ginecologo di guardia','4881 4875 6208',{ g: 1 }],['Ostetricia','4875 4881'],['Sala parto','6229'],
- ['Fast track ginecologico','2423 2403+ 1741?'],['Ginecologia – reparto','2402'],['Ginecologia – aggiunta','4741?',{n:'Accanto a 4875'}]
-],
-ped:[
- ['Pediatra di guardia','4879',{ g: 1, n:'Altre cifre a matita non decifrabili'}],['Neonatologo di guardia','4878',{ g: 1 }],['Pediatria PS','1745'],
- ['DEA Meyer','055 5662421'],['Meyer – centralino','055 56621'],['Laboratorio Meyer','331 8509388'],['Laboratorio Meyer – fax','055 7949559'],
- ['Referente Meyer (nome poco leggibile)','329 6705556? 320 4374576?']
-],
-uro:[['Urologo di guardia','1604 6215 4625?',{ g: 1, n:'1604 ripetuto a penna'}]],
-orl:[['Otorino di guardia','4880 6333',{ g: 1 }],['Ambulatorio ORL','1885'],['Chirurgo maxillo-facciale','348 0116570',{ g: 1 }]],
-ocul:[['Oculista PS','1416 1420',{ g: 1 }],['Oculista Careggi','055 7947260',{ g: 1 }]],
-psi:[
- ['Psichiatra di guardia','6232',{ g: 1 }],['VOP – visite psichiatriche urgenti','1507 1504 1510 1506'],['VOP – esterni','0574 807900 0574 8079007!'],
- ['Psichiatria – reparto','3202 3203 3229'],['SERD','7400 7401 7425? 7429+',{n:'Due annotazioni diverse unite'}],
- ['Villa Fiorita','0574 4891502! 393 8018572']
-],
-tox:[
- ['Tossicologia Careggi','055 7947819 055 7946238 055 7947817',{ g: 1 }],['Laboratorio urgenze tossicologiche','055 7947262 055 7949529 055 794939…!',{n:'Ultimo numero tagliato'}],
- ['Tossicologia – reparto','055 7947844 055 7947481'],['Tossicologia in gravidanza','055 7946859'],['Micologo (intossicazione da funghi)','339 6507700?']
-],
-amb:[['Dermatologia','7333 7335'],['Allergologia','7344 7339'],['Reumatologia','4648 1209+'],['Reumatologia – ambulatorio','7578 7579']],
-lab:[
- ['Laboratorio urgenze','3812 3822 3828 3826'],['Laboratorio – medico','1165'],['Laboratorio – annotazione','4407+',{n:'Manoscritto vicino a 3812'}],
- ['Trasfusionale','1391'],['Trasfusionale – ambulatorio','1380 1383'],['Microbiologia Careggi','055 7945120'],['Anatomia patologica – dott. Ferrucci?','0574 807802?']
-],
-osp:[
- ['DEA Careggi','055 7947243 055 7947235~ 055 7947088~'],['Centralino Careggi','055 794111'],['Ispettore AOUC','055 7947292'],
- ['DEA Pistoia','0573 351750'],['Torregalli – centralino','055 69321']
-],
-terr:[
- ['Centrale 118','800 118118'],['Centrale 118 – trasferimenti','055 227677430!',{n:'12 cifre: un numero fisso italiano ne ha al massimo 11, verificare'}],['Coordinatore infermieristico trasferimenti','1750 340 3141601'],
- ['SEUS','800 010622?',{n:'Manoscritto sopra un numero barrato'}],['SEUS – altro recapito','0573 573180?'],['SEUS – centrale operativa','0571 1833792'],
- ['Cure intermedie','7363 7309 7355 7685+ 7749+'],['CoDeCaSa','347 0749988?'],
- ['Medicina del lavoro','0574 805506 0574 805507~ 0574 805508~'],
- ['La Nara (antiviolenza)','0574 34472'],['Numero antiviolenza (H24)','1522'],['Melagrana','0574 660311']
-],
-serv:[
- ['Centralino','1300 1301 1302'],['Securitas','1163'],['Vigilanza','4739'],
- ['Medico di direzione','1614+'],['CED','5101'],['CED – assistenza informatica','800 800567'],['Portantini','4026'],
- ['Amministrativi','2201+'],['Stanza steward, 3° piano','4010+'],['Progetto PASS','4740'],
- ['Mediazione cinese','3227'],['Mediazione urdu','1166'],['Mediazione farsi – Alessandra','338 6755057']
-],
-dub:[
- ['2ª foto, sotto Medicina 2A (forse Torregalli)','055 6932111?'],['2ª foto, accanto al chirurgo toracico','223?'],
- ['3ª foto, vicino a elettrofisiologia','3871?'],['4ª foto, foglio sullo sfondo','055 7678…!'],['4ª foto, riquadro “CdC…”','8881…?'],['4ª foto, parte bassa','1881?']
-]};
+/** Dati grezzi della rubrica: arrivano dalla Edge Function «emergenze-rubrica» dopo il PIN (non stanno nel codice pubblico). */
+export type DatiRubrica = Record<string, Riga[]>
 
 function leggiNumeri(s: string): Numero[] {
   const t = s.split(' ')
@@ -176,7 +74,7 @@ function leggiNumeri(s: string): Numero[] {
   return out
 }
 
-export const VOCI: Voce[] = CATEGORIE.flatMap((c) =>
+export const costruisciVoci = (D: DatiRubrica): Voce[] => CATEGORIE.flatMap((c) =>
   (D[c.id] ?? []).map(([nome, num, opz], i) => ({
     id: `${c.id}-${i}`, cat: c.id, nome, numeri: leggiNumeri(num), guardia: !!opz?.g, nota: opz?.n ?? '',
   })),
