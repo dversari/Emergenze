@@ -95,6 +95,16 @@ const DISEGNI: Record<string, ReactNode> = {
       <path d="M32 22 c-3 -4 -9 -1 -6 4 l6 5 l6 -5 c3 -5 -3 -8 -6 -4 Z" className="fill-bordeaux stroke-bordeaux" strokeWidth={1} />
     </>
   ),
+  moduli: (
+    <>
+      <rect x="16" y="8" width="32" height="18" rx="2" className="fill-carta stroke-verde-scuro" strokeWidth={2.2} />
+      <path d="M22 14 h20 M22 19 h14" {...T} strokeWidth={1.6} className="stroke-oro2" />
+      <rect x="8" y="24" width="48" height="22" rx="5" className="fill-verde3 stroke-verde-scuro" strokeWidth={2.4} />
+      <circle cx="47" cy="31" r="2.2" className="fill-bordeaux" />
+      <rect x="16" y="38" width="32" height="18" rx="2" className="fill-carta stroke-verde-scuro" strokeWidth={2.2} />
+      <path d="M22 44 h20 M22 49 h12" {...T} strokeWidth={1.6} className="stroke-bordeaux" />
+    </>
+  ),
   rubrica: (
     <>
       <path d="M18 12 c-6 2 -8 8 -6 14 c5 14 14 23 28 28 c6 2 12 0 14 -6 l-9 -8 l-6 4 c-7 -3 -12 -8 -15 -15 l4 -6 Z" className="fill-verde3 stroke-verde-scuro" strokeWidth={2.4} strokeLinejoin="round" />
@@ -112,6 +122,7 @@ const PAGINE = [
   { id: 'sedazione', to: '/sedazione', nome: 'Sedazione', testo: 'Schemi per 70 kg' },
   { id: 'anamnesi', to: '/anamnesi', nome: 'Cartella', testo: 'Anamnesi ed EO per sintomo' },
   { id: 'dimissioni', to: '/dimissioni', nome: 'Dimissione', testo: 'Testi pronti da adattare' },
+  { id: 'moduli', to: '/moduli', nome: 'Moduli', testo: 'Richiesta trasfusione, da compilare e stampare' },
 ]
 
 const AVVERTENZE = [
@@ -165,7 +176,7 @@ export default function Home() {
       <div className="flex flex-col gap-2.5 lg:contents">
         <section className="grid grid-cols-2 gap-2 lg:gap-3 lg:col-start-2 lg:row-start-1">
           {PAGINE.map((p) => (
-            <Link key={p.id} to={p.to} className="card !p-2 lg:!p-3 !rounded-2xl flex items-center gap-2 lg:gap-3 active:bg-sabbia lg:hover:border-verde2">
+            <Link key={p.id} to={p.to} className={`${p.id === 'moduli' ? 'col-span-2 ' : ''}card !p-2 lg:!p-3 !rounded-2xl flex items-center gap-2 lg:gap-3 active:bg-sabbia lg:hover:border-verde2`}>
               <svg viewBox="0 0 64 64" className="w-10 h-10 lg:w-12 lg:h-12 shrink-0" aria-hidden>{DISEGNI[p.id]}</svg>
               <div className="min-w-0">
                 <p className="font-extrabold text-[14px] lg:text-[16px] leading-tight">{p.nome}</p>
