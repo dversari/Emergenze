@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { CATEGORIE, ICONE, costruisciVoci, type DatiRubrica, type Numero, type Tono, type Voce } from '../lib/rubrica'
 
@@ -112,6 +113,16 @@ function RubricaInterna() {
   const avviso = (m: string) => { setMsg(m); setTimeout(() => setMsg(''), 1600) }
   const aggiorna = (s: Segnalazione[]) => { setSegn(s); salvaSegn(s) }
 
+  // Arrivo da un PDTA con ?cerca=…: mostra subito le voci corrispondenti.
+  const [params] = useSearchParams()
+  const daCercare = params.get('cerca')
+  const inArrivo = useRef(false)
+  useEffect(() => {
+    if (!daCercare) return
+    inArrivo.current = true
+    setCerca(daCercare)
+  }, [daCercare])
+
   useEffect(() => {
     const chiudi = (e: MouseEvent) => { if (!boxCerca.current?.contains(e.target as Node)) setTendina(false) }
     document.addEventListener('click', chiudi)
@@ -149,6 +160,17 @@ function RubricaInterna() {
     setTimeout(() => document.getElementById(`r-${v.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 60)
     setTimeout(() => setEvidenza(null), 1800)
   }
+
+  // Arrivo da un PDTA: apre la specialità e porta alla voce di guardia più pertinente.
+  useEffect(() => {
+    if (!inArrivo.current || !risultati.length) return
+    inArrivo.current = false
+    const tutti = risultati.filter((v) => v.cat === risultati[0].cat)
+    setAperti((a) => new Set([...a, ...risultati.map((v) => v.cat)]))
+    const q = norm(daCercare ?? '')
+    vai(risultati.find((v) => norm(v.nome).startsWith(q)) ?? tutti.find((v) => v.guardia) ?? risultati[0])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [risultati])
 
   const scegliFiltro = (f: Filtro) => {
     setFiltro(f)

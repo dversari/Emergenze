@@ -30,6 +30,52 @@ const SCORE: [RegExp, string][] = [
 ]
 const RE_SCORE = new RegExp(`(${SCORE.map(([r]) => r.source).join('|')})`, 'g')
 
+/** Consulenti citati negli algoritmi → ricerca in Rubrica (con ritorno al PDTA). */
+const CONSULENTI: [RegExp, string][] = [
+  [/neurochirurg(?:o|hi|ia)\b/i, 'neurochirurg'],
+  [/cardiochirurg(?:o|hi|ia)\b/i, 'cardiochirurgo'],
+  [/neuroradiolog[oi]\b(?: interventist[ai])?/i, 'neuroradiologo'],
+  [/radiolog[oi] interventist[ai]|radiologia interventistica/i, 'radiologo interventista'],
+  [/chirurg(?:o|hi|ia) vascolar[ei]/i, 'chirurgo vascolare'],
+  [/chirurg(?:o|hi|ia) toracic[oa]/i, 'chirurgo toracico'],
+  [/emodinamist[ai]|emodinamica/i, 'emodinamica'],
+  [/cardiolog[oi]\b/i, 'cardiologo'],
+  [/rianimator[ei]|anestesist[ai]/i, 'rianimatore'],
+  [/neurolog[oi]\b/i, 'neurologo'],
+  [/ortopedic[oi]\b/i, 'ortopedico'],
+  [/urolog[oi]\b/i, 'urologo'],
+  [/ginecolog[oi]\b/i, 'ginecologo'],
+  [/pediatr[ai]\b/i, 'pediatra'],
+  [/otorino\w*|\bORL\b/, 'otorino'],
+  [/oculist[ai]\b/i, 'oculista'],
+  [/psichiatr[ai]\b/i, 'psichiatra'],
+  [/endoscopist[ai]/i, 'endoscopista'],
+  [/infettivolog[oi]\b/i, 'infettivologo'],
+  [/nefrolog[oi]\b/i, 'nefrologo'],
+  [/\bchirurg[oi]\b(?! (?:vascolar|toracic))/i, 'chirurgo di guardia'],
+]
+const RE_CONS = new RegExp(`(${CONSULENTI.map(([r]) => r.source).join('|')})`, 'gi')
+
+function TestoCons({ t, scuro, ritorno }: { t: string; scuro?: boolean; ritorno: ReturnType<typeof useConRitorno> }) {
+  const parti = t.split(RE_CONS).filter((p) => p !== undefined && p !== '')
+  return (
+    <>
+      {parti.map((p, i) => {
+        const hit = CONSULENTI.find(([r]) => new RegExp(`^(?:${r.source})$`, r.flags).test(p))
+        if (hit) {
+          return (
+            <Link key={i} to={`/rubrica?cerca=${encodeURIComponent(hit[1])}`} state={ritorno.state} onClick={ritorno.onClick}
+              className={`inline-block font-bold rounded-full px-1.5 leading-[1.35] ${scuro ? 'bg-white/20 text-white' : 'bg-bordeaux3 text-bordeaux'}`}>
+              ☎&#xFE0E;&nbsp;{p}
+            </Link>
+          )
+        }
+        return scuro ? <span key={i}>{p}</span> : <Evidenzia key={i} t={p} />
+      })}
+    </>
+  )
+}
+
 /** Testo con score cliccabili (aprono il calcolatore) e farmaci evidenziati. */
 function Testo({ t, scuro }: { t: string; scuro?: boolean }) {
   const ritorno = useConRitorno()
@@ -46,7 +92,7 @@ function Testo({ t, scuro }: { t: string; scuro?: boolean }) {
             </Link>
           )
         }
-        return scuro ? <span key={i}>{p}</span> : <Evidenzia key={i} t={p} />
+        return <TestoCons key={i} t={p} scuro={scuro} ritorno={ritorno} />
       })}
     </>
   )

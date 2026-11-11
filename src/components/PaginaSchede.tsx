@@ -54,10 +54,10 @@ export default function PaginaSchede({ schede, segnaposto }: { schede: Scheda[];
           {voci.filter((s) => s.gruppo === g).map((s) => {
             const open = aperto === s.id
             return (
-              <section key={s.id} id={`s-${s.id}`} className="card !p-0 overflow-hidden scroll-mt-24">
+              <section key={s.id} id={`s-${s.id}`} className={`card !p-0 overflow-hidden scroll-mt-24 ${s.urgente ? '!border-bordeaux border-2' : ''}`}>
                 <button onClick={() => toggle(s.id)} className="w-full flex items-center gap-3 px-4 py-3 text-left">
                   <div className="flex-1 min-w-0">
-                    <p className="font-bold leading-tight">{s.nome}</p>
+                    <p className="font-bold leading-tight">{s.urgente && <span className="mr-1.5 align-middle text-[10px] font-black uppercase tracking-wide rounded-full px-2 py-0.5 bg-bordeaux text-white">Urgenza</span>}{s.nome}</p>
                     <p className="text-xs text-tenue leading-snug mt-0.5"><Evidenzia t={s.sintesi} /></p>
                   </div>
                   <span className={`text-tenue transition-transform shrink-0 ${open ? 'rotate-90' : ''}`}>›</span>
