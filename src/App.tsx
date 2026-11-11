@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { HashRouter, Link, NavLink, Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import type { Provenienza } from './lib/ritorno'
 import Home from './pages/Home'
@@ -32,6 +33,12 @@ const schede = [
 
 /** Intestazione in alto, schede in basso a portata di pollice. */
 function Guscio() {
+  const barra = useRef<HTMLDivElement>(null)
+  const { pathname } = useLocation()
+  useEffect(() => {
+    const el = barra.current?.querySelector('.attiva-si') as HTMLElement | null
+    el?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' })
+  }, [pathname])
   return (
     <div className="min-h-screen bg-fondo text-testo">
       <header className="px-4 pt-[calc(14px+env(safe-area-inset-top))] pb-2 sticky top-0 bg-fondo/95 backdrop-blur z-10 flex items-center gap-2.5 lg:px-8 lg:pt-4 lg:pb-3 lg:border-b lg:border-linea">
@@ -48,7 +55,7 @@ function Guscio() {
         </Link>
       </header>
 
-      <main className="px-3.5 py-3 pb-[calc(90px+env(safe-area-inset-bottom))] max-w-3xl mx-auto lg:ml-56 lg:mr-0 lg:max-w-none lg:px-8 lg:py-5 lg:pb-10">
+      <main className="px-3.5 py-3 pb-[calc(104px+env(safe-area-inset-bottom))] max-w-3xl mx-auto lg:ml-56 lg:mr-0 lg:max-w-none lg:px-8 lg:py-5 lg:pb-10">
         <div className="lg:max-w-[1400px] lg:mx-auto">
         <Outlet />
         </div>
@@ -69,18 +76,19 @@ function Guscio() {
         <div className="mt-auto flex items-center gap-2 px-3 text-[11px] text-tenue"><Monogramma size={28} /> DEA-LIRIO · PS Prato</div>
       </nav>
 
-      <nav className="lg:hidden fixed bottom-0 inset-x-0 z-20 bg-fondo/95 backdrop-blur-md border-t border-linea px-2 pt-2 pb-[max(14px,calc(env(safe-area-inset-bottom)+6px))]">
-        <div className="grid grid-cols-9 gap-0 max-w-xl mx-auto">
+      <nav className="lg:hidden fixed bottom-0 inset-x-0 z-20 bg-fondo/95 backdrop-blur-md border-t border-linea pt-2 pb-[max(14px,calc(env(safe-area-inset-bottom)+6px))]">
+        <div ref={barra} className="flex gap-1 overflow-x-auto snap-x px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {schede.map((s) => (
             <NavLink key={s.to} to={s.to}
               className={({ isActive }) =>
-                `flex flex-col items-center justify-center gap-0.5 rounded-[12px] py-1.5 text-[8px] font-bold tracking-tighter transition-colors ${
+                `attiva-${isActive ? 'si' : 'no'} snap-start shrink-0 min-w-[68px] flex flex-col items-center justify-center gap-1 rounded-[14px] px-2 py-2 text-[11px] font-bold transition-colors ${
                   isActive ? 'bg-verde text-white' : 'text-tenue'}`}>
-              <span className="text-lg leading-none">{s.icona}</span>
+              <span className="text-[22px] leading-none">{s.icona}</span>
               {s.label}
             </NavLink>
           ))}
         </div>
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-fondo to-transparent" />
       </nav>
     </div>
   )
