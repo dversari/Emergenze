@@ -7,7 +7,7 @@
 export type Tono = 'avvio' | 'passo' | 'decisione' | 'allarme' | 'terapia' | 'esito' | 'nota'
 
 export type Nodo =
-  | { tipo: Tono; titolo: string; righe?: string[]; tempo?: string; /** titolo di una sezione del riassunto da aprire */ vedi?: string }
+  | { tipo: Tono; titolo: string; righe?: string[]; tempo?: string; /** titolo di una sezione del riassunto da aprire */ vedi?: string; /** id delle manovre illustrate (lib/manovre) */ manovre?: string[] }
   | { tipo: 'rami'; rami: Ramo[] }
 
 /** fine: il ramo termina qui (non prosegue nel flusso principale). */
@@ -44,6 +44,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                   'Normale → centrale (ictus) fino a prova contraria.',
                   'Skew presente o ipoacusia nuova (finger rub) → centrale.',
                 ],
+                manovre: ['hit'],
               },
             ],
           },
@@ -56,6 +57,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                   'Roll test: orizzontale geotropo o apogeotropo → VPPB canale laterale.',
                   'Atipico (verticale verso il basso persistente, senza vertigine, non esauribile, non cambia con le manovre) → centrale.',
                 ],
+                manovre: ['roll-test', 'dix-hallpike'],
               },
             ],
           },
@@ -101,6 +103,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                   'Neurite vestibolare: prednisone 50–60 mg/die per 5 giorni a scalare (da considerare), sintomatici per 2–3 giorni (metoclopramide 10 mg ev = 1 fiala; ondansetron 4 mg), mobilizzazione precoce.',
                   'Niente sedativi vestibolari prolungati.',
                 ],
+                manovre: ['epley', 'semont', 'gufoni-geo', 'gufoni-apo', 'lempert'],
               },
             ],
           },

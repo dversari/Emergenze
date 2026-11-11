@@ -26,6 +26,8 @@ export interface LineaGuida {
   fonti?: { id: string; etichetta: string }[]
   /** schede dell'app collegate (antibiotici, procedure, dimissioni…) */
   vediAnche?: { etichetta: string; to: string }[]
+  /** manovre illustrate da mostrare (id in lib/manovre) */
+  manovre?: string[]
   /** testi esterni utili (figure, video, manovre) */
   approfondimenti?: (Collegamento & { nota?: string })[]
 }
@@ -565,6 +567,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
   {
     id: 'vertigine',
     titolo: 'Vertigine acuta',
+    manovre: ['hit', 'roll-test', 'dix-hallpike', 'epley', 'semont', 'gufoni-geo', 'gufoni-apo', 'lempert'],
     ente: 'STANDING · GRACE-3 2023',
     anno: 2023,
     area: 'Neurologia · ORL',

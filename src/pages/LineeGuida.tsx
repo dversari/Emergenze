@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Algoritmo, { idSezione } from '../components/Algoritmo'
+import Manovre from '../components/Manovre'
 import { ALGORITMI } from '../lib/algoritmi'
 import { Link, useParams } from 'react-router-dom'
 import { LINEE_GUIDA, lineaGuida } from '../lib/lineeGuida'
@@ -86,6 +87,8 @@ export function RiassuntoLineaGuida() {
       </section>
 
       {ALGORITMI[l.id] && <Algoritmo {...ALGORITMI[l.id]} />}
+
+      {l.manovre && <Manovre ids={l.manovre} />}
 
       {(l.vediAnche || l.approfondimenti) && (
         <section className="card">

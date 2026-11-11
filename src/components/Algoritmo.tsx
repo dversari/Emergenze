@@ -1,6 +1,8 @@
 import type { Nodo, Ramo, Tono } from '../lib/algoritmi'
 import { Link } from 'react-router-dom'
 import { Evidenzia } from './PaginaSchede'
+import { apriManovra } from './Manovre'
+import { manovra } from '../lib/manovre'
 
 /** Score citati nel testo → calcolatore corrispondente. */
 const SCORE: [RegExp, string][] = [
@@ -95,6 +97,16 @@ function Blocco({ n, piccolo }: { n: Extract<Nodo, { titolo: string }>; piccolo?
             </li>
           ))}
         </ul>
+      )}
+      {n.manovre && (
+        <div className="flex flex-wrap gap-1 mt-2">
+          {n.manovre.map((id) => (
+            <button key={id} onClick={() => apriManovra(id)}
+              className="text-[11px] font-bold rounded-full px-2 py-1 bg-oro text-white">
+              ▶ {manovra(id)?.nome.replace(/ \(.*\)$/, '') ?? id}
+            </button>
+          ))}
+        </div>
       )}
       {n.vedi && (
         <button onClick={() => apriSezione(n.vedi!)}
