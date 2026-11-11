@@ -61,7 +61,7 @@ ps:[
 ],
 neuro:[
  ['Neurologo di guardia per PS / OBI','4029',{ g: 1 }],['Neurologo di guardia per ospedale','4737',{ g: 1 }],
- ['Neurologo – altri recapiti','4700 4701'],['Neurologia / stroke – reparto','4202'],['EEG','1625+'],
+ ['Neurologo – altri recapiti','4700 4701'],['Neurologia / stroke – reparto','4202'],['Elettrofisiologo – portatile','1625'],
  ['Ambulatorio elettrofisiologia – EEG','1442'],['Ambulatorio neurologia – botox','1429'],
  ['Neurochirurgo (Careggi)','331 6225069',{ g: 1 }],['Neurochirurgo interventista','348 6527779',{ g: 1 }],
  ['Neurochirurgia Careggi','055 7947530 055 7947885~'],['Neurochirurgia – fax','055 7947756'],
@@ -78,7 +78,7 @@ anest:[
  ['Rianimazione – reparto','3712 3702'],['Subintensiva','3762']
 ],
 chir:[
- ['Chirurgo di guardia','4730 6228 4874',{ g: 1 }],['Chirurgo vascolare interno','1437',{ g: 1 }],
+ ['Chirurgo di guardia','4730 6228 4874',{ g: 1 }],['Chirurgo vascolare di guardia','3664',{ g: 1 }],['Ambulatorio chirurgia vascolare','1437'],
  ['Chirurgia – settore 1','3250'],['Settore 1, 2° piano – infermieri','3250'],['Chirurgia – settore 2','3300'],
  ['Settore 2, 2° piano – medici','3308 3311 3224'],['Settore 2, 2° piano – infermieri','3300 3301'],['Sala operatoria','3600'],
  ['Chirurgo vascolare Torregalli','055 6932038',{ g: 1, n:'Solo giorno'}],['Chirurgo toracico','335 7914233',{ g: 1 }],
