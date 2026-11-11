@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import Monogramma from '../components/Monogramma'
+import Segnala from '../components/Segnala'
 import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
 
@@ -111,35 +114,99 @@ const PAGINE = [
   { id: 'dimissioni', to: '/dimissioni', nome: 'Dimissione', testo: 'Testi pronti da adattare' },
 ]
 
+const AVVERTENZE = [
+  'Non è approvata da nessuno: né dall’ASL, né dalla Regione, né dal Ministero, né dal primario (che forse non sa nemmeno che esiste). È un quaderno di appunti con l’ambizione di un’app.',
+  'Chi la usa lo fa sotto la propria responsabilità. Le dosi sono per un adulto di 70 kg che, statisticamente, non è il paziente che hai davanti.',
+  'Non sostituisce lo studio: le linee guida originali, i protocolli aziendali e la scheda tecnica vanno letti da sé. Questa serve a ricordare, non a imparare.',
+  'Se qualcosa non torna, hanno ragione la scheda tecnica e il buon senso (e quasi sempre il collega più anziano).',
+]
+
+function Avvertenze({ compatte }: { compatte?: boolean }) {
+  return (
+    <ul className={`flex flex-col ${compatte ? 'gap-1.5 text-[12.5px]' : 'gap-2 text-[13.5px]'} leading-snug`}>
+      {AVVERTENZE.map((a) => (
+        <li key={a} className="flex gap-2"><span className="text-bordeaux font-black">!</span><span>{a}</span></li>
+      ))}
+    </ul>
+  )
+}
+
+const IN_DIVENIRE = 'DEA-LIRIO è un cantiere aperto: cresce turno dopo turno. Errori, dosi da correggere, protocolli di Prato che mancano, idee: segnalali, ogni contributo viene letto e finisce nella versione successiva.'
+
 /** Schermata iniziale. */
 export default function Home() {
+  const [avvisi, setAvvisi] = useState(false)
   return (
-    <div className="flex flex-col gap-2.5 lg:max-w-4xl lg:mx-auto">
-      <section className="card !p-0 overflow-hidden">
-        <div className="bg-sabbia px-4 pt-2 flex justify-center">
-          <div style={{ height: 'clamp(64px, 18svh, 180px)' }} className="aspect-[22/15]"><Giglio /></div>
-        </div>
-        <div className="px-4 pt-2 pb-3">
-          <h2 className="font-black text-[28px] leading-none tracking-tight text-verde-scuro">
-            DEA<span className="text-bordeaux">-</span>LIRIO
-          </h2>
-          <p className="mt-1 text-[13.5px] leading-snug">
-            Algoritmi, calcolatori e numeri utili per sopravvivere al Pronto Soccorso di Prato.
-          </p>
-        </div>
-      </section>
-
-      <section className="grid grid-cols-2 gap-2">
-        {PAGINE.map((p) => (
-          <Link key={p.id} to={p.to} className="card !p-2 !rounded-2xl flex items-center gap-2 active:bg-sabbia">
-            <svg viewBox="0 0 64 64" className="w-10 h-10 shrink-0" aria-hidden>{DISEGNI[p.id]}</svg>
-            <div className="min-w-0">
-              <p className="font-extrabold text-[14px] leading-tight">{p.nome}</p>
-              <p className="text-[10.5px] text-tenue leading-tight">{p.testo}</p>
+    <div className="flex flex-col gap-2.5 lg:grid lg:grid-cols-2 lg:gap-5 lg:items-start lg:max-w-6xl lg:mx-auto">
+      <div className="flex flex-col gap-2.5 lg:gap-4">
+        <section className="card !p-0 overflow-hidden">
+          <div className="bg-sabbia px-4 pt-2 flex justify-center">
+            <div className="aspect-[22/15] h-[clamp(48px,13svh,180px)] lg:h-[230px]"><Giglio /></div>
+          </div>
+          <div className="px-4 pt-2 pb-3 lg:px-6 lg:pb-5 flex items-end gap-3">
+            <div className="flex-1">
+              <h2 className="font-black text-[28px] lg:text-[40px] leading-none tracking-tight text-verde-scuro">
+                DEA<span className="text-bordeaux">-</span>LIRIO
+              </h2>
+              <p className="mt-1 text-[13.5px] lg:text-[16px] leading-snug">
+                Algoritmi, calcolatori e numeri utili per sopravvivere al Pronto Soccorso di Prato.
+              </p>
             </div>
-          </Link>
-        ))}
-      </section>
+            <Monogramma size={46} className="shrink-0 hidden lg:block" />
+          </div>
+        </section>
+
+        <section className="hidden lg:block card">
+          <p className="etichetta mb-2 !text-bordeaux">Avvertenze semiserie (ma serie)</p>
+          <Avvertenze />
+        </section>
+      </div>
+
+      <div className="flex flex-col gap-2.5 lg:gap-4">
+        <section className="grid grid-cols-2 gap-2 lg:gap-3">
+          {PAGINE.map((p) => (
+            <Link key={p.id} to={p.to} className="card !p-2 lg:!p-3 !rounded-2xl flex items-center gap-2 lg:gap-3 active:bg-sabbia lg:hover:border-verde2">
+              <svg viewBox="0 0 64 64" className="w-10 h-10 lg:w-12 lg:h-12 shrink-0" aria-hidden>{DISEGNI[p.id]}</svg>
+              <div className="min-w-0">
+                <p className="font-extrabold text-[14px] lg:text-[16px] leading-tight">{p.nome}</p>
+                <p className="text-[10.5px] lg:text-[12px] text-tenue leading-tight">{p.testo}</p>
+              </div>
+            </Link>
+          ))}
+        </section>
+
+        <section className="hidden lg:flex card flex-col gap-3">
+          <p className="etichetta !text-verde">Lavori in corso</p>
+          <p className="text-[13.5px] leading-snug">{IN_DIVENIRE}</p>
+          <div className="flex items-center gap-3">
+            <Segnala />
+            <span className="ml-auto flex items-center gap-2 text-[11.5px] text-tenue">a cura di <Monogramma size={34} /></span>
+          </div>
+        </section>
+
+        {/* telefono: tutto in una schermata, avvertenze e segnalazioni in una riga */}
+        <div className="lg:hidden flex items-center gap-2 px-1">
+          <Monogramma size={30} />
+          <button onClick={() => setAvvisi(true)} className="text-[12px] font-bold text-bordeaux underline underline-offset-2">Avvertenze</button>
+          <span className="text-tenue text-[12px]">·</span>
+          <Segnala etichetta="Segnala errori e idee" className="text-[12px] font-bold text-verde underline underline-offset-2" />
+        </div>
+      </div>
+
+      {avvisi && (
+        <div className="fixed inset-0 z-50 bg-black/40 flex items-end justify-center" onClick={() => setAvvisi(false)}>
+          <div className="bg-carta w-full max-w-lg rounded-t-[22px] p-4 pb-[calc(16px+env(safe-area-inset-bottom))]" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center gap-2 mb-2"><Monogramma size={34} /><p className="font-black text-lg">Avvertenze semiserie (ma serie)</p></div>
+            <Avvertenze compatte />
+            <p className="etichetta mt-3 mb-1 !text-verde">Lavori in corso</p>
+            <p className="text-[12.5px] leading-snug">{IN_DIVENIRE}</p>
+            <div className="flex gap-2 mt-3">
+              <button onClick={() => setAvvisi(false)} className="flex-1 rounded-full border border-linea-forte py-2.5 font-bold text-tenue">Ho capito</button>
+              <Segnala etichetta="Segnala" className="flex-1 rounded-full bg-verde text-white py-2.5 font-extrabold" />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

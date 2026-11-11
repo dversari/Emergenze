@@ -11,6 +11,7 @@ import { ANAMNESI } from './lib/anamnesi'
 import PaginaSchede from './components/PaginaSchede'
 import { PROCEDURE, SEDAZIONE } from './lib/schede'
 import { ElencoLineeGuida, RiassuntoLineaGuida } from './pages/LineeGuida'
+import Monogramma from './components/Monogramma'
 
 declare const __VERSIONE__: string
 
@@ -60,6 +61,7 @@ function Guscio() {
             {s.label}
           </NavLink>
         ))}
+        <div className="mt-auto flex items-center gap-2 px-3 text-[11px] text-tenue"><Monogramma size={28} /> DEA-LIRIO · PS Prato</div>
       </nav>
 
       <nav className="lg:hidden fixed bottom-0 inset-x-0 z-20 bg-fondo/95 backdrop-blur-md border-t border-linea px-2 pt-2 pb-[max(14px,calc(env(safe-area-inset-bottom)+6px))]">
