@@ -318,6 +318,23 @@ const PUNTEGGI: Punteggio[] = [
       : { livello: 'alto', testo: t <= 5 ? 'Rischio alto: ricovero/monitor.' : 'Rischio molto alto: ricovero con monitor.' },
     fonte: 'Thiruganasambandamoorthy, CMAJ 2016',
   },
+  {
+    id: 'twist',
+    nome: 'TWIST',
+    ambito: 'Scroto acuto · rischio di torsione del testicolo',
+    voci: [
+      { tipo: 'si', id: 'g', testo: 'Testicolo gonfio', punti: 2 },
+      { tipo: 'si', id: 'd', testo: 'Testicolo duro', punti: 2 },
+      { tipo: 'si', id: 'c', testo: 'Riflesso cremasterico assente', punti: 1 },
+      { tipo: 'si', id: 'n', testo: 'Nausea o vomito', punti: 1 },
+      { tipo: 'si', id: 'a', testo: 'Testicolo alto', punti: 1 },
+    ],
+    esito: (t) =>
+      t <= 2 ? { livello: 'basso', testo: 'Rischio basso (0–2): ecodoppler; torsione improbabile ma non esclusa.' }
+      : t <= 4 ? { livello: 'medio', testo: 'Rischio intermedio (3–4): ecodoppler urgente e urologo.' }
+      : { livello: 'alto', testo: 'Rischio alto (≥ 5): urologo subito per esplorazione, senza aspettare l’ecografia.' },
+    fonte: 'Barbosa, J Urol 2013 (validato soprattutto in età pediatrica)',
+  },
 ]
 
 // ─── Componenti ───────────────────────────────────────────────────────────────

@@ -1992,6 +1992,327 @@ export const LINEE_GUIDA: LineaGuida[] = [
       { data: '2023-04-17', testo: 'NICE NG133 aggiornata: obiettivo PA ≤ 135/85; labetalolo prima scelta, nifedipina alternativa; magnesio solfato nella preeclampsia grave e nell’eclampsia.' },
     ],
   },
+  {
+    id: 'otite',
+    titolo: 'Otite esterna e otite media (adulto)',
+    ente: 'AAO-HNS / NICE',
+    anno: 2014,
+    area: 'ORL',
+    fonte: { etichetta: 'Rosenfeld et al., Otolaryngol Head Neck Surg 2014 (otite esterna)', url: 'https://doi.org/10.1177/0194599813517083' },
+    controllata: '2026-11-11',
+    vediAnche: [
+      { etichetta: 'Dimissione otite esterna', to: '/dimissioni?apri=otite-esterna' },
+      { etichetta: 'Dimissione otite media', to: '/dimissioni?apri=otite-media' },
+      { etichetta: 'Anamnesi otalgia', to: '/anamnesi?apri=otalgia' },
+      { etichetta: 'Paralisi di Bell', to: '/linee-guida/paralisi-bell' },
+    ],
+    inBreve: [
+      'Esterna: dolore alla trazione del padiglione o alla pressione sul trago, condotto edematoso e arrossato, timpano normale se visibile.',
+      'Esterna non complicata: solo gocce (antibiotico ± cortisone) per 7 giorni e analgesia; niente antibiotico per bocca.',
+      'Antibiotico per bocca solo se l’infezione supera il condotto (cellulite del padiglione) o in diabete/immunodepressione.',
+      'Otite esterna necrotizzante (anziano diabetico, dolore notturno intenso, tessuto di granulazione, paralisi di nervi cranici): TC, ORL, antibiotico ev anti-Pseudomonas.',
+      'Media dell’adulto: analgesia; antibiotico se forma grave, febbre alta o nessun miglioramento in 3 giorni (amoxicillina).',
+      'Complicanze della media: mastoidite (gonfiore dietro l’orecchio, padiglione spostato), paralisi del facciale, meningite → TC e ORL.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (adulto)',
+        punti: [
+          'Esterna: gocce di chinolonico ± cortisone (ciprofloxacina ± desametasone o fluocinolone) 3–4 gocce 2 volte al giorno per 7 giorni; con timpano perforato o non visibile solo chinolonico (no aminoglicosidi).',
+          'Condotto molto edematoso: pulizia delicata e stuello (garza) per far entrare le gocce.',
+          'Media: amoxicillina (Zimox) 1 g ogni 8 h per 5–7 giorni; allergia: claritromicina (Klacid) 500 mg ogni 12 h. Fallimento: amoxicillina/clavulanato (Augmentin) 875/125 mg ogni 8–12 h.',
+          'Dolore: paracetamolo 1 g fino a 3 volte al giorno o ibuprofene (Brufen) 600 mg ogni 8 h.',
+        ],
+      },
+      {
+        titolo: 'Quando l’ORL',
+        punti: [
+          'Necrotizzante sospetta, complicanze, paralisi del facciale, vertigine o sordità improvvisa.',
+          'Otite media unilaterale o versamento persistente nell’adulto: visita ORL per escludere una massa del rinofaringe.',
+          'Otorrea che non guarisce in 2 settimane.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2014-02-01', testo: 'AAO-HNS 2014 (otite esterna): solo terapia topica nei casi non complicati, analgesia adeguata, niente antibiotico sistemico di routine. NICE NG91 (2018): nella media acuta antibiotico non di routine.' },
+    ],
+  },
+  {
+    id: 'sinusite',
+    titolo: 'Rinosinusite acuta',
+    ente: 'EPOS',
+    anno: 2020,
+    area: 'ORL',
+    fonte: { etichetta: 'Fokkens et al., Rhinology 2020 (EPOS)', url: 'https://doi.org/10.4193/Rhin20.600' },
+    controllata: '2026-11-11',
+    vediAnche: [{ etichetta: 'Dimissione sinusite', to: '/dimissioni?apri=sinusite' }, { etichetta: 'Meningite', to: '/linee-guida/meningite' }],
+    inBreve: [
+      'Quasi sempre virale: sintomi < 10 giorni, guarisce da sola.',
+      'Batterica probabile se almeno 3 tra: secrezione purulenta (soprattutto monolaterale), dolore locale intenso, febbre > 38 °C, PCR o VES alte, peggioramento dopo un iniziale miglioramento.',
+      'Terapia: lavaggi nasali, cortisone spray, analgesici. Antibiotico solo nella forma batterica probabile o grave.',
+      'Complicanze orbitarie (edema periorbitario, diplopia, calo del visus, oftalmoplegia, proptosi) o intracraniche (cefalea intensa, meningismo, deficit, confusione): TC con contrasto, ORL e oculista, antibiotico ev.',
+      'Niente TC nella sinusite non complicata.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (adulto)',
+        punti: [
+          'Lavaggi nasali con soluzione fisiologica o ipertonica 2–3 volte al giorno.',
+          'Mometasone spray (Nasonex) 2 spruzzi per narice 1–2 volte al giorno per 14 giorni.',
+          'Paracetamolo 1 g fino a 3 volte al giorno o ibuprofene (Brufen) 400–600 mg ogni 8 h.',
+          'Antibiotico: amoxicillina/clavulanato (Augmentin) 875/125 mg ogni 12 h per 5–7 giorni; allergia: doxiciclina (Bassado) 100 mg ogni 12 h.',
+          'Complicata (ricovero): ceftriaxone (Rocefin) 2 g ev ogni 24 h ± metronidazolo (Flagyl) 500 mg ogni 8 h.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2020-02-20', testo: 'EPOS 2020: distinzione virale, post-virale e batterica; antibiotico solo con criteri di batterica; cortisone nasale nella post-virale.' },
+    ],
+  },
+  {
+    id: 'paralisi-bell',
+    titolo: 'Paralisi del facciale (di Bell)',
+    ente: 'AAO-HNS',
+    anno: 2013,
+    area: 'Neurologia · ORL',
+    fonte: { etichetta: 'Baugh et al., Otolaryngol Head Neck Surg 2013 (AAO-HNS)', url: 'https://doi.org/10.1177/0194599813505967' },
+    controllata: '2026-11-11',
+    vediAnche: [
+      { etichetta: 'Anamnesi paralisi facciale', to: '/anamnesi?apri=paralisi-faciale' },
+      { etichetta: 'Dimissione paralisi di Bell', to: '/dimissioni?apri=paralisi-bell' },
+      { etichetta: 'Codice ictus', to: '/linee-guida/ictus' },
+    ],
+    inBreve: [
+      'Periferica: tutta l’emifaccia, fronte compresa (non corruga la fronte, non chiude l’occhio). Fronte risparmiata = centrale → percorso ictus.',
+      'Di Bell = periferica, esordio in < 72 h, senza altra causa. Escludere: zoster (vescicole all’orecchio o in bocca: Ramsay Hunt), otite, Lyme, parotide, trauma, altri nervi cranici, bilaterale.',
+      'Prednisone entro 72 h dall’esordio, a tutti gli adulti senza controindicazioni.',
+      'Antivirale da solo no; insieme al cortisone solo come opzione nelle forme gravi (e sempre se Ramsay Hunt).',
+      'Proteggere l’occhio: lacrime di giorno, gel e occlusione la notte.',
+      'Niente esami o TC di routine. Visita ORL/neurologica se non migliora entro 3 mesi, se peggiora, o se ricorre.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (adulto)',
+        punti: [
+          'Prednisone (Deltacortene) 60 mg al mattino per 5 giorni (2 compresse da 25 mg + 2 da 5 mg), poi scalare di 10 mg al giorno in 5 giorni. In alternativa prednisolone 50 mg per 10 giorni.',
+          'Ramsay Hunt o forma grave: + valaciclovir (Zelitrex) 1 g ogni 8 h per 7 giorni.',
+          'Diabetici: controllo glicemico durante il cortisone.',
+          'Occhio: lacrime artificiali ogni 1–2 h di giorno, gel o unguento oftalmico la notte, chiusura con cerotto o occhiali; oculista se dolore, arrossamento o calo del visus.',
+        ],
+      },
+      {
+        titolo: 'Segni d’allarme (non è Bell)',
+        punti: [
+          'Fronte risparmiata, altri deficit neurologici, cefalea grave, confusione.',
+          'Esordio lento in settimane, paralisi di singoli rami, recidiva omolaterale, bilaterale.',
+          'Massa parotidea, otorrea, febbre, vescicole, tumore noto.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2013-11-01', testo: 'AAO-HNS 2013: cortisone entro 72 h; antivirale solo come opzione insieme al cortisone; niente esami e imaging di routine; protezione oculare.' },
+    ],
+  },
+  {
+    id: 'occhio-rosso',
+    titolo: 'Occhio rosso',
+    ente: 'AAO',
+    anno: 2018,
+    area: 'Oculistica',
+    fonte: { etichetta: 'AAO Preferred Practice Pattern Conjunctivitis, Ophthalmology 2019', url: 'https://doi.org/10.1016/j.ophtha.2018.10.020' },
+    controllata: '2026-11-11',
+    vediAnche: [
+      { etichetta: 'Anamnesi occhio rosso', to: '/anamnesi?apri=occhio-rosso' },
+      { etichetta: 'Dimissione congiuntivite', to: '/dimissioni?apri=congiuntivite' },
+      { etichetta: 'Dimissione corpo estraneo', to: '/dimissioni?apri=corpo-estraneo-occhio' },
+    ],
+    inBreve: [
+      'Prima domanda: il visus è calato? Misurarlo sempre (ottotipo o conta dita).',
+      'Invio oculistico urgente: calo del visus, dolore vero (non bruciore), fotofobia, iperemia perilimbare, pupilla anomala, opacità corneale, trauma penetrante o chimico, portatore di lenti con lesione corneale, zoster oftalmico.',
+      'Ustione chimica: irrigare subito e a lungo (almeno 30 min, fino a pH 7–7,5), poi oculista.',
+      'Glaucoma acuto: occhio rosso dolente, visus calato, pupilla media fissa, cornea opaca, cefalea e vomito → acetazolamide e oculista subito.',
+      'Congiuntivite (secrezione, visus normale, niente dolore): virale la più frequente; antibiotico collirio solo se secrezione purulenta.',
+      'Emorragia sottocongiuntivale isolata: benigna; controllare PA e anticoagulanti.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci',
+        punti: [
+          'Congiuntivite batterica: tobramicina collirio (Tobral) 1–2 gocce ogni 4–6 h per 5–7 giorni. Portatore di lenti: chinolonico (ofloxacina, Exocin) e oculista.',
+          'Allergica: antistaminico collirio (ketotifene, Zaditen) 2 volte al giorno.',
+          'Abrasione corneale: antibiotico collirio o unguento; niente anestetico collirio a domicilio; niente bendaggio nei portatori di lenti.',
+          'Glaucoma acuto: acetazolamide (Diamox) 500 mg ev o per bocca; timololo 0,5% (Timoptol) 1 goccia; oculista subito.',
+          'Cortisone collirio: mai senza visita oculistica.',
+        ],
+      },
+      {
+        titolo: 'Diagnosi differenziale',
+        punti: [
+          'Congiuntivite: iperemia diffusa, secrezione, visus normale.',
+          'Episclerite: settoriale, poco dolore. Sclerite: dolore profondo che sveglia la notte, colore violaceo → oculista.',
+          'Cheratite: dolore, fotofobia, fluoresceina positiva; dendritica = herpes.',
+          'Uveite anteriore: dolore, fotofobia, miosi, iperemia ciliare.',
+          'Glaucoma acuto ad angolo chiuso: pupilla media areflessica, cornea opaca, occhio duro.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2018-10-01', testo: 'AAO PPP Congiuntivite: maggior parte virale; antibiotico topico nelle forme batteriche; segni d’allarme per invio urgente.' },
+    ],
+  },
+  {
+    id: 'orchiepididimite',
+    titolo: 'Orchiepididimite',
+    ente: 'EAU',
+    anno: 2025,
+    area: 'Urologia',
+    fonte: { etichetta: 'EAU Guidelines on Urological Infections 2025', url: 'https://uroweb.org/guidelines/urological-infections' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'twist', nome: 'TWIST' }],
+    vediAnche: [
+      { etichetta: 'Antibiotici: orchiepididimite', to: '/antibiotici?apri=orchiepididimite' },
+      { etichetta: 'Anamnesi dolore scrotale', to: '/anamnesi?apri=scroto' },
+      { etichetta: 'Dimissione orchiepididimite', to: '/dimissioni?apri=orchiepididimite' },
+    ],
+    inBreve: [
+      'Prima escludere la torsione: esordio improvviso, vomito, testicolo alto o orizzontale, cremasterico assente. TWIST alto → urologo subito, l’ecodoppler non deve ritardare.',
+      'Orchiepididimite: esordio graduale, epididimo dolente e ingrossato, spesso febbre e sintomi urinari; Prehn positivo non è affidabile.',
+      'Esame urine e urinocoltura; < 35 anni o rapporti a rischio: test per gonococco e clamidia (urine di primo getto).',
+      'Probabile infezione sessuale: ceftriaxone + doxiciclina. Probabile origine urinaria (> 35 anni, uropatia, catetere): chinolonico.',
+      'Ricovero se sepsi, ascesso, dolore incontrollabile; ecografia se dubbio o non migliora in 3 giorni.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (adulto)',
+        punti: [
+          'Da trasmissione sessuale: ceftriaxone (Rocefin) 1 g im dose unica + doxiciclina (Bassado) 100 mg ogni 12 h per 10–14 giorni.',
+          'Origine urinaria: levofloxacina (Tavanic) 500 mg al giorno per 10 giorni (o ciprofloxacina 500 mg ogni 12 h).',
+          'Sostegno scrotale, ghiaccio, ibuprofene (Brufen) 600 mg ogni 8 h.',
+          'Partner degli ultimi 60 giorni da valutare e trattare se infezione sessuale; niente rapporti fino a fine terapia.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2025-03-01', testo: 'EAU 2025: scelta dell’antibiotico secondo il rischio di infezione sessuale o urinaria; torsione da escludere sempre.' },
+    ],
+  },
+  {
+    id: 'infezione-urinaria',
+    titolo: 'Infezioni delle vie urinarie',
+    ente: 'EAU',
+    anno: 2025,
+    area: 'Urologia · Infettivologia',
+    fonte: { etichetta: 'EAU Guidelines on Urological Infections 2025', url: 'https://uroweb.org/guidelines/urological-infections' },
+    controllata: '2026-11-11',
+    vediAnche: [
+      { etichetta: 'Antibiotici: cistite', to: '/antibiotici?apri=cistite' },
+      { etichetta: 'Antibiotici: pielonefrite', to: '/antibiotici?apri=pielonefrite' },
+      { etichetta: 'Antibiotici: prostatite', to: '/antibiotici?apri=prostatite' },
+      { etichetta: 'Dimissione cistite', to: '/dimissioni?apri=cistite' },
+      { etichetta: 'Dimissione pielonefrite', to: '/dimissioni?apri=pielonefrite' },
+      { etichetta: 'Sepsi', to: '/linee-guida/sepsi' },
+    ],
+    inBreve: [
+      'Cistite non complicata (donna non gravida, senza anomalie): diagnosi clinica, niente urinocoltura; fosfomicina dose unica o nitrofurantoina 5 giorni.',
+      'Batteriuria asintomatica: non trattare (tranne gravidanza e prima di interventi urologici). Nell’anziano lo stick positivo senza sintomi urinari non spiega febbre o confusione.',
+      'Uomo con sintomi urinari: infezione complicata, urinocoltura, 7 giorni; febbre o dolore perineale → prostatite.',
+      'Pielonefrite: urinocoltura (ed emocolture se grave); ecografia se dolore colico, calcoli noti, monorene, mancata risposta in 72 h.',
+      'Idronefrosi infetta: drenaggio urgente (urologo). Sepsi: PDTA sepsi.',
+      'Gravidanza: urinocoltura sempre; niente chinoloni.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (adulto)',
+        punti: [
+          'Cistite: fosfomicina (Monuril) 3 g dose unica la sera a vescica vuota, oppure nitrofurantoina (Neofuradantin) 100 mg ogni 12 h per 5 giorni (no se clearance < 30).',
+          'Cistite nell’uomo: secondo coltura, 7 giorni (es. nitrofurantoina; chinolonico se sospetta prostatite).',
+          'Pielonefrite a domicilio: ciprofloxacina (Ciproxin) 500 mg ogni 12 h per 7 giorni (se resistenze locali < 10%) o ceftriaxone (Rocefin) 1–2 g dose iniziale poi terapia orale secondo coltura.',
+          'Pielonefrite ricoverata: ceftriaxone 2 g ev ogni 24 h; shock o rischio di resistenze: piperacillina/tazobactam (Tazocin) 4,5 g ogni 6 h.',
+        ],
+      },
+      {
+        titolo: 'Ricovero se',
+        punti: [
+          'Sepsi o instabilità, vomito che impedisce la terapia orale, ostruzione, gravidanza con pielonefrite, immunodepressione, mancata risposta.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2025-03-01', testo: 'EAU 2025: niente urinocoltura nella cistite non complicata della donna; batteriuria asintomatica non trattata; chinoloni solo se necessari.' },
+    ],
+  },
+  {
+    id: 'gastrite-dispepsia',
+    titolo: 'Gastrite e dispepsia',
+    ente: 'ACG/CAG',
+    anno: 2017,
+    area: 'Gastroenterologia',
+    fonte: { etichetta: 'Moayyedi et al., Am J Gastroenterol 2017 (ACG/CAG)', url: 'https://doi.org/10.1038/ajg.2017.154' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'heart', nome: 'HEART' }],
+    vediAnche: [
+      { etichetta: 'Reflusso', to: '/linee-guida/reflusso' },
+      { etichetta: 'Emorragia digestiva', to: '/linee-guida/emorragia-digestiva' },
+      { etichetta: 'Dimissione gastrite', to: '/dimissioni?apri=gastrite' },
+    ],
+    inBreve: [
+      'Dolore epigastrico: prima escludere SCA (ECG, troponina se dubbio), colica biliare, pancreatite (lipasi), ulcera perforata, aneurisma aortico.',
+      'Segni d’allarme: sanguinamento (ematemesi, melena), anemia, calo di peso, disfagia, vomito persistente, massa, ittero, ≥ 60 anni con sintomi nuovi → gastroscopia.',
+      'Sotto i 60 anni senza allarme: test per Helicobacter pylori (breath test o antigene fecale, a 2 settimane dallo stop dell’inibitore di pompa) ed eradicazione se positivo.',
+      'Negativo o senza Helicobacter: inibitore di pompa per 4–8 settimane.',
+      'Sospendere FANS e aspirina se possibile; alcol e fumo.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (adulto)',
+        punti: [
+          'Pantoprazolo (Pantorc) 40 mg al mattino a digiuno, 30 min prima della colazione, per 4–8 settimane.',
+          'Alginato/antiacido (Gaviscon) dopo i pasti e la sera al bisogno.',
+          'Helicobacter: quadruplice con bismuto (Pylera 3 capsule 4 volte al giorno + omeprazolo 20 mg 2 volte al giorno per 10 giorni) dal curante.',
+          'In PS: pantoprazolo 40 mg ev; per il dolore paracetamolo, non FANS.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2017-07-01', testo: 'ACG/CAG 2017: endoscopia dai 60 anni; sotto i 60 test-and-treat per H. pylori e poi inibitore di pompa. Maastricht VI (2022): quadruplice con bismuto in prima linea.' },
+    ],
+  },
+  {
+    id: 'reflusso',
+    titolo: 'Malattia da reflusso gastroesofageo',
+    ente: 'ACG',
+    anno: 2022,
+    area: 'Gastroenterologia',
+    fonte: { etichetta: 'Katz et al., Am J Gastroenterol 2022 (ACG)', url: 'https://doi.org/10.14309/ajg.0000000000001538' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'heart', nome: 'HEART' }],
+    vediAnche: [
+      { etichetta: 'Gastrite e dispepsia', to: '/linee-guida/gastrite-dispepsia' },
+      { etichetta: 'NSTE-SCA', to: '/linee-guida/nste-sca' },
+      { etichetta: 'Dimissione reflusso', to: '/dimissioni?apri=reflusso' },
+    ],
+    inBreve: [
+      'Sintomi tipici: pirosi retrosternale e rigurgito, dopo i pasti o da sdraiati.',
+      'Dolore toracico: prima escludere la causa cardiaca, anche se «sembra reflusso».',
+      'Sintomi tipici senza allarme: inibitore di pompa per 8 settimane, 30–60 min prima del pasto; poi provare a sospendere o ridurre alla dose minima efficace.',
+      'Allarme → gastroscopia: disfagia, odinofagia, sanguinamento, anemia, calo di peso, vomito ricorrente.',
+      'Misure di stile di vita: calo di peso, testata del letto rialzata se sintomi notturni, niente pasti 2–3 h prima di coricarsi.',
+      'Corpo estraneo o bolo alimentare impattato (non deglutisce la saliva): gastroscopia urgente.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (adulto)',
+        punti: [
+          'Pantoprazolo (Pantorc) 40 mg o omeprazolo (Omeprazen) 20 mg al mattino, 30–60 min prima della colazione, per 8 settimane.',
+          'Sintomi notturni o risposta parziale: dose 2 volte al giorno (prima di colazione e cena).',
+          'Alginato (Gaviscon) dopo i pasti e la sera per i sintomi al bisogno.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2021-11-22', testo: 'ACG 2022: 8 settimane di inibitore di pompa per i sintomi tipici, poi tentativo di sospensione; endoscopia per sintomi d’allarme o mancata risposta.' },
+    ],
+  },
 ]
 
 export const lineaGuida = (id: string) => LINEE_GUIDA.find((l) => l.id === id)

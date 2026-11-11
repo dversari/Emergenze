@@ -627,4 +627,65 @@ DA NON DIMENTICARE
 - Invio oculistico urgente: calo del visus, dolore vero, fotofobia, iperemia ciliare, pupilla anomala, opacità corneale, trauma penetrante o chimico, portatore di lenti con ulcera, zoster oftalmico.
 - Ustione chimica: lavaggio abbondante prima di tutto (pH).`,
   },
+  {
+    id: 'paralisi-faciale', nome: 'Paralisi del facciale', gruppo: 'Neurologia',
+    testo: `ANAMNESI
+Asimmetria del viso [dx / sx] notata alle ore [...] del [...], [al risveglio / improvvisa / progressiva in ... giorni].
+Sintomi associati: [otalgia / dolore retroauricolare / vescicole all'orecchio o in bocca / ipoacusia / acufeni / vertigine / iperacusia / alterazione del gusto / lacrimazione ridotta / disturbi della deglutizione / diplopia / deficit di forza o sensibilità degli arti / disartria / cefalea].
+Episodi precedenti: [...]. Infezione recente, puntura di zecca, viaggi: [...]. Trauma cranico o facciale: [...]. Gravidanza: [...]. Diabete: [...].
+${GENERALE}
+
+ESAME OBIETTIVO
+${PARAMETRI}
+Vigile, orientato, eloquio [fluente, non disartrico].
+VII nc: paralisi [completa / parziale] di tutta l'emifaccia [dx / sx]: [non] corruga la fronte, chiusura palpebrale [incompleta, segno di Bell presente / completa], spianamento del solco naso-genieno, deviazione della rima buccale controlateralmente, [non] gonfia la guancia. House-Brackmann grado [...]/VI.
+Altri nervi cranici: pupille isocoriche normoreagenti, MOE nella norma, non diplopia, non nistagmo; sensibilità del viso conservata; ugola e lingua in asse.
+Forza e sensibilità conservate e simmetriche ai quattro arti; Mingazzini mantenute; prove cerebellari nella norma.
+Otoscopia: [condotto e timpano nella norma / vescicole]. Parotidi: [non tumefazioni]. Cavo orale: [non vescicole]. Cute: [non eritema migrante].
+
+DA NON DIMENTICARE
+- Fronte risparmiata = paralisi centrale → codice ictus.
+- Vescicole all'orecchio o in bocca = Ramsay Hunt (zoster): cortisone + valaciclovir.
+- Prednisone entro 72 h; proteggere l'occhio (lacrime, gel e occlusione la notte).`,
+  },
+  {
+    id: 'otalgia', nome: 'Otalgia', gruppo: 'Infezioni e generale',
+    testo: `ANAMNESI
+Otalgia [dx / sx / bilaterale] da [...], NRS [...]/10, [continua / pulsante / notturna].
+Sintomi associati: [febbre / otorrea / ipoacusia / acufeni / vertigine / prurito / sensazione di orecchio chiuso / rinite o faringite recente / dolore alla masticazione / mal di denti / vescicole].
+Bagni in piscina o mare, uso di cotton fioc o auricolari: [...]. Episodi precedenti, interventi all'orecchio, timpano perforato noto: [...]. Diabete, immunodepressione: [...].
+${GENERALE}
+
+ESAME OBIETTIVO
+${PARAMETRI}
+Padiglione: [normale / arrossato, tumefatto]; dolore alla trazione del padiglione e alla pressione sul trago [assente / presente].
+Otoscopia [dx]: condotto [libero / edematoso, iperemico, con secrezione / tappo di cerume]; timpano [integro, traslucido / iperemico, estroflesso / perforato / non visibile]. Otoscopia [sx]: [...].
+Regione mastoidea: [non tumefatta, non dolente]; padiglione [in sede / spostato in avanti].
+VII nc: [simmetrico]. Non nistagmo. Weber [...]. Linfonodi laterocervicali [non palpabili]. Faringe [...]. ATM e arcate dentarie: [...].
+
+DA NON DIMENTICARE
+- Anziano diabetico con dolore notturno intenso e granulazioni nel condotto = otite esterna necrotizzante (TC, ORL).
+- Mastoidite, paralisi del facciale, meningismo → TC e ORL.
+- Otite media unilaterale nell'adulto: visita ORL (rinofaringe).`,
+  },
+  {
+    id: 'epigastralgia', nome: 'Epigastralgia / pirosi', gruppo: 'Addome e urologia',
+    testo: `ANAMNESI
+Dolore/bruciore [epigastrico / retrosternale] da [...], [continuo / dopo i pasti / a digiuno / notturno / da sdraiato], NRS [...]/10, irradiazione [dorso / braccio / mandibola / nessuna].
+Sintomi associati: [rigurgito acido / nausea / vomito / ematemesi / melena / disfagia / odinofagia / calo di peso / sazietà precoce / dispnea / sudorazione / febbre / ittero].
+FANS, aspirina, cortisone, anticoagulanti, bifosfonati: [...]. Alcol, fumo: [...]. Precedenti: [ulcera / Helicobacter / gastroscopie / calcolosi biliare / pancreatite].
+Fattori di rischio cardiovascolare: [...].
+${GENERALE}
+
+ESAME OBIETTIVO
+${PARAMETRI}
+Condizioni generali [buone]. Cute e sclere [non itteriche]. Torace: MV fisiologico. Cuore: toni validi, ritmici, pause libere.
+Addome: [piano, trattabile], dolente alla palpazione [profonda in epigastrio / non dolente], Murphy [negativo], Blumberg [negativo], non masse né organomegalie, peristalsi [presente]. Non masse pulsanti.
+Esplorazione rettale (se sospetto sanguinamento): [feci normocromiche / melena].
+
+DA NON DIMENTICARE
+- ECG (e troponina se dubbio): l'infarto inferiore si presenta come «gastrite».
+- Lipasi; eco se sospetto biliare; > 60 anni con dolore nuovo: pensare all'aneurisma.
+- Allarme (sanguinamento, anemia, calo di peso, disfagia, vomito persistente, ≥ 60 anni) → gastroscopia.`,
+  },
 ]

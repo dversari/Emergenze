@@ -79,6 +79,9 @@ export default function PaginaTesti({ voci: tutte, prefisso, segnaposto, nota }:
   const [, forza] = useState(0)
   const q = cerca.trim().toLowerCase()
 
+  const apri = params.get('apri')
+  useEffect(() => { if (apri) setAperto(apri) }, [apri])
+
   useEffect(() => {
     if (aperto) document.getElementById(`d-${aperto}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }, [aperto])

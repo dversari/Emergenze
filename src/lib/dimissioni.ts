@@ -1043,4 +1043,95 @@ ${RITORNO}
 - dolore molto forte o che non migliora dopo 48–72 ore, specialmente se diabetico o anziano;
 - paralisi di metà del viso, vertigine, calo importante dell'udito.`,
   },
+  {
+    id: 'paralisi-bell', nome: 'Paralisi del facciale (di Bell)', gruppo: 'Neurologia e psiche',
+    testo: `Diagnosi: paralisi periferica del nervo facciale [destro/sinistro] (paralisi di Bell). La visita non ha evidenziato segni di ictus né altre cause.
+
+Di solito migliora nel giro di settimane; la maggior parte delle persone recupera completamente o quasi entro 3–6 mesi.
+
+Terapia:
+- Deltacortene (prednisone) 25 mg e 5 mg: 60 mg (2 compresse da 25 mg + 2 da 5 mg) al mattino dopo colazione per 5 giorni, poi 50 mg, 40 mg, 30 mg, 20 mg, 10 mg (un giorno ciascuno) e stop. Se diabetico controlli la glicemia.
+- [Gastroprotezione: pantoprazolo (Pantorc) 20 mg 1 compressa al mattino a digiuno finché assume il cortisone.]
+- [Zelitrex (valaciclovir) 1 g: 1 compressa ogni 8 ore per 7 giorni.]
+
+Protezione dell'occhio (molto importante, l'occhio non si chiude bene):
+- Lacrime artificiali [...] 1–2 gocce ogni 1–2 ore durante il giorno.
+- La sera gel o unguento oftalmico [...] e chiuda l'occhio con un cerotto di carta o usi occhiali avvolgenti la notte.
+- Occhiali da sole all'aperto; eviti vento e polvere.
+
+${controlli('Si allega richiesta per visita [ORL / neurologica] se non c\'è miglioramento entro 3 mesi.')}
+
+${RITORNO}
+- debolezza o formicolio di braccio o gamba, difficoltà a parlare, a deglutire, vista doppia, sbandamento;
+- mal di testa forte, febbre, confusione;
+- occhio rosso, dolente o calo della vista;
+- vescicole all'orecchio o in bocca, dolore all'orecchio intenso;
+- la paralisi peggiora o compare anche dall'altro lato.`,
+  },
+  {
+    id: 'otite-media', nome: 'Otite media acuta (adulto)', gruppo: 'Occhio e orecchio',
+    testo: `Diagnosi: otite media acuta [destra/sinistra].
+
+Terapia:
+- Paracetamolo 1 g fino a 3 volte al giorno o Brufen (ibuprofene) 600 mg ogni 8 ore dopo i pasti.
+- [Zimox (amoxicillina) 1 g: 1 compressa ogni 8 ore per 5–7 giorni.] [Se allergico alla penicillina: Klacid (claritromicina) 500 mg ogni 12 ore per 5–7 giorni.]
+- [Lavaggi nasali con soluzione fisiologica 2–3 volte al giorno.]
+
+Indicazioni:
+- Se esce liquido dall'orecchio (timpano perforato) tenga l'orecchio asciutto e non metta gocce senza indicazione medica.
+- Eviti di soffiare il naso con forza e i viaggi in aereo finché non è guarito.
+
+${controlli('Si allega richiesta per visita ORL [se i sintomi non si risolvono entro 2 settimane o resta la sensazione di orecchio chiuso].')}
+
+${RITORNO}
+- gonfiore, arrossamento o dolore dietro l'orecchio, padiglione spostato in avanti;
+- paralisi di metà del viso, vertigine forte, calo improvviso dell'udito;
+- mal di testa forte, rigidità del collo, febbre alta, sonnolenza o confusione;
+- nessun miglioramento dopo 48–72 ore di antibiotico.`,
+  },
+  {
+    id: 'reflusso', nome: 'Reflusso gastroesofageo', gruppo: 'Addome',
+    testo: `Diagnosi: malattia da reflusso gastroesofageo. [ECG e troponina nella norma: escluse cause cardiache del dolore.]
+
+Terapia:
+- Pantorc (pantoprazolo) 40 mg: 1 compressa al mattino a digiuno, 30–60 minuti prima della colazione, per 8 settimane; poi ne parli con il medico curante per ridurre o sospendere.
+- Al bisogno dopo i pasti e la sera: Gaviscon (alginato) [1 bustina].
+
+Indicazioni:
+- Ceni almeno 2–3 ore prima di coricarsi; pasti piccoli; eviti alcol, fumo, cibi grassi o fritti se peggiorano i sintomi.
+- Se ha sintomi di notte rialzi la testata del letto di 15–20 cm (non basta un cuscino in più).
+- Se è in sovrappeso, perdere peso riduce il reflusso.
+- Eviti antinfiammatori (ibuprofene, ketoprofene, aspirina) se possibile.
+
+${controlli()}
+
+${RITORNO}
+- dolore al petto oppressivo, che si irradia a braccio, mandibola o schiena, o con sudorazione o affanno;
+- difficoltà o dolore a deglutire, cibo che si blocca;
+- vomito con sangue o «a fondo di caffè», feci nere;
+- dimagrimento non voluto.`,
+  },
+  {
+    id: 'orchiepididimite', nome: 'Orchiepididimite', gruppo: 'Infezioni',
+    testo: `Diagnosi: orchiepididimite [destra/sinistra]. [L'ecodoppler ha escluso una torsione del testicolo.]
+
+Terapia:
+- [Probabile infezione a trasmissione sessuale: eseguito in PS Rocefin (ceftriaxone) 1 g intramuscolo; prosegua con Bassado (doxiciclina) 100 mg: 1 compressa ogni 12 ore per 10–14 giorni, dopo i pasti con un bicchiere d'acqua, senza sdraiarsi subito dopo; eviti il sole.]
+- [Origine urinaria: Tavanic (levofloxacina) 500 mg: 1 compressa al giorno per 10 giorni. Sospenda e chiami il medico se dolore ai tendini (soprattutto il tallone).]
+- Brufen (ibuprofene) 600 mg ogni 8 ore dopo i pasti per alcuni giorni; [pantoprazolo 20 mg al mattino].
+- Riposo, slip contenitivo o sospensorio, ghiaccio avvolto in un panno 15 minuti più volte al giorno.
+
+Indicazioni:
+- Il dolore migliora di solito in 2–3 giorni; il gonfiore può durare alcune settimane.
+- [Eviti i rapporti sessuali fino alla fine della terapia e al controllo; il/la partner deve essere valutato/a e trattato/a.]
+- Ritiri l'esito di urinocoltura [e test per clamidia e gonococco] e lo porti al medico curante.
+
+${controlli('Si allega richiesta per ecografia scrotale di controllo [e visita urologica] se il gonfiore non si riduce entro 2 settimane.')}
+
+${RITORNO}
+- dolore improvviso e molto forte al testicolo, nausea o vomito;
+- febbre alta con brividi, scroto molto rosso, caldo o con pus;
+- impossibilità a urinare;
+- nessun miglioramento dopo 3 giorni di antibiotico.`,
+  },
 ]

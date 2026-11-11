@@ -14,6 +14,213 @@ export type Nodo =
 export interface Ramo { etichetta: string; tono?: 'si' | 'no' | 'neutro'; nodi: Nodo[]; fine?: string }
 
 export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: Nodo[] }> = {
+  otite: {
+    titolo: 'Algoritmo otalgia',
+    nota: 'AAO-HNS 2014, NICE NG91. Adulto.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Dolore all’orecchio', righe: ['Otoscopia, padiglione, mastoide, nervo facciale, linfonodi, ATM e denti (dolore riferito).'] },
+      { tipo: 'decisione', titolo: 'Dove sta il problema?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Condotto', tono: 'neutro', nodi: [
+              { tipo: 'passo', titolo: 'Otite esterna', righe: ['Dolore al trago e alla trazione del padiglione.'] },
+              { tipo: 'terapia', titolo: 'Gocce 7 giorni', righe: ['Chinolonico ± cortisone; analgesia. Antibiotico per bocca solo se cellulite o diabete/immunodepresso.'] },
+            ],
+          },
+          {
+            etichetta: 'Timpano', tono: 'neutro', nodi: [
+              { tipo: 'passo', titolo: 'Otite media', righe: ['Timpano estroflesso, opaco, arrossato; otorrea se perforato.'] },
+              { tipo: 'terapia', titolo: 'Analgesia ± amoxicillina', righe: ['Amoxicillina (Zimox) 1 g ogni 8 h per 5–7 giorni se grave o non migliora in 3 giorni.'] },
+            ],
+          },
+          {
+            etichetta: 'Normale', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'Dolore riferito', righe: ['Denti, ATM, faringe, collo; zoster (vescicole).'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Segni di complicanza?', righe: ['Gonfiore dietro l’orecchio, padiglione spostato, paralisi del facciale, vertigine, cefalea con febbre, anziano diabetico con dolore notturno e granulazioni.'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'TC e ORL', righe: ['Mastoidite, otite necrotizzante, complicanze intracraniche: antibiotico ev.'] }] },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Dimissione', vai: [{ etichetta: 'Otite esterna', to: '/dimissioni?apri=otite-esterna' }, { etichetta: 'Otite media', to: '/dimissioni?apri=otite-media' }] }] },
+        ],
+      },
+    ],
+  },
+  sinusite: {
+    titolo: 'Algoritmo rinosinusite acuta',
+    nota: 'EPOS 2020. Adulto.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Congestione, rinorrea, dolore facciale, iposmia' },
+      { tipo: 'decisione', titolo: 'Segni di complicanza?', righe: ['Edema o arrossamento periorbitario, diplopia, calo del visus, proptosi, cefalea intensa, meningismo, deficit, confusione.'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'TC con contrasto, ORL e oculista', righe: ['Ceftriaxone (Rocefin) 2 g ev ± metronidazolo (Flagyl) 500 mg ogni 8 h; ricovero.'] }], fine: 'ricovero' },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'decisione', titolo: 'Batterica probabile? (≥ 3 criteri)', righe: ['Secrezione purulenta, dolore locale forte, febbre > 38 °C, PCR/VES alte, peggioramento dopo un miglioramento.'] }] },
+        ],
+      },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'terapia', titolo: 'Sintomatica', righe: ['Lavaggi nasali, mometasone spray (Nasonex), analgesici. Senza antibiotico.'] }] },
+          { etichetta: 'Sì', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Antibiotico', righe: ['Amoxicillina/clavulanato (Augmentin) 875/125 mg ogni 12 h per 5–7 giorni + terapia sintomatica.'] }] },
+        ],
+      },
+      { tipo: 'esito', titolo: 'Dimissione', vai: [{ etichetta: 'Dimissione sinusite', to: '/dimissioni?apri=sinusite' }] },
+    ],
+  },
+  'paralisi-bell': {
+    titolo: 'Algoritmo paralisi del facciale',
+    nota: 'AAO-HNS 2013. Adulto.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Asimmetria del viso acuta', righe: ['Ora di esordio; vescicole; otalgia; altri sintomi neurologici.'], vai: [{ etichetta: 'Anamnesi', to: '/anamnesi?apri=paralisi-faciale' }] },
+      { tipo: 'decisione', titolo: 'Corruga la fronte dal lato colpito?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì (fronte risparmiata)', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Centrale: percorso ictus', righe: ['NIHSS, glicemia, TC.'], vai: [{ etichetta: 'Codice ictus', to: '/linee-guida/ictus' }] }], fine: 'codice ictus' },
+          { etichetta: 'No (tutta l’emifaccia)', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'Periferica' }] },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Segni d’allarme o altra causa?', righe: ['Altri nervi cranici o deficit, bilaterale, esordio lento, massa parotidea, otite o otorrea, trauma, vescicole (Ramsay Hunt).'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'passo', titolo: 'Causa specifica', righe: ['TC/RM, ORL o neurologo. Ramsay Hunt: cortisone + valaciclovir (Zelitrex) 1 g ogni 8 h per 7 giorni.'] }] },
+          {
+            etichetta: 'No: Bell', tono: 'si', nodi: [
+              { tipo: 'terapia', titolo: 'Prednisone entro 72 h', righe: ['Prednisone (Deltacortene) 60 mg per 5 giorni, poi scalare in 5 giorni.', 'Forma grave: valaciclovir come opzione.'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'checklist', titolo: 'Occhio', righe: ['Lacrime artificiali ogni 1–2 h', 'Gel oftalmico e occlusione la notte', 'Oculista se dolore, rossore, calo del visus'] },
+      { tipo: 'esito', titolo: 'Dimissione; ORL/neurologo se non migliora in 3 mesi', vai: [{ etichetta: 'Dimissione Bell', to: '/dimissioni?apri=paralisi-bell' }] },
+    ],
+  },
+  'occhio-rosso': {
+    titolo: 'Algoritmo occhio rosso',
+    nota: 'AAO PPP. Visus sempre misurato.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Occhio rosso', righe: ['Visus, pupilla, fluoresceina, eversione palpebra.'], vai: [{ etichetta: 'Anamnesi', to: '/anamnesi?apri=occhio-rosso' }] },
+      { tipo: 'decisione', titolo: 'Ustione chimica?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Irrigare subito', righe: ['Almeno 30 min fino a pH 7–7,5, poi oculista.'] }], fine: 'oculista' },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'decisione', titolo: 'Segni d’allarme?', righe: ['Calo del visus, dolore vero, fotofobia, iperemia perilimbare, pupilla anomala, cornea opaca, trauma penetrante, lenti a contatto con lesione, zoster V1.'] }] },
+        ],
+      },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Oculista urgente', righe: ['Pupilla media fissa e cornea opaca = glaucoma acuto: acetazolamide (Diamox) 500 mg ev/os + timololo (Timoptol) 0,5% 1 goccia.'] },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'Probabile congiuntivite o emorragia sottocongiuntivale', righe: ['Purulenta: tobramicina (Tobral) collirio. Virale: igiene e lacrime. Allergica: ketotifene (Zaditen).'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'esito', titolo: 'Dimissione', vai: [{ etichetta: 'Congiuntivite', to: '/dimissioni?apri=congiuntivite' }, { etichetta: 'Corpo estraneo', to: '/dimissioni?apri=corpo-estraneo-occhio' }] },
+    ],
+  },
+  orchiepididimite: {
+    titolo: 'Algoritmo scroto acuto',
+    nota: 'EAU 2025. Adulto.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Dolore scrotale acuto', righe: ['Ora di esordio; vomito; trauma; sintomi urinari; rapporti a rischio.'], vai: [{ etichetta: 'Anamnesi', to: '/anamnesi?apri=scroto' }] },
+      { tipo: 'decisione', titolo: 'Torsione possibile? (TWIST)', righe: ['Esordio improvviso, vomito, testicolo alto/orizzontale, cremasterico assente.'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'TWIST ≥ 5 o dubbio', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Urologo subito', tempo: '< 6 h', righe: ['Esplorazione chirurgica; l’ecodoppler non deve ritardare.'] }], fine: 'sala operatoria' },
+          { etichetta: 'Basso', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'Probabile orchiepididimite', righe: ['Esame urine, urinocoltura, test per gonococco e clamidia; ecodoppler se dubbio.'] }] },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Origine probabile?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sessuale', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Ceftriaxone + doxiciclina', righe: ['Ceftriaxone (Rocefin) 1 g im + doxiciclina (Bassado) 100 mg ogni 12 h per 10–14 giorni.'] }] },
+          { etichetta: 'Urinaria', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Chinolonico', righe: ['Levofloxacina (Tavanic) 500 mg al giorno per 10 giorni.'] }] },
+        ],
+      },
+      { tipo: 'esito', titolo: 'Dimissione; ricovero se sepsi o ascesso', vai: [{ etichetta: 'Dimissione', to: '/dimissioni?apri=orchiepididimite' }, { etichetta: 'Antibiotici', to: '/antibiotici?apri=orchiepididimite' }] },
+    ],
+  },
+  'infezione-urinaria': {
+    titolo: 'Algoritmo infezioni urinarie',
+    nota: 'EAU 2025. Adulto.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Sintomi urinari ± febbre', righe: ['Disuria, pollachiuria, urgenza, dolore sovrapubico; febbre, dolore al fianco, brividi.'] },
+      { tipo: 'decisione', titolo: 'Quadro?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Cistite donna', tono: 'si', nodi: [
+              { tipo: 'terapia', titolo: 'Senza coltura', righe: ['Fosfomicina (Monuril) 3 g dose unica o nitrofurantoina (Neofuradantin) 100 mg ogni 12 h per 5 giorni.'] },
+            ],
+          },
+          {
+            etichetta: 'Uomo', tono: 'neutro', nodi: [
+              { tipo: 'passo', titolo: 'Complicata', righe: ['Urinocoltura; 7 giorni. Febbre/dolore perineale → prostatite.'], vai: [{ etichetta: 'Prostatite', to: '/antibiotici?apri=prostatite' }] },
+            ],
+          },
+          {
+            etichetta: 'Febbre e fianco', tono: 'no', nodi: [
+              { tipo: 'passo', titolo: 'Pielonefrite', righe: ['Urinocoltura (± emocolture), creatinina, PCR; ecografia se colica, calcoli, monorene o non risponde.'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Pielonefrite: sepsi, vomito, ostruzione, gravidanza?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Ricovero', righe: ['Ceftriaxone 2 g ev; idronefrosi infetta → urologo per drenaggio.'], vai: [{ etichetta: 'Sepsi', to: '/linee-guida/sepsi' }] }] },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'terapia', titolo: 'Domicilio', righe: ['Ciprofloxacina (Ciproxin) 500 mg ogni 12 h per 7 giorni, o ceftriaxone 1–2 g poi orale secondo coltura.'], vai: [{ etichetta: 'Dimissione pielonefrite', to: '/dimissioni?apri=pielonefrite' }] }] },
+        ],
+      },
+      { tipo: 'nota', titolo: 'Batteriuria asintomatica', righe: ['Non trattare (salvo gravidanza o procedure urologiche); non spiega da sola febbre o confusione nell’anziano.'] },
+    ],
+  },
+  'gastrite-dispepsia': {
+    titolo: 'Algoritmo dolore epigastrico / dispepsia',
+    nota: 'ACG/CAG 2017.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Dolore o bruciore epigastrico' },
+      { tipo: 'checklist', titolo: 'Escludere', righe: ['SCA: ECG, troponina se dubbio (HEART)', 'Colica biliare, colecistite (Murphy, eco)', 'Pancreatite (lipasi)', 'Ulcera perforata (addome acuto, aria libera)', 'Aneurisma aortico (> 60 anni, eco)'] },
+      { tipo: 'decisione', titolo: 'Segni d’allarme o ≥ 60 anni con sintomi nuovi?', righe: ['Sanguinamento, anemia, calo di peso, disfagia, vomito persistente, massa, ittero.'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sanguinamento', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'PDTA emorragia digestiva', vai: [{ etichetta: 'Emorragia digestiva', to: '/linee-guida/emorragia-digestiva' }] }] },
+          { etichetta: 'Altri allarmi', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Gastroscopia', righe: ['Urgente o programmata secondo il quadro.'] }] },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'terapia', titolo: 'Inibitore di pompa', righe: ['Pantoprazolo (Pantorc) 40 mg per 4–8 settimane; test per H. pylori dal curante; stop FANS.'], vai: [{ etichetta: 'Dimissione gastrite', to: '/dimissioni?apri=gastrite' }] }] },
+        ],
+      },
+    ],
+  },
+  reflusso: {
+    titolo: 'Algoritmo reflusso gastroesofageo',
+    nota: 'ACG 2022.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Pirosi, rigurgito, dolore retrosternale' },
+      { tipo: 'decisione', titolo: 'Dolore toracico?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'passo', titolo: 'Prima escludere la causa cardiaca', righe: ['ECG, troponina, HEART.'], vai: [{ etichetta: 'NSTE-SCA', to: '/linee-guida/nste-sca' }] }] },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'Sintomi tipici' }] },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Allarme?', righe: ['Disfagia, odinofagia, sanguinamento, anemia, calo di peso, vomito ricorrente; bolo impattato.'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Gastroscopia', righe: ['Urgente se bolo impattato (non deglutisce la saliva) o sanguinamento.'] }] },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'terapia', titolo: 'Inibitore di pompa 8 settimane', righe: ['Pantoprazolo (Pantorc) 40 mg 30–60 min prima della colazione; alginato (Gaviscon) al bisogno; stile di vita.'], vai: [{ etichetta: 'Dimissione reflusso', to: '/dimissioni?apri=reflusso' }] }] },
+        ],
+      },
+    ],
+  },
   'trauma-maggiore': {
     titolo: 'Algoritmo trauma maggiore',
     nota: 'Linea guida europea 2023, ATLS. Dosi per 70 kg.',
