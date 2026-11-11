@@ -1533,7 +1533,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     area: 'Trauma',
     fonte: { etichetta: 'Rossaint et al., Crit Care 2023 (linea guida europea, 6ª ed.)', url: 'https://doi.org/10.1186/s13054-023-04327-7' },
     controllata: '2026-11-11',
-    calcolatori: [{ id: 'gcs', nome: 'GCS' }],
+    calcolatori: [{ id: 'gcs', nome: 'GCS' }, { id: 'nexus', nome: 'NEXUS cervicale' }, { id: 'ccsr', nome: 'Canadian C-spine' }],
     vediAnche: [
       { etichetta: 'Decompressione', to: '/procedure?apri=decompressione' },
       { etichetta: 'Drenaggio toracico', to: '/procedure?apri=tubo' },
@@ -2323,7 +2323,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     area: 'Trauma · Neurologia',
     fonte: { etichetta: 'NICE NG232 Head injury (2023) — integra il PDTA aziendale di Prato', url: 'https://www.nice.org.uk/guidance/ng232' },
     controllata: '2026-11-12',
-    calcolatori: [{ id: 'gcs', nome: 'GCS' }],
+    calcolatori: [{ id: 'gcs', nome: 'GCS' }, { id: 'ccthr', nome: 'Canadian CT Head Rule' }, { id: 'nexus2', nome: 'NEXUS II' }, { id: 'ccsr', nome: 'Canadian C-spine' }, { id: 'nexus', nome: 'NEXUS cervicale' }],
     vediAnche: [
       { etichetta: 'Cartella: trauma cranico', to: '/anamnesi?apri=trauma-cranico' },
       { etichetta: 'Dimissione trauma cranico', to: '/dimissioni?apri=trauma-cranico' },

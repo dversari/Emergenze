@@ -352,6 +352,89 @@ const PUNTEGGI: Punteggio[] = [
       : { livello: 'alto', testo: 'Rischio alto (≈8% a 2 giorni): doppia antiaggregazione, valutazione specialistica immediata.' },
     fonte: 'Johnston, Lancet 2007; ESO 2021',
   },
+  {
+    id: 'nexus',
+    nome: 'NEXUS (rachide cervicale)',
+    ambito: 'Trauma · serve l’imaging del rachide cervicale? Basso rischio solo se TUTTI assenti',
+    voci: [
+      { tipo: 'si', id: 'd', testo: 'Dolorabilità sulla linea mediana posteriore del collo', punti: 1 },
+      { tipo: 'si', id: 'n', testo: 'Deficit neurologico focale', punti: 1 },
+      { tipo: 'si', id: 'v', testo: 'Vigilanza alterata (GCS < 15, disorientato, risposta lenta)', punti: 1 },
+      { tipo: 'si', id: 'i', testo: 'Intossicazione (alcol, droghe)', punti: 1 },
+      { tipo: 'si', id: 'l', testo: 'Lesione dolorosa che distrae (frattura di un osso lungo, ustione estesa…)', punti: 1 },
+    ],
+    esito: (t) =>
+      t === 0 ? { livello: 'basso', testo: 'Nessun criterio: rachide cervicale clinicamente escluso, niente imaging, si toglie il collare.' }
+      : { livello: 'alto', testo: 'Almeno un criterio: imaging del rachide cervicale (TC negli adulti).' },
+    formato: (t) => (t === 0 ? 'neg' : 'pos'),
+    fonte: 'Hoffman, N Engl J Med 2000',
+  },
+  {
+    id: 'ccsr',
+    nome: 'Canadian C-spine rule',
+    ambito: 'Trauma · adulto vigile (GCS 15) e stabile: serve l’imaging cervicale?',
+    voci: [
+      { tipo: 'si', id: 'a1', testo: '1 · ALTO rischio: età ≥ 65 anni', punti: 0 },
+      { tipo: 'si', id: 'a2', testo: '1 · ALTO rischio: dinamica pericolosa (caduta da ≥ 1 m o 5 scalini, carico assiale sul capo, incidente ad alta velocità > 100 km/h, ribaltamento o sbalzato fuori, veicolo a motore ricreativo, collisione in bicicletta)', punti: 0 },
+      { tipo: 'si', id: 'a3', testo: '1 · ALTO rischio: parestesie alle estremità', punti: 0 },
+      { tipo: 'si', id: 'b1', testo: '2 · BASSO rischio: tamponamento semplice', punti: 0 },
+      { tipo: 'si', id: 'b2', testo: '2 · BASSO rischio: seduto in PS', punti: 0 },
+      { tipo: 'si', id: 'b3', testo: '2 · BASSO rischio: ha camminato in qualsiasi momento', punti: 0 },
+      { tipo: 'si', id: 'b4', testo: '2 · BASSO rischio: dolore al collo comparso dopo, non subito', punti: 0 },
+      { tipo: 'si', id: 'b5', testo: '2 · BASSO rischio: nessuna dolorabilità sulla linea mediana', punti: 0 },
+      { tipo: 'si', id: 'c', testo: '3 · Ruota attivamente il collo di 45° a destra E a sinistra', punti: 0 },
+    ],
+    esito: (_t, r) => {
+      const alto = ['a1', 'a2', 'a3'].some((k) => k in r)
+      const basso = ['b1', 'b2', 'b3', 'b4', 'b5'].some((k) => k in r)
+      if (alto) return { livello: 'alto', testo: 'Fattore ad alto rischio: imaging del rachide cervicale.' }
+      if (!basso) return { livello: 'alto', testo: 'Nessun fattore a basso rischio che permetta di testare il movimento: imaging.' }
+      if (!('c' in r)) return { livello: 'medio', testo: 'Fattore a basso rischio presente: chiedi di ruotare il collo di 45° per lato. Se non ci riesce: imaging.' }
+      return { livello: 'basso', testo: 'Ruota il collo senza problemi: niente imaging.' }
+    },
+    formato: () => '→',
+    fonte: 'Stiell, JAMA 2001 (non vale se GCS < 15, instabile, < 16 anni, deficit acuti, malattia vertebrale nota)',
+  },
+  {
+    id: 'ccthr',
+    nome: 'Canadian CT Head Rule',
+    ambito: 'Trauma cranico con GCS 13–15 e perdita di coscienza, amnesia o disorientamento: serve la TC?',
+    voci: [
+      { tipo: 'si', id: 'h1', testo: 'ALTO: GCS < 15 a 2 ore dal trauma', punti: 10 },
+      { tipo: 'si', id: 'h2', testo: 'ALTO: sospetta frattura aperta o affondata del cranio', punti: 10 },
+      { tipo: 'si', id: 'h3', testo: 'ALTO: segni di frattura della base (emotimpano, occhi di procione, otoliquorrea o rinoliquorrea, segno di Battle)', punti: 10 },
+      { tipo: 'si', id: 'h4', testo: 'ALTO: vomito ≥ 2 episodi', punti: 10 },
+      { tipo: 'si', id: 'h5', testo: 'ALTO: età ≥ 65 anni', punti: 10 },
+      { tipo: 'si', id: 'm1', testo: 'MEDIO: amnesia retrograda (prima dell’impatto) ≥ 30 minuti', punti: 1 },
+      { tipo: 'si', id: 'm2', testo: 'MEDIO: dinamica pericolosa (pedone investito, sbalzato dal veicolo, caduta da > 1 m o 5 scalini)', punti: 1 },
+    ],
+    esito: (t) =>
+      t >= 10 ? { livello: 'alto', testo: 'Alto rischio di intervento neurochirurgico: TC.' }
+      : t > 0 ? { livello: 'medio', testo: 'Rischio medio di lesione alla TC: TC.' }
+      : { livello: 'basso', testo: 'Nessun criterio: TC non necessaria per la regola (verificare comunque il PDTA aziendale).' },
+    formato: (t) => (t >= 10 ? 'alto' : t > 0 ? 'medio' : 'basso'),
+    fonte: 'Stiell, Lancet 2001 (non vale in anticoagulati, convulsioni, < 16 anni)',
+  },
+  {
+    id: 'nexus2',
+    nome: 'NEXUS II (TC cranio)',
+    ambito: 'Trauma cranico: TC se almeno un criterio',
+    voci: [
+      { tipo: 'si', id: 'f', testo: 'Segni di frattura cranica significativa', punti: 1 },
+      { tipo: 'si', id: 's', testo: 'Ematoma del cuoio capelluto', punti: 1 },
+      { tipo: 'si', id: 'n', testo: 'Deficit neurologico', punti: 1 },
+      { tipo: 'si', id: 'v', testo: 'Vigilanza alterata', punti: 1 },
+      { tipo: 'si', id: 'b', testo: 'Comportamento anomalo', punti: 1 },
+      { tipo: 'si', id: 'c', testo: 'Coagulopatia (anche terapia anticoagulante)', punti: 1 },
+      { tipo: 'si', id: 'p', testo: 'Vomito persistente', punti: 1 },
+      { tipo: 'si', id: 'e', testo: 'Età ≥ 65 anni', punti: 1 },
+    ],
+    esito: (t) =>
+      t === 0 ? { livello: 'basso', testo: 'Nessun criterio: rischio molto basso di lesione intracranica significativa.' }
+      : { livello: 'alto', testo: 'Almeno un criterio: TC cranio.' },
+    formato: (t) => (t === 0 ? 'neg' : 'pos'),
+    fonte: 'Mower, J Trauma 2005',
+  },
 ]
 
 // ─── Componenti ───────────────────────────────────────────────────────────────
