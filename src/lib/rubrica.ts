@@ -62,6 +62,7 @@ ps:[
 neuro:[
  ['Neurologo di guardia per PS / OBI','4029',{ g: 1 }],['Neurologo di guardia per ospedale','4737',{ g: 1 }],
  ['Neurologo – altri recapiti','4700 4701'],['Neurologia / stroke – reparto','4202'],['EEG','1625+'],
+ ['Ambulatorio elettrofisiologia – EEG','1442'],['Ambulatorio neurologia – botox','1429'],
  ['Neurochirurgo (Careggi)','331 6225069',{ g: 1 }],['Neurochirurgo interventista','348 6527779',{ g: 1 }],
  ['Neurochirurgia Careggi','055 7947530 055 7947885~'],['Neurochirurgia – fax','055 7947756'],
  ['Stroke team Careggi','055 7947665',{ g: 1 }],['Sala angiografica Careggi','055 79472892! 055 7946949',{n:'Primo numero con una cifra in più'}],['Sala angiografica – fax','055 7947087'],
@@ -86,7 +87,7 @@ chir:[
 ],
 orto:[['Ortopedico di guardia PS','4877',{ g: 1 }],['Sala gessi','1726'],['Ortopedia – reparto','3301 3302 3300']],
 rad:[
- ['Radiologo di guardia','4732 1830 1848',{ g: 1 }],['RX – tecnici','1442'],['Ecografia','1724 1826',{n:'1724 annotato “eco immagini”'}],['TAC','1826 1843'],['RMN','1823'],
+ ['Radiologo di guardia','4732 1830 1848',{ g: 1 }],['Ecografia','1724 1826',{n:'1724 annotato “eco immagini”'}],['TAC','1826 1843'],['RMN','1823'],
  ['Angiologia Doppler','1820'],['Medicina nucleare','1874 1866 1867 1891 1861 1876'],['Coordinatore medicina nucleare','x1837? 1406 1870'],
  ['Radiologo interventista Careggi','347 6619120',{ g: 1 }],['Radiologo interventista Torregalli – dott. Falchini','333 6191285',{ g: 1 }]
 ],
