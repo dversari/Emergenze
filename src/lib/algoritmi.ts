@@ -4,16 +4,515 @@
  * Dosi per adulto di 70 kg con il numero di fiale/compresse; verificare i formati in reparto.
  */
 
-export type Tono = 'avvio' | 'passo' | 'decisione' | 'allarme' | 'terapia' | 'esito' | 'nota'
+export type Tono = 'avvio' | 'passo' | 'decisione' | 'allarme' | 'terapia' | 'esito' | 'nota' | 'checklist'
 
 export type Nodo =
-  | { tipo: Tono; titolo: string; righe?: string[]; tempo?: string; /** titolo di una sezione del riassunto da aprire */ vedi?: string; /** id delle manovre illustrate (lib/manovre) */ manovre?: string[] }
+  | { tipo: Tono; titolo: string; righe?: string[]; tempo?: string; /** titolo di una sezione del riassunto da aprire */ vedi?: string; /** id delle manovre illustrate (lib/manovre) */ manovre?: string[]; /** collegamenti ad altre pagine dell'app, con ritorno */ vai?: { etichetta: string; to: string }[] }
   | { tipo: 'rami'; rami: Ramo[] }
 
 /** fine: il ramo termina qui (non prosegue nel flusso principale). */
 export interface Ramo { etichetta: string; tono?: 'si' | 'no' | 'neutro'; nodi: Nodo[]; fine?: string }
 
 export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: Nodo[] }> = {
+  sepsi: {
+    titolo: 'Algoritmo sepsi — prima ora',
+    nota: 'SSC 2026. Dosi per 70 kg; verificare formati e diluizioni in reparto.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Sospetta infezione + NEWS2 ≥ 5 (o SIRS, o segni di disfunzione d’organo)',
+        righe: ['Ipotensione, tachipnea, confusione, oliguria, cute marezzata, refill > 3 s, lattato > 2.'],
+      },
+      { tipo: 'decisione', titolo: 'Sepsi probabile/certa o possibile shock?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Antibiotico entro 1 ora', tempo: '≤ 60 min', vai: [{ etichetta: 'Antibiotici: sepsi', to: '/antibiotici?apri=sepsi' }] },
+            ],
+          },
+          {
+            etichetta: 'Solo possibile, senza shock', tono: 'neutro', nodi: [
+              { tipo: 'passo', titolo: 'Indagini rapide', tempo: '≤ 3 h', righe: ['Se l’infezione resta probabile: antibiotico entro 3 ore.'] },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'checklist', titolo: 'Pacchetto della prima ora',
+        righe: [
+          'Lattato (ripetere entro 2–4 h se > 2)',
+          'Emocolture × 2 prima dell’antibiotico, senza ritardarlo',
+          'Antibiotico ad ampio spettro; beta-lattamici in infusione prolungata dopo il carico',
+          'Cristalloidi bilanciati 30 mL/kg ≈ 2.100 mL in 3 h se PAS < 90, PAM < 65 o lattato ≥ 4 (boli da 500 mL con rivalutazione)',
+          'Noradrenalina se l’ipotensione persiste durante/dopo i liquidi, anche da vena periferica',
+          'Cercare la fonte (eco, TC) e programmarne il controllo entro 6 h',
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Shock settico? (vasopressori per PAM ≥ 65 e lattato > 2 nonostante i liquidi)' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Shock',
+                righe: [
+                  'Noradrenalina: 2 fiale da 2 mg in SF fino a 50 mL (80 µg/mL), da 0,05 µg/kg/min ≈ 2,5 mL/h.',
+                  'PAM obiettivo 65 (60–65 se ≥ 65 anni).',
+                  'Idrocortisone 50 mg ev ogni 6 h.',
+                  'Accesso arterioso, catetere vescicale, rianimatore.',
+                ],
+              },
+            ],
+            fine: 'terapia intensiva',
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              {
+                tipo: 'passo', titolo: 'Rivalutare',
+                righe: ['Refill, diuresi, stato mentale, lattato. Altri liquidi solo se rispondono (sollevamento passivo degli arti).'],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'esito', titolo: 'Dopo',
+        righe: ['De-escalation con colture/antibiogramma; togliere i liquidi in eccesso dopo la stabilizzazione; destinazione adeguata.'],
+      },
+    ],
+  },
+  ictus: {
+    titolo: 'Algoritmo codice ictus',
+    nota: 'AHA/ASA 2026. Dosi per 70 kg. Trombectomia: centro di riferimento della rete ictus.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Deficit neurologico acuto',
+        righe: ['Ora dell’ultima volta visto in benessere: ____ (testimone).'],
+      },
+      {
+        tipo: 'checklist', titolo: 'Primi 10 minuti',
+        righe: [
+          'Glicemia capillare (< 50: correggere e rivalutare)',
+          'PA, SpO₂ > 94%, ECG, accesso venoso × 2',
+          'NIHSS e peso',
+          'Anticoagulanti: farmaco e ora dell’ultima dose',
+          'Neurologo avvisato; TC + angio-TC (e perfusione se fuori finestra)',
+          'Esami: emocromo, coagulazione, creatinina (non aspettarli per la TC)',
+        ],
+      },
+      { tipo: 'decisione', titolo: 'TC: emorragia?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Emorragia cerebrale', righe: ['Antagonizzare l’anticoagulante; PAS 130–150; neurochirurgo.'] },
+            ],
+            fine: 'percorso emorragia',
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'decisione', titolo: 'Da quanto?' },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: '≤ 4,5 h', tono: 'si', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Trombolisi se deficit invalidante',
+                righe: [
+                  'Tenecteplase 0,25 mg/kg = 17,5 mg in bolo (3,5 mL del flacone 25 mg a 5 mg/mL)',
+                  'oppure alteplase 0,9 mg/kg = 63 mg (6,3 mg bolo + 56,7 mg in 60 min)',
+                  'PA < 185/110 prima, < 180/105 per 24 h',
+                ],
+                vedi: 'Controindicazioni principali',
+              },
+            ],
+          },
+          {
+            etichetta: '4,5–24 h o esordio ignoto', tono: 'neutro', nodi: [
+              {
+                tipo: 'passo', titolo: 'Imaging avanzato',
+                righe: [
+                  '4,5–9 h / al risveglio: trombolisi se penombra alla perfusione o mismatch DWI-FLAIR.',
+                  'Fino a 24 h: trombectomia se occlusione di grosso vaso e tessuto salvabile.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Occlusione di grosso vaso all’angio-TC?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Trombectomia', righe: ['Contatto immediato con il centro di trombectomia; non aspettare l’effetto della trombolisi.'] },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'esito', titolo: 'Stroke unit', righe: ['Controlli neuro e PA; deglutizione prima di bere/mangiare.'] },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  chetoacidosi: {
+    titolo: 'Algoritmo chetoacidosi / stato iperosmolare',
+    nota: 'Consenso ADA/EASD/JBDS 2024. Dosi per 70 kg.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Iperglicemia o diabete noto con malessere',
+        righe: ['Glicemia, β-idrossibutirrato, EGA venoso (pH, bicarbonati, K), Na, creatinina, osmolalità.'],
+      },
+      { tipo: 'decisione', titolo: 'Quale quadro?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'DKA', tono: 'no', nodi: [
+              { tipo: 'passo', titolo: 'D + K + A', righe: ['Glicemia ≥ 200 o diabete noto; β-OHB ≥ 3; pH < 7,3 e/o HCO₃ < 18.'] },
+            ],
+          },
+          {
+            etichetta: 'HHS', tono: 'neutro', nodi: [
+              { tipo: 'passo', titolo: 'Iperosmolare', righe: ['Glicemia ≥ 600; osmolalità efficace > 300; β-OHB < 3; pH ≥ 7,3.'] },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: '1 · Liquidi',
+        righe: ['SF 0,9% o Ringer 1–1,5 L nella prima ora (boli da 250 mL se anziano/cardiopatico), poi 250–500 mL/h.'],
+      },
+      { tipo: 'decisione', titolo: '2 · Potassio' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'K < 3,5', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Niente insulina', righe: ['KCl 10–20 mEq/h con monitor fino a K ≥ 3,5.'] },
+            ],
+          },
+          {
+            etichetta: 'K 3,5–5', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'Insulina', righe: ['KCl 10–20 mEq per litro di liquidi.'] },
+            ],
+          },
+          {
+            etichetta: 'K > 5', tono: 'neutro', nodi: [
+              { tipo: 'passo', titolo: 'Insulina', righe: ['Niente potassio; ricontrollo ogni 1–2 h.'] },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: '3 · Insulina ev a dose fissa',
+        righe: [
+          'Actrapid 50 UI in 50 mL di SF (1 UI/mL).',
+          'DKA: 0,1 U/kg/h = 7 mL/h. HHS: 0,05 U/kg/h = 3,5 mL/h (solo se la glicemia non scende con i liquidi).',
+          'Glicemia < 250: glucosata 5–10% e insulina a 0,05 U/kg/h (3,5 mL/h).',
+          'Euglicemica da SGLT2-inibitori: glucosata subito.',
+        ],
+      },
+      {
+        tipo: 'checklist', titolo: 'Ogni ora / ogni 2–4 ore',
+        righe: [
+          'Glicemia capillare ogni ora',
+          'β-OHB, pH, HCO₃, K ogni 2–4 h',
+          'Bilancio idrico; catetere se oligoanuria',
+          'HHS: glicemia ↓ ≤ 90–120 mg/dL/h, Na ↓ ≤ 10 mmol/L/24 h',
+          'Causa scatenante cercata (infezione, ECG/troponina, lipasi)',
+        ],
+      },
+      {
+        tipo: 'esito', titolo: 'Risoluzione',
+        righe: ['DKA: β-OHB < 0,6 e pH ≥ 7,3 o HCO₃ ≥ 18. HHS: osmolalità < 300, glicemia < 250, diuresi > 0,5 mL/kg/h, coscienza migliorata. Insulina basale sottocute 1–2 h prima di sospendere l’infusione.'],
+      },
+    ],
+  },
+  iperkaliemia: {
+    titolo: 'Algoritmo iperkaliemia',
+    nota: 'UK Kidney Association 2023. Dosi per adulto.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'K ≥ 5,5 mmol/L',
+        righe: ['Escludere emolisi (ricontrollo su EGA). ECG a 12 derivazioni e monitor se ≥ 6,0.'],
+      },
+      { tipo: 'decisione', titolo: 'Alterazioni ECG? (T alte, PR lungo, P assenti, QRS largo, bradicardia, ritmo sinusoidale)' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: '1 · Proteggere il cuore',
+                righe: ['Calcio gluconato 10% 30 mL = 3 fiale in 10 min; ripetere se l’ECG non migliora. Arresto: calcio cloruro 10% 10 mL.'],
+                vai: [{ etichetta: 'Timer ACR', to: '/acr' }],
+              },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'Niente calcio', righe: ['Passare a spostare ed eliminare il potassio.'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Gravità' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: '≥ 6,0', tono: 'no', nodi: [
+              {
+                tipo: 'terapia', titolo: '2 · Spostare il potassio',
+                righe: [
+                  'Insulina rapida 10 UI + 25 g di glucosio (250 mL glucosata 10% o 50 mL al 50%) in 15 min.',
+                  'Glicemia < 126: poi glucosata 10% 50 mL/h per 5 h.',
+                  'Salbutamolo 10–20 mg nebulizzato (2–4 mL della soluzione 5 mg/mL).',
+                ],
+              },
+              {
+                tipo: 'terapia', titolo: '3 · Eliminare il potassio',
+                righe: ['Zirconio ciclosilicato 10 g ogni 8 h (≥ 6,5; da considerare tra 6,0 e 6,4). Bicarbonato se acidosi. Furosemide se diuresi conservata. Dialisi se refrattaria.'],
+              },
+            ],
+          },
+          {
+            etichetta: '5,5–5,9', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'Lieve', righe: ['Niente terapia acuta; cercare e rimuovere la causa (farmaci, insufficienza renale).'] },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'checklist', titolo: 'Monitoraggio',
+        righe: [
+          'Glicemia a 0, 15, 30, 60 min, poi ogni ora fino a 6 h',
+          'K a 1, 2, 4, 6 e 24 h (obiettivo < 6 entro 2 h)',
+          'Farmaci sospesi: ACE-i/sartani, antialdosteronici, FANS, trimetoprim, K',
+          'Nefrologo se K ≥ 6,5 dopo il trattamento o insufficienza renale grave',
+        ],
+      },
+    ],
+  },
+  iponatriemia: {
+    titolo: 'Algoritmo iponatriemia',
+    nota: 'Linea guida europea 2014. NaCl 3%: vedi la preparazione nelle sezioni.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Na < 135 mmol/L',
+        righe: ['Osmolalità plasmatica, glicemia: escludere pseudo-iponatriemia e iperglicemia.'],
+      },
+      { tipo: 'decisione', titolo: 'Sintomi?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Gravi', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'NaCl 3% 150 mL in 20 min', tempo: 'subito',
+                righe: [
+                  'Vomito, convulsioni, sopore, coma, arresto.',
+                  'Ricontrollare il sodio e ripetere fino a 2 volte, finché +5 mmol/L o sintomi migliorati.',
+                  'Poi stop alla NaCl 3% e cercare la causa.',
+                ],
+                vedi: 'Preparare la NaCl 3%',
+              },
+            ],
+          },
+          {
+            etichetta: 'Moderati', tono: 'neutro', nodi: [
+              { tipo: 'passo', titolo: 'Un bolo di 150 mL di NaCl 3%', righe: ['Nausea, confusione, cefalea. Poi causa; obiettivo +5 mmol/L in 24 h.'] },
+            ],
+          },
+          {
+            etichetta: 'Lievi o assenti', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'Inquadrare la causa', righe: ['Osmolalità urinaria, sodio urinario, volemia.'], vedi: 'Inquadramento (senza sintomi gravi)' },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'checklist', titolo: 'Sicurezza',
+        righe: [
+          'Na dopo ogni bolo, poi a 6, 12, 24 h',
+          'Limite: +10 mmol/L nelle prime 24 h (+8 se alcolismo, malnutrizione, ipokaliemia, cirrosi, Na ≤ 120)',
+          'Ipercorrezione: sospendere, glucosata 5% e/o desmopressina 2 µg ev, con specialista',
+          'Diuresi abbondante improvvisa = rischio di ipercorrezione',
+        ],
+      },
+    ],
+  },
+  'stato-di-male': {
+    titolo: 'Algoritmo stato di male convulsivo',
+    nota: 'ACEP 2024, ESETT. Dosi per 70 kg.',
+    nodi: [
+      {
+        tipo: 'checklist', titolo: '0–5 min: stabilizzare', tempo: '0–5 min',
+        righe: [
+          'Posizione laterale, aspirazione, ossigeno, SpO₂, monitor',
+          'Glicemia capillare (< 70: tiamina 100 mg ev poi glucosio 33% 50 mL)',
+          'Accesso venoso; esami: elettroliti con Ca e Mg, emocromo, funzione epatica e renale, CK, tossicologico, livelli dei farmaci',
+          'Ora di inizio della crisi',
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: '5 min: benzodiazepina a dose piena', tempo: '5–20 min',
+        righe: [
+          'Lorazepam 4 mg ev = 1 fiala, ripetibile dopo 5 min.',
+          'Senza vena: midazolam 10 mg im (2 fiale da 5 mg) o diazepam 10 mg ev/rettale.',
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Ancora crisi dopo 2 dosi?' },
+      {
+        tipo: 'terapia', titolo: '20 min: seconda linea (efficacia simile)', tempo: '20–40 min',
+        righe: [
+          'Levetiracetam 60 mg/kg = 4.200 mg (8,4 fiale da 500 mg) in 100 mL SF in 10 min',
+          'oppure valproato 40 mg/kg = 2.800 mg (7 flaconi da 400 mg) in 10 min',
+          'oppure fenitoina 20 mg/kg = 1.400 mg ≤ 50 mg/min con monitor',
+        ],
+        vedi: 'Farmaci (70 kg)',
+      },
+      { tipo: 'decisione', titolo: 'Ancora crisi?' },
+      {
+        tipo: 'allarme', titolo: '40 min: refrattario', tempo: '> 40 min',
+        righe: [
+          'Intubazione e anestetico in infusione (propofol o midazolam), rianimatore, EEG continuo.',
+          'Si può aggiungere un secondo farmaco di seconda linea.',
+        ],
+        vai: [{ etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' }],
+      },
+      {
+        tipo: 'checklist', titolo: 'Cause da cercare',
+        righe: [
+          'Sospensione o livelli bassi degli antiepilettici',
+          'Ipoglicemia, iponatriemia, ipocalcemia, ipomagnesemia',
+          'Alcol (astinenza), tossici (triciclici, isoniazide → piridossina)',
+          'Eclampsia: magnesio solfato 4 g ev',
+          'TC encefalo; rachicentesi se febbre (antibiotico prima se ritardata)',
+        ],
+      },
+    ],
+  },
+  anafilassi: {
+    titolo: 'Algoritmo anafilassi',
+    nota: 'Resuscitation Council UK 2021. Adulto.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Esordio acuto con problemi A, B o C',
+        righe: ['A: gonfiore di gola o lingua, stridore, raucedine. B: dispnea, sibili, SpO₂ bassa. C: ipotensione, shock, sincope. Di solito con ponfi o angioedema (non sempre).'],
+      },
+      {
+        tipo: 'allarme', titolo: 'Adrenalina 0,5 mg im subito', tempo: 'subito',
+        righe: ['0,5 mL della fiala da 1 mg/mL, coscia anterolaterale. Chiamare aiuto, rimuovere l’allergene.'],
+      },
+      {
+        tipo: 'checklist', titolo: 'Insieme',
+        righe: [
+          'Sdraiato con gambe sollevate (seduto se dispnea; mai in piedi)',
+          'Ossigeno ad alti flussi; monitor, SpO₂, PA',
+          'Accesso venoso; cristalloidi 500–1.000 mL in bolo se ipoteso',
+          'Salbutamolo nebulizzato se broncospasmo',
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Dopo 5 min: problemi A, B, C persistono?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'terapia', titolo: '2ª dose di adrenalina 0,5 mg im', righe: ['Altro bolo di liquidi.'] },
+              {
+                tipo: 'allarme', titolo: 'Ancora? Anafilassi refrattaria',
+                righe: [
+                  'Adrenalina 1 mg in 100 mL SF: 35–70 mL/h, titolare (esperto, terapia intensiva).',
+                  'Beta-bloccati: glucagone 1–2 mg ev.',
+                  'Stridore: adrenalina nebulizzata 5 mg; intubazione precoce.',
+                  'Arresto: ALS.',
+                ],
+                vai: [{ etichetta: 'Timer ACR', to: '/acr' }],
+                vedi: 'Forma refrattaria (70 kg)',
+              },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              {
+                tipo: 'passo', titolo: 'Dopo la stabilizzazione',
+                righe: ['Antistaminico solo per i sintomi cutanei. Triptasi subito e a 1–2 h.'],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'esito', titolo: 'Osservazione e dimissione',
+        righe: ['≥ 6 h dopo la risoluzione se 2 dosi; ≥ 12 h se grave. 2 autoiniettori, istruzioni, visita allergologica.'],
+        vedi: 'Osservazione e dimissione',
+      },
+    ],
+  },
+  paracetamolo: {
+    titolo: 'Algoritmo intossicazione acuta da paracetamolo',
+    nota: 'Australia/NZ 2019. Dosi per 70 kg. Sentire sempre la Tossicologia di Careggi.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Ingestione di paracetamolo',
+        righe: ['Quanto (g e mg/kg), quando, formulazione (rilascio modificato?), altre sostanze, intenzionale?'],
+        vai: [{ etichetta: 'Rubrica: Tossicologia', to: '/rubrica' }],
+      },
+      { tipo: 'decisione', titolo: '≥ 10 g o ≥ 200 mg/kg?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'No', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Rischio basso', righe: ['Niente antidoto; valutazione psichiatrica se intenzionale.'] }],
+          },
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'passo', titolo: 'Carbone attivo 50 g', righe: ['Entro 2 h (entro 4 h se ≥ 30 g o rilascio modificato), se vigile e collaborante.'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Orario noto e assunzione unica, rilascio immediato?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'si', nodi: [
+              {
+                tipo: 'passo', titolo: 'Paracetamolemia a 4 h (o appena possibile)',
+                righe: ['Sopra la linea 150 mg/L a 4 h → N-acetilcisteina. Arrivo dopo 8 h: iniziare subito, poi decidere col dosaggio.'],
+                vedi: 'Linea di trattamento del nomogramma',
+              },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'N-acetilcisteina subito', righe: ['Orario ignoto, assunzioni ripetute, rilascio modificato.'] },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: 'N-acetilcisteina a due sacche',
+        righe: [
+          '200 mg/kg = 14 g (70 mL a 200 mg/mL) in 500 mL glucosata 5% in 4 h',
+          'poi 100 mg/kg = 7 g (35 mL) in 1.000 mL in 16 h',
+          'Massiva (≥ 30 g o livello > doppio della linea): 2ª sacca 14 g in 16 h',
+        ],
+        vedi: 'N-acetilcisteina (70 kg)',
+      },
+      {
+        tipo: 'checklist', titolo: 'Fine infusione',
+        righe: [
+          'Paracetamolemia, ALT, INR, creatinina, EGA con lattati',
+          'Stop se paracetamolo < 20 mg/L e ALT normali o in calo; altrimenti continuare alla velocità della 2ª sacca',
+          'Criteri di gravità → epatologo/centro trapianti',
+          'Valutazione psichiatrica se intenzionale',
+        ],
+      },
+    ],
+  },
   vertigine: {
     titolo: 'Algoritmo STANDING per la vertigine acuta',
     nota: 'Vanni et al. (Careggi), integrato con GRACE-3 2023. Le figure delle manovre sono nei link «Approfondimenti» qui sotto.',
@@ -115,6 +614,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
           'Cammina da solo, beve, sintomi controllati: dimissione con indicazioni (scheda Dimissioni: VPPB).',
           'Vertigine episodica spontanea con fattori di rischio vascolare: considerare TIA (angio-TC o angio-RM, GRACE-3).',
         ],
+        vai: [{ etichetta: 'Dimissione VPPB', to: '/dimissioni?apri=vppb' }],
       },
     ],
   },
@@ -149,6 +649,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'allarme', titolo: 'Urologo: decompressione urgente',
                 righe: ['Stent ureterale o nefrostomia percutanea. Sepsi: emocolture e urinocoltura, poi antibiotico (scheda Antibiotici: pielonefrite).'],
+                vai: [{ etichetta: 'Antibiotici: pielonefrite', to: '/antibiotici?apri=pielonefrite' }],
               },
             ],
             fine: 'ricovero',
@@ -171,6 +672,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       {
         tipo: 'esito', titolo: 'Dimissione',
         righe: ['Dolore controllato, beve, niente febbre: dimissione (scheda Dimissioni: colica renale) con controllo urologico/ecografico se non espulso in 4–6 settimane.'],
+        vai: [{ etichetta: 'Dimissione colica renale', to: '/dimissioni?apri=colica-renale' }],
       },
     ],
   },
@@ -206,6 +708,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                   'Digiuno, liquidi, antibiotico (scheda Antibiotici), chirurgo.',
                   'Colecistectomia laparoscopica precoce; non operabile/instabile: drenaggio percutaneo.',
                 ],
+                vai: [{ etichetta: 'Antibiotici: colecistite', to: '/antibiotici?apri=colecistite' }],
               },
             ],
           },
@@ -360,7 +863,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         tipo: 'rami', rami: [
           {
             etichetta: 'Sì', tono: 'no', nodi: [
-              { tipo: 'allarme', titolo: 'Pericardiocentesi urgente', righe: ['Scheda Procedure: pericardiocentesi. Liquidi in attesa.'] },
+              { tipo: 'allarme', titolo: 'Pericardiocentesi urgente', righe: ['Liquidi in attesa.'], vai: [{ etichetta: 'Procedura: pericardiocentesi', to: '/procedure?apri=pericardiocentesi' }] },
             ],
             fine: 'UTIC',
           },
@@ -464,6 +967,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                   'Emocolture ed espettorato prima, poi antibiotico subito (ceftriaxone + macrolide; Pseudomonas/MRSA se fattori di rischio).',
                   'Antigeni urinari. Idrocortisone 200 mg/die se non influenza.',
                 ],
+                vai: [{ etichetta: 'Antibiotici: CAP', to: '/antibiotici?apri=cap' }],
               },
             ],
             fine: 'terapia intensiva',
@@ -1055,6 +1559,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                   'Atropina 0,5 mg ev = 1 fiala, ogni 3–5 min fino a 3 mg.',
                   'Inefficace → pacing transcutaneo (scheda Procedure).',
                 ],
+                vai: [{ etichetta: 'Pacing transcutaneo', to: '/procedure?apri=pacing' }],
               },
             ],
           },

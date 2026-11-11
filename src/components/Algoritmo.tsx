@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import type { Nodo, Ramo, Tono } from '../lib/algoritmi'
 import { Link } from 'react-router-dom'
 import { Evidenzia } from './PaginaSchede'
 import { apriManovra } from './Manovre'
 import { manovra } from '../lib/manovre'
+import { useConRitorno } from '../lib/ritorno'
 
 /** Score citati nel testo → calcolatore corrispondente. */
 const SCORE: [RegExp, string][] = [
@@ -22,6 +24,7 @@ const RE_SCORE = new RegExp(`(${SCORE.map(([r]) => r.source).join('|')})`, 'g')
 
 /** Testo con score cliccabili (aprono il calcolatore) e farmaci evidenziati. */
 function Testo({ t, scuro }: { t: string; scuro?: boolean }) {
+  const ritorno = useConRitorno()
   const parti = t.split(RE_SCORE).filter((p) => p !== undefined)
   return (
     <>
@@ -29,7 +32,7 @@ function Testo({ t, scuro }: { t: string; scuro?: boolean }) {
         const hit = SCORE.find(([r]) => new RegExp(`^(${r.source})$`).test(p))
         if (hit) {
           return (
-            <Link key={i} to={`/calcolatori?apri=${hit[1]}`}
+            <Link key={i} to={`/calcolatori?apri=${hit[1]}`} state={ritorno.state} onClick={ritorno.onClick}
               className={`inline-block font-bold rounded-full px-1.5 leading-[1.35] underline-offset-2 ${scuro ? 'bg-white/20 text-white' : 'bg-verde text-white'}`}>
               {p}&nbsp;↗
             </Link>
@@ -49,8 +52,9 @@ const STILE: Record<Tono, string> = {
   terapia: 'bg-verde3 border-verde2',
   esito: 'bg-verde text-white border-verde',
   nota: 'bg-sabbia border-linea border-dashed',
+  checklist: 'bg-carta border-verde2',
 }
-const ICONA: Partial<Record<Tono, string>> = { decisione: '◆', allarme: '!', terapia: '℞', esito: '✓' }
+const ICONA: Partial<Record<Tono, string>> = { decisione: '◆', allarme: '!', terapia: '℞', esito: '✓', checklist: '☑' }
 
 /** Apre la sezione (details) del riassunto con quel titolo e ci scorre sopra. */
 export const idSezione = (t: string) => 'sez-' + t.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-')
@@ -88,7 +92,8 @@ function Blocco({ n, piccolo }: { n: Extract<Nodo, { titolo: string }>; piccolo?
         )}
         <p className={`font-extrabold leading-tight ${piccolo ? 'text-[13px]' : 'text-[15px]'} ${n.tipo === 'allarme' ? 'text-bordeaux' : ''}`}><Testo t={n.titolo} scuro={scuro} /></p>
       </div>
-      {n.righe && (
+      {n.righe && n.tipo === 'checklist' && <Spunte righe={n.righe} piccolo={piccolo} />}
+      {n.righe && n.tipo !== 'checklist' && (
         <ul className={`mt-1.5 flex flex-col gap-1 ${piccolo ? 'text-[12px]' : 'text-[13px]'} leading-snug ${scuro ? 'text-white/90' : ''}`}>
           {n.righe.map((r, i) => (
             <li key={i} className="flex gap-1.5">
@@ -98,6 +103,7 @@ function Blocco({ n, piccolo }: { n: Extract<Nodo, { titolo: string }>; piccolo?
           ))}
         </ul>
       )}
+      {n.vai && <Vai voci={n.vai} scuro={scuro} />}
       {n.manovre && (
         <div className="flex flex-wrap gap-1 mt-2">
           {n.manovre.map((id) => (
@@ -114,6 +120,40 @@ function Blocco({ n, piccolo }: { n: Extract<Nodo, { titolo: string }>; piccolo?
           ↓ sezione «{n.vedi}»
         </button>
       )}
+    </div>
+  )
+}
+
+function Spunte({ righe, piccolo }: { righe: string[]; piccolo?: boolean }) {
+  const [fatte, setFatte] = useState<number[]>([])
+  return (
+    <ul className={`mt-1.5 flex flex-col gap-1 ${piccolo ? 'text-[12px]' : 'text-[13px]'} leading-snug`}>
+      {righe.map((r, i) => {
+        const ok = fatte.includes(i)
+        return (
+          <li key={i}>
+            <label className="flex gap-2 items-start">
+              <input type="checkbox" checked={ok} onChange={() => setFatte((f) => (ok ? f.filter((x) => x !== i) : [...f, i]))} className="mt-0.5 w-[18px] h-[18px] shrink-0 accent-[#2f6b4f]" />
+              <span className={ok ? 'line-through text-tenue' : ''}><Testo t={r} /></span>
+            </label>
+          </li>
+        )
+      })}
+      {fatte.length > 0 && <li className="text-[10.5px] text-tenue">{fatte.length}/{righe.length} fatte</li>}
+    </ul>
+  )
+}
+
+function Vai({ voci, scuro }: { voci: { etichetta: string; to: string }[]; scuro?: boolean }) {
+  const r = useConRitorno()
+  return (
+    <div className="flex flex-wrap gap-1 mt-2">
+      {voci.map((v) => (
+        <Link key={v.to} to={v.to} state={r.state} onClick={r.onClick}
+          className={`text-[11px] font-bold rounded-full px-2 py-1 ${scuro ? 'bg-white/20 text-white' : 'bg-verde-scuro text-white'}`}>
+          {v.etichetta} →
+        </Link>
+      ))}
     </div>
   )
 }

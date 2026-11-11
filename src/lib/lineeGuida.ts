@@ -755,6 +755,365 @@ export const LINEE_GUIDA: LineaGuida[] = [
       { data: '2019-10-01', testo: 'ATS/IDSA 2019: terapia empirica secondo gravità e fattori di rischio per Pseudomonas e MRSA.' },
     ],
   },
+  {
+    id: 'sepsi',
+    titolo: 'Sepsi e shock settico',
+    ente: 'Surviving Sepsis Campaign',
+    anno: 2026,
+    area: 'Infettivologia · Terapia intensiva',
+    fonte: { etichetta: 'Prescott et al., Crit Care Med 2026 (SSC)', url: 'https://doi.org/10.1097/CCM.0000000000007075' },
+    controllata: '2026-11-11',
+    vediAnche: [
+      { etichetta: 'Antibiotici: sepsi senza focolaio', to: '/antibiotici?apri=sepsi' },
+      { etichetta: 'Antibiotici: neutropenia febbrile', to: '/antibiotici?apri=neutropenia' },
+      { etichetta: 'Anamnesi: febbre', to: '/anamnesi?apri=febbre' },
+    ],
+    inBreve: [
+      'Sepsi e shock settico sono emergenze: il trattamento comincia subito.',
+      'Screening con NEWS2, MEWS o SIRS e non con il solo qSOFA (poco sensibile). Lattato in tutti i sospetti.',
+      'Antibiotico entro 1 ora se sepsi probabile/certa o possibile shock; se la sepsi è solo possibile e senza shock, indagini rapide e antibiotico entro 3 ore se l’infezione resta probabile.',
+      'Ipoperfusione o shock: almeno 30 mL/kg di cristalloidi bilanciati nelle prime 3 ore (valutando il singolo paziente), noradrenalina anche da vena periferica senza aspettare, PAM 65 (60–65 se ≥ 65 anni).',
+      'Controllo della fonte entro 6 ore se serve. Idrocortisone nello shock che richiede vasopressori.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (70 kg)',
+        punti: [
+          'Ringer lattato/acetato 30 mL/kg ≈ 2.100 mL nelle prime 3 h (boli da 500 mL rivalutando); peso ideale/aggiustato se BMI > 30.',
+          'Noradrenalina: 2 fiale da 2 mg in SF fino a 50 mL (80 µg/mL), partire da 0,05 µg/kg/min ≈ 2,5 mL/h; da vena periferica grossa e controllata (verificare il formato in reparto).',
+          'Idrocortisone 200 mg/die: 50 mg ev ogni 6 h (o infusione) se servono vasopressori; senza fludrocortisone di routine.',
+          'Vasopressina da aggiungere se noradrenalina 0,25–0,5 µg/kg/min senza raggiungere la PAM (terapia intensiva).',
+        ],
+      },
+      {
+        titolo: 'Rivalutazione',
+        punti: [
+          'Refill capillare, PAM, diuresi, stato mentale; lattato ripetuto entro 2–4 h se alto.',
+          'Misure dinamiche (sollevamento passivo degli arti, bolo di prova) per guidare altri liquidi.',
+          'Dopo la fase di rianimazione: togliere attivamente i liquidi in eccesso (diuretici).',
+          'De-escalation dell’antibiotico appena disponibili colture e antibiogramma.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2026-03-23', testo: 'SSC 2026: 129 raccomandazioni (46 nuove). Antibiotico entro 1 h se probabile, entro 3 h dopo indagini se solo possibile; cristalloidi bilanciati; PAM 60–65 negli anziani; noradrenalina periferica; NEWS2/SIRS invece del qSOFA.' },
+    ],
+  },
+  {
+    id: 'ictus',
+    titolo: 'Ictus ischemico acuto',
+    ente: 'AHA/ASA',
+    anno: 2026,
+    area: 'Neurologia',
+    fonte: { etichetta: 'Prabhakaran et al., Stroke 2026 (AHA/ASA)', url: 'https://doi.org/10.1161/STR.0000000000000513' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'gcs', nome: 'GCS' }],
+    vediAnche: [{ etichetta: 'Anamnesi: deficit neurologico', to: '/anamnesi?apri=deficit-neurologico' }],
+    inBreve: [
+      'Codice ictus: ora dell’ultima volta visto bene, glicemia subito, NIHSS, TC + angio-TC senza ritardi.',
+      'Trombolisi entro 4,5 h nei deficit invalidanti, qualunque sia il NIHSS: tenecteplase 0,25 mg/kg (max 25 mg) in bolo oppure alteplase 0,9 mg/kg. Prima è meglio.',
+      'Esordio ignoto/al risveglio: trombolisi possibile tra 4,5 e 9 h con penombra alla perfusione (o mismatch DWI-FLAIR alla RM).',
+      'Occlusione di grosso vaso: trombectomia fino a 24 h, anche nei core estesi selezionati e nell’occlusione basilare; non aspettare la risposta alla trombolisi.',
+      'PA < 185/110 prima e < 180/105 dopo la trombolisi; abbassarla sotto 140 non serve e dopo trombectomia riuscita peggiora l’esito.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Trombolisi (70 kg)',
+        punti: [
+          'Tenecteplase 0,25 mg/kg = 17,5 mg in bolo in 5–10 s (flacone da 25 mg ricostituito a 5 mg/mL: 3,5 mL). Non usare 0,4 mg/kg.',
+          'Alteplase 0,9 mg/kg = 63 mg: 6,3 mg in bolo, poi 56,7 mg in 60 min (flaconi da 50 mg; massimo 90 mg).',
+          'Controlli neurologici e PA ogni 15 min per 2 h, poi ogni 30 min per 6 h, poi ogni ora fino a 24 h. Niente antiaggreganti/anticoagulanti per 24 h.',
+          'Peggioramento, cefalea, vomito, ipertensione improvvisa: sospendere l’infusione e TC urgente.',
+        ],
+      },
+      {
+        titolo: 'Controindicazioni principali',
+        punti: [
+          'Emorragia intracranica alla TC; ipodensità estesa già evidente.',
+          'Trauma cranico grave o ictus ischemico negli ultimi 3 mesi; chirurgia intracranica/spinale recente; neoplasia intracranica intra-assiale.',
+          'Sanguinamento attivo; piastrine < 100.000; INR > 1,7; eparina a dosi terapeutiche nelle 24 h; DOAC nelle ultime 48 h (se non dosati o antagonizzati).',
+          'PA che non scende sotto 185/110 con la terapia; glicemia < 50 mg/dL (correggere e rivalutare).',
+          'Dissezione aortica sospetta, endocardite.',
+        ],
+      },
+      {
+        titolo: 'Pressione arteriosa',
+        punti: [
+          'Prima della trombolisi: se > 185/110, labetalolo 10–20 mg ev (2–4 mL della fiala 100 mg/20 mL) o urapidil 12,5–25 mg ev (2,5–5 mL della fiala 50 mg/10 mL).',
+          'Senza riperfusione: trattare solo se > 220/120.',
+          'Glicemia 140–180 mg/dL; evitare ipertermia e ipossia (SpO₂ > 94%).',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2026-01-26', testo: 'AHA/ASA 2026: tenecteplase equivalente all’alteplase; finestra estesa 4,5–9 h con imaging; trombectomia nei core estesi e nella basilare; niente PA < 140 dopo riperfusione; prime raccomandazioni pediatriche.' },
+    ],
+  },
+  {
+    id: 'chetoacidosi',
+    titolo: 'Chetoacidosi e stato iperosmolare',
+    ente: 'ADA/EASD/JBDS',
+    anno: 2024,
+    area: 'Metabolismo',
+    fonte: { etichetta: 'Umpierrez et al., Diabetologia 2024 (consenso)', url: 'https://doi.org/10.1007/s00125-024-05979-4' },
+    controllata: '2026-11-11',
+    inBreve: [
+      'Chetoacidosi (DKA) = D + K + A: glicemia ≥ 200 mg/dL o diabete noto; β-idrossibutirrato ≥ 3,0 mmol/L (o chetonuria ≥ 2+); pH < 7,3 e/o bicarbonati < 18.',
+      'Stato iperosmolare (HHS): glicemia ≥ 600, osmolalità efficace > 300, β-OHB < 3, pH ≥ 7,3 e bicarbonati ≥ 15.',
+      'Ordine: liquidi → potassio → insulina. Insulina solo con K ≥ 3,5.',
+      'Insulina ev a dose fissa 0,1 U/kg/h (DKA moderata-grave); con glicemia < 250 aggiungere glucosata e ridurre a 0,05 U/kg/h.',
+      'Risoluzione DKA: β-OHB < 0,6 e pH ≥ 7,3 o bicarbonati ≥ 18. Prima di sospendere l’insulina ev, iniziare la basale sottocute.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Insulina e potassio (70 kg)',
+        punti: [
+          'Insulina rapida (Actrapid) 50 UI in SF fino a 50 mL = 1 UI/mL: 0,1 U/kg/h = 7 mL/h; 0,05 U/kg/h = 3,5 mL/h. Bolo solo se la pompa ritarda.',
+          'K < 3,5: niente insulina; KCl 10–20 mEq/h (fiale 2 mEq/mL da 10 mL = 20 mEq) con monitor, fino a K ≥ 3,5.',
+          'K 3,5–5: 10–20 mEq di KCl in ogni litro di liquidi.',
+          'K > 5: niente potassio, ricontrollare ogni 1–2 h.',
+          'Bicarbonato solo se pH < 7,0.',
+        ],
+      },
+      {
+        titolo: 'Liquidi',
+        punti: [
+          'SF 0,9% o Ringer: 1–1,5 L nella prima ora (boli da 250 mL negli anziani, cardiopatici, nefropatici), poi 250–500 mL/h secondo idratazione e sodio corretto.',
+          'Glicemia < 250 mg/dL: aggiungere glucosata 5–10%, obiettivo 150–200 (DKA) o 200–250 (HHS).',
+          'Chetoacidosi euglicemica (SGLT2-inibitori): glucosata fin dall’inizio insieme all’insulina.',
+          'HHS: calo della glicemia ≤ 90–120 mg/dL/h, del sodio ≤ 10 mmol/L in 24 h, dell’osmolalità 3–8 mOsm/kg/h; insulina 0,05 U/kg/h.',
+        ],
+      },
+      {
+        titolo: 'Monitoraggio',
+        punti: [
+          'Glicemia capillare ogni ora; β-OHB, EGA venoso, potassio ogni 2–4 h.',
+          'Cercare la causa: infezione, infarto, sospensione dell’insulina, pancreatite, farmaci (SGLT2-inibitori, cortisone).',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2024-06-22', testo: 'Consenso ADA/EASD/JBDS/AACE/DTS 2024: soglia glicemica 200 (prima 250), β-idrossibutirrato centrale per diagnosi e risoluzione, primi criteri di risoluzione dell’HHS.' },
+    ],
+  },
+  {
+    id: 'iperkaliemia',
+    titolo: 'Iperkaliemia',
+    ente: 'UK Kidney Association',
+    anno: 2023,
+    area: 'Metabolismo',
+    fonte: { etichetta: 'UKKA, Treatment of acute hyperkalaemia in adults 2023', url: 'https://www.ukkidney.org/sites/renal.org/files/UKKA%20HYPERKALAEMIA%20GUIDELINE%20-%202023%20-%20Draft%20for%20public%20consultation_1.pdf' },
+    controllata: '2026-11-11',
+    vediAnche: [{ etichetta: 'Timer ACR', to: '/acr' }],
+    inBreve: [
+      'Lieve 5,5–5,9; moderata 6,0–6,4; grave ≥ 6,5 mmol/L. ECG e monitor se ≥ 6,0. Escludere la pseudoiperkaliemia (emolisi): ricontrollo su EGA.',
+      'Proteggere il cuore se ci sono alterazioni ECG: calcio gluconato 10% 30 mL ev in 10 min (calcio cloruro 10 mL nell’arresto).',
+      'Spostare il potassio: insulina 10 UI + 25 g di glucosio in 15 min; salbutamolo 10–20 mg nebulizzato in aggiunta.',
+      'Eliminare il potassio: sodio zirconio ciclosilicato 10 g × 3 (grave; da considerare nella moderata); dialisi se refrattaria o insufficienza renale grave.',
+      'Glicemia controllata per 6 ore dopo l’insulina: l’ipoglicemia tardiva è frequente.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (adulto)',
+        punti: [
+          'Calcio gluconato 10%: 30 mL = 3 fiale da 10 mL in 10 min; ripetere se l’ECG non migliora dopo 5–10 min (dura 30–60 min).',
+          'Insulina rapida 10 UI + 25 g di glucosio in 15 min: 250 mL di glucosata 10% oppure 50 mL al 50%. Se glicemia di partenza < 126 mg/dL: poi glucosata 10% 50 mL/h per 5 h. Se glicemia > 250: solo insulina.',
+          'Salbutamolo 10–20 mg nebulizzato (10 mg = 2 mL della soluzione 5 mg/mL); 10 mg se cardiopatia ischemica.',
+          'Sodio zirconio ciclosilicato (Lokelma) 10 g per bocca ogni 8 h fino a 72 h.',
+          'Bicarbonato 8,4% 50 mL solo se acidosi metabolica.',
+          'Furosemide 40–80 mg ev se diuresi conservata e non disidratato.',
+        ],
+      },
+      {
+        titolo: 'Monitoraggio e prevenzione',
+        punti: [
+          'Glicemia a 0, 15, 30, 60 min poi ogni ora fino a 6 h dall’insulina.',
+          'Potassio a 1, 2, 4, 6 e 24 h; obiettivo < 6 entro 2 h.',
+          'Sospendere i farmaci che lo aumentano: ACE-i/sartani, antialdosteronici, FANS, trimetoprim, integratori di potassio, diuretici risparmiatori.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2023-10-01', testo: 'UKKA 2023: calcio gluconato 30 mL in 10 min, calcio cloruro in rianimazione, protocollo insulina-glucosio in due tempi, zirconio ciclosilicato nelle forme gravi, resine al calcio tolte dall’acuto.' },
+    ],
+  },
+  {
+    id: 'iponatriemia',
+    titolo: 'Iponatriemia',
+    ente: 'ESE/ERA/ESICM',
+    anno: 2014,
+    area: 'Metabolismo',
+    fonte: { etichetta: 'Spasovski et al., Eur J Endocrinol 2014', url: 'https://doi.org/10.1530/EJE-13-1020' },
+    controllata: '2026-11-11',
+    inBreve: [
+      'Prima escludere pseudo-iponatriemia e iperglicemia (osmolalità plasmatica).',
+      'Sintomi gravi (vomito, convulsioni, sopore, coma, arresto) qualunque sia la causa: 150 mL di NaCl 3% in 20 min, ripetibile 2 volte, fino a +5 mmol/L.',
+      'Sintomi moderati (nausea, confusione, cefalea): un solo bolo di 150 mL di NaCl 3%, poi cercare la causa.',
+      'Limite di correzione: ≤ 10 mmol/L nelle prime 24 h (≤ 8 se a rischio di demielinizzazione) e ≤ 8 ogni 24 h successive.',
+      'Ipercorrezione: sospendere, glucosata 5% e/o desmopressina, con specialista.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Preparare la NaCl 3%',
+        punti: [
+          '150 mL di NaCl 3% contengono circa 77 mEq di sodio.',
+          'Se non c’è la soluzione pronta: SF 0,9% 100 mL + 30 mL di NaCl 2 mEq/mL (3 fiale da 10 mL) ≈ 130 mL con 75 mEq (≈ 3,4%), da infondere in 20 min (verificare con la farmacia).',
+          'Sodio ricontrollato dopo ogni bolo, poi a 6, 12, 24 h.',
+        ],
+      },
+      {
+        titolo: 'Inquadramento (senza sintomi gravi)',
+        punti: [
+          'Osmolalità urinaria < 100: eccesso di acqua (polidipsia, birra, «tea and toast»).',
+          'Sodio urinario < 30 con osmolalità urinaria > 100: ipovolemia vera o efficace (vomito, diarrea, scompenso, cirrosi).',
+          'Sodio urinario ≥ 30: diuretici, SIADH, insufficienza surrenalica, ipotiroidismo, nefropatia.',
+          'Ipovolemia: SF 0,9% 0,5–1 mL/kg/h; SIADH: restrizione idrica; scompenso/cirrosi: restrizione, diuretico dell’ansa.',
+          'Rischio di demielinizzazione: Na ≤ 120, alcolismo, malnutrizione, ipokaliemia, cirrosi, tiazidici.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2026-11-11', testo: 'Controllo: la linea guida europea del 2014 resta il riferimento; la Society for Endocrinology britannica (2022) usa lo stesso schema a boli.' },
+      { data: '2014-02-25', testo: 'Linea guida europea: boli di 150 mL di NaCl 3% nei sintomi gravi, limite 10 mmol/L nelle prime 24 h.' },
+    ],
+  },
+  {
+    id: 'stato-di-male',
+    titolo: 'Stato di male epilettico',
+    ente: 'ACEP 2024 · ESETT',
+    anno: 2024,
+    area: 'Neurologia',
+    fonte: { etichetta: 'Kapur et al., N Engl J Med 2019 (ESETT)', url: 'https://doi.org/10.1056/NEJMoa1905795' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'gcs', nome: 'GCS' }],
+    vediAnche: [
+      { etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' },
+      { etichetta: 'Anamnesi: crisi convulsiva', to: '/anamnesi?apri=convulsione' },
+    ],
+    inBreve: [
+      'Stato di male: crisi ≥ 5 minuti o crisi ripetute senza ripresa della coscienza.',
+      'A 5 minuti: benzodiazepina a dose piena (l’errore più frequente è sottodosarla), ripetibile una volta.',
+      'Se continua: seconda linea con levetiracetam, valproato o fenitoina — efficacia simile (ESETT, ACEP 2024).',
+      'Refrattario: intubazione e anestetico in infusione, EEG, terapia intensiva.',
+      'Glicemia subito; cercare la causa (sospensione dei farmaci, alcol, tossici, ipo-Na, infezione, lesione cerebrale).',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (70 kg)',
+        punti: [
+          'Lorazepam 4 mg ev = 1 fiala da 4 mg/1 mL (0,1 mg/kg), ripetibile dopo 5 min.',
+          'Senza vena: midazolam 10 mg im = 2 fiale da 5 mg/1 mL (o buccale/intranasale); diazepam 10 mg ev = 1 fiala da 10 mg/2 mL.',
+          'Levetiracetam 60 mg/kg (max 4.500 mg) = 4.200 mg = 42 mL (8,4 fiale da 500 mg/5 mL) in 100 mL di SF in 10 min.',
+          'Valproato 40 mg/kg (max 3.000 mg) = 2.800 mg = 7 flaconi da 400 mg in 100 mL di SF in 10 min (no in gravidanza, epatopatia, malattie mitocondriali).',
+          'Fenitoina 20 mg/kg = 1.400 mg = 5,6 fiale da 250 mg/5 mL, non più di 50 mg/min (≈ 28 min) con monitor (ipotensione, aritmie).',
+          'Alternativa: lacosamide 200–400 mg ev in 15–30 min (no se BAV).',
+        ],
+      },
+      {
+        titolo: 'Cause da cercare e trattare',
+        punti: [
+          'Ipoglicemia: tiamina 100 mg ev poi glucosio 33% 50 mL (5 fiale da 10 mL).',
+          'Iponatriemia grave: NaCl 3% (PDTA iponatriemia).',
+          'Eclampsia (gravidanza > 20 settimane o puerperio): magnesio solfato 4 g ev in 15–20 min.',
+          'Intossicazioni (triciclici, isoniazide: piridossina), astinenza da alcol o benzodiazepine.',
+          'TC encefalo; rachicentesi se febbre o sospetta infezione (antibiotico prima, se ritardata).',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2024-04-18', testo: 'ACEP 2024: dopo benzodiazepine adeguate, fosfenitoina, levetiracetam o valproato con efficacia simile.' },
+      { data: '2019-11-28', testo: 'ESETT: levetiracetam 60 mg/kg, valproato 40 mg/kg e fosfenitoina 20 mg/kg equivalenti (circa metà dei pazienti risponde).' },
+    ],
+  },
+  {
+    id: 'anafilassi',
+    titolo: 'Anafilassi',
+    ente: 'Resuscitation Council UK · EAACI',
+    anno: 2021,
+    area: 'Allergologia · Emergenze',
+    fonte: { etichetta: 'RCUK, Emergency treatment of anaphylaxis 2021', url: 'https://resus.org.uk/media/337/download' },
+    controllata: '2026-11-11',
+    vediAnche: [
+      { etichetta: 'Dimissione orticaria', to: '/dimissioni?apri=orticaria' },
+      { etichetta: 'Anamnesi: reazione allergica', to: '/anamnesi?apri=allergia' },
+    ],
+    inBreve: [
+      'Adrenalina im subito: 0,5 mg (0,5 mL della fiala da 1 mg/mL) nella coscia anterolaterale; ripetere dopo 5 min se i problemi A, B o C persistono.',
+      'Paziente sdraiato con le gambe sollevate (seduto se dispnoico); non farlo alzare in piedi. Ossigeno, liquidi in bolo se ipoteso.',
+      'Refrattaria (nessun miglioramento dopo 2 dosi im): adrenalina in infusione ev e aiuto esperto.',
+      'Antistaminici e cortisone NON sono terapia d’emergenza: antistaminico solo per i sintomi cutanei dopo la stabilizzazione; cortisone solo nelle forme refrattarie o con asma/shock persistente.',
+      'Dimissione con 2 autoiniettori, istruzioni e visita allergologica.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Forma refrattaria (70 kg)',
+        punti: [
+          'Adrenalina 1 mg (1 fiala da 1 mg/mL) in 100 mL di SF (10 µg/mL): partire da 0,5–1 mL/kg/h = 35–70 mL/h, titolare; monitor e PA invasiva se possibile.',
+          'Liquidi: cristalloidi 500–1.000 mL in bolo, ripetibili (anche diversi litri).',
+          'Beta-bloccati: glucagone 1–2 mg ev ogni 5 min.',
+          'Broncospasmo: salbutamolo nebulizzato; edema laringeo: adrenalina nebulizzata 5 mg (5 fiale), intubazione precoce da parte di esperto.',
+          'Arresto: ALS con adrenalina ev 1 mg (timer ACR).',
+        ],
+      },
+      {
+        titolo: 'Osservazione e dimissione',
+        punti: [
+          'Almeno 6 h dopo la risoluzione se sono servite 2 dosi di adrenalina o reazioni bifasiche precedenti.',
+          'Almeno 12 h se forma grave (> 2 dosi), asma grave, arrivo tardivo, possibile assorbimento continuo dell’allergene, o paziente che vive solo/lontano.',
+          'Triptasi: subito dopo il trattamento iniziale, poi a 1–2 h (non oltre 4 h).',
+          'Due autoiniettori di adrenalina prescritti e spiegati; segnalare l’allergene; visita allergologica.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2026-11-11', testo: 'Controllo: RCUK 2021 ed EAACI 2021 restano le versioni in vigore.' },
+      { data: '2021-05-01', testo: 'RCUK 2021: ripetere l’adrenalina im dopo 5 min, algoritmo per la forma refrattaria, niente antistaminici né cortisone di routine nell’emergenza.' },
+    ],
+  },
+  {
+    id: 'paracetamolo',
+    titolo: 'Intossicazione da paracetamolo',
+    ente: 'Australia e Nuova Zelanda',
+    anno: 2019,
+    area: 'Tossicologia',
+    fonte: { etichetta: 'Chiew et al., Med J Aust 2020', url: 'https://doi.org/10.5694/mja2.50428' },
+    controllata: '2026-11-11',
+    vediAnche: [
+      { etichetta: 'Rubrica: Tossicologia Careggi', to: '/rubrica' },
+      { etichetta: 'Anamnesi: intossicazione', to: '/anamnesi?apri=intossicazione' },
+    ],
+    inBreve: [
+      'Dose potenzialmente tossica: ≥ 10 g o ≥ 200 mg/kg (la minore) in un’unica assunzione.',
+      'Carbone attivo 50 g entro 2 h dall’ingestione (entro 4 h se ≥ 30 g o rilascio modificato), se vigile e collaborante.',
+      'Paracetamolemia a 4 h (o appena possibile dopo): sopra la linea del nomogramma → N-acetilcisteina.',
+      'Ora sconosciuta, assunzioni ripetute nel tempo, rilascio modificato o arrivo dopo 8 h con dose tossica: N-acetilcisteina subito, senza aspettare il dosaggio.',
+      'N-acetilcisteina a due sacche: 200 mg/kg in 4 h, poi 100 mg/kg in 16 h. Intossicazione massiva: seconda sacca raddoppiata. Sentire il Centro Antiveleni.',
+    ],
+    sezioni: [
+      {
+        titolo: 'N-acetilcisteina (70 kg)',
+        punti: [
+          '1ª sacca: 200 mg/kg = 14 g = 70 mL di N-acetilcisteina 200 mg/mL (es. 2,8 fiale da 5 g/25 mL) in 500 mL di glucosata 5% in 4 h.',
+          '2ª sacca: 100 mg/kg = 7 g = 35 mL (1,4 fiale) in 1.000 mL di glucosata 5% in 16 h.',
+          'Massiva (≥ 30 g o paracetamolemia > doppio della linea): 2ª sacca 200 mg/kg = 14 g in 16 h.',
+          'Reazioni anafilattoidi (rash, broncospasmo): sospendere, antistaminico, poi riprendere a velocità più bassa. Non sono una vera allergia.',
+          'Fine terapia: paracetamolo < 20 mg/L e ALT normali o in calo; altrimenti continuare alla velocità della 2ª sacca.',
+        ],
+      },
+      {
+        titolo: 'Linea di trattamento del nomogramma',
+        punti: [
+          'Linea 150 mg/L a 4 h, che si dimezza ogni 4 h: 4 h → 150; 6 h → 106; 8 h → 75; 10 h → 53; 12 h → 38; 14 h → 27; 16 h → 19 mg/L.',
+          'Il nomogramma vale solo per un’assunzione unica di paracetamolo a rilascio immediato con orario noto. (Il Regno Unito usa una linea più bassa, 100 mg/L a 4 h.)',
+          'Esami: paracetamolemia, ALT, INR, creatinina, glicemia, EGA con lattati; ripetere a fine infusione.',
+          'Gravità: INR > 3 a 48 h o > 4,5, creatinina > 2,3 mg/dL, pH < 7,3, lattati > 3, encefalopatia → epatologo/centro trapianti.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2019-12-01', testo: 'Linee guida Australia/NZ: N-acetilcisteina a due sacche (meno reazioni), dose aumentata nelle intossicazioni massive, rilascio modificato sempre trattato.' },
+    ],
+  },
 ]
 
 export const lineaGuida = (id: string) => LINEE_GUIDA.find((l) => l.id === id)

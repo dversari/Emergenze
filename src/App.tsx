@@ -1,5 +1,7 @@
-import { HashRouter, Link, NavLink, Navigate, Outlet, Route, Routes } from 'react-router-dom'
+import { HashRouter, Link, NavLink, Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import type { Provenienza } from './lib/ritorno'
 import Home from './pages/Home'
+import Acr from './pages/Acr'
 import Calcolatori from './pages/Calcolatori'
 import Antibiotici from './pages/Antibiotici'
 import Rubrica from './pages/Rubrica'
@@ -35,11 +37,15 @@ function Guscio() {
             <h1 className="font-extrabold text-2xl tracking-tight leading-none">DEA-LIRIO</h1>
           </div>
         </Link>
-        <span className="ml-auto text-[10px] text-tenue text-right leading-tight">versione<br />{__VERSIONE__}</span>
+        <span className="ml-auto text-[9.5px] text-tenue text-right leading-tight">versione<br />{__VERSIONE__}</span>
+        <Link to="/acr" className="shrink-0 rounded-full bg-bordeaux text-white text-[12px] font-black px-3 py-2 leading-none shadow-sm active:opacity-80" aria-label="Timer arresto cardiaco">
+          ⏱ ACR
+        </Link>
       </header>
 
       <main className="px-3.5 py-3 pb-[calc(90px+env(safe-area-inset-bottom))] max-w-3xl mx-auto">
         <Outlet />
+        <TornaA />
       </main>
 
       <nav className="fixed bottom-0 inset-x-0 z-20 bg-fondo/95 backdrop-blur-md border-t border-linea px-2 pt-2 pb-[max(14px,calc(env(safe-area-inset-bottom)+6px))]">
@@ -66,6 +72,7 @@ export default function App() {
         <Route element={<Guscio />}>
           <Route index element={<Home />} />
           <Route path="calcolatori" element={<Calcolatori />} />
+          <Route path="acr" element={<Acr />} />
           <Route path="antibiotici" element={<Antibiotici />} />
           <Route path="procedure" element={<PaginaSchede key="p" schede={PROCEDURE} segnaposto="Cerca una procedura…" />} />
           <Route path="sedazione" element={<PaginaSchede key="s" schede={SEDAZIONE} segnaposto="Cerca uno schema…" />} />
@@ -78,5 +85,19 @@ export default function App() {
         </Route>
       </Routes>
     </HashRouter>
+  )
+}
+
+/** Pulsante «← Torna a …» quando si arriva da un PDTA. */
+function TornaA() {
+  const loc = useLocation()
+  const nav = useNavigate()
+  const da = (loc.state as { da?: Provenienza } | null)?.da
+  if (!da) return null
+  return (
+    <button onClick={() => (window.history.length > 1 ? nav(-1) : nav(da.to))}
+      className="fixed left-1/2 -translate-x-1/2 bottom-[86px] z-30 rounded-full bg-verde-scuro text-white text-[13px] font-extrabold px-4 py-2.5 shadow-lg max-w-[90vw] truncate active:opacity-80">
+      ← Torna a {da.etichetta}
+    </button>
   )
 }

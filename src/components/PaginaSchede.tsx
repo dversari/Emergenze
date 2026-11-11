@@ -4,6 +4,7 @@ import type { Scheda } from '../lib/schede'
 
 // Nomi dei farmaci evidenziati in rosso grassetto dentro i testi.
 const FARMACI = [
+  'N-acetilcisteina','acetilcisteina','levetiracetam','valproato','fenitoina','tenecteplase','idrocortisone','calcio gluconato','calcio cloruro','insulina','Actrapid','zirconio ciclosilicato','glucagone','salbutamolo','KCl','desmopressina','magnesio solfato','carbone attivo',
   'aspirina','acido acetilsalicilico','prasugrel','ticagrelor','clopidogrel','metoprololo','amiodarone','furosemide','isosorbide dinitrato','nitroglicerina','metoclopramide','digossina','diltiazem','flecainide','propafenone','vernakalant','dobutamina','levosimendan','acetazolamide','idroclorotiazide','enoxaparina','apixaban','rivaroxaban','alteplase',
   'ketamina', 'propofol', 'ketofol', 'midazolam', 'fentanil', 'morfina',
   'rocuronio', 'succinilcolina', 'sugammadex', 'naloxone', 'flumazenil', 'noradrenalina', 'adrenalina',

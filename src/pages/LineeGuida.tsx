@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { RitornoCtx, riprendiScroll, useConRitorno } from '../lib/ritorno'
 import Algoritmo, { idSezione } from '../components/Algoritmo'
 import Manovre from '../components/Manovre'
 import { ALGORITMI } from '../lib/algoritmi'
@@ -47,12 +48,20 @@ export function ElencoLineeGuida() {
 }
 
 /** Riassunto di una linea guida. */
+/** Link interno che ricorda il PDTA di partenza (pulsante «Torna a …»). */
+function LinkR(props: React.ComponentProps<typeof Link>) {
+  const r = useConRitorno()
+  return <Link {...props} state={r.state} onClick={r.onClick} />
+}
+
 export function RiassuntoLineaGuida() {
   const { id = '' } = useParams()
   const l = lineaGuida(id)
+  useEffect(() => { riprendiScroll(`/linee-guida/${id}`) }, [id])
   if (!l) return <p className="text-sm text-tenue">PDTA non trovato. <Link to="/linee-guida" className="underline">Torna all’elenco</Link></p>
 
   return (
+    <RitornoCtx.Provider value={l.titolo}>
     <div className="flex flex-col gap-3">
       <Link to="/linee-guida" className="text-sm text-tenue">‹ PDTA</Link>
 
@@ -77,10 +86,10 @@ export function RiassuntoLineaGuida() {
         {l.calcolatori && (
           <div className="flex flex-wrap gap-1.5 mt-3">
             {l.calcolatori.map((c) => (
-              <Link key={c.id} to={`/calcolatori?apri=${c.id}`}
+              <LinkR key={c.id} to={`/calcolatori?apri=${c.id}`}
                 className="text-xs font-semibold rounded-full px-3 py-1.5 bg-verde text-white">
                 {c.nome} →
-              </Link>
+              </LinkR>
             ))}
           </div>
         )}
@@ -97,7 +106,7 @@ export function RiassuntoLineaGuida() {
               <p className="etichetta mb-2">Nell’app</p>
               <div className="flex flex-wrap gap-1.5 mb-1">
                 {l.vediAnche.map((v) => (
-                  <Link key={v.to} to={v.to} className="text-xs font-semibold rounded-full px-3 py-1.5 bg-verde3 text-verde-scuro">{v.etichetta} →</Link>
+                  <LinkR key={v.to} to={v.to} className="text-xs font-semibold rounded-full px-3 py-1.5 bg-verde3 text-verde-scuro">{v.etichetta} →</LinkR>
                 ))}
               </div>
             </>
@@ -148,5 +157,6 @@ export function RiassuntoLineaGuida() {
 
       <p className="text-[11px] text-tenue px-1">Riassunto personale: le dosi vanno verificate su linee guida e scheda tecnica.</p>
     </div>
+    </RitornoCtx.Provider>
   )
 }
