@@ -16,6 +16,7 @@ Strumenti per il pronto soccorso, in un'app web installabile sul telefono: calco
 | **Linee guida** | `src/lib/lineeGuida.ts`: per ogni linea guida fonte, data dell'ultimo controllo, punti «In PS, in breve», sezioni, registro degli aggiornamenti e calcolatori collegati |
 | **Anamnesi** | `src/lib/anamnesi.ts` (`ANAMNESI`: anamnesi ed esame obiettivo mirati per sintomo di accesso, con «Da non dimenticare»). Stessa pagina modificabile delle dimissioni (`src/components/PaginaTesti.tsx`), chiave `emergenze.anamnesi.<id>` |
 | **Dimissioni** | `src/lib/dimissioni.ts` (`DIMISSIONI`: testo predefinito per diagnosi, campi tra [parentesi] da completare). Le modifiche fatte nell'app restano sul telefono (`localStorage`, chiave `emergenze.dimissione.<id>`) finché non si preme «Ripristina originale» |
+| **Rubrica** | `src/lib/rubrica.ts` (`CATEGORIE` per specialità con icona e tono di colore; `D` con le voci: numeri separati da spazi, marcatori `?` incerto, `!` anomalo, `~` ricostruito, `+` a penna, `x` davanti = barrato; `{ g: 1 }` = guardia in evidenza). Pagina `src/pages/Rubrica.tsx`: ricerca a tendina, blocchi espandibili, segnalazioni di modifica/eliminazione salvate sul telefono (`emergenze.rubrica.segnalazioni`) da copiare o condividere |
 
 Le dosi riportate vanno sempre verificate su linee guida e scheda tecnica.
 
