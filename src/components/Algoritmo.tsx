@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import type { Nodo, Ramo, Tono } from '../lib/algoritmi'
 import { Link } from 'react-router-dom'
 import { Evidenzia } from './PaginaSchede'
@@ -79,6 +79,9 @@ function Freccia({ corta }: { corta?: boolean }) {
 }
 
 function Blocco({ n, piccolo }: { n: Extract<Nodo, { titolo: string }>; piccolo?: boolean }) {
+  const dosi = useContext(SezioneDosi)
+  const testo = [n.titolo, ...(n.righe ?? [])].join(' ')
+  const vedi = n.vedi ?? (dosi && ['terapia', 'allarme', 'checklist', 'passo'].includes(n.tipo) && RE_DOSE.test(testo) ? sezionePerNodo(testo, dosi) : undefined)
   const scuro = n.tipo === 'avvio' || n.tipo === 'esito'
   return (
     <div className={`rounded-2xl border-[1.5px] ${piccolo ? 'px-2.5 py-2' : 'px-3.5 py-3'} ${STILE[n.tipo]}`}>
@@ -117,10 +120,10 @@ function Blocco({ n, piccolo }: { n: Extract<Nodo, { titolo: string }>; piccolo?
           ))}
         </div>
       )}
-      {n.vedi && (
-        <button onClick={() => apriSezione(n.vedi!)}
+      {vedi && (
+        <button onClick={() => apriSezione(vedi)}
           className={`mt-2 text-[11.5px] font-bold rounded-full px-2.5 py-1 ${scuro ? 'bg-white/20 text-white' : 'bg-verde text-white'}`}>
-          ↓ sezione «{n.vedi}»
+          ↓ sezione «{vedi}»
         </button>
       )}
     </div>
@@ -200,8 +203,25 @@ function Sequenza({ nodi, piccolo }: { nodi: Nodo[]; piccolo?: boolean }) {
 }
 
 /** Diagramma a blocchi verticale con diramazioni. */
-export default function Algoritmo({ titolo, nota, nodi }: { titolo: string; nota?: string; nodi: Nodo[] }) {
+/** Sezione con le dosi del PDTA: usata come «↓ sezione» automatico nei nodi di terapia senza `vedi`. */
+const SezioneDosi = createContext<{ titolo: string; punti: string[] }[] | undefined>(undefined)
+const RE_DOSE = /\d[\d.,]*\s*(mg|UI|µg|g\b|mL|mEq)/
+const parole = (t: string) => new Set(t.toLowerCase().match(/[a-zàèéìòù-]{7,}/g) ?? [])
+/** Sezione del riassunto che condivide più parole lunghe (farmaci, procedure) con il nodo. */
+function sezionePerNodo(testo: string, sezioni: { titolo: string; punti: string[] }[]) {
+  const p = parole(testo)
+  let migliore: string | undefined; let max = 1
+  for (const s of sezioni) {
+    const q = parole(s.titolo + ' ' + s.punti.join(' '))
+    let n = 0; p.forEach((w) => { if (q.has(w)) n++ })
+    if (n > max) { max = n; migliore = s.titolo }
+  }
+  return migliore
+}
+
+export default function Algoritmo({ titolo, nota, nodi, sezioni }: { titolo: string; nota?: string; nodi: Nodo[]; sezioni?: { titolo: string; punti: string[] }[] }) {
   return (
+    <SezioneDosi.Provider value={sezioni}>
     <section className="card">
       <p className="etichetta">Algoritmo</p>
       <h3 className="font-extrabold text-lg leading-tight mt-0.5">{titolo}</h3>
@@ -214,5 +234,6 @@ export default function Algoritmo({ titolo, nota, nodi }: { titolo: string; nota
         <span><span className="font-black text-verde">✓</span> esito</span>
       </div>
     </section>
+    </SezioneDosi.Provider>
   )
 }

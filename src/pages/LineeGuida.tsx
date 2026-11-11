@@ -95,7 +95,7 @@ export function RiassuntoLineaGuida() {
         )}
       </section>
 
-      {ALGORITMI[l.id] && <Algoritmo {...ALGORITMI[l.id]} />}
+      {ALGORITMI[l.id] && <Algoritmo {...ALGORITMI[l.id]} sezioni={l.sezioni} />}
 
       {l.manovre && <Manovre ids={l.manovre} />}
 

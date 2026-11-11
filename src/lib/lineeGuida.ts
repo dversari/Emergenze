@@ -59,19 +59,19 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Controllo della frequenza in acuto',
         punti: [
-          'FE >40%: beta-bloccante (metoprololo 2,5–5 mg ev in 2 min, ripetibile fino a 15 mg; esmololo 500 µg/kg in 1 min, poi 50–300 µg/kg/min) oppure diltiazem 0,25 mg/kg ev in 5 min, poi 5–15 mg/h, o verapamil 2,5–10 mg ev in 5 min.',
-          'FE ≤40% o scompenso: beta-bloccante a basse dosi con cautela, digossina 0,5 mg ev (fino a 0,75–1,5 mg in 24 h in dosi frazionate), amiodarone se refrattaria o instabile.',
-          'Niente diltiazem/verapamil con FE ≤40%.',
-          'FA pre-eccitata (QRS larghi, irregolari, molto veloci): niente farmaci nodali (beta-bloccanti, calcioantagonisti, digossina, amiodarone). Cardioversione elettrica.',
+          'FE >40%: beta-bloccante (metoprololo (Lopresor) 2,5–5 mg ev in 2 min, ripetibile fino a 15 mg; esmololo 500 µg/kg in 1 min, poi 50–300 µg/kg/min) oppure diltiazem 0,25 mg/kg ev in 5 min, poi 5–15 mg/h, o verapamil (Isoptin) 2,5–10 mg ev in 5 min.',
+          'FE ≤40% o scompenso: beta-bloccante a basse dosi con cautela, digossina (Lanoxin) 0,5 mg ev (fino a 0,75–1,5 mg in 24 h in dosi frazionate), amiodarone (Cordarone) se refrattaria o instabile.',
+          'Niente diltiazem/verapamil (Isoptin) con FE ≤40%.',
+          'FA pre-eccitata (QRS larghi, irregolari, molto veloci): niente farmaci nodali (beta-bloccanti, calcioantagonisti, digossina (Lanoxin), amiodarone (Cordarone)). Cardioversione elettrica.',
         ],
       },
       {
         titolo: 'Cardioversione farmacologica',
         punti: [
-          'Senza cardiopatia strutturale (no IVS marcata, no FE ridotta, no coronaropatia): flecainide 2 mg/kg ev in 10 min (max 150 mg) o 200–300 mg os; propafenone 1,5–2 mg/kg ev in 10 min o 450–600 mg os.',
-          'Con flecainide/propafenone associare un farmaco nodale: rischio di flutter con conduzione 1:1.',
-          'Vernakalant 3 mg/kg ev in 10 min, seconda dose 2 mg/kg dopo 15 min. Non con SCA recente, scompenso grave, PAS <100, stenosi aortica severa, QT lungo.',
-          'Con cardiopatia strutturale o scompenso: amiodarone 300 mg ev in 30–60 min, poi 900–1200 mg nelle 24 h. Conversione lenta (ore).',
+          'Senza cardiopatia strutturale (no IVS marcata, no FE ridotta, no coronaropatia): flecainide (Almarytm) 2 mg/kg ev in 10 min (max 150 mg) o 200–300 mg os; propafenone (Rytmonorm) 1,5–2 mg/kg ev in 10 min o 450–600 mg os.',
+          'Con flecainide (Almarytm)/propafenone (Rytmonorm) associare un farmaco nodale: rischio di flutter con conduzione 1:1.',
+          'Vernakalant (non disponibile in PS a Prato) 3 mg/kg ev in 10 min, seconda dose 2 mg/kg dopo 15 min. Non con SCA recente, scompenso grave, PAS <100, stenosi aortica severa, QT lungo.',
+          'Con cardiopatia strutturale o scompenso: amiodarone (Cordarone) 300 mg ev in 30–60 min, poi 900–1200 mg nelle 24 h. Conversione lenta (ore).',
         ],
       },
       {
@@ -148,9 +148,9 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Diuretici',
         punti: [
-          'Furosemide ev 40 mg se mai trattato con diuretici; se già in terapia, il doppio della dose orale abituale. Dose iniziale più alta se insufficienza renale cronica. Bolo o infusione continua sono equivalenti.',
+          'Furosemide (Lasix) ev 40 mg se mai trattato con diuretici; se già in terapia, il doppio della dose orale abituale. Dose iniziale più alta se insufficienza renale cronica. Bolo o infusione continua sono equivalenti.',
           'Risposta adeguata: sodio urinario ≥70 mEq/L a 2 h oppure diuresi ≥100 mL/h nelle prime 6 h. Se insufficiente: raddoppiare la dose ev e/o aggiungere un diuretico non dell’ansa.',
-          'Dopo 24 h: se la diuresi totale è <3 L e la congestione persiste, aumentare ancora nel secondo giorno. Dose massima abituale furosemide 600 mg/die (fino a 1000 mg se funzione renale molto ridotta).',
+          'Dopo 24 h: se la diuresi totale è <3 L e la congestione persiste, aumentare ancora nel secondo giorno. Dose massima abituale furosemide (Lasix) 600 mg/die (fino a 1000 mg se funzione renale molto ridotta).',
           'Già in diuretico dell’ansa con sovraccarico (IIa): acetazolamide 500 mg ev una volta al giorno, oppure idroclorotiazide os 25 mg (eGFR >50), 50 mg (eGFR 20–50), 100 mg (eGFR <20). Nell’IRC avanzata meglio l’acetazolamide. Con l’idroclorotiazide attenzione a ipopotassiemia e funzione renale.',
           'Un piccolo aumento transitorio della creatinina non è un problema se la decongestione procede. Liquidi assunti inferiori alla diuresi; MRA e potassio se ipopotassiemia.',
         ],
@@ -216,7 +216,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     inBreve: [
       'Diagnosi (le due linee guida concordano): probabilità clinica (Wells o Ginevra) → se bassa, PERC → D-dimero con soglia per età dopo i 50 anni (età × 10 µg/L) → angio-TC. Se la probabilità è alta: direttamente imaging, e anticoagulare in attesa se il rischio emorragico lo consente.',
       'Gravità: l’AHA 2026 introduce 5 categorie (A–E); l’ESC 2019 usa basso, intermedio-basso, intermedio-alto, alto rischio. Tabella di corrispondenza sotto.',
-      'Anticoagulazione: EBPM preferita all’ENF (AHA classe 1; ESC: EBPM o fondaparinux preferiti). ENF se instabile, se è probabile la trombolisi o se l’insufficienza renale è grave. Per la terapia orale DOAC.',
+      'Anticoagulazione: EBPM preferita all’ENF (AHA classe 1; ESC: EBPM o fondaparinux (Arixtra) preferiti). ENF se instabile, se è probabile la trombolisi o se l’insufficienza renale è grave. Per la terapia orale DOAC.',
       'Instabile (AHA E / ESC alto rischio): trombolisi sistemica; se controindicata o fallita, trattamento con catetere o chirurgia.',
       'Basso rischio (AHA A–B / ESC basso): trattamento a domicilio ragionevole, con anticoagulante subito disponibile e controllo programmato.',
       'Attenzione al ventricolo destro: sedazione profonda e intubazione possono far precipitare il circolo; liquidi solo con cautela.',
@@ -237,7 +237,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           'AHA 2026: categoria E → trombolisi sistemica, trattamento con catetere o trombectomia meccanica (2a). Categoria D e C3 → stesse opzioni con beneficio incerto (2b). Categoria C → non di routine. Team PERT multidisciplinare per C–E (classe 1).',
           'ESC 2019: alto rischio → trombolisi sistemica (I). Intermedio-alto → trombolisi non di routine (III); trombolisi «di salvataggio» se l’emodinamica peggiora (I). Chirurgia o catetere se la trombolisi è controindicata o fallita.',
-          'Dosi ESC: alteplase 100 mg in 2 h, oppure 0,6 mg/kg in 15 min (max 50 mg) nel regime accelerato. ENF: bolo 80 U/kg, poi 18 U/kg/h.',
+          'Dosi ESC: alteplase (Actilyse) 100 mg in 2 h, oppure 0,6 mg/kg in 15 min (max 50 mg) nel regime accelerato. ENF: bolo 80 U/kg, poi 18 U/kg/h.',
           'AHA 2026: la quantità di trombo alla TC non serve a stratificare le categorie A–C (classe 3).',
         ],
       },
@@ -314,15 +314,15 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Antitrombotici per la PCI primaria',
         punti: [
-          'Inibitore P2Y12: prasugrel preferito (IIa ESC) 60 mg, poi 10 mg (5 mg se ≥75 anni o <60 kg; controindicato se ictus/TIA pregresso); ticagrelor 180 mg, poi 90 mg x2; clopidogrel 600 mg se gli altri non sono disponibili o sono controindicati.',
-          'Anticoagulante in sala: ENF; enoxaparina o bivalirudina come alternative.',
+          'Inibitore P2Y12: prasugrel (Efient) preferito (IIa ESC) 60 mg, poi 10 mg (5 mg se ≥75 anni o <60 kg; controindicato se ictus/TIA pregresso); ticagrelor (Brilique) 180 mg, poi 90 mg x2; clopidogrel (Plavix) 600 mg se gli altri non sono disponibili o sono controindicati.',
+          'Anticoagulante in sala: ENF; enoxaparina (Clexane) o bivalirudina come alternative.',
         ],
       },
       {
         titolo: 'Altre terapie in acuto',
         punti: [
           'Oppioidi ev per il dolore severo (rallentano l’assorbimento degli antiaggreganti orali).',
-          'Beta-bloccante ev (preferibilmente metoprololo) da considerare all’arrivo in PCI primaria se non c’è scompenso acuto e la PAS è >120 mmHg.',
+          'Beta-bloccante ev (preferibilmente metoprololo (Lopresor)) da considerare all’arrivo in PCI primaria se non c’è scompenso acuto e la PAS è >120 mmHg.',
           'Niente nitrati se PAS <90 mmHg, infarto del VD o inibitori della PDE5 nelle 24–48 ore.',
           'Statina ad alta intensità il prima possibile.',
         ],
@@ -529,7 +529,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       'Stabilizzare prima: due accessi, cristalloidi se instabile, trasfusione restrittiva (Hb ≤ 7 g/dL; ≤ 8 se cardiopatia).',
       'Glasgow-Blatchford ≤ 1: gestione ambulatoriale con endoscopia programmata.',
       'Non varicosa: endoscopia entro 24 h dopo la stabilizzazione; IPP ad alte dosi prima, senza ritardare l’endoscopia; eritromicina 250 mg ev 30–120 min prima se sanguinamento importante.',
-      'Sospetta varicosa (cirrosi): vasoattivo subito (terlipressina, somatostatina o octreotide), ceftriaxone 1 g/die fino a 7 giorni, eritromicina ed endoscopia entro 12 h.',
+      'Sospetta varicosa (cirrosi): vasoattivo subito (terlipressina (Glypressin), somatostatina o octreotide (Sandostatin)), ceftriaxone 1 g/die fino a 7 giorni, eritromicina ed endoscopia entro 12 h.',
       'Niente sondino naso-gastrico di routine. Acido tranexamico non raccomandato.',
     ],
     sezioni: [
@@ -538,14 +538,14 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           'IPP: esomeprazolo o pantoprazolo 80 mg ev in bolo = 2 fiale da 40 mg, poi 8 mg/h (o 40 mg ogni 12 h); dopo emostasi endoscopica ad alto rischio, alte dosi per 72 h.',
           'Eritromicina 250 mg ev in 20–30 min, 30–120 min prima dell’endoscopia (controllare QT).',
-          'Terlipressina 2 mg ev ogni 4 h (2 fiale da 1 mg) fino al controllo, poi 1 mg ogni 4 h, per 2–5 giorni. Alternativa: somatostatina 250 µg in bolo poi 250–500 µg/h.',
+          'Terlipressina (Glypressin) 2 mg ev ogni 4 h (2 fiale da 1 mg) fino al controllo, poi 1 mg ogni 4 h, per 2–5 giorni. Alternativa: somatostatina 250 µg in bolo poi 250–500 µg/h.',
           'Ceftriaxone 1 g ev al giorno fino a 7 giorni in tutti i cirrotici con emorragia.',
         ],
       },
       {
         titolo: 'Anticoagulanti e antiaggreganti',
         punti: [
-          'AVK con emorragia grave/instabile: complesso protrombinico (4 fattori) + vitamina K ev.',
+          'AVK con emorragia grave/instabile: complesso protrombinico (4 fattori) + vitamina K (Konakion) ev.',
           'DOAC: sospendere; con emorragia pericolosa per la vita, antidoto o complesso protrombinico secondo il farmaco e l’ultima dose.',
           'ASA in prevenzione secondaria: non sospendere o riprendere subito dopo l’endoscopia se basso rischio di risanguinamento.',
         ],
@@ -612,8 +612,8 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Terapia',
         punti: [
-          'Sintomatici solo per pochi giorni (antiemetici: metoclopramide, ondansetron; dimenidrinato): rallentano il compenso vestibolare. Evitare le benzodiazepine prolungate.',
-          'Neurite vestibolare: cortisone breve da considerare (GRACE-3), es. prednisone 50–60 mg/die per 5 giorni a scalare; riabilitazione vestibolare precoce.',
+          'Sintomatici solo per pochi giorni (antiemetici: metoclopramide (Plasil), ondansetron (Zofran); dimenidrinato): rallentano il compenso vestibolare. Evitare le benzodiazepine prolungate.',
+          'Neurite vestibolare: cortisone breve da considerare (GRACE-3), es. prednisone (Deltacortene) 50–60 mg/die per 5 giorni a scalare; riabilitazione vestibolare precoce.',
           'VPPB: manovra di riposizionamento; nessun farmaco anti-vertigine di routine (AAO-HNS).',
         ],
       },
@@ -647,7 +647,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
           'Ibuprofene 600 mg ogni 8 h per 1–2 settimane, poi scalare (riduzione di 200–400 mg ogni 1–2 settimane) guidati da sintomi e PCR; oppure aspirina 750–1000 mg ogni 8 h (preferita dopo infarto o in cardiopatia ischemica).',
           'Colchicina 0,5 mg ogni 12 h (0,5 mg una volta al giorno se < 70 kg o con interazioni/insufficienza renale) per 3 mesi; 6 mesi nelle recidive.',
           'Gastroprotezione con IPP durante il FANS.',
-          'Seconda linea (controindicazioni o mancata risposta, esclusa l’infezione): prednisone a basse dosi 0,2–0,5 mg/kg/die. Recidive refrattarie: anti-IL-1 (specialista).',
+          'Seconda linea (controindicazioni o mancata risposta, esclusa l’infezione): prednisone (Deltacortene) a basse dosi 0,2–0,5 mg/kg/die. Recidive refrattarie: anti-IL-1 (specialista).',
           'Riposo: niente attività fisica intensa fino alla remissione; negli atleti almeno 1–3 mesi.',
         ],
       },
@@ -745,7 +745,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Cortisone nella CAP grave',
         punti: [
-          'Idrocortisone 200 mg/die ev (es. infusione) per 4–7 giorni, poi a scalare (schema CAPE COD), entro 24 h dall’ingresso.',
+          'Idrocortisone (Flebocortid) 200 mg/die ev (es. infusione) per 4–7 giorni, poi a scalare (schema CAPE COD), entro 24 h dall’ingresso.',
           'No se influenza, aspergillosi, diabete scompensato, sanguinamento digestivo recente.',
         ],
       },
@@ -773,7 +773,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       'Screening con NEWS2, MEWS o SIRS e non con il solo qSOFA (poco sensibile). Lattato in tutti i sospetti.',
       'Antibiotico entro 1 ora se sepsi probabile/certa o possibile shock; se la sepsi è solo possibile e senza shock, indagini rapide e antibiotico entro 3 ore se l’infezione resta probabile.',
       'Ipoperfusione o shock: almeno 30 mL/kg di cristalloidi bilanciati nelle prime 3 ore (valutando il singolo paziente), noradrenalina anche da vena periferica senza aspettare, PAM 65 (60–65 se ≥ 65 anni).',
-      'Controllo della fonte entro 6 ore se serve. Idrocortisone nello shock che richiede vasopressori.',
+      'Controllo della fonte entro 6 ore se serve. Idrocortisone (Flebocortid) nello shock che richiede vasopressori.',
     ],
     sezioni: [
       {
@@ -781,7 +781,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           'Ringer lattato/acetato 30 mL/kg ≈ 2.100 mL nelle prime 3 h (boli da 500 mL rivalutando); peso ideale/aggiustato se BMI > 30.',
           'Noradrenalina: 2 fiale da 2 mg in SF fino a 50 mL (80 µg/mL), partire da 0,05 µg/kg/min ≈ 2,5 mL/h; da vena periferica grossa e controllata (verificare il formato in reparto).',
-          'Idrocortisone 200 mg/die: 50 mg ev ogni 6 h (o infusione) se servono vasopressori; senza fludrocortisone di routine.',
+          'Idrocortisone (Flebocortid) 200 mg/die: 50 mg ev ogni 6 h (o infusione) se servono vasopressori; senza fludrocortisone di routine.',
           'Vasopressina da aggiungere se noradrenalina 0,25–0,5 µg/kg/min senza raggiungere la PAM (terapia intensiva).',
         ],
       },
@@ -811,7 +811,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     vediAnche: [{ etichetta: 'Anamnesi: deficit neurologico', to: '/anamnesi?apri=deficit-neurologico' }],
     inBreve: [
       'Codice ictus: ora dell’ultima volta visto bene, glicemia subito, NIHSS, TC + angio-TC senza ritardi.',
-      'Trombolisi entro 4,5 h nei deficit invalidanti, qualunque sia il NIHSS: tenecteplase 0,25 mg/kg (max 25 mg) in bolo oppure alteplase 0,9 mg/kg. Prima è meglio.',
+      'Trombolisi entro 4,5 h nei deficit invalidanti, qualunque sia il NIHSS: tenecteplase (Metalyse) 0,25 mg/kg (max 25 mg) in bolo oppure alteplase (Actilyse) 0,9 mg/kg. Prima è meglio.',
       'Esordio ignoto/al risveglio: trombolisi possibile tra 4,5 e 9 h con penombra alla perfusione (o mismatch DWI-FLAIR alla RM).',
       'Occlusione di grosso vaso: trombectomia fino a 24 h, anche nei core estesi selezionati e nell’occlusione basilare; non aspettare la risposta alla trombolisi.',
       'PA < 185/110 prima e < 180/105 dopo la trombolisi; abbassarla sotto 140 non serve e dopo trombectomia riuscita peggiora l’esito.',
@@ -820,8 +820,8 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Trombolisi (70 kg)',
         punti: [
-          'Tenecteplase 0,25 mg/kg = 17,5 mg in bolo in 5–10 s (flacone da 25 mg ricostituito a 5 mg/mL: 3,5 mL). Non usare 0,4 mg/kg.',
-          'Alteplase 0,9 mg/kg = 63 mg: 6,3 mg in bolo, poi 56,7 mg in 60 min (flaconi da 50 mg; massimo 90 mg).',
+          'Tenecteplase (Metalyse) 0,25 mg/kg = 17,5 mg in bolo in 5–10 s (flacone da 50 mg = 10.000 UI ricostituito in 10 mL a 5 mg/mL: 3,5 mL). Non usare 0,4 mg/kg.',
+          'Alteplase (Actilyse) 0,9 mg/kg = 63 mg: 6,3 mg in bolo, poi 56,7 mg in 60 min (flaconi da 50 mg; massimo 90 mg).',
           'Controlli neurologici e PA ogni 15 min per 2 h, poi ogni 30 min per 6 h, poi ogni ora fino a 24 h. Niente antiaggreganti/anticoagulanti per 24 h.',
           'Peggioramento, cefalea, vomito, ipertensione improvvisa: sospendere l’infusione e TC urgente.',
         ],
@@ -839,7 +839,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Pressione arteriosa',
         punti: [
-          'Prima della trombolisi: se > 185/110, labetalolo 10–20 mg ev (2–4 mL della fiala 100 mg/20 mL) o urapidil 12,5–25 mg ev (2,5–5 mL della fiala 50 mg/10 mL).',
+          'Prima della trombolisi: se > 185/110, labetalolo (Trandate) 10–20 mg ev (2–4 mL della fiala 100 mg/20 mL) o urapidil (Ebrantil) 12,5–25 mg ev (2,5–5 mL della fiala 50 mg/10 mL).',
           'Senza riperfusione: trattare solo se > 220/120.',
           'Glicemia 140–180 mg/dL; evitare ipertermia e ipossia (SpO₂ > 94%).',
         ],
@@ -908,8 +908,8 @@ export const LINEE_GUIDA: LineaGuida[] = [
     inBreve: [
       'Lieve 5,5–5,9; moderata 6,0–6,4; grave ≥ 6,5 mmol/L. ECG e monitor se ≥ 6,0. Escludere la pseudoiperkaliemia (emolisi): ricontrollo su EGA.',
       'Proteggere il cuore se ci sono alterazioni ECG: calcio gluconato 10% 30 mL ev in 10 min (calcio cloruro 10 mL nell’arresto).',
-      'Spostare il potassio: insulina 10 UI + 25 g di glucosio in 15 min; salbutamolo 10–20 mg nebulizzato in aggiunta.',
-      'Eliminare il potassio: sodio zirconio ciclosilicato 10 g × 3 (grave; da considerare nella moderata); dialisi se refrattaria o insufficienza renale grave.',
+      'Spostare il potassio: insulina 10 UI + 25 g di glucosio in 15 min; salbutamolo (Broncovaleas) 10–20 mg nebulizzato in aggiunta.',
+      'Eliminare il potassio: in PS c’è il sodio polistirene sulfonato (Kayexalate), lento e poco efficace in acuto; la linea guida preferisce lo zirconio ciclosilicato (Lokelma). Dialisi se refrattaria o insufficienza renale grave.',
       'Glicemia controllata per 6 ore dopo l’insulina: l’ipoglicemia tardiva è frequente.',
     ],
     sezioni: [
@@ -918,10 +918,10 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           'Calcio gluconato 10%: 30 mL = 3 fiale da 10 mL in 10 min; ripetere se l’ECG non migliora dopo 5–10 min (dura 30–60 min).',
           'Insulina rapida 10 UI + 25 g di glucosio in 15 min: 250 mL di glucosata 10% oppure 50 mL al 50%. Se glicemia di partenza < 126 mg/dL: poi glucosata 10% 50 mL/h per 5 h. Se glicemia > 250: solo insulina.',
-          'Salbutamolo 10–20 mg nebulizzato (10 mg = 2 mL della soluzione 5 mg/mL); 10 mg se cardiopatia ischemica.',
-          'Sodio zirconio ciclosilicato (Lokelma) 10 g per bocca ogni 8 h fino a 72 h.',
+          'Salbutamolo (Broncovaleas) 10–20 mg nebulizzato (10 mg = 2 mL della soluzione 5 mg/mL); 10 mg se cardiopatia ischemica.',
+          'Sodio polistirene sulfonato (Kayexalate) 15 g per bocca 3–4 volte al giorno o 30 g per clistere; agisce in ore, rischio di necrosi intestinale (no se ileo o dopo chirurgia addominale). La linea guida preferisce lo zirconio ciclosilicato (Lokelma) 10 g ogni 8 h, non disponibile in PS.',
           'Bicarbonato 8,4% 50 mL solo se acidosi metabolica.',
-          'Furosemide 40–80 mg ev se diuresi conservata e non disidratato.',
+          'Furosemide (Lasix) 40–80 mg ev se diuresi conservata e non disidratato.',
         ],
       },
       {
@@ -993,7 +993,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     inBreve: [
       'Stato di male: crisi ≥ 5 minuti o crisi ripetute senza ripresa della coscienza.',
       'A 5 minuti: benzodiazepina a dose piena (l’errore più frequente è sottodosarla), ripetibile una volta.',
-      'Se continua: seconda linea con levetiracetam, valproato o fenitoina — efficacia simile (ESETT, ACEP 2024).',
+      'Se continua: seconda linea con levetiracetam (Keppra), valproato (Depakin) o fenitoina (Dintoina) — efficacia simile (ESETT, ACEP 2024).',
       'Refrattario: intubazione e anestetico in infusione, EEG, terapia intensiva.',
       'Glicemia subito; cercare la causa (sospensione dei farmaci, alcol, tossici, ipo-Na, infezione, lesione cerebrale).',
     ],
@@ -1001,12 +1001,12 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Farmaci (70 kg)',
         punti: [
-          'Lorazepam 4 mg ev = 1 fiala da 4 mg/1 mL (0,1 mg/kg), ripetibile dopo 5 min.',
-          'Senza vena: midazolam 10 mg im = 2 fiale da 5 mg/1 mL (o buccale/intranasale); diazepam 10 mg ev = 1 fiala da 10 mg/2 mL.',
-          'Levetiracetam 60 mg/kg (max 4.500 mg) = 4.200 mg = 42 mL (8,4 fiale da 500 mg/5 mL) in 100 mL di SF in 10 min.',
-          'Valproato 40 mg/kg (max 3.000 mg) = 2.800 mg = 7 flaconi da 400 mg in 100 mL di SF in 10 min (no in gravidanza, epatopatia, malattie mitocondriali).',
-          'Fenitoina 20 mg/kg = 1.400 mg = 5,6 fiale da 250 mg/5 mL, non più di 50 mg/min (≈ 28 min) con monitor (ipotensione, aritmie).',
-          'Alternativa: lacosamide 200–400 mg ev in 15–30 min (no se BAV).',
+          'Diazepam (Valium) 10 mg ev = 1 fiala da 10 mg/2 mL in 2 min, ripetibile una volta dopo 5 min (0,15–0,2 mg/kg per dose, max 10 mg).',
+          'Senza vena: midazolam (Ipnovel) 10 mg im = 2 fiale da 5 mg/1 mL (o buccale/intranasale); diazepam (Valium) 10 mg rettale (Micropam).',
+          'Levetiracetam (Keppra) 60 mg/kg (max 4.500 mg) = 4.200 mg = 42 mL (8,4 fiale da 500 mg/5 mL) in 100 mL di SF in 10 min.',
+          'Valproato (Depakin) 40 mg/kg (max 3.000 mg) = 2.800 mg = 7 flaconi da 400 mg in 100 mL di SF in 10 min (no in gravidanza, epatopatia, malattie mitocondriali).',
+          'Fenitoina (Dintoina) 20 mg/kg = 1.400 mg = 5,6 fiale da 250 mg/5 mL, non più di 50 mg/min (≈ 28 min) con monitor (ipotensione, aritmie).',
+          'Alternativa: lacosamide (Vimpat) 200–400 mg ev in 15–30 min (no se BAV).',
         ],
       },
       {
@@ -1014,7 +1014,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           'Ipoglicemia: tiamina 100 mg ev poi glucosio 33% 50 mL (5 fiale da 10 mL).',
           'Iponatriemia grave: NaCl 3% (PDTA iponatriemia).',
-          'Eclampsia (gravidanza > 20 settimane o puerperio): magnesio solfato 4 g ev in 15–20 min.',
+          'Eclampsia (gravidanza > 20 settimane o puerperio): magnesio solfato 4 g ev (4 fiale da 1 g/10 mL) in 15–20 min.',
           'Intossicazioni (triciclici, isoniazide: piridossina), astinenza da alcol o benzodiazepine.',
           'TC encefalo; rachicentesi se febbre o sospetta infezione (antibiotico prima, se ritardata).',
         ],
@@ -1050,8 +1050,8 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           'Adrenalina 1 mg (1 fiala da 1 mg/mL) in 100 mL di SF (10 µg/mL): partire da 0,5–1 mL/kg/h = 35–70 mL/h, titolare; monitor e PA invasiva se possibile.',
           'Liquidi: cristalloidi 500–1.000 mL in bolo, ripetibili (anche diversi litri).',
-          'Beta-bloccati: glucagone 1–2 mg ev ogni 5 min.',
-          'Broncospasmo: salbutamolo nebulizzato; edema laringeo: adrenalina nebulizzata 5 mg (5 fiale), intubazione precoce da parte di esperto.',
+          'Beta-bloccati: glucagone (GlucaGen) 1–2 mg ev ogni 5 min.',
+          'Broncospasmo: salbutamolo (Broncovaleas) nebulizzato; edema laringeo: adrenalina nebulizzata 5 mg (5 fiale), intubazione precoce da parte di esperto.',
           'Arresto: ALS con adrenalina ev 1 mg (timer ACR).',
         ],
       },
@@ -1085,15 +1085,15 @@ export const LINEE_GUIDA: LineaGuida[] = [
     inBreve: [
       'Dose potenzialmente tossica: ≥ 10 g o ≥ 200 mg/kg (la minore) in un’unica assunzione.',
       'Carbone attivo 50 g entro 2 h dall’ingestione (entro 4 h se ≥ 30 g o rilascio modificato), se vigile e collaborante.',
-      'Paracetamolemia a 4 h (o appena possibile dopo): sopra la linea del nomogramma → N-acetilcisteina.',
-      'Ora sconosciuta, assunzioni ripetute nel tempo, rilascio modificato o arrivo dopo 8 h con dose tossica: N-acetilcisteina subito, senza aspettare il dosaggio.',
-      'N-acetilcisteina a due sacche: 200 mg/kg in 4 h, poi 100 mg/kg in 16 h. Intossicazione massiva: seconda sacca raddoppiata. Sentire il Centro Antiveleni.',
+      'Paracetamolemia a 4 h (o appena possibile dopo): sopra la linea del nomogramma → N-acetilcisteina (Hidonac).',
+      'Ora sconosciuta, assunzioni ripetute nel tempo, rilascio modificato o arrivo dopo 8 h con dose tossica: N-acetilcisteina (Hidonac) subito, senza aspettare il dosaggio.',
+      'N-acetilcisteina (Hidonac) a due sacche: 200 mg/kg in 4 h, poi 100 mg/kg in 16 h. Intossicazione massiva: seconda sacca raddoppiata. Sentire il Centro Antiveleni.',
     ],
     sezioni: [
       {
         titolo: 'N-acetilcisteina (70 kg)',
         punti: [
-          '1ª sacca: 200 mg/kg = 14 g = 70 mL di N-acetilcisteina 200 mg/mL (es. 2,8 fiale da 5 g/25 mL) in 500 mL di glucosata 5% in 4 h.',
+          '1ª sacca: 200 mg/kg = 14 g = 70 mL di N-acetilcisteina (Hidonac) 200 mg/mL = 2,8 fiale da 5 g/25 mL in 500 mL di glucosata 5% in 4 h.',
           '2ª sacca: 100 mg/kg = 7 g = 35 mL (1,4 fiale) in 1.000 mL di glucosata 5% in 16 h.',
           'Massiva (≥ 30 g o paracetamolemia > doppio della linea): 2ª sacca 200 mg/kg = 14 g in 16 h.',
           'Reazioni anafilattoidi (rash, broncospasmo): sospendere, antistaminico, poi riprendere a velocità più bassa. Non sono una vera allergia.',
@@ -1127,7 +1127,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     inBreve: [
       'TC senza contrasto subito; angio-TC per spot sign e lesioni sottostanti (soprattutto se < 70 anni, lobare, senza ipertensione).',
       'PAS 150–220: portarla a 140 e mantenerla 130–150, in modo graduale e senza oscillazioni; iniziare entro 2 h dall’esordio e arrivare all’obiettivo entro 1 h. Evitare PAS < 130.',
-      'Anticoagulante: sospendere e antagonizzare subito (PCC + vitamina K per i dicumarolici, idarucizumab per dabigatran, PCC per gli anti-Xa).',
+      'Anticoagulante: sospendere e antagonizzare subito (PCC + vitamina K (Konakion) per i dicumarolici, idarucizumab (Praxbind) per dabigatran (Pradaxa), PCC per gli anti-Xa).',
       'Antiaggregante: niente trasfusione di piastrine se non va in sala operatoria.',
       'Neurochirurgo subito per emorragia cerebellare con compressione del tronco o idrocefalo, o deterioramento.',
       'No corticosteroidi, no antiepilettici in profilassi, no acido tranexamico di routine.',
@@ -1144,10 +1144,10 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Antagonizzare (70 kg)',
         punti: [
-          'Dicumarolico con INR ≥ 2: complesso protrombinico (PCC) 25–50 UI/kg secondo INR (INR 2–4: 25 UI/kg = 1.750 UI; 4–6: 35 UI/kg = 2.450 UI; > 6: 50 UI/kg = 3.500 UI) + vitamina K 10 mg ev lenta (1 fiala). INR 1,3–1,9: PCC da considerare.',
-          'Dabigatran: idarucizumab 5 g ev (2 flaconi da 2,5 g).',
-          'Apixaban, rivaroxaban, edoxaban: PCC 50 UI/kg = 3.500 UI. Andexanet alfa: ritirato negli USA nel 2025 per eventi trombotici; in Europa autorizzazione condizionata.',
-          'Eparina non frazionata: protamina 1 mg ogni 100 UI somministrate nelle ultime 2–3 h (max 50 mg). Enoxaparina < 8 h: protamina 1 mg per mg (effetto parziale).',
+          'Dicumarolico con INR ≥ 2: complesso protrombinico (PCC) 25–50 UI/kg secondo INR (INR 2–4: 25 UI/kg = 1.750 UI ≈ 4 flaconi da 500; 4–6: 35 UI/kg = 2.450 UI = 5 flaconi; > 6: 50 UI/kg = 3.500 UI = 7 flaconi) + vitamina K (Konakion) 10 mg ev lenta (1 fiala). INR 1,3–1,9: PCC da considerare.',
+          'Dabigatran (Pradaxa): idarucizumab (Praxbind) 5 g ev (2 flaconi da 2,5 g).',
+          'Apixaban (Eliquis), rivaroxaban (Xarelto), edoxaban (Lixiana): PCC 50 UI/kg = 3.500 UI = 7 flaconi da 500 UI. Andexanet alfa: ritirato negli USA nel 2025 per eventi trombotici; in Europa autorizzazione condizionata.',
+          'Eparina non frazionata: protamina 1 mg ogni 100 UI somministrate nelle ultime 2–3 h (max 50 mg). Enoxaparina (Clexane) < 8 h: protamina 1 mg per mg (effetto parziale).',
           'Ultima assunzione < 2 h di un anticoagulante orale: carbone attivo 50 g se protegge le vie aeree.',
         ],
       },
@@ -1178,8 +1178,8 @@ export const LINEE_GUIDA: LineaGuida[] = [
     inBreve: [
       'Cefalea improvvisa che raggiunge il massimo in meno di 1 ora: pensarci. La regola di Ottawa aiuta a escluderla nei pazienti vigili.',
       'TC entro 6 h dall’esordio, letta da un radiologo esperto e negativa: ESA esclusa. Oltre 6 h: rachicentesi (xantocromia, almeno 12 h dall’esordio) o angio-TC.',
-      'ESA confermata: neurochirurgia/neuroradiologia di riferimento per trattare l’aneurisma il prima possibile.',
-      'Nimodipina 60 mg per bocca ogni 4 h; antagonizzare gli anticoagulanti; controllare la PA (obiettivo esatto non definito; spesso PAS < 160).',
+      'ESA confermata: neurochirurgia/neuroradiologia di Careggi per trattare l’aneurisma il prima possibile.',
+      'Nimodipina (Nimotop) 60 mg per bocca ogni 4 h; antagonizzare gli anticoagulanti; controllare la PA (obiettivo esatto non definito; spesso PAS < 160).',
       'Idrocefalo acuto con peggioramento: derivazione ventricolare esterna.',
       'No acido tranexamico, no antiepilettici in profilassi di routine.',
     ],
@@ -1195,8 +1195,8 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Farmaci (70 kg)',
         punti: [
-          'Nimodipina 60 mg = 2 compresse da 30 mg ogni 4 h per 21 giorni; se ipotensione, 30 mg ogni 2 h.',
-          'Pressione: labetalolo 10–20 mg ev o urapidil 10–25 mg ev, evitando ipotensione.',
+          'Nimodipina (Nimotop) 60 mg = 2 compresse da 30 mg ogni 4 h per 21 giorni; se ipotensione, 30 mg ogni 2 h.',
+          'Pressione: labetalolo (Trandate) 10–20 mg ev o urapidil (Ebrantil) 10–25 mg ev, evitando ipotensione.',
           'Analgesia: paracetamolo 1 g ev; oppioide a basse dosi se serve. Antiemetico.',
           'Anticoagulanti: vedi il PDTA «Anticoagulato che sanguina».',
         ],
@@ -1238,19 +1238,19 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Antidoti (70 kg)',
         punti: [
-          'Dicumarolico (warfarin, acenocumarolo): PCC 25–50 UI/kg secondo INR (1.750–3.500 UI) + vitamina K 5–10 mg ev lenta.',
-          'Dabigatran: idarucizumab 5 g ev (2 flaconi da 2,5 g); dialisi se non disponibile.',
-          'Apixaban, rivaroxaban, edoxaban: PCC 50 UI/kg = 3.500 UI (alternativa a dose fissa 2.000 UI). Andexanet alfa solo dove disponibile: segnale di trombosi, ritirato negli USA.',
+          'Dicumarolico (warfarin (Coumadin), acenocumarolo (Sintrom)): PCC 25–50 UI/kg secondo INR (1.750–3.500 UI = 4–7 flaconi da 500 UI) + vitamina K (Konakion) 5–10 mg ev lenta.',
+          'Dabigatran (Pradaxa): idarucizumab (Praxbind) 5 g ev (2 flaconi da 2,5 g); dialisi se non disponibile.',
+          'Apixaban (Eliquis), rivaroxaban (Xarelto), edoxaban (Lixiana): PCC 50 UI/kg = 3.500 UI = 7 flaconi da 500 UI (alternativa a dose fissa 2.000 UI). Andexanet alfa solo dove disponibile: segnale di trombosi, ritirato negli USA.',
           'Eparina non frazionata: protamina 1 mg ogni 100 UI delle ultime 2–3 h (max 50 mg).',
-          'Enoxaparina: protamina 1 mg per mg se < 8 h (0,5 mg per mg se 8–12 h); neutralizzazione parziale.',
+          'Enoxaparina (Clexane): protamina 1 mg per mg se < 8 h (0,5 mg per mg se 8–12 h); neutralizzazione parziale.',
           'Assunzione dell’anticoagulante orale < 2–4 h: carbone attivo 50 g.',
         ],
       },
       {
         titolo: 'INR alto senza sanguinamento (dicumarolici)',
         punti: [
-          'INR sopra il range e < 10: sospendere 1–2 dosi, ridurre la dose; niente vitamina K di routine.',
-          'INR > 10: sospendere e vitamina K 2–5 mg per bocca; ricontrollo a 24 h.',
+          'INR sopra il range e < 10: sospendere 1–2 dosi, ridurre la dose; niente vitamina K (Konakion) di routine.',
+          'INR > 10: sospendere e vitamina K (Konakion) 2–5 mg per bocca; ricontrollo a 24 h.',
         ],
       },
       {
@@ -1286,18 +1286,18 @@ export const LINEE_GUIDA: LineaGuida[] = [
       'Invasiva immediata (< 2 h) se rischio molto alto: instabilità o shock, dolore refrattario, aritmie maligne o arresto, complicanze meccaniche, scompenso acuto, sopraslivellamenti ST intermittenti.',
       'Invasiva precoce (< 24 h) se rischio alto: NSTEMI confermato, alterazioni ST-T dinamiche, sopraslivellamento ST transitorio, GRACE > 140.',
       'ASA a tutti; pretrattamento con inibitore P2Y12 non di routine se la coronarografia è prevista entro 24 h.',
-      'Anticoagulante: eparina non frazionata se coronarografia subito; enoxaparina in alternativa; fondaparinux se la coronarografia non è precoce.',
+      'Anticoagulante: eparina non frazionata se coronarografia subito; enoxaparina (Clexane) in alternativa; fondaparinux (Arixtra) se la coronarografia non è precoce.',
     ],
     sezioni: [
       {
         titolo: 'Farmaci (70 kg)',
         punti: [
-          'ASA: 150–300 mg per bocca masticata o 75–250 mg ev.',
-          'Eparina non frazionata: 70–100 UI/kg = 5.000–7.000 UI ev in sala.',
-          'Enoxaparina 1 mg/kg = 70 mg sc ogni 12 h (dimezzare la frequenza se clearance < 30).',
-          'Fondaparinux 2,5 mg sc al giorno (se coronarografia non precoce).',
-          'P2Y12 (con il cardiologo): ticagrelor 180 mg, prasugrel 60 mg (se anatomia nota; no se ictus/TIA pregresso), clopidogrel 300–600 mg se anticoagulato o gli altri non indicati.',
-          'Nitrati se dolore o ipertensione (no se PAS < 90, infarto del ventricolo destro, inibitori PDE5 recenti); metoprololo 5 mg ev se tachicardia e ipertensione senza scompenso; morfina 2–4 mg ev se dolore forte; ossigeno solo se SpO₂ < 90%.',
+          'ASA: 150–300 mg per bocca masticata o 75–250 mg ev (Flectadol 500 mg: mezzo flacone = 250 mg).',
+          'Eparina non frazionata: 70–100 UI/kg = 5.000–7.000 UI ev = 1–1,4 mL della fiala da 25.000 UI/5 mL.',
+          'Enoxaparina (Clexane) 1 mg/kg = 70 mg sc ogni 12 h (dimezzare la frequenza se clearance < 30).',
+          'Fondaparinux (Arixtra) 2,5 mg sc al giorno (se coronarografia non precoce).',
+          'P2Y12 (con il cardiologo): ticagrelor (Brilique) 180 mg, prasugrel (Efient) 60 mg (se anatomia nota; no se ictus/TIA pregresso), clopidogrel (Plavix) 300–600 mg se anticoagulato o gli altri non indicati.',
+          'Nitrati se dolore o ipertensione (no se PAS < 90, infarto del ventricolo destro, inibitori PDE5 recenti); metoprololo (Lopresor) 5 mg ev se tachicardia e ipertensione senza scompenso; morfina 2–4 mg ev se dolore forte; ossigeno solo se SpO₂ < 90%.',
         ],
       },
       {
@@ -1328,7 +1328,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       'Sospetto con ADD-RS: 0–1 → D-dimero (e eco); ≥ 2 → angio-TC aorta subito.',
       'ADD-RS ≤ 1 e D-dimero < 500 ng/mL: sindrome aortica acuta improbabile.',
       'Terapia: analgesia con oppioide, poi beta-bloccante ev per FC ≤ 60, poi vasodilatatore per PAS < 120 (100–120).',
-      'Tipo A (aorta ascendente): cardiochirurgia d’urgenza. Tipo B complicato (malperfusione, rottura, dolore o ipertensione refrattari): endoprotesi.',
+      'Tipo A (aorta ascendente): cardiochirurgia di Careggi d’urgenza. Tipo B complicato (malperfusione, rottura, dolore o ipertensione refrattari): endoprotesi.',
       'Niente anticoagulanti, antiaggreganti o fibrinolitici finché il sospetto non è escluso.',
     ],
     sezioni: [
@@ -1343,12 +1343,11 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Farmaci (70 kg)',
         punti: [
-          'Morfina 2–4 mg ev ripetibile o fentanil 50 µg ev.',
-          'Esmololo: 0,5 mg/kg = 35 mg in 1 min, poi 50–200 µg/kg/min (3,5–14 mg/min).',
-          'Labetalolo 20 mg ev in 2 min, poi 20–80 mg ogni 10 min (max 300 mg) o 0,5–2 mg/min.',
-          'Metoprololo 5 mg ev ogni 5 min fino a 15 mg.',
+          'Morfina 2–4 mg ev ripetibile o fentanil (Fentanest) 50 µg ev.',
+          'Labetalolo (Trandate) 20 mg ev in 2 min, poi 20–80 mg ogni 10 min (max 300 mg) o 0,5–2 mg/min.',
+          'Metoprololo (Lopresor) 5 mg ev ogni 5 min fino a 15 mg.',
           'Beta-bloccante controindicato: diltiazem 0,25 mg/kg = 17,5 mg ev in 2 min.',
-          'Dopo il controllo della FC: urapidil 10–25 mg ev poi 5–30 mg/h (o nitroprussiato).',
+          'Dopo il controllo della FC: urapidil (Ebrantil) 10–25 mg ev poi 5–30 mg/h. Esmololo e nitroprussiato non disponibili in PS.',
         ],
       },
       {
@@ -1376,19 +1375,19 @@ export const LINEE_GUIDA: LineaGuida[] = [
     inBreve: [
       'Grave: parla a parole, seduto in avanti, agitato, FR > 30, muscoli accessori, FC > 120, SpO₂ < 90%, PEF ≤ 50%.',
       'Pericolo di vita: sopore, confusione, torace silente → rianimatore, preparare l’intubazione.',
-      'Salbutamolo ripetuto nella prima ora + ipratropio nelle forme gravi; ossigeno per SpO₂ 93–95%; cortisone sistemico entro 1 h.',
+      'Salbutamolo (Broncovaleas) ripetuto nella prima ora + ipratropio (Atem) nelle forme gravi; ossigeno per SpO₂ 93–95%; cortisone sistemico entro 1 h.',
       'Magnesio solfato ev nelle forme gravi che non rispondono.',
       'Niente antibiotici di routine, niente sedativi.',
-      'Dimissione: iniziare o aumentare la terapia inalatoria con cortisone, prednisone 5–7 giorni, controllo entro 2–7 giorni.',
+      'Dimissione: iniziare o aumentare la terapia inalatoria con cortisone, prednisone (Deltacortene) 5–7 giorni, controllo entro 2–7 giorni.',
     ],
     sezioni: [
       {
         titolo: 'Farmaci (70 kg)',
         punti: [
-          'Salbutamolo spray 100 µg: 4–10 puff con distanziatore ogni 20 min per 1 h; oppure nebulizzato 2,5–5 mg (0,5–1 mL della soluzione 5 mg/mL) ogni 20 min.',
-          'Ipratropio 0,5 mg nebulizzato (1 fiala) ogni 20 min per 1 h, nelle forme gravi.',
-          'Prednisone 50 mg per bocca (2 compresse da 25 mg) oppure metilprednisolone 40 mg ev se non deglutisce.',
-          'Magnesio solfato 2 g ev in 20 min (verificare la concentrazione delle fiale).',
+          'Salbutamolo (Broncovaleas) spray 100 µg: 4–10 puff con distanziatore ogni 20 min per 1 h; oppure nebulizzato 2,5–5 mg (0,5–1 mL della soluzione 5 mg/mL) ogni 20 min.',
+          'Ipratropio (Atem) 0,5 mg nebulizzato (1 fiala) ogni 20 min per 1 h, nelle forme gravi.',
+          'Prednisone (Deltacortene) 50 mg per bocca (2 compresse da 25 mg) oppure metilprednisolone (Solu-Medrol) 40 mg ev se non deglutisce.',
+          'Magnesio solfato 2 g = 2 fiale da 1 g/10 mL in 100 mL di SF in 20 min.',
           'Adrenalina im 0,5 mg solo se anafilassi o asma quasi fatale senza risposta.',
         ],
       },
@@ -1396,7 +1395,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         titolo: 'Ricovero o dimissione',
         punti: [
           'Rivalutare a 1 h: sintomi, SpO₂, PEF.',
-          'Ricovero se PEF < 60% dopo il trattamento, SpO₂ bassa, peggioramento o fattori di rischio di asma fatale (intubazioni precedenti, ricoveri recenti, uso eccessivo di salbutamolo).',
+          'Ricovero se PEF < 60% dopo il trattamento, SpO₂ bassa, peggioramento o fattori di rischio di asma fatale (intubazioni precedenti, ricoveri recenti, uso eccessivo di salbutamolo (Broncovaleas)).',
           'Dimissione se PEF > 60–80%, SpO₂ > 94% in aria e sintomi migliorati.',
           'RX torace solo se sospetto di complicanza (pneumotorace, polmonite) o mancata risposta.',
         ],
@@ -1423,7 +1422,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     inBreve: [
       'Escludere ciò che la imita: polmonite, scompenso, embolia polmonare, pneumotorace, SCA, aritmie.',
       'Ossigeno con obiettivo SpO₂ 88–92%; EGA all’arrivo e dopo 30–60 min.',
-      'Broncodilatatori a breve durata (salbutamolo ± ipratropio); prednisone 40 mg per 5 giorni.',
+      'Broncodilatatori a breve durata (salbutamolo (Broncovaleas) ± ipratropio (Atem)); prednisone (Deltacortene) 40 mg per 5 giorni.',
       'Antibiotico se espettorato purulento con aumento del volume o della dispnea, o se serve la ventilazione; 5–7 giorni.',
       'NIV se acidosi respiratoria (pH ≤ 7,35 e PaCO₂ ≥ 45) o dispnea grave con fatica; alti flussi nasali come alternativa in casi selezionati.',
     ],
@@ -1431,9 +1430,9 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Farmaci (70 kg)',
         punti: [
-          'Salbutamolo 2,5–5 mg nebulizzato (0,5–1 mL) ogni 20 min per 1 h, poi ogni 4–6 h; con aria compressa se ipercapnia (o ossigeno a basso flusso a parte).',
-          'Ipratropio 0,5 mg nebulizzato (1 fiala) ogni 6–8 h.',
-          'Prednisone 40 mg (1 compressa da 25 mg + 3 da 5 mg) per 5 giorni, o metilprednisolone 40 mg ev.',
+          'Salbutamolo (Broncovaleas) 2,5–5 mg nebulizzato (0,5–1 mL) ogni 20 min per 1 h, poi ogni 4–6 h; con aria compressa se ipercapnia (o ossigeno a basso flusso a parte).',
+          'Ipratropio (Atem) 0,5 mg nebulizzato (1 fiala) ogni 6–8 h.',
+          'Prednisone (Deltacortene) 40 mg (1 compressa da 25 mg + 3 da 5 mg) per 5 giorni, o metilprednisolone (Solu-Medrol) 40 mg ev.',
         ],
       },
       {
@@ -1464,7 +1463,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       'Se non risponde: isoprenalina 5 µg/min o adrenalina 2–10 µg/min, pacing transcutaneo come ponte al transvenoso.',
       'Anche senza segni di pericolo, rischio di asistolia: BAV Mobitz II, BAV completo con QRS largo, pause > 3 s, asistolia recente → pacing.',
       'Atropina inefficace (e può peggiorare) nel BAV avanzato a QRS largo e nel trapiantato cardiaco.',
-      'Cause: iperkaliemia, farmaci (beta-bloccanti, calcio-antagonisti, digossina), ischemia inferiore, ipotermia, ipotiroidismo.',
+      'Cause: iperkaliemia, farmaci (beta-bloccanti, calcio-antagonisti, digossina (Lanoxin)), ischemia inferiore, ipotermia, ipotiroidismo.',
     ],
     sezioni: [
       {
@@ -1473,8 +1472,8 @@ export const LINEE_GUIDA: LineaGuida[] = [
           'Atropina 0,5 mg ev (1 fiala da 0,5 mg) ogni 3–5 min, massimo 3 mg.',
           'Isoprenalina: 1 fiala da 0,2 mg in 50 mL di glucosata 5% (4 µg/mL): 5 µg/min = 75 mL/h, titolare.',
           'Adrenalina: 1 mg in 50 mL di SF (20 µg/mL): 2–10 µg/min = 6–30 mL/h.',
-          'Beta-bloccante o calcio-antagonista: glucagone 2–10 mg ev (con calcio e insulina ad alte dosi su consiglio del tossicologo).',
-          'Digossina: anticorpi antidigossina (Tossicologia).',
+          'Beta-bloccante o calcio-antagonista: glucagone (GlucaGen) 2–10 mg ev (con calcio e insulina ad alte dosi su consiglio del tossicologo).',
+          'Digossina (Lanoxin): anticorpi antidigossina (Tossicologia).',
           'Trapiantato o lesione midollare: aminofillina 100–200 mg ev lenta.',
         ],
       },
@@ -1493,11 +1492,11 @@ export const LINEE_GUIDA: LineaGuida[] = [
     controllata: '2026-11-11',
     vediAnche: [{ etichetta: 'Fibrillazione atriale', to: '/linee-guida/fibrillazione-atriale' }, { etichetta: 'Sedazione procedurale', to: '/sedazione?apri=procedurale' }, { etichetta: 'Timer ACR', to: '/acr' }],
     inBreve: [
-      'Instabile (shock, sincope, ischemia, scompenso): cardioversione sincronizzata in sedazione, fino a 3 tentativi; se fallisce, amiodarone 300 mg in 10–20 min e ritentare.',
-      'Stabile, QRS stretto regolare: manovra vagale (Valsalva modificata), poi adenosina 6–12–18 mg.',
+      'Instabile (shock, sincope, ischemia, scompenso): cardioversione sincronizzata in sedazione, fino a 3 tentativi; se fallisce, amiodarone (Cordarone) 300 mg in 10–20 min e ritentare.',
+      'Stabile, QRS stretto regolare: manovra vagale (Valsalva modificata), poi adenosina (Krenosin) 6–12–18 mg.',
       'Stabile, QRS stretto irregolare: probabile FA → controllo della frequenza (vedi PDTA FA).',
-      'Stabile, QRS largo regolare: considerarla TV → amiodarone 300 mg in 10–60 min (o procainamide), o cardioversione elettiva.',
-      'Torsione di punta: magnesio solfato 2 g ev in 10 min; correggere K e Mg, sospendere i farmaci che allungano il QT.',
+      'Stabile, QRS largo regolare: considerarla TV → amiodarone (Cordarone) 300 mg in 10–60 min (o procainamide), o cardioversione elettiva.',
+      'Torsione di punta: magnesio solfato 2 g ev (2 fiale da 1 g/10 mL) in 10 min; correggere K e Mg, sospendere i farmaci che allungano il QT.',
     ],
     sezioni: [
       {
@@ -1507,16 +1506,16 @@ export const LINEE_GUIDA: LineaGuida[] = [
           'Flutter e tachicardia sopraventricolare: 70–120 J, poi a salire.',
           'TV con polso: 120–150 J, poi a salire.',
           'TV polimorfa instabile: defibrillazione (non sincronizzata).',
-          'Amiodarone dopo la cardioversione fallita: 300 mg in 10–20 min, poi 900 mg in 24 h.',
+          'Amiodarone (Cordarone) dopo la cardioversione fallita: 300 mg in 10–20 min, poi 900 mg in 24 h.',
         ],
       },
       {
         titolo: 'Farmaci (70 kg)',
         punti: [
           'Valsalva modificata: soffiare 15 s in una siringa da 10 mL (40 mmHg) da semiseduto, poi subito supino con gambe sollevate a 45° per 15 s.',
-          'Adenosina 6 mg (1 fiala) in bolo rapido + 20 mL di SF in vena grossa; poi 12 mg, poi 18 mg. Avvisare del malessere; evitare nell’asma grave e nella preeccitazione con FA.',
-          'Alternativa nella TPSV: verapamil 5 mg ev in 2 min (no se QRS largo o scompenso) o metoprololo 5 mg ev.',
-          'Amiodarone 300 mg = 2 fiale da 150 mg in 250 mL di glucosata 5%.',
+          'Adenosina (Krenosin) 6 mg (1 fiala) in bolo rapido + 20 mL di SF in vena grossa; poi 12 mg, poi 18 mg. Avvisare del malessere; evitare nell’asma grave e nella preeccitazione con FA.',
+          'Alternativa nella TPSV: verapamil (Isoptin) 5 mg ev in 2 min (no se QRS largo o scompenso) o metoprololo (Lopresor) 5 mg ev.',
+          'Amiodarone (Cordarone) 300 mg = 2 fiale da 150 mg in 250 mL di glucosata 5%.',
         ],
       },
     ],

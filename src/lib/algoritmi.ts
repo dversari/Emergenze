@@ -35,12 +35,12 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         tipo: 'rami', rami: [
           {
             etichetta: 'Dicumarolico', tono: 'no', nodi: [
-              { tipo: 'terapia', titolo: 'PCC + vitamina K', righe: ['INR ≥ 2: PCC 25–50 UI/kg (1.750–3.500 UI) + vitamina K 10 mg ev.'], vedi: 'Antagonizzare (70 kg)' },
+              { tipo: 'terapia', titolo: 'PCC + vitamina K', righe: ['INR ≥ 2: PCC 25–50 UI/kg (4–7 flaconi da 500 UI) + vitamina K (Konakion) 10 mg ev.'], vedi: 'Antagonizzare (70 kg)' },
             ],
           },
           {
             etichetta: 'DOAC', tono: 'no', nodi: [
-              { tipo: 'terapia', titolo: 'Antidoto', righe: ['Dabigatran: idarucizumab 5 g ev. Anti-Xa: PCC 50 UI/kg = 3.500 UI.'], vedi: 'Antagonizzare (70 kg)' },
+              { tipo: 'terapia', titolo: 'Antidoto', righe: ['Dabigatran (Pradaxa): idarucizumab (Praxbind) 5 g ev. Anti-Xa: PCC 50 UI/kg = 7 flaconi da 500 UI.'], vedi: 'Antagonizzare (70 kg)' },
             ],
           },
           {
@@ -53,13 +53,13 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       { tipo: 'decisione', titolo: 'PAS 150–220?' },
       {
         tipo: 'terapia', titolo: 'PAS 140 (130–150) entro 1 h', tempo: 'inizio ≤ 2 h',
-        righe: ['Labetalolo 10–20 mg ev ogni 10 min o urapidil 10–25 mg ev, poi infusione. Gradualmente, senza oscillazioni; mai PAS < 130.'],
+        righe: ['Labetalolo (Trandate) 10–20 mg ev ogni 10 min o urapidil (Ebrantil) 10–25 mg ev, poi infusione. Gradualmente, senza oscillazioni; mai PAS < 130.'],
         vedi: 'Pressione arteriosa (70 kg)',
       },
       { tipo: 'decisione', titolo: 'Cerebellare con compressione, idrocefalo, effetto massa, peggioramento?' },
       {
         tipo: 'rami', rami: [
-          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Neurochirurgo subito', righe: ['Evacuazione o derivazione ventricolare.'] }] },
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Neurochirurgo di Careggi subito', righe: ['Evacuazione o derivazione ventricolare.'] }] },
           { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Stroke unit / terapia intensiva', righe: ['TC di controllo entro 24 h o se peggiora.'] }] },
         ],
       },
@@ -80,7 +80,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       { tipo: 'decisione', titolo: 'TC?' },
       {
         tipo: 'rami', rami: [
-          { etichetta: 'Sangue', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'ESA', righe: ['Angio-TC; neurochirurgia/neuroradiologia di riferimento.'] }] },
+          { etichetta: 'Sangue', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'ESA', righe: ['Angio-TC; neurochirurgia di Careggi.'] }] },
           { etichetta: 'Negativa ≤ 6 h', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'ESA esclusa', righe: ['Se TC di ultima generazione letta da radiologo esperto.'] }] },
           { etichetta: 'Negativa > 6 h', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Rachicentesi o angio-TC', righe: ['Rachicentesi almeno 12 h dall’esordio: xantocromia.'] }] },
         ],
@@ -90,7 +90,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         righe: [
           'GCS ≤ 8 o vie aeree non protette → intubazione',
           'Antagonizzare gli anticoagulanti',
-          'Nimodipina 60 mg per bocca (2 cp da 30 mg) ogni 4 h',
+          'Nimodipina (Nimotop) 60 mg per bocca (2 cp da 30 mg) ogni 4 h',
           'PA controllata evitando ipotensione (spesso PAS < 160)',
           'Analgesia (paracetamolo 1 g ev, oppioide a basse dosi), antiemetico',
           'Idrocefalo con peggioramento → derivazione ventricolare',
@@ -98,7 +98,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         ],
         vai: [{ etichetta: 'Anticoagulato che sanguina', to: '/linee-guida/anticoagulato-sanguinamento' }],
       },
-      { tipo: 'esito', titolo: 'Trasferimento al centro neurochirurgico', righe: ['Comunicare GCS, deficit motorio (WFNS), ora di esordio, terapie.'] },
+      { tipo: 'esito', titolo: 'Trasferimento alla neurochirurgia di Careggi', righe: ['Comunicare GCS, deficit motorio (WFNS), ora di esordio, terapie.'] },
     ],
   },
   'anticoagulato-sanguinamento': {
@@ -136,9 +136,9 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       { tipo: 'decisione', titolo: 'Quale anticoagulante?' },
       {
         tipo: 'rami', rami: [
-          { etichetta: 'Dicumarolico', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'PCC + vitamina K', righe: ['PCC 25–50 UI/kg secondo INR + vitamina K 5–10 mg ev lenta.'] }] },
+          { etichetta: 'Dicumarolico', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'PCC + vitamina K', righe: ['PCC 25–50 UI/kg secondo INR (4–7 flaconi da 500 UI) + vitamina K (Konakion) 5–10 mg ev lenta.'] }] },
           { etichetta: 'Dabigatran', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Idarucizumab 5 g ev', righe: ['2 flaconi da 2,5 g; dialisi se non disponibile.'] }] },
-          { etichetta: 'Anti-Xa', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'PCC 50 UI/kg = 3.500 UI', righe: ['Apixaban, rivaroxaban, edoxaban.'] }] },
+          { etichetta: 'Anti-Xa', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'PCC 50 UI/kg = 7 flaconi da 500 UI', righe: ['Apixaban (Eliquis), rivaroxaban (Xarelto), edoxaban (Lixiana).'] }] },
           { etichetta: 'Eparine', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Protamina', righe: ['1 mg ogni 100 UI di eparina (ultime 2–3 h) o per mg di enoxaparina (< 8 h); max 50 mg.'] }] },
         ],
       },
@@ -158,7 +158,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         tipo: 'rami', rami: [
           {
             etichetta: 'Sì', tono: 'no', nodi: [
-              { tipo: 'allarme', titolo: 'Coronarografia immediata', tempo: '< 2 h', righe: ['ASA 250 mg ev o 300 mg per bocca; eparina 5.000–7.000 UI ev. Emodinamista subito.'] },
+              { tipo: 'allarme', titolo: 'Coronarografia immediata', tempo: '< 2 h', righe: ['ASA 250 mg ev (mezzo flacone di Flectadol 500) o 300 mg per bocca; eparina 5.000–7.000 UI ev (1–1,4 mL della fiala 25.000 UI/5 mL). Emodinamista subito.'] },
             ],
             fine: 'emodinamica',
           },
@@ -193,9 +193,9 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         tipo: 'checklist', titolo: 'Terapia NSTEMI',
         righe: [
           'ASA 150–300 mg per bocca',
-          'Enoxaparina 70 mg sc ogni 12 h (o fondaparinux 2,5 mg se coronarografia non precoce)',
+          'Enoxaparina (Clexane) 70 mg sc ogni 12 h (o fondaparinux (Arixtra) 2,5 mg se coronarografia non precoce)',
           'P2Y12: decidere col cardiologo (non di routine se coronarografia < 24 h)',
-          'Nitrati se dolore/ipertensione; metoprololo 5 mg ev se tachicardico e iperteso senza scompenso',
+          'Nitrati se dolore/ipertensione; metoprololo (Lopresor) 5 mg ev se tachicardico e iperteso senza scompenso',
           'Monitor ECG; ossigeno solo se SpO₂ < 90%',
         ],
       },
@@ -224,9 +224,9 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       {
         tipo: 'terapia', titolo: 'Mentre si conferma',
         righe: [
-          '1. Analgesia: morfina 2–4 mg ev o fentanil 50 µg.',
-          '2. FC ≤ 60: esmololo 35 mg ev poi infusione, o labetalolo 20 mg ev, o metoprololo 5 mg ev.',
-          '3. Poi PAS 100–120: urapidil 10–25 mg ev poi infusione.',
+          '1. Analgesia: morfina 2–4 mg ev o fentanil (Fentanest) 50 µg.',
+          '2. FC ≤ 60: labetalolo (Trandate) 20 mg ev poi 20–80 mg ogni 10 min o infusione; metoprololo (Lopresor) 5 mg ev in alternativa.',
+          '3. Poi PAS 100–120: urapidil (Ebrantil) 10–25 mg ev poi infusione.',
           'Niente ASA, eparina o fibrinolitici.',
         ],
         vedi: 'Farmaci (70 kg)',
@@ -234,7 +234,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       { tipo: 'decisione', titolo: 'Tipo?' },
       {
         tipo: 'rami', rami: [
-          { etichetta: 'A (ascendente)', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Cardiochirurgia d’urgenza', righe: ['Trasferimento immediato.'] }] },
+          { etichetta: 'A (ascendente)', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Cardiochirurgia di Careggi', righe: ['Trasferimento immediato.'] }] },
           {
             etichetta: 'B (discendente)', tono: 'neutro', nodi: [
               { tipo: 'decisione', titolo: 'Complicata?', righe: ['Malperfusione, rottura, dolore o ipertensione refrattari, espansione rapida.'] },
@@ -260,7 +260,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         tipo: 'rami', rami: [
           {
             etichetta: 'Sì', tono: 'no', nodi: [
-              { tipo: 'allarme', titolo: 'Rianimatore', righe: ['Salbutamolo + ipratropio continui, metilprednisolone 40 mg ev, magnesio 2 g ev; intubazione da esperto (ketamina).'], vai: [{ etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' }] },
+              { tipo: 'allarme', titolo: 'Rianimatore', righe: ['Salbutamolo (Broncovaleas) + ipratropio (Atem) continui, metilprednisolone (Solu-Medrol) 40 mg ev, magnesio 2 g ev; intubazione da esperto (ketamina).'], vai: [{ etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' }] },
             ],
           },
           {
@@ -268,10 +268,10 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'checklist', titolo: 'Prima ora',
                 righe: [
-                  'Salbutamolo 4–10 puff con distanziatore o 2,5–5 mg nebulizzato ogni 20 min',
-                  'Grave: ipratropio 0,5 mg nebulizzato ogni 20 min',
+                  'Salbutamolo (Broncovaleas) 4–10 puff con distanziatore o 2,5–5 mg nebulizzato ogni 20 min',
+                  'Grave: ipratropio (Atem) 0,5 mg nebulizzato ogni 20 min',
                   'Ossigeno per SpO₂ 93–95%',
-                  'Prednisone 50 mg per bocca (o metilprednisolone 40 mg ev)',
+                  'Prednisone (Deltacortene) 50 mg per bocca (o metilprednisolone (Solu-Medrol) 40 mg ev)',
                 ],
               },
             ],
@@ -281,8 +281,8 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       { tipo: 'decisione', titolo: 'Dopo 1 h: grave e senza risposta?' },
       {
         tipo: 'rami', rami: [
-          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Magnesio solfato 2 g ev in 20 min', righe: ['Continuare salbutamolo; EGA; RX se sospetto pneumotorace; ricovero.'] }] },
-          { etichetta: 'No, migliorato', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Dimissione se PEF > 60–80%, SpO₂ > 94%', righe: ['Prednisone 5–7 giorni, cortisone inalatorio iniziato o aumentato, controllo entro 2–7 giorni.'] }] },
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Magnesio solfato 2 g ev (2 fiale da 1 g) in 20 min', righe: ['Continuare salbutamolo (Broncovaleas); EGA; RX se sospetto pneumotorace; ricovero.'] }] },
+          { etichetta: 'No, migliorato', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Dimissione se PEF > 60–80%, SpO₂ > 94%', righe: ['Prednisone (Deltacortene) 5–7 giorni, cortisone inalatorio iniziato o aumentato, controllo entro 2–7 giorni.'] }] },
         ],
       },
     ],
@@ -300,8 +300,8 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         tipo: 'terapia', titolo: 'Terapia',
         righe: [
           'Ossigeno per SpO₂ 88–92%.',
-          'Salbutamolo 2,5–5 mg + ipratropio 0,5 mg nebulizzati (con aria se ipercapnico).',
-          'Prednisone 40 mg per 5 giorni.',
+          'Salbutamolo (Broncovaleas) 2,5–5 mg + ipratropio (Atem) 0,5 mg nebulizzati (con aria se ipercapnico).',
+          'Prednisone (Deltacortene) 40 mg per 5 giorni.',
           'Antibiotico se espettorato purulento + più volume o dispnea, o se ventilato.',
         ],
         vai: [{ etichetta: 'Antibiotici: BPCO', to: '/antibiotici?apri=bpco' }],
@@ -354,8 +354,8 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         tipo: 'checklist', titolo: 'Cause da correggere',
         righe: [
           'Iperkaliemia → calcio gluconato',
-          'Beta-bloccanti/calcio-antagonisti → glucagone, calcio (Tossicologia)',
-          'Digossina → anticorpi antidigossina',
+          'Beta-bloccanti/calcio-antagonisti → glucagone (GlucaGen), calcio (Tossicologia)',
+          'Digossina (Lanoxin) → anticorpi antidigossina',
           'IMA inferiore → coronarografia',
           'Ipotermia, ipotiroidismo, ipertensione endocranica',
         ],
@@ -375,11 +375,11 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
             etichetta: 'Sì', tono: 'no', nodi: [
               {
                 tipo: 'allarme', titolo: 'Cardioversione sincronizzata',
-                righe: ['In sedazione, fino a 3 tentativi. FA: energia massima; flutter/TPSV 70–120 J; TV 120–150 J.', 'Fallisce: amiodarone 300 mg in 10–20 min e ritentare.'],
+                righe: ['In sedazione, fino a 3 tentativi. FA: energia massima; flutter/TPSV 70–120 J; TV 120–150 J.', 'Fallisce: amiodarone (Cordarone) 300 mg in 10–20 min e ritentare.'],
                 vai: [{ etichetta: 'Sedazione procedurale', to: '/sedazione?apri=procedurale' }],
               },
             ],
-            fine: 'poi amiodarone 900 mg/24 h',
+            fine: 'poi amiodarone (Cordarone) 900 mg/24 h',
           },
           { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'decisione', titolo: 'QRS stretto o largo? Regolare?' }] },
         ],
@@ -388,22 +388,22 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         tipo: 'rami', rami: [
           {
             etichetta: 'Stretto regolare', tono: 'neutro', nodi: [
-              { tipo: 'terapia', titolo: 'Vagale, poi adenosina', righe: ['Valsalva modificata; adenosina 6 → 12 → 18 mg in bolo rapido. Flutter: controllo della frequenza.'], vedi: 'Farmaci (70 kg)' },
+              { tipo: 'terapia', titolo: 'Vagale, poi adenosina', righe: ['Valsalva modificata; adenosina (Krenosin) 6 → 12 → 18 mg in bolo rapido. Flutter: controllo della frequenza.'], vedi: 'Farmaci (70 kg)' },
             ],
           },
           {
             etichetta: 'Stretto irregolare', tono: 'neutro', nodi: [
-              { tipo: 'passo', titolo: 'Probabile FA', righe: ['Beta-bloccante o diltiazem; amiodarone/digossina se scompenso.'], vai: [{ etichetta: 'Fibrillazione atriale', to: '/linee-guida/fibrillazione-atriale' }] },
+              { tipo: 'passo', titolo: 'Probabile FA', righe: ['Beta-bloccante o diltiazem; amiodarone (Cordarone)/digossina (Lanoxin) se scompenso.'], vai: [{ etichetta: 'Fibrillazione atriale', to: '/linee-guida/fibrillazione-atriale' }] },
             ],
           },
           {
             etichetta: 'Largo regolare', tono: 'no', nodi: [
-              { tipo: 'terapia', titolo: 'Considerarla TV', righe: ['Amiodarone 300 mg in 10–60 min o cardioversione elettiva. Adenosina solo se aberranza nota.'] },
+              { tipo: 'terapia', titolo: 'Considerarla TV', righe: ['Amiodarone (Cordarone) 300 mg in 10–60 min o cardioversione elettiva. Adenosina (Krenosin) solo se aberranza nota.'] },
             ],
           },
           {
             etichetta: 'Largo irregolare', tono: 'no', nodi: [
-              { tipo: 'passo', titolo: 'FA con blocco di branca, FA preeccitata o torsione', righe: ['Preeccitata: no adenosina, digossina, verapamil, diltiazem → cardioversione. Torsione: magnesio solfato 2 g ev in 10 min.'] },
+              { tipo: 'passo', titolo: 'FA con blocco di branca, FA preeccitata o torsione', righe: ['Preeccitata: no adenosina (Krenosin), digossina (Lanoxin), verapamil (Isoptin), diltiazem → cardioversione. Torsione: magnesio solfato 2 g ev (2 fiale da 1 g) in 10 min.'] },
             ],
           },
         ],
@@ -454,7 +454,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 righe: [
                   'Noradrenalina: 2 fiale da 2 mg in SF fino a 50 mL (80 µg/mL), da 0,05 µg/kg/min ≈ 2,5 mL/h.',
                   'PAM obiettivo 65 (60–65 se ≥ 65 anni).',
-                  'Idrocortisone 50 mg ev ogni 6 h.',
+                  'Idrocortisone (Flebocortid) 50 mg ev ogni 6 h.',
                   'Accesso arterioso, catetere vescicale, rianimatore.',
                 ],
               },
@@ -479,7 +479,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
   },
   ictus: {
     titolo: 'Algoritmo codice ictus',
-    nota: 'AHA/ASA 2026. Dosi per 70 kg. Trombectomia: centro di riferimento della rete ictus.',
+    nota: 'AHA/ASA 2026. Dosi per 70 kg. Trombectomia: Careggi.',
     nodi: [
       {
         tipo: 'avvio', titolo: 'Deficit neurologico acuto',
@@ -519,8 +519,8 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'terapia', titolo: 'Trombolisi se deficit invalidante',
                 righe: [
-                  'Tenecteplase 0,25 mg/kg = 17,5 mg in bolo (3,5 mL del flacone 25 mg a 5 mg/mL)',
-                  'oppure alteplase 0,9 mg/kg = 63 mg (6,3 mg bolo + 56,7 mg in 60 min)',
+                  'Tenecteplase (Metalyse) 0,25 mg/kg = 17,5 mg in bolo (3,5 mL del flacone da 50 mg ricostituito in 10 mL, 5 mg/mL)',
+                  'oppure alteplase (Actilyse) 0,9 mg/kg = 63 mg (6,3 mg bolo + 56,7 mg in 60 min)',
                   'PA < 185/110 prima, < 180/105 per 24 h',
                 ],
                 vedi: 'Controindicazioni principali',
@@ -545,7 +545,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         tipo: 'rami', rami: [
           {
             etichetta: 'Sì', tono: 'no', nodi: [
-              { tipo: 'allarme', titolo: 'Trombectomia', righe: ['Contatto immediato con il centro di trombectomia; non aspettare l’effetto della trombolisi.'] },
+              { tipo: 'allarme', titolo: 'Trombectomia', righe: ['Contatto immediato con la neuroradiologia di Careggi; non aspettare l’effetto della trombolisi.'] },
             ],
           },
           {
@@ -666,12 +666,12 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 righe: [
                   'Insulina rapida 10 UI + 25 g di glucosio (250 mL glucosata 10% o 50 mL al 50%) in 15 min.',
                   'Glicemia < 126: poi glucosata 10% 50 mL/h per 5 h.',
-                  'Salbutamolo 10–20 mg nebulizzato (2–4 mL della soluzione 5 mg/mL).',
+                  'Salbutamolo (Broncovaleas) 10–20 mg nebulizzato (2–4 mL della soluzione 5 mg/mL).',
                 ],
               },
               {
                 tipo: 'terapia', titolo: '3 · Eliminare il potassio',
-                righe: ['Zirconio ciclosilicato 10 g ogni 8 h (≥ 6,5; da considerare tra 6,0 e 6,4). Bicarbonato se acidosi. Furosemide se diuresi conservata. Dialisi se refrattaria.'],
+                righe: ['Kayexalate 15 g per bocca o 30 g per clistere (lento; Lokelma preferito ma non disponibile). Bicarbonato se acidosi. Furosemide (Lasix) se diuresi conservata. Dialisi se refrattaria.'],
               },
             ],
           },
@@ -756,17 +756,17 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       {
         tipo: 'terapia', titolo: '5 min: benzodiazepina a dose piena', tempo: '5–20 min',
         righe: [
-          'Lorazepam 4 mg ev = 1 fiala, ripetibile dopo 5 min.',
-          'Senza vena: midazolam 10 mg im (2 fiale da 5 mg) o diazepam 10 mg ev/rettale.',
+          'Diazepam (Valium) 10 mg ev = 1 fiala in 2 min, ripetibile una volta dopo 5 min.',
+          'Senza vena: midazolam (Ipnovel) 10 mg im (2 fiale da 5 mg) o diazepam (Valium) rettale 10 mg (Micropam).',
         ],
       },
       { tipo: 'decisione', titolo: 'Ancora crisi dopo 2 dosi?' },
       {
         tipo: 'terapia', titolo: '20 min: seconda linea (efficacia simile)', tempo: '20–40 min',
         righe: [
-          'Levetiracetam 60 mg/kg = 4.200 mg (8,4 fiale da 500 mg) in 100 mL SF in 10 min',
-          'oppure valproato 40 mg/kg = 2.800 mg (7 flaconi da 400 mg) in 10 min',
-          'oppure fenitoina 20 mg/kg = 1.400 mg ≤ 50 mg/min con monitor',
+          'Levetiracetam (Keppra) 60 mg/kg = 4.200 mg (8,4 fiale da 500 mg) in 100 mL SF in 10 min',
+          'oppure valproato (Depakin) 40 mg/kg = 2.800 mg (7 flaconi da 400 mg) in 10 min',
+          'oppure fenitoina (Dintoina) 20 mg/kg = 1.400 mg ≤ 50 mg/min con monitor',
         ],
         vedi: 'Farmaci (70 kg)',
       },
@@ -774,7 +774,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       {
         tipo: 'allarme', titolo: '40 min: refrattario', tempo: '> 40 min',
         righe: [
-          'Intubazione e anestetico in infusione (propofol o midazolam), rianimatore, EEG continuo.',
+          'Intubazione e anestetico in infusione (propofol (Diprivan) o midazolam (Ipnovel)), rianimatore, EEG continuo.',
           'Si può aggiungere un secondo farmaco di seconda linea.',
         ],
         vai: [{ etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' }],
@@ -785,7 +785,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
           'Sospensione o livelli bassi degli antiepilettici',
           'Ipoglicemia, iponatriemia, ipocalcemia, ipomagnesemia',
           'Alcol (astinenza), tossici (triciclici, isoniazide → piridossina)',
-          'Eclampsia: magnesio solfato 4 g ev',
+          'Eclampsia: magnesio solfato 4 g ev (4 fiale da 1 g)',
           'TC encefalo; rachicentesi se febbre (antibiotico prima se ritardata)',
         ],
       },
@@ -809,7 +809,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
           'Sdraiato con gambe sollevate (seduto se dispnea; mai in piedi)',
           'Ossigeno ad alti flussi; monitor, SpO₂, PA',
           'Accesso venoso; cristalloidi 500–1.000 mL in bolo se ipoteso',
-          'Salbutamolo nebulizzato se broncospasmo',
+          'Salbutamolo (Broncovaleas) nebulizzato se broncospasmo',
         ],
       },
       { tipo: 'decisione', titolo: 'Dopo 5 min: problemi A, B, C persistono?' },
@@ -822,7 +822,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 tipo: 'allarme', titolo: 'Ancora? Anafilassi refrattaria',
                 righe: [
                   'Adrenalina 1 mg in 100 mL SF: 35–70 mL/h, titolare (esperto, terapia intensiva).',
-                  'Beta-bloccati: glucagone 1–2 mg ev.',
+                  'Beta-bloccati: glucagone (GlucaGen) 1–2 mg ev.',
                   'Stridore: adrenalina nebulizzata 5 mg; intubazione precoce.',
                   'Arresto: ALS.',
                 ],
@@ -877,7 +877,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
             etichetta: 'Sì', tono: 'si', nodi: [
               {
                 tipo: 'passo', titolo: 'Paracetamolemia a 4 h (o appena possibile)',
-                righe: ['Sopra la linea 150 mg/L a 4 h → N-acetilcisteina. Arrivo dopo 8 h: iniziare subito, poi decidere col dosaggio.'],
+                righe: ['Sopra la linea 150 mg/L a 4 h → N-acetilcisteina (Hidonac). Arrivo dopo 8 h: iniziare subito, poi decidere col dosaggio.'],
                 vedi: 'Linea di trattamento del nomogramma',
               },
             ],
@@ -892,8 +892,8 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       {
         tipo: 'terapia', titolo: 'N-acetilcisteina a due sacche',
         righe: [
-          '200 mg/kg = 14 g (70 mL a 200 mg/mL) in 500 mL glucosata 5% in 4 h',
-          'poi 100 mg/kg = 7 g (35 mL) in 1.000 mL in 16 h',
+          '200 mg/kg = 14 g (Hidonac: 70 mL = 2,8 fiale da 5 g/25 mL) in 500 mL glucosata 5% in 4 h',
+          'poi 100 mg/kg = 7 g (35 mL = 1,4 fiale) in 1.000 mL in 16 h',
           'Massiva (≥ 30 g o livello > doppio della linea): 2ª sacca 14 g in 16 h',
         ],
         vedi: 'N-acetilcisteina (70 kg)',
@@ -995,7 +995,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 righe: [
                   'VPPB canale posteriore: Epley (o Semont).',
                   'VPPB canale laterale geotropo: Gufoni sul fianco sano o Lempert (barbecue); apogeotropo: Gufoni sul fianco malato.',
-                  'Neurite vestibolare: prednisone 50–60 mg/die per 5 giorni a scalare (da considerare), sintomatici per 2–3 giorni (metoclopramide 10 mg ev = 1 fiala; ondansetron 4 mg), mobilizzazione precoce.',
+                  'Neurite vestibolare: prednisone (Deltacortene) 50–60 mg/die per 5 giorni a scalare (da considerare), sintomatici per 2–3 giorni (metoclopramide (Plasil) 10 mg ev = 1 fiala; ondansetron (Zofran) 4 mg), mobilizzazione precoce.',
                   'Niente sedativi vestibolari prolungati.',
                 ],
                 manovre: ['epley', 'semont', 'gufoni-geo', 'gufoni-apo', 'lempert'],
@@ -1215,7 +1215,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'terapia', titolo: 'Subito',
                 righe: [
-                  'Terlipressina 2 mg ev = 2 fiale da 1 mg ogni 4 h (poi 1 mg ogni 4 h), oppure somatostatina 250 µg in bolo + 250–500 µg/h.',
+                  'Terlipressina (Glypressin) 2 mg ev = 2 fiale da 1 mg ogni 4 h (poi 1 mg ogni 4 h), oppure somatostatina 250 µg in bolo + 250–500 µg/h.',
                   'Ceftriaxone 1 g ev/die fino a 7 giorni.',
                   'Eritromicina 250 mg ev 30–120 min prima dell’endoscopia.',
                   'Endoscopia (legatura) entro 12 h; Hb obiettivo 7–9, evitare la sovratrasfusione.',
@@ -1361,7 +1361,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 tipo: 'allarme', titolo: 'Terapia intensiva',
                 righe: [
                   'Emocolture ed espettorato prima, poi antibiotico subito (ceftriaxone + macrolide; Pseudomonas/MRSA se fattori di rischio).',
-                  'Antigeni urinari. Idrocortisone 200 mg/die se non influenza.',
+                  'Antigeni urinari. Idrocortisone (Flebocortid) 200 mg/die se non influenza.',
                 ],
                 vai: [{ etichetta: 'Antibiotici: CAP', to: '/antibiotici?apri=cap' }],
               },
@@ -1442,9 +1442,9 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'terapia', titolo: 'Controllo della frequenza (obiettivo FC < 110)',
                 righe: [
-                  'FE > 40%: metoprololo 2,5–5 mg ev in 2 min (½–1 fiala da 5 mg/5 mL), ripetibile fino a 15 mg; oppure diltiazem 0,25 mg/kg (≈ 18 mg) ev in 5 min.',
-                  'FE ≤ 40% o scompenso: digossina 0,5 mg ev = 1 fiala da 0,5 mg/2 mL; beta-bloccante a basse dosi con cautela; amiodarone se refrattaria.',
-                  'Niente diltiazem/verapamil se FE ≤ 40%.',
+                  'FE > 40%: metoprololo (Lopresor) 2,5–5 mg ev in 2 min (½–1 fiala da 5 mg/5 mL), ripetibile fino a 15 mg; oppure diltiazem 0,25 mg/kg (≈ 18 mg) ev in 5 min.',
+                  'FE ≤ 40% o scompenso: digossina (Lanoxin) 0,5 mg ev = 1 fiala da 0,5 mg/2 mL; beta-bloccante a basse dosi con cautela; amiodarone (Cordarone) se refrattaria.',
+                  'Niente diltiazem/verapamil (Isoptin) se FE ≤ 40%.',
                 ],
               },
             ],
@@ -1486,10 +1486,9 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'terapia', titolo: 'Farmacologica',
                 righe: [
-                  'Flecainide 2 mg/kg ev in 10 min (≈ 140 mg = 14 mL della fiala da 150 mg/15 mL; max 150 mg) o 300 mg per bocca = 3 cp da 100 mg.',
-                  'Propafenone 2 mg/kg ev in 10 min (≈ 140 mg = 2 fiale da 70 mg/20 mL) o 600 mg per bocca = 2 cp da 300 mg.',
-                  'Con flecainide/propafenone associare un nodale (rischio di flutter 1:1).',
-                  'Vernakalant 3 mg/kg (≈ 210 mg) ev in 10 min se disponibile.',
+                  'Flecainide (Almarytm) 2 mg/kg ev in 10 min (≈ 140 mg = 14 mL della fiala da 150 mg/15 mL; max 150 mg) o 300 mg per bocca = 3 cp da 100 mg.',
+                  'Propafenone (Rytmonorm) 2 mg/kg ev in 10 min (≈ 140 mg = 2 fiale da 70 mg/20 mL) o 600 mg per bocca = 2 cp da 300 mg.',
+                  'Con flecainide (Almarytm)/propafenone (Rytmonorm) associare un nodale (rischio di flutter 1:1).',
                 ],
               },
             ],
@@ -1499,7 +1498,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'terapia', titolo: 'Amiodarone o elettrica',
                 righe: [
-                  'Amiodarone 300 mg = 2 fiale da 150 mg in 250 mL di glucosata 5% in 30–60 min, poi 900–1200 mg nelle 24 h. Conversione lenta (ore).',
+                  'Amiodarone (Cordarone) 300 mg = 2 fiale da 150 mg in 250 mL di glucosata 5% in 30–60 min, poi 900–1200 mg nelle 24 h. Conversione lenta (ore).',
                   'Oppure cardioversione elettrica sincronizzata.',
                 ],
               },
@@ -1592,9 +1591,9 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 tipo: 'allarme', titolo: 'Ridistribuzione più che sovraccarico',
                 righe: [
                   'CPAP subito.',
-                  'Nitroglicerina in pompa: 2 fiale da 5 mg in SF fino a 50 mL (200 µg/mL). Partire da 10–20 µg/min (3–6 mL/h), aumentare ogni 3–5 min fino a 100–200 µg/min (30–60 mL/h), finché PAS ≥ 110 mmHg.',
-                  'In attesa della pompa: isosorbide dinitrato 5 mg sublinguale.',
-                  'Furosemide a dose bassa (es. 40 mg ev = 2 fiale da 20 mg): spesso il paziente non è in sovraccarico.',
+                  'Nitroglicerina in pompa: 10 fiale da 5 mg/1,5 mL (50 mg = 15 mL) + 35 mL di SF = 50 mL (1 mg/mL). Partire da 10–20 µg/min (0,6–1,2 mL/h), aumentare ogni 3–5 min fino a 100–200 µg/min (6–12 mL/h), finché PAS ≥ 110 mmHg.',
+                  'In attesa della pompa: isosorbide dinitrato (Carvasin) 5 mg sublinguale.',
+                  'Furosemide (Lasix) a dose bassa (es. 40 mg ev = 2 fiale da 20 mg): spesso il paziente non è in sovraccarico.',
                   'Niente morfina di routine (solo distress grave refrattario).',
                 ],
               },
@@ -1629,7 +1628,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       {
         tipo: 'terapia', titolo: 'Decongestione: furosemide ev',
         righe: [
-          'Mai trattato: furosemide 40 mg ev = 2 fiale da 20 mg/2 mL.',
+          'Mai trattato: furosemide (Lasix) 40 mg ev = 2 fiale da 20 mg/2 mL.',
           'Già in diuretico: il doppio della dose orale abituale ev (es. 50 mg/die per bocca → 100 mg ev = 5 fiale da 20 mg o 10 mL della fiala da 250 mg/25 mL). Più alta se insufficienza renale cronica.',
           'Bolo o infusione continua: equivalenti.',
           'Catetere o misura precisa della diuresi; liquidi assunti meno della diuresi.',
@@ -1651,9 +1650,9 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'terapia', titolo: 'Potenziare',
                 righe: [
-                  'Raddoppiare la dose ev di furosemide.',
+                  'Raddoppiare la dose ev di furosemide (Lasix).',
                   'Aggiungere (IIa) acetazolamide 500 mg ev = 1 fiala da 500 mg una volta al giorno, oppure idroclorotiazide per bocca 25 mg (eGFR > 50), 50 mg (20–50), 100 mg (< 20).',
-                  'Massimo abituale 600 mg/die di furosemide.',
+                  'Massimo abituale 600 mg/die di furosemide (Lasix).',
                 ],
               },
             ],
@@ -1697,7 +1696,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 tipo: 'terapia', titolo: 'Trattamento immediato',
                 righe: [
                   'Eparina non frazionata 80 U/kg ≈ 5.600 UI ev in bolo (≈ 1,1 mL della fiala da 25.000 UI/5 mL), poi 18 U/kg/h ≈ 1.250 UI/h.',
-                  'Trombolisi: alteplase 100 mg in 2 h (10 mg in bolo + 90 mg) = 2 flaconi da 50 mg; regime accelerato 0,6 mg/kg in 15 min (≈ 42 mg, max 50 mg).',
+                  'Trombolisi: alteplase (Actilyse) 100 mg in 2 h (10 mg in bolo + 90 mg) = 2 flaconi da 50 mg; regime accelerato 0,6 mg/kg in 15 min (≈ 42 mg, max 50 mg).',
                   'Controindicata o fallita: catetere o chirurgia (team PERT).',
                   'Noradrenalina se ipoteso; liquidi al massimo 500 mL; evitare intubazione e sedazione profonda se possibile.',
                 ],
@@ -1784,8 +1783,8 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       {
         tipo: 'terapia', titolo: 'Anticoagulazione (paziente stabile)',
         righe: [
-          'Enoxaparina 1 mg/kg ogni 12 h: 70 mg sc = 1 siringa da 7.000 UI/0,7 mL ogni 12 h (CrCl < 30: una volta al giorno).',
-          'Oppure DOAC: apixaban 10 mg ogni 12 h per 7 giorni (2 cp da 5 mg), poi 5 mg ogni 12 h; rivaroxaban 15 mg ogni 12 h per 21 giorni, poi 20 mg al giorno.',
+          'Enoxaparina (Clexane) 1 mg/kg ogni 12 h: 70 mg sc = 1 siringa da 7.000 UI/0,7 mL ogni 12 h (CrCl < 30: una volta al giorno).',
+          'Oppure DOAC: apixaban (Eliquis) 10 mg ogni 12 h per 7 giorni (2 cp da 5 mg), poi 5 mg ogni 12 h; rivaroxaban (Xarelto) 15 mg ogni 12 h per 21 giorni, poi 20 mg al giorno.',
           'Eparina non frazionata solo se instabile, se è probabile la trombolisi o con insufficienza renale grave.',
           'Durata: almeno 3 mesi.',
         ],
@@ -1900,12 +1899,12 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         righe: [
           'Aspirina 250 mg ev = ½ flacone da 500 mg (o 150–300 mg per bocca, masticata), se non già data dal 118.',
           'Eparina non frazionata 5.000 UI ev in bolo (70–100 U/kg) = 1 mL della fiala da 25.000 UI/5 mL. Se il paziente assume anticoagulanti orali: dose da concordare con l’emodinamista.',
-          'Inibitore P2Y12 deciso con l’emodinamista (il pretrattamento «può essere considerato»): prasugrel 60 mg = 6 cp da 10 mg (non se ictus/TIA pregresso; mantenimento 5 mg se ≥ 75 anni o < 60 kg); ticagrelor 180 mg = 2 cp da 90 mg; clopidogrel 600 mg = 8 cp da 75 mg se anticoagulante orale o alto rischio emorragico.',
-          'Dolore: morfina 2–4 mg ev (fiala 10 mg/1 mL in 10 mL di SF: 2–4 mL), ripetibile ogni 5–10 min; oppure fentanil 50 µg ev = 1 mL della fiala da 100 µg/2 mL. Gli oppioidi rallentano l’effetto degli antiaggreganti orali.',
-          'Isosorbide dinitrato 5 mg sublinguale se PAS > 90 mmHg; no se infarto del ventricolo destro o inibitori della PDE5 nelle 24–48 h. Nitroglicerina in infusione se ipertensione o scompenso.',
+          'Inibitore P2Y12 deciso con l’emodinamista (il pretrattamento «può essere considerato»): prasugrel (Efient) 60 mg = 6 cp da 10 mg (non se ictus/TIA pregresso; mantenimento 5 mg se ≥ 75 anni o < 60 kg); ticagrelor (Brilique) 180 mg = 2 cp da 90 mg; clopidogrel (Plavix) 600 mg = 8 cp da 75 mg se anticoagulante orale o alto rischio emorragico.',
+          'Dolore: morfina 2–4 mg ev (fiala 10 mg/1 mL in 10 mL di SF: 2–4 mL), ripetibile ogni 5–10 min; oppure fentanil (Fentanest) 50 µg ev = 1 mL della fiala da 100 µg/2 mL. Gli oppioidi rallentano l’effetto degli antiaggreganti orali.',
+          'Isosorbide dinitrato (Carvasin) 5 mg sublinguale se PAS > 90 mmHg; no se infarto del ventricolo destro o inibitori della PDE5 nelle 24–48 h. Nitroglicerina in infusione se ipertensione o scompenso.',
           'Ossigeno solo se SpO₂ < 90%.',
-          'Nausea: ondansetron 4 mg ev = 1 fiala da 4 mg/2 mL.',
-          'Metoprololo 5 mg ev (1 fiala da 5 mg/5 mL), ripetibile fino a 15 mg: da considerare solo se PAS > 120 mmHg e nessun segno di scompenso (meglio decidere con l’emodinamista).',
+          'Nausea: ondansetron (Zofran) 4 mg ev = 1 fiala da 4 mg/2 mL.',
+          'Metoprololo (Lopresor) 5 mg ev (1 fiala da 5 mg/5 mL), ripetibile fino a 15 mg: da considerare solo se PAS > 120 mmHg e nessun segno di scompenso (meglio decidere con l’emodinamista).',
         ],
       },
       { tipo: 'decisione', titolo: 'Complicanze in attesa della sala?' },
@@ -1940,8 +1939,8 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'allarme', titolo: 'Aritmie ventricolari',
                 righe: [
-                  'Senza polso: defibrillazione e ALS; amiodarone 300 mg ev = 2 fiale da 150 mg/3 mL dopo il 3° shock.',
-                  'TV con polso: cardioversione sincronizzata se instabile; altrimenti amiodarone 300 mg in 20–60 min.',
+                  'Senza polso: defibrillazione e ALS; amiodarone (Cordarone) 300 mg ev = 2 fiale da 150 mg/3 mL dopo il 3° shock.',
+                  'TV con polso: cardioversione sincronizzata se instabile; altrimenti amiodarone (Cordarone) 300 mg in 20–60 min.',
                   'Potassio > 4 mmol/L, magnesio > 2 mg/dL.',
                 ],
               },
@@ -1975,7 +1974,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'passo', titolo: 'Scompenso acuto',
                 righe: [
-                  'Furosemide 40 mg ev = 2 fiale da 20 mg.',
+                  'Furosemide (Lasix) 40 mg ev = 2 fiale da 20 mg.',
                   'Nitroglicerina in infusione se PAS > 110 mmHg; CPAP.',
                 ],
               },
