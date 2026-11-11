@@ -13,6 +13,9 @@ const enteAnno = (l: { ente: string; anno: number }) => (/\d{4}/.test(l.ente) ? 
 const data = (iso: string) =>
   new Date(iso + 'T12:00:00').toLocaleDateString('it-IT', { day: 'numeric', month: 'short', year: 'numeric' })
 
+/** PDTA tempo-dipendenti mostrati in cima all'elenco. */
+const EVIDENZA = ['post-rosc', 'stemi', 'ictus', 'sepsi', 'anafilassi', 'trauma-maggiore', 'stato-di-male', 'emorragia-cerebrale', 'dissezione-aortica', 'embolia-polmonare', 'tachicardia', 'bradicardia', 'anticoagulato-sanguinamento', 'emorragia-digestiva', 'iperkaliemia', 'chetoacidosi']
+
 /** Elenco delle linee guida: tocca una voce per aprirne il riassunto. */
 export function ElencoLineeGuida() {
   const [cerca, setCerca] = useState('')
@@ -22,6 +25,21 @@ export function ElencoLineeGuida() {
     <div className="flex flex-col gap-2.5">
       <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder="Cerca un PDTA…"
         className="rounded-xl border border-linea px-3 py-2.5 text-base" />
+      {!q && (
+        <div className="elenco !gap-2">
+          <p className="etichetta px-1 mt-1 !text-bordeaux">In evidenza · tempo-dipendenti</p>
+          {EVIDENZA.map((id) => LINEE_GUIDA.find((l) => l.id === id)).filter((l) => !!l).map((l) => (
+            <Link key={l.id} to={`/linee-guida/${l.id}`} className="card !py-2.5 flex items-center gap-3 active:bg-sabbia !border-bordeaux2/50">
+              <div className="w-9 h-9 rounded-xl bg-bordeaux text-white flex items-center justify-center font-extrabold text-xs shrink-0">
+                {(l.titolo.includes(' ') ? l.titolo.split(' ').map((p) => p[0]).join('') : l.titolo).slice(0, 2).toUpperCase()}
+              </div>
+              <p className="flex-1 min-w-0 font-bold leading-tight">{l.titolo}</p>
+              <span className="text-tenue">›</span>
+            </Link>
+          ))}
+          <p className="etichetta px-1 mt-3">Tutti i PDTA per area</p>
+        </div>
+      )}
       {[...new Set(voci.map((l) => l.area.split(' · ')[0]))].sort().map((area) => (
         <div key={area} className="elenco !gap-2">
           <p className="etichetta px-1 mt-1">{area}</p>
