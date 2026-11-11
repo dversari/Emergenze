@@ -41,6 +41,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     area: 'Cardiologia',
     fonte: { etichetta: 'Van Gelder et al., Eur Heart J 2024', url: 'https://doi.org/10.1093/eurheartj/ehae176' },
     controllata: '2026-11-09',
+    vediAnche: [{ etichetta: 'Cardioversione elettrica', to: '/procedure?apri=cve' }, { etichetta: 'Tachicardia', to: '/linee-guida/tachicardia' }],
     fonti: [{ id: 'esc-fa-2024', etichetta: 'ESC 2024' }],
     calcolatori: [
       { id: 'cha2ds2va', nome: 'CHA₂DS₂-VA' },
@@ -363,7 +364,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     vediAnche: [
       { etichetta: 'Dimissione colica renale', to: '/dimissioni?apri=colica-renale' },
       { etichetta: 'Antibiotici: pielonefrite', to: '/antibiotici?apri=pielonefrite' },
-      { etichetta: 'Anamnesi: dolore al fianco', to: '/anamnesi?apri=colica-renale' },
+      { etichetta: 'Cartella: dolore al fianco', to: '/anamnesi?apri=colica-renale' },
     ],
     inBreve: [
       'Prima l’analgesia: FANS (compreso il metamizolo) di prima scelta, più efficaci degli oppioidi; oppioidi come seconda scelta.',
@@ -521,7 +522,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     fonte: { etichetta: 'Gralnek et al., Endoscopy 2021 (ESGE, non varicosa)', url: 'https://doi.org/10.1055/a-1369-5274' },
     controllata: '2026-11-11',
     calcolatori: [{ id: 'gbs', nome: 'Glasgow-Blatchford' }],
-    vediAnche: [{ etichetta: 'Anamnesi: sanguinamento digestivo', to: '/anamnesi?apri=emorragia-digestiva' }],
+    vediAnche: [{ etichetta: 'Cartella: sanguinamento digestivo', to: '/anamnesi?apri=emorragia-digestiva' }],
     approfondimenti: [
       { etichetta: 'ESGE 2022: emorragia da varici esofago-gastriche', url: 'https://doi.org/10.1055/a-1939-4887' },
     ],
@@ -574,7 +575,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     fonte: { etichetta: 'Edlow et al., Acad Emerg Med 2023 (GRACE-3)', url: 'https://doi.org/10.1111/acem.14728' },
     controllata: '2026-11-11',
     vediAnche: [
-      { etichetta: 'Anamnesi: vertigine', to: '/anamnesi?apri=vertigine' },
+      { etichetta: 'Cartella: vertigine', to: '/anamnesi?apri=vertigine' },
       { etichetta: 'Dimissione VPPB', to: '/dimissioni?apri=vppb' },
     ],
     approfondimenti: [
@@ -766,7 +767,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     vediAnche: [
       { etichetta: 'Antibiotici: sepsi senza focolaio', to: '/antibiotici?apri=sepsi' },
       { etichetta: 'Antibiotici: neutropenia febbrile', to: '/antibiotici?apri=neutropenia' },
-      { etichetta: 'Anamnesi: febbre', to: '/anamnesi?apri=febbre' },
+      { etichetta: 'Cartella: febbre', to: '/anamnesi?apri=febbre' },
     ],
     inBreve: [
       'Sepsi e shock settico sono emergenze: il trattamento comincia subito.',
@@ -808,7 +809,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     fonte: { etichetta: 'Prabhakaran et al., Stroke 2026 (AHA/ASA)', url: 'https://doi.org/10.1161/STR.0000000000000513' },
     controllata: '2026-11-11',
     calcolatori: [{ id: 'gcs', nome: 'GCS' }],
-    vediAnche: [{ etichetta: 'Anamnesi: deficit neurologico', to: '/anamnesi?apri=deficit-neurologico' }],
+    vediAnche: [{ etichetta: 'Cartella: deficit neurologico', to: '/anamnesi?apri=deficit-neurologico' }],
     inBreve: [
       'Codice ictus: ora dell’ultima volta visto bene, glicemia subito, NIHSS, TC + angio-TC senza ritardi.',
       'Trombolisi entro 4,5 h nei deficit invalidanti, qualunque sia il NIHSS: tenecteplase (Metalyse) 0,25 mg/kg (max 25 mg) in bolo oppure alteplase (Actilyse) 0,9 mg/kg. Prima è meglio.',
@@ -988,7 +989,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     calcolatori: [{ id: 'gcs', nome: 'GCS' }],
     vediAnche: [
       { etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' },
-      { etichetta: 'Anamnesi: crisi convulsiva', to: '/anamnesi?apri=convulsione' },
+      { etichetta: 'Cartella: crisi convulsiva', to: '/anamnesi?apri=convulsione' },
     ],
     inBreve: [
       'Stato di male: crisi ≥ 5 minuti o crisi ripetute senza ripresa della coscienza.',
@@ -1035,7 +1036,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     controllata: '2026-11-11',
     vediAnche: [
       { etichetta: 'Dimissione orticaria', to: '/dimissioni?apri=orticaria' },
-      { etichetta: 'Anamnesi: reazione allergica', to: '/anamnesi?apri=allergia' },
+      { etichetta: 'Cartella: reazione allergica', to: '/anamnesi?apri=allergia' },
     ],
     inBreve: [
       'Adrenalina im subito: 0,5 mg (0,5 mL della fiala da 1 mg/mL) nella coscia anterolaterale; ripetere dopo 5 min se i problemi A, B o C persistono.',
@@ -1080,7 +1081,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     controllata: '2026-11-11',
     vediAnche: [
       { etichetta: 'Rubrica: Tossicologia Careggi', to: '/rubrica' },
-      { etichetta: 'Anamnesi: intossicazione', to: '/anamnesi?apri=intossicazione' },
+      { etichetta: 'Cartella: intossicazione', to: '/anamnesi?apri=intossicazione' },
     ],
     inBreve: [
       'Dose potenzialmente tossica: ≥ 10 g o ≥ 200 mg/kg (la minore) in un’unica assunzione.',
@@ -1282,7 +1283,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       { etichetta: 'Dimissione dolore toracico', to: '/dimissioni?apri=dolore-toracico' },
     ],
     inBreve: [
-      'ECG entro 10 min. Troponina ad alta sensibilità con algoritmo 0/1 h (o 0/2 h) e soglie del dosaggio in uso.',
+      'ECG entro 10 min. Troponina ad alta sensibilità: a Prato il dosaggio è validato con prelievi a 0 e 3 h (l’ESC 2023 preferisce 0/1 h o 0/2 h, ma vanno usati i tempi e le soglie validati per il proprio dosaggio).',
       'Invasiva immediata (< 2 h) se rischio molto alto: instabilità o shock, dolore refrattario, aritmie maligne o arresto, complicanze meccaniche, scompenso acuto, sopraslivellamenti ST intermittenti.',
       'Invasiva precoce (< 24 h) se rischio alto: NSTEMI confermato, alterazioni ST-T dinamiche, sopraslivellamento ST transitorio, GRACE > 140.',
       'ASA a tutti; pretrattamento con inibitore P2Y12 non di routine se la coronarografia è prevista entro 24 h.',
@@ -1301,12 +1302,13 @@ export const LINEE_GUIDA: LineaGuida[] = [
         ],
       },
       {
-        titolo: 'Algoritmo 0/1 h',
+        titolo: 'Troponina 0/3 h (protocollo di Prato)',
         punti: [
-          'Esclusione: troponina molto bassa all’arrivo (se dolore da > 3 h) oppure bassa all’arrivo e senza variazione a 1 h.',
-          'Conferma: troponina alta all’arrivo o aumento significativo a 1 h.',
-          'Zona grigia: terzo prelievo a 3 h e valutazione clinica (eco).',
-          'Soglie: quelle del laboratorio per il dosaggio in uso.',
+          'Prelievo all’arrivo e a 3 h (dall’arrivo; se il dolore è iniziato da più di 6 h può bastare il primo prelievo, secondo il laboratorio).',
+          'Esclusione: entrambi i valori sotto il 99° percentile del dosaggio, senza variazione significativa, paziente senza dolore e con rischio basso (HEART, GRACE < 140).',
+          'Conferma: valore sopra il 99° percentile con aumento o calo significativo tra 0 e 3 h (dinamica), in un quadro clinico compatibile.',
+          'Valori alti e stabili: danno miocardico cronico (insufficienza renale, scompenso) più che infarto; valutare con il cardiologo.',
+          'Soglie (99° percentile e variazione significativa): quelle del laboratorio di Prato per il dosaggio in uso.',
         ],
       },
     ],
@@ -1490,7 +1492,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     area: 'Cardiologia',
     fonte: { etichetta: 'ERC Guidelines 2025 Adult ALS, Resuscitation 2025', url: 'https://doi.org/10.1016/j.resuscitation.2025.110769' },
     controllata: '2026-11-11',
-    vediAnche: [{ etichetta: 'Fibrillazione atriale', to: '/linee-guida/fibrillazione-atriale' }, { etichetta: 'Sedazione procedurale', to: '/sedazione?apri=procedurale' }, { etichetta: 'Timer ACR', to: '/acr' }],
+    vediAnche: [{ etichetta: 'Cardioversione elettrica', to: '/procedure?apri=cve' }, { etichetta: 'Fibrillazione atriale', to: '/linee-guida/fibrillazione-atriale' }, { etichetta: 'Sedazione procedurale', to: '/sedazione?apri=procedurale' }, { etichetta: 'Timer ACR', to: '/acr' }],
     inBreve: [
       'Instabile (shock, sincope, ischemia, scompenso): cardioversione sincronizzata in sedazione, fino a 3 tentativi; se fallisce, amiodarone (Cordarone) 300 mg in 10–20 min e ritentare.',
       'Stabile, QRS stretto regolare: manovra vagale (Valsalva modificata), poi adenosina (Krenosin) 6–12–18 mg.',
@@ -2003,7 +2005,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     vediAnche: [
       { etichetta: 'Dimissione otite esterna', to: '/dimissioni?apri=otite-esterna' },
       { etichetta: 'Dimissione otite media', to: '/dimissioni?apri=otite-media' },
-      { etichetta: 'Anamnesi otalgia', to: '/anamnesi?apri=otalgia' },
+      { etichetta: 'Cartella: otalgia', to: '/anamnesi?apri=otalgia' },
       { etichetta: 'Paralisi di Bell', to: '/linee-guida/paralisi-bell' },
     ],
     inBreve: [
@@ -2078,7 +2080,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     fonte: { etichetta: 'Baugh et al., Otolaryngol Head Neck Surg 2013 (AAO-HNS)', url: 'https://doi.org/10.1177/0194599813505967' },
     controllata: '2026-11-11',
     vediAnche: [
-      { etichetta: 'Anamnesi paralisi facciale', to: '/anamnesi?apri=paralisi-faciale' },
+      { etichetta: 'Cartella: paralisi facciale', to: '/anamnesi?apri=paralisi-faciale' },
       { etichetta: 'Dimissione paralisi di Bell', to: '/dimissioni?apri=paralisi-bell' },
       { etichetta: 'Codice ictus', to: '/linee-guida/ictus' },
     ],
@@ -2122,7 +2124,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     fonte: { etichetta: 'AAO Preferred Practice Pattern Conjunctivitis, Ophthalmology 2019', url: 'https://doi.org/10.1016/j.ophtha.2018.10.020' },
     controllata: '2026-11-11',
     vediAnche: [
-      { etichetta: 'Anamnesi occhio rosso', to: '/anamnesi?apri=occhio-rosso' },
+      { etichetta: 'Cartella: occhio rosso', to: '/anamnesi?apri=occhio-rosso' },
       { etichetta: 'Dimissione congiuntivite', to: '/dimissioni?apri=congiuntivite' },
       { etichetta: 'Dimissione corpo estraneo', to: '/dimissioni?apri=corpo-estraneo-occhio' },
     ],
@@ -2171,7 +2173,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     calcolatori: [{ id: 'twist', nome: 'TWIST' }],
     vediAnche: [
       { etichetta: 'Antibiotici: orchiepididimite', to: '/antibiotici?apri=orchiepididimite' },
-      { etichetta: 'Anamnesi dolore scrotale', to: '/anamnesi?apri=scroto' },
+      { etichetta: 'Cartella: dolore scrotale', to: '/anamnesi?apri=scroto' },
       { etichetta: 'Dimissione orchiepididimite', to: '/dimissioni?apri=orchiepididimite' },
     ],
     inBreve: [

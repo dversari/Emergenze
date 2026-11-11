@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { Scheda } from '../lib/schede'
+import { FIGURE } from './FigureProcedure'
 
 // Nomi dei farmaci evidenziati in rosso grassetto dentro i testi.
 const FARMACI = [
@@ -25,6 +26,9 @@ export default function PaginaSchede({ schede, segnaposto }: { schede: Scheda[];
   const [aperto, setAperto] = useState<string | null>(params.get('apri'))
   const [cerca, setCerca] = useState('')
   const q = cerca.trim().toLowerCase()
+
+  const apri = params.get('apri')
+  useEffect(() => { if (apri) setAperto(apri) }, [apri])
 
   useEffect(() => {
     if (!aperto) return
@@ -60,6 +64,7 @@ export default function PaginaSchede({ schede, segnaposto }: { schede: Scheda[];
                 </button>
                 {open && (
                   <div className="px-4 pb-4 pt-1 border-t border-linea flex flex-col gap-3">
+                    {FIGURE[s.id] && <div className="mt-2">{FIGURE[s.id]()}</div>}
                     {s.blocchi.map((b) => (
                       <div key={b.titolo}>
                         <p className="etichetta mt-2 mb-1.5">{b.titolo}</p>

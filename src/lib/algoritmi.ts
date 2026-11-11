@@ -75,7 +75,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
     titolo: 'Algoritmo paralisi del facciale',
     nota: 'AAO-HNS 2013. Adulto.',
     nodi: [
-      { tipo: 'avvio', titolo: 'Asimmetria del viso acuta', righe: ['Ora di esordio; vescicole; otalgia; altri sintomi neurologici.'], vai: [{ etichetta: 'Anamnesi', to: '/anamnesi?apri=paralisi-faciale' }] },
+      { tipo: 'avvio', titolo: 'Asimmetria del viso acuta', righe: ['Ora di esordio; vescicole; otalgia; altri sintomi neurologici.'], vai: [{ etichetta: 'Cartella', to: '/anamnesi?apri=paralisi-faciale' }] },
       { tipo: 'decisione', titolo: 'Corruga la fronte dal lato colpito?' },
       {
         tipo: 'rami', rami: [
@@ -102,7 +102,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
     titolo: 'Algoritmo occhio rosso',
     nota: 'AAO PPP. Visus sempre misurato.',
     nodi: [
-      { tipo: 'avvio', titolo: 'Occhio rosso', righe: ['Visus, pupilla, fluoresceina, eversione palpebra.'], vai: [{ etichetta: 'Anamnesi', to: '/anamnesi?apri=occhio-rosso' }] },
+      { tipo: 'avvio', titolo: 'Occhio rosso', righe: ['Visus, pupilla, fluoresceina, eversione palpebra.'], vai: [{ etichetta: 'Cartella', to: '/anamnesi?apri=occhio-rosso' }] },
       { tipo: 'decisione', titolo: 'Ustione chimica?' },
       {
         tipo: 'rami', rami: [
@@ -131,7 +131,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
     titolo: 'Algoritmo scroto acuto',
     nota: 'EAU 2025. Adulto.',
     nodi: [
-      { tipo: 'avvio', titolo: 'Dolore scrotale acuto', righe: ['Ora di esordio; vomito; trauma; sintomi urinari; rapporti a rischio.'], vai: [{ etichetta: 'Anamnesi', to: '/anamnesi?apri=scroto' }] },
+      { tipo: 'avvio', titolo: 'Dolore scrotale acuto', righe: ['Ora di esordio; vomito; trauma; sintomi urinari; rapporti a rischio.'], vai: [{ etichetta: 'Cartella', to: '/anamnesi?apri=scroto' }] },
       { tipo: 'decisione', titolo: 'Torsione possibile? (TWIST)', righe: ['Esordio improvviso, vomito, testicolo alto/orizzontale, cremasterico assente.'] },
       {
         tipo: 'rami', rami: [
@@ -715,7 +715,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
           },
           {
             etichetta: 'No', tono: 'si', nodi: [
-              { tipo: 'passo', titolo: 'Troponina hs 0/1 h (o 0/2 h)', righe: ['Diagnosi differenziale: dissezione, embolia, pericardite. Eco al letto.'] },
+              { tipo: 'passo', titolo: 'Troponina hs a 0 e 3 h (protocollo di Prato)', righe: ['Diagnosi differenziale: dissezione, embolia, pericardite. Eco al letto.'], vedi: 'Troponina 0/3 h (protocollo di Prato)' },
             ],
           },
         ],
@@ -730,7 +730,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
           },
           {
             etichetta: 'Zona grigia', tono: 'neutro', nodi: [
-              { tipo: 'passo', titolo: 'Terzo prelievo a 3 h', righe: ['Eco; rivalutazione clinica.'] },
+              { tipo: 'passo', titolo: 'Valori alti e stabili o dinamica dubbia', righe: ['Prelievo a 6 h, eco, cardiologo.'] },
             ],
           },
           {
@@ -927,7 +927,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'allarme', titolo: 'Cardioversione sincronizzata',
                 righe: ['In sedazione, fino a 3 tentativi. FA: energia massima; flutter/TPSV 70–120 J; TV 120–150 J.', 'Fallisce: amiodarone (Cordarone) 300 mg in 10–20 min e ritentare.'],
-                vai: [{ etichetta: 'Sedazione procedurale', to: '/sedazione?apri=procedurale' }],
+                vai: [{ etichetta: 'Cardioversione elettrica', to: '/procedure?apri=cve' }, { etichetta: 'Sedazione procedurale', to: '/sedazione?apri=procedurale' }],
               },
             ],
             fine: 'poi amiodarone (Cordarone) 900 mg/24 h',
@@ -2390,7 +2390,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 tipo: 'passo', titolo: 'NSTE-SCA o dolore da definire',
                 righe: [
                   'ECG ogni 15–30 min se il dolore persiste o cambia.',
-                  'Troponina hs 0/1 h (o 0/2 h). HEART score.',
+                  'Troponina hs a 0 e 3 h (protocollo di Prato). HEART score.',
                 ],
               },
               {

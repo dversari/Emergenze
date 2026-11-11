@@ -38,7 +38,7 @@ Addome: trattabile, non dolente, non masse pulsanti.
 Arti: polsi periferici [presenti e simmetrici]; non edemi, non segni di TVP.
 
 DA NON DIMENTICARE
-- ECG entro 10 minuti dall'arrivo; ripetere se dolore ricorrente. Troponina hs 0/1 h o 0/2 h.
+- ECG entro 10 minuti dall'arrivo; ripetere se dolore ricorrente. Troponina hs a 0 e 3 h (protocollo di Prato).
 - Score: HEART (calcolatori), Wells/PERC se sospetta EP.
 - Dissezione: dolore lacerante, deficit di polso o PA asimmetrica (>20 mmHg), deficit neurologico, soffio di insufficienza aortica.
 - Altri: pneumotorace, tamponamento, rottura esofagea (vomito prima del dolore).`,

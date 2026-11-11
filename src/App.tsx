@@ -15,14 +15,14 @@ import { ElencoLineeGuida, RiassuntoLineaGuida } from './pages/LineeGuida'
 declare const __VERSIONE__: string
 
 const schede = [
+  { to: '/rubrica', label: 'Rubrica', icona: '☎\uFE0E' },
+  { to: '/linee-guida', label: 'PDTA', icona: '▤︎' },
   { to: '/calcolatori', label: 'Calcolatori', icona: '±' },
   { to: '/antibiotici', label: 'Antibiotici', icona: '℞' },
   { to: '/procedure', label: 'Procedure', icona: '⌖' },
   { to: '/sedazione', label: 'Sedazione', icona: '☾\uFE0E' },
-  { to: '/linee-guida', label: 'PDTA', icona: '▤︎' },
-  { to: '/anamnesi', label: 'Anamnesi', icona: '☰\uFE0E' },
-  { to: '/dimissioni', label: 'Dimissioni', icona: '✎\uFE0E' },
-  { to: '/rubrica', label: 'Rubrica', icona: '☎\uFE0E' },
+  { to: '/anamnesi', label: 'Cartella', icona: '☰\uFE0E' },
+  { to: '/dimissioni', label: 'Dimissione', icona: '✎\uFE0E' },
 ]
 
 /** Intestazione in alto, schede in basso a portata di pollice. */

@@ -101,14 +101,14 @@ const DISEGNI: Record<string, ReactNode> = {
 }
 
 const PAGINE = [
-  { id: 'calcolatori', to: '/calcolatori', nome: 'Calcolatori', testo: 'Score, clearance, elettroliti' },
-  { id: 'linee-guida', to: '/linee-guida', nome: 'PDTA', testo: 'Percorsi, linee guida, algoritmi' },
-  { id: 'antibiotici', to: '/antibiotici', nome: 'Antibiotici', testo: 'Empirica toscana, fiale, rene' },
-  { id: 'procedure', to: '/procedure', nome: 'Procedure', testo: 'Passaggi in sequenza' },
-  { id: 'sedazione', to: '/sedazione', nome: 'Sedazione', testo: 'Schemi per 70 kg' },
-  { id: 'anamnesi', to: '/anamnesi', nome: 'Anamnesi', testo: 'Domande ed EO per sintomo' },
-  { id: 'dimissioni', to: '/dimissioni', nome: 'Dimissioni', testo: 'Testi pronti da adattare' },
   { id: 'rubrica', to: '/rubrica', nome: 'Rubrica', testo: 'Numeri interni ed esterni' },
+  { id: 'linee-guida', to: '/linee-guida', nome: 'PDTA', testo: 'Percorsi, linee guida, algoritmi' },
+  { id: 'calcolatori', to: '/calcolatori', nome: 'Calcolatori', testo: 'Score, clearance, elettroliti' },
+  { id: 'antibiotici', to: '/antibiotici', nome: 'Antibiotici', testo: 'Empirica toscana, fiale, rene' },
+  { id: 'procedure', to: '/procedure', nome: 'Procedure', testo: 'Passaggi e schemi disegnati' },
+  { id: 'sedazione', to: '/sedazione', nome: 'Sedazione', testo: 'Schemi per 70 kg' },
+  { id: 'anamnesi', to: '/anamnesi', nome: 'Cartella', testo: 'Anamnesi ed EO per sintomo' },
+  { id: 'dimissioni', to: '/dimissioni', nome: 'Dimissione', testo: 'Testi pronti da adattare' },
 ]
 
 /** Schermata iniziale. */

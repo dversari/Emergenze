@@ -271,7 +271,7 @@ export const PROCEDURE: Scheda[] = [
     sintesi: 'Piastre antero-posteriori, frequenza 70, energia in salita fino a cattura, +10 mA.',
     blocchi: [
       { titolo: 'Passaggi', numerato: true, righe: [
-        'Bradicardia instabile non responsiva ad atropina 1 mg ev = 2 fiale da 0,5 mg (ripetibile fino a 3 mg = 6 fiale) o adrenalina 2–10 µg/min.',
+        'Bradicardia instabile non responsiva ad atropina 0,5 mg ev = 1 fiala (ripetibile ogni 3–5 min fino a 3 mg = 6 fiale), isoprenalina o adrenalina 2–10 µg/min.',
         'Piastre: anteriore sul precordio (sinistra dello sterno), posteriore tra le scapole a sinistra; elettrodi ECG del defibrillatore collegati.',
         'Analgesia/sedazione: fentanil 25–50 µg ev = 1/4–1/2 fiala da 100 µg (0,5–1 mL) ± midazolam 1–2 mg ev (1–2 mL di 1 fiala da 5 mg diluita a 5 mL).',
         'Modalità demand, frequenza 60–70/min.',
@@ -282,6 +282,33 @@ export const PROCEDURE: Scheda[] = [
       ] },
     ],
     fonte: 'ERC 2025',
+  },
+  {
+    id: 'cve', nome: 'Cardioversione elettrica sincronizzata', gruppo: 'Accessi',
+    sintesi: 'Sedazione, placche, SYNC verificato prima di ogni shock; FA all’energia massima, flutter/TPSV 70–120 J, TV 120–150 J.',
+    blocchi: [
+      { titolo: 'Prima', righe: [
+        'Urgente se instabile (shock, sincope, ischemia, scompenso): non aspettare digiuno né anticoagulazione.',
+        'Elettiva per FA/flutter: durata < 24 h, oppure anticoagulante efficace da ≥ 3 settimane, oppure ecocardiogramma transesofageo che esclude trombi (ESC 2024). Eparina o DOAC prima, se non già in terapia.',
+        'Potassio e magnesio nella norma; escludere intossicazione digitalica. Digiuno se possibile, consenso, monitor, SpO₂, capnografia, accesso venoso, aspiratore e pallone pronti.',
+        'Pacemaker/ICD: placche ad almeno 8 cm dal generatore, preferire antero-posteriori; controllo del dispositivo dopo.',
+      ] },
+      { titolo: 'Passaggi', numerato: true, righe: [
+        'Placche antero-laterali (sottoclaveare destra + apice) o antero-posteriori; cute asciutta, rasata se serve.',
+        'Sedazione procedurale: propofol 0,5–1 mg/kg = 35–70 mg (3,5–7 mL di 1%) a boli lenti; con ipotensione preferire dosi ridotte o etomidato. Vedi scheda «Sedazione procedurale».',
+        'Premere SYNC e verificare i marcatori su ogni onda R; se non compaiono, cambiare derivazione o aumentare l’ampiezza.',
+        'Energia (bifasico): FA all’energia massima; flutter e TPSV 70–120 J; TV monomorfa con polso 120–150 J, poi a salire.',
+        '«Tutti lontani, ossigeno via», tenere premuto il pulsante finché lo shock parte (il ritardo è normale).',
+        'Controllare ritmo e polso; se serve ripetere: riattivare SYNC (molti defibrillatori lo tolgono dopo lo shock), al massimo 3 tentativi.',
+        'Fallimento in instabile: amiodarone 300 mg in 10–20 min e ritentare. TV polimorfa o FV: defibrillazione NON sincronizzata.',
+      ] },
+      { titolo: 'Dopo', righe: [
+        'ECG a 12 derivazioni, monitor fino al risveglio completo (almeno 1–2 h), PA e saturazione.',
+        'FA/flutter: anticoagulante per almeno 4 settimane dopo la cardioversione, poi secondo CHA₂DS₂-VA.',
+        'Ustioni cutanee lievi possibili: crema idratante.',
+      ] },
+    ],
+    fonte: 'ERC 2025; ESC 2024 (fibrillazione atriale)',
   },
 ]
 
