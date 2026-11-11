@@ -259,6 +259,65 @@ const PUNTEGGI: Punteggio[] = [
       : { livello: 'alto', testo: 'Probabilità alta: angio-TC aorta subito.' },
     fonte: 'ESC 2024; Nazerian, Circulation 2018 (ADvISED)',
   },
+  {
+    id: 'ciwa',
+    nome: 'CIWA-Ar',
+    ambito: 'Astinenza alcolica · gravità',
+    voci: [
+      { tipo: 'scelta', id: 'n', testo: 'Nausea/vomito (0 nessuno … 7 continui)', opzioni: [{ testo: '0', punti: 0 }, { testo: '1', punti: 1 }, { testo: '2', punti: 2 }, { testo: '3', punti: 3 }, { testo: '4', punti: 4 }, { testo: '5', punti: 5 }, { testo: '6', punti: 6 }, { testo: '7', punti: 7 }] },
+      { tipo: 'scelta', id: 't', testo: 'Tremore (0 assente … 7 grave anche a braccia ferme)', opzioni: [{ testo: '0', punti: 0 }, { testo: '1', punti: 1 }, { testo: '2', punti: 2 }, { testo: '3', punti: 3 }, { testo: '4', punti: 4 }, { testo: '5', punti: 5 }, { testo: '6', punti: 6 }, { testo: '7', punti: 7 }] },
+      { tipo: 'scelta', id: 's', testo: 'Sudorazione (0 … 7 profusa)', opzioni: [{ testo: '0', punti: 0 }, { testo: '1', punti: 1 }, { testo: '2', punti: 2 }, { testo: '3', punti: 3 }, { testo: '4', punti: 4 }, { testo: '5', punti: 5 }, { testo: '6', punti: 6 }, { testo: '7', punti: 7 }] },
+      { tipo: 'scelta', id: 'a', testo: 'Ansia (0 … 7 attacco di panico)', opzioni: [{ testo: '0', punti: 0 }, { testo: '1', punti: 1 }, { testo: '2', punti: 2 }, { testo: '3', punti: 3 }, { testo: '4', punti: 4 }, { testo: '5', punti: 5 }, { testo: '6', punti: 6 }, { testo: '7', punti: 7 }] },
+      { tipo: 'scelta', id: 'g', testo: 'Agitazione (0 … 7 si muove continuamente)', opzioni: [{ testo: '0', punti: 0 }, { testo: '1', punti: 1 }, { testo: '2', punti: 2 }, { testo: '3', punti: 3 }, { testo: '4', punti: 4 }, { testo: '5', punti: 5 }, { testo: '6', punti: 6 }, { testo: '7', punti: 7 }] },
+      { tipo: 'scelta', id: 'ta', testo: 'Disturbi tattili (formicolii, insetti) (0 … 7)', opzioni: [{ testo: '0', punti: 0 }, { testo: '1', punti: 1 }, { testo: '2', punti: 2 }, { testo: '3', punti: 3 }, { testo: '4', punti: 4 }, { testo: '5', punti: 5 }, { testo: '6', punti: 6 }, { testo: '7', punti: 7 }] },
+      { tipo: 'scelta', id: 'u', testo: 'Disturbi uditivi (0 … 7 allucinazioni continue)', opzioni: [{ testo: '0', punti: 0 }, { testo: '1', punti: 1 }, { testo: '2', punti: 2 }, { testo: '3', punti: 3 }, { testo: '4', punti: 4 }, { testo: '5', punti: 5 }, { testo: '6', punti: 6 }, { testo: '7', punti: 7 }] },
+      { tipo: 'scelta', id: 'v', testo: 'Disturbi visivi (luce, allucinazioni) (0 … 7)', opzioni: [{ testo: '0', punti: 0 }, { testo: '1', punti: 1 }, { testo: '2', punti: 2 }, { testo: '3', punti: 3 }, { testo: '4', punti: 4 }, { testo: '5', punti: 5 }, { testo: '6', punti: 6 }, { testo: '7', punti: 7 }] },
+      { tipo: 'scelta', id: 'c', testo: 'Cefalea, testa stretta (0 … 7)', opzioni: [{ testo: '0', punti: 0 }, { testo: '1', punti: 1 }, { testo: '2', punti: 2 }, { testo: '3', punti: 3 }, { testo: '4', punti: 4 }, { testo: '5', punti: 5 }, { testo: '6', punti: 6 }, { testo: '7', punti: 7 }] },
+      { tipo: 'scelta', id: 'o', testo: 'Orientamento (0 orientato … 4 disorientato su luogo/persona)', opzioni: [{ testo: '0', punti: 0 }, { testo: '1', punti: 1 }, { testo: '2', punti: 2 }, { testo: '3', punti: 3 }, { testo: '4', punti: 4 }] },
+    ],
+    esito: (t) =>
+      t < 10 ? { livello: 'basso', testo: 'Lieve (< 10): niente benzodiazepine, ricontrollo ogni 4 h.' }
+      : t < 19 ? { livello: 'medio', testo: 'Moderata (10–18): diazepam (Valium) 10–20 mg, ricontrollo ogni 1–2 h.' }
+      : { livello: 'alto', testo: 'Grave (≥ 19): diazepam ripetuto, monitoraggio stretto, valutare terapia intensiva.' },
+    fonte: 'Sullivan, Br J Addict 1989; ASAM 2020',
+  },
+  {
+    id: '4at',
+    nome: '4AT',
+    ambito: 'Delirium · screening',
+    voci: [
+      { tipo: 'scelta', id: 'v', testo: 'Vigilanza', opzioni: [{ testo: 'Normale', punti: 0 }, { testo: 'Alterata', punti: 4 }] },
+      { tipo: 'scelta', id: 'a', testo: 'AMT4 (età, data di nascita, luogo, anno): errori', opzioni: [{ testo: '0', punti: 0 }, { testo: '1', punti: 1 }, { testo: '≥ 2 o non testabile', punti: 2 }] },
+      { tipo: 'scelta', id: 'm', testo: 'Mesi dell’anno a ritroso', opzioni: [{ testo: '≥ 7 corretti', punti: 0 }, { testo: '< 7 o rifiuta', punti: 1 }, { testo: 'Non testabile', punti: 2 }] },
+      { tipo: 'scelta', id: 'c', testo: 'Cambiamento acuto o decorso fluttuante', opzioni: [{ testo: 'No', punti: 0 }, { testo: 'Sì', punti: 4 }] },
+    ],
+    esito: (t) =>
+      t === 0 ? { livello: 'basso', testo: 'Delirium o deficit cognitivo grave improbabili.' }
+      : t < 4 ? { livello: 'medio', testo: '1–3: possibile deficit cognitivo; approfondire.' }
+      : { livello: 'alto', testo: '≥ 4: possibile delirium ± deficit cognitivo; cercare la causa.' },
+    fonte: 'Bellelli, Age Ageing 2014; NICE CG103',
+  },
+  {
+    id: 'csrs',
+    nome: 'Canadian Syncope Risk Score',
+    ambito: 'Sincope · rischio di eventi gravi a 30 giorni',
+    voci: [
+      { tipo: 'si', id: 'p', testo: 'Predisposizione vasovagale (caldo, folla, in piedi a lungo, paura, dolore)', punti: -1 },
+      { tipo: 'si', id: 'h', testo: 'Cardiopatia nota', punti: 1 },
+      { tipo: 'si', id: 'b', testo: 'PAS < 90 o > 180 in PS', punti: 2 },
+      { tipo: 'si', id: 't', testo: 'Troponina > 99° percentile', punti: 2 },
+      { tipo: 'si', id: 'x', testo: 'Asse QRS anomalo (< −30° o > 100°)', punti: 1 },
+      { tipo: 'si', id: 'q', testo: 'QRS > 130 ms', punti: 1 },
+      { tipo: 'si', id: 'qt', testo: 'QTc > 480 ms', punti: 2 },
+      { tipo: 'scelta', id: 'd', testo: 'Diagnosi in PS', opzioni: [{ testo: 'Altra', punti: 0 }, { testo: 'Vasovagale', punti: -2 }, { testo: 'Cardiaca', punti: 2 }] },
+    ],
+    esito: (t) =>
+      t <= -2 ? { livello: 'basso', testo: 'Rischio molto basso a 30 giorni: dimissione.' }
+      : t <= 0 ? { livello: 'basso', testo: 'Rischio basso: dimissione con controllo.' }
+      : t <= 3 ? { livello: 'medio', testo: 'Rischio medio: osservazione con monitor, percorso rapido.' }
+      : { livello: 'alto', testo: t <= 5 ? 'Rischio alto: ricovero/monitor.' : 'Rischio molto alto: ricovero con monitor.' },
+    fonte: 'Thiruganasambandamoorthy, CMAJ 2016',
+  },
 ]
 
 // ─── Componenti ───────────────────────────────────────────────────────────────
@@ -318,7 +377,7 @@ function CalcoloPunteggio({ p, aperto, onToggle }: { p: Punteggio; aperto: boole
               <input type="checkbox" className="w-5 h-5 accent-[#2f6652]" checked={v.id in risposte}
                 onChange={(e) => imposta(v.id, e.target.checked ? v.punti : null)} />
               <span className="flex-1 text-sm">{v.testo}</span>
-              <span className="text-xs font-bold text-tenue">+{v.punti.toLocaleString('it-IT')}</span>
+              <span className="text-xs font-bold text-tenue">{v.punti > 0 ? '+' : ''}{v.punti.toLocaleString('it-IT')}</span>
             </label>
           ) : (
             <div key={v.id} className="rounded-xl px-3 py-2 border border-linea bg-white">
@@ -330,7 +389,7 @@ function CalcoloPunteggio({ p, aperto, onToggle }: { p: Punteggio; aperto: boole
                     <button key={o.testo} onClick={() => imposta(v.id, sel ? null : o.punti)}
                       className={`text-xs font-semibold rounded-full px-2.5 py-1.5 border transition-colors ${
                         sel ? 'bg-verde text-white border-verde' : 'bg-sabbia border-linea text-testo'}`}>
-                      {o.testo} <span className="opacity-60">{o.punti}</span>
+                      {o.testo}{o.testo !== String(o.punti) && <span className="opacity-60"> {o.punti}</span>}
                     </button>
                   )
                 })}
@@ -455,6 +514,7 @@ export default function EmergenzeCalcolatori() {
   const toggle = (id: string) => setAperto((a) => (a === id ? null : id))
   useEffect(() => {
     const id = params.get('apri')
+    if (id) setAperto(id)
     if (id) requestAnimationFrame(() => document.getElementById(`calc-${id}`)?.scrollIntoView({ block: 'start' }))
   }, [params])
 

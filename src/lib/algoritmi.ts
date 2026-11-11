@@ -14,6 +14,350 @@ export type Nodo =
 export interface Ramo { etichetta: string; tono?: 'si' | 'no' | 'neutro'; nodi: Nodo[]; fine?: string }
 
 export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: Nodo[] }> = {
+  'trauma-maggiore': {
+    titolo: 'Algoritmo trauma maggiore',
+    nota: 'Linea guida europea 2023, ATLS. Dosi per 70 kg.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Trauma maggiore', righe: ['Team in sala, preallerta emoteca, timer dall’ora del trauma.'] },
+      {
+        tipo: 'checklist', titolo: '<C>ABCDE',
+        righe: [
+          '<C> Emorragia esterna: compressione, laccio emostatico',
+          'A Vie aeree + rachide cervicale in linea',
+          'B Torace: pneumotorace iperteso → decompressione; emotorace → drenaggio',
+          'C Due accessi grossi o intraossea; eFAST; fascia pelvica se bacino sospetto',
+          'D GCS, pupille, glicemia',
+          'E Esporre, riscaldare',
+        ],
+        vai: [{ etichetta: 'Decompressione', to: '/procedure?apri=decompressione' }, { etichetta: 'Drenaggio', to: '/procedure?apri=tubo' }, { etichetta: 'Intraossea', to: '/procedure?apri=io' }],
+      },
+      { tipo: 'decisione', titolo: 'Shock emorragico?', righe: ['PAS < 90, FC > 120, shock index > 1, lattato alto, eFAST positiva.'] },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Rianimazione emostatica',
+                righe: [
+                  'Acido tranexamico (Tranex) 1 g in 10 min entro 3 h, poi 1 g in 8 h.',
+                  'Emazie e plasma presto; fibrinogeno 3–4 g se < 1,5 g/L; calcio.',
+                  'PAS 80–90 (PAM ≥ 80 se trauma cranico grave).',
+                  'Antagonizzare gli anticoagulanti.',
+                ],
+              },
+              { tipo: 'allarme', titolo: 'Controllo dell’emorragia', righe: ['Non risponde: sala operatoria o radiologia interventistica senza TC.', 'Risponde: TC total body.'] },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'TC total body', righe: ['Se meccanismo ad alta energia o lesioni multiple.'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'GCS ≤ 8 o vie aeree a rischio?' },
+      {
+        tipo: 'allarme', titolo: 'Intubazione',
+        righe: ['Evitare ipossia e ipotensione; normocapnia. Segni di erniazione: neurochirurgo di Careggi.'],
+        vai: [{ etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' }],
+      },
+      { tipo: 'esito', titolo: 'Destinazione', righe: ['Sala operatoria, terapia intensiva o trasferimento al trauma center (Careggi).'] },
+    ],
+  },
+  'post-rosc': {
+    titolo: 'Algoritmo dopo la ROSC',
+    nota: 'ERC-ESICM 2025. Dosi per 70 kg.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Ritorno del circolo', righe: ['Annotare l’ora nel timer ACR.'], vai: [{ etichetta: 'Timer ACR', to: '/acr' }] },
+      {
+        tipo: 'checklist', titolo: 'A-B: vie aeree e respiro',
+        righe: ['Intubazione se in coma', 'Ossigeno 100% poi SpO₂ 94–98%', 'Normocapnia (EtCO₂ e EGA)', 'Volume corrente 6–8 mL/kg (420–560 mL)'],
+      },
+      {
+        tipo: 'checklist', titolo: 'C: circolo',
+        righe: ['Accesso arterioso', 'PAS > 100 o PAM > 60–65', 'Liquidi, noradrenalina 2,5 mL/h (2 fiale da 2 mg in 50 mL)', 'ECG a 12 derivazioni', 'Eco al letto'],
+      },
+      { tipo: 'decisione', titolo: 'Causa cardiaca probabile?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'STEMI', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Coronarografia subito', righe: ['Emodinamica di Prato.'], vai: [{ etichetta: 'STEMI', to: '/linee-guida/stemi' }] }],
+          },
+          {
+            etichetta: 'Sì, senza ST', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Coronarografia urgente', righe: ['Se instabile o alta probabilità di occlusione; altrimenti con il cardiologo.'] }],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'TC encefalo e torace', righe: ['Emorragia cerebrale, embolia polmonare, dissezione.'] }],
+          },
+        ],
+      },
+      {
+        tipo: 'checklist', titolo: 'D-E: cervello e resto',
+        righe: [
+          'Temperatura ≤ 37,5 °C per 72 h (niente febbre)',
+          'Glicemia 140–180 mg/dL',
+          'Crisi epilettiche: trattare, EEG',
+          'Sedazione e analgesia',
+          'Niente prognosi in PS',
+        ],
+      },
+      { tipo: 'esito', titolo: 'Terapia intensiva o emodinamica' },
+    ],
+  },
+  'oppioidi-benzodiazepine': {
+    titolo: 'Algoritmo coma da oppioidi o benzodiazepine',
+    nota: 'AHA 2023. Dosi per 70 kg.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Sopore con respiro lento o miosi', righe: ['Glicemia capillare subito. Cercare: trauma, co-ingestioni, paracetamolo.'] },
+      { tipo: 'decisione', titolo: 'Respira (FR ≥ 10, SpO₂ ok)?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'No', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Ventilare con pallone e maschera', righe: ['Naloxone (Narcan) 0,4 mg ev/im (1 fiala); ripetere fino a 2 mg e oltre per oppioidi sintetici.', 'Arresto: ALS.'], vai: [{ etichetta: 'Timer ACR', to: '/acr' }] },
+            ],
+          },
+          {
+            etichetta: 'Sì ma lento', tono: 'neutro', nodi: [
+              { tipo: 'terapia', titolo: 'Naloxone a piccole dosi', righe: ['0,04–0,1 mg ev ogni 2–3 min (fiala da 0,4 mg in 10 mL: 1–2,5 mL) fino a FR ≥ 10.'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Risponde al naloxone?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'Osservazione 2–4 h', righe: ['Recidiva o oppioide a lunga durata: infusione con 2/3 della dose efficace ogni ora.'] }] },
+          {
+            etichetta: 'No', tono: 'neutro', nodi: [
+              { tipo: 'passo', titolo: 'Probabili benzodiazepine o altro', righe: ['Supporto respiratorio. Flumazenil (Anexate) 0,2 mg ev solo se nessun rischio di convulsioni (non abituato, niente triciclici, niente epilessia).'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'esito', titolo: 'Tossicologia, valutazione psichiatrica se intenzionale', vai: [{ etichetta: 'Rubrica: Tossicologia', to: '/rubrica' }] },
+    ],
+  },
+  monossido: {
+    titolo: 'Algoritmo intossicazione da monossido di carbonio',
+    nota: 'ACEP 2017, UHMS.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Sospetto CO', righe: ['Cefalea, nausea, vertigini, sincope; più persone coinvolte; braciere, stufa, caldaia, incendio.'] },
+      { tipo: 'terapia', titolo: 'Ossigeno 100% subito', righe: ['Maschera con reservoir 15 L/min o ventilazione.'] },
+      { tipo: 'checklist', titolo: 'Esami', righe: ['EGA con COHb e lattati (il saturimetro sbaglia)', 'ECG e troponina', 'Test di gravidanza', 'Esame neurologico'] },
+      { tipo: 'decisione', titolo: 'Criteri per l’iperbarica?', righe: ['Perdita di coscienza, deficit neurologici, COHb > 25% (> 15% in gravidanza), ischemia miocardica, acidosi grave.'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Tossicologia e centro iperbarico', righe: ['Incendio con coma/lattato alto: idrossocobalamina (Cyanokit) 5 g in 15 min.'], vai: [{ etichetta: 'Rubrica: Tossicologia', to: '/rubrica' }] }] },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Ossigeno fino a COHb < 3% e asintomatico', righe: ['Avvisare dei sintomi neurologici tardivi; verificare la sorgente prima del rientro a casa.'] }] },
+        ],
+      },
+    ],
+  },
+  digossina: {
+    titolo: 'Algoritmo intossicazione da digossina',
+    nota: 'AHA 2023.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'In terapia con digossina e sintomi', righe: ['Nausea, disturbi visivi, confusione, bradicardia, aritmie.'] },
+      { tipo: 'checklist', titolo: 'Subito', righe: ['Monitor ECG', 'Digossinemia (≥ 6 h dall’ultima dose)', 'K, Mg, creatinina', 'Sospendere digossina e farmaci che la aumentano (amiodarone, verapamil)'] },
+      { tipo: 'decisione', titolo: 'Criteri per gli anticorpi antidigossina?', righe: ['Aritmie pericolose, K > 5,0 nell’acuta, ipoperfusione d’organo, arresto.'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'DigiFab', righe: ['Acuta/arresto: 10 flaconi. Cronica: 3–6 flaconi. Tramite Tossicologia di Careggi.'], vai: [{ etichetta: 'Rubrica: Tossicologia', to: '/rubrica' }] }] },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'Supporto', righe: ['Correggere K e Mg; atropina se bradicardia; monitor.'] }] },
+        ],
+      },
+    ],
+  },
+  'astinenza-alcolica': {
+    titolo: 'Algoritmo astinenza alcolica',
+    nota: 'ASAM 2020. Dosi per 70 kg.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Ultimo bicchiere da 6–96 h', righe: ['Tremore, sudorazione, ansia, tachicardia, allucinazioni, convulsioni.'] },
+      { tipo: 'checklist', titolo: 'Subito', righe: ['Glicemia', 'Tiamina (Benerva) 200 mg ev prima del glucosio', 'Escludere trauma cranico, infezione, encefalopatia epatica, altre sostanze', 'Mg, K, fosforo'] },
+      { tipo: 'decisione', titolo: 'CIWA-Ar?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: '< 10', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'Lieve', righe: ['Supporto; ricontrollo CIWA ogni 4 h.'] }] },
+          { etichetta: '10–18', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Diazepam (Valium) 10–20 mg', righe: ['Per bocca o ev; ripetere ogni 1–2 h finché CIWA < 10.'] }] },
+          { etichetta: '≥ 19 o DT', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Grave', righe: ['Diazepam 10–20 mg ev ogni 5–10 min fino a sedazione leggera. Refrattario: terapia intensiva (fenobarbital o propofol).'] }] },
+        ],
+      },
+      { tipo: 'nota', titolo: 'Wernicke?', righe: ['Confusione, atassia, oftalmoplegia: tiamina 500 mg ev 3 volte al giorno.'] },
+    ],
+  },
+  meningite: {
+    titolo: 'Algoritmo sospetta meningite batterica',
+    nota: 'NICE 2024, ESCMID. Dosi per 70 kg.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Febbre + cefalea, rigidità, alterazione della coscienza o petecchie', righe: ['Emocolture subito.'] },
+      { tipo: 'decisione', titolo: 'TC prima della rachicentesi?', righe: ['Deficit focali, crisi nuove, GCS < 10, immunodepressione grave, papilledema.'] },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Prima terapia, poi TC', tempo: '≤ 60 min', righe: ['Desametasone + antibiotico subito, poi TC e rachicentesi se sicura.'] },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'Rachicentesi subito', tempo: '≤ 60 min', righe: ['Se non eseguibile entro pochi minuti: terapia prima.'], vai: [{ etichetta: 'Rachicentesi', to: '/procedure?apri=rachicentesi' }] },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: 'Terapia',
+        righe: [
+          'Desametasone (Soldesam) 10 mg ev prima o con l’antibiotico, poi ogni 6 h.',
+          'Ceftriaxone (Rocefin) 2 g ev ogni 12 h.',
+          '> 50 anni o immunodepresso: + ampicillina (Amplital) 2 g ogni 4 h.',
+          'Encefalite sospetta: + aciclovir (Zovirax) 700 mg ev ogni 8 h.',
+        ],
+        vai: [{ etichetta: 'Antibiotici: meningite', to: '/antibiotici?apri=meningite' }],
+      },
+      { tipo: 'checklist', titolo: 'Dopo', righe: ['Shock: PDTA sepsi', 'Isolamento respiratorio per 24 h se meningococco possibile', 'Igiene pubblica per la profilassi dei contatti', 'Malattie infettive / terapia intensiva'], vai: [{ etichetta: 'Sepsi', to: '/linee-guida/sepsi' }] },
+    ],
+  },
+  cefalea: {
+    titolo: 'Algoritmo cefalea acuta',
+    nota: 'ACEP 2019. Dosi per 70 kg.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Cefalea in PS', righe: ['PA, temperatura, esame neurologico, fundus se possibile.'] },
+      { tipo: 'decisione', titolo: 'Segni d’allarme?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Esordio improvviso', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'PDTA ESA', righe: ['Regola di Ottawa per ESA, TC.'], vai: [{ etichetta: 'ESA', to: '/linee-guida/esa' }] }] },
+          { etichetta: 'Febbre, meningismo', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'PDTA meningite', vai: [{ etichetta: 'Meningite', to: '/linee-guida/meningite' }] }] },
+          { etichetta: 'Altri', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'TC encefalo ± angio', righe: ['Deficit, > 50 anni nuova, anticoagulante, tumore, immunodepresso, Valsalva, gravidanza, papilledema.'] }] },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'Probabile primaria' }] },
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: 'Terapia',
+        righe: [
+          'Metoclopramide (Plasil) 10 mg ev in 15 min.',
+          '± ketorolac (Toradol) 30 mg ev o paracetamolo 1 g ev.',
+          'Emicrania: desametasone (Soldesam) 8–10 mg ev contro le recidive.',
+          'Grappolo: ossigeno 12–15 L/min per 15 min.',
+          'Evitare gli oppioidi.',
+        ],
+      },
+      { tipo: 'esito', titolo: 'Dimissione se risolta e senza segni d’allarme', vai: [{ etichetta: 'Dimissione cefalea', to: '/dimissioni?apri=cefalea' }] },
+    ],
+  },
+  delirium: {
+    titolo: 'Algoritmo delirium',
+    nota: 'NICE CG103 (2023).',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Confusione acuta o fluttuante', righe: ['4AT: ≥ 4 probabile delirium.'] },
+      {
+        tipo: 'checklist', titolo: 'Cause (cercarle tutte)',
+        righe: [
+          'Glicemia, SpO₂, temperatura',
+          'Infezione (urine, polmone, cute)',
+          'Farmaci nuovi o sospesi (anticolinergici, oppioidi, benzodiazepine)',
+          'Ritenzione urinaria, fecaloma, dolore',
+          'Disidratazione, Na, Ca, creatinina',
+          'Astinenza da alcol o benzodiazepine',
+          'Ictus, trauma cranico (TC se dubbio)',
+        ],
+      },
+      { tipo: 'terapia', titolo: 'Senza farmaci', righe: ['Orientamento, familiari, occhiali e apparecchi acustici, luce, niente contenzioni, niente spostamenti inutili.'] },
+      { tipo: 'decisione', titolo: 'Agitazione pericolosa o grave sofferenza?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Aloperidolo (Serenase) 0,5–1 mg', righe: ['Ev o im, ripetibile dopo 30–60 min; max 5 mg/die. Parkinson/Lewy: quetiapina 12,5–25 mg per bocca.'], vai: [{ etichetta: 'Sedazione: agitato', to: '/sedazione?apri=agitato' }] }] },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'Solo misure non farmacologiche' }] },
+        ],
+      },
+    ],
+  },
+  sincope: {
+    titolo: 'Algoritmo sincope',
+    nota: 'ESC 2018.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Perdita di coscienza transitoria', righe: ['Era sincope? Escludere crisi epilettica, trauma cranico, intossicazione, ipoglicemia.'] },
+      { tipo: 'checklist', titolo: 'A tutti', righe: ['Anamnesi (prodromi, posizione, sforzo, palpitazioni)', 'PA sdraiato e in piedi a 3 min', 'ECG a 12 derivazioni', 'Glicemia; test di gravidanza'] },
+      { tipo: 'decisione', titolo: 'Causa grave evidente?', righe: ['Aritmia, SCA, embolia polmonare, dissezione, emorragia (digestiva, extrauterina, aneurisma).'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'PDTA della causa' }], fine: 'trattare la causa' },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'decisione', titolo: 'Rischio (ESC, Canadian Syncope Risk Score)' }] },
+        ],
+      },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Basso', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Dimissione', vai: [{ etichetta: 'Vasovagale', to: '/dimissioni?apri=sincope-vasovagale' }, { etichetta: 'Ortostatica', to: '/dimissioni?apri=sincope-ortostatica' }] }] },
+          { etichetta: 'Intermedio', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Osservazione con monitor', righe: ['Fino a 6 h, troponina, eco; percorso ambulatoriale rapido.'] }] },
+          { etichetta: 'Alto', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Monitor e ricovero', righe: ['Cardiologo; telemetria; eco.'] }] },
+        ],
+      },
+    ],
+  },
+  extrauterina: {
+    titolo: 'Algoritmo sospetta gravidanza extrauterina',
+    nota: 'NICE NG126 (2023).',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Donna in età fertile con dolore addominale, perdite ematiche, sincope o shock', righe: ['Test di gravidanza subito.'] },
+      { tipo: 'decisione', titolo: 'Positivo e instabile (o liquido libero abbondante)?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Emorragia', righe: ['Due accessi grossi, emoderivati, acido tranexamico non di routine; ginecologo di guardia per la sala subito.'], vai: [{ etichetta: 'Rubrica: ginecologia', to: '/rubrica' }] },
+            ],
+            fine: 'sala operatoria',
+          },
+          {
+            etichetta: 'No, stabile', tono: 'si', nodi: [
+              { tipo: 'checklist', titolo: 'Esami', righe: ['β-hCG quantitativa', 'Emocromo, gruppo e Rh', 'Ecografia transvaginale (ginecologo)'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Ecografia?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Gravidanza intrauterina', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Extrauterina molto improbabile' }] },
+          { etichetta: 'Sede sconosciuta', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'β-hCG a 48 h con il ginecologo', righe: ['Istruzioni chiare per il ritorno.'] }] },
+          { etichetta: 'Extrauterina', tono: 'no', nodi: [{ tipo: 'passo', titolo: 'Metotrexato, chirurgia o attesa', righe: ['Decide il ginecologo; anti-D 250 UI se Rh negativo e chirurgia.'], vedi: 'Trattamento (decide il ginecologo)' }] },
+        ],
+      },
+    ],
+  },
+  preeclampsia: {
+    titolo: 'Algoritmo preeclampsia / eclampsia',
+    nota: 'NICE NG133 (2023). Magnesio solfato fiale da 1 g/10 mL.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Gravidanza ≥ 20 settimane o puerperio con PA ≥ 140/90', righe: ['Cefalea, disturbi visivi, dolore epigastrico, edemi, dispnea? Proteinuria? Ginecologo di guardia.'], vai: [{ etichetta: 'Rubrica: ginecologia', to: '/rubrica' }] },
+      { tipo: 'decisione', titolo: 'Convulsioni?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Eclampsia', righe: ['Fianco sinistro, ossigeno. Magnesio solfato 4 g ev in 5–15 min (4 fiale), poi 1 g/h. Recidiva: altri 2 g.'] },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'decisione', titolo: 'PA ≥ 160/110 o segni di gravità?' },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: 'Abbassare la PA entro 1 h', tempo: '≤ 60 min',
+        righe: ['Labetalolo (Trandate) 20 mg ev, poi 40 e 80 mg ogni 10 min (max 300 mg).', 'Asma: nifedipina (Adalat) 10 mg per bocca.', 'Obiettivo ≤ 135/85.'],
+      },
+      { tipo: 'terapia', titolo: 'Magnesio solfato nella forma grave', righe: ['4 g ev in 5–15 min, poi 1 g/h per 24 h.'] },
+      {
+        tipo: 'checklist', titolo: 'Monitoraggio',
+        righe: ['PA ogni 15 min', 'Riflessi rotulei, FR, SpO₂ ogni ora', 'Catetere e diuresi; liquidi 80 mL/h', 'Esami: emocromo, transaminasi, LDH, creatinina, coagulazione', 'Tossicità: calcio gluconato 10% 10 mL'],
+      },
+      { tipo: 'esito', titolo: 'Ostetricia: il parto è la cura definitiva' },
+    ],
+  },
   'emorragia-cerebrale': {
     titolo: 'Algoritmo emorragia cerebrale spontanea',
     nota: 'AHA/ASA 2022. Dosi per 70 kg.',

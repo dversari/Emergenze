@@ -21,6 +21,9 @@ const SCORE: [RegExp, string][] = [
   [/BISAP/, 'bisap'],
   [/ICH score/, 'ich'],
   [/ADD-RS/, 'addrs'],
+  [/CIWA-Ar|CIWA/, 'ciwa'],
+  [/4AT/, '4at'],
+  [/Canadian Syncope Risk Score/, 'csrs'],
   [/regola di Ottawa per ESA|Ottawa/, 'ottawa-esa'],
 ]
 const RE_SCORE = new RegExp(`(${SCORE.map(([r]) => r.source).join('|')})`, 'g')

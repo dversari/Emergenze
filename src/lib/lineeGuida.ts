@@ -1523,6 +1523,475 @@ export const LINEE_GUIDA: LineaGuida[] = [
       { data: '2025-10-22', testo: 'ERC 2025: FA instabile con primo shock all’energia massima; amiodarone 300 mg dopo cardioversione fallita; adenosina e manovre vagali nella tachicardia a QRS stretto regolare.' },
     ],
   },
+  {
+    id: 'trauma-maggiore',
+    titolo: 'Trauma maggiore',
+    ente: 'Task Force europea / ATLS',
+    anno: 2023,
+    area: 'Trauma',
+    fonte: { etichetta: 'Rossaint et al., Crit Care 2023 (linea guida europea, 6ª ed.)', url: 'https://doi.org/10.1186/s13054-023-04327-7' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'gcs', nome: 'GCS' }],
+    vediAnche: [
+      { etichetta: 'Decompressione', to: '/procedure?apri=decompressione' },
+      { etichetta: 'Drenaggio toracico', to: '/procedure?apri=tubo' },
+      { etichetta: 'Intraossea', to: '/procedure?apri=io' },
+      { etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' },
+      { etichetta: 'Anticoagulato che sanguina', to: '/linee-guida/anticoagulato-sanguinamento' },
+    ],
+    inBreve: [
+      '<C>ABCDE: prima l’emorragia esterna massiva (compressione, laccio emostatico), poi vie aeree con protezione del rachide.',
+      'Ipotensione permissiva finché il sanguinamento non è controllato: PAS 80–90 mmHg; PAM ≥ 80 se trauma cranico grave.',
+      'Acido tranexamico entro 3 h: 1 g in 10 min, poi 1 g in 8 h.',
+      'Emoderivati presto; fibrinogeno se < 1,5 g/L; calcio ionizzato nella norma; prevenire l’ipotermia.',
+      'Fascia pelvica se sospetta frattura di bacino con instabilità. eFAST; TC total body se stabile o rispondente.',
+      'Instabile con sanguinamento in cavità: chirurgia di controllo del danno o radiologia interventistica, senza aspettare la TC.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci ed emoderivati (70 kg)',
+        punti: [
+          'Acido tranexamico (Tranex 500 mg/5 mL): 1 g = 2 fiale in 100 mL di SF in 10 min, poi 1 g in 8 h. Non dopo 3 h dal trauma.',
+          'Fibrinogeno concentrato (Haemocomplettan o Fibryga 1 g): 3–4 g se fibrinogeno < 1,5 g/L o sanguinamento massivo.',
+          'Emazie e plasma presto (rapporto almeno 1:2) se emorragia massiva; poi guidati da esami o test viscoelastici.',
+          'Calcio cloruro 10% 10 mL o calcio gluconato 10% 30 mL se calcio ionizzato < 1,15 mmol/L.',
+          'Anticoagulanti: complesso protrombinico (PCC) e vitamina K (Konakion) per i dicumarolici; vedi PDTA dedicato.',
+        ],
+      },
+      {
+        titolo: 'Primary survey',
+        punti: [
+          '<C>: emorragia esterna catastrofica → compressione, laccio, agenti emostatici.',
+          'A: vie aeree con collare/immobilizzazione in linea; intubazione se GCS ≤ 8 o vie aeree a rischio.',
+          'B: pneumotorace iperteso → decompressione; emotorace massivo → drenaggio.',
+          'C: due accessi grossi (o intraossea), eFAST, fascia pelvica, emoderivati.',
+          'D: GCS, pupille, glicemia. E: esporre e riscaldare.',
+        ],
+      },
+      {
+        titolo: 'Trauma cranico grave',
+        punti: [
+          'Evitare ipossia (SpO₂ > 94%) e ipotensione (PAS ≥ 100–110, PAM ≥ 80).',
+          'Normocapnia (PaCO₂ 35–40); iperventilazione solo come ponte se segni di erniazione.',
+          'Testa a 30°; mannitolo o soluzione ipertonica se segni di erniazione, con il neurochirurgo di Careggi.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2023-03-01', testo: 'Linea guida europea 6ª edizione: 39 raccomandazioni; ipotensione permissiva, acido tranexamico precoce, gestione guidata dai test della coagulazione.' },
+    ],
+  },
+  {
+    id: 'post-rosc',
+    titolo: 'Dopo il ritorno del circolo (post-ROSC)',
+    ente: 'ERC-ESICM',
+    anno: 2025,
+    area: 'Rianimazione',
+    fonte: { etichetta: 'Nolan et al., Resuscitation 2025 (ERC-ESICM)', url: 'https://doi.org/10.1016/j.resuscitation.2025.110809' },
+    controllata: '2026-11-11',
+    vediAnche: [{ etichetta: 'Timer ACR', to: '/acr' }, { etichetta: 'STEMI', to: '/linee-guida/stemi' }, { etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' }],
+    inBreve: [
+      'Ossigeno al 100% finché la SpO₂ non è affidabile, poi SpO₂ 94–98% (PaO₂ 75–100 mmHg); normocapnia.',
+      'PAS > 100 mmHg o PAM > 60–65; diuresi > 0,5 mL/kg/h e lattato in calo.',
+      'ECG a 12 derivazioni: STEMI → coronarografia subito. Senza sopraslivellamento: coronarografia urgente solo se alta probabilità di occlusione o instabilità.',
+      'Nessuna causa cardiaca evidente: TC encefalo e torace (anche angio-TC).',
+      'Prevenire la febbre: temperatura ≤ 37,5 °C per almeno 72 h nei pazienti in coma.',
+      'Glicemia controllata; trattare le crisi epilettiche (EEG); niente prognosi in PS.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Ventilazione e circolo (70 kg)',
+        punti: [
+          'Volume corrente 6–8 mL/kg di peso ideale (420–560 mL per 70 kg), PEEP 5–8.',
+          'Noradrenalina: 2 fiale da 2 mg in SF fino a 50 mL (80 µg/mL), partenza 0,05 µg/kg/min ≈ 2,5 mL/h.',
+          'Sedazione con propofol (Diprivan) o midazolam (Ipnovel) + fentanil (Fentanest).',
+        ],
+      },
+      {
+        titolo: 'Cause da cercare',
+        punti: [
+          '4 H: ipossia, ipovolemia, ipo/iperkaliemia e altri disturbi metabolici, ipotermia.',
+          '4 T: trombosi coronarica o polmonare, pneumotorace iperteso, tamponamento, tossici.',
+          'Eco al letto, EGA con lattato ed elettroliti, troponina.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2025-10-22', testo: 'ERC-ESICM 2025: «controllo della temperatura» con prevenzione attiva della febbre (≤ 37,5 °C per 72 h), PAM > 60–65, SpO₂ 94–98%, nuova sezione sulle aritmie dopo la ROSC.' },
+    ],
+  },
+  {
+    id: 'oppioidi-benzodiazepine',
+    titolo: 'Intossicazione da oppioidi e benzodiazepine',
+    ente: 'AHA',
+    anno: 2023,
+    area: 'Tossicologia',
+    fonte: { etichetta: 'Lavonas et al., Circulation 2023 (AHA, avvelenamenti)', url: 'https://doi.org/10.1161/CIR.0000000000001161' },
+    controllata: '2026-11-11',
+    vediAnche: [{ etichetta: 'Rubrica: Tossicologia', to: '/rubrica' }, { etichetta: 'Timer ACR', to: '/acr' }],
+    inBreve: [
+      'Priorità: ventilare. Il naloxone serve a far respirare, non a svegliare del tutto.',
+      'Naloxone a piccole dosi nei dipendenti (rischio di astinenza acuta e agitazione); dosi piene se apnea o arresto imminente.',
+      'Durata del naloxone (30–90 min) inferiore a quella di molti oppioidi (metadone, rilascio prolungato): osservazione o infusione.',
+      'Flumazenil non di routine: rischio di convulsioni (uso cronico di benzodiazepine, triciclici, epilessia). Solo nella sedazione iatrogena in paziente non abituato.',
+      'Cercare co-ingestioni (paracetamolo, alcol), ipoglicemia, trauma.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (70 kg)',
+        punti: [
+          'Naloxone (Narcan 0,4 mg/1 mL): 0,04–0,1 mg ev (fiala diluita in 10 mL: 1–2,5 mL) ripetuti ogni 2–3 min fino a FR ≥ 10; apnea: 0,4 mg ev o im; fino a 2 mg e oltre per oppioidi sintetici.',
+          'Infusione: ogni ora 2/3 della dose che ha fatto respirare.',
+          'Flumazenil (Anexate 0,5 mg/5 mL): 0,2 mg ev (2 mL) in 30 s, poi 0,1 mg ogni minuto fino a 1 mg; solo se nessuna controindicazione.',
+        ],
+      },
+      {
+        titolo: 'Osservazione',
+        punti: [
+          'Dopo naloxone: almeno 2–4 h; più a lungo per metadone, buprenorfina e rilascio prolungato.',
+          'Ingestione di ovuli («body packer»): ricovero e chirurgo.',
+          'Intenzionale: valutazione psichiatrica.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2023-09-18', testo: 'AHA 2023 avvelenamenti: naloxone per l’arresto respiratorio da oppioidi; flumazenil sconsigliato nel coma indifferenziato.' },
+    ],
+  },
+  {
+    id: 'monossido',
+    titolo: 'Intossicazione da monossido di carbonio',
+    ente: 'ACEP / UHMS',
+    anno: 2017,
+    area: 'Tossicologia',
+    fonte: { etichetta: 'ACEP Clinical Policy, Ann Emerg Med 2017', url: 'https://doi.org/10.1016/j.annemergmed.2016.11.003' },
+    controllata: '2026-11-11',
+    vediAnche: [{ etichetta: 'Rubrica: Tossicologia', to: '/rubrica' }],
+    inBreve: [
+      'Sospettarla con cefalea, nausea, vertigini, sincope in più persone della stessa casa, braciere, stufa, caldaia, incendio.',
+      'La SpO₂ del saturimetro è falsamente normale: misurare la carbossiemoglobina (COHb) su EGA.',
+      'Ossigeno al 100% con maschera con reservoir subito, senza aspettare l’EGA.',
+      'Ossigeno iperbarico da discutere con la Tossicologia se: perdita di coscienza, deficit neurologici, COHb > 25% (> 15% in gravidanza), ischemia miocardica, acidosi grave.',
+      'Incendio con coma o acidosi lattica grave: pensare anche al cianuro (idrossocobalamina).',
+    ],
+    sezioni: [
+      {
+        titolo: 'Esami e trattamento',
+        punti: [
+          'EGA con COHb e lattati, ECG, troponina, CK; test di gravidanza.',
+          'Ossigeno 15 L/min con reservoir (o ventilazione) fino a COHb < 3% e sintomi risolti (di solito 6 h).',
+          'Idrossocobalamina (Cyanokit 5 g) in 15 min se sospetto cianuro nel fumo d’incendio.',
+          'Avvisare dei sintomi neurologici tardivi (settimane) e programmare il controllo.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2017-01-01', testo: 'ACEP 2017: l’iperbarica può migliorare l’esito neurologico in casi selezionati; la COHb non predice da sola la gravità.' },
+    ],
+  },
+  {
+    id: 'digossina',
+    titolo: 'Intossicazione da digossina',
+    ente: 'AHA',
+    anno: 2023,
+    area: 'Tossicologia',
+    fonte: { etichetta: 'Lavonas et al., Circulation 2023 (AHA, avvelenamenti)', url: 'https://doi.org/10.1161/CIR.0000000000001161' },
+    controllata: '2026-11-11',
+    vediAnche: [{ etichetta: 'Rubrica: Tossicologia', to: '/rubrica' }, { etichetta: 'Bradicardia', to: '/linee-guida/bradicardia' }, { etichetta: 'Iperkaliemia', to: '/linee-guida/iperkaliemia' }],
+    inBreve: [
+      'Cronica (anziano, insufficienza renale, diuretici): nausea, disturbi visivi, confusione, bradiaritmie. Acuta: vomito, iperkaliemia, aritmie gravi.',
+      'Digossinemia almeno 6 h dopo l’ultima dose; potassio, magnesio, creatinina.',
+      'Anticorpi antidigossina (Fab) se aritmie pericolose, K > 5,0 nell’acuta, insufficienza d’organo da ipoperfusione o arresto.',
+      'Iperkaliemia: i Fab sono la terapia; il calcio non è più controindicato ma non è prioritario.',
+      'Correggere ipokaliemia e ipomagnesiemia; atropina per la bradicardia in attesa dei Fab.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Anticorpi antidigossina (DigiFab 40 mg)',
+        punti: [
+          'Arresto o ingestione acuta di dose ignota: 10 flaconi (fino a 20).',
+          'Cronica con tossicità: 3–6 flaconi.',
+          'Calcolo: flaconi = digossinemia (ng/mL) × peso (kg) / 100 → 70 kg con 3 ng/mL ≈ 2–3 flaconi.',
+          'Reperibilità: tramite la Tossicologia di Careggi.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2023-09-18', testo: 'AHA 2023: anticorpi antidigossina per aritmie gravi; il calcio per l’iperkaliemia non è più considerato pericoloso.' },
+    ],
+  },
+  {
+    id: 'astinenza-alcolica',
+    titolo: 'Astinenza alcolica',
+    ente: 'ASAM',
+    anno: 2020,
+    area: 'Tossicologia',
+    fonte: { etichetta: 'ASAM Clinical Practice Guideline on Alcohol Withdrawal Management 2020', url: 'https://doi.org/10.1097/ADM.0000000000000668' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'ciwa', nome: 'CIWA-Ar' }],
+    vediAnche: [{ etichetta: 'Stato di male', to: '/linee-guida/stato-di-male' }, { etichetta: 'Sedazione: agitato', to: '/sedazione?apri=agitato' }],
+    inBreve: [
+      'Inizio 6–24 h dopo l’ultimo bicchiere; convulsioni 12–48 h; delirium tremens 48–96 h.',
+      'Gravità con CIWA-Ar: < 10 lieve, 10–18 moderata, ≥ 19 grave.',
+      'Benzodiazepine prima scelta, a sintomi (CIWA-Ar) o a dosi fisse se il monitoraggio non è possibile.',
+      'Tiamina prima del glucosio; alte dosi se sospetta encefalopatia di Wernicke (confusione, atassia, oftalmoplegia).',
+      'Escludere: ipoglicemia, trauma cranico, infezione, encefalopatia epatica, altre sostanze.',
+      'Delirium tremens o benzodiazepine a dosi crescenti senza effetto: terapia intensiva (fenobarbital o propofol).',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (70 kg)',
+        punti: [
+          'Diazepam (Valium) 10–20 mg ev lento o per bocca ogni 1–2 h finché CIWA-Ar < 10 (fino a sedazione leggera).',
+          'Epatopatia grave o anziano: lorazepam (Tavor) 1–2 mg per bocca o oxazepam (Serpax) 15–30 mg.',
+          'Tiamina (Benerva 100 mg) 100–200 mg ev; se sospetto Wernicke 500 mg ev 3 volte al giorno.',
+          'Correggere magnesio, potassio, fosforo; glucosata dopo la tiamina.',
+          'Convulsione da astinenza: diazepam 10 mg ev; non serve l’antiepilettico a lungo termine.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2020-01-01', testo: 'ASAM 2020: benzodiazepine prima scelta, approccio a sintomi con CIWA-Ar, fenobarbital come alternativa da parte di esperti, tiamina a tutti.' },
+    ],
+  },
+  {
+    id: 'meningite',
+    titolo: 'Meningite batterica',
+    ente: 'ESCMID / NICE',
+    anno: 2024,
+    area: 'Neurologia · Infettivologia',
+    fonte: { etichetta: 'NICE NG240, 2024', url: 'https://www.nice.org.uk/guidance/ng240' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'gcs', nome: 'GCS' }],
+    vediAnche: [{ etichetta: 'Antibiotici: meningite', to: '/antibiotici?apri=meningite' }, { etichetta: 'Rachicentesi', to: '/procedure?apri=rachicentesi' }, { etichetta: 'Sepsi', to: '/linee-guida/sepsi' }],
+    inBreve: [
+      'Febbre, cefalea, rigidità nucale, alterazione della coscienza: spesso non tutti presenti. Petecchie che non scompaiono alla pressione = meningococco finché non escluso.',
+      'Antibiotico entro 1 ora; non ritardarlo per TC o rachicentesi.',
+      'Desametasone prima o insieme alla prima dose di antibiotico.',
+      'TC prima della rachicentesi solo se: deficit focali, crisi nuove, GCS < 10, immunodepressione grave, papilledema.',
+      'Sospetta encefalite (confusione, comportamento alterato, crisi focali): aggiungere aciclovir.',
+      'Avvisare la Direzione sanitaria/igiene per la profilassi dei contatti stretti (meningococco).',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (70 kg)',
+        punti: [
+          'Ceftriaxone (Rocefin) 2 g ev ogni 12 h.',
+          'Età > 50 anni, immunodepressione, alcolismo, gravidanza: + ampicillina (Amplital) 2 g ev ogni 4 h (Listeria).',
+          'Dove il pneumococco resistente è possibile: + vancomicina (Vancocina) 15–20 mg/kg ev ogni 8–12 h.',
+          'Desametasone (Soldesam) 10 mg ev ogni 6 h per 4 giorni; sospendere se non pneumococco/Haemophilus.',
+          'Aciclovir (Zovirax) 10 mg/kg = 700 mg ev ogni 8 h se sospetta encefalite.',
+          'Profilassi dei contatti: ciprofloxacina (Ciproxin) 500 mg per bocca una volta.',
+        ],
+      },
+      {
+        titolo: 'Liquor tipico',
+        punti: [
+          'Batterica: torbido, cellule > 1.000 (neutrofili), proteine > 1 g/L, glucosio liquor/sangue < 0,4.',
+          'Virale: limpido, 10–1.000 cellule (linfociti), proteine 0,4–1 g/L, rapporto glucosio > 0,6.',
+          'Sempre: colorazione di Gram, coltura, PCR; glicemia contemporanea.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2024-03-19', testo: 'NICE NG240: antibiotico entro 1 h, ceftriaxone in ospedale, desametasone sopra i 3 mesi, rachicentesi senza ritardare l’antibiotico.' },
+    ],
+  },
+  {
+    id: 'cefalea',
+    titolo: 'Cefalea acuta in PS',
+    ente: 'ACEP',
+    anno: 2019,
+    area: 'Neurologia',
+    fonte: { etichetta: 'ACEP Clinical Policy, Ann Emerg Med 2019', url: 'https://doi.org/10.1016/j.annemergmed.2019.07.009' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'ottawa-esa', nome: 'Regola di Ottawa per ESA' }],
+    vediAnche: [{ etichetta: 'ESA', to: '/linee-guida/esa' }, { etichetta: 'Meningite', to: '/linee-guida/meningite' }, { etichetta: 'Dimissione cefalea', to: '/dimissioni?apri=cefalea' }],
+    inBreve: [
+      'Segni d’allarme (SNOOP): sistemici (febbre, calo di peso, tumore, immunodepressione), neurologici, esordio improvviso, > 50 anni con cefalea nuova, cambio di caratteristiche, postura, gravidanza, Valsalva, papilledema.',
+      'Esordio improvviso: regola di Ottawa e PDTA ESA.',
+      'Febbre e meningismo: PDTA meningite.',
+      'Primaria tipica: metoclopramide ev (± FANS), idratazione; evitare gli oppioidi.',
+      'Emicrania: desametasone riduce le recidive a 72 h.',
+      'Altre cause da non perdere: trombosi venosa cerebrale, dissezione carotidea o vertebrale, intossicazione da CO, arterite temporale (> 50 anni, VES/PCR), glaucoma acuto, crisi ipertensiva, preeclampsia.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (70 kg)',
+        punti: [
+          'Metoclopramide (Plasil) 10 mg ev in 15 min (1 fiala da 10 mg/2 mL); acatisia: difenidramina o benzodiazepina.',
+          'Ketorolac (Toradol) 30 mg ev o ibuprofene (Brufen) 600 mg per bocca.',
+          'Paracetamolo 1 g ev.',
+          'Desametasone (Soldesam) 8–10 mg ev per ridurre le recidive dell’emicrania.',
+          'Sumatriptan (Imigran) 6 mg sc se emicrania senza controindicazioni cardiovascolari.',
+          'Cefalea a grappolo: ossigeno 12–15 L/min con reservoir per 15 min; sumatriptan 6 mg sc.',
+        ],
+      },
+      {
+        titolo: 'Quando la TC',
+        punti: [
+          'Esordio improvviso, deficit neurologici, alterazione della coscienza, papilledema, trauma, anticoagulante, immunodepressione, tumore noto, > 50 anni con cefalea nuova, cefalea da sforzo/Valsalva.',
+          'Angio-TC (o angio-RM) se sospetta dissezione o trombosi venosa (dopo la TC senza contrasto).',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2019-10-01', testo: 'ACEP 2019: ESA esclusa con TC negativa entro 6 h; metoclopramide e FANS di prima scelta; oppioidi da evitare.' },
+    ],
+  },
+  {
+    id: 'delirium',
+    titolo: 'Delirium',
+    ente: 'NICE',
+    anno: 2023,
+    area: 'Neurologia · Geriatria',
+    fonte: { etichetta: 'NICE CG103 (aggiornata 2023)', url: 'https://www.nice.org.uk/guidance/cg103' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: '4at', nome: '4AT' }],
+    vediAnche: [{ etichetta: 'Sedazione: agitato', to: '/sedazione?apri=agitato' }, { etichetta: 'Astinenza alcolica', to: '/linee-guida/astinenza-alcolica' }],
+    inBreve: [
+      'Esordio acuto, fluttuante, con disattenzione: screening con 4AT (≥ 4 probabile delirium).',
+      'È un sintomo: cercare la causa (infezione, farmaci, ritenzione urinaria, stipsi, dolore, ipossia, disidratazione, alterazioni elettrolitiche, glicemia, astinenza, ictus).',
+      'Prima i rimedi non farmacologici: orientamento, familiari, occhiali e apparecchi acustici, luce, sonno, mobilizzazione, niente contenzioni.',
+      'Farmaci solo se agitazione pericolosa o grave sofferenza: aloperidolo a basse dosi, per il tempo più breve.',
+      'Niente benzodiazepine, salvo astinenza alcolica o da benzodiazepine.',
+      'Parkinson o demenza a corpi di Lewy: evitare l’aloperidolo (quetiapina a basse dosi, con specialista).',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (anziano)',
+        punti: [
+          'Aloperidolo (Serenase 5 mg/1 mL): 0,5–1 mg ev o im (0,1–0,2 mL), ripetibile dopo 30–60 min; massimo 5 mg/die. ECG per il QT.',
+          'Quetiapina (Seroquel) 12,5–25 mg per bocca se Parkinson o Lewy.',
+        ],
+      },
+      {
+        titolo: 'Esami per la causa',
+        punti: [
+          'Glicemia, emocromo, elettroliti con calcio, creatinina, funzione epatica, PCR, EGA, esame urine (ma batteriuria ≠ causa), ECG.',
+          'Revisione dei farmaci: anticolinergici, oppioidi, benzodiazepine, antistaminici, steroidi, antiparkinsoniani.',
+          'Vescica (ecografia per ritenzione), alvo, dolore, saturazione.',
+          'TC encefalo se trauma, anticoagulanti, segni focali o nessuna altra causa.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2023-01-18', testo: 'NICE CG103 aggiornata: 4AT come strumento di valutazione; prevenzione multicomponente; antipsicotico solo per breve tempo se sofferenza o rischio.' },
+    ],
+  },
+  {
+    id: 'sincope',
+    titolo: 'Sincope',
+    ente: 'ESC',
+    anno: 2018,
+    area: 'Cardiologia',
+    fonte: { etichetta: 'Brignole et al., Eur Heart J 2018 (ESC)', url: 'https://doi.org/10.1093/eurheartj/ehy037' },
+    controllata: '2026-11-11',
+    calcolatori: [{ id: 'csrs', nome: 'Canadian Syncope Risk Score' }],
+    vediAnche: [
+      { etichetta: 'Dimissione sincope vasovagale', to: '/dimissioni?apri=sincope-vasovagale' },
+      { etichetta: 'Dimissione sincope ortostatica', to: '/dimissioni?apri=sincope-ortostatica' },
+      { etichetta: 'Bradicardia', to: '/linee-guida/bradicardia' },
+      { etichetta: 'Embolia polmonare', to: '/linee-guida/embolia-polmonare' },
+    ],
+    inBreve: [
+      'Era sincope? Perdita di coscienza transitoria, rapida, con ripresa spontanea e completa. Distinguere da crisi epilettica, trauma, intossicazione.',
+      'A tutti: anamnesi, esame obiettivo, PA in clinostatismo e in piedi (3 min), ECG a 12 derivazioni.',
+      'Alto rischio (ESC): dolore toracico, dispnea, sincope da sforzo o da sdraiato, palpitazioni prima, cardiopatia o FE ridotta, familiarità per morte improvvisa, ECG patologico, PAS < 90, sanguinamento → monitor e ricovero/osservazione.',
+      'Basso rischio (prodromi tipici, trigger, in piedi a lungo, dopo il pasto, senza cardiopatia, ECG normale): dimissione.',
+      'Né alto né basso: osservazione in PS con monitor (fino a 6 h) o percorso rapido ambulatoriale.',
+    ],
+    sezioni: [
+      {
+        titolo: 'ECG ad alto rischio',
+        punti: [
+          'Ischemia acuta; BAV II grado Mobitz II o III grado; bradicardia sinusale < 40 o pause > 3 s da sveglio; blocco di branca o QRS > 120 ms; TV non sostenuta.',
+          'QT lungo o corto, Brugada tipo 1, preeccitazione, onde epsilon o T negative in V1–V3 (cardiomiopatia aritmogena), ipertrofia (cardiomiopatia ipertrofica).',
+        ],
+      },
+      {
+        titolo: 'Esami mirati',
+        punti: [
+          'Emocromo se sospetto sanguinamento; troponina e BNP se sospetto cardiaco; D-dimero se sospetta embolia; test di gravidanza.',
+          'Massaggio del seno carotideo > 40 anni se sospetto (no se soffio carotideo o ictus/TIA recente).',
+          'Ecocardiogramma se cardiopatia nota o sospetta.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2018-03-19', testo: 'ESC 2018: stratificazione in PS ad alto/basso rischio, unità di osservazione, ecocardiogramma e monitor mirati. Nuova linea guida ESC su sincope prevista per il 2028.' },
+    ],
+  },
+  {
+    id: 'extrauterina',
+    titolo: 'Gravidanza extrauterina',
+    ente: 'NICE',
+    anno: 2023,
+    area: 'Ostetricia',
+    fonte: { etichetta: 'NICE NG126 (aggiornata 2023)', url: 'https://www.nice.org.uk/guidance/ng126' },
+    controllata: '2026-11-11',
+    vediAnche: [{ etichetta: 'Rubrica: ginecologia', to: '/rubrica' }, { etichetta: 'Trauma maggiore (emoderivati)', to: '/linee-guida/trauma-maggiore' }],
+    inBreve: [
+      'Test di gravidanza a ogni donna in età fertile con dolore addominale, sanguinamento vaginale, sincope o shock.',
+      'Instabile o liquido libero abbondante all’eFAST: rianimazione, emoderivati, ginecologo di guardia per la sala operatoria subito.',
+      'Stabile: β-hCG quantitativa, gruppo sanguigno, ecografia transvaginale dal ginecologo.',
+      'Gravidanza di sede sconosciuta (β-hCG positiva, utero vuoto): β-hCG ripetuta a 48 h con il ginecologo.',
+      'Rh negativo con trattamento chirurgico: immunoglobuline anti-D 250 UI.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Trattamento (decide il ginecologo)',
+        punti: [
+          'Metotrexato se: niente dolore importante, non rotta, massa < 35 mm senza battito, β-hCG < 1.500 UI/L (fino a 5.000 con scelta condivisa), niente gravidanza intrauterina, follow-up possibile.',
+          'Chirurgia (salpingectomia di solito): dolore importante, massa ≥ 35 mm, battito visibile, β-hCG ≥ 5.000, rottura.',
+          'Attesa: stabile, senza dolore, β-hCG < 1.500 in calo.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2023-08-01', testo: 'NICE NG126 aggiornata: anti-D solo con trattamento chirurgico; criteri per metotrexato e trattamento in attesa.' },
+    ],
+  },
+  {
+    id: 'preeclampsia',
+    titolo: 'Preeclampsia ed eclampsia',
+    ente: 'NICE',
+    anno: 2023,
+    area: 'Ostetricia',
+    fonte: { etichetta: 'NICE NG133 (aggiornata 2023)', url: 'https://www.nice.org.uk/guidance/ng133' },
+    controllata: '2026-11-11',
+    vediAnche: [{ etichetta: 'Rubrica: ginecologia', to: '/rubrica' }, { etichetta: 'Stato di male', to: '/linee-guida/stato-di-male' }],
+    inBreve: [
+      'Gravidanza ≥ 20 settimane o puerperio (fino a 6 settimane) con PA ≥ 140/90 + proteinuria o danno d’organo (cefalea, disturbi visivi, dolore epigastrico, piastrine basse, transaminasi, creatinina, edema polmonare).',
+      'PA ≥ 160/110: grave, trattare entro 1 ora; obiettivo ≤ 135/85.',
+      'Eclampsia (convulsioni): magnesio solfato, non benzodiazepine come prima scelta.',
+      'Magnesio solfato anche nella preeclampsia grave per prevenire le convulsioni.',
+      'Ginecologo di guardia subito: la cura definitiva è il parto.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci',
+        punti: [
+          'Labetalolo (Trandate) 20 mg ev in 2 min, poi 40 e 80 mg ogni 10 min (max 300 mg); o per bocca 200 mg.',
+          'Nifedipina (Adalat) 10 mg per bocca (non sublinguale), ripetibile dopo 30 min, se labetalolo controindicato (asma).',
+          'Magnesio solfato: carico 4 g ev (4 fiale da 1 g/10 mL in 100 mL) in 5–15 min, poi 1 g/h per 24 h.',
+          'Recidiva di convulsione: altri 2 g ev in 5 min.',
+          'Tossicità da magnesio (riflessi assenti, FR < 12, oliguria): sospendere; calcio gluconato 10% 10 mL ev in 10 min.',
+        ],
+      },
+      {
+        titolo: 'Monitoraggio',
+        punti: [
+          'PA ogni 15 min fino all’obiettivo; riflessi rotulei, FR e SpO₂ ogni ora con il magnesio; diuresi (catetere).',
+          'Esami: emocromo, transaminasi, LDH, creatinina, acido urico, coagulazione, proteinuria (rapporto proteine/creatinina).',
+          'Liquidi limitati (80 mL/h): rischio di edema polmonare.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2023-04-17', testo: 'NICE NG133 aggiornata: obiettivo PA ≤ 135/85; labetalolo prima scelta, nifedipina alternativa; magnesio solfato nella preeclampsia grave e nell’eclampsia.' },
+    ],
+  },
 ]
 
 export const lineaGuida = (id: string) => LINEE_GUIDA.find((l) => l.id === id)
