@@ -137,10 +137,10 @@ const IN_DIVENIRE = 'DEA-LIRIO è un cantiere aperto: cresce turno dopo turno. E
 export default function Home() {
   const [avvisi, setAvvisi] = useState(false)
   return (
-    <div className="flex flex-col gap-2.5 lg:grid lg:grid-cols-2 lg:gap-5 lg:items-start lg:max-w-6xl lg:mx-auto">
-      <div className="flex flex-col gap-2.5 lg:gap-4">
-        <section className="card !p-0 overflow-hidden">
-          <div className="bg-sabbia px-4 pt-2 flex justify-center">
+    <div className="flex flex-col gap-2.5 lg:grid lg:grid-cols-2 lg:gap-5 lg:items-stretch lg:grid-rows-[auto_auto] lg:max-w-6xl lg:mx-auto">
+      <div className="flex flex-col gap-2.5 lg:contents">
+        <section className="card !p-0 overflow-hidden lg:col-start-1 lg:row-start-1 lg:flex lg:flex-col">
+          <div className="bg-sabbia px-4 pt-2 flex justify-center items-center lg:flex-1">
             <div className="aspect-[22/15] h-[clamp(44px,9svh,180px)] lg:h-[230px]"><Giglio /></div>
           </div>
           <div className="px-4 pt-2 pb-3 lg:px-6 lg:pb-5 flex items-end gap-3">
@@ -156,14 +156,14 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="hidden lg:block card">
+        <section className="hidden lg:flex lg:flex-col lg:justify-center card lg:col-start-1 lg:row-start-2">
           <p className="etichetta mb-2 !text-bordeaux">Avvertenze semiserie (ma serie)</p>
           <Avvertenze />
         </section>
       </div>
 
-      <div className="flex flex-col gap-2.5 lg:gap-4">
-        <section className="grid grid-cols-2 gap-2 lg:gap-3">
+      <div className="flex flex-col gap-2.5 lg:contents">
+        <section className="grid grid-cols-2 gap-2 lg:gap-3 lg:col-start-2 lg:row-start-1">
           {PAGINE.map((p) => (
             <Link key={p.id} to={p.to} className="card !p-2 lg:!p-3 !rounded-2xl flex items-center gap-2 lg:gap-3 active:bg-sabbia lg:hover:border-verde2">
               <svg viewBox="0 0 64 64" className="w-10 h-10 lg:w-12 lg:h-12 shrink-0" aria-hidden>{DISEGNI[p.id]}</svg>
@@ -175,7 +175,7 @@ export default function Home() {
           ))}
         </section>
 
-        <section className="hidden lg:flex card flex-col gap-3">
+        <section className="hidden lg:flex lg:justify-center card flex-col gap-3 lg:col-start-2 lg:row-start-2">
           <p className="etichetta !text-verde">Lavori in corso</p>
           <p className="text-[13.5px] leading-snug">{IN_DIVENIRE}</p>
           <div className="flex items-center gap-3">
