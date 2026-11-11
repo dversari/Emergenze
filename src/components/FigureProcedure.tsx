@@ -366,7 +366,7 @@ const Serrato = () => (
 
 
 const NivMontaggio = () => (
-  <Fig didascalia="V60: ossigeno ad alta pressione dalla parete, filtro all’uscita, circuito monotubo, UNA sola perdita intenzionale (porta espiratoria sul circuito con maschera non ventilata a gomito blu, oppure maschera ventilata senza porta). Maschera appoggiata a mano a ventilatore acceso, poi le cinghie.">
+  <Fig didascalia="V60: ossigeno ad alta pressione dalla parete, filtro all’uscita, circuito monotubo, UNA sola perdita intenzionale (porta espiratoria sul circuito con maschera non ventilata a gomito arancio con valvola antisoffocamento). Tubicino di sensing dal raccordo vicino alla maschera al frontale della V60. Maschera appoggiata a mano a ventilatore acceso, poi le cinghie.">
     {/* parete O2 */}
     <rect x="6" y="8" width="54" height="22" rx="4" className="fill-verde3 stroke-verde-scuro" strokeWidth={1.5} />
     {testo(33, 23, 'O₂ parete', 'fill-verde-scuro', 9, 'middle', true)}
@@ -397,10 +397,16 @@ const NivMontaggio = () => (
     <path d="M300 40 C266 36 250 58 252 80 L246 92 L253 96 L250 104 C252 112 258 114 266 113 L268 126 C270 138 286 142 304 138" className={pelle} strokeWidth={1.5} />
     <path d="M300 40 C318 46 318 120 304 138" {...T} className="stroke-tenue" strokeWidth={1.5} />
     <path d="M258 70 L240 98 L246 118 L272 122 L268 84 Z" className="fill-[#e7eef5]/80 stroke-[#5b7b98]" strokeWidth={2} />
-    <path d="M244 112 l-6 6" {...T} strokeWidth={6} className="stroke-[#3d6fb0]" />
-    {testo(232, 140, 'gomito blu', 'fill-[#3d6fb0]', 8, 'middle', true)}
+    <path d="M244 112 l-6 6" {...T} strokeWidth={6} className="stroke-[#e07b24]" />
+    <circle cx="247" cy="112" r="2.6" className="fill-white stroke-[#e07b24]" strokeWidth={1.2} />
+    {testo(262, 152, 'gomito arancio', 'fill-[#c0621a]', 8, 'middle', true)}
+    {testo(262, 161, '(antisoffocamento)', 'fill-[#c0621a]', 7.5, 'middle')}
+    {/* tubicino di sensing */}
+    <path d="M232 126 C214 160 196 186 150 186 C112 186 104 176 100 160" {...T} strokeWidth={1.3} className="stroke-verde-scuro" />
+    <circle cx="100" cy="160" r="2.4" className="fill-verde-scuro" />
+    {testo(150, 196, 'tubicino di sensing', 'fill-verde-scuro', 8, 'middle', true)}
     <path d="M268 84 L300 66 M272 116 L304 112" {...T} strokeWidth={2.2} className="stroke-oro" />
-    {testo(286, 186, 'testa a 30–45°', 'fill-tenue', 8.5, 'middle')}
+    {testo(290, 182, 'testa 30–45°', 'fill-tenue', 8, 'middle')}
     {testo(170, 24, 'maschera: ponte del naso → sotto il labbro', 'fill-tenue', 8, 'middle')}
   </Fig>
 )

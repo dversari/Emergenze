@@ -452,7 +452,8 @@ export const PROCEDURE: Scheda[] = [
       { titolo: 'Montaggio della V60', numerato: true, righe: [
         'Alimentazione di rete (batteria interna per il trasporto) e tubo dell’ossigeno ad alta pressione alla presa a muro: la FiO₂ si imposta sul ventilatore (O₂ 21–100%), non con un flussimetro.',
         'Filtro antibatterico sull’uscita del ventilatore, poi circuito monotubo.',
-        'Una sola perdita intenzionale: maschera NON ventilata (gomito blu) + porta espiratoria sul circuito (Whisper Swivel/DEP); oppure maschera ventilata (gomito trasparente) senza porta aggiuntiva. Due perdite = ventilazione inefficace; nessuna perdita = rirespirazione di CO₂.',
+        'Una sola perdita intenzionale: da noi maschera NON ventilata con valvola antisoffocamento (gomito arancio) + porta espiratoria sul circuito (Whisper Swivel/DEP). Una maschera ventilata (gomito trasparente) va usata senza porta aggiuntiva. Due perdite = ventilazione inefficace; nessuna perdita = rirespirazione di CO₂.',
+        'Tubicino di sensing (linea della pressione prossimale): dal raccordo vicino alla maschera alla presa sul frontale della V60. Staccato, piegato o con condensa = pressioni lette male, trigger errati e allarmi; controllarlo a ogni allarme.',
         'Menu Maschera/Porta: selezionare tipo di maschera e di porta espiratoria; eseguire il test della porta espiratoria (circuito chiuso con la mano quando richiesto).',
         'Maschera oronasale (full face) scelta con il calibro: dal ponte del naso a sotto il labbro inferiore. Casco solo per CPAP nell’ipossiemico.',
         'In standby: modalità e parametri (vedi scheda «NIV: impostazione per patologia ed EGA»), allarmi.',
@@ -520,9 +521,10 @@ export const PROCEDURE: Scheda[] = [
         'Fame d’aria all’inizio dell’atto: Rise più veloce (da 3 a 1–2).',
         'Ciclaggio tardivo (espira contro la macchina, atti lunghi): ridurre le perdite (maschera, cinghie), ridurre PS; con Auto-Trak+ anticipare il ciclaggio.',
         'Doppio trigger: tempo inspiratorio troppo breve rispetto alla richiesta: aumentare PS; con Auto-Trak+ ritardare il ciclaggio.',
-        'Autotrigger (FR del ventilatore alta senza sforzi visibili): perdite o acqua nel circuito.',
+        'Autotrigger (FR del ventilatore alta senza sforzi visibili): perdite, acqua nel circuito o condensa nel tubicino di sensing.',
       ] },
       { titolo: 'Perdite e maschera', righe: [
+        'Valvola antisoffocamento del gomito arancio: deve chiudersi quando il ventilatore spinge; se resta aperta (pressione bassa, ventilatore spento) il paziente respira aria ambiente attraverso di essa. Non coprirla.',
         'Riposizionare prima di stringere: la perdita sugli occhi è la più dannosa (congiuntiviti) e la più frequente.',
         'Maschera troppo grande o troppo stretta perde di più; con protesi dentarie spesso meglio tenerle.',
         'Barba, sondino naso-gastrico, cachessia: cuscinetti/medicazioni, cambio di misura o di interfaccia.',
