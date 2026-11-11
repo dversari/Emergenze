@@ -6,6 +6,7 @@ import Acr from './pages/Acr'
 import Calcolatori from './pages/Calcolatori'
 import Antibiotici from './pages/Antibiotici'
 import Rubrica from './pages/Rubrica'
+import Turni from './pages/Turni'
 import Moduli from './pages/Moduli'
 import ModuloTrasfusione from './pages/ModuloTrasfusione'
 import PaginaTesti from './components/PaginaTesti'
@@ -29,6 +30,7 @@ const schede = [
   { to: '/anamnesi', label: 'Cartella', icona: '☰\uFE0E' },
   { to: '/dimissioni', label: 'Dimissione', icona: '✎\uFE0E' },
   { to: '/moduli', label: 'Moduli', icona: '⎙\uFE0E' },
+  { to: '/turni', label: 'Turni', icona: '▦\uFE0E' },
 ]
 
 /** Intestazione in alto, schede in basso a portata di pollice. */
@@ -108,6 +110,7 @@ export default function App() {
           <Route path="anamnesi" element={<PaginaTesti key="a" voci={ANAMNESI} prefisso="anamnesi" segnaposto="Cerca un sintomo…" nota="Testo da adattare al paziente prima di copiarlo in cartella; cancella la sezione «Da non dimenticare» se non serve." />} />
           <Route path="dimissioni" element={<PaginaTesti key="d" voci={DIMISSIONI} prefisso="dimissione" segnaposto="Cerca una diagnosi…" nota="Dosi per adulto: verificare allergie, funzione renale, gravidanza e terapie in corso." />} />
           <Route path="rubrica" element={<Rubrica />} />
+          <Route path="turni" element={<Turni />} />
           <Route path="moduli" element={<Moduli />} />
           <Route path="modulo-trasfusione" element={<ModuloTrasfusione />} />
           <Route path="linee-guida" element={<ElencoLineeGuida />} />

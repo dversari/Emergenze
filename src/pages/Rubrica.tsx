@@ -29,14 +29,14 @@ function impostaVoci(d: DatiRubrica) {
   for (const k of Object.keys(usi)) delete usi[k]
   VOCI.forEach((v) => v.numeri.forEach((n) => { if (!n.esterno && n.cifre.length === 4) (usi[n.cifre] ??= []).push(v.id) }))
 }
-const URL_RUBRICA = 'https://djruxnduelhzxkomxvcb.supabase.co/functions/v1/emergenze-rubrica'
-const CHIAVE_DATI = 'emergenze.rubrica.dati'
-const CHIAVE_PIN = 'emergenze.rubrica.pin'
-const leggi = (k: string) => { try { return localStorage.getItem(k) } catch { return null } }
+export const URL_RUBRICA = 'https://djruxnduelhzxkomxvcb.supabase.co/functions/v1/emergenze-rubrica'
+export const CHIAVE_DATI = 'emergenze.rubrica.dati'
+export const CHIAVE_PIN = 'emergenze.rubrica.pin'
+export const leggi = (k: string) => { try { return localStorage.getItem(k) } catch { return null } }
 const scrivi = (k: string, v: string | null) => { try { if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v) } catch { /* privata */ } }
 { const c = leggi(CHIAVE_DATI); if (c) try { impostaVoci(JSON.parse(c).dati) } catch { /* cache rovinata */ } }
 
-async function scarica(pin: string) {
+export async function scarica(pin: string) {
   const res = await fetch(URL_RUBRICA, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ pin }) })
   const j = await res.json().catch(() => ({}))
   if (!res.ok) throw Object.assign(new Error(j.error ?? `Errore ${res.status}`), { status: res.status })
