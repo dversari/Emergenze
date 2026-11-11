@@ -1,0 +1,214 @@
+/*
+ * Algoritmi visivi delle linee guida (diagramma a blocchi verticale).
+ * STEMI: ESC 2023 + ACC/AHA 2025, adattato a un PS con emodinamica h24 (Prato): solo PCI primaria, niente fibrinolisi.
+ * Dosi per adulto di 70 kg con il numero di fiale/compresse; verificare i formati in reparto.
+ */
+
+export type Tono = 'avvio' | 'passo' | 'decisione' | 'allarme' | 'terapia' | 'esito' | 'nota'
+
+export type Nodo =
+  | { tipo: Tono; titolo: string; righe?: string[]; tempo?: string }
+  | { tipo: 'rami'; rami: Ramo[] }
+
+export interface Ramo { etichetta: string; tono?: 'si' | 'no' | 'neutro'; nodi: Nodo[] }
+
+export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: Nodo[] }> = {
+  stemi: {
+    titolo: 'Algoritmo STEMI — PS con emodinamica h24',
+    nota: 'ESC 2023 e ACC/AHA 2025. Prato ha l’emodinamica h24: la strategia è sempre la PCI primaria, la fibrinolisi non è prevista.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Dolore toracico o equivalente ischemico',
+        righe: [
+          'Equivalenti: dispnea, sincope, epigastralgia, sudorazione, arresto cardiaco.',
+          'Anziani, donne, diabetici: sintomi spesso atipici.',
+        ],
+      },
+      {
+        tipo: 'passo', titolo: 'ECG a 12 derivazioni', tempo: '≤ 10 min',
+        righe: [
+          'Monitor, defibrillatore a portata di mano, accesso venoso (lasciare libero il polso destro per l’accesso radiale).',
+          'Prelievo: troponina hs, emocromo, coagulazione, creatinina, elettroliti. Se lo STEMI è già evidente non aspettare il risultato.',
+          'ST↑ inferiore → registrare V3R–V4R. ST↓ V1–V3 → registrare V7–V9.',
+          'Confronto con ECG precedenti; ecocardio al letto (acinesia regionale, versamento, valvole).',
+        ],
+      },
+      { tipo: 'decisione', titolo: 'ST sopraslivellato o equivalente di STEMI?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'si', nodi: [
+              {
+                tipo: 'passo', titolo: 'Criteri ECG',
+                righe: [
+                  'ST↑ al punto J in ≥ 2 derivazioni contigue: ≥ 1 mm; in V2–V3 ≥ 2 mm (uomo ≥ 40 anni), ≥ 2,5 mm (uomo < 40), ≥ 1,5 mm (donna).',
+                  'V7–V9 ≥ 0,5 mm (infarto posteriore); V3R–V4R ≥ 0,5 mm (ventricolo destro).',
+                  'Equivalenti: blocco di branca sinistro o destro o ritmo da pacemaker con sintomi ischemici in atto (Sgarbossa); onde T iperacute; pattern di de Winter.',
+                ],
+              },
+              {
+                tipo: 'allarme', titolo: 'Prima degli antitrombotici: è una dissezione?',
+                righe: [
+                  'Dolore lacerante o dorsale, PA asimmetrica > 20 mmHg, deficit di polso o neurologico, soffio diastolico, mediastino slargato, versamento pericardico → ecocardio e angio-TC.',
+                  'Altri simulatori: pericardite, Takotsubo, ripolarizzazione precoce, aneurisma ventricolare, iperkaliemia.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'No / dubbio', tono: 'no', nodi: [
+              {
+                tipo: 'passo', titolo: 'NSTE-SCA o dolore da definire',
+                righe: [
+                  'ECG ogni 15–30 min se il dolore persiste o cambia.',
+                  'Troponina hs 0/1 h (o 0/2 h). HEART score.',
+                ],
+              },
+              {
+                tipo: 'allarme', titolo: 'Rischio molto alto → coronarografia immediata (< 2 h): stesso percorso dello STEMI',
+                righe: [
+                  'Instabilità emodinamica o shock, dolore refrattario, aritmie maligne o arresto cardiaco, complicanze meccaniche, scompenso acuto da ischemia.',
+                  'ST↓ > 1 mm in ≥ 6 derivazioni con ST↑ in aVR e/o V1 (malattia del tronco o trivasale), ST↓ ricorrente dinamico.',
+                ],
+              },
+              {
+                tipo: 'nota', titolo: 'NSTEMI confermato (troponina) → coronarografia entro 24 h; altrimenti percorso dolore toracico.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'allarme', titolo: 'STEMI: attivare subito l’emodinamica (PCI primaria)', tempo: 'diagnosi → filo ≤ 60 min',
+        righe: [
+          'Chiamare cardiologo/emodinamista di guardia appena posta la diagnosi, senza aspettare la troponina.',
+          '≤ 90 min se il paziente arriva da un ospedale senza emodinamica.',
+          'Annotare gli orari: esordio dei sintomi, primo contatto, ECG diagnostico, attivazione, arrivo in sala.',
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Da quanto sono iniziati i sintomi?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: '≤ 12 ore', tono: 'si', nodi: [
+              { tipo: 'esito', titolo: 'PCI primaria', righe: ['Sempre (classe I).'] },
+            ],
+          },
+          {
+            etichetta: '12–48 ore', tono: 'neutro', nodi: [
+              {
+                tipo: 'passo', titolo: 'PCI primaria',
+                righe: [
+                  'Sempre se dolore persistente, instabilità emodinamica o aritmie gravi (classe I).',
+                  'Se asintomatico: PCI primaria da considerare (IIa).',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: '> 48 ore, asintomatico', tono: 'no', nodi: [
+              {
+                tipo: 'passo', titolo: 'Niente PCI urgente dell’arteria occlusa',
+                righe: ['Coronarografia programmata durante il ricovero; terapia come NSTE-SCA.'],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: 'Terapia in PS, in attesa della sala (70 kg)',
+        righe: [
+          'Aspirina 250 mg ev = ½ flacone da 500 mg (o 150–300 mg per bocca, masticata), se non già data dal 118.',
+          'Eparina non frazionata 5.000 UI ev in bolo (70–100 U/kg) = 1 mL della fiala da 25.000 UI/5 mL. Se il paziente assume anticoagulanti orali: dose da concordare con l’emodinamista.',
+          'Inibitore P2Y12 deciso con l’emodinamista (il pretrattamento «può essere considerato»): prasugrel 60 mg = 6 cp da 10 mg (non se ictus/TIA pregresso; mantenimento 5 mg se ≥ 75 anni o < 60 kg); ticagrelor 180 mg = 2 cp da 90 mg; clopidogrel 600 mg = 8 cp da 75 mg se anticoagulante orale o alto rischio emorragico.',
+          'Dolore: morfina 2–4 mg ev (fiala 10 mg/1 mL in 10 mL di SF: 2–4 mL), ripetibile ogni 5–10 min; oppure fentanil 50 µg ev = 1 mL della fiala da 100 µg/2 mL. Gli oppioidi rallentano l’effetto degli antiaggreganti orali.',
+          'Isosorbide dinitrato 5 mg sublinguale se PAS > 90 mmHg; no se infarto del ventricolo destro o inibitori della PDE5 nelle 24–48 h. Nitroglicerina in infusione se ipertensione o scompenso.',
+          'Ossigeno solo se SpO₂ < 90%.',
+          'Nausea: ondansetron 4 mg ev = 1 fiala da 4 mg/2 mL.',
+          'Metoprololo 5 mg ev (1 fiala da 5 mg/5 mL), ripetibile fino a 15 mg: da considerare solo se PAS > 120 mmHg e nessun segno di scompenso (meglio decidere con l’emodinamista).',
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Complicanze in attesa della sala?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Shock cardiogeno', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'PAS < 90 mmHg con ipoperfusione',
+                righe: [
+                  'Noradrenalina in infusione (0,05–0,5 µg/kg/min); niente nitrati e beta-bloccanti.',
+                  'Ecocardio: rottura del setto o di parete, insufficienza mitralica acuta, infarto del ventricolo destro.',
+                  'Intubazione se necessaria; supporto meccanico da valutare in emodinamica.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'Arresto cardiaco rianimato', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'ROSC',
+                righe: [
+                  'ST↑ persistente → coronarografia immediata.',
+                  'Senza ST↑ ed emodinamicamente stabile → niente coronarografia immediata di routine: decisione caso per caso.',
+                  'PAM ≥ 65 mmHg, SpO₂ 94–98%, normocapnia, evitare la febbre.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'FV / TV', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'Aritmie ventricolari',
+                righe: [
+                  'Senza polso: defibrillazione e ALS; amiodarone 300 mg ev = 2 fiale da 150 mg/3 mL dopo il 3° shock.',
+                  'TV con polso: cardioversione sincronizzata se instabile; altrimenti amiodarone 300 mg in 20–60 min.',
+                  'Potassio > 4 mmol/L, magnesio > 2 mg/dL.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'Bradicardia / BAV', tono: 'neutro', nodi: [
+              {
+                tipo: 'passo', titolo: 'Frequente nell’inferiore',
+                righe: [
+                  'Atropina 0,5 mg ev = 1 fiala, ogni 3–5 min fino a 3 mg.',
+                  'Inefficace → pacing transcutaneo (scheda Procedure).',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'Ventricolo destro', tono: 'neutro', nodi: [
+              {
+                tipo: 'passo', titolo: 'Inferiore con ST↑ in V4R',
+                righe: [
+                  'Niente nitrati, niente diuretici, cautela con la morfina.',
+                  'Ipotensione con polmoni liberi: boli di 250 mL di SF.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'Edema polmonare', tono: 'neutro', nodi: [
+              {
+                tipo: 'passo', titolo: 'Scompenso acuto',
+                righe: [
+                  'Furosemide 40 mg ev = 2 fiale da 20 mg.',
+                  'Nitroglicerina in infusione se PAS > 110 mmHg; CPAP.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'esito', titolo: 'Trasferimento in sala di emodinamica',
+        righe: [
+          'Monitor e defibrillatore, accompagnato da medico/infermiere.',
+          'Niente iniezioni intramuscolari. Consegnare ECG, orari e farmaci somministrati.',
+        ],
+      },
+    ],
+  },
+}

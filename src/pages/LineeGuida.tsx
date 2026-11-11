@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import Algoritmo from '../components/Algoritmo'
+import { ALGORITMI } from '../lib/algoritmi'
 import { Link, useParams } from 'react-router-dom'
 import { LINEE_GUIDA, lineaGuida } from '../lib/lineeGuida'
 import ChiediLineaGuida from '../components/ChiediLineaGuida'
@@ -77,6 +79,8 @@ export function RiassuntoLineaGuida() {
           </div>
         )}
       </section>
+
+      {ALGORITMI[l.id] && <Algoritmo {...ALGORITMI[l.id]} />}
 
       {l.sezioni.map((s) => (
         <details key={s.titolo} className="card !p-0 overflow-hidden group">

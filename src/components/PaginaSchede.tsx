@@ -4,6 +4,7 @@ import type { Scheda } from '../lib/schede'
 
 // Nomi dei farmaci evidenziati in rosso grassetto dentro i testi.
 const FARMACI = [
+  'aspirina','acido acetilsalicilico','prasugrel','ticagrelor','clopidogrel','metoprololo','amiodarone','furosemide','isosorbide dinitrato','nitroglicerina','metoclopramide',
   'ketamina', 'propofol', 'ketofol', 'midazolam', 'fentanil', 'morfina',
   'rocuronio', 'succinilcolina', 'sugammadex', 'naloxone', 'flumazenil', 'noradrenalina', 'adrenalina',
   'ondansetron', 'olanzapina', 'lorazepam', 'aloperidolo', 'diazepam', 'tiamina', 'quetiapina',
@@ -12,7 +13,7 @@ const FARMACI = [
 ]
 const RE_FARMACI = new RegExp(`\\b(${FARMACI.join('|')})\\b`, 'gi')
 
-function Evidenzia({ t }: { t: string }) {
+export function Evidenzia({ t }: { t: string }) {
   const parti = t.split(RE_FARMACI)
   return <>{parti.map((p, i) => (i % 2 === 1 ? <strong key={i} className="font-extrabold text-bordeaux">{p}</strong> : p))}</>
 }

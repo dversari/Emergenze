@@ -291,27 +291,18 @@ export const LINEE_GUIDA: LineaGuida[] = [
     ],
     inBreve: [
       'ECG entro 10 minuti dal primo contatto. Trattare come STEMI anche: blocco di branca o ritmo da pacemaker con sintomi ischemici; ST sottoslivellato V1–V3 (registrare V7–V9 per il posteriore).',
-      'PCI primaria se dalla diagnosi al passaggio del filo passano ≤120 minuti; altrimenti fibrinolisi entro 10 minuti dalla diagnosi e trasferimento al centro PCI.',
-      'Dopo fibrinolisi: PCI di salvataggio se la risoluzione dell’ST è <50% a 60–90 minuti; altrimenti coronarografia entro 2–24 ore.',
+      'Prato ha l’emodinamica h24: sempre PCI primaria, attivata appena posta la diagnosi; obiettivo diagnosi → filo ≤60 minuti. Niente fibrinolisi.',
+      'Sintomi da >12 h: PCI primaria se dolore persistente, instabilità o aritmie; da considerare fino a 48 h anche se asintomatico.',
       'Subito: aspirina 150–300 mg os (o 75–250 mg ev) ed eparina non frazionata 70–100 U/kg ev. Pretrattamento con inibitore P2Y12 prima della coronarografia: «può essere considerato» nella PCI primaria, non di routine nelle NSTE-SCA.',
-      'Ossigeno solo se SpO₂ <90%. Arresto cardiaco rianimato con ST sopraslivellato: PCI primaria.',
+      'Ossigeno solo se SpO₂ <90%. Arresto cardiaco rianimato con ST sopraslivellato: coronarografia immediata.',
     ],
     sezioni: [
       {
         titolo: 'Tempi (ESC 2023)',
         punti: [
           'Primo contatto → ECG e diagnosi: ≤10 min.',
-          'Diagnosi → filo: ≤60 min se il paziente arriva in un centro PCI, ≤90 min se trasferito; oltre 120 min previsti → fibrinolisi.',
-          'Diagnosi → bolo di fibrinolitico: ≤10 min. Fibrinolisi → valutazione dell’efficacia: 60–90 min. Fibrinolisi → coronarografia: 2–24 h.',
-          'I tempi stanno nella figura dei ritardi dell’ESC: dal testo ho verificato solo ECG ≤10 min, soglia di 120 min e coronarografia 2–24 h dopo fibrinolisi.',
-        ],
-      },
-      {
-        titolo: 'Fibrinolisi',
-        punti: [
-          'Tenecteplase bolo unico secondo il peso: <60 kg 30 mg; 60–69 kg 35 mg; 70–79 kg 40 mg; 80–89 kg 45 mg; ≥90 kg 50 mg.',
-          'Dosi dalla tabella dei farmaci ESC (non leggibile nel testo web: verificarle). Con: aspirina; clopidogrel 300 mg (75 mg se >75 anni); enoxaparina 30 mg ev poi 1 mg/kg sc ogni 12 h (≥75 anni: niente bolo, 0,75 mg/kg ogni 12 h).',
-          'Controindicazioni assolute principali: emorragia cerebrale pregressa, ictus ischemico negli ultimi 6 mesi, lesione o neoplasia del SNC, trauma maggiore, chirurgia o trauma cranico nell’ultimo mese, sanguinamento in atto, dissezione aortica sospetta.',
+          'Diagnosi → filo: ≤60 min se il paziente arriva in un centro PCI (Prato), ≤90 min se trasferito da un altro ospedale.',
+          'Esordio >12 h: PCI primaria se ischemia in atto, instabilità o aritmie (I); 12–48 h asintomatico: da considerare (IIa); >48 h asintomatico: niente PCI di routine dell’arteria occlusa (III).',
         ],
       },
       {
