@@ -77,7 +77,8 @@ anest:[
  ['Rianimazione – reparto','3712 3702'],['Subintensiva','3762']
 ],
 chir:[
- ['Chirurgo di guardia','4730 6228 4874',{ g: 1 }],['Chirurgo vascolare di guardia','3664',{ g: 1 }],['Ambulatorio chirurgia vascolare','1437'],
+ ['Chirurgo di guardia','4730 6228 4874',{ g: 1 }],['Chirurgo vascolare di guardia','3664',{ g: 1 }],
+ ['Chirurgo toracico Prato – dott. Francesco Falli','333 2235953',{ g: 1, n: 'Riferimento per i problemi toracici' }],['Chirurgo vascolare Prato – dott. Francesco Menici','333 3720557',{ g: 1, n: 'Riferimento per i problemi vascolari' }],['Ambulatorio chirurgia vascolare','1437'],
  ['Chirurgia – settore 1','3250'],['Settore 1, 2° piano – infermieri','3250'],['Chirurgia – settore 2','3300'],
  ['Settore 2, 2° piano – medici','3308 3311 3224'],['Settore 2, 2° piano – infermieri','3300 3301'],['Sala operatoria','3600'],
  ['Chirurgo vascolare Torregalli','055 6932038',{ g: 1, n:'Solo giorno'}],['Chirurgo toracico','335 7914233',{ g: 1 }],
