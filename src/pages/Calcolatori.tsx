@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom'
  * Calcolatori rapidi per il pronto soccorso. Tutto gira nel browser: nessun dato
  * del paziente viene salvato o inviato. Le soglie sono quelle degli studi originali
  * o delle linee guida citate sotto ogni calcolatore.
- * Per aprirne uno direttamente: #/?apri=<id> (usato dalle linee guida).
+ * Per aprirne uno direttamente: #/calcolatori?apri=<id> (usato dalle linee guida).
  */
 
 type Livello = 'basso' | 'medio' | 'alto'

@@ -71,7 +71,7 @@ export function RiassuntoLineaGuida() {
         {l.calcolatori && (
           <div className="flex flex-wrap gap-1.5 mt-3">
             {l.calcolatori.map((c) => (
-              <Link key={c.id} to={`/?apri=${c.id}`}
+              <Link key={c.id} to={`/calcolatori?apri=${c.id}`}
                 className="text-xs font-semibold rounded-full px-3 py-1.5 bg-verde text-white">
                 {c.nome} →
               </Link>

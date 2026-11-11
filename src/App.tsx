@@ -1,4 +1,5 @@
-import { HashRouter, NavLink, Navigate, Outlet, Route, Routes } from 'react-router-dom'
+import { HashRouter, Link, NavLink, Navigate, Outlet, Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
 import Calcolatori from './pages/Calcolatori'
 import Antibiotici from './pages/Antibiotici'
 import Rubrica from './pages/Rubrica'
@@ -12,7 +13,7 @@ import { ElencoLineeGuida, RiassuntoLineaGuida } from './pages/LineeGuida'
 declare const __VERSIONE__: string
 
 const schede = [
-  { to: '/', label: 'Calcolatori', icona: '±', end: true },
+  { to: '/calcolatori', label: 'Calcolatori', icona: '±' },
   { to: '/antibiotici', label: 'Antibiotici', icona: '℞' },
   { to: '/procedure', label: 'Procedure', icona: '⌖' },
   { to: '/sedazione', label: 'Sedazione', icona: '☾\uFE0E' },
@@ -27,11 +28,13 @@ function Guscio() {
   return (
     <div className="min-h-screen bg-fondo text-testo">
       <header className="px-4 pt-[calc(14px+env(safe-area-inset-top))] pb-2 sticky top-0 bg-fondo/95 backdrop-blur z-10 flex items-center gap-2.5">
-        <img src="./favicon.svg" alt="" className="w-8 h-8" />
-        <div>
-          <p className="text-[10px] uppercase tracking-[0.12em] text-bordeaux font-bold leading-none">Pronto soccorso</p>
-          <h1 className="font-extrabold text-2xl tracking-tight leading-none">Emergenze</h1>
-        </div>
+        <Link to="/" className="flex items-center gap-2.5" aria-label="Pagina iniziale">
+          <img src="./favicon.svg" alt="" className="w-8 h-8" />
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.12em] text-bordeaux font-bold leading-none">PS Prato</p>
+            <h1 className="font-extrabold text-2xl tracking-tight leading-none">DEA-LIRIO</h1>
+          </div>
+        </Link>
         <span className="ml-auto text-[10px] text-tenue text-right leading-tight">versione<br />{__VERSIONE__}</span>
       </header>
 
@@ -42,7 +45,7 @@ function Guscio() {
       <nav className="fixed bottom-0 inset-x-0 z-20 bg-fondo/95 backdrop-blur-md border-t border-linea px-2 pt-2 pb-[max(14px,calc(env(safe-area-inset-bottom)+6px))]">
         <div className="grid grid-cols-8 gap-0 max-w-lg mx-auto">
           {schede.map((s) => (
-            <NavLink key={s.to} to={s.to} end={s.end}
+            <NavLink key={s.to} to={s.to}
               className={({ isActive }) =>
                 `flex flex-col items-center justify-center gap-0.5 rounded-[12px] py-1.5 text-[8.5px] font-bold tracking-tighter transition-colors ${
                   isActive ? 'bg-verde text-white' : 'text-tenue'}`}>
@@ -61,7 +64,8 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route element={<Guscio />}>
-          <Route index element={<Calcolatori />} />
+          <Route index element={<Home />} />
+          <Route path="calcolatori" element={<Calcolatori />} />
           <Route path="antibiotici" element={<Antibiotici />} />
           <Route path="procedure" element={<PaginaSchede key="p" schede={PROCEDURE} segnaposto="Cerca una procedura…" />} />
           <Route path="sedazione" element={<PaginaSchede key="s" schede={SEDAZIONE} segnaposto="Cerca uno schema…" />} />
