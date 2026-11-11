@@ -20,7 +20,10 @@ export function ElencoLineeGuida() {
     <div className="flex flex-col gap-2.5">
       <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder="Cerca una linea guida…"
         className="rounded-xl border border-linea px-3 py-2.5 text-base" />
-      {voci.map((l) => (
+      {[...new Set(voci.map((l) => l.area.split(' · ')[0]))].sort().map((area) => (
+        <div key={area} className="flex flex-col gap-2">
+          <p className="etichetta px-1 mt-1">{area}</p>
+      {voci.filter((l) => l.area.split(' · ')[0] === area).map((l) => (
         <Link key={l.id} to={`/linee-guida/${l.id}`} className="card !py-3 flex items-center gap-3 active:bg-sabbia">
           <div className="w-11 h-11 rounded-xl bg-bordeaux3 text-bordeaux flex items-center justify-center font-extrabold text-sm shrink-0">
             {(l.titolo.includes(' ') ? l.titolo.split(' ').map((p) => p[0]).join('') : l.titolo).slice(0, 2).toUpperCase()}
@@ -32,6 +35,8 @@ export function ElencoLineeGuida() {
           </div>
           <span className="text-tenue">›</span>
         </Link>
+      ))}
+        </div>
       ))}
       <div className="rounded-[18px] border border-dashed border-linea-forte px-4 py-3 text-sm text-tenue">
         Le altre linee guida si aggiungono qui: ogni voce ha il riassunto, il link all’originale e il registro degli aggiornamenti.
@@ -81,6 +86,34 @@ export function RiassuntoLineaGuida() {
       </section>
 
       {ALGORITMI[l.id] && <Algoritmo {...ALGORITMI[l.id]} />}
+
+      {(l.vediAnche || l.approfondimenti) && (
+        <section className="card">
+          {l.vediAnche && (
+            <>
+              <p className="etichetta mb-2">Nell’app</p>
+              <div className="flex flex-wrap gap-1.5 mb-1">
+                {l.vediAnche.map((v) => (
+                  <Link key={v.to} to={v.to} className="text-xs font-semibold rounded-full px-3 py-1.5 bg-verde3 text-verde-scuro">{v.etichetta} →</Link>
+                ))}
+              </div>
+            </>
+          )}
+          {l.approfondimenti && (
+            <>
+              <p className={`etichetta mb-2 ${l.vediAnche ? 'mt-3' : ''}`}>Approfondimenti e figure</p>
+              <ul className="flex flex-col gap-2">
+                {l.approfondimenti.map((a) => (
+                  <li key={a.url}>
+                    <a href={a.url} target="_blank" rel="noreferrer" className="text-sm font-semibold text-verde underline">{a.etichetta} ↗</a>
+                    {a.nota && <p className="text-[12px] text-tenue leading-snug">{a.nota}</p>}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </section>
+      )}
 
       {l.sezioni.map((s) => (
         <details key={s.titolo} className="card !p-0 overflow-hidden group">

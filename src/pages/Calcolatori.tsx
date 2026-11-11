@@ -174,6 +174,42 @@ const PUNTEGGI: Punteggio[] = [
     },
     fonte: 'Teasdale, Lancet 1974',
   },
+  {
+    id: 'gbs',
+    nome: 'Glasgow-Blatchford',
+    ambito: 'Emorragia digestiva alta · prima dell’endoscopia',
+    voci: [
+      { tipo: 'scelta', id: 'urea', testo: 'Urea (mg/dL)', opzioni: [{ testo: '<39', punti: 0 }, { testo: '39–47', punti: 2 }, { testo: '48–59', punti: 3 }, { testo: '60–149', punti: 4 }, { testo: '≥150', punti: 6 }] },
+      { tipo: 'scelta', id: 'hb', testo: 'Emoglobina (g/dL)', opzioni: [{ testo: 'U ≥13 / D ≥12', punti: 0 }, { testo: 'U 12–12,9', punti: 1 }, { testo: 'D 10–11,9', punti: 1 }, { testo: 'U 10–11,9', punti: 3 }, { testo: '<10', punti: 6 }] },
+      { tipo: 'scelta', id: 'pas', testo: 'PAS (mmHg)', opzioni: [{ testo: '≥110', punti: 0 }, { testo: '100–109', punti: 1 }, { testo: '90–99', punti: 2 }, { testo: '<90', punti: 3 }] },
+      { tipo: 'si', id: 'fc', testo: 'FC ≥100', punti: 1 },
+      { tipo: 'si', id: 'mel', testo: 'Melena', punti: 1 },
+      { tipo: 'si', id: 'sin', testo: 'Sincope', punti: 2 },
+      { tipo: 'si', id: 'epa', testo: 'Epatopatia', punti: 2 },
+      { tipo: 'si', id: 'sc', testo: 'Scompenso cardiaco', punti: 2 },
+    ],
+    esito: (t) =>
+      t <= 1 ? { livello: 'basso', testo: 'Rischio molto basso: gestione ambulatoriale con endoscopia programmata (ESGE 2021).' }
+      : t <= 6 ? { livello: 'medio', testo: 'Ricovero ed endoscopia entro 24 h.' }
+      : { livello: 'alto', testo: 'Alto rischio di intervento o morte: ricovero, endoscopia entro 24 h dopo stabilizzazione (prima se instabile).' },
+    fonte: 'Blatchford, Lancet 2000. Urea convertita: mmol/L × 6 = mg/dL.',
+  },
+  {
+    id: 'bisap',
+    nome: 'BISAP',
+    ambito: 'Pancreatite acuta · rischio di mortalità (prime 24 h)',
+    voci: [
+      { tipo: 'si', id: 'b', testo: 'Urea > 53 mg/dL (BUN > 25)', punti: 1 },
+      { tipo: 'si', id: 'i', testo: 'Alterazione dello stato mentale (GCS < 15)', punti: 1 },
+      { tipo: 'si', id: 's', testo: 'SIRS (≥ 2: T > 38 o < 36, FC > 90, FR > 20 o PaCO₂ < 32, GB > 12.000 o < 4.000)', punti: 1 },
+      { tipo: 'si', id: 'a', testo: 'Età > 60 anni', punti: 1 },
+      { tipo: 'si', id: 'p', testo: 'Versamento pleurico', punti: 1 },
+    ],
+    esito: (t) =>
+      t <= 2 ? { livello: 'basso', testo: 'Mortalità < 2%.' }
+      : { livello: 'alto', testo: 'Mortalità > 15% (BISAP ≥ 3): rischio di pancreatite grave, monitoraggio stretto.' },
+    fonte: 'Wu, Gut 2008',
+  },
 ]
 
 // ─── Componenti ───────────────────────────────────────────────────────────────

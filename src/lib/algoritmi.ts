@@ -14,6 +14,497 @@ export type Nodo =
 export interface Ramo { etichetta: string; tono?: 'si' | 'no' | 'neutro'; nodi: Nodo[]; fine?: string }
 
 export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: Nodo[] }> = {
+  vertigine: {
+    titolo: 'Algoritmo STANDING per la vertigine acuta',
+    nota: 'Vanni et al. (Careggi), integrato con GRACE-3 2023. Le figure delle manovre sono nei link «Approfondimenti» qui sotto.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Vertigine o instabilità acuta',
+        righe: [
+          'Prima: glicemia, PA e FC (anche in ortostatismo), ECG; esame neurologico.',
+          'Deficit focali, cefalea improvvisa o dolore al collo (dissezione), ipoacusia improvvisa: percorso ictus.',
+        ],
+      },
+      { tipo: 'decisione', titolo: '1 · Nistagmo spontaneo, posizionale o assente? (sguardo primario e 4 direzioni, meglio con Frenzel)' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Spontaneo', tono: 'no', nodi: [
+              {
+                tipo: 'decisione', titolo: '2 · Direzione',
+              },
+              {
+                tipo: 'allarme', titolo: 'Centrale se',
+                righe: ['Cambia direzione con lo sguardo, è verticale o torsionale puro.'],
+              },
+              {
+                tipo: 'passo', titolo: 'Unidirezionale orizzontale-torsionale → 3 · Head impulse test',
+                righe: [
+                  'Patologico (saccade di correzione) → periferico: neurite vestibolare.',
+                  'Normale → centrale (ictus) fino a prova contraria.',
+                  'Skew presente o ipoacusia nuova (finger rub) → centrale.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'Posizionale', tono: 'si', nodi: [
+              {
+                tipo: 'passo', titolo: 'Supine roll test, poi Dix-Hallpike',
+                righe: [
+                  'Dix-Hallpike: nistagmo torsionale-verticale verso l’alto, latenza breve, < 60 s, esauribile → VPPB canale posteriore.',
+                  'Roll test: orizzontale geotropo o apogeotropo → VPPB canale laterale.',
+                  'Atipico (verticale verso il basso persistente, senza vertigine, non esauribile, non cambia con le manovre) → centrale.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'Nistagmo assente', tono: 'neutro', nodi: [
+              {
+                tipo: 'decisione', titolo: '4 · Stazione eretta e marcia (staNdinG)',
+              },
+              {
+                tipo: 'passo', titolo: 'Valutazione',
+                righe: [
+                  'Non sta in piedi o non cammina senza appoggio (atassia) → centrale.',
+                  'Cammina da solo → non centrale (cause otolitiche, presincope, ortostatismo, farmaci, ansia).',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Sospetto centrale?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'Percorso ictus',
+                righe: [
+                  'Dentro la finestra terapeutica: codice ictus (angio-TC).',
+                  'La TC senza contrasto non esclude l’ischemia del circolo posteriore: RM con diffusione (falsi negativi nelle prime 48 h).',
+                  'Neurologo; ricovero.',
+                ],
+              },
+            ],
+            fine: 'percorso ictus',
+          },
+          {
+            etichetta: 'No: periferico', tono: 'si', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Terapia',
+                righe: [
+                  'VPPB canale posteriore: Epley (o Semont).',
+                  'VPPB canale laterale geotropo: Gufoni sul fianco sano o Lempert (barbecue); apogeotropo: Gufoni sul fianco malato.',
+                  'Neurite vestibolare: prednisone 50–60 mg/die per 5 giorni a scalare (da considerare), sintomatici per 2–3 giorni (metoclopramide 10 mg ev = 1 fiala; ondansetron 4 mg), mobilizzazione precoce.',
+                  'Niente sedativi vestibolari prolungati.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'esito', titolo: 'Dimissione',
+        righe: [
+          'Cammina da solo, beve, sintomi controllati: dimissione con indicazioni (scheda Dimissioni: VPPB).',
+          'Vertigine episodica spontanea con fattori di rischio vascolare: considerare TIA (angio-TC o angio-RM, GRACE-3).',
+        ],
+      },
+    ],
+  },
+  'colica-renale': {
+    titolo: 'Algoritmo colica renale',
+    nota: 'EAU 2026. Dosi per 70 kg; verificare i formati in reparto.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Dolore al fianco colico',
+        righe: ['Età > 60 anni senza calcolosi nota: escludere l’aneurisma dell’aorta (eco al letto). Donna fertile: β-hCG.'],
+      },
+      {
+        tipo: 'terapia', titolo: 'Analgesia subito',
+        righe: [
+          'Ketorolac 30 mg ev = 1 fiala, oppure diclofenac 75 mg = 1 fiala, oppure metamizolo 1–2 g ev; + paracetamolo 1 g ev.',
+          'FANS no se insufficienza renale, rene unico, terzo trimestre, ulcera attiva.',
+          'Seconda scelta: morfina 2–4 mg ev ripetibile. Antiemetico se vomito.',
+        ],
+      },
+      {
+        tipo: 'passo', titolo: 'Esami',
+        righe: [
+          'Urine, creatinina, PCR, emocromo; urinocoltura se febbre o leucocituria.',
+          'Ecografia; TC a basse dosi senza contrasto se resta il dubbio.',
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Febbre/sepsi con ostruzione, anuria, rene unico ostruito, insufficienza renale o dolore incontrollabile?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'Urologo: decompressione urgente',
+                righe: ['Stent ureterale o nefrostomia percutanea. Sepsi: emocolture e urinocoltura, poi antibiotico (scheda Antibiotici: pielonefrite).'],
+              },
+            ],
+            fine: 'ricovero',
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'decisione', titolo: 'Dimensione e sede del calcolo' },
+              {
+                tipo: 'passo', titolo: 'Gestione',
+                righe: [
+                  '< 5 mm: espulsione spontanea probabile; analgesia.',
+                  '5–10 mm uretere distale: + alfa-litico (tamsulosina 0,4 mg la sera, off-label) ± cortisone (uso locale).',
+                  '> 10 mm o prossimale: urologo.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'esito', titolo: 'Dimissione',
+        righe: ['Dolore controllato, beve, niente febbre: dimissione (scheda Dimissioni: colica renale) con controllo urologico/ecografico se non espulso in 4–6 settimane.'],
+      },
+    ],
+  },
+  'colica-biliare': {
+    titolo: 'Algoritmo dolore biliare',
+    nota: 'Tokyo 2018 e WSES 2020.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Dolore in ipocondrio destro o epigastrio',
+        righe: ['ECG (infarto inferiore), lipasi, bilirubina, transaminasi, ALP/GGT, PCR, emocromo; ecografia.'],
+      },
+      {
+        tipo: 'terapia', titolo: 'Analgesia',
+        righe: ['Ketorolac 30 mg ev = 1 fiala (o diclofenac 75 mg) ± paracetamolo 1 g ev; oppioide se necessario.'],
+      },
+      { tipo: 'decisione', titolo: 'Che quadro è?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Colica semplice', tono: 'si', nodi: [
+              {
+                tipo: 'esito', titolo: 'Dolore < 6 h, risolto, senza febbre, esami normali',
+                righe: ['Dimissione con dieta povera di grassi e visita chirurgica per colecistectomia programmata.'],
+              },
+            ],
+          },
+          {
+            etichetta: 'Colecistite', tono: 'no', nodi: [
+              {
+                tipo: 'passo', titolo: 'Murphy +, febbre/PCR/leucocitosi, ecografia tipica',
+                righe: [
+                  'Gravità Tokyo: III disfunzione d’organo; II GB > 18.000, massa, > 72 h, complicanze locali; I altrimenti.',
+                  'Digiuno, liquidi, antibiotico (scheda Antibiotici), chirurgo.',
+                  'Colecistectomia laparoscopica precoce; non operabile/instabile: drenaggio percutaneo.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'Colangite', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'Febbre + ittero/colestasi + dolore',
+                righe: ['Emocolture, antibiotico subito, drenaggio biliare (CPRE): urgente se grave (ipotensione, confusione, insufficienza d’organo).'],
+              },
+            ],
+          },
+          {
+            etichetta: 'Pancreatite biliare', tono: 'neutro', nodi: [
+              {
+                tipo: 'passo', titolo: 'Lipasi > 3 volte il limite',
+                righe: ['Percorso pancreatite; CPRE solo se colangite; colecistectomia nello stesso ricovero se lieve.'],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  pancreatite: {
+    titolo: 'Algoritmo pancreatite acuta',
+    nota: 'ACG 2024. Dosi per 70 kg.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Dolore epigastrico a sbarra',
+        righe: ['Diagnosi: 2 su 3 tra dolore tipico, lipasi > 3 volte il limite, imaging. TC subito solo se la diagnosi è incerta.'],
+      },
+      {
+        tipo: 'passo', titolo: 'Esami e gravità',
+        righe: [
+          'Emocromo/ematocrito, urea, creatinina, elettroliti, calcio, trigliceridi, funzione epatica, PCR, EGA con lattati; ecografia addominale.',
+          'BISAP; SIRS persistente, urea in aumento, ematocrito alto = rischio.',
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: 'Liquidi e terapia',
+        righe: [
+          'Ringer lattato 1,5 mL/kg/h ≈ 100 mL/h; bolo di 10 mL/kg ≈ 700 mL se ipovolemico.',
+          'Rivalutare entro 6 h e nelle 24–48 h: diuresi, urea, ematocrito, segni vitali; evitare il sovraccarico.',
+          'Analgesia adeguata (anche oppioidi). Niente antibiotici profilattici.',
+          'Lieve: dieta orale solida povera di grassi appena tollera (24–48 h).',
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Origine e complicanze' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Colangite', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'CPRE urgente', righe: ['Antibiotico; gastroenterologo/endoscopista.'] },
+            ],
+          },
+          {
+            etichetta: 'Insufficienza d’organo', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Terapia intensiva', righe: ['Insufficienza respiratoria, renale o circolatoria; > 48 h = forma grave.'] },
+            ],
+          },
+          {
+            etichetta: 'Lieve biliare', tono: 'si', nodi: [
+              { tipo: 'esito', titolo: 'Ricovero breve', righe: ['Colecistectomia nello stesso ricovero.'] },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  'emorragia-digestiva': {
+    titolo: 'Algoritmo emorragia digestiva',
+    nota: 'ESGE 2021 (non varicosa) e 2022 (varici). Dosi per 70 kg; verificare i formati in reparto.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Ematemesi, vomito caffeano, melena o ematochezia',
+        righe: ['Due accessi venosi grossi, emocromo, gruppo e prove crociate, coagulazione, urea, creatinina, lattati.'],
+      },
+      { tipo: 'decisione', titolo: 'Instabile? (ipotensione, shock index FC/PAS > 1)' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'Rianimazione',
+                righe: [
+                  'Cristalloidi; emazie (protocollo trasfusionale massivo se necessario).',
+                  'Protezione delle vie aeree se ematemesi massiva o coscienza alterata.',
+                  'Endoscopista subito; anticoagulante: antagonizzare.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              {
+                tipo: 'passo', titolo: 'Stratificare',
+                righe: ['Glasgow-Blatchford ≤ 1: dimissione con endoscopia ambulatoriale.', 'Trasfusione restrittiva: Hb ≤ 7 g/dL (≤ 8 se cardiopatia).'],
+              },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Cirrosi o sospette varici?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì: varicosa', tono: 'no', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Subito',
+                righe: [
+                  'Terlipressina 2 mg ev = 2 fiale da 1 mg ogni 4 h (poi 1 mg ogni 4 h), oppure somatostatina 250 µg in bolo + 250–500 µg/h.',
+                  'Ceftriaxone 1 g ev/die fino a 7 giorni.',
+                  'Eritromicina 250 mg ev 30–120 min prima dell’endoscopia.',
+                  'Endoscopia (legatura) entro 12 h; Hb obiettivo 7–9, evitare la sovratrasfusione.',
+                  'Refrattaria: sonda di Sengstaken o stent esofageo come ponte alla TIPS.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'No: non varicosa', tono: 'si', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Terapia',
+                righe: [
+                  'Pantoprazolo/esomeprazolo 80 mg ev = 2 fiale da 40 mg, poi 8 mg/h o 40 mg ogni 12 h.',
+                  'Eritromicina 250 mg ev se sanguinamento importante.',
+                  'Endoscopia entro 24 h dopo la stabilizzazione.',
+                  'Niente sondino di routine; niente acido tranexamico.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'nota', titolo: 'Emorragia bassa',
+        righe: ['Ematochezia con instabilità: considerare una fonte alta (EGDS); angio-TC per localizzare, poi embolizzazione o endoscopia. Stabile: colonscopia nel ricovero.'],
+      },
+    ],
+  },
+  pericardite: {
+    titolo: 'Algoritmo pericardite acuta',
+    nota: 'ESC 2025. Dosi per 70 kg.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Dolore toracico pleuritico, migliora seduto in avanti',
+        righe: ['ECG, troponina, PCR, emocromo, creatinina, RX torace, ecocardio. Escludere SCA, dissezione, EP.'],
+      },
+      { tipo: 'decisione', titolo: 'Almeno 2 tra: dolore tipico, sfregamento, ST↑ diffuso o PR↓, versamento?' },
+      { tipo: 'decisione', titolo: 'Tamponamento? (ipotensione, turgore giugulare, polso paradosso, collasso delle sezioni destre)' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Pericardiocentesi urgente', righe: ['Scheda Procedure: pericardiocentesi. Liquidi in attesa.'] },
+            ],
+            fine: 'UTIC',
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              {
+                tipo: 'passo', titolo: 'Criteri di rischio',
+                righe: [
+                  'Maggiori: febbre > 38 °C, esordio subacuto, versamento > 20 mm, mancata risposta ai FANS dopo 1 settimana.',
+                  'Minori: troponina alta (miopericardite), immunodepressione, trauma, anticoagulanti.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: 'Terapia',
+        righe: [
+          'Ibuprofene 600 mg ogni 8 h per 1–2 settimane poi a scalare (o aspirina 750–1000 mg ogni 8 h) + IPP.',
+          'Colchicina 0,5 mg ogni 12 h (una volta al giorno se < 70 kg) per 3 mesi.',
+          'Riposo fisico fino alla remissione. Cortisone solo in seconda linea.',
+        ],
+      },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Rischio presente', tono: 'no', nodi: [
+              { tipo: 'esito', titolo: 'Ricovero', righe: ['Ricerca della causa; miopericardite: monitoraggio e percorso miocardite.'] },
+            ],
+          },
+          {
+            etichetta: 'Nessun criterio', tono: 'si', nodi: [
+              { tipo: 'esito', titolo: 'Domicilio', righe: ['Controllo a 1 settimana con PCR.'] },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  miocardite: {
+    titolo: 'Algoritmo sospetta miocardite',
+    nota: 'ESC 2025.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Dolore toracico, dispnea, palpitazioni o sincope con troponina alta',
+        righe: ['Spesso dopo infezione virale; anche da farmaci (inibitori dei checkpoint, vaccini a mRNA, clozapina).'],
+      },
+      {
+        tipo: 'passo', titolo: 'ECG, troponina seriata, NT-proBNP, PCR, ecocardio; monitor continuo',
+      },
+      { tipo: 'decisione', titolo: 'Possibile sindrome coronarica acuta?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'Escluderla prima', righe: ['Percorso SCA: coronarografia o angio-TC coronarica.'] },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'passo', titolo: 'Risonanza cardiaca', righe: ['Esame centrale, il prima possibile (criteri di Lake Louise).'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Alto rischio? FE ridotta, scompenso, aritmie ventricolari, BAV avanzato, shock' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'allarme', titolo: 'UTIC / centro di riferimento', righe: ['Fulminante: supporto meccanico, biopsia endomiocardica, terapia specifica.'] },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'esito', titolo: 'Ricovero monitorato', righe: ['Riposo fisico; colchicina se componente pericarditica; follow-up con ECG entro 6 mesi.'] },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  polmonite: {
+    titolo: 'Algoritmo polmonite comunitaria',
+    nota: 'ATS 2025 con ATS/IDSA 2019. Antibiotici: vedi la scheda collegata.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Febbre, tosse, dispnea, crepitii',
+        righe: ['RX torace o ecografia polmonare; SpO₂/EGA, emocromo, PCR, urea, creatinina, lattati; test per virus respiratori.'],
+      },
+      { tipo: 'decisione', titolo: 'CAP grave? Shock con vasopressori o ventilazione, oppure ≥ 3 criteri minori ATS' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'Terapia intensiva',
+                righe: [
+                  'Emocolture ed espettorato prima, poi antibiotico subito (ceftriaxone + macrolide; Pseudomonas/MRSA se fattori di rischio).',
+                  'Antigeni urinari. Idrocortisone 200 mg/die se non influenza.',
+                ],
+              },
+            ],
+            fine: 'terapia intensiva',
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              {
+                tipo: 'passo', titolo: 'Dove curarla',
+                righe: ['CURB-65 0–1 e SpO₂ buona, beve, assistito a casa: domicilio. 2: ricovero breve o osservazione. ≥ 3: ricovero.'],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Domicilio', tono: 'si', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Antibiotico per bocca',
+                righe: [
+                  'Senza comorbidità: amoxicillina 1 g ogni 8 h.',
+                  'Con comorbidità: amoxicillina/clavulanato + macrolide (o doxiciclina).',
+                  'Virus positivo senza comorbidità: si può non dare l’antibiotico.',
+                  'Durata: almeno 3 giorni e stabilità clinica.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'Ricovero', tono: 'neutro', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Antibiotico ev',
+                righe: [
+                  'Ceftriaxone 1–2 g + claritromicina (o azitromicina).',
+                  'Niente cortisone se non grave.',
+                  'Influenza: oseltamivir.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 
   'fibrillazione-atriale': {
     titolo: 'Algoritmo FA in PS',

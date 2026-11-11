@@ -13,6 +13,8 @@ const SCORE: [RegExp, string][] = [
   [/Cockcroft-Gault/, 'cockcroft'],
   [/GCS/, 'gcs'],
   [/CURB-65/, 'curb65'],
+  [/Glasgow-Blatchford/, 'gbs'],
+  [/BISAP/, 'bisap'],
 ]
 const RE_SCORE = new RegExp(`(${SCORE.map(([r]) => r.source).join('|')})`, 'g')
 
