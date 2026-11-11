@@ -5,6 +5,7 @@ import Acr from './pages/Acr'
 import Calcolatori from './pages/Calcolatori'
 import Antibiotici from './pages/Antibiotici'
 import Rubrica from './pages/Rubrica'
+import Moduli from './pages/Moduli'
 import ModuloTrasfusione from './pages/ModuloTrasfusione'
 import PaginaTesti from './components/PaginaTesti'
 import { DIMISSIONI } from './lib/dimissioni'
@@ -26,6 +27,7 @@ const schede = [
   { to: '/sedazione', label: 'Sedazione', icona: '☾\uFE0E' },
   { to: '/anamnesi', label: 'Cartella', icona: '☰\uFE0E' },
   { to: '/dimissioni', label: 'Dimissione', icona: '✎\uFE0E' },
+  { to: '/moduli', label: 'Moduli', icona: '⎙\uFE0E' },
 ]
 
 /** Intestazione in alto, schede in basso a portata di pollice. */
@@ -68,11 +70,11 @@ function Guscio() {
       </nav>
 
       <nav className="lg:hidden fixed bottom-0 inset-x-0 z-20 bg-fondo/95 backdrop-blur-md border-t border-linea px-2 pt-2 pb-[max(14px,calc(env(safe-area-inset-bottom)+6px))]">
-        <div className="grid grid-cols-8 gap-0 max-w-lg mx-auto">
+        <div className="grid grid-cols-9 gap-0 max-w-xl mx-auto">
           {schede.map((s) => (
             <NavLink key={s.to} to={s.to}
               className={({ isActive }) =>
-                `flex flex-col items-center justify-center gap-0.5 rounded-[12px] py-1.5 text-[8.5px] font-bold tracking-tighter transition-colors ${
+                `flex flex-col items-center justify-center gap-0.5 rounded-[12px] py-1.5 text-[8px] font-bold tracking-tighter transition-colors ${
                   isActive ? 'bg-verde text-white' : 'text-tenue'}`}>
               <span className="text-lg leading-none">{s.icona}</span>
               {s.label}
@@ -98,6 +100,7 @@ export default function App() {
           <Route path="anamnesi" element={<PaginaTesti key="a" voci={ANAMNESI} prefisso="anamnesi" segnaposto="Cerca un sintomo…" nota="Testo da adattare al paziente prima di copiarlo in cartella; cancella la sezione «Da non dimenticare» se non serve." />} />
           <Route path="dimissioni" element={<PaginaTesti key="d" voci={DIMISSIONI} prefisso="dimissione" segnaposto="Cerca una diagnosi…" nota="Dosi per adulto: verificare allergie, funzione renale, gravidanza e terapie in corso." />} />
           <Route path="rubrica" element={<Rubrica />} />
+          <Route path="moduli" element={<Moduli />} />
           <Route path="modulo-trasfusione" element={<ModuloTrasfusione />} />
           <Route path="linee-guida" element={<ElencoLineeGuida />} />
           <Route path="linee-guida/:id" element={<RiassuntoLineaGuida />} />

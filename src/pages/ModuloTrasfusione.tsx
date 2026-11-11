@@ -61,7 +61,7 @@ export default function ModuloTrasfusione() {
   return (
     <div className="flex flex-col gap-3 lg:max-w-4xl lg:mx-auto">
       <div className="no-print flex flex-wrap items-center gap-2">
-        <Link to="/linee-guida/anemia-acuta" className="text-sm text-tenue">‹ PDTA anemia acuta</Link>
+        <span className="flex gap-4"><Link to="/moduli" className="text-sm text-tenue">‹ Moduli</Link><Link to="/linee-guida/anemia-acuta" className="text-sm text-tenue">PDTA anemia acuta</Link></span>
         <span className="flex-1" />
         <button onClick={svuota} className="rounded-full border border-linea-forte px-4 py-2 text-sm font-bold text-tenue">Svuota</button>
         <button onClick={() => window.print()} className="rounded-full bg-verde text-white px-5 py-2 text-sm font-extrabold">🖨︎ Stampa</button>
