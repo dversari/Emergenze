@@ -22,6 +22,7 @@ const SCORE: [RegExp, string][] = [
   [/ICH score/, 'ich'],
   [/ADD-RS/, 'addrs'],
   [/TWIST/, 'twist'],
+  [/ABCD²/, 'abcd2'],
   [/CIWA-Ar|CIWA/, 'ciwa'],
   [/4AT/, '4at'],
   [/Canadian Syncope Risk Score/, 'csrs'],

@@ -335,6 +335,23 @@ const PUNTEGGI: Punteggio[] = [
       : { livello: 'alto', testo: 'Rischio alto (≥ 5): urologo subito per esplorazione, senza aspettare l’ecografia.' },
     fonte: 'Barbosa, J Urol 2013 (validato soprattutto in età pediatrica)',
   },
+  {
+    id: 'abcd2',
+    nome: 'ABCD²',
+    ambito: 'TIA · rischio di ictus a 2 giorni (non usarlo da solo per dimettere)',
+    voci: [
+      { tipo: 'si', id: 'a', testo: 'Età ≥ 60 anni', punti: 1 },
+      { tipo: 'si', id: 'b', testo: 'PA ≥ 140/90 alla prima misurazione', punti: 1 },
+      { tipo: 'scelta', id: 'c', testo: 'Clinica', opzioni: [{ testo: 'Altro', punti: 0 }, { testo: 'Disturbo del linguaggio senza deficit motorio', punti: 1 }, { testo: 'Deficit motorio unilaterale', punti: 2 }] },
+      { tipo: 'scelta', id: 'd', testo: 'Durata', opzioni: [{ testo: '< 10 min', punti: 0 }, { testo: '10–59 min', punti: 1 }, { testo: '≥ 60 min', punti: 2 }] },
+      { tipo: 'si', id: 'e', testo: 'Diabete', punti: 1 },
+    ],
+    esito: (t) =>
+      t <= 3 ? { livello: 'basso', testo: 'Rischio basso (≈1% a 2 giorni): comunque accertamenti entro 24 h; FA e stenosi carotidea cambiano tutto.' }
+      : t <= 5 ? { livello: 'medio', testo: 'Rischio moderato (≈4% a 2 giorni): doppia antiaggregazione per 21 giorni se non cardioembolico.' }
+      : { livello: 'alto', testo: 'Rischio alto (≈8% a 2 giorni): doppia antiaggregazione, valutazione specialistica immediata.' },
+    fonte: 'Johnston, Lancet 2007; ESO 2021',
+  },
 ]
 
 // ─── Componenti ───────────────────────────────────────────────────────────────

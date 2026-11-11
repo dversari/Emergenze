@@ -809,7 +809,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     fonte: { etichetta: 'Prabhakaran et al., Stroke 2026 (AHA/ASA)', url: 'https://doi.org/10.1161/STR.0000000000000513' },
     controllata: '2026-11-11',
     calcolatori: [{ id: 'gcs', nome: 'GCS' }],
-    vediAnche: [{ etichetta: 'Cartella: deficit neurologico', to: '/anamnesi?apri=deficit-neurologico' }],
+    vediAnche: [{ etichetta: 'TIA', to: '/linee-guida/tia' }, { etichetta: 'Cartella: deficit neurologico', to: '/anamnesi?apri=deficit-neurologico' }],
     inBreve: [
       'Codice ictus: ora dell’ultima volta visto bene, glicemia subito, NIHSS, TC + angio-TC senza ritardi.',
       'Trombolisi entro 4,5 h nei deficit invalidanti, qualunque sia il NIHSS: tenecteplase (Metalyse) 0,25 mg/kg (max 25 mg) in bolo oppure alteplase (Actilyse) 0,9 mg/kg. Prima è meglio.',
@@ -2313,6 +2313,116 @@ export const LINEE_GUIDA: LineaGuida[] = [
     ],
     aggiornamenti: [
       { data: '2021-11-22', testo: 'ACG 2022: 8 settimane di inibitore di pompa per i sintomi tipici, poi tentativo di sospensione; endoscopia per sintomi d’allarme o mancata risposta.' },
+    ],
+  },
+  {
+    id: 'trauma-cranico',
+    titolo: 'Trauma cranico lieve (PDTA aziendale)',
+    ente: 'PDTA ASL Toscana Centro / NICE 2023',
+    anno: 2023,
+    area: 'Trauma · Neurologia',
+    fonte: { etichetta: 'NICE NG232 Head injury (2023) — integra il PDTA aziendale di Prato', url: 'https://www.nice.org.uk/guidance/ng232' },
+    controllata: '2026-11-12',
+    calcolatori: [{ id: 'gcs', nome: 'GCS' }],
+    vediAnche: [
+      { etichetta: 'Cartella: trauma cranico', to: '/anamnesi?apri=trauma-cranico' },
+      { etichetta: 'Dimissione trauma cranico', to: '/dimissioni?apri=trauma-cranico' },
+      { etichetta: 'Dimissione in anticoagulante', to: '/dimissioni?apri=trauma-cranico-tao' },
+      { etichetta: 'Anticoagulato che sanguina', to: '/linee-guida/anticoagulato-sanguinamento' },
+      { etichetta: 'Trauma maggiore', to: '/linee-guida/trauma-maggiore' },
+    ],
+    inBreve: [
+      'Lieve = GCS 14–15 (il PDTA aziendale, come le linee guida italiane SINCh, considera il GCS 13 già moderato). Commotivo se perdita di coscienza o amnesia.',
+      'TC entro 1 ora: GCS < 15, segni di frattura cranica, convulsioni, deficit neurologico, vomito ripetuto.',
+      'TC entro 8 ore: perdita di coscienza, amnesia o stato confusionale; cefalea diffusa, coagulopatia, intossicazione da alcol o sostanze, dinamica maggiore, età > 65; antiaggreganti (esclusa ASA 100 mg), anticoagulanti, pregresso intervento neurochirurgico, difficoltà di osservazione.',
+      'Nessun criterio: trauma cranico lieve non commotivo a basso rischio, dimissione con il modulo di osservazione domiciliare, senza TC.',
+      'TC positiva: neurochirurgo di Careggi; anticoagulato → antagonizzare. TC dubbia: osservazione o ricovero.',
+      'TC di controllo dopo 24 h di osservazione se GCS 14 o sintomi neurologici persistenti; subito se peggiora.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Esame obiettivo mirato',
+        punti: [
+          'GCS ripetuto; pupille e motilità oculare; esame neurologico completo.',
+          'Segni di frattura: infossamento o ferita penetrante, ecchimosi periorbitarie bilaterali («occhi di panda»), segno di Battle, emotimpano, oto- o rinoliquorrea.',
+          'Rachide cervicale: Canadian C-spine rule; altri traumi (sopra le clavicole, torace, addome, bacino).',
+          'Perché è caduto? Escludere sincope, aritmia, ipoglicemia, intossicazione.',
+        ],
+      },
+      {
+        titolo: 'Anticoagulati e antiaggregati',
+        punti: [
+          'PDTA aziendale: anticoagulanti e antiaggreganti (tranne ASA 100 mg) = TC entro 8 h; nel testo si suggerisce entro 1 h per la terapia anticoagulante (TAO): nella pratica, TC il prima possibile se TAO.',
+          'Prelievi: emocromo, PT/INR, aPTT; ora dell’ultima dose del DOAC.',
+          'TC positiva: antagonizzare subito (vedi PDTA «Anticoagulato che sanguina») e neurochirurgo.',
+          'TC negativa, GCS 15, senza altri problemi: il rischio di emorragia tardiva è basso (circa 1%, più con dicumarolici che con DOAC); la TC di controllo non è indicata di routine (NICE 2023). Dimissione con caregiver e foglio informativo, oppure osservazione se dubbi o niente caregiver.',
+        ],
+      },
+      {
+        titolo: 'Dimissione',
+        punti: [
+          'GCS tornato a 15 (o al valore abituale), nessun sintomo d’allarme (vomito persistente, cefalea grave, crisi), nessun altro motivo di ricovero (intossicazione, altre lesioni, liquorrea, meningismo).',
+          'Una persona adulta presente a casa per almeno 24 h; foglio informativo dato a voce e per scritto al paziente e a chi lo assiste (protocollo di osservazione domiciliare).',
+          'Senza caregiver: la TC normale permette comunque la dimissione dei pazienti senza segni neurologici (basso rischio di peggioramento).',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2023-05-18', testo: 'NICE NG232 (2023): TC entro 1 h per GCS < 13 all’arrivo o < 15 a 2 h, frattura, crisi, deficit, vomito ripetuto; entro 8 h per anticoagulanti; antiaggreganti da soli non sono più un criterio automatico.' },
+      { data: '2026-11-12', testo: 'Inserito il PDTA aziendale del trauma cranico lieve con il protocollo di osservazione domiciliare, integrato con NICE 2023 ed EFNS 2012.' },
+    ],
+  },
+  {
+    id: 'tia',
+    titolo: 'Attacco ischemico transitorio (TIA)',
+    ente: 'ESO / AHA',
+    anno: 2021,
+    area: 'Neurologia',
+    fonte: { etichetta: 'Fonseca et al., Eur Stroke J 2021 (ESO, gestione del TIA)', url: 'https://doi.org/10.1177/2396987321992905' },
+    controllata: '2026-11-12',
+    calcolatori: [{ id: 'abcd2', nome: 'ABCD²' }],
+    vediAnche: [
+      { etichetta: 'Codice ictus', to: '/linee-guida/ictus' },
+      { etichetta: 'Fibrillazione atriale', to: '/linee-guida/fibrillazione-atriale' },
+      { etichetta: 'Cartella: deficit neurologico', to: '/anamnesi?apri=deficit-neurologico' },
+    ],
+    inBreve: [
+      'Deficit neurologico focale acuto risolto completamente; se il deficit è ancora presente è un ictus: codice ictus.',
+      'È un’urgenza: il rischio di ictus è massimo nelle prime 48 ore. Valutazione specialistica e accertamenti entro 24 h (osservazione, ricovero o ambulatorio TIA rapido).',
+      'L’ABCD² aiuta ma non va usato da solo per decidere chi dimettere (ESO 2021): conta soprattutto la causa (stenosi carotidea, FA).',
+      'Subito: TC encefalo con angio-TC dei vasi del collo e intracranici (o RM con DWI + angio), ECG e monitor per la FA, glicemia, emocromo, coagulazione, lipidi.',
+      'Doppia antiaggregazione per 21 giorni nel TIA ad alto rischio (ABCD² ≥ 4) se non cardioembolico e senza indicazione all’anticoagulante.',
+      'Stenosi carotidea sintomatica 50–99%: endoarteriectomia entro 2 settimane. FA: anticoagulante. Statina ad alta intensità.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Farmaci (adulto)',
+        punti: [
+          'Doppia antiaggregazione: ASA 300 mg + clopidogrel (Plavix) 300–600 mg di carico, poi ASA 100 mg + clopidogrel 75 mg al giorno per 21 giorni, poi un solo antiaggregante.',
+          'Alternativa: ticagrelor (Brilique) 180 mg poi 90 mg ogni 12 h + ASA per 30 giorni.',
+          'Basso rischio: un solo antiaggregante (ASA 100 mg o clopidogrel 75 mg).',
+          'FA: anticoagulante (DOAC) da iniziare presto dopo il TIA, se l’imaging esclude emorragia.',
+          'Atorvastatina (Torvast) 40–80 mg; obiettivo LDL < 70 mg/dL (o < 55 secondo ESC).',
+        ],
+      },
+      {
+        titolo: 'Imitatori del TIA',
+        punti: [
+          'Ipoglicemia, aura emicranica (sintomi positivi che si spostano), crisi epilettica con paralisi di Todd, sincope, vertigine periferica isolata, amnesia globale transitoria.',
+          'Sintomi isolati poco suggestivi: vertigine, confusione, perdita di coscienza, incontinenza.',
+        ],
+      },
+      {
+        titolo: 'Indicazioni alla dimissione',
+        punti: [
+          'Non guidare fino alla valutazione specialistica (di norma almeno 1 mese dopo il TIA, secondo la normativa).',
+          'Tornare subito (112) se ricompaiono i sintomi.',
+          'Visita neurologica/ambulatorio TIA ed esami prenotati prima della dimissione.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2021-02-01', testo: 'ESO 2021: valutazione entro 24 h in centro dedicato; ABCD² da solo non sufficiente per il triage; doppia antiaggregazione breve nel TIA ad alto rischio.' },
     ],
   },
 ]

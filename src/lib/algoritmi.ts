@@ -14,6 +14,86 @@ export type Nodo =
 export interface Ramo { etichetta: string; tono?: 'si' | 'no' | 'neutro'; nodi: Nodo[]; fine?: string }
 
 export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: Nodo[] }> = {
+  'trauma-cranico': {
+    titolo: 'Algoritmo trauma cranico lieve (PDTA aziendale)',
+    nota: 'Flow chart del PDTA aziendale (GCS 14–15), integrata con NICE 2023.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Trauma cranico, GCS 14–15', righe: ['GCS ≤ 13: trauma moderato/grave → percorso trauma maggiore, neurochirurgo.'], vai: [{ etichetta: 'Trauma maggiore', to: '/linee-guida/trauma-maggiore' }, { etichetta: 'Cartella', to: '/anamnesi?apri=trauma-cranico' }] },
+      { tipo: 'decisione', titolo: 'GCS < 15, segni di frattura cranica, convulsioni, deficit neurologico, vomito ripetuto?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'TC cranio entro 1 ora', tempo: '≤ 1 h' }] },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'decisione', titolo: 'Fattori di rischio?' }] },
+        ],
+      },
+      {
+        tipo: 'checklist', titolo: 'TC entro 8 ore se almeno uno',
+        righe: [
+          'Perdita di coscienza, amnesia o stato confusionale',
+          'Cefalea diffusa',
+          'Coagulopatia',
+          'Intossicazione da alcol o sostanze',
+          'Dinamica maggiore (pedone investito, sbalzato dal veicolo, caduta > 1 m o > 5 scalini)',
+          'Età > 65 anni',
+          'Antiaggreganti (esclusa ASA 100 mg) o anticoagulanti (TAO: il prima possibile)',
+          'Pregresso intervento neurochirurgico',
+          'Difficoltà di osservazione (niente caregiver)',
+        ],
+        vedi: 'Anticoagulati e antiaggregati',
+      },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Nessuno', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Non commotivo a basso rischio', righe: ['Dimissione senza TC, con il modulo di osservazione domiciliare.'], vai: [{ etichetta: 'Dimissione', to: '/dimissioni?apri=trauma-cranico' }] }], fine: 'dimissione' },
+          { etichetta: 'Almeno uno', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'TC cranio entro 8 ore', tempo: '≤ 8 h' }] },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Esito della TC' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Negativa', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Dimissione', righe: ['GCS 15, nessun allarme, caregiver per 24 h, foglio informativo.'], vai: [{ etichetta: 'Dimissione', to: '/dimissioni?apri=trauma-cranico' }, { etichetta: 'In anticoagulante', to: '/dimissioni?apri=trauma-cranico-tao' }] }] },
+          { etichetta: 'Dubbia', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Osservazione / ricovero', righe: ['TC di controllo a 24 h se GCS 14 o sintomi persistenti; subito se peggiora.'] }] },
+          { etichetta: 'Positiva', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Neurochirurgo di Careggi', righe: ['Anticoagulato: antagonizzare subito.'], vai: [{ etichetta: 'Anticoagulato che sanguina', to: '/linee-guida/anticoagulato-sanguinamento' }] }] },
+        ],
+      },
+    ],
+  },
+  tia: {
+    titolo: 'Algoritmo TIA',
+    nota: 'ESO 2021, AHA/ASA 2021.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Deficit neurologico focale transitorio', righe: ['Ora di inizio e durata; glicemia capillare.'] },
+      { tipo: 'decisione', titolo: 'Sintomi ancora presenti?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'È un ictus: codice ictus', vai: [{ etichetta: 'Codice ictus', to: '/linee-guida/ictus' }] }], fine: 'codice ictus' },
+          { etichetta: 'No, risolti', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'Probabile TIA', righe: ['Escludere gli imitatori: ipoglicemia, aura, crisi, sincope.'], vedi: 'Imitatori del TIA' }] },
+        ],
+      },
+      {
+        tipo: 'checklist', titolo: 'Accertamenti subito',
+        righe: [
+          'TC encefalo + angio-TC collo e intracranica (o RM DWI + angio)',
+          'ECG; monitor per la FA',
+          'Glicemia, emocromo, coagulazione, creatinina, lipidi',
+          'ABCD² (non da solo per decidere)',
+          'Neurologo',
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Causa trovata?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'FA', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Anticoagulante', righe: ['DOAC presto, se nessuna emorragia.'], vai: [{ etichetta: 'FA', to: '/linee-guida/fibrillazione-atriale' }] }] },
+          { etichetta: 'Stenosi carotidea 50–99%', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Chirurgo vascolare', righe: ['Endoarteriectomia entro 2 settimane; antiaggregante + statina.'] }] },
+          {
+            etichetta: 'Nessuna / piccoli vasi', tono: 'si', nodi: [
+              { tipo: 'terapia', titolo: 'ABCD² ≥ 4: doppia antiaggregazione 21 giorni', righe: ['ASA 300 mg + clopidogrel (Plavix) 300–600 mg, poi ASA 100 + clopidogrel 75. ABCD² < 4: un solo antiaggregante.'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'esito', titolo: 'Ricovero/osservazione o ambulatorio TIA entro 24 h', righe: ['Statina ad alta intensità, controllo PA, niente guida fino al controllo.'] },
+    ],
+  },
   otite: {
     titolo: 'Algoritmo otalgia',
     nota: 'AAO-HNS 2014, NICE NG91. Adulto.',
