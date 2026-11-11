@@ -123,8 +123,8 @@ export default function Antibiotici() {
     .filter((f) => !q || `${f.nome} ${f.fiale}`.toLowerCase().includes(q))
 
   return (
-    <div className="flex flex-col gap-2.5">
-      <div className="grid grid-cols-2 gap-1 p-1 rounded-2xl bg-sabbia border border-linea">
+    <div className="elenco">
+      <div className="intero grid grid-cols-2 gap-1 p-1 rounded-2xl bg-sabbia border border-linea">
         {(['condizioni', 'farmaci'] as const).map((v) => (
           <button key={v} onClick={() => vai(v)}
             className={`rounded-xl py-2 text-sm font-bold ${vista === v ? 'bg-carta shadow-card text-testo' : 'text-tenue'}`}>
@@ -169,7 +169,7 @@ export default function Antibiotici() {
             onToggle={() => setAperto((a) => (a === f.id ? null : f.id))} />
         ))
       )}
-      <p className="text-[11px] text-tenue px-1 mt-1">Adulto, funzione epatica normale. Terapia empirica: adattarla all’antibiogramma locale e alle colture.</p>
+      <p className="intero text-[11px] text-tenue px-1 mt-1">Adulto, funzione epatica normale. Terapia empirica: adattarla all’antibiogramma locale e alle colture.</p>
     </div>
   )
 }

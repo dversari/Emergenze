@@ -23,7 +23,7 @@ export function ElencoLineeGuida() {
       <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder="Cerca un PDTA…"
         className="rounded-xl border border-linea px-3 py-2.5 text-base" />
       {[...new Set(voci.map((l) => l.area.split(' · ')[0]))].sort().map((area) => (
-        <div key={area} className="flex flex-col gap-2">
+        <div key={area} className="elenco !gap-2">
           <p className="etichetta px-1 mt-1">{area}</p>
       {voci.filter((l) => l.area.split(' · ')[0] === area).map((l) => (
         <Link key={l.id} to={`/linee-guida/${l.id}`} className="card !py-3 flex items-center gap-3 active:bg-sabbia">
@@ -62,6 +62,7 @@ export function RiassuntoLineaGuida() {
 
   return (
     <RitornoCtx.Provider value={l.titolo}>
+    <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-6 lg:items-start">
     <div className="flex flex-col gap-3">
       <Link to="/linee-guida" className="text-sm text-tenue">‹ PDTA</Link>
 
@@ -95,9 +96,10 @@ export function RiassuntoLineaGuida() {
         )}
       </section>
 
-      {ALGORITMI[l.id] && <Algoritmo {...ALGORITMI[l.id]} sezioni={l.sezioni} />}
-
-      {l.manovre && <Manovre ids={l.manovre} />}
+      <div className="flex flex-col gap-3 lg:hidden">
+        {ALGORITMI[l.id] && <Algoritmo {...ALGORITMI[l.id]} sezioni={l.sezioni} />}
+        {l.manovre && <Manovre ids={l.manovre} />}
+      </div>
 
       {(l.vediAnche || l.approfondimenti) && (
         <section className="card">
@@ -156,6 +158,13 @@ export function RiassuntoLineaGuida() {
       {l.fonti && <ChiediLineaGuida key={l.id} fonti={l.fonti} />}
 
       <p className="text-[11px] text-tenue px-1">Riassunto personale: le dosi vanno verificate su linee guida e scheda tecnica.</p>
+    </div>
+    {(ALGORITMI[l.id] || l.manovre) && (
+      <aside className="hidden lg:flex flex-col gap-3 sticky top-[80px] max-h-[calc(100vh-96px)] overflow-y-auto pr-1 pb-4">
+        {ALGORITMI[l.id] && <Algoritmo {...ALGORITMI[l.id]} sezioni={l.sezioni} />}
+        {l.manovre && <Manovre ids={l.manovre} />}
+      </aside>
+    )}
     </div>
     </RitornoCtx.Provider>
   )

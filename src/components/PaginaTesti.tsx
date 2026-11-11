@@ -98,7 +98,7 @@ export default function PaginaTesti({ voci: tutte, prefisso, segnaposto, nota }:
   const gruppi = [...new Set(voci.map((d) => d.gruppo))]
 
   return (
-    <div className="flex flex-col gap-2.5">
+    <div className="elenco">
       <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder={segnaposto}
         className="rounded-xl border border-linea px-3 py-2.5 text-base" />
       {gruppi.map((g) => (
@@ -120,8 +120,8 @@ export default function PaginaTesti({ voci: tutte, prefisso, segnaposto, nota }:
           })}
         </Fragment>
       ))}
-      {!voci.length && <p className="text-sm text-tenue px-1">Nessun risultato.</p>}
-      <p className="text-[11px] text-tenue px-1 mt-1">{nota}</p>
+      {!voci.length && <p className="intero text-sm text-tenue px-1">Nessun risultato.</p>}
+      <p className="intero text-[11px] text-tenue px-1 mt-1">{nota}</p>
     </div>
   )
 }

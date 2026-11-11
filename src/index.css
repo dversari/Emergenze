@@ -81,3 +81,10 @@ input, select, textarea {
   font-size: 16px;
 }
 
+
+/* Elenchi: una colonna sul telefono, due sul computer (etichette e ricerca a tutta larghezza) */
+.elenco { display: flex; flex-direction: column; gap: 0.625rem; }
+@media (min-width: 1024px) {
+  .elenco { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .elenco > input, .elenco > .etichetta, .elenco > .intero { grid-column: 1 / -1; }
+}

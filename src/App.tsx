@@ -29,7 +29,7 @@ const schede = [
 function Guscio() {
   return (
     <div className="min-h-screen bg-fondo text-testo">
-      <header className="px-4 pt-[calc(14px+env(safe-area-inset-top))] pb-2 sticky top-0 bg-fondo/95 backdrop-blur z-10 flex items-center gap-2.5">
+      <header className="px-4 pt-[calc(14px+env(safe-area-inset-top))] pb-2 sticky top-0 bg-fondo/95 backdrop-blur z-10 flex items-center gap-2.5 lg:px-8 lg:pt-4 lg:pb-3 lg:border-b lg:border-linea">
         <Link to="/" className="flex items-center gap-2.5" aria-label="Pagina iniziale">
           <img src="./favicon.svg" alt="" className="w-8 h-8" />
           <div>
@@ -43,12 +43,26 @@ function Guscio() {
         </Link>
       </header>
 
-      <main className="px-3.5 py-3 pb-[calc(90px+env(safe-area-inset-bottom))] max-w-3xl mx-auto">
+      <main className="px-3.5 py-3 pb-[calc(90px+env(safe-area-inset-bottom))] max-w-3xl mx-auto lg:ml-56 lg:mr-0 lg:max-w-none lg:px-8 lg:py-5 lg:pb-10">
+        <div className="lg:max-w-[1400px] lg:mx-auto">
         <Outlet />
+        </div>
         <TornaA />
       </main>
 
-      <nav className="fixed bottom-0 inset-x-0 z-20 bg-fondo/95 backdrop-blur-md border-t border-linea px-2 pt-2 pb-[max(14px,calc(env(safe-area-inset-bottom)+6px))]">
+      <nav className="hidden lg:flex fixed left-0 top-[63px] bottom-0 w-56 z-20 flex-col gap-1 border-r border-linea bg-fondo px-3 py-4">
+        {schede.map((s) => (
+          <NavLink key={s.to} to={s.to}
+            className={({ isActive }) =>
+              `flex items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] font-bold transition-colors ${
+                isActive ? 'bg-verde text-white' : 'text-tenue hover:bg-sabbia hover:text-testo'}`}>
+            <span className="w-6 text-center text-lg leading-none">{s.icona}</span>
+            {s.label}
+          </NavLink>
+        ))}
+      </nav>
+
+      <nav className="lg:hidden fixed bottom-0 inset-x-0 z-20 bg-fondo/95 backdrop-blur-md border-t border-linea px-2 pt-2 pb-[max(14px,calc(env(safe-area-inset-bottom)+6px))]">
         <div className="grid grid-cols-8 gap-0 max-w-lg mx-auto">
           {schede.map((s) => (
             <NavLink key={s.to} to={s.to}
@@ -96,7 +110,7 @@ function TornaA() {
   if (!da) return null
   return (
     <button onClick={() => (window.history.length > 1 ? nav(-1) : nav(da.to))}
-      className="fixed left-1/2 -translate-x-1/2 bottom-[86px] z-30 rounded-full bg-verde-scuro text-white text-[13px] font-extrabold px-4 py-2.5 shadow-lg max-w-[90vw] truncate active:opacity-80">
+      className="fixed left-1/2 lg:left-[calc(50%+7rem)] -translate-x-1/2 bottom-[86px] lg:bottom-6 z-30 rounded-full bg-verde-scuro text-white text-[13px] font-extrabold px-4 py-2.5 shadow-lg max-w-[90vw] truncate active:opacity-80">
       ← Torna a {da.etichetta}
     </button>
   )

@@ -100,7 +100,7 @@ export default function Rubrica() {
   const segnalata = (v: Voce, n: Numero) => segn.some((s) => s.vid === v.id && s.numero === n.n)
 
   return (
-    <div className="flex flex-col gap-2.5">
+    <div className="flex flex-col gap-2.5 lg:max-w-4xl lg:mx-auto">
       {/* Ricerca con tendina */}
       <div ref={boxCerca} className="relative">
         <input value={cerca} onChange={(e) => { setCerca(e.target.value); setTendina(true) }} onFocus={() => setTendina(true)}

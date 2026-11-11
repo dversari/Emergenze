@@ -519,15 +519,15 @@ export default function EmergenzeCalcolatori() {
   }, [params])
 
   return (
-    <div className="flex flex-col gap-2.5">
+    <div className="elenco">
       <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder="Cerca un calcolatore…"
         className="rounded-xl border border-linea px-3 py-2.5 text-base" />
       {punteggi.map((p) => (
         <CalcoloPunteggio key={p.id} p={p} aperto={aperto === p.id} onToggle={() => toggle(p.id)} />
       ))}
       {altri.map(({ id, Comp }) => <Comp key={id} aperto={aperto === id} onToggle={() => toggle(id)} />)}
-      {!punteggi.length && !altri.length && <p className="text-sm text-tenue px-1">Nessun calcolatore trovato.</p>}
-      <p className="text-[11px] text-tenue px-1 mt-1">I valori inseriti restano sul telefono e si cancellano chiudendo la pagina.</p>
+      {!punteggi.length && !altri.length && <p className="intero text-sm text-tenue px-1">Nessun calcolatore trovato.</p>}
+      <p className="intero text-[11px] text-tenue px-1 mt-1">I valori inseriti restano sul telefono e si cancellano chiudendo la pagina.</p>
     </div>
   )
 }

@@ -199,7 +199,7 @@ export default function Acr() {
 
   if (!s.inizio) {
     return (
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 lg:max-w-3xl lg:mx-auto lg:w-full">
         <section className="card text-center">
           <p className="etichetta">Arresto cardiaco · ERC 2025</p>
           <h2 className="font-black text-2xl mt-1">Timer ACR</h2>
@@ -212,7 +212,7 @@ export default function Acr() {
   }
 
   return (
-    <div className="flex flex-col gap-2.5">
+    <div className="flex flex-col gap-2.5 lg:max-w-3xl lg:mx-auto">
       {/* tempi */}
       <section className={`card !p-3 ${scaduto ? 'bg-bordeaux text-white animate-pulse' : ''}`}>
         <div className="flex items-end justify-between">

@@ -114,7 +114,7 @@ const PAGINE = [
 /** Schermata iniziale. */
 export default function Home() {
   return (
-    <div className="flex flex-col gap-2.5">
+    <div className="flex flex-col gap-2.5 lg:max-w-4xl lg:mx-auto">
       <section className="card !p-0 overflow-hidden">
         <div className="bg-sabbia px-4 pt-2 flex justify-center">
           <div style={{ height: 'clamp(64px, 18svh, 180px)' }} className="aspect-[22/15]"><Giglio /></div>
