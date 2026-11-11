@@ -50,6 +50,15 @@ const STILE: Record<Tono, string> = {
 }
 const ICONA: Partial<Record<Tono, string>> = { decisione: '◆', allarme: '!', terapia: '℞', esito: '✓' }
 
+/** Apre la sezione (details) del riassunto con quel titolo e ci scorre sopra. */
+export const idSezione = (t: string) => 'sez-' + t.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-')
+function apriSezione(titolo: string) {
+  const el = document.getElementById(idSezione(titolo)) as HTMLDetailsElement | null
+  if (!el) return
+  el.open = true
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
 /** Freccia verticale tra due blocchi. */
 function Freccia({ corta }: { corta?: boolean }) {
   return (
@@ -86,6 +95,12 @@ function Blocco({ n, piccolo }: { n: Extract<Nodo, { titolo: string }>; piccolo?
             </li>
           ))}
         </ul>
+      )}
+      {n.vedi && (
+        <button onClick={() => apriSezione(n.vedi!)}
+          className={`mt-2 text-[11.5px] font-bold rounded-full px-2.5 py-1 ${scuro ? 'bg-white/20 text-white' : 'bg-verde text-white'}`}>
+          ↓ sezione «{n.vedi}»
+        </button>
       )}
     </div>
   )

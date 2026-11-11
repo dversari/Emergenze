@@ -7,7 +7,7 @@
 export type Tono = 'avvio' | 'passo' | 'decisione' | 'allarme' | 'terapia' | 'esito' | 'nota'
 
 export type Nodo =
-  | { tipo: Tono; titolo: string; righe?: string[]; tempo?: string }
+  | { tipo: Tono; titolo: string; righe?: string[]; tempo?: string; /** titolo di una sezione del riassunto da aprire */ vedi?: string }
   | { tipo: 'rami'; rami: Ramo[] }
 
 /** fine: il ramo termina qui (non prosegue nel flusso principale). */
@@ -364,11 +364,12 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
           {
             etichetta: 'No', tono: 'si', nodi: [
               {
-                tipo: 'passo', titolo: 'Criteri di rischio',
+                tipo: 'passo', titolo: 'Criteri di rischio: ne basta 1, maggiore o minore → ricovero',
                 righe: [
                   'Maggiori: febbre > 38 °C, esordio subacuto, versamento > 20 mm, mancata risposta ai FANS dopo 1 settimana.',
-                  'Minori: troponina alta (miopericardite), immunodepressione, trauma, anticoagulanti.',
+                  'Minori: troponina alta (miopericardite), immunodepressione, trauma, anticoagulanti orali.',
                 ],
+                vedi: 'Criteri di rischio',
               },
             ],
           },
@@ -385,7 +386,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       {
         tipo: 'rami', rami: [
           {
-            etichetta: 'Rischio presente', tono: 'no', nodi: [
+            etichetta: '≥ 1 criterio', tono: 'no', nodi: [
               { tipo: 'esito', titolo: 'Ricovero', righe: ['Ricerca della causa; miopericardite: monitoraggio e percorso miocardite.'] },
             ],
           },

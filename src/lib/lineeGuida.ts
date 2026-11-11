@@ -635,7 +635,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       'Diagnosi con almeno 2 tra: dolore toracico pericarditico, sfregamento, alterazioni ECG (ST sopraslivellato diffuso o PR sottoslivellato), versamento pericardico nuovo o in aumento. PCR alta e imaging a supporto.',
       'Troponina alta = coinvolgimento miocardico (miopericardite): ricovero e valutazione.',
       'Terapia: FANS o aspirina ad alte dosi + colchicina (non più opzionale) + riposo fisico fino alla remissione. Cortisone solo in seconda linea.',
-      'Ricovero se un criterio maggiore: febbre > 38 °C, esordio subacuto, versamento importante (> 20 mm) o tamponamento, mancata risposta ai FANS dopo 1 settimana.',
+      'Ricovero se c’è anche un solo criterio di rischio, maggiore (febbre > 38 °C, esordio subacuto, versamento > 20 mm o tamponamento, mancata risposta ai FANS dopo 1 settimana) o minore (miopericardite, immunodepressione, trauma, anticoagulanti).',
     ],
     sezioni: [
       {
@@ -651,9 +651,11 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Criteri di rischio',
         punti: [
-          'Maggiori: febbre > 38 °C, esordio subacuto, versamento > 20 mm o tamponamento, mancata risposta ai FANS dopo 1 settimana.',
-          'Minori: miopericardite, immunodepressione, trauma, terapia anticoagulante orale.',
-          'Nessun criterio: gestione ambulatoriale con controllo a 1 settimana.',
+          'Quanti ne servono: ne basta uno solo, maggiore o minore, per considerare il caso ad alto rischio → ricovero e ricerca della causa.',
+          'Maggiori (4): febbre > 38 °C; esordio subacuto (giorni-settimane, senza dolore acuto netto); versamento pericardico importante (> 20 mm in diastole) o tamponamento; mancata risposta a FANS/aspirina dopo almeno 1 settimana.',
+          'Minori (4): miopericardite (troponina alta); immunodepressione; trauma; terapia anticoagulante orale.',
+          'Nessun criterio (basso rischio): domicilio con FANS + colchicina, senza ricerca estesa della causa, controllo a 1 settimana con PCR.',
+          'Fonte: triage dell’ESC 2015, ripreso nella linea guida 2025 (non verificato sul testo completo 2025).',
         ],
       },
     ],

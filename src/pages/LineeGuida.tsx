@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Algoritmo from '../components/Algoritmo'
+import Algoritmo, { idSezione } from '../components/Algoritmo'
 import { ALGORITMI } from '../lib/algoritmi'
 import { Link, useParams } from 'react-router-dom'
 import { LINEE_GUIDA, lineaGuida } from '../lib/lineeGuida'
@@ -116,7 +116,7 @@ export function RiassuntoLineaGuida() {
       )}
 
       {l.sezioni.map((s) => (
-        <details key={s.titolo} className="card !p-0 overflow-hidden group">
+        <details key={s.titolo} id={idSezione(s.titolo)} className="card !p-0 overflow-hidden group scroll-mt-24">
           <summary className="px-4 py-3 font-bold cursor-pointer list-none flex items-center justify-between">
             {s.titolo}
             <span className="text-tenue transition-transform group-open:rotate-90">›</span>
