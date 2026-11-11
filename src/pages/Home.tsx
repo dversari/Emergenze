@@ -117,7 +117,7 @@ export default function Home() {
     <div className="flex flex-col gap-2.5">
       <section className="card !p-0 overflow-hidden">
         <div className="bg-sabbia px-4 pt-2 flex justify-center">
-          <div style={{ height: 'clamp(70px, 20svh, 190px)' }} className="aspect-[22/15]"><Giglio /></div>
+          <div style={{ height: 'clamp(64px, 18svh, 180px)' }} className="aspect-[22/15]"><Giglio /></div>
         </div>
         <div className="px-4 pt-2 pb-3">
           <h2 className="font-black text-[28px] leading-none tracking-tight text-verde-scuro">
