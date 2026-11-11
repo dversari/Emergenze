@@ -101,7 +101,7 @@ med:[
 geri:[['Geriatra di guardia','4007',{ g: 1 }],['Geriatria','6223 4057?'],['Geriatria – reparto','2302 4206'],['DH geriatrico','2610']],
 nefro:[['Nefrologo di guardia','1621',{ g: 1 }],['Nefrologia','6250'],['Dialisi','1224']],
 pneumo:[['Pneumologo di guardia','4009',{ g: 1 }],['Pneumologia – guardia','6346'],['Pneumologia – stanza','4630'],['Pneumologia – ambulatorio','1425 1426 4009+']],
-gastro:[['Gastroenterologo / endoscopista','4006 1611 3469+',{ g: 1 }],['Sala endoscopica','1602 1603'],['Gastroenterologia Careggi','348 8511849?']],
+gastro:[['Endoscopista di guardia – cordless','3469',{ g: 1 }],['Gastroenterologia / endoscopia','4006 1611'],['Sala endoscopica','1602 1603'],['Gastroenterologia Careggi','348 8511849?']],
 infett:[['Infettivologo di guardia','4733',{ g: 1 }],['Malattie infettive – reparto','6221 3208 3220'],['COVID 1 – medico','3256'],['Malattie infettive Pistoia','0573 351562 0573 351511']],
 onco:[['Oncologo di guardia','4008',{ g: 1 }],['Oncologia – reparto','6227 2764'],['Ematologia','2226 2752 2758',{n:'Annotazione in alto: “2226 / 2754?”'}]],
 gin:[
