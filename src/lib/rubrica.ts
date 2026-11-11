@@ -19,7 +19,7 @@ export interface Voce { id: string; cat: string; nome: string; numeri: Numero[];
 
 export const CATEGORIE: Categoria[] = [
   { id: 'ps', nome: 'Pronto Soccorso · HDU (OBI incluso)', tono: 'bordeaux', parole: 'dea triage obi hdu bed manager capoturno' },
-  { id: 'neuro', nome: 'Neurologia · Neurochirurgia · Stroke', tono: 'verde', parole: 'nrch nch neuro ictus stroke cervello eeg angio cto neurorianimazione' },
+  { id: 'neuro', nome: 'Neurologia · Neurochirurgia · Stroke', tono: 'verde', parole: 'nrch nch neuroradiologo interventistica trombectomia neuro ictus stroke cervello eeg angio cto neurorianimazione' },
   { id: 'cardio', nome: 'Cardiologia · Cardiochirurgia', tono: 'bordeaux', parole: 'cuore utic emodinamica stemi pmk holter' },
   { id: 'anest', nome: 'Anestesia · Rianimazione', tono: 'verde', parole: 'rianimatore anestesista intensiva subintensiva' },
   { id: 'chir', nome: 'Chirurgia · Vascolare · Toracica · Ustioni', tono: 'oro', parole: 'chirurgo sala operatoria ustionati pisa' },
@@ -62,7 +62,7 @@ neuro:[
  ['Neurologo di guardia per PS / OBI','4029',{ g: 1 }],['Neurologo di guardia per ospedale','4737',{ g: 1 }],
  ['Neurologo – altri recapiti','4700 4701'],['Neurologia / stroke – reparto','4202'],['Elettrofisiologo – portatile','1625'],
  ['Ambulatorio elettrofisiologia – EEG','1442'],['Ambulatorio neurologia – botox','1429'],
- ['Neurochirurgo (Careggi)','331 6225069',{ g: 1 }],['Neurochirurgo interventista','348 6527779',{ g: 1 }],
+ ['Neurochirurgo (Careggi)','331 6225069',{ g: 1 }],['Neuroradiologo interventista','348 6527779',{ g: 1 }],
  ['Neurochirurgia Careggi','055 7947530 055 7947885~'],['Neurochirurgia – fax','055 7947756'],
  ['Stroke team Careggi','055 7947665',{ g: 1 }],['Sala angiografica Careggi','055 79472892! 055 7946949',{n:'Primo numero con una cifra in più'}],['Sala angiografica – fax','055 7947087'],
  ['Neurorianimazione CTO','055 7948419 055 7948416~']
