@@ -66,6 +66,12 @@ function Rami({ rami }: { rami: Ramo[] }) {
           </div>
           <Freccia corta />
           <Sequenza nodi={r.nodi} piccolo />
+          {r.fine && (
+            <div className="flex flex-col items-center mt-1">
+              <div className="w-0.5 h-3 bg-linea-forte" />
+              <span className="text-[10.5px] font-bold text-tenue border border-linea-forte rounded-md px-2 py-0.5 bg-carta">■ fine: {r.fine}</span>
+            </div>
+          )}
         </div>
       ))}
     </div>

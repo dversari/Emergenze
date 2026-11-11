@@ -10,9 +10,393 @@ export type Nodo =
   | { tipo: Tono; titolo: string; righe?: string[]; tempo?: string }
   | { tipo: 'rami'; rami: Ramo[] }
 
-export interface Ramo { etichetta: string; tono?: 'si' | 'no' | 'neutro'; nodi: Nodo[] }
+/** fine: il ramo termina qui (non prosegue nel flusso principale). */
+export interface Ramo { etichetta: string; tono?: 'si' | 'no' | 'neutro'; nodi: Nodo[]; fine?: string }
 
 export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: Nodo[] }> = {
+
+  'fibrillazione-atriale': {
+    titolo: 'Algoritmo FA in PS',
+    nota: 'ESC 2024 (percorso AF-CARE). Dosi per 70 kg con il numero di fiale/compresse: verificare i formati in reparto.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'FA all’ECG (QRS stretti, RR irregolari, assenza di onde P)',
+        righe: ['Monitor, accesso venoso, elettroliti (K, Mg), TSH, creatinina, troponina se dolore. Ecocardio al letto (FE, valvole, VD).'],
+      },
+      { tipo: 'decisione', titolo: 'Instabile? (shock, ischemia in atto, edema polmonare, sincope)' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'Cardioversione elettrica sincronizzata subito',
+                righe: [
+                  'In sedazione (scheda Sedazione), bifasica, energia elevata fin dal primo shock.',
+                  'Eparina subito (non attendere 3 settimane di OAC).',
+                  'FA pre-eccitata (QRS larghi, irregolari, molto veloci): sempre elettrica, niente farmaci nodali.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              {
+                tipo: 'passo', titolo: 'Cercare la causa',
+                righe: ['Infezione, disidratazione, ipertiroidismo, alcol, EP, SCA, scompenso, elettroliti, farmaci.'],
+              },
+              {
+                tipo: 'terapia', titolo: 'Controllo della frequenza (obiettivo FC < 110)',
+                righe: [
+                  'FE > 40%: metoprololo 2,5–5 mg ev in 2 min (½–1 fiala da 5 mg/5 mL), ripetibile fino a 15 mg; oppure diltiazem 0,25 mg/kg (≈ 18 mg) ev in 5 min.',
+                  'FE ≤ 40% o scompenso: digossina 0,5 mg ev = 1 fiala da 0,5 mg/2 mL; beta-bloccante a basse dosi con cautela; amiodarone se refrattaria.',
+                  'Niente diltiazem/verapamil se FE ≤ 40%.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Esordio certo < 24 h, oppure OAC efficace da ≥ 3 settimane, oppure ETE senza trombi?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'si', nodi: [
+              {
+                tipo: 'passo', titolo: 'Cardioversione possibile',
+                righe: [
+                  'Prima: iniziare l’anticoagulante (EBPM o DOAC).',
+                  'In alternativa: attesa vigile con solo controllo della frequenza e rivalutazione entro 48 h (spesso cardioverte da sola).',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'No / incerto', tono: 'no', nodi: [
+              {
+                tipo: 'passo', titolo: 'Niente cardioversione elettiva',
+                righe: [
+                  'Controllo della frequenza e anticoagulazione.',
+                  'Cardioversione dopo ≥ 3 settimane di OAC efficace o dopo ETE.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Cardiopatia strutturale? (FE ridotta, IVS marcata, coronaropatia)' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Farmacologica',
+                righe: [
+                  'Flecainide 2 mg/kg ev in 10 min (≈ 140 mg = 14 mL della fiala da 150 mg/15 mL; max 150 mg) o 300 mg per bocca = 3 cp da 100 mg.',
+                  'Propafenone 2 mg/kg ev in 10 min (≈ 140 mg = 2 fiale da 70 mg/20 mL) o 600 mg per bocca = 2 cp da 300 mg.',
+                  'Con flecainide/propafenone associare un nodale (rischio di flutter 1:1).',
+                  'Vernakalant 3 mg/kg (≈ 210 mg) ev in 10 min se disponibile.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Amiodarone o elettrica',
+                righe: [
+                  'Amiodarone 300 mg = 2 fiale da 150 mg in 250 mL di glucosata 5% in 30–60 min, poi 900–1200 mg nelle 24 h. Conversione lenta (ore).',
+                  'Oppure cardioversione elettrica sincronizzata.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: 'Anticoagulazione',
+        righe: [
+          'Dopo qualunque cardioversione: OAC per almeno 4 settimane, poi secondo CHA₂DS₂-VA.',
+          'CHA₂DS₂-VA ≥ 2 raccomandata; = 1 da considerare; 0 nessuna. DOAC preferiti (AVK solo con protesi meccaniche o stenosi mitralica moderata-severa).',
+          'Dosi ridotte dei DOAC solo con i criteri della scheda tecnica (CrCl con Cockcroft-Gault). HAS-BLED alto: correggere i fattori, non è un motivo per non anticoagulare.',
+        ],
+      },
+      {
+        tipo: 'esito', titolo: 'Dimissione o ricovero',
+        righe: [
+          'Dimissione se stabile, frequenza controllata, causa non grave, anticoagulazione impostata: controllo cardiologico.',
+          'Ricovero se scompenso, ischemia, causa da trattare, frequenza non controllata.',
+        ],
+      },
+    ],
+  },
+  'scompenso-cardiaco': {
+    titolo: 'Algoritmo scompenso decompensato ed edema polmonare acuto',
+    nota: 'ESC 2026. Dosi per 70 kg con il numero di fiale; le diluizioni per pompa sono esempi: verificare formati e protocolli del reparto.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Dispnea con sospetto scompenso',
+        righe: ['Ortopnea, crepitii, edemi, turgore giugulare, aumento di peso; EPA: dispnea improvvisa, schiuma, sudorazione, ipertensione.'],
+      },
+      {
+        tipo: 'passo', titolo: 'Subito', tempo: 'primi minuti',
+        righe: [
+          'Paziente seduto; PA, FC, SpO₂, FR, temperatura; ECG.',
+          'EGA con lattati; troponina, NT-proBNP, creatinina, elettroliti, emocromo, glicemia.',
+          'Ecografia polmonare (linee B, versamento) ed ecocardio al letto (FE, VD, valvole, versamento pericardico, vena cava).',
+          'NT-proBNP < 300 pg/mL (BNP < 100) esclude lo scompenso; > 5000 pg/mL = rischio molto alto.',
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Insufficienza respiratoria o shock?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Respiratoria', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'Ossigeno e CPAP',
+                righe: [
+                  'Ossigeno solo se SpO₂ < 90% (a chi non è ipossiemico nuoce).',
+                  'CPAP/NIV il prima possibile se distress, FR > 25 o SpO₂ < 90% (es. CPAP 7,5–10 cmH₂O, FiO₂ per SpO₂ 92–96%).',
+                  'Cautela se ipoteso o scompenso destro.',
+                  'Intubazione se peggiora nonostante NIV.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'Shock', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'PAS < 90 con ipoperfusione',
+                righe: [
+                  'Noradrenalina: 2 fiale da 2 mg in SF fino a 50 mL (80 µg/mL), da 0,05 µg/kg/min ≈ 2,5 mL/h.',
+                  'Dobutamina se bassa portata: 1 fiala da 250 mg in SF fino a 50 mL (5 mg/mL), 2,5–5 µg/kg/min = 2–4 mL/h (in beta-bloccati meglio levosimendan).',
+                  'Bolo di liquidi solo se non congesto.',
+                  'Shock team; da STEMI → emodinamica.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'allarme', titolo: 'Fattore scatenante da trattare subito (CHAMPIT)',
+        righe: [
+          'C: sindrome coronarica acuta → percorso STEMI/NSTE.',
+          'H: emergenza ipertensiva → EPA ipertensivo (sotto).',
+          'A: aritmia (FA rapida, TV, bradicardia).',
+          'M: causa meccanica acuta (rottura, insufficienza valvolare acuta, endocardite).',
+          'P: embolia polmonare.',
+          'I: infezione. T: tamponamento.',
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Profilo clinico' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'EPA ipertensivo (PAS > 140)', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'Ridistribuzione più che sovraccarico',
+                righe: [
+                  'CPAP subito.',
+                  'Nitroglicerina in pompa: 2 fiale da 5 mg in SF fino a 50 mL (200 µg/mL). Partire da 10–20 µg/min (3–6 mL/h), aumentare ogni 3–5 min fino a 100–200 µg/min (30–60 mL/h), finché PAS ≥ 110 mmHg.',
+                  'In attesa della pompa: isosorbide dinitrato 5 mg sublinguale.',
+                  'Furosemide a dose bassa (es. 40 mg ev = 2 fiale da 20 mg): spesso il paziente non è in sovraccarico.',
+                  'Niente morfina di routine (solo distress grave refrattario).',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'Caldo-umido', tono: 'neutro', nodi: [
+              {
+                tipo: 'passo', titolo: 'Congesto, ben perfuso (il più frequente)',
+                righe: ['Decongestione con diuretico (sotto); nitroglicerina se PAS > 110 e congestione polmonare.'],
+              },
+            ],
+          },
+          {
+            etichetta: 'Freddo-umido', tono: 'no', nodi: [
+              {
+                tipo: 'passo', titolo: 'Congesto e ipoperfuso',
+                righe: ['Se PAS < 90: inotropo/vasopressore prima, poi diuretico. Se PA conservata: vasodilatatore cauto e diuretico.'],
+              },
+            ],
+          },
+          {
+            etichetta: 'Freddo-secco', tono: 'neutro', nodi: [
+              {
+                tipo: 'passo', titolo: 'Ipoperfuso, non congesto',
+                righe: ['Bolo cauto di liquidi (250 mL SF), rivalutare; inotropo se persiste ipoperfusione.'],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: 'Decongestione: furosemide ev',
+        righe: [
+          'Mai trattato: furosemide 40 mg ev = 2 fiale da 20 mg/2 mL.',
+          'Già in diuretico: il doppio della dose orale abituale ev (es. 50 mg/die per bocca → 100 mg ev = 5 fiale da 20 mg o 10 mL della fiala da 250 mg/25 mL). Più alta se insufficienza renale cronica.',
+          'Bolo o infusione continua: equivalenti.',
+          'Catetere o misura precisa della diuresi; liquidi assunti meno della diuresi.',
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Risposta adeguata? Na urinario ≥ 70 mEq/L a 2 h oppure diuresi ≥ 100 mL/h nelle prime 6 h' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'si', nodi: [
+              {
+                tipo: 'passo', titolo: 'Proseguire',
+                righe: ['Ripetere la dose ogni 12 h fino alla decongestione. Controllare K, Mg, creatinina: un piccolo aumento della creatinina è accettabile.'],
+              },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'no', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Potenziare',
+                righe: [
+                  'Raddoppiare la dose ev di furosemide.',
+                  'Aggiungere (IIa) acetazolamide 500 mg ev = 1 fiala da 500 mg una volta al giorno, oppure idroclorotiazide per bocca 25 mg (eGFR > 50), 50 mg (20–50), 100 mg (< 20).',
+                  'Massimo abituale 600 mg/die di furosemide.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'nota', titolo: 'Da non dimenticare',
+        righe: [
+          'Non sospendere beta-bloccante, ACE-i/ARNI, MRA se non in caso di shock, ipotensione sintomatica, iperkaliemia o insufficienza renale grave.',
+          'Profilassi antitrombotica (EBPM). SGLT2-inibitore da iniziare dopo la stabilizzazione.',
+        ],
+      },
+      {
+        tipo: 'esito', titolo: 'Destinazione',
+        righe: [
+          'UTIC/sub-intensiva: NIV che non si stacca, inotropi o vasopressori, shock, SCA, aritmie gravi.',
+          'Reparto: risposta al diuretico, stabile.',
+        ],
+      },
+    ],
+  },
+  'embolia-polmonare': {
+    titolo: 'Algoritmo embolia polmonare',
+    nota: 'ESC 2019 con le categorie AHA/ACC 2026 (A–E) tra parentesi. Dosi per 70 kg; verificare i formati in reparto.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Sospetta embolia polmonare',
+        righe: ['Dispnea, dolore pleuritico, sincope, tachicardia, emottisi, ipossiemia non spiegata; fattori di rischio TEV.'],
+      },
+      { tipo: 'decisione', titolo: 'Ipotensione persistente, shock o arresto?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì: alto rischio (E)', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'Eco al letto',
+                righe: ['VD dilatato/disfunzionante con paziente instabile: basta per trattare se la TC non è possibile subito.'],
+              },
+              {
+                tipo: 'terapia', titolo: 'Trattamento immediato',
+                righe: [
+                  'Eparina non frazionata 80 U/kg ≈ 5.600 UI ev in bolo (≈ 1,1 mL della fiala da 25.000 UI/5 mL), poi 18 U/kg/h ≈ 1.250 UI/h.',
+                  'Trombolisi: alteplase 100 mg in 2 h (10 mg in bolo + 90 mg) = 2 flaconi da 50 mg; regime accelerato 0,6 mg/kg in 15 min (≈ 42 mg, max 50 mg).',
+                  'Controindicata o fallita: catetere o chirurgia (team PERT).',
+                  'Noradrenalina se ipoteso; liquidi al massimo 500 mL; evitare intubazione e sedazione profonda se possibile.',
+                ],
+              },
+              {
+                tipo: 'allarme', titolo: 'Arresto cardiaco da EP',
+                righe: ['Trombolisi durante la RCP; poi continuare la rianimazione 60–90 minuti. ECMO se disponibile.'],
+              },
+            ],
+            fine: 'terapia intensiva / UTIC',
+          },
+          {
+            etichetta: 'No: stabile', tono: 'si', nodi: [
+              {
+                tipo: 'passo', titolo: 'Probabilità clinica',
+                righe: ['Wells (o Ginevra). Calcolatori: Wells EP, PERC.'],
+              },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Paziente stabile: quanto è probabile l’EP?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Bassa / improbabile', tono: 'si', nodi: [
+              {
+                tipo: 'passo', titolo: 'PERC → D-dimero',
+                righe: [
+                  'Probabilità molto bassa e PERC negativo: EP esclusa senza esami.',
+                  'Altrimenti D-dimero con soglia per età dopo i 50 anni (età × 10 µg/L).',
+                  'Negativo: EP esclusa. Positivo: angio-TC.',
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'Alta / probabile', tono: 'no', nodi: [
+              {
+                tipo: 'passo', titolo: 'Angio-TC direttamente',
+                righe: [
+                  'Niente D-dimero.',
+                  'Anticoagulare in attesa se il rischio emorragico lo consente.',
+                  'Controindicazione al mezzo di contrasto: scintigrafia V/Q o eco-doppler degli arti (TVP = trattare).',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'EP confermata: gravità (sPESI, VD a TC/eco, troponina)' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Basso rischio (A–B)', tono: 'si', nodi: [
+              {
+                tipo: 'esito', titolo: 'Domicilio possibile',
+                righe: ['sPESI 0 (o Hestia negativo), VD normale, troponina normale, anticoagulante disponibile e controllo programmato.'],
+              },
+            ],
+          },
+          {
+            etichetta: 'Intermedio-basso (C)', tono: 'neutro', nodi: [
+              {
+                tipo: 'passo', titolo: 'Ricovero in reparto',
+                righe: ['sPESI ≥ 1 oppure solo uno tra VD alterato e troponina alta. EBPM.'],
+              },
+            ],
+          },
+          {
+            etichetta: 'Intermedio-alto (C3–D)', tono: 'no', nodi: [
+              {
+                tipo: 'allarme', titolo: 'Ricovero monitorato',
+                righe: [
+                  'VD alterato e troponina alta, o ipotensione transitoria/lattati alti (D).',
+                  'Eparina non frazionata se è probabile la trombolisi; team PERT.',
+                  'Trombolisi non di routine: «di salvataggio» se l’emodinamica peggiora.',
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: 'Anticoagulazione (paziente stabile)',
+        righe: [
+          'Enoxaparina 1 mg/kg ogni 12 h: 70 mg sc = 1 siringa da 7.000 UI/0,7 mL ogni 12 h (CrCl < 30: una volta al giorno).',
+          'Oppure DOAC: apixaban 10 mg ogni 12 h per 7 giorni (2 cp da 5 mg), poi 5 mg ogni 12 h; rivaroxaban 15 mg ogni 12 h per 21 giorni, poi 20 mg al giorno.',
+          'Eparina non frazionata solo se instabile, se è probabile la trombolisi o con insufficienza renale grave.',
+          'Durata: almeno 3 mesi.',
+        ],
+      },
+    ],
+  },
   stemi: {
     titolo: 'Algoritmo STEMI — PS con emodinamica h24',
     nota: 'ESC 2023 e ACC/AHA 2025. Prato ha l’emodinamica h24: la strategia è sempre la PCI primaria, la fibrinolisi non è prevista.',
@@ -75,6 +459,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 tipo: 'nota', titolo: 'NSTEMI confermato (troponina) → coronarografia entro 24 h; altrimenti percorso dolore toracico.',
               },
             ],
+            fine: 'percorso NSTE-SCA',
           },
         ],
       },
