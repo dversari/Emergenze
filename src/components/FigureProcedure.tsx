@@ -33,10 +33,10 @@ const BustoFronte = ({ cx = 110, y = 14 }: { cx?: number; y?: number }) => (
   </g>
 )
 
-function Fig({ children, didascalia }: { children: ReactNode; didascalia: string }) {
+function Fig({ children, didascalia, alto = 200 }: { children: ReactNode; didascalia: string; alto?: number }) {
   return (
     <figure className="rounded-2xl bg-carta border border-linea p-2">
-      <svg viewBox="0 0 320 200" className="w-full h-auto" role="img" aria-label={didascalia}>{defs}{children}</svg>
+      <svg viewBox={`0 0 320 ${alto}`} className="w-full h-auto" role="img" aria-label={didascalia}>{defs}{children}</svg>
       <figcaption className="text-[11.5px] text-tenue leading-snug px-1 pt-1">{didascalia}</figcaption>
     </figure>
   )
@@ -364,7 +364,94 @@ const Serrato = () => (
   </Fig>
 )
 
+
+const NivMontaggio = () => (
+  <Fig didascalia="V60: ossigeno ad alta pressione dalla parete, filtro all’uscita, circuito monotubo, UNA sola perdita intenzionale (porta espiratoria sul circuito con maschera non ventilata a gomito blu, oppure maschera ventilata senza porta). Maschera appoggiata a mano a ventilatore acceso, poi le cinghie.">
+    {/* parete O2 */}
+    <rect x="6" y="8" width="54" height="22" rx="4" className="fill-verde3 stroke-verde-scuro" strokeWidth={1.5} />
+    {testo(33, 23, 'O₂ parete', 'fill-verde-scuro', 9, 'middle', true)}
+    <path d="M33 30 C33 44 40 46 40 56" {...T} strokeWidth={3} className="stroke-verde" />
+    {/* ventilatore */}
+    <rect x="14" y="56" width="104" height="104" rx="10" className="fill-white stroke-verde-scuro" strokeWidth={2} />
+    <rect x="22" y="64" width="72" height="52" rx="4" className="fill-[#26332d]" />
+    {testo(27, 78, 'S/T', 'fill-[#9fd3b5]', 8, 'start', true)}
+    {testo(27, 91, 'IPAP 15', 'fill-white', 9, 'start', true)}
+    {testo(27, 103, 'EPAP 5', 'fill-white', 9, 'start', true)}
+    {testo(66, 91, 'O₂ 40%', 'fill-[#f1d98a]', 8)}
+    {testo(66, 103, 'Vte 480', 'fill-[#f1d98a]', 8)}
+    <path d="M28 110 l6 -5 l6 5 l6 -5 l6 5 l6 -5 l6 5" {...T} strokeWidth={1.2} className="stroke-[#9fd3b5]" />
+    <circle cx="106" cy="90" r="8" className="fill-sabbia stroke-verde-scuro" strokeWidth={1.5} />
+    {testo(66, 150, 'Philips V60', 'fill-verde-scuro', 10, 'middle', true)}
+    {/* filtro */}
+    <rect x="118" y="124" width="16" height="14" rx="3" className="fill-oro3 stroke-oro" strokeWidth={1.5} />
+    {testo(126, 152, 'filtro', 'fill-oro', 8, 'middle', true)}
+    {/* circuito */}
+    <path d="M134 131 C170 131 160 176 200 170 C226 166 222 132 236 120" {...T} strokeWidth={7} className="stroke-[#c9d6e2]" />
+    <path d="M134 131 C170 131 160 176 200 170 C226 166 222 132 236 120" {...T} strokeWidth={1} strokeDasharray="2 3" className="stroke-[#8aa1b6]" />
+    {/* porta espiratoria */}
+    <rect x="226" y="112" width="18" height="14" rx="3" transform="rotate(-40 235 119)" className="fill-white stroke-bordeaux" strokeWidth={1.8} />
+    <path d="M232 108 l-4 -6 M238 106 l-2 -7 M243 109 l1 -7" {...T} strokeWidth={1.4} className="stroke-bordeaux" />
+    {testo(196, 96, 'porta espiratoria', 'fill-bordeaux', 8, 'middle', true)}
+    {testo(196, 106, '(unica perdita)', 'fill-bordeaux', 7.5, 'middle')}
+    {/* testa di profilo con maschera */}
+    <path d="M300 40 C266 36 250 58 252 80 L246 92 L253 96 L250 104 C252 112 258 114 266 113 L268 126 C270 138 286 142 304 138" className={pelle} strokeWidth={1.5} />
+    <path d="M300 40 C318 46 318 120 304 138" {...T} className="stroke-tenue" strokeWidth={1.5} />
+    <path d="M258 70 L240 98 L246 118 L272 122 L268 84 Z" className="fill-[#e7eef5]/80 stroke-[#5b7b98]" strokeWidth={2} />
+    <path d="M244 112 l-6 6" {...T} strokeWidth={6} className="stroke-[#3d6fb0]" />
+    {testo(232, 140, 'gomito blu', 'fill-[#3d6fb0]', 8, 'middle', true)}
+    <path d="M268 84 L300 66 M272 116 L304 112" {...T} strokeWidth={2.2} className="stroke-oro" />
+    {testo(286, 186, 'testa a 30–45°', 'fill-tenue', 8.5, 'middle')}
+    {testo(170, 24, 'maschera: ponte del naso → sotto il labbro', 'fill-tenue', 8, 'middle')}
+  </Fig>
+)
+
+const box = (x: number, y: number, w: number, h: number, cls: string, righe: string[], tcls = 'fill-testo', size = 8.2, bold0 = true) => (
+  <g>
+    <rect x={x} y={y} width={w} height={h} rx="6" className={cls} strokeWidth={1.4} />
+    {righe.map((r, i) => <text key={i} x={x + w / 2} y={y + 12 + i * (size + 3)} fontSize={size} textAnchor="middle" fontWeight={i === 0 && bold0 ? 800 : 600} className={tcls}>{r}</text>)}
+  </g>
+)
+
+const NivSchema = () => (
+  <Fig alto={250} didascalia="Schema di partenza: si sale di 2–3 cmH₂O di PS (o 1–2 di EPAP) ogni 5–10 minuti fino a Vte 6–8 mL/kg di peso ideale e FR < 25. Prima di tutto chiedersi se la NIV è indicata e se c’è un tetto terapeutico.">
+    {box(85, 4, 150, 30, 'fill-verde3 stroke-verde-scuro', ['Distress (FR > 25–30) + EGA', 'pH · PaCO₂ · P/F · lattati'], 'fill-verde-scuro')}
+    {freccia('M120 34 L55 52', 'stroke-verde-scuro')}{freccia('M160 34 L160 52', 'stroke-verde-scuro')}{freccia('M200 34 L265 52', 'stroke-verde-scuro')}
+    {box(4, 56, 102, 34, 'fill-bordeaux3 stroke-bordeaux', ['IPERCAPNICO', 'pH < 7,35 · CO₂ > 45'], 'fill-bordeaux')}
+    {box(110, 56, 100, 34, 'fill-oro3 stroke-oro', ['MISTO', 'ipossiemia + CO₂ ↑'], 'fill-oro')}
+    {box(214, 56, 102, 34, 'fill-[#e3ecf4] stroke-[#5b7b98]', ['IPOSSIEMICO', 'CO₂ normale o bassa'], 'fill-[#35577a]')}
+    {box(4, 96, 102, 92, 'fill-white stroke-bordeaux', ['S/T', 'IPAP 12–15 → 20–25', 'EPAP 4–5 (→ 6–8)', 'Rate 12–16', 'I-Time 0,8–1,0 s · Rise 1–2', 'SpO₂ 88–92%', 'BPCO, neuromuscolare'], 'fill-testo', 8)}
+    {box(110, 96, 100, 92, 'fill-white stroke-oro', ['S/T', 'EPAP 8–10', 'IPAP 15–20', 'obeso: AVAPS', 'Vt 8 mL/kg PBW', 'EPA con fatica,', 'BPCO + polmonite'], 'fill-testo', 8)}
+    {box(214, 96, 102, 92, 'fill-white stroke-[#5b7b98]', ['CPAP 8–10', 'EPA cardiogeno', '(da 5 se PAS bassa)', '— — —', 'Polmonite/ARDS:', 'HFNC, o CPAP 8–10,', 'PS bassa, Vte < 9,5'], 'fill-testo', 8)}
+    {box(4, 196, 312, 48, 'fill-sabbia stroke-linea-forte', ['EGA a 1 ora', 'migliorano pH, CO₂, FR, P/F → continuare e rivalutare a 4 ore', 'nessun miglioramento, GCS ↓, FR > 35, intolleranza → INTUBARE'], 'fill-testo', 8.6)}
+  </Fig>
+)
+
+const NivMonitor = () => (
+  <Fig didascalia="Curva di pressione: EPAP di base, IPAP al plateau, pressione di supporto = IPAP − EPAP; Rise è la pendenza della salita (1 = più rapida). Sullo schermo controllare Vte, FR, perdite (Pt Leak) e Pt Trig.">
+    <path d="M18 30 V170 H210" {...T} strokeWidth={1.4} className="stroke-tenue" />
+    {testo(22, 26, 'cmH₂O', 'fill-tenue', 8)}{testo(206, 182, 'tempo', 'fill-tenue', 8, 'end')}
+    <path d="M18 140 H40 L52 70 H92 L100 140 H130 L142 70 H182 L190 140 H210" {...T} strokeWidth={2.6} className="stroke-verde" />
+    <path d="M18 140 H210" {...T} strokeWidth={1} strokeDasharray="3 3" className="stroke-bordeaux2" />
+    <path d="M18 70 H210" {...T} strokeWidth={1} strokeDasharray="3 3" className="stroke-bordeaux2" />
+    {testo(206, 66, 'IPAP', 'fill-bordeaux', 9, 'end', true)}{testo(206, 154, 'EPAP', 'fill-bordeaux', 9, 'end', true)}
+    {freccia('M116 136 L116 76', 'stroke-oro')}{freccia('M116 76 L116 136', 'stroke-oro')}
+    {testo(120, 108, 'PS', 'fill-oro', 10, 'start', true)}
+    <path d="M40 140 L52 70" {...T} strokeWidth={4} className="stroke-oro2" opacity={0.5} />
+    {testo(30, 100, 'Rise', 'fill-oro', 8.5, 'end', true)}
+    <path d="M52 160 H92" {...T} strokeWidth={1.2} className="stroke-tenue" />
+    <path d="M52 156 v8 M92 156 v8" {...T} strokeWidth={1.2} className="stroke-tenue" />
+    {testo(72, 158, 'Ti', 'fill-tenue', 8.5, 'middle', true)}
+    {box(222, 14, 94, 36, 'fill-verde3 stroke-verde-scuro', ['Vte', '6–8 mL/kg PBW'], 'fill-verde-scuro', 9)}
+    {box(222, 56, 94, 36, 'fill-verde3 stroke-verde-scuro', ['FR', '< 25 e in calo'], 'fill-verde-scuro', 9)}
+    {box(222, 98, 94, 36, 'fill-oro3 stroke-oro', ['Pt Leak', 'il più bassa possibile'], 'fill-oro', 9)}
+    {box(222, 140, 94, 36, 'fill-bordeaux3 stroke-bordeaux', ['Pt Trig', 'basso = backup'], 'fill-bordeaux', 9)}
+  </Fig>
+)
+
 export const FIGURE: Record<string, () => ReactNode> = {
+  'niv-v60': NivMontaggio,
+  'niv-parametri': NivSchema,
+  'niv-monitor': NivMonitor,
   'fascia-iliaca': FasciaIliaca,
   'fascia-iliaca-sopra': Soprainguinale,
   esp: ESP,

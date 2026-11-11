@@ -353,6 +353,22 @@ const PUNTEGGI: Punteggio[] = [
     fonte: 'Johnston, Lancet 2007; ESO 2021',
   },
   {
+    id: 'hacor',
+    nome: 'HACOR (NIV nell’ipossiemico)',
+    ambito: 'NIV · a 1 ora dall’inizio: rischio di fallimento nell’insufficienza ipossiemica',
+    voci: [
+      { tipo: 'scelta', id: 'h', testo: 'Frequenza cardiaca', opzioni: [{ testo: '≤ 120', punti: 0 }, { testo: '≥ 121', punti: 1 }] },
+      { tipo: 'scelta', id: 'a', testo: 'pH', opzioni: [{ testo: '≥ 7,35', punti: 0 }, { testo: '7,30–7,34', punti: 2 }, { testo: '7,25–7,29', punti: 3 }, { testo: '< 7,25', punti: 4 }] },
+      { tipo: 'scelta', id: 'c', testo: 'GCS', opzioni: [{ testo: '15', punti: 0 }, { testo: '13–14', punti: 2 }, { testo: '11–12', punti: 5 }, { testo: '≤ 10', punti: 10 }] },
+      { tipo: 'scelta', id: 'o', testo: 'PaO₂/FiO₂', opzioni: [{ testo: '≥ 201', punti: 0 }, { testo: '176–200', punti: 2 }, { testo: '151–175', punti: 3 }, { testo: '126–150', punti: 4 }, { testo: '101–125', punti: 5 }, { testo: '≤ 100', punti: 6 }] },
+      { tipo: 'scelta', id: 'r', testo: 'Frequenza respiratoria', opzioni: [{ testo: '≤ 30', punti: 0 }, { testo: '31–35', punti: 1 }, { testo: '36–40', punti: 2 }, { testo: '41–45', punti: 3 }, { testo: '≥ 46', punti: 4 }] },
+    ],
+    esito: (t) =>
+      t <= 5 ? { livello: 'basso', testo: 'HACOR ≤ 5: rischio di fallimento basso; continuare la NIV con rivalutazione.' }
+      : { livello: 'alto', testo: 'HACOR > 5 a 1 ora: fallimento molto probabile (>80% nello studio originale): anticipare l’intubazione se indicata.' },
+    fonte: 'Duan et al., Intensive Care Med 2017',
+  },
+  {
     id: 'nexus',
     nome: 'NEXUS (rachide cervicale)',
     ambito: 'Trauma · serve l’imaging del rachide cervicale? Basso rischio solo se TUTTI assenti',

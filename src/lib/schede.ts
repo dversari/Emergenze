@@ -417,7 +417,7 @@ export const PROCEDURE: Scheda[] = [
       ] },
       { titolo: 'Passaggi', numerato: true, righe: [
         'Placche antero-laterali (sottoclaveare destra + apice) o antero-posteriori; cute asciutta, rasata se serve.',
-        'Sedazione procedurale: propofol 0,5–1 mg/kg = 35–70 mg (3,5–7 mL di 1%) a boli lenti; con ipotensione preferire dosi ridotte o etomidato. Vedi scheda «Sedazione procedurale».',
+        'Sedazione procedurale: propofol 0,5–1 mg/kg = 35–70 mg (3,5–7 mL di 1%) a boli lenti; con ipotensione dosi ridotte o ketamina 0,5–1 mg/kg (35–70 mg). Vedi scheda «Sedazione procedurale».',
         'Premere SYNC e verificare i marcatori su ogni onda R; se non compaiono, cambiare derivazione o aumentare l’ampiezza.',
         'Energia (bifasico): FA all’energia massima; flutter e TPSV 70–120 J; TV monomorfa con polso 120–150 J, poi a salire.',
         '«Tutti lontani, ossigeno via», tenere premuto il pulsante finché lo shock parte (il ritardo è normale).',
@@ -431,6 +431,111 @@ export const PROCEDURE: Scheda[] = [
       ] },
     ],
     fonte: 'ERC 2025; ESC 2024 (fibrillazione atriale)',
+  },
+  // ─── Ventilazione non invasiva (Philips V60) ───
+  {
+    id: 'niv-v60', nome: 'NIV/CPAP con Philips V60: montaggio e avvio', gruppo: 'Ventilazione non invasiva',
+    sintesi: 'Circuito monotubo con una sola perdita intenzionale, maschera oronasale della misura giusta, impostare in standby, applicare la maschera a ventilatore acceso, EGA a 1 ora.',
+    blocchi: [
+      { titolo: 'Indicazioni (ERS/ATS 2017, BTS 2016)', righe: [
+        'BPCO riacutizzata con acidosi respiratoria: pH ≤ 7,35 e PaCO₂ > 45 mmHg nonostante terapia medica e O₂ controllato → NIV (prima scelta, raccomandazione forte).',
+        'Edema polmonare acuto cardiogeno con distress o ipossiemia → CPAP o NIV (forte), insieme a nitrati e diuretico.',
+        'Sindrome obesità-ipoventilazione, malattie neuromuscolari, cifoscoliosi con ipercapnia acuta → NIV.',
+        'Insufficienza ipossiemica de novo (polmonite, ARDS): preferire alti flussi nasali (HFNC); NIV/CPAP solo come prova breve, sorvegliata, con intubazione pronta. Immunodepressi e trauma toracico (dopo analgesia, PNX drenato): NIV utile.',
+        'Asma: nessuna raccomandazione; solo prova breve in ambiente protetto.',
+      ] },
+      { titolo: 'Controindicazioni', righe: [
+        'Arresto respiratorio o necessità di intubazione immediata; shock non controllato; aritmie maligne.',
+        'GCS < 8 se non dovuto a ipercapnia; agitazione non collaborante; incapacità di proteggere le vie aeree, vomito, ematemesi, secrezioni abbondanti.',
+        'Traumi, ustioni o chirurgia recente del volto e delle prime vie aeree; chirurgia esofago-gastrica recente; PNX non drenato; ostruzione delle alte vie.',
+      ] },
+      { titolo: 'Montaggio della V60', numerato: true, righe: [
+        'Alimentazione di rete (batteria interna per il trasporto) e tubo dell’ossigeno ad alta pressione alla presa a muro: la FiO₂ si imposta sul ventilatore (O₂ 21–100%), non con un flussimetro.',
+        'Filtro antibatterico sull’uscita del ventilatore, poi circuito monotubo.',
+        'Una sola perdita intenzionale: maschera NON ventilata (gomito blu) + porta espiratoria sul circuito (Whisper Swivel/DEP); oppure maschera ventilata (gomito trasparente) senza porta aggiuntiva. Due perdite = ventilazione inefficace; nessuna perdita = rirespirazione di CO₂.',
+        'Menu Maschera/Porta: selezionare tipo di maschera e di porta espiratoria; eseguire il test della porta espiratoria (circuito chiuso con la mano quando richiesto).',
+        'Maschera oronasale (full face) scelta con il calibro: dal ponte del naso a sotto il labbro inferiore. Casco solo per CPAP nell’ipossiemico.',
+        'In standby: modalità e parametri (vedi scheda «NIV: impostazione per patologia ed EGA»), allarmi.',
+        'Paziente seduto a 30–45°, spiegare. Avviare la ventilazione, poi appoggiare la maschera tenendola con la mano per 1–2 min; solo dopo fissare le cinghie (due dita sotto le cinghie).',
+        'Ramp (5–45 min) solo se il paziente non tollera le pressioni piene; tasto «100% O₂» = 2 minuti di O₂ puro (es. prima di aspirare o mobilizzare).',
+      ] },
+      { titolo: 'Allarmi da impostare', righe: [
+        'Vt basso: circa 4–5 mL/kg di peso ideale (≈ 250–300 mL nell’adulto medio).',
+        'FR alta 35/min; FR bassa 8/min; apnea 20 s; VE bassa 4 L/min.',
+        'Pressione alta: IPAP + 5–10 cmH₂O; pressione bassa: IPAP − 5 cmH₂O, ritardo 20 s (scatta con le grandi perdite o il distacco).',
+      ] },
+      { titolo: 'Comfort e sicurezza', righe: [
+        'Protezione del ponte nasale (idrocolloide) fin dall’inizio; pause brevi per bere e per la cute dopo le prime ore se il paziente migliora.',
+        'Sondino naso-gastrico se distensione gastrica o vomito; umidificazione se NIV prolungata.',
+        'Ansia o dispnea che impediscono l’adattamento: morfina 2 mg ev (1/5 di fiala da 10 mg diluita a 10 mL), ripetibile con cautela, solo se vigile e con monitoraggio di FR e capnia. Niente sedazione nell’ipercapnico soporoso.',
+        'Ordine di non intubare: decidere e scrivere PRIMA di iniziare se la NIV è il tetto terapeutico.',
+      ] },
+    ],
+    fonte: 'ERS/ATS 2017 (NIV nell’insufficienza respiratoria acuta); BTS/ICS 2016 (ipercapnica); Philips Respironics V60, pocket guide e specifiche',
+  },
+  {
+    id: 'niv-parametri', nome: 'NIV: impostazione per patologia ed EGA', gruppo: 'Ventilazione non invasiva',
+    sintesi: 'Ipercapnico → S/T con EPAP bassa e pressione di supporto alta; ipossiemico → CPAP/EPAP alta e supporto basso. Si sale ogni 5–10 minuti guardando Vte, FR e comfort.',
+    blocchi: [
+      { titolo: 'Come leggere i parametri della V60', righe: [
+        'IPAP ed EPAP sono pressioni ASSOLUTE: la pressione di supporto (PS) è IPAP − EPAP. Esempio IPAP 15 / EPAP 5 = PS 10.',
+        'EPAP (o CPAP) recluta alveoli, migliora l’ossigenazione, contrasta la PEEP intrinseca e tiene aperte le alte vie. Minimo 4 cmH₂O (lavaggio della CO₂ dalla porta).',
+        'PS aumenta il volume corrente: è la leva per la CO₂ e per la fatica.',
+        'Modalità: CPAP (solo pressione continua); S/T (spontanea con frequenza di sicurezza: la standard); PCV (frequenza e Ti fissi, per pazienti con drive scarso); AVAPS (la V60 varia l’IPAP fino a 2,5 cmH₂O/min tra Min P e Max P per garantire il Vt impostato).',
+        'Rise 1–5: 1 = più veloce. Rate e I-Time valgono solo per gli atti di backup; trigger e ciclaggio sono automatici (Auto-Trak), personalizzabili solo con l’opzione Auto-Trak+.',
+      ] },
+      { titolo: 'Decidere dall’EGA e dalla clinica', numerato: true, righe: [
+        'Distress (FR > 25–30, muscoli accessori, respiro paradosso) + EGA. Peso ideale (PBW): uomo 50 + 0,91 × (altezza cm − 152,4); donna 45,5 + 0,91 × (altezza − 152,4). 170 cm ≈ 66 kg (uomo) → Vt 6–8 mL/kg ≈ 400–530 mL.',
+        'pH < 7,35 con PaCO₂ > 45 → S/T. pH < 7,25: ancora NIV, ma con medico al letto e intubazione pronta; sotto 7,20 il fallimento è frequente.',
+        'pH ≥ 7,35 con ipercapnia compensata → niente NIV di routine: terapia medica e O₂ controllato (SpO₂ 88–92%), ripetere l’EGA.',
+        'Ipossiemia con PaCO₂ normale o bassa: EPA cardiogeno → CPAP; polmonite/ARDS → HFNC, oppure CPAP/NIV con EPAP alta e PS bassa in prova di 1 ora.',
+        'Ipossiemia + ipercapnia (EPA con fatica, BPCO con polmonite, obeso): S/T con EPAP più alta (8–10).',
+        'Ogni 5–10 min: aumentare la PS di 2–3 cmH₂O fino a Vte e FR al bersaglio; aumentare l’EPAP di 1–2 per l’ossigenazione o per gli sforzi inefficaci; O₂ per SpO₂ 88–92% (ipercapnico) o 92–96%.',
+      ] },
+      { titolo: 'Parametri di partenza per patologia (V60)', righe: [
+        'BPCO riacutizzata: S/T, IPAP 12–15 → salire fino a 20–25 (raramente 30), EPAP 4–5 (6–8 se sforzi inefficaci/PEEP intrinseca), Rate 12–16, I-Time 0,8–1,0 s, Rise 1–2. SpO₂ 88–92%.',
+        'EPA cardiogeno: CPAP 8–10 cmH₂O (partire da 5 se ipoteso o intollerante), O₂ 50–100% poi scalare; se ipercapnia o fatica S/T IPAP 12–15 / EPAP 8–10. Attenzione a PAS < 90.',
+        'Obesità-ipoventilazione / OSAS: S/T con EPAP 8–10 (ostruzione delle alte vie), IPAP 18–25, Rate 14–16, I-Time 1,0–1,2 s; utile AVAPS con Vt 8 mL/kg di peso ideale, Min P 15, Max P 30.',
+        'Neuromuscolari, cifoscoliosi: S/T o PCV, IPAP 15–20, EPAP 4–5, Rate 14–18, I-Time 1,2 s; frequenza di backup vicina a quella spontanea.',
+        'Polmonite/ARDS (prova): CPAP 8–10 oppure S/T con EPAP 8–10 e PS bassa (IPAP = EPAP + 4–6). Vte > 9–9,5 mL/kg di peso ideale nonostante PS bassa = alto rischio di fallimento.',
+        'Asma: S/T IPAP 10–12, EPAP 4–5, Rise 1, I-Time breve (0,8 s); salire con prudenza.',
+        'Trauma toracico: dopo analgesia efficace e PNX escluso o drenato, CPAP 5–10 o S/T con PS bassa.',
+      ] },
+    ],
+    fonte: 'ERS/ATS 2017; BTS/ICS 2016; Carteaux 2016 (Vt > 9,5 mL/kg); manuale Philips V60',
+  },
+  {
+    id: 'niv-monitor', nome: 'NIV: cosa monitorare e ottimizzare', gruppo: 'Ventilazione non invasiva',
+    sintesi: 'Nella prima ora al letto: FR, SpO₂, Vte, perdite, sincronia e coscienza; EGA a 1 ora. Nessun miglioramento in 1–2 ore = intubare, non insistere.',
+    blocchi: [
+      { titolo: 'Cosa leggere sullo schermo della V60', righe: [
+        'Vte (volume espirato): bersaglio 6–8 mL/kg di peso ideale. Basso → aumentare IPAP (PS) o ridurre le perdite; troppo alto nell’ipossiemico → ridurre PS.',
+        'FR: obiettivo < 25/min in calo nella prima ora. VE (volume minuto): sale con il lavoro di ventilare la CO₂.',
+        'Tot Leak / Pt Leak: perdita totale (compresa la porta) e non intenzionale. Mirare a Pt Leak il più basso possibile: valori alti e variabili disturbano il trigger e falsano i volumi. Il simbolo della maschera sullo schermo segnala la perdita eccessiva.',
+        'Pt Trig: % di atti iniziati dal paziente. Basso = sta lavorando il backup (apnea, sedazione, ipercapnia che peggiora) oppure sforzi non riconosciuti.',
+        'PIP e curve pressione/flusso: la pressione deve raggiungere l’IPAP con un plateau; il flusso espiratorio deve tornare a zero prima dell’atto successivo (se no: PEEP intrinseca, air trapping).',
+      ] },
+      { titolo: 'Asincronie: cosa cambiare', righe: [
+        'Sforzi inefficaci (il paziente respira, la macchina non parte; tipico della BPCO): aumentare EPAP di 1–2 cmH₂O, ridurre PS se Vte eccessivo, ridurre le perdite.',
+        'Fame d’aria all’inizio dell’atto: Rise più veloce (da 3 a 1–2).',
+        'Ciclaggio tardivo (espira contro la macchina, atti lunghi): ridurre le perdite (maschera, cinghie), ridurre PS; con Auto-Trak+ anticipare il ciclaggio.',
+        'Doppio trigger: tempo inspiratorio troppo breve rispetto alla richiesta: aumentare PS; con Auto-Trak+ ritardare il ciclaggio.',
+        'Autotrigger (FR del ventilatore alta senza sforzi visibili): perdite o acqua nel circuito.',
+      ] },
+      { titolo: 'Perdite e maschera', righe: [
+        'Riposizionare prima di stringere: la perdita sugli occhi è la più dannosa (congiuntiviti) e la più frequente.',
+        'Maschera troppo grande o troppo stretta perde di più; con protesi dentarie spesso meglio tenerle.',
+        'Barba, sondino naso-gastrico, cachessia: cuscinetti/medicazioni, cambio di misura o di interfaccia.',
+      ] },
+      { titolo: 'Sorveglianza e criteri di fallimento', numerato: true, righe: [
+        'Prima ora al letto del paziente: FR, SpO₂, FC, PA, coscienza, uso dei muscoli accessori, tolleranza; monitor continuo.',
+        'EGA a 1 ora (e a 4 ore, o dopo ogni cambio importante): pH e PaCO₂ devono migliorare; ipossiemico: P/F in aumento.',
+        'HACOR a 1 ora (FC, pH, GCS, P/F, FR; calcolatore nella scheda Calcolatori) > 5 nell’ipossiemico = alto rischio di fallimento: decidere presto.',
+        'Intubare (se non c’è limitazione terapeutica): pH o PaCO₂ che peggiorano o non migliorano in 1–2 ore; FR > 35; coscienza che peggiora; intolleranza; secrezioni non gestibili; instabilità emodinamica o aritmie; arresto. Ritardare l’intubazione peggiora la prognosi.',
+        'Successo: continuare per gran parte delle prime 24 ore nell’ipercapnico, poi svezzare riducendo prima le ore di giorno; nell’EPA spesso bastano poche ore.',
+      ] },
+    ],
+    fonte: 'ERS/ATS 2017; BTS/ICS 2016; Duan 2017 (HACOR); Vignaux 2009 (asincronie in NIV); manuale Philips V60',
   },
 ]
 

@@ -164,7 +164,7 @@ export default function Turni() {
 
       <section className="card !p-3 text-[12px] text-tenue leading-snug flex flex-wrap gap-x-4 gap-y-1">
         <span><b>F1/F2</b> flussi</span><span><b>A</b> alta</span><span><b>B</b> boarding</span><span><b>L</b> bassa</span><span><b>TVR</b></span>
-        <span>bordo spesso = produttività aggiuntiva</span><span>giallo = la tua sigla</span><span>fuori turno e OBI non riportati</span>
+        <span>bordo spesso = produttività aggiuntiva</span><span>in giallo: la sigla scritta in «La mia sigla»</span><span>fuori turno e OBI non riportati</span>
         <span>Fonte: prospetto mensile (I. Grassi); i cambi successivi non sono inclusi.</span>
       </section>
     </div>
