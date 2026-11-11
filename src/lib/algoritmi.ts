@@ -318,7 +318,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
             etichetta: 'No: stabile', tono: 'si', nodi: [
               {
                 tipo: 'passo', titolo: 'Probabilità clinica',
-                righe: ['Wells (o Ginevra). Calcolatori: Wells EP, PERC.'],
+                righe: ['Wells EP (o Ginevra); se la probabilità è bassa, PERC.'],
               },
             ],
           },

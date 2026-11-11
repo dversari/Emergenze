@@ -1,5 +1,41 @@
 import type { Nodo, Ramo, Tono } from '../lib/algoritmi'
+import { Link } from 'react-router-dom'
 import { Evidenzia } from './PaginaSchede'
+
+/** Score citati nel testo → calcolatore corrispondente. */
+const SCORE: [RegExp, string][] = [
+  [/CHA₂DS₂-VA/, 'cha2ds2va'],
+  [/HAS-BLED/, 'hasbled'],
+  [/HEART( score)?/, 'heart'],
+  [/Wells( EP)?/, 'wells-ep'],
+  [/PERC/, 'perc'],
+  [/sPESI/, 'spesi'],
+  [/Cockcroft-Gault/, 'cockcroft'],
+  [/GCS/, 'gcs'],
+  [/CURB-65/, 'curb65'],
+]
+const RE_SCORE = new RegExp(`(${SCORE.map(([r]) => r.source).join('|')})`, 'g')
+
+/** Testo con score cliccabili (aprono il calcolatore) e farmaci evidenziati. */
+function Testo({ t, scuro }: { t: string; scuro?: boolean }) {
+  const parti = t.split(RE_SCORE).filter((p) => p !== undefined)
+  return (
+    <>
+      {parti.map((p, i) => {
+        const hit = SCORE.find(([r]) => new RegExp(`^(${r.source})$`).test(p))
+        if (hit) {
+          return (
+            <Link key={i} to={`/calcolatori?apri=${hit[1]}`}
+              className={`inline-block font-bold rounded-full px-1.5 leading-[1.35] underline-offset-2 ${scuro ? 'bg-white/20 text-white' : 'bg-verde text-white'}`}>
+              {p}&nbsp;↗
+            </Link>
+          )
+        }
+        return scuro ? <span key={i}>{p}</span> : <Evidenzia key={i} t={p} />
+      })}
+    </>
+  )
+}
 
 const STILE: Record<Tono, string> = {
   avvio: 'bg-verde-scuro text-white border-verde-scuro',
@@ -37,14 +73,14 @@ function Blocco({ n, piccolo }: { n: Extract<Nodo, { titolo: string }>; piccolo?
             {ICONA[n.tipo]}
           </span>
         )}
-        <p className={`font-extrabold leading-tight ${piccolo ? 'text-[13px]' : 'text-[15px]'} ${n.tipo === 'allarme' ? 'text-bordeaux' : ''}`}>{n.titolo}</p>
+        <p className={`font-extrabold leading-tight ${piccolo ? 'text-[13px]' : 'text-[15px]'} ${n.tipo === 'allarme' ? 'text-bordeaux' : ''}`}><Testo t={n.titolo} scuro={scuro} /></p>
       </div>
       {n.righe && (
         <ul className={`mt-1.5 flex flex-col gap-1 ${piccolo ? 'text-[12px]' : 'text-[13px]'} leading-snug ${scuro ? 'text-white/90' : ''}`}>
           {n.righe.map((r, i) => (
             <li key={i} className="flex gap-1.5">
               <span className={`mt-[7px] w-1 h-1 rounded-full shrink-0 ${scuro ? 'bg-white/70' : 'bg-tenue'}`} />
-              <span>{scuro ? r : <Evidenzia t={r} />}</span>
+              <span><Testo t={r} scuro={scuro} /></span>
             </li>
           ))}
         </ul>
