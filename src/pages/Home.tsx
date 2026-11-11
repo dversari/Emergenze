@@ -102,7 +102,7 @@ const DISEGNI: Record<string, ReactNode> = {
 
 const PAGINE = [
   { id: 'calcolatori', to: '/calcolatori', nome: 'Calcolatori', testo: 'Score, clearance, elettroliti' },
-  { id: 'linee-guida', to: '/linee-guida', nome: 'Linee guida', testo: 'Riassunti e algoritmi' },
+  { id: 'linee-guida', to: '/linee-guida', nome: 'PDTA', testo: 'Percorsi, linee guida, algoritmi' },
   { id: 'antibiotici', to: '/antibiotici', nome: 'Antibiotici', testo: 'Empirica toscana, fiale, rene' },
   { id: 'procedure', to: '/procedure', nome: 'Procedure', testo: 'Passaggi in sequenza' },
   { id: 'sedazione', to: '/sedazione', nome: 'Sedazione', testo: 'Schemi per 70 kg' },

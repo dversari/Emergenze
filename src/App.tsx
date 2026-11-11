@@ -17,7 +17,7 @@ const schede = [
   { to: '/antibiotici', label: 'Antibiotici', icona: '℞' },
   { to: '/procedure', label: 'Procedure', icona: '⌖' },
   { to: '/sedazione', label: 'Sedazione', icona: '☾\uFE0E' },
-  { to: '/linee-guida', label: 'Linee guida', icona: '▤︎' },
+  { to: '/linee-guida', label: 'PDTA', icona: '▤︎' },
   { to: '/anamnesi', label: 'Anamnesi', icona: '☰\uFE0E' },
   { to: '/dimissioni', label: 'Dimissioni', icona: '✎\uFE0E' },
   { to: '/rubrica', label: 'Rubrica', icona: '☎\uFE0E' },

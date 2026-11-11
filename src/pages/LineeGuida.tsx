@@ -19,7 +19,7 @@ export function ElencoLineeGuida() {
   const voci = LINEE_GUIDA.filter((l) => !q || `${l.titolo} ${l.ente} ${l.area}`.toLowerCase().includes(q))
   return (
     <div className="flex flex-col gap-2.5">
-      <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder="Cerca una linea guida…"
+      <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder="Cerca un PDTA…"
         className="rounded-xl border border-linea px-3 py-2.5 text-base" />
       {[...new Set(voci.map((l) => l.area.split(' · ')[0]))].sort().map((area) => (
         <div key={area} className="flex flex-col gap-2">
@@ -40,7 +40,7 @@ export function ElencoLineeGuida() {
         </div>
       ))}
       <div className="rounded-[18px] border border-dashed border-linea-forte px-4 py-3 text-sm text-tenue">
-        Le altre linee guida si aggiungono qui: ogni voce ha il riassunto, il link all’originale e il registro degli aggiornamenti.
+        Gli altri PDTA si aggiungono qui: ogni voce ha il riassunto, l’algoritmo, il link alle linee guida originali e il registro degli aggiornamenti.
       </div>
     </div>
   )
@@ -50,11 +50,11 @@ export function ElencoLineeGuida() {
 export function RiassuntoLineaGuida() {
   const { id = '' } = useParams()
   const l = lineaGuida(id)
-  if (!l) return <p className="text-sm text-tenue">Linea guida non trovata. <Link to="/linee-guida" className="underline">Torna all’elenco</Link></p>
+  if (!l) return <p className="text-sm text-tenue">PDTA non trovato. <Link to="/linee-guida" className="underline">Torna all’elenco</Link></p>
 
   return (
     <div className="flex flex-col gap-3">
-      <Link to="/linee-guida" className="text-sm text-tenue">‹ Linee guida</Link>
+      <Link to="/linee-guida" className="text-sm text-tenue">‹ PDTA</Link>
 
       <div>
         <p className="text-[11px] uppercase tracking-[0.12em] text-bordeaux font-bold">{enteAnno(l)} · {l.area}</p>
