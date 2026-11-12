@@ -208,7 +208,7 @@ export default function ModuloTrasferimento() {
                 <tr key={i}>
                   {CLASSI.slice(i, i + 2).map((c) => (
                     <td key={c.titolo} className="w-1/2">
-                      <p className="font-bold">{c.titolo} – Il paziente:</p>
+                      <p className="font-bold flex items-center gap-[2mm]"><span className="scelta-classe"><K id={`classe-${c.titolo}`} gruppo={CLASSI.map((x) => `classe-${x.titolo}`)}>{c.titolo}</K></span><span className="font-normal">– Il paziente:</span></p>
                       <div className="flex flex-col gap-[0.4mm] mt-[0.5mm]">
                         {c.voci.map((v, j) => <K key={v} id={`${c.titolo}-${j}`}>{v}</K>)}
                       </div>

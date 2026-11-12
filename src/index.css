@@ -114,6 +114,8 @@ input, select, textarea {
 .foglio.trasf .campo { font-size: 9pt !important; }
 .foglio.trasf .casella { width: 3.2mm; height: 3.2mm; }
 .foglio.trasf .casella.piena::after { font-size: 9pt; }
+.foglio.trasf .scelta-classe .casella { width: 4.2mm; height: 4.2mm; border-width: 1.5px; }
+.foglio.trasf .scelta-classe .casella.piena::after { font-size: 11pt; inset: -1.3mm 0 0 0.5mm; }
 
 @media print {
   @page { size: A4; margin: 0; }
