@@ -291,6 +291,120 @@ Non grossolane alterazioni valvolari [/ ...]. [Aorta ascendente ... cm.]
 Conclusione: [...]. Esame mirato bedside, non sostitutivo dell'ecocardiogramma completo.`,
   },
   {
+    id: 'occhio', nome: 'Occhio e nervo ottico', sottotitolo: 'Ipertensione endocranica (ONSD), distacco di retina, emovitreo', tono: 'border-l-[#6b4fa0]', sonda: 'Lineare',
+    scansioni: ['Palpebra chiusa, molto gel, sonda appoggiata senza premere (appoggiare la mano sullo zigomo); mai su sospetta rottura del bulbo', 'Scansioni trasversale (sonda 1) e sagittale (sonda 2) per ogni occhio, guadagno basso', 'ONSD: misurare il diametro della guaina del nervo ottico 3 mm dietro il globo, media di 2 misure per occhio', 'Far muovere l’occhio (con le palpebre chiuse) per vedere le membrane mobili'],
+    corpo: <Collo sonde={[{ x: 86, y: 50, n: '1', lineare: true, lx: -20, ly: -4 }, { x: 116, y: 50, n: '2', r: 90, lineare: true, lx: 18, ly: -4 }]} />,
+    immagine: (
+      <Us tipo="lineare" etichetta="OCCHIO · ONSD" lab={[{ x: 120, y: 66, t: 'globo' }, { x: 120, y: 30, t: 'cristallino' }, { x: 160, y: 150, t: 'nervo ottico', a: 'start' }, { x: 98, y: 126, t: '3 mm', a: 'end' }]}>
+        <rect x="40" y="10" width="160" height="12" fill={grigio(130)} />
+        <path d="M100 24 Q120 18 140 24" stroke={grigio(230)} strokeWidth="2.5" fill="none" />
+        <circle cx="120" cy="70" r="46" fill={nero} />
+        <path d="M40 22 H200 V180 H40 Z" fill="none" />
+        <path d="M74 70 A46 46 0 0 0 166 70" stroke={grigio(120)} strokeWidth="3" fill="none" />
+        <path d="M110 116 L106 176 L134 176 L130 116 Z" fill={grigio(55)} />
+        <path d="M110 116 L106 176 M130 116 L134 176" stroke={grigio(170)} strokeWidth="2" />
+      </Us>
+    ),
+    galleria: [
+      { tit: 'Distacco di retina: membrana spessa ancorata al nervo ottico', img: (
+        <Us tipo="lineare" lab={[{ x: 120, y: 70, t: 'retina' }]}>
+          <circle cx="120" cy="80" r="52" fill={nero} />
+          <path d="M84 118 Q96 60 120 128 Q140 70 156 118" stroke={grigio(225)} strokeWidth="3.5" fill="none" />
+          <path d="M112 132 L110 176 L130 176 L128 132 Z" fill={grigio(55)} />
+        </Us>
+      ) },
+      { tit: 'Emovitreo / distacco di vitreo: echi fini mobili, membrana sottile non ancorata', img: (
+        <Us tipo="lineare" lab={[{ x: 120, y: 64, t: 'vitreo' }]}>
+          <circle cx="120" cy="80" r="52" fill={nero} />
+          {[[100, 90], [128, 100], [140, 78], [108, 110], [118, 86], [134, 116], [96, 104]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r="2.5" fill={grigio(170)} />)}
+          <path d="M80 112 Q120 90 160 112" stroke={grigio(150)} strokeWidth="1.5" fill="none" />
+        </Us>
+      ) },
+    ],
+    didascalia: 'Globo nero (anecogeno), cristallino brillante in alto, nervo ottico come banda scura dietro il globo. ONSD > 5–5,7 mm nell’adulto suggerisce ipertensione endocranica (dato di supporto, non sostituisce la TC). Distacco di retina: membrana spessa ancorata al nervo ottico; distacco di vitreo: sottile e molto mobile.',
+    referto: `ECOGRAFIA OCULARE BEDSIDE [DX/SX/BILATERALE]
+Bulbo oculare di forma regolare, camera vitreale anecogena.
+Non immagini di distacco di retina né di distacco del vitreo; non emovitreo. Cristallino in sede.
+Diametro della guaina del nervo ottico (ONSD, 3 mm dietro il globo): dx ... mm, sx ... mm [nei limiti / aumentato (> 5–5,7 mm), compatibile con ipertensione endocranica].
+[Positivo per: membrana iperecogena ancorata al nervo ottico, compatibile con distacco di retina / echi mobili in camera vitreale da emovitreo / dislocazione del cristallino / ematoma retrobulbare.]
+Esame mirato bedside; valutazione oculistica [richiesta].`,
+  },
+  {
+    id: 'muscoli', nome: 'Muscoli e tessuti molli', sottotitolo: 'Lesioni muscolari, ematoma, cellulite/ascesso, corpo estraneo, versamento, frattura', tono: 'border-l-[#8a6a2e]', sonda: 'Lineare (convex se profondo)',
+    scansioni: ['Sempre confronto con il lato sano, in longitudinale e trasversale', 'Sonda sul punto dolente; contrazione o movimento attivo per vedere le lesioni dinamiche', 'Color Doppler per iperemia e per distinguere vasi da raccolte', 'Compressione: l’ascesso si muove (pus), il flemmone no'],
+    corpo: <Gambe sonde={[{ x: 120, y: 92, n: '1', lineare: true, r: 90, lx: 16, ly: 0 }, { x: 116, y: 158, n: '2', lineare: true, lx: 18, ly: 0 }]} />,
+    immagine: (
+      <Us tipo="lineare" etichetta="MUSCOLO NORMALE (longitudinale)" lab={[{ x: 66, y: 32, t: 'cute', a: 'start' }, { x: 120, y: 80, t: 'fibre «a penna»' }, { x: 120, y: 160, t: 'osso' }]}>
+        <rect x="40" y="10" width="160" height="26" fill={grigio(120)} />
+        <path d="M40 40 H200" stroke={grigio(220)} strokeWidth="2.5" />
+        <rect x="40" y="42" width="160" height="96" fill={grigio(55)} />
+        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => <path key={i} d={`M${30 + i * 24} 138 L${60 + i * 24} 44`} stroke={grigio(165)} strokeWidth="2" />)}
+        <path d="M40 140 H200" stroke={grigio(225)} strokeWidth="2.5" />
+        <path d="M40 146 Q120 138 200 146" stroke={grigio(250)} strokeWidth="4" fill="none" />
+        <rect x="40" y="150" width="160" height="30" fill={nero} />
+      </Us>
+    ),
+    galleria: [
+      { tit: 'Lesione muscolare con ematoma: fibre interrotte, raccolta nera', img: (
+        <Us tipo="lineare" lab={[{ x: 120, y: 96, t: 'ematoma' }]}>
+          <rect x="40" y="10" width="160" height="26" fill={grigio(120)} />
+          <rect x="40" y="40" width="160" height="100" fill={grigio(55)} />
+          {[0, 1, 2, 6, 7].map((i) => <path key={i} d={`M${30 + i * 24} 138 L${60 + i * 24} 44`} stroke={grigio(165)} strokeWidth="2" />)}
+          <ellipse cx="120" cy="90" rx="38" ry="22" fill={nero} />
+        </Us>
+      ) },
+      { tit: 'Cellulite: «acciottolato» (cobblestone), sottocute ispessito', img: (
+        <Us tipo="lineare" lab={[{ x: 120, y: 160, t: 'cobblestone' }]}>
+          <rect x="40" y="10" width="160" height="150" fill={grigio(150)} />
+          {[0, 1, 2, 3, 4, 5].map((r) => [0, 1, 2, 3, 4, 5, 6].map((c) => <path key={`${r}${c}`} d={`M${44 + c * 24} ${30 + r * 22} h18`} stroke={nero} strokeWidth="5" strokeLinecap="round" />))}
+        </Us>
+      ) },
+      { tit: 'Ascesso: raccolta ipo/anecogena con parete, si deforma alla compressione', img: (
+        <Us tipo="lineare" lab={[{ x: 120, y: 92, t: 'pus' }]}>
+          <rect x="40" y="10" width="160" height="160" fill={grigio(135)} />
+          <ellipse cx="120" cy="90" rx="46" ry="32" fill={grigio(40)} stroke={grigio(200)} strokeWidth="3" />
+          {[[104, 84], [130, 96], [118, 104], [140, 82]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r="3" fill={grigio(110)} />)}
+          <rect x="100" y="124" width="40" height="40" fill={grigio(185)} />
+        </Us>
+      ) },
+      { tit: 'Corpo estraneo: iperecogeno con ombra (legno) o riverbero (metallo, vetro)', img: (
+        <Us tipo="lineare" lab={[{ x: 120, y: 54, t: 'corpo estraneo' }]}>
+          <rect x="40" y="10" width="160" height="160" fill={grigio(120)} />
+          <path d="M96 70 L148 64" stroke={grigio(250)} strokeWidth="5" strokeLinecap="round" />
+          <ellipse cx="122" cy="68" rx="34" ry="12" fill="none" stroke={grigio(40)} strokeWidth="5" />
+          <path d="M98 74 L96 172 L148 172 L146 70 Z" fill={grigio(30)} opacity="0.85" />
+        </Us>
+      ) },
+      { tit: 'Versamento articolare (ginocchio, recesso sovrapatellare)', img: (
+        <Us tipo="lineare" lab={[{ x: 120, y: 96, t: 'versamento' }, { x: 160, y: 40, t: 'quadricipite' }]}>
+          <rect x="40" y="10" width="160" height="60" fill={grigio(80)} />
+          <path d="M40 72 Q120 66 200 74 L200 120 Q120 128 40 118 Z" fill={nero} />
+          <path d="M40 124 Q120 130 200 122" stroke={grigio(240)} strokeWidth="4" fill="none" />
+          <rect x="40" y="128" width="160" height="50" fill={nero} />
+        </Us>
+      ) },
+      { tit: 'Frattura: interruzione o scalino della corticale, ematoma sopra', img: (
+        <Us tipo="lineare" lab={[{ x: 120, y: 80, t: 'scalino' }]}>
+          <rect x="40" y="10" width="160" height="90" fill={grigio(115)} />
+          <ellipse cx="120" cy="92" rx="24" ry="8" fill={nero} />
+          <path d="M40 104 L116 104 M126 112 L200 112" stroke={grigio(250)} strokeWidth="5" />
+          <rect x="40" y="108" width="76" height="70" fill={nero} /><rect x="126" y="116" width="74" height="62" fill={nero} />
+        </Us>
+      ) },
+    ],
+    didascalia: 'Muscolo normale: fondo scuro con fibre chiare oblique «a penna» in longitudinale, aspetto «a cielo stellato» in trasversale. Ematoma e liquido sono neri; la cellulite dà sottocute ispessito ad acciottolato; l’ascesso è una raccolta con parete e rinforzo posteriore; i corpi estranei sono brillanti con ombra o riverbero.',
+    referto: `ECOGRAFIA BEDSIDE DEI TESSUTI MOLLI / MUSCOLOSCHELETRICA – SEDE: [...]
+Confronto con il controlaterale.
+[Normale ecostruttura muscolare, non interruzioni delle fibre né raccolte.]
+[Lesione muscolare di [grado ...] del muscolo ..., con interruzione delle fibre per ... mm ed ematoma di ... × ... mm.]
+[Sottocute ispessito con aspetto ad acciottolato, compatibile con cellulite; non raccolte drenabili.]
+[Raccolta ipo-anecogena di ... × ... × ... mm a ... mm dalla cute, con parete iperemica al Doppler, compatibile con ascesso.]
+[Formazione iperecogena lineare di ... mm a ... mm di profondità, con [cono d'ombra / artefatto da riverbero], compatibile con corpo estraneo.]
+[Versamento articolare [ginocchio / anca / ...] di ... mm.]
+[Interruzione della corticale di [...], compatibile con frattura.]
+Esame mirato bedside.`,
+  },
+  {
     id: 'efast', nome: 'eFAST', sottotitolo: 'Trauma: liquido libero, PNX, versamento pericardico', tono: 'border-l-[#a3322a]', sonda: 'Convex (lineare per le pleure)',
     scansioni: ['1 Ipocondrio dx: Morison e polo inferiore del fegato', '2 Ipocondrio sx: perisplenico (più posteriore e alto)', '3 Sovrapubica: retrovescicale / Douglas', '4 Subxifoidea: pericardio', '5–6 Anteriori 2° spazio emiclaveare: sliding pleurico'],
     corpo: <Tronco sonde={[{ x: 66, y: 134, n: '1', r: 75, lx: -16, ly: -8 }, { x: 136, y: 116, n: '2', r: -75, lx: 16, ly: -8 }, { x: 100, y: 188, n: '3', lx: 15, ly: 0 }, { x: 100, y: 124, n: '4', r: -25, lx: 15, ly: 6 }, { x: 84, y: 80, n: '5', r: 90, lx: -13, ly: -6 }, { x: 116, y: 80, n: '6', r: 90, lx: 13, ly: -6 }]} />,

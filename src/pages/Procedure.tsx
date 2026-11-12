@@ -10,7 +10,7 @@ const SEZIONI = [
   { id: 'invasive', nome: 'Procedure invasive', testo: 'Vie aeree, torace, accessi, addome e SNC, blocchi nervosi', colore: 'bg-[#f4e9ea] border-[#e2c9cd] text-[#6b2f3a]', icona: '✚' },
   { id: 'elettrica', nome: 'Terapia elettrica', testo: 'Defibrillazione, cardioversione, pacing: comandi di TEC-5600, TEC-5531K, DFM100', colore: 'bg-[#f6eedd] border-[#e6d5b0] text-[#7a5a17]', icona: '⚡' },
   { id: 'ventilazione', nome: 'Ventilazione', testo: 'NIV/CPAP con Philips V60: montaggio, parametri, monitoraggio', colore: 'bg-[#e6efe9] border-[#c6dacd] text-[#2c5a43]', icona: '≋' },
-  { id: 'eco', nome: 'Ecografia bedside', testo: 'CUS, addome, vasi del collo, cuore, eFAST, polmone: scansioni e referti', colore: 'bg-[#e6edf4] border-[#c8d6e4] text-[#2d4f73]', icona: '◠' },
+  { id: 'eco', nome: 'Ecografia bedside', testo: 'CUS, addome, collo, cuore, occhio, muscoli, eFAST, polmone: scansioni e referti', colore: 'bg-[#e6edf4] border-[#c8d6e4] text-[#2d4f73]', icona: '◠' },
 ] as const
 
 export default function Procedure() {
