@@ -12,7 +12,9 @@ const SCORE: [RegExp, string][] = [
   [/CHA₂DS₂-VA/, 'cha2ds2va'],
   [/HAS-BLED/, 'hasbled'],
   [/HEART( score)?/, 'heart'],
+  [/Wells TVP/, 'wells-tvp'],
   [/Wells( EP)?/, 'wells-ep'],
+  [/score di Constans|Constans/, 'constans'],
   [/PERC/, 'perc'],
   [/sPESI/, 'spesi'],
   [/Cockcroft-Gault/, 'cockcroft'],
@@ -49,6 +51,8 @@ const CONSULENTI: [RegExp, string][] = [
   [/Tossicologia(?: di Careggi)?/, 'tossicologia'],
   [/radiolog[oi] interventist[ai]|radiologia interventistica/i, 'radiologo interventista'],
   [/chirurg(?:o|hi|ia) vascolar[ei]/i, 'chirurgo vascolare'],
+  [/angiolog(?:o|i|ia)\b/i, 'Angiologia'],
+  [/gastroenterolog(?:o|i|ia)\b/i, 'Gastroenterologia'],
   [/chirurg(?:o|hi|ia) toracic[oa]/i, 'chirurgo toracico'],
   [/emodinamist[ai]|emodinamica/i, 'emodinamica'],
   [/cardiolog[oi]\b/i, 'cardiologo'],
@@ -289,8 +293,12 @@ function Vai({ voci, scuro }: { voci: { etichetta: string; to: string }[]; scuro
 
 const CHIP = { si: 'bg-verde text-white', no: 'bg-bordeaux text-white', neutro: 'bg-oro text-white' }
 
-function Rami({ rami }: { rami: Ramo[] }) {
+/** Due rami affiancati di cui almeno uno termina: il flusso prosegue solo dall'altro. */
+const prosegueDaUnLato = (rami: Ramo[]) => rami.length === 2 && rami.some((r) => r.fine) && rami.some((r) => !r.fine)
+
+function Rami({ rami, continua }: { rami: Ramo[]; continua?: boolean }) {
   const affiancati = rami.length === 2
+  const lato = continua && prosegueDaUnLato(rami)
   return (
     <div className={affiancati ? 'grid grid-cols-2 gap-2' : 'flex flex-col gap-2'}>
       {rami.map((r) => (
@@ -306,6 +314,12 @@ function Rami({ rami }: { rami: Ramo[] }) {
               <span className="text-[10.5px] font-bold text-tenue border border-linea-forte rounded-md px-2 py-0.5 bg-carta">■ fine: {r.fine}</span>
             </div>
           )}
+          {lato && !r.fine && (
+            <div className="flex flex-1 flex-col items-center min-h-6" aria-hidden>
+              <div className="w-0.5 flex-1 bg-linea-forte" />
+              <div className="w-0 h-0 border-x-[5px] border-x-transparent border-t-[6px] border-t-linea-forte" />
+            </div>
+          )}
         </div>
       ))}
     </div>
@@ -315,12 +329,16 @@ function Rami({ rami }: { rami: Ramo[] }) {
 function Sequenza({ nodi, piccolo }: { nodi: Nodo[]; piccolo?: boolean }) {
   return (
     <div className="flex flex-col">
-      {nodi.map((n, i) => (
-        <div key={i}>
-          {i > 0 && <Freccia corta={piccolo} />}
-          {n.tipo === 'rami' ? <Rami rami={n.rami} /> : <Blocco n={n} piccolo={piccolo} />}
-        </div>
-      ))}
+      {nodi.map((n, i) => {
+        const prec = nodi[i - 1]
+        const giaFreccia = prec?.tipo === 'rami' && prosegueDaUnLato(prec.rami)
+        return (
+          <div key={i}>
+            {i > 0 && !giaFreccia && <Freccia corta={piccolo} />}
+            {n.tipo === 'rami' ? <Rami rami={n.rami} continua={i < nodi.length - 1} /> : <Blocco n={n} piccolo={piccolo} />}
+          </div>
+        )
+      })}
     </div>
   )
 }

@@ -1318,20 +1318,23 @@ export const LINEE_GUIDA: LineaGuida[] = [
   },
   {
     id: 'dissezione-aortica',
-    titolo: 'Dissezione aortica e sindromi aortiche acute',
+    titolo: 'Aorta acuta: dissezione, sindromi aortiche e aneurisma rotto',
     ente: 'ESC',
     anno: 2024,
     area: 'Cardiologia · Chirurgia vascolare',
     fonte: { etichetta: 'Mazzolai et al., Eur Heart J 2024 (ESC)', url: 'https://academic.oup.com/eurheartj/article/45/36/3538/7738955' },
     controllata: '2026-11-11',
     calcolatori: [{ id: 'addrs', nome: 'ADD-RS' }],
-    vediAnche: [{ etichetta: 'Pericardiocentesi', to: '/procedure?apri=pericardiocentesi' }, { etichetta: 'NSTE-SCA', to: '/linee-guida/nste-sca' }],
+    vediAnche: [{ etichetta: 'Pericardiocentesi', to: '/procedure?apri=pericardiocentesi' }, { etichetta: 'NSTE-SCA', to: '/linee-guida/nste-sca' }, { etichetta: 'eFAST', to: '/procedure?sez=eco&apri=efast' }, { etichetta: 'Ischemia degli arti', to: '/linee-guida/ischemia-arto' }],
+    approfondimenti: [{ etichetta: 'Wanhainen et al., ESVS 2024 aneurismi aorto-iliaci', url: 'https://doi.org/10.1016/j.ejvs.2023.11.002', nota: 'aneurisma rotto e sintomatico' }],
     inBreve: [
       'Sospetto con ADD-RS: 0–1 → D-dimero (e eco); ≥ 2 → angio-TC aorta subito.',
       'ADD-RS ≤ 1 e D-dimero < 500 ng/mL: sindrome aortica acuta improbabile.',
       'Terapia: analgesia con oppioide, poi beta-bloccante ev per FC ≤ 60, poi vasodilatatore per PAS < 120 (100–120).',
       'Tipo A (aorta ascendente): cardiochirurgia di Careggi d’urgenza. Tipo B complicato (malperfusione, rottura, dolore o ipertensione refrattari): endoprotesi.',
       'Niente anticoagulanti, antiaggreganti o fibrinolitici finché il sospetto non è escluso.',
+      'Aneurisma dell’aorta addominale rotto (dolore addominale o lombare, ipotensione, aneurisma noto o visto all’eco): chirurgo vascolare di guardia subito; instabile → in sala senza TC.',
+      'Rottura: ipotensione permissiva (paziente cosciente, PAS 70–90), liquidi limitati, emazie e plasma; niente farmaci per alzare la pressione oltre il necessario.',
     ],
     sezioni: [
       {
@@ -1353,6 +1356,19 @@ export const LINEE_GUIDA: LineaGuida[] = [
         ],
       },
       {
+        titolo: 'Aneurisma dell’aorta addominale rotto o sintomatico (ESVS 2024)',
+        punti: [
+          'Triade: dolore addominale, lombare o al fianco + ipotensione/sincope + massa pulsante; spesso scambiata per colica renale (> 60 anni: eco aorta sempre).',
+          'Eco al letto: aorta > 3 cm (misura esterna-esterna, asse trasverso). L’eco vede l’aneurisma, non sempre la rottura (retroperitoneale).',
+          'Instabile con aneurisma noto o visto all’eco: chirurgo vascolare di guardia e sala; la TC solo se non ritarda.',
+          'Stabile: angio-TC aorta subito, poi chirurgo vascolare (EVAR se anatomia adatta).',
+          'Ipotensione permissiva: PAS 70–90 mmHg purché cosciente; boli piccoli, emazie 0 negativo/gruppo-specifiche, plasma e piastrine (protocollo trasfusione massiva). Evitare grandi volumi di cristalloidi.',
+          'Due accessi venosi grossi, gruppo e prove crociate 6–8 unità, emocromo, coagulazione, fibrinogeno, creatinina, lattati, EGA.',
+          'Aneurisma sintomatico non rotto (dolore, dolorabilità, TC senza rottura): ricovero e riparazione urgente decisa dal chirurgo vascolare; controllo della pressione e del dolore.',
+          'Aneurisma infetto (febbre, emocolture positive, aspetto sacciforme): emocolture e antibiotico dopo il prelievo.',
+        ],
+      },
+      {
         titolo: 'Ipotensione o shock',
         punti: [
           'Cercare con l’eco: tamponamento, insufficienza aortica acuta, rottura, ischemia miocardica.',
@@ -1362,7 +1378,168 @@ export const LINEE_GUIDA: LineaGuida[] = [
       },
     ],
     aggiornamenti: [
+      { data: '2024-01-23', testo: 'ESVS 2024 (aneurismi aorto-iliaci): aneurisma rotto e sintomatico, ipotensione permissiva, EVAR preferita quando l’anatomia lo consente.' },
       { data: '2024-08-30', testo: 'ESC 2024 (malattie arteriose periferiche e aortiche): percorso diagnostico con ADD-RS e D-dimero, obiettivi FC ≤ 60 e PAS 100–120.' },
+    ],
+  },
+  {
+    id: 'ischemia-arto',
+    titolo: 'Ischemia acuta e critica degli arti',
+    ente: 'ESVS',
+    anno: 2020,
+    area: 'Chirurgia vascolare',
+    fonte: { etichetta: 'Björck et al., Eur J Vasc Endovasc Surg 2020 (ESVS, ischemia acuta)', url: 'https://doi.org/10.1016/j.ejvs.2019.09.006' },
+    controllata: '2026-11-12',
+    vediAnche: [{ etichetta: 'Fibrillazione atriale', to: '/linee-guida/fibrillazione-atriale' }, { etichetta: 'Aorta acuta', to: '/linee-guida/dissezione-aortica' }],
+    approfondimenti: [
+      { etichetta: 'Conte et al., Global Vascular Guidelines on CLTI 2019', url: 'https://doi.org/10.1016/j.ejvs.2019.05.006', nota: 'ischemia cronica critica (CLTI)' },
+      { etichetta: 'Mazzolai et al., ESC 2024 arteriopatie periferiche e aorta', url: 'https://doi.org/10.1093/eurheartj/ehae179' },
+    ],
+    inBreve: [
+      'Ischemia acuta (< 2 settimane): dolore, pallore, arto freddo, polsi assenti, poi parestesie e paralisi. Il deficit sensitivo e motorio decide l’urgenza.',
+      'Subito: eparina sodica 5000 UI ev (1 fiala da 5000 UI), analgesia, chirurgo vascolare di guardia.',
+      'Classe IIb (deficit sensitivo oltre le dita o deficit motorio lieve-moderato): rivascolarizzazione immediata, senza attendere esami che ritardano.',
+      'Classe III (anestesia, paralisi, rigidità, assenza di segnali Doppler arteriosi e venosi): arto non salvabile, amputazione o cure palliative.',
+      'Cercare la fonte: ECG (fibrillazione atriale), eco cuore, aneurismi (aorta, poplitea), dissezione aortica.',
+      'Dopo la riperfusione: sindrome compartimentale (fasciotomia), iperkaliemia, rabdomiolisi.',
+      'Ischemia cronica critica (CLTI): dolore a riposo, ulcere o gangrena da > 2 settimane. Visita del chirurgo vascolare in tempi brevi; urgente se infezione o gangrena umida.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Classificazione di Rutherford (ischemia acuta)',
+        punti: [
+          'I – vitale: nessun deficit sensitivo o motorio; Doppler arterioso udibile. Rivascolarizzazione in urgenza differibile (ore).',
+          'IIa – marginalmente minacciato: deficit sensitivo limitato alle dita, forza conservata; Doppler arterioso spesso assente, venoso presente. Rivascolarizzazione urgente.',
+          'IIb – minacciato subito: deficit sensitivo oltre le dita, dolore a riposo, deficit motorio lieve-moderato. Rivascolarizzazione immediata.',
+          'III – irreversibile: anestesia, paralisi, rigidità muscolare, Doppler arterioso e venoso assenti. Amputazione primaria o palliazione.',
+        ],
+      },
+      {
+        titolo: 'Embolia o trombosi?',
+        punti: [
+          'Embolia: esordio brusco, fonte nota (fibrillazione atriale, IMA recente, aneurisma), arto controlaterale con polsi normali.',
+          'Trombosi in situ: storia di claudicatio, arteriopatia nota, bypass o stent precedenti, polsi ridotti anche dall’altro lato.',
+          'Aneurisma popliteo trombizzato: massa pulsante al cavo popliteo, spesso bilaterale. Eco.',
+          'Arto superiore: quasi sempre embolica (brachiale); embolectomia spesso in anestesia locale.',
+        ],
+      },
+      {
+        titolo: 'Diagnostica',
+        punti: [
+          'Doppler portatile su pedidia, tibiale posteriore (o radiale/ulnare) e vene: decide la classe.',
+          'Angio-TC dall’aorta ai piedi se non ritarda il trattamento (IIb: decide il chirurgo vascolare, eventualmente imaging in sala).',
+          'Esami: emocromo, coagulazione, creatinina, potassio, CK, lattati, gruppo sanguigno, ECG; troponina se dubbio di IMA.',
+        ],
+      },
+      {
+        titolo: 'Terapia in PS (70 kg)',
+        punti: [
+          'Eparina sodica 5000 UI ev in bolo (1 fiala da 5000 UI/mL), poi infusione 18 UI/kg/h = circa 1250 UI/h (25.000 UI in 50 mL = 2,5 mL/h) secondo il chirurgo vascolare; aPTT ratio 1,5–2,5.',
+          'Analgesia: morfina 2–4 mg ev ripetibile o fentanil (Fentanest) 50 µg ev.',
+          'Arto in posizione declive, protetto, niente borse calde o fredde. Digiuno, accesso venoso, idratazione.',
+          'Trombolisi intra-arteriosa e trombectomia percutanea: le decide il chirurgo vascolare o il radiologo interventista (classe I–IIa).',
+        ],
+      },
+      {
+        titolo: 'Ischemia cronica critica (CLTI)',
+        punti: [
+          'Dolore a riposo notturno che migliora con l’arto in basso, ulcere che non guariscono, gangrena; pressione alla caviglia < 50 mmHg o ABI < 0,4.',
+          'Piede diabetico infetto o gangrena umida: antibiotico, chirurgo vascolare e chirurgo di guardia nello stesso accesso.',
+          'Senza infezione: analgesia, antiaggregante, statina, visita del chirurgo vascolare o ambulatorio di Angiologia in tempi brevi (non dimettere senza appuntamento).',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2020-01-01', testo: 'ESVS 2020: classe di Rutherford, eparina subito, rivascolarizzazione immediata nella IIb, ricerca della fonte embolica.' },
+      { data: '2024-08-30', testo: 'ESC 2024 (arteriopatie periferiche e aortiche): stessi principi per l’ischemia acuta; nessuna nuova linea guida ESVS sull’ischemia acuta a novembre 2026.' },
+    ],
+  },
+  {
+    id: 'tvp',
+    titolo: 'Trombosi venosa profonda (arti e vene splancniche)',
+    ente: 'ESVS · EASL',
+    anno: 2026,
+    area: 'Medicina vascolare · Epatologia',
+    fonte: { etichetta: 'Kakkos et al., Eur J Vasc Endovasc Surg 2021 (ESVS, trombosi venosa)', url: 'https://doi.org/10.1016/j.ejvs.2020.09.023' },
+    controllata: '2026-11-12',
+    calcolatori: [
+      { id: 'wells-tvp', nome: 'Wells TVP' },
+      { id: 'constans', nome: 'Constans' },
+      { id: 'cockcroft', nome: 'Clearance creatinina' },
+    ],
+    vediAnche: [{ etichetta: 'Embolia polmonare', to: '/linee-guida/embolia-polmonare' }, { etichetta: 'Ecocompressione (CUS)', to: '/procedure?sez=eco&apri=cus' }, { etichetta: 'Anticoagulato che sanguina', to: '/linee-guida/anticoagulato-sanguinamento' }],
+    approfondimenti: [
+      { etichetta: 'EASL 2026: malattie vascolari del fegato (trombosi portale, Budd-Chiari)', url: 'https://doi.org/10.1016/j.jhep.2025.08.001' },
+      { etichetta: 'ESVS 2025: arterie e vene mesenteriche e renali', url: 'https://doi.org/10.1016/j.ejvs.2025.06.010' },
+      { etichetta: 'American Venous Forum 2026: TVP dell’arto superiore', url: 'https://doi.org/10.1016/j.jvsv.2026.102461' },
+    ],
+    inBreve: [
+      'Arto inferiore: Wells TVP. Improbabile → D-dimero (soglia età × 10 dopo i 50 anni); probabile o D-dimero positivo → ecocompressione (CUS).',
+      'Arto superiore: score di Constans, poi eco-doppler. Catetere o pacemaker sono la causa più frequente.',
+      'TVP confermata senza segni di gravità: DOAC e dimissione. Apixaban (Eliquis) 10 mg × 2 per 7 giorni poi 5 mg × 2, oppure rivaroxaban (Xarelto) 15 mg × 2 per 21 giorni poi 20 mg.',
+      'Durata minima 3 mesi; oltre se non provocata, neoplasia o fattore di rischio persistente.',
+      'Flegmasia (arto cianotico, teso, dolente, polsi deboli): chirurgo vascolare subito.',
+      'Trombosi portale o mesenterica acuta: anticoagulare subito con eparina; peritonismo o lattati alti = ischemia intestinale → chirurgo di guardia.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Diagnosi arto inferiore',
+        punti: [
+          'Wells TVP < 2: D-dimero; negativo = TVP esclusa.',
+          'Wells TVP ≥ 2 o D-dimero positivo: ecocompressione prossimale a 2 punti (femorale comune e poplitea) o completa.',
+          'CUS negativa con sospetto alto o D-dimero positivo: ripetere a 5–7 giorni (o eco completa da Angiologia).',
+          'Gravidanza, neoplasia, recidiva: il D-dimero aiuta meno; meglio l’ecografia diretta.',
+        ],
+      },
+      {
+        titolo: 'Terapia (70 kg)',
+        punti: [
+          'Apixaban (Eliquis) 10 mg × 2 (2 cp da 5 mg) per 7 giorni, poi 5 mg × 2.',
+          'Rivaroxaban (Xarelto) 15 mg × 2 per 21 giorni, poi 20 mg una volta al giorno, con il pasto.',
+          'Edoxaban (Lixiana) 60 mg/die o dabigatran (Pradaxa) 150 mg × 2: solo dopo ≥ 5 giorni di eparina.',
+          'Enoxaparina (Clexane) 100 UI/kg × 2 = 7000 UI ogni 12 h (siringa da 8000 UI, scartare 0,1 mL); fondaparinux (Arixtra) 7,5 mg sc/die (50–100 kg).',
+          'Eparina sodica ev (bolo 5000 UI, poi circa 1250 UI/h) se procedura imminente, insufficienza renale grave o instabilità.',
+          'Gravidanza: solo eparina a basso peso molecolare. Sindrome da antifosfolipidi tripla positiva: no DOAC (warfarin).',
+          'Neoplasia attiva: apixaban, edoxaban o rivaroxaban; eparina a basso peso molecolare se tumore gastrointestinale o urologico ad alto rischio di sanguinamento.',
+        ],
+      },
+      {
+        titolo: 'Casi particolari arto inferiore',
+        punti: [
+          'TVP distale isolata (vene del polpaccio) sintomatica: di norma anticoagulare 3 mesi; se rischio basso di estensione e rischio emorragico alto, ecografia di controllo a 1–2 settimane.',
+          'TVP iliaco-femorale con sintomi gravi: valutare con il chirurgo vascolare la rimozione precoce del trombo (classe IIa ESVS).',
+          'Trombosi venosa superficiale ≥ 5 cm: fondaparinux (Arixtra) 2,5 mg sc/die per 45 giorni. Entro 3 cm dalla giunzione safeno-femorale: trattarla come una TVP.',
+          'Ricovero se: flegmasia, EP associata instabile, sanguinamento attivo o alto rischio, dolore non controllabile, impossibilità di gestione a casa.',
+        ],
+      },
+      {
+        titolo: 'Arto superiore',
+        punti: [
+          'Associata a catetere (PICC, CVC, port): anticoagulare almeno 3 mesi e finché il catetere resta in sede. Toglierlo solo se non serve più, non funziona o è infetto; se serve e funziona può restare.',
+          'Giovane, braccio dominante, dopo sforzo (Paget-Schroetter, stretto toracico): chirurgo vascolare per trombolisi locale e valutazione dello stretto toracico.',
+          'Senza catetere né causa evidente: cercare neoplasia (RX o TC torace, esami di base) come per la TVP non provocata.',
+          'Tromboflebite da agocannula: togliere la cannula, impacchi e FANS topico; niente anticoagulante se non si estende verso le vene profonde.',
+          'Terapia anticoagulante: stessi farmaci e dosi della TVP dell’arto inferiore.',
+        ],
+      },
+      {
+        titolo: 'Vene splancniche: porta, mesenterica, splenica, sovraepatiche',
+        punti: [
+          'Sospetto: dolore addominale, febbre, ascite, ipertensione portale nuova; eco-doppler, poi TC con fase portale.',
+          'Trombosi mesenterica: eparina subito (ESVS 2025). Peritonismo, lattati in aumento, sanguinamento intestinale → chirurgo di guardia per resezione.',
+          'Trombosi portale acuta senza cirrosi (EASL 2026): eparina a basso peso molecolare subito, almeno 6 mesi; a lungo termine se fattore protrombotico persistente o estensione alle mesenteriche.',
+          'Cause da cercare: pancreatite, diverticolite, appendicite (pileflebite → antibiotico e anticoagulante), neoplasie, neoplasie mieloproliferative (JAK2, CALR), antifosfolipidi, EPN.',
+          'Cirrosi: anticoagulare la trombosi recente del tronco portale o delle mesenteriche, o occlusiva > 50%; non ritardare per la profilassi delle varici. DOAC solo in Child A (B con cautela), mai in Child C. Gastroenterologia.',
+          'Budd-Chiari (sovraepatiche): anticoagulare sempre; gastroenterologo/epatologo nello stesso accesso.',
+          'Cavernoma portale cronico trovato per caso: non è un’urgenza; invio ambulatoriale.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2021-01-01', testo: 'ESVS 2021: diagnosi con probabilità clinica, D-dimero e ecocompressione; DOAC di prima scelta; TVP distale e arto superiore.' },
+      { data: '2025-06-11', testo: 'ESVS 2025 (vasi mesenterici e renali): trombosi venosa mesenterica, eparina subito e chirurgia se ischemia intestinale.' },
+      { data: '2025-11-12', testo: 'EASL 2026 (malattie vascolari del fegato): trombosi portale con e senza cirrosi, Budd-Chiari.' },
+      { data: '2026-03-02', testo: 'American Venous Forum 2026: prima linea guida dedicata alla TVP dell’arto superiore.' },
     ],
   },
   {

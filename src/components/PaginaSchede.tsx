@@ -12,8 +12,19 @@ const FARMACI = [
   'ondansetron', 'olanzapina', 'lorazepam', 'aloperidolo', 'diazepam', 'tiamina', 'quetiapina',
   'clorpromazina', 'levomepromazina', 'butilscopolamina', 'lidocaina', 'atropina', 'albumina', 'caffeina',
   'desametasone', 'clorexidina', 'eparina', 'ropivacaina', 'levobupivacaina',
+  'adenosina', 'labetalolo', 'urapidil', 'esmololo', 'nitroprussiato', 'verapamil', 'nifedipina', 'nimodipina', 'ivabradina',
+  'dabigatran', 'edoxaban', 'fondaparinux', 'warfarin', 'acenocumarolo', 'idarucizumab', 'andexanet', 'protamina', 'vitamina K',
+  'complesso protrombinico', 'acido tranexamico', 'fibrinogeno', 'caplacizumab', 'rituximab', 'eculizumab', 'ravulizumab', 'atorvastatina',
+  'metilprednisolone', 'prednisone', 'prednisolone', 'betametasone', 'mometasone', 'clorfenamina', 'cetirizina', 'ketotifene',
+  'paracetamolo', 'ibuprofene', 'ketorolac', 'diclofenac', 'tramadolo', 'oxazepam', 'sumatriptan', 'lacosamide', 'colchicina',
+  'omeprazolo', 'pantoprazolo', 'esomeprazolo', 'alginato', 'macrogol', 'lattulosio', 'octreotide', 'terlipressina',
+  'ipratropio', 'polistirene sulfonato', 'bicarbonato di sodio', 'bicarbonato', 'mannitolo', 'glucosio', 'idrossocobalamina', 'anticorpi antidigossina',
+  'amoxicillina', 'clavulanato', 'ampicillina', 'piperacillina', 'tazobactam', 'ceftriaxone', 'cefotaxime', 'cefazolina', 'ceftazidima', 'cefepime',
+  'meropenem', 'ertapenem', 'vancomicina', 'linezolid', 'daptomicina', 'clindamicina', 'gentamicina', 'amikacina', 'azitromicina', 'claritromicina',
+  'doxiciclina', 'ciprofloxacina', 'levofloxacina', 'metronidazolo', 'fosfomicina', 'nitrofurantoina', 'cotrimossazolo', 'tobramicina',
+  'aciclovir', 'valaciclovir', 'oseltamivir', 'fluconazolo', 'timololo', 'ATRA', 'procainamide', 'plasma', 'emazie',
 ]
-const RE_FARMACI = new RegExp(`\\b(${FARMACI.join('|')})\\b`, 'gi')
+const RE_FARMACI = new RegExp(`\\b(${[...FARMACI].sort((a, b) => b.length - a.length).join('|')})\\b`, 'gi')
 
 export function Evidenzia({ t }: { t: string }) {
   const parti = t.split(RE_FARMACI)

@@ -132,6 +132,43 @@ const PUNTEGGI: Punteggio[] = [
     formato: (t) => t.toLocaleString('it-IT', { maximumFractionDigits: 1 }),
   },
   {
+    id: 'wells-tvp',
+    nome: 'Wells TVP',
+    ambito: 'Trombosi venosa profonda arto inferiore',
+    voci: [
+      { tipo: 'si', id: 'k', testo: 'Neoplasia attiva (in terapia o palliazione, o negli ultimi 6 mesi)', punti: 1 },
+      { tipo: 'si', id: 'par', testo: 'Paralisi, paresi o gesso recente all’arto inferiore', punti: 1 },
+      { tipo: 'si', id: 'all', testo: 'Allettamento > 3 giorni o chirurgia maggiore nelle 12 settimane', punti: 1 },
+      { tipo: 'si', id: 'dol', testo: 'Dolorabilità lungo il sistema venoso profondo', punti: 1 },
+      { tipo: 'si', id: 'gon', testo: 'Tutta la gamba gonfia', punti: 1 },
+      { tipo: 'si', id: 'pol', testo: 'Polpaccio > 3 cm rispetto all’altro (10 cm sotto la tuberosità tibiale)', punti: 1 },
+      { tipo: 'si', id: 'fov', testo: 'Edema improntabile solo nella gamba sintomatica', punti: 1 },
+      { tipo: 'si', id: 'col', testo: 'Vene superficiali collaterali (non varicose)', punti: 1 },
+      { tipo: 'si', id: 'prec', testo: 'TVP pregressa documentata', punti: 1 },
+      { tipo: 'si', id: 'alt', testo: 'Diagnosi alternativa almeno altrettanto probabile', punti: -2 },
+    ],
+    esito: (t) =>
+      t >= 2 ? { livello: 'alto', testo: 'TVP probabile: ecocompressione (CUS). Se negativa e D-dimero positivo, ripetere a 1 settimana.' }
+      : { livello: 'basso', testo: 'TVP improbabile: D-dimero (soglia per età se > 50 anni). Negativo = esclusa; positivo = ecocompressione.' },
+    fonte: 'Wells, NEJM 2003 (modello a due livelli)',
+  },
+  {
+    id: 'constans',
+    nome: 'Constans',
+    ambito: 'Trombosi venosa profonda arto superiore',
+    voci: [
+      { tipo: 'si', id: 'cat', testo: 'Catetere venoso o pacemaker nella vena succlavia o giugulare', punti: 1 },
+      { tipo: 'si', id: 'dol', testo: 'Dolore localizzato', punti: 1 },
+      { tipo: 'si', id: 'ed', testo: 'Edema improntabile monolaterale', punti: 1 },
+      { tipo: 'si', id: 'alt', testo: 'Diagnosi alternativa almeno altrettanto probabile', punti: -1 },
+    ],
+    esito: (t) =>
+      t >= 2 ? { livello: 'alto', testo: 'Probabilità alta (circa 2 casi su 3): eco-doppler.' }
+      : t === 1 ? { livello: 'medio', testo: 'Probabilità intermedia: eco-doppler (o D-dimero, poi eco se positivo).' }
+      : { livello: 'basso', testo: 'Probabilità bassa: D-dimero; se positivo eco-doppler.' },
+    fonte: 'Constans, Thromb Haemost 2008',
+  },
+  {
     id: 'perc',
     nome: 'PERC',
     ambito: 'Escludere EP a basso rischio',

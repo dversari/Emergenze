@@ -897,10 +897,22 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
     ],
   },
   'dissezione-aortica': {
-    titolo: 'Algoritmo sindrome aortica acuta',
-    nota: 'ESC 2024. Dosi per 70 kg.',
+    titolo: 'Algoritmo aorta acuta',
+    nota: 'ESC 2024 · ESVS 2024. Dosi per 70 kg.',
     nodi: [
-      { tipo: 'avvio', titolo: 'Dolore toracico, dorsale o addominale sospetto', righe: ['Calcolare l’ADD-RS; eco al letto (flap, versamento pericardico, insufficienza aortica, radice dilatata).'] },
+      { tipo: 'avvio', titolo: 'Dolore toracico, dorsale o addominale sospetto', righe: ['Eco al letto: aorta addominale (> 3 cm = aneurisma), flap, versamento pericardico, insufficienza aortica, radice dilatata.'] },
+      { tipo: 'decisione', titolo: 'Aneurisma addominale con dolore o ipotensione?', righe: ['Dolore addominale, lombare o al fianco; sincope; massa pulsante.'] },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', fine: 'sala operatoria (EVAR o chirurgia aperta)', nodi: [
+              { tipo: 'allarme', titolo: 'Chirurgo vascolare di guardia subito', righe: ['Instabile: in sala, la TC solo se non ritarda. Stabile: angio-TC aorta subito.'] },
+              { tipo: 'terapia', titolo: 'Ipotensione permissiva', righe: ['PAS 70–90 se cosciente; liquidi limitati; emazie e plasma (trasfusione massiva).', '2 accessi grossi, gruppo e crociate 6–8 unità, lattati, fibrinogeno.'], vedi: 'Aneurisma dell’aorta addominale rotto o sintomatico (ESVS 2024)' },
+            ],
+          },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'Sospetto di sindrome aortica acuta', righe: ['Dissezione, ematoma intramurale, ulcera penetrante.'] }] },
+        ],
+      },
       { tipo: 'decisione', titolo: 'ADD-RS?' },
       {
         tipo: 'rami', rami: [
@@ -943,6 +955,63 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         righe: ['Pensare a tamponamento, rottura, insufficienza aortica acuta. Drenaggio pericardico solo di piccoli volumi se la chirurgia non è subito disponibile.'],
         vai: [{ etichetta: 'Pericardiocentesi', to: '/procedure?apri=pericardiocentesi' }],
       },
+    ],
+  },
+  'ischemia-arto': {
+    titolo: 'Algoritmo ischemia acuta d’arto',
+    nota: 'ESVS 2020. Dosi per 70 kg.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Arto freddo, pallido, dolente, senza polsi', righe: ['Esordio < 2 settimane. Confrontare con l’arto controlaterale.'] },
+      { tipo: 'terapia', titolo: 'Subito', righe: ['Eparina sodica 5000 UI ev (1 fiala da 5000 UI).', 'Morfina 2–4 mg ev o fentanil (Fentanest) 50 µg ev.', 'ECG, esami con CK, potassio, lattati, gruppo.'], vedi: 'Terapia in PS (70 kg)' },
+      { tipo: 'decisione', titolo: 'Classe di Rutherford?', righe: ['Sensibilità, forza, Doppler arterioso e venoso.'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'I · IIa', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Chirurgo vascolare di guardia', righe: ['Angio-TC dall’aorta ai piedi.', 'Rivascolarizzazione urgente: chirurgica o endovascolare (trombolisi, trombectomia).'] }] },
+          { etichetta: 'IIb', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Rivascolarizzazione immediata', righe: ['Chirurgo vascolare subito; non ritardare con esami. Imaging in sala se serve.'] }] },
+          { etichetta: 'III', tono: 'no', nodi: [{ tipo: 'passo', titolo: 'Arto non salvabile', righe: ['Anestesia, paralisi, rigidità, Doppler muto: amputazione o cure palliative con il chirurgo vascolare.'] }] },
+        ],
+      },
+      { tipo: 'checklist', titolo: 'Cercare la fonte', righe: ['Fibrillazione atriale (ECG), trombo ventricolare (eco cuore)', 'Aneurisma aortico o popliteo (eco)', 'Dissezione aortica con malperfusione', 'Arteriopatia nota, bypass o stent occlusi'] },
+      { tipo: 'nota', titolo: 'Dopo la riperfusione', righe: ['Sindrome compartimentale (dolore alla mobilizzazione passiva, tensione): fasciotomia.', 'Potassio, CK, mioglobina, creatinina; idratazione.'] },
+    ],
+  },
+  tvp: {
+    titolo: 'Algoritmo trombosi venosa profonda',
+    nota: 'ESVS 2021 · EASL 2026. Dosi per 70 kg.',
+    nodi: [
+      { tipo: 'decisione', titolo: 'Dove?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Arto inferiore', tono: 'neutro', nodi: [
+              { tipo: 'passo', titolo: 'Wells TVP', righe: ['< 2: D-dimero (età × 10 dopo i 50 anni); negativo = esclusa.', '≥ 2 o D-dimero positivo: ecocompressione (CUS).', 'CUS negativa con sospetto alto: ripetere a 5–7 giorni.'] },
+              { tipo: 'allarme', titolo: 'Flegmasia', righe: ['Arto cianotico, teso, polsi deboli: chirurgo vascolare subito.'] },
+            ],
+          },
+          {
+            etichetta: 'Arto superiore', tono: 'neutro', nodi: [
+              { tipo: 'passo', titolo: 'Score di Constans, poi eco-doppler', righe: ['Catetere o pacemaker: il catetere resta se funziona e serve.', 'Giovane dopo sforzo (Paget-Schroetter): chirurgo vascolare per trombolisi.'] },
+            ],
+          },
+          {
+            etichetta: 'Porta · mesenterica', tono: 'no', nodi: [
+              { tipo: 'passo', titolo: 'Eco-doppler, TC con fase portale', righe: ['Peritonismo o lattati alti: ischemia intestinale → chirurgo di guardia.', 'Pileflebite (febbre, fonte addominale): antibiotico.'] },
+              { tipo: 'terapia', titolo: 'Eparina subito', righe: ['Enoxaparina (Clexane) 7000 UI × 2 sc, o eparina sodica ev se chirurgia possibile.', 'Cirrosi: Gastroenterologia; DOAC mai in Child C.'] },
+            ],
+          },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Gestione a domicilio possibile?', righe: ['No se: flegmasia, EP instabile, sanguinamento o rischio alto, dolore non controllato, trombosi splancnica, impossibilità di cure a casa.'] },
+      {
+        tipo: 'terapia', titolo: 'Anticoagulante (70 kg)',
+        righe: [
+          'Apixaban (Eliquis) 10 mg × 2 per 7 giorni, poi 5 mg × 2.',
+          'Oppure rivaroxaban (Xarelto) 15 mg × 2 per 21 giorni, poi 20 mg/die col pasto.',
+          'Gravidanza: enoxaparina (Clexane) 100 UI/kg × 2. Antifosfolipidi: warfarin.',
+        ],
+        vedi: 'Terapia (70 kg)',
+      },
+      { tipo: 'esito', titolo: 'Almeno 3 mesi', righe: ['Splancnica: almeno 6 mesi. Non provocata, neoplasia o fattore persistente: a lungo termine. Controllo dal medico curante o in Angiologia.'] },
     ],
   },
   asma: {
