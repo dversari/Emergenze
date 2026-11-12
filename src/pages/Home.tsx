@@ -198,17 +198,17 @@ export default function Home() {
               </div>
             </Link>
           ))}
-          <Link to="/formazione" className="flex items-center gap-2 lg:gap-3 rounded-2xl border border-[#e6d5b0] bg-[#f6eedd] px-2.5 py-2 lg:px-3 lg:py-2.5 active:bg-[#efe3c8]">
+          <Link to="/formazione" className="flex items-center gap-2 lg:gap-3 rounded-2xl border border-linea bg-[#ebebe8] px-2.5 py-2 lg:px-3 lg:py-2.5 active:bg-[#e0e0dc]">
             <span className="text-2xl lg:text-3xl leading-none">🎓</span>
             <span className="min-w-0 flex-1">
-              <span className="block font-extrabold text-[14px] lg:text-[16px] leading-tight text-[#7a5a17]">Formazione</span>
+              <span className="block font-extrabold text-[14px] lg:text-[16px] leading-tight">Formazione</span>
               <span className="block text-[10.5px] lg:text-[12px] text-tenue leading-tight">regole 2026 in breve: codici, rimborsi, FAD</span>
             </span>
           </Link>
-          <Link to="/riunioni" className="flex items-center gap-2 lg:gap-3 rounded-2xl border border-[#b9cbe0] bg-[#e8eff7] px-2.5 py-2 lg:px-3 lg:py-2.5 active:bg-[#dae5f1]">
+          <Link to="/riunioni" className="flex items-center gap-2 lg:gap-3 rounded-2xl border border-linea bg-[#ebebe8] px-2.5 py-2 lg:px-3 lg:py-2.5 active:bg-[#e0e0dc]">
             <span className="text-2xl lg:text-3xl leading-none">🗂️</span>
             <span className="min-w-0 flex-1">
-              <span className="block font-extrabold text-[14px] lg:text-[16px] leading-tight text-[#24476d]">Riunioni</span>
+              <span className="block font-extrabold text-[14px] lg:text-[16px] leading-tight">Riunioni</span>
               <span className="block text-[10.5px] lg:text-[12px] text-tenue leading-tight">verbali e comunicazioni del reparto 🔒</span>
             </span>
           </Link>
