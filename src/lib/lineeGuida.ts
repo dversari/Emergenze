@@ -1692,7 +1692,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         titolo: 'Farmaci (70 kg)',
         punti: [
           'Valsalva modificata: soffiare 15 s in una siringa da 10 mL (40 mmHg) da semiseduto, poi subito supino con gambe sollevate a 45° per 15 s.',
-          'Adenosina (Krenosin) 6 mg (1 fiala) in bolo rapido + 20 mL di SF in vena grossa; poi 12 mg, poi 18 mg. Avvisare del malessere; evitare nell’asma grave e nella preeccitazione con FA.',
+          'Adenosina (Krenosin) 6 mg (1 fiala) in bolo rapido + 20 mL di SF in vena grossa; poi 12 mg, poi 18 mg. Avvisare il paziente: per qualche secondo vampate, oppressione toracica e sensazione di morte imminente, è atteso; evitare nell’asma grave e nella preeccitazione con FA.',
           'Alternativa nella TPSV: verapamil (Isoptin) 5 mg ev in 2 min (no se QRS largo o scompenso) o metoprololo (Lopresor) 5 mg ev.',
           'Amiodarone (Cordarone) 300 mg = 2 fiale da 150 mg in 250 mL di glucosata 5%.',
         ],
