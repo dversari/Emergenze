@@ -1773,7 +1773,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           '> 1500 mL di sangue in cavità all’inserimento del drenaggio o > 200 mL/h per 2–4 ore: shock, murmure ridotto, ottusità, giugulari vuote.',
           'Rianimazione emostatica e tubo toracico grosso (28–32 Fr) al 5° spazio ascellare medio.',
-          'Perdita massiva o persistente: toracotomia. Il chirurgo toracico è a Careggi: trasferimento; se troppo instabile per il trasporto, chirurgo di guardia.',
+          'Perdita massiva o persistente: toracotomia, che si fa solo a Careggi (trasferimento con chirurgo toracico di Careggi). A Prato non c’è chirurgia toracica: consulenza solo se è di guardia il collega di chirurgia generale con competenza toracica (vedi Rubrica).',
         ],
       },
       {
@@ -1796,7 +1796,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         titolo: 'Tamponamento cardiaco',
         punti: [
           'Ferita penetrante del torace o dell’epigastrio, ipotensione, giugulari turgide (possono mancare se ipovolemico); eFAST: versamento pericardico.',
-          'Liquidi come ponte; cardiochirurgo di Careggi o chirurgo di guardia per toracotomia/finestra pericardica.',
+          'Liquidi come ponte; toracotomia o finestra pericardica solo a Careggi: cardiochirurgo di Careggi e trasferimento.',
           'Pericardiocentesi solo come ponte se la chirurgia non è immediata (il sangue spesso è coagulato).',
         ],
       },
@@ -1844,7 +1844,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           'Trattare le cause reversibili insieme alla RCP (ERC 2025): emorragia (laccio, fascia pelvica, emoderivati), ossigenazione (vie aeree), pneumotorace (toracostomia bilaterale a dito), tamponamento.',
           'Le compressioni toraciche non devono ritardare il trattamento delle cause; in ipovolemia l’adrenalina ha un ruolo minore.',
-          'Toracotomia resuscitativa: solo trauma penetrante con arresto da < 15 minuti e operatore esperto.',
+          'Toracotomia resuscitativa: solo trauma penetrante con arresto da < 15 minuti e operatore esperto; a Prato il torace non si apre (solo Careggi).',
         ],
       },
       {
@@ -1875,7 +1875,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
           'Fratture costali: analgesia multimodale e blocchi; anziano con ≥ 3 coste fratturate = ricovero (rischio di polmonite).',
           'Lesione aortica traumatica (decelerazione): mediastino allargato alla RX, angio-TC; controllo della FC e PAS < 100–120 come nella dissezione; chirurgo vascolare per endoprotesi.',
           'Rottura del diaframma: più spesso a sinistra, visceri nel torace, sondino nel torace alla RX; chirurgia.',
-          'Lesione tracheo-bronchiale: pneumotorace con perdita d’aria persistente dal drenaggio, enfisema sottocutaneo massivo; broncoscopia, chirurgo toracico di Careggi.',
+          'Lesione tracheo-bronchiale: pneumotorace con perdita d’aria persistente dal drenaggio, enfisema sottocutaneo massivo; broncoscopia, chirurgo toracico di Careggi (trasferimento).',
           'Lesione esofagea (penetrante): pneumomediastino, dolore sproporzionato; TC con contrasto orale, antibiotico, chirurgia.',
           'Contusione miocardica: ECG e troponina; aritmie o ipotensione → eco e monitoraggio.',
         ],

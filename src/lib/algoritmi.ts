@@ -392,7 +392,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       {
         tipo: 'rami', rami: [
           { etichetta: 'Shock emorragico', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Dove sanguina?', righe: ['Esterno, torace, addome, bacino-retroperitoneo, ossa lunghe.'], vedi: 'Shock emorragico' }] },
-          { etichetta: 'Tamponamento', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Versamento pericardico all’eFAST', righe: ['Toracotomia o finestra pericardica; pericardiocentesi solo come ponte.'], vedi: 'Tamponamento cardiaco' }] },
+          { etichetta: 'Tamponamento', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Versamento pericardico all’eFAST', righe: ['Toracotomia o finestra pericardica solo a Careggi; pericardiocentesi come ponte.'], vedi: 'Tamponamento cardiaco' }] },
           { etichetta: 'Bacino instabile', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Fascia pelvica ai grandi trocanteri', righe: ['Instabile: angioembolizzazione (radiologo interventista di Careggi o Torregalli secondo l’orario) o packing.'], vedi: 'Frattura di bacino instabile' }] },
           { etichetta: 'Non emorragico', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Ostruttivo, cardiogeno, neurogeno', righe: ['Ipotensione con bradicardia e cute calda: lesione midollare (dopo aver escluso il sanguinamento).'], vedi: 'Shock non emorragico' }] },
         ],
@@ -418,7 +418,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       { tipo: 'decisione', titolo: 'Dopo la valutazione primaria: emodinamica?', righe: ['Risposta a emoderivati e controllo dell’emorragia esterna.'] },
       {
         tipo: 'rami', rami: [
-          { etichetta: 'Non risponde', tono: 'no', fine: 'sala operatoria, angiografia o trasferimento', nodi: [{ tipo: 'allarme', titolo: 'Controllo del danno senza TC', righe: ['eFAST positiva → laparotomia; bacino → angioembolizzazione o packing; torace → toracotomia.', 'Trauma center: Careggi.'] }] },
+          { etichetta: 'Non risponde', tono: 'no', fine: 'sala operatoria, angiografia o trasferimento', nodi: [{ tipo: 'allarme', titolo: 'Controllo del danno senza TC', righe: ['eFAST positiva → laparotomia; bacino → angioembolizzazione o packing; torace → Careggi (a Prato il torace non si apre).', 'Trauma center: Careggi.'] }] },
           { etichetta: 'Stabile o risponde', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'TC total body con contrasto', righe: ['Encefalo, rachide, torace, addome, bacino.'] }] },
         ],
       },
