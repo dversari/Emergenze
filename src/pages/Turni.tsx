@@ -23,18 +23,17 @@ const CHIAVE_SIGLA = 'emergenze.turni.sigla'
 
 const leggiTurni = (): Mese[] => { try { return JSON.parse(leggi(CHIAVE_DATI) ?? '{}').turni ?? [] } catch { return [] } }
 
-/* Colori: mattina rossi polverosi, pomeriggio verdi, notte grigio, nottina nero, boarding arancio scarico */
+/* Colori uguali per turno: mattina verde, pomeriggio rosso, notte grigio, nottina nero */
 const TONO: Record<string, string> = {
-  m: 'bg-[#f3e1df] text-[#6e2f2f] border-[#e3c4c0]',
-  p: 'bg-[#e1ece4] text-[#2c5a43] border-[#c5d9cb]',
-  b: 'bg-[#f6e6d3] text-[#7a4a1c] border-[#e9cfae]',
+  m: 'bg-[#e1ece4] text-[#2c5a43] border-[#c5d9cb]',
+  p: 'bg-[#f3e1df] text-[#6e2f2f] border-[#e3c4c0]',
   n: 'bg-[#e4e4e2] text-[#3a3d3b] border-[#cfcfcc]',
   nn: 'bg-[#2b2d2c] text-white border-[#2b2d2c]',
   r: 'bg-white text-tenue border-dashed border-linea-forte',
 }
 
 function Chip({ x, tono, mia }: { x: Sigla; tono: string; mia: boolean }) {
-  const t = x.p === 'B' ? 'b' : tono
+  const t = tono
   return (
     <span className={`inline-flex items-baseline gap-1 rounded-lg border px-1.5 py-0.5 text-[13px] leading-tight ${mia ? 'bg-[#e8c34a] text-[#2b2410] border-[#b8902a] font-black shadow-sm' : `${TONO[t]} font-bold`} ${x.agg ? 'border-2 !border-current' : ''}`}
       title={x.agg ? 'Produttività aggiuntiva' : undefined}>
