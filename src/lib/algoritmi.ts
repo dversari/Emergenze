@@ -924,7 +924,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         tipo: 'rami', rami: [
           {
             etichetta: 'Sì', tono: 'no', nodi: [
-              { tipo: 'allarme', titolo: 'Rianimatore', righe: ['Salbutamolo (Broncovaleas) + ipratropio (Atem) continui, metilprednisolone (Solu-Medrol) 40 mg ev, magnesio 2 g ev; intubazione da esperto (ketamina).'], vai: [{ etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' }] },
+              { tipo: 'allarme', titolo: 'Rianimatore', righe: ['Salbutamolo (Broncovaleas) + ipratropio (Atem) continui, metilprednisolone (Urbason) 40 mg ev, magnesio 2 g ev; intubazione da esperto (ketamina).'], vai: [{ etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' }] },
             ],
           },
           {
@@ -935,7 +935,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                   'Salbutamolo (Broncovaleas) 4–10 puff con distanziatore o 2,5–5 mg nebulizzato ogni 20 min',
                   'Grave: ipratropio (Atem) 0,5 mg nebulizzato ogni 20 min',
                   'Ossigeno per SpO₂ 93–95%',
-                  'Prednisone (Deltacortene) 50 mg per bocca (o metilprednisolone (Solu-Medrol) 40 mg ev)',
+                  'Prednisone (Deltacortene) 50 mg per bocca (o metilprednisolone (Urbason) 40 mg ev)',
                 ],
               },
             ],

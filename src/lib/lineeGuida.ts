@@ -1388,7 +1388,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           'Salbutamolo (Broncovaleas) spray 100 µg: 4–10 puff con distanziatore ogni 20 min per 1 h; oppure nebulizzato 2,5–5 mg (0,5–1 mL della soluzione 5 mg/mL) ogni 20 min.',
           'Ipratropio (Atem) 0,5 mg nebulizzato (1 fiala) ogni 20 min per 1 h, nelle forme gravi.',
-          'Prednisone (Deltacortene) 50 mg per bocca (2 compresse da 25 mg) oppure metilprednisolone (Solu-Medrol) 40 mg ev se non deglutisce.',
+          'Prednisone (Deltacortene) 50 mg per bocca (2 compresse da 25 mg) oppure metilprednisolone (Urbason) 40 mg ev se non deglutisce.',
           'Magnesio solfato 2 g = 2 fiale da 1 g/10 mL in 100 mL di SF in 20 min.',
           'Adrenalina im 0,5 mg solo se anafilassi o asma quasi fatale senza risposta.',
         ],
@@ -1434,7 +1434,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           'Salbutamolo (Broncovaleas) 2,5–5 mg nebulizzato (0,5–1 mL) ogni 20 min per 1 h, poi ogni 4–6 h; con aria compressa se ipercapnia (o ossigeno a basso flusso a parte).',
           'Ipratropio (Atem) 0,5 mg nebulizzato (1 fiala) ogni 6–8 h.',
-          'Prednisone (Deltacortene) 40 mg (1 compressa da 25 mg + 3 da 5 mg) per 5 giorni, o metilprednisolone (Solu-Medrol) 40 mg ev.',
+          'Prednisone (Deltacortene) 40 mg (1 compressa da 25 mg + 3 da 5 mg) per 5 giorni, o metilprednisolone (Urbason) 40 mg ev.',
         ],
       },
       {
