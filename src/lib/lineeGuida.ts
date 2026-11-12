@@ -1585,7 +1585,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
   },
   {
     id: 'post-rosc',
-    titolo: 'Dopo il ritorno del circolo (post-ROSC)',
+    titolo: 'Post-ROSC',
     ente: 'ERC-ESICM',
     anno: 2025,
     area: 'Rianimazione',
