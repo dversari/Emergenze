@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react'
  * Analisi EGA: algoritmo in passi (pH → disturbo primario → compenso → anion gap → delta ratio →
  * cause → ossigenazione). Inseriti i dati, resta acceso solo il percorso valido.
  * Formule: Winter (acidosi metabolica), 0,7×HCO₃+21 (alcalosi metabolica), regole 1–3,5 / 2–4 per i respiratori,
- * AG corretto per albumina (+2,5 per ogni g/dL sotto 4), delta ratio (AG−12)/(24−HCO₃).
+ * AG dall'EGA (o calcolato da Na e Cl), delta ratio (AG−12)/(24−HCO₃).
  */
 
 type Opz = { id: string; titolo: string; sotto?: string }
@@ -15,15 +15,15 @@ const f1 = (v: number) => v.toFixed(1).replace('.', ',')
 const f0 = (v: number) => Math.round(v).toString()
 
 const ESEMPI: { nome: string; v: Record<string, string> }[] = [
-  { nome: 'Chetoacidosi', v: { ph: '7.12', co2: '19', hco3: '7', na: '134', cl: '98', alb: '4', latt: '1.8', po2: '98', fio2: '21', eta: '24' } },
-  { nome: 'BPCO riacutizzata', v: { ph: '7.28', co2: '72', hco3: '33', na: '140', cl: '96', alb: '3.5', latt: '1.2', po2: '55', fio2: '28', eta: '74' } },
-  { nome: 'Vomito', v: { ph: '7.52', co2: '48', hco3: '38', na: '136', cl: '86', alb: '4', latt: '1', po2: '88', fio2: '21', eta: '40' } },
-  { nome: 'Sepsi + diarrea', v: { ph: '7.19', co2: '22', hco3: '9', na: '138', cl: '112', alb: '2.5', latt: '4.5', po2: '70', fio2: '40', eta: '68' } },
+  { nome: 'Chetoacidosi', v: { ph: '7.12', co2: '19', hco3: '7', na: '134', cl: '98', latt: '1.8', po2: '98', fio2: '21', eta: '24' } },
+  { nome: 'BPCO riacutizzata', v: { ph: '7.28', co2: '72', hco3: '33', na: '140', cl: '96', latt: '1.2', po2: '55', fio2: '28', eta: '74' } },
+  { nome: 'Vomito', v: { ph: '7.52', co2: '48', hco3: '38', na: '136', cl: '86', latt: '1', po2: '88', fio2: '21', eta: '40' } },
+  { nome: 'Sepsi + diarrea', v: { ph: '7.19', co2: '22', hco3: '9', na: '138', cl: '107', ag: '22', latt: '4.5', po2: '70', fio2: '40', eta: '68' } },
 ]
 
 function analizza(v: Record<string, string>) {
   const ph = num(v.ph), co2 = num(v.co2), hco3 = num(v.hco3)
-  const na = num(v.na), cl = num(v.cl), alb = num(v.alb), latt = num(v.latt)
+  const na = num(v.na), cl = num(v.cl), agEga = num(v.ag), conK = v.agk === '1', latt = num(v.latt)
   const po2 = num(v.po2), fio2p = num(v.fio2), eta = num(v.eta)
   const passi: Passo[] = []
   const conclusioni: string[] = []
@@ -85,27 +85,27 @@ function analizza(v: Record<string, string>) {
     passi.push({ n: 3, titolo: 'Compenso', attivi: [], opzioni: [], nonApplicabile: misto ? 'Disturbo misto: il compenso non si calcola, i due disturbi sono entrambi primari.' : 'Nessun disturbo primario da compensare.' })
   }
 
-  // 4. anion gap
-  if (na !== null && cl !== null) {
-    const ag = na - cl - hco3
-    const agc = alb !== null ? ag + 2.5 * (4 - alb) : ag
-    const alto = agc > 14
+  // 4. anion gap: dall'EGA (con o senza K⁺) oppure calcolato da Na⁺ e Cl⁻
+  if (agEga !== null || (na !== null && cl !== null)) {
+    const base = agEga !== null && conK ? 16 : 12
+    const agc = agEga ?? (na! - cl! - hco3)
+    const alto = agc > base + 2
     passi.push({ n: 4, titolo: 'Anion gap', attivi: [alto ? 'alto' : 'norm'], opzioni: [
-      { id: 'norm', titolo: 'Normale', sotto: '12 ± 2' }, { id: 'alto', titolo: 'Aumentato', sotto: '> 14' },
-    ], dettaglio: `AG = Na⁺ − (Cl⁻ + HCO₃⁻) = ${f1(ag)}${alb !== null ? `; corretto per albumina ${f1(alb)} g/dL = ${f1(agc)}` : ' (inserisci l’albumina per correggerlo)'}` })
+      { id: 'norm', titolo: 'Normale', sotto: `${base} ± 2` }, { id: 'alto', titolo: 'Aumentato', sotto: `> ${base + 2}` },
+    ], dettaglio: (agEga !== null ? `AG dall’EGA ${f1(agc)}${conK ? ' (con K⁺: normale ~16)' : ''}` : `AG = Na⁺ − (Cl⁻ + HCO₃⁻) = ${f1(agc)}`) + '. Con albumina bassa l’AG reale è più alto (+2,5 per ogni g/dL sotto 4).' })
     const iMac = conclusioni.findIndex((c) => c.startsWith('Acidosi metabolica'))
-    if (iMac >= 0) conclusioni[iMac] = conclusioni[iMac].replace('Acidosi metabolica', `Acidosi metabolica ad AG ${alto ? 'aumentato' : 'normale'} (${f0(agc)})`)
+    if (iMac >= 0) conclusioni[iMac] = conclusioni[iMac].replace(/^Acidosi metabolica( primaria| \(disturbo misto\))?/, (m) => `${m} ad AG ${alto ? 'aumentato' : 'normale'} (${f0(agc)})`)
     if (alto && latt !== null && latt > 2) conclusioni.push(`Componente lattica (lattati ${f1(latt)})`)
     if (alto && !primari.includes('mac') && !conclusioni.some((c) => c.includes('acidosi metabolica'))) conclusioni.push(`Acidosi metabolica ad AG aumentato nascosta (AG ${f0(agc)})`)
 
     // 5. delta ratio / cause
     if (alto && hco3 < 24) {
-      const dr = (agc - 12) / (24 - hco3)
+      const dr = (agc - base) / (24 - hco3)
       const r = dr < 0.4 ? 'a' : dr < 0.8 ? 'b' : dr <= 2 ? 'c' : 'd'
       passi.push({ n: 5, titolo: 'Delta ratio', attivi: [r], opzioni: [
         { id: 'a', titolo: '< 0,4', sotto: 'ipercloremica' }, { id: 'b', titolo: '0,4–0,8', sotto: 'AG alto + AG normale' },
         { id: 'c', titolo: '0,8–2', sotto: 'AG alto pura' }, { id: 'd', titolo: '> 2', sotto: '+ alcalosi metabolica' },
-      ], dettaglio: `(AG − 12) / (24 − HCO₃⁻) = ${f1(agc - 12)} / ${f1(24 - hco3)} = ${dr.toFixed(2).replace('.', ',')}` })
+      ], dettaglio: `(AG − ${base}) / (24 − HCO₃⁻) = ${f1(agc - base)} / ${f1(24 - hco3)} = ${dr.toFixed(2).replace('.', ',')}` })
       if (r === 'b') conclusioni.push('+ acidosi metabolica ipercloremica (AG normale) associata')
       if (r === 'd') conclusioni.push('+ alcalosi metabolica associata (o HCO₃⁻ già alto per compenso cronico)')
       passi.push({ n: 6, titolo: 'Cause di acidosi ad AG aumentato', attivi: latt !== null && latt >= 4 ? ['lat'] : latt !== null && latt > 2 ? ['lat'] : [], opzioni: [
@@ -120,7 +120,7 @@ function analizza(v: Record<string, string>) {
       ], dettaglio: 'AG urinario (Na⁺ + K⁺ − Cl⁻ urinari): negativo = perdita intestinale; positivo = causa renale.' })
     }
   } else {
-    passi.push({ n: 4, titolo: 'Anion gap', attivi: [], opzioni: [], nonApplicabile: 'Inserisci Na⁺ e Cl⁻ (e l’albumina) per l’anion gap: un’acidosi ad AG alto può nascondersi anche con pH normale.' })
+    passi.push({ n: 4, titolo: 'Anion gap', attivi: [], opzioni: [], nonApplicabile: 'Inserisci l’anion gap dell’EGA (o Na⁺ e Cl⁻) per l’anion gap: un’acidosi ad AG alto può nascondersi anche con pH normale.' })
   }
   if (primari.includes('mal')) {
     passi.push({ n: passi.length + 1, titolo: 'Alcalosi metabolica: cause', attivi: [], opzioni: [
@@ -189,7 +189,7 @@ function PassoVista({ p, ultimo }: { p: Passo; ultimo: boolean }) {
 
 const CAMPI: { id: string; et: string; u: string; ph?: string }[] = [
   { id: 'ph', et: 'pH', u: '', ph: '7,40' }, { id: 'co2', et: 'PaCO₂', u: 'mmHg', ph: '40' }, { id: 'hco3', et: 'HCO₃⁻', u: 'mmol/L', ph: '24' },
-  { id: 'na', et: 'Na⁺', u: 'mmol/L', ph: '140' }, { id: 'cl', et: 'Cl⁻', u: 'mmol/L', ph: '104' }, { id: 'alb', et: 'Albumina', u: 'g/dL', ph: '4' },
+  { id: 'na', et: 'Na⁺', u: 'mmol/L', ph: '140' }, { id: 'cl', et: 'Cl⁻', u: 'mmol/L', ph: '104' }, { id: 'ag', et: 'Anion gap', u: 'EGA', ph: '12' },
   { id: 'latt', et: 'Lattati', u: 'mmol/L', ph: '1' }, { id: 'po2', et: 'PaO₂', u: 'mmHg', ph: '90' }, { id: 'fio2', et: 'FiO₂', u: '%', ph: '21' },
   { id: 'eta', et: 'Età', u: 'anni', ph: '60' },
 ]
@@ -219,6 +219,10 @@ export function AnalisiEga({ chiudi }: { chiudi: () => void }) {
                 </label>
               ))}
             </div>
+            <label className="mt-2 flex items-center gap-2 text-[12px] text-tenue">
+              <input type="checkbox" checked={v.agk === '1'} onChange={(e) => setV((o) => ({ ...o, agk: e.target.checked ? '1' : '' }))} />
+              l’anion gap dell’EGA include il K⁺ (Na⁺ + K⁺ − Cl⁻ − HCO₃⁻)
+            </label>
             <Gauge ph={num(v.ph ?? '')} />
             <p className="mt-5 text-[11px] text-tenue">Obbligatori pH, PaCO₂, HCO₃⁻. Gli altri aggiungono anion gap, cause e ossigenazione.</p>
             <div className="mt-2 flex flex-wrap gap-1.5">
@@ -243,7 +247,7 @@ export function AnalisiEga({ chiudi }: { chiudi: () => void }) {
               <p className="text-sm">oppure prova un esempio: l’algoritmo accende solo il percorso valido.</p>
             </div>
           )}
-          <p className="text-[11px] text-tenue">Regole: Winter (PaCO₂ = 1,5 × HCO₃⁻ + 8 ± 2); alcalosi metabolica PaCO₂ = 0,7 × HCO₃⁻ + 21 ± 2; respiratorie acute/croniche +1/+3,5 e −2/−4 mmol/L ogni 10 mmHg; AG normale 12 ± 2 (corretto per albumina); delta ratio di Wrenn. Non sostituisce il giudizio clinico.</p>
+          <p className="text-[11px] text-tenue">Regole: Winter (PaCO₂ = 1,5 × HCO₃⁻ + 8 ± 2); alcalosi metabolica PaCO₂ = 0,7 × HCO₃⁻ + 21 ± 2; respiratorie acute/croniche +1/+3,5 e −2/−4 mmol/L ogni 10 mmHg; AG normale 12 ± 2 (16 ± 2 se calcolato con il K⁺); delta ratio di Wrenn. Non sostituisce il giudizio clinico.</p>
         </div>
       </div>
     </div>
