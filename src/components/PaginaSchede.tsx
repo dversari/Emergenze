@@ -21,7 +21,7 @@ export function Evidenzia({ t }: { t: string }) {
 }
 
 /** Elenco di card raggruppate che si aprono sui passaggi (Procedure, Sedazione). */
-export default function PaginaSchede({ schede, segnaposto }: { schede: Scheda[]; segnaposto: string }) {
+export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGruppi }: { schede: Scheda[]; segnaposto: string; senzaCerca?: boolean; senzaGruppi?: boolean }) {
   const [params, setParams] = useSearchParams()
   const [aperto, setAperto] = useState<string | null>(params.get('apri'))
   const [cerca, setCerca] = useState('')
@@ -48,11 +48,11 @@ export default function PaginaSchede({ schede, segnaposto }: { schede: Scheda[];
 
   return (
     <div className="elenco">
-      <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder={segnaposto}
-        className="rounded-xl border border-linea px-3 py-2.5 text-base" />
+      {!senzaCerca && <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder={segnaposto}
+        className="rounded-xl border border-linea px-3 py-2.5 text-base" />}
       {gruppi.map((g) => (
         <Fragment key={g}>
-          <p className="etichetta px-1 mt-1">{g}</p>
+          {!senzaGruppi && <p className="etichetta px-1 mt-1">{g}</p>}
           {voci.filter((s) => s.gruppo === g).map((s) => {
             const open = aperto === s.id
             return (

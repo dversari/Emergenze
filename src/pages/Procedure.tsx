@@ -40,9 +40,58 @@ export default function Procedure() {
         <button onClick={() => setParams({})} className="rounded-full border border-linea px-3 py-1 text-sm font-bold text-tenue">‹ Sezioni</button>
         <h1 className="text-xl font-black">{s.nome}</h1>
       </div>
-      {sez === 'eco' ? <Ecografie /> : (
+      {sez === 'eco' ? <Ecografie /> : sez === 'elettrica' ? <Elettrica /> : (
         <PaginaSchede key={sez} schede={PROCEDURE.filter((p) => sezioneDi(p.gruppo) === sez)} segnaposto={sez === 'invasive' ? 'Cerca una procedura…' : 'Cerca…'} />
       )}
+    </div>
+  )
+}
+
+const TERAPIE = ['defibrillazione', 'cve', 'pacing']
+const APPARECCHI = [
+  { id: 'nk-5600', marca: 'Nihon Kohden', nome: 'TEC-5600', nota: 'con pacing, tasto SCARICA' },
+  { id: 'nk-5531', marca: 'Nihon Kohden', nome: 'TEC-5531K', nota: 'con piastre' },
+  { id: 'dfm100', marca: 'Philips', nome: 'Efficia DFM100', nota: 'manopola verde' },
+]
+
+/** Terapia elettrica: a sinistra le terapie, a destra i defibrillatori; la scheda scelta si apre sotto a tutta larghezza. */
+function Elettrica() {
+  const [params, setParams] = useSearchParams()
+  const sel = params.get('apri')
+  const scegli = (id: string) => {
+    const np = new URLSearchParams(params)
+    if (sel === id) np.delete('apri'); else np.set('apri', id)
+    setParams(np, { replace: true })
+  }
+  const scelta = PROCEDURE.filter((p) => p.id === sel)
+  const nomeBreve: Record<string, string> = { defibrillazione: 'Defibrillazione', cve: 'Cardioversione', pacing: 'Pacing' }
+  const sotto: Record<string, string> = { defibrillazione: 'FV/TV senza polso, energie', cve: 'sincronizzata', pacing: 'transcutaneo' }
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="grid grid-cols-2 gap-2.5">
+        <div className="flex flex-col gap-2">
+          <p className="etichetta px-1">Terapie</p>
+          {TERAPIE.map((id) => (
+            <button key={id} onClick={() => scegli(id)}
+              className={`rounded-2xl border px-3 py-2.5 text-left transition-colors ${sel === id ? 'bg-[#7a5a17] border-[#7a5a17] text-white' : 'bg-[#f6eedd] border-[#e6d5b0] text-[#7a5a17]'}`}>
+              <p className="font-black leading-tight">{nomeBreve[id]}</p>
+              <p className={`text-[12px] leading-tight ${sel === id ? 'text-white/80' : 'text-tenue'}`}>{sotto[id]}</p>
+            </button>
+          ))}
+        </div>
+        <div className="flex flex-col gap-2">
+          <p className="etichetta px-1">Defibrillatori</p>
+          {APPARECCHI.map((a) => (
+            <button key={a.id} onClick={() => scegli(a.id)}
+              className={`rounded-2xl border px-3 py-2.5 text-left transition-colors ${sel === a.id ? 'bg-[#3c4a5c] border-[#3c4a5c] text-white' : 'bg-[#e7ebf0] border-[#c9d1dc] text-[#3c4a5c]'}`}>
+              <p className={`text-[11px] font-bold leading-tight ${sel === a.id ? 'text-white/80' : 'text-tenue'}`}>{a.marca}</p>
+              <p className="font-black leading-tight">{a.nome}</p>
+              <p className={`text-[12px] leading-tight ${sel === a.id ? 'text-white/80' : 'text-tenue'}`}>{a.nota}</p>
+            </button>
+          ))}
+        </div>
+      </div>
+      {scelta.length > 0 && <PaginaSchede key={sel} schede={scelta} segnaposto="" senzaCerca senzaGruppi />}
     </div>
   )
 }
