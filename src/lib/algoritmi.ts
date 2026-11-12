@@ -2192,7 +2192,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 righe: [
                   'In sedazione (scheda Sedazione), bifasica, energia elevata fin dal primo shock.',
                   'Eparina subito (non attendere 3 settimane di OAC).',
-                  'FA pre-eccitata (QRS larghi, irregolari, molto veloci): sempre elettrica, niente farmaci nodali.',
+                  'FA pre-eccitata (QRS larghi, irregolari, molto veloci): sempre elettrica, niente farmaci che rallentano il nodo AV (beta-bloccanti, calcioantagonisti, digossina, amiodarone).',
                 ],
               },
             ],
@@ -2252,7 +2252,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 righe: [
                   'Flecainide (Almarytm) 2 mg/kg ev in 10 min (≈ 140 mg = 14 mL della fiala da 150 mg/15 mL; max 150 mg) o 300 mg per bocca = 3 cp da 100 mg.',
                   'Propafenone (Rytmonorm) 2 mg/kg ev in 10 min (≈ 140 mg = 2 fiale da 70 mg/20 mL) o 600 mg per bocca = 2 cp da 300 mg.',
-                  'Con flecainide (Almarytm)/propafenone (Rytmonorm) associare un nodale (rischio di flutter 1:1).',
+                  'Con flecainide (Almarytm) o propafenone (Rytmonorm) dare prima un beta-bloccante o verapamil/diltiazem (rallentano il nodo AV): rischio di flutter con conduzione 1:1.',
                 ],
               },
             ],

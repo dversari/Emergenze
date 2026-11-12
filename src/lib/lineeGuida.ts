@@ -63,14 +63,14 @@ export const LINEE_GUIDA: LineaGuida[] = [
           'FE >40%: beta-bloccante (metoprololo (Lopresor) 2,5–5 mg ev in 2 min, ripetibile fino a 15 mg; esmololo 500 µg/kg in 1 min, poi 50–300 µg/kg/min) oppure diltiazem 0,25 mg/kg ev in 5 min, poi 5–15 mg/h, o verapamil (Isoptin) 2,5–10 mg ev in 5 min.',
           'FE ≤40% o scompenso: beta-bloccante a basse dosi con cautela, digossina (Lanoxin) 0,5 mg ev (fino a 0,75–1,5 mg in 24 h in dosi frazionate), amiodarone (Cordarone) se refrattaria o instabile.',
           'Niente diltiazem/verapamil (Isoptin) con FE ≤40%.',
-          'FA pre-eccitata (QRS larghi, irregolari, molto veloci): niente farmaci nodali (beta-bloccanti, calcioantagonisti, digossina (Lanoxin), amiodarone (Cordarone)). Cardioversione elettrica.',
+          'FA pre-eccitata (QRS larghi, irregolari, molto veloci): niente farmaci che rallentano il nodo AV (beta-bloccanti, calcioantagonisti, digossina (Lanoxin), amiodarone (Cordarone)). Cardioversione elettrica.',
         ],
       },
       {
         titolo: 'Cardioversione farmacologica',
         punti: [
           'Senza cardiopatia strutturale (no IVS marcata, no FE ridotta, no coronaropatia): flecainide (Almarytm) 2 mg/kg ev in 10 min (max 150 mg) o 200–300 mg os; propafenone (Rytmonorm) 1,5–2 mg/kg ev in 10 min o 450–600 mg os.',
-          'Con flecainide (Almarytm)/propafenone (Rytmonorm) associare un farmaco nodale: rischio di flutter con conduzione 1:1.',
+          'Con flecainide (Almarytm) o propafenone (Rytmonorm) dare prima un farmaco che rallenta il nodo atrio-ventricolare: beta-bloccante (metoprololo (Lopresor) 5 mg ev, o per bocca) oppure verapamil (Isoptin) o diltiazem. Motivo: questi farmaci possono trasformare la FA in un flutter lento che passa ai ventricoli 1:1, con frequenza molto alta.',
           'Vernakalant (non disponibile in PS a Prato) 3 mg/kg ev in 10 min, seconda dose 2 mg/kg dopo 15 min. Non con SCA recente, scompenso grave, PAS <100, stenosi aortica severa, QT lungo.',
           'Con cardiopatia strutturale o scompenso: amiodarone (Cordarone) 300 mg ev in 30–60 min, poi 900–1200 mg nelle 24 h. Conversione lenta (ore).',
         ],
