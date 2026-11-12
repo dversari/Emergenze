@@ -10,6 +10,7 @@ import Procedure from './pages/Procedure'
 import Turni from './pages/Turni'
 import Moduli from './pages/Moduli'
 import ModuloTrasfusione from './pages/ModuloTrasfusione'
+import ModuloTrasferimento from './pages/ModuloTrasferimento'
 import PaginaTesti from './components/PaginaTesti'
 import { DIMISSIONI } from './lib/dimissioni'
 import { ANAMNESI } from './lib/anamnesi'
@@ -114,6 +115,7 @@ export default function App() {
           <Route path="turni" element={<Turni />} />
           <Route path="moduli" element={<Moduli />} />
           <Route path="modulo-trasfusione" element={<ModuloTrasfusione />} />
+          <Route path="modulo-trasferimento" element={<ModuloTrasferimento />} />
           <Route path="linee-guida" element={<ElencoLineeGuida />} />
           <Route path="linee-guida/:id" element={<RiassuntoLineaGuida />} />
           <Route path="*" element={<Navigate to="/" replace />} />

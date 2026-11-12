@@ -1,11 +1,18 @@
 import { Link } from 'react-router-dom'
 
-const MODULI = [
+type Modulo = { to: string; titolo: string; descr: string; pdta?: { to: string; etichetta: string } }
+
+const MODULI: Modulo[] = [
   {
     to: '/modulo-trasfusione',
     titolo: 'Richiesta di sangue e emocomponenti',
     descr: 'Modulo aziendale 2019 (SOC Immunoematologia Prato-Pistoia). Struttura DEA, centro di costo 8981C. Compilabile e stampabile.',
     pdta: { to: '/linee-guida/anemia-acuta', etichetta: 'PDTA anemia acuta' },
+  },
+  {
+    to: '/modulo-trasferimento',
+    titolo: 'Trasferimento di emergenza (118)',
+    descr: 'Allegato 1 alla PA.A118.01: sintesi clinica, GCS e classe di Ehrenwerth per il trasporto. Compilabile e stampabile.',
   },
 ]
 
@@ -23,7 +30,7 @@ export default function Moduli() {
             </Link>
             <div className="mt-3 flex gap-2 text-sm">
               <Link to={m.to} className="rounded-xl bg-verde px-3 py-1.5 font-bold text-white">Apri il modulo</Link>
-              <Link to={m.pdta.to} className="rounded-xl border border-linea px-3 py-1.5 font-bold text-tenue">{m.pdta.etichetta}</Link>
+              {m.pdta && <Link to={m.pdta.to} className="rounded-xl border border-linea px-3 py-1.5 font-bold text-tenue">{m.pdta.etichetta}</Link>}
             </div>
           </div>
         ))}
