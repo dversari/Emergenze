@@ -8,7 +8,7 @@ import { useMemo, useState } from 'react'
  */
 
 type Opz = { id: string; titolo: string; sotto?: string }
-type Passo = { n: number; titolo: string; opzioni: Opz[]; attivi: string[]; dettaglio?: string; nonApplicabile?: string }
+type Passo = { n: number; titolo: string; opzioni: Opz[]; attivi: string[]; dettaglio?: string; nonApplicabile?: string; mnemonico?: { titolo: string; voci: { l: string; t: string; on?: boolean }[] } }
 
 const num = (s?: string) => { if (!s) return null; const v = parseFloat(s.replace(',', '.')); return Number.isFinite(v) ? v : null }
 const f1 = (v: number) => v.toFixed(1).replace('.', ',')
@@ -136,7 +136,13 @@ function analizza(v: Record<string, string>) {
         { id: 'lat', titolo: 'Lattica', sotto: latt !== null ? `lattati ${f1(latt)}` : 'shock, sepsi, ischemia, metformina' },
         { id: 'cheto', titolo: 'Chetoacidosi', sotto: 'diabetica, alcolica, digiuno' }, { id: 'ren', titolo: 'Insuff. renale', sotto: 'urea, creatinina' },
         { id: 'tox', titolo: 'Tossici', sotto: 'metanolo, glicole (gap osmolare), salicilati, paracetamolo (5-oxoprolina)' },
-      ], dettaglio: latt !== null && latt > 2 ? `Lattati ${f1(latt)} mmol/L: componente lattica${latt >= 4 ? ' importante' : ''}.` : `${latt === null ? 'Lattati non inseriti: dosarli. ' : ''}GOLDMARK: glicoli, 5-oxoprolina, L- e D-lattato, metanolo, aspirina, insufficienza renale, chetoni.` })
+      ], dettaglio: latt !== null && latt > 2 ? `Lattati ${f1(latt)} mmol/L: componente lattica${latt >= 4 ? ' importante' : ''}.` : `${latt === null ? 'Lattati non inseriti: dosarli. ' : ''}Gap osmolare se sospetto metanolo o glicole.`,
+      mnemonico: { titolo: 'CAT MUDPILES', voci: [
+        { l: 'C', t: 'CO (monossido), cianuro' }, { l: 'A', t: 'Alcolica (chetoacidosi)' }, { l: 'T', t: 'Toluene' },
+        { l: 'M', t: 'Metanolo, metformina' }, { l: 'U', t: 'Uremia (insufficienza renale)' }, { l: 'D', t: 'Diabetica (chetoacidosi)' },
+        { l: 'P', t: 'Paracetamolo (5-oxoprolina), propilenglicole' }, { l: 'I', t: 'Isoniazide, ferro (iron)' },
+        { l: 'L', t: 'Lattica (shock, sepsi, ischemia)', on: latt !== null && latt > 2 }, { l: 'E', t: 'Etilenglicole' }, { l: 'S', t: 'Salicilati' },
+      ] } })
     } else if (primari.includes('mac') && !alto) {
       passi.push({ n: 5, titolo: 'Acidosi ad AG normale (ipercloremica)', attivi: [], opzioni: [
         { id: 'gi', titolo: 'Perdite intestinali', sotto: 'diarrea, fistole, stomie' }, { id: 'sf', titolo: 'Fisiologica in eccesso', sotto: 'NaCl 0,9% abbondante' },
@@ -210,6 +216,18 @@ function PassoVista({ p, ultimo }: { p: Passo; ultimo: boolean }) {
               </div>
             )
           })}
+        </div>
+      )}
+      {p.mnemonico && (
+        <div className="mt-2 rounded-xl border border-linea bg-white p-2">
+          <p className="mb-1 text-[12px] font-black tracking-[0.25em] text-bordeaux">{p.mnemonico.titolo}</p>
+          <div className="grid gap-x-3 gap-y-0.5 sm:grid-cols-2">
+            {p.mnemonico.voci.map((x, i) => (
+              <p key={i} className={`flex items-baseline gap-2 rounded px-1 text-[12.5px] ${x.on ? 'bg-verde text-white font-bold' : ''}`}>
+                <span className={`w-4 text-center text-[15px] font-black ${x.on ? '' : 'text-bordeaux'}`}>{x.l}</span>{x.t}
+              </p>
+            ))}
+          </div>
         </div>
       )}
       {p.dettaglio && <p className="mt-1.5 rounded-lg bg-sabbia px-2.5 py-1.5 text-[12.5px] leading-snug">{p.dettaglio}</p>}
