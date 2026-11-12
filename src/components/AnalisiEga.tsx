@@ -14,12 +14,6 @@ const num = (s?: string) => { if (!s) return null; const v = parseFloat(s.replac
 const f1 = (v: number) => v.toFixed(1).replace('.', ',')
 const f0 = (v: number) => Math.round(v).toString()
 
-const ESEMPI: { nome: string; v: Record<string, string> }[] = [
-  { nome: 'Chetoacidosi', v: { ph: '7.12', co2: '19', hco3: '7', na: '134', cl: '98', latt: '1.8', po2: '98', fio2: '21', eta: '24' } },
-  { nome: 'BPCO riacutizzata', v: { ph: '7.28', co2: '72', hco3: '33', na: '140', cl: '96', latt: '1.2', po2: '55', fio2: '28', eta: '74' } },
-  { nome: 'Vomito', v: { ph: '7.52', co2: '48', hco3: '38', na: '136', cl: '86', latt: '1', po2: '88', fio2: '21', eta: '40' } },
-  { nome: 'Sepsi + diarrea', v: { ph: '7.19', co2: '22', hco3: '9', na: '138', cl: '107', ag: '22', latt: '4.5', po2: '70', fio2: '40', eta: '68' } },
-]
 
 function analizza(v: Record<string, string>) {
   let ph = num(v.ph), co2 = num(v.co2), hco3 = num(v.hco3)
@@ -242,6 +236,44 @@ const CAMPI: { id: string; et: string; u: string }[] = [
   { id: 'eta', et: 'Età', u: 'anni' },
 ]
 
+
+const CAUSE: Record<string, { titolo: string; tono: string; voci: string[] }> = {
+  rac: { titolo: 'Acidosi respiratoria', tono: 'bg-[#f6e3e3] border-[#e2bcbc] text-[#6e2f2f]', voci: [
+    'Depressione del respiro: oppioidi, benzodiazepine, alcol, lesioni del tronco', 'BPCO, asma grave, edema polmonare avanzato',
+    'Neuromuscolari: Guillain-Barré, miastenia, SLA', 'Parete: obesità-ipoventilazione, cifoscoliosi, volet costale', 'O₂ eccessivo nel BPCO; NIV/ventilazione insufficiente'] },
+  ral: { titolo: 'Alcalosi respiratoria', tono: 'bg-[#e2ecf6] border-[#bcd0e4] text-[#2d4f73]', voci: [
+    'Dolore, ansia, iperventilazione', 'Ipossiemia: embolia polmonare, polmonite, edema', 'Sepsi iniziale, febbre', 'Salicilati (fase precoce), gravidanza, cirrosi',
+    'Lesioni del SNC; ventilazione meccanica eccessiva'] },
+  'mac-alto': { titolo: 'Acidosi metabolica ad AG aumentato', tono: 'bg-[#f3dede] border-[#dcb0b0] text-[#6b2430]', voci: [
+    'Lattica: shock, sepsi, ischemia mesenterica, convulsioni, metformina', 'Chetoacidosi diabetica, alcolica, da digiuno', 'Insufficienza renale',
+    'Tossici: metanolo, glicole etilenico, salicilati, paracetamolo (5-oxoprolina), ferro, isoniazide'] },
+  'mac-norm': { titolo: 'Acidosi metabolica ad AG normale', tono: 'bg-[#f7e8dc] border-[#e6c8ae] text-[#74421f]', voci: [
+    'Diarrea, fistole, stomie ad alta portata', 'Fisiologica in eccesso (acidosi ipercloremica)', 'Acidosi tubulare renale',
+    'Acetazolamide, topiramato; ureterosigmoidostomia', 'Fase di risoluzione della chetoacidosi'] },
+  mac: { titolo: 'Acidosi metabolica (AG non noto)', tono: 'bg-[#f3dede] border-[#dcb0b0] text-[#6b2430]', voci: [
+    'AG alto: lattica, chetoacidosi, uremia, tossici', 'AG normale: diarrea, fisiologica in eccesso, acidosi tubulare', 'Calcolare l’AG per distinguere'] },
+  mal: { titolo: 'Alcalosi metabolica', tono: 'bg-[#e3eef0] border-[#b9d3d8] text-[#285860]', voci: [
+    'Vomito, sondino naso-gastrico in aspirazione', 'Diuretici (tiazidici, dell’ansa)', 'Ipokaliemia; iperaldosteronismo, Cushing',
+    'Post-ipercapnia (dopo NIV/ventilazione di un BPCO)', 'Bicarbonato o alcali in eccesso; trasfusioni massive (citrato)'] },
+  ipox: { titolo: 'Ipossiemia', tono: 'bg-[#ecebe6] border-[#d3d1c8] text-[#45463f]', voci: [
+    'Alterato V/Q: BPCO, asma, embolia polmonare, polmonite', 'Shunt: ARDS, atelettasia, edema polmonare, shunt cardiaco (non risponde all’O₂)',
+    'Ipoventilazione: gradiente A-a normale, PaCO₂ alta', 'Difetto di diffusione: interstiziopatie', 'FiO₂ bassa (altitudine)'] },
+}
+
+function trovati(conclusioni: string[]) {
+  const t = new Set<string>()
+  for (const c of conclusioni) {
+    const l = c.toLowerCase()
+    if (l.includes('acidosi respiratoria')) t.add('rac')
+    if (l.includes('alcalosi respiratoria')) t.add('ral')
+    if (l.includes('alcalosi metabolica')) t.add('mal')
+    if (l.includes('acidosi metabolica')) t.add(l.includes('ag aumentato') ? 'mac-alto' : l.includes('ipercloremica') || l.includes('ag normale') ? 'mac-norm' : 'mac')
+    if (l.includes('ipossiemia')) t.add('ipox')
+  }
+  if (t.has('mac') && (t.has('mac-alto') || t.has('mac-norm'))) t.delete('mac')
+  return [...t]
+}
+
 function referto(v: Record<string, string>, r: ReturnType<typeof analizza>) {
   const val = 'val' in r ? r.val : undefined
   const c = (k: string) => r.calcolati.includes(k) ? ' (calcolato)' : ''
@@ -294,10 +326,6 @@ export function AnalisiEga({ chiudi }: { chiudi: () => void }) {
             </label>
             <Gauge ph={num(v.ph ?? '')} />
             <p className="mt-5 text-[11px] text-tenue">Bastano due tra pH, PaCO₂ e HCO₃⁻ (il terzo si calcola). I campi vuoti non vengono mai considerati normali: l’algoritmo dice solo ciò che si può concludere.</p>
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              <span className="text-[11px] font-bold text-tenue self-center">Prova:</span>
-              {ESEMPI.map((e) => <button key={e.nome} onClick={() => setV(e.v)} className="rounded-full border border-linea px-2.5 py-0.5 text-[12px] font-bold text-verde">{e.nome}</button>)}
-            </div>
           </section>
           {r.pronto && (
             <section className="card mt-3 !p-3 !border-verde border-2">
@@ -313,7 +341,7 @@ export function AnalisiEga({ chiudi }: { chiudi: () => void }) {
             <div className="card text-center text-tenue">
               <p className="text-4xl">⚗︎</p>
               <p className="mt-1 font-bold">Inserisci pH, PaCO₂ e HCO₃⁻</p>
-              <p className="text-sm">oppure prova un esempio: l’algoritmo accende solo il percorso valido.</p>
+              <p className="text-sm">(bastano due): l’algoritmo accende solo il percorso valido.</p>
             </div>
           )}
           {r.pronto && (
@@ -323,6 +351,19 @@ export function AnalisiEga({ chiudi }: { chiudi: () => void }) {
                 <button onClick={copia} className="rounded-full bg-verde px-3 py-1 text-sm font-extrabold text-white">{copiato ? 'Copiato ✓' : 'Copia'}</button>
               </div>
               <p className="mt-2 whitespace-pre-wrap rounded-lg bg-sabbia px-3 py-2 text-[13.5px] leading-snug select-all">{testo}</p>
+            </section>
+          )}
+          {'val' in r && r.val && trovati(r.conclusioni).length > 0 && (
+            <section>
+              <p className="mb-2 text-[11px] font-extrabold uppercase tracking-wide text-tenue">Possibili cause</p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {trovati(r.conclusioni).map((k) => (
+                  <div key={k} className={`rounded-xl border p-2.5 ${CAUSE[k].tono}`}>
+                    <p className="text-[13px] font-black">{CAUSE[k].titolo}</p>
+                    <ul className="mt-1 space-y-0.5 text-[12px] leading-snug">{CAUSE[k].voci.map((v) => <li key={v}>· {v}</li>)}</ul>
+                  </div>
+                ))}
+              </div>
             </section>
           )}
           <p className="text-[11px] text-tenue">Regole: Winter (PaCO₂ = 1,5 × HCO₃⁻ + 8 ± 2); alcalosi metabolica PaCO₂ = 0,7 × HCO₃⁻ + 21 ± 2; respiratorie acute/croniche +1/+3,5 e −2/−4 mmol/L ogni 10 mmHg; AG normale 12 ± 2 (16 ± 2 se calcolato con il K⁺); delta ratio di Wrenn. Non sostituisce il giudizio clinico.</p>
