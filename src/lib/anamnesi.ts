@@ -143,7 +143,8 @@ Arti: non edemi; polsi femorali [presenti e simmetrici].
 
 DA NON DIMENTICARE
 - Danno d'organo acuto (emergenza ipertensiva): SCA, EPA, dissezione, ictus/encefalopatia, retinopatia, IRA, preeclampsia → trattamento ev.
-- Senza danno d'organo: niente riduzione rapida; ECG, creatinina, esame urine.`,
+- Senza danno d'organo: prima togliere dolore, ansia, cefalea (paracetamolo 1 g), poi rimisurare a riposo: quasi sempre scende da sola. Niente riduzione rapida né antipertensivi «al bisogno».
+- ECG, creatinina, esame urine se indicati; terapia di fondo rivista dal curante sulle misurazioni domiciliari del mattino.`,
   },
   // ─── Addome e urologia ───
   {

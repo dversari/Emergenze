@@ -22,18 +22,42 @@ const ESEMPI: { nome: string; v: Record<string, string> }[] = [
 ]
 
 function analizza(v: Record<string, string>) {
-  const ph = num(v.ph), co2 = num(v.co2), hco3 = num(v.hco3)
+  let ph = num(v.ph), co2 = num(v.co2), hco3 = num(v.hco3)
   const na = num(v.na), cl = num(v.cl), agEga = num(v.ag), conK = v.agk === '1', latt = num(v.latt)
   const po2 = num(v.po2), fio2p = num(v.fio2), eta = num(v.eta)
   const passi: Passo[] = []
   const conclusioni: string[] = []
-  if (ph === null || co2 === null || hco3 === null) return { passi, conclusioni, pronto: false }
+  const calcolati: string[] = []
+  const nBase = [ph, co2, hco3].filter((x) => x !== null).length
+  if (nBase === 0) return { passi, conclusioni, pronto: false, calcolati }
+  // Con due dei tre valori il terzo si ricava (Henderson-Hasselbalch); con uno solo si dice solo ciò che è certo.
+  if (nBase === 2) {
+    if (hco3 === null) { hco3 = 0.0307 * co2! * 10 ** (ph! - 6.1); calcolati.push('HCO₃⁻') }
+    else if (co2 === null) { co2 = hco3 / (0.0307 * 10 ** (ph! - 6.1)); calcolati.push('PaCO₂') }
+    else { ph = 6.1 + Math.log10(hco3 / (0.0307 * co2)); calcolati.push('pH') }
+  }
+  if (nBase === 1) {
+    if (ph !== null) {
+      const st = ph < 7.35 ? 'acid' : ph > 7.45 ? 'alc' : 'norm'
+      passi.push({ n: 1, titolo: 'pH', attivi: [st], opzioni: [
+        { id: 'acid', titolo: 'Acidemia', sotto: '< 7,35' }, { id: 'norm', titolo: 'Normale', sotto: '7,35–7,45' }, { id: 'alc', titolo: 'Alcalemia', sotto: '> 7,45' },
+      ], dettaglio: `pH ${ph.toFixed(2).replace('.', ',')}` })
+      conclusioni.push(st === 'acid' ? 'Acidemia' : st === 'alc' ? 'Alcalemia' : 'pH normale (non esclude disturbi misti)')
+    } else if (co2 !== null) {
+      conclusioni.push(co2 > 45 ? `PaCO₂ ${f0(co2)}: ipoventilazione (acidosi respiratoria o compenso di un’alcalosi metabolica)` : co2 < 35 ? `PaCO₂ ${f0(co2)}: iperventilazione (alcalosi respiratoria o compenso di un’acidosi metabolica)` : `PaCO₂ ${f0(co2)} nei limiti`)
+    } else if (hco3 !== null) {
+      conclusioni.push(hco3 < 22 ? `HCO₃⁻ ${f1(hco3)}: acidosi metabolica o compenso di un’alcalosi respiratoria` : hco3 > 26 ? `HCO₃⁻ ${f1(hco3)}: alcalosi metabolica o compenso di un’acidosi respiratoria` : `HCO₃⁻ ${f1(hco3)} nei limiti`)
+    }
+    passi.push({ n: passi.length + 1, titolo: 'Disturbo primario e compenso', attivi: [], opzioni: [], nonApplicabile: 'Serve almeno un altro dei tre valori (pH, PaCO₂, HCO₃⁻): con due, il terzo viene calcolato.' })
+    return { passi, conclusioni, pronto: true, calcolati }
+  }
+  ph = ph!; co2 = co2!; hco3 = hco3!
 
   // 1. pH
   const stato = ph < 7.35 ? 'acid' : ph > 7.45 ? 'alc' : 'norm'
   passi.push({ n: 1, titolo: 'pH', attivi: [stato], opzioni: [
     { id: 'acid', titolo: 'Acidemia', sotto: '< 7,35' }, { id: 'norm', titolo: 'Normale', sotto: '7,35–7,45' }, { id: 'alc', titolo: 'Alcalemia', sotto: '> 7,45' },
-  ], dettaglio: `pH ${ph.toFixed(2).replace('.', ',')}` })
+  ], dettaglio: `pH ${ph.toFixed(2).replace('.', ',')}${calcolati.length ? ` · ${calcolati[0]} calcolato con Henderson-Hasselbalch (verificare sul referto)` : ''}` })
 
   // 2. disturbo primario
   const mAc = hco3 < 22, mAl = hco3 > 26, rAc = co2 > 45, rAl = co2 < 35
@@ -112,7 +136,7 @@ function analizza(v: Record<string, string>) {
         { id: 'lat', titolo: 'Lattica', sotto: latt !== null ? `lattati ${f1(latt)}` : 'shock, sepsi, ischemia, metformina' },
         { id: 'cheto', titolo: 'Chetoacidosi', sotto: 'diabetica, alcolica, digiuno' }, { id: 'ren', titolo: 'Insuff. renale', sotto: 'urea, creatinina' },
         { id: 'tox', titolo: 'Tossici', sotto: 'metanolo, glicole (gap osmolare), salicilati, paracetamolo (5-oxoprolina)' },
-      ], dettaglio: latt !== null && latt > 2 ? `Lattati ${f1(latt)} mmol/L: componente lattica${latt >= 4 ? ' importante' : ''}.` : 'GOLDMARK: glicoli, 5-oxoprolina, L- e D-lattato, metanolo, aspirina, insufficienza renale, chetoni.' })
+      ], dettaglio: latt !== null && latt > 2 ? `Lattati ${f1(latt)} mmol/L: componente lattica${latt >= 4 ? ' importante' : ''}.` : `${latt === null ? 'Lattati non inseriti: dosarli. ' : ''}GOLDMARK: glicoli, 5-oxoprolina, L- e D-lattato, metanolo, aspirina, insufficienza renale, chetoni.` })
     } else if (primari.includes('mac') && !alto) {
       passi.push({ n: 5, titolo: 'Acidosi ad AG normale (ipercloremica)', attivi: [], opzioni: [
         { id: 'gi', titolo: 'Perdite intestinali', sotto: 'diarrea, fistole, stomie' }, { id: 'sf', titolo: 'Fisiologica in eccesso', sotto: 'NaCl 0,9% abbondante' },
@@ -120,6 +144,7 @@ function analizza(v: Record<string, string>) {
       ], dettaglio: 'AG urinario (Na⁺ + K⁺ − Cl⁻ urinari): negativo = perdita intestinale; positivo = causa renale.' })
     }
   } else {
+    if (primari.includes('mac')) conclusioni.push('Anion gap non valutabile (mancano AG o Na⁺/Cl⁻)')
     passi.push({ n: 4, titolo: 'Anion gap', attivi: [], opzioni: [], nonApplicabile: 'Inserisci l’anion gap dell’EGA (o Na⁺ e Cl⁻) per l’anion gap: un’acidosi ad AG alto può nascondersi anche con pH normale.' })
   }
   if (primari.includes('mal')) {
@@ -139,11 +164,16 @@ function analizza(v: Record<string, string>) {
     const r = pf > 300 ? 'ok' : pf > 200 ? 'lieve' : pf > 100 ? 'mod' : 'grave'
     passi.push({ n: passi.length + 1, titolo: 'Ossigenazione', attivi: [r], opzioni: [
       { id: 'ok', titolo: 'P/F > 300', sotto: 'normale' }, { id: 'lieve', titolo: '200–300', sotto: 'lieve' }, { id: 'mod', titolo: '100–200', sotto: 'moderata' }, { id: 'grave', titolo: '≤ 100', sotto: 'grave' },
-    ], dettaglio: `P/F = ${f0(pf)} · gradiente A-a = ${f0(aa)} mmHg${aaAtt !== null ? ` (atteso ≤ ${f0(aaAtt)} per l’età)` : ''}${aaAtt !== null ? (aa > aaAtt + 5 ? ' → aumentato: problema V/Q, shunt o diffusione' : ' → normale: ipossiemia da ipoventilazione') : ''}` })
+    ], dettaglio: `P/F = ${f0(pf)} · gradiente A-a = ${f0(aa)} mmHg${aaAtt !== null ? ` (atteso ≤ ${f0(aaAtt)} per l’età)${aa > aaAtt + 5 ? ' → aumentato: problema V/Q, shunt o diffusione' : ' → normale: se ipossiemico, da ipoventilazione'}` : ' (per il valore atteso serve l’età)'}` })
     if (pf <= 300) conclusioni.push(`Ipossiemia (P/F ${f0(pf)})`)
+  } else if (po2 !== null) {
+    passi.push({ n: passi.length + 1, titolo: 'Ossigenazione', attivi: [], opzioni: [], nonApplicabile: `PaO₂ ${f0(po2)} mmHg${po2 < 60 ? ': ipossiemia' : ''}. Senza FiO₂ non si calcolano P/F né gradiente A-a.` })
+    if (po2 < 60) conclusioni.push(`Ipossiemia (PaO₂ ${f0(po2)}, FiO₂ non nota)`)
+  } else {
+    passi.push({ n: passi.length + 1, titolo: 'Ossigenazione', attivi: [], opzioni: [], nonApplicabile: 'Non valutata: servono PaO₂ e FiO₂ (e l’età per il gradiente A-a atteso).' })
   }
-  if (!conclusioni.length) conclusioni.push('EGA senza disturbi acido-base evidenti')
-  return { passi, conclusioni, pronto: true }
+  if (!conclusioni.length) conclusioni.push('Nessun disturbo acido-base evidente')
+  return { passi, conclusioni, pronto: true, calcolati, val: { ph, co2, hco3 } }
 }
 
 function Gauge({ ph }: { ph: number | null }) {
@@ -187,16 +217,37 @@ function PassoVista({ p, ultimo }: { p: Passo; ultimo: boolean }) {
   )
 }
 
-const CAMPI: { id: string; et: string; u: string; ph?: string }[] = [
-  { id: 'ph', et: 'pH', u: '', ph: '7,40' }, { id: 'co2', et: 'PaCO₂', u: 'mmHg', ph: '40' }, { id: 'hco3', et: 'HCO₃⁻', u: 'mmol/L', ph: '24' },
-  { id: 'na', et: 'Na⁺', u: 'mmol/L', ph: '140' }, { id: 'cl', et: 'Cl⁻', u: 'mmol/L', ph: '104' }, { id: 'ag', et: 'Anion gap', u: 'EGA', ph: '12' },
-  { id: 'latt', et: 'Lattati', u: 'mmol/L', ph: '1' }, { id: 'po2', et: 'PaO₂', u: 'mmHg', ph: '90' }, { id: 'fio2', et: 'FiO₂', u: '%', ph: '21' },
-  { id: 'eta', et: 'Età', u: 'anni', ph: '60' },
+const CAMPI: { id: string; et: string; u: string }[] = [
+  { id: 'ph', et: 'pH', u: '' }, { id: 'co2', et: 'PaCO₂', u: 'mmHg' }, { id: 'hco3', et: 'HCO₃⁻', u: 'mmol/L' },
+  { id: 'na', et: 'Na⁺', u: 'mmol/L' }, { id: 'cl', et: 'Cl⁻', u: 'mmol/L' }, { id: 'ag', et: 'Anion gap', u: 'EGA' },
+  { id: 'latt', et: 'Lattati', u: 'mmol/L' }, { id: 'po2', et: 'PaO₂', u: 'mmHg' }, { id: 'fio2', et: 'FiO₂', u: '%' },
+  { id: 'eta', et: 'Età', u: 'anni' },
 ]
+
+function referto(v: Record<string, string>, r: ReturnType<typeof analizza>) {
+  const val = 'val' in r ? r.val : undefined
+  const c = (k: string) => r.calcolati.includes(k) ? ' (calcolato)' : ''
+  const ph = val?.ph ?? num(v.ph), co2 = val?.co2 ?? num(v.co2), hco3 = val?.hco3 ?? num(v.hco3)
+  const fio2 = num(v.fio2)
+  const p: string[] = []
+  if (ph !== null) p.push(`pH ${ph.toFixed(2).replace('.', ',')}${c('pH')}`)
+  if (co2 !== null) p.push(`PaCO₂ ${f0(co2)} mmHg${c('PaCO₂')}`)
+  if (hco3 !== null) p.push(`HCO₃⁻ ${f1(hco3)} mmol/L${c('HCO₃⁻')}`)
+  if (num(v.po2) !== null) p.push(`PaO₂ ${f0(num(v.po2)!)} mmHg`)
+  if (num(v.po2) !== null && fio2 !== null) p.push(`P/F ${f0(num(v.po2)! / (fio2 / 100))}`)
+  if (num(v.ag) !== null) p.push(`AG ${f1(num(v.ag)!)}${v.agk === '1' ? ' (con K⁺)' : ''}`)
+  else if (num(v.na) !== null && num(v.cl) !== null && hco3 !== null) p.push(`Na⁺ ${f0(num(v.na)!)}, Cl⁻ ${f0(num(v.cl)!)}, AG ${f1(num(v.na)! - num(v.cl)! - hco3)}`)
+  if (num(v.latt) !== null) p.push(`lattati ${f1(num(v.latt)!)} mmol/L`)
+  const aria = fio2 === null ? '' : fio2 <= 21 ? ' in aria ambiente' : ` in O₂ (FiO₂ ${f0(fio2)}%)`
+  return `EGA arterioso${aria}: ${p.join(', ')}.\nConclusione: ${r.conclusioni.map((x, i) => (i ? x.replace(/^\+ /, '') : x)).join('; ')}.`
+}
 
 export function AnalisiEga({ chiudi }: { chiudi: () => void }) {
   const [v, setV] = useState<Record<string, string>>({})
   const r = useMemo(() => analizza(v), [v])
+  const [copiato, setCopiato] = useState(false)
+  const testo = r.pronto ? referto(v, r) : ''
+  const copia = async () => { try { await navigator.clipboard.writeText(testo); setCopiato(true); setTimeout(() => setCopiato(false), 1500) } catch { /* niente */ } }
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-fondo">
       <div className="sticky top-0 z-10 flex items-center gap-2 border-b border-linea bg-[#1f2b26] px-4 pb-3 pt-[calc(12px+env(safe-area-inset-top))] text-white">
@@ -214,7 +265,7 @@ export function AnalisiEga({ chiudi }: { chiudi: () => void }) {
               {CAMPI.map((c) => (
                 <label key={c.id} className={`flex flex-col ${['ph', 'co2', 'hco3'].includes(c.id) ? '' : ''}`}>
                   <span className="text-[11px] font-extrabold text-tenue">{c.et} {c.u && <span className="font-semibold">{c.u}</span>}</span>
-                  <input inputMode="decimal" value={v[c.id] ?? ''} placeholder={c.ph} onChange={(e) => setV((o) => ({ ...o, [c.id]: e.target.value }))}
+                  <input inputMode="decimal" value={v[c.id] ?? ''} onChange={(e) => setV((o) => ({ ...o, [c.id]: e.target.value }))}
                     className={`w-full rounded-lg border px-2 py-1.5 text-base font-bold ${['ph', 'co2', 'hco3'].includes(c.id) ? 'border-verde2 bg-verde3/40' : 'border-linea bg-white'} placeholder:text-linea-forte placeholder:font-semibold`} />
                 </label>
               ))}
@@ -224,7 +275,7 @@ export function AnalisiEga({ chiudi }: { chiudi: () => void }) {
               l’anion gap dell’EGA include il K⁺ (Na⁺ + K⁺ − Cl⁻ − HCO₃⁻)
             </label>
             <Gauge ph={num(v.ph ?? '')} />
-            <p className="mt-5 text-[11px] text-tenue">Obbligatori pH, PaCO₂, HCO₃⁻. Gli altri aggiungono anion gap, cause e ossigenazione.</p>
+            <p className="mt-5 text-[11px] text-tenue">Bastano due tra pH, PaCO₂ e HCO₃⁻ (il terzo si calcola). I campi vuoti non vengono mai considerati normali: l’algoritmo dice solo ciò che si può concludere.</p>
             <div className="mt-2 flex flex-wrap gap-1.5">
               <span className="text-[11px] font-bold text-tenue self-center">Prova:</span>
               {ESEMPI.map((e) => <button key={e.nome} onClick={() => setV(e.v)} className="rounded-full border border-linea px-2.5 py-0.5 text-[12px] font-bold text-verde">{e.nome}</button>)}
@@ -246,6 +297,15 @@ export function AnalisiEga({ chiudi }: { chiudi: () => void }) {
               <p className="mt-1 font-bold">Inserisci pH, PaCO₂ e HCO₃⁻</p>
               <p className="text-sm">oppure prova un esempio: l’algoritmo accende solo il percorso valido.</p>
             </div>
+          )}
+          {r.pronto && (
+            <section className="card !p-3">
+              <div className="flex items-center gap-2">
+                <p className="flex-1 text-[11px] font-extrabold uppercase tracking-wide text-verde">Lettura da copiare in cartella</p>
+                <button onClick={copia} className="rounded-full bg-verde px-3 py-1 text-sm font-extrabold text-white">{copiato ? 'Copiato ✓' : 'Copia'}</button>
+              </div>
+              <p className="mt-2 whitespace-pre-wrap rounded-lg bg-sabbia px-3 py-2 text-[13.5px] leading-snug select-all">{testo}</p>
+            </section>
           )}
           <p className="text-[11px] text-tenue">Regole: Winter (PaCO₂ = 1,5 × HCO₃⁻ + 8 ± 2); alcalosi metabolica PaCO₂ = 0,7 × HCO₃⁻ + 21 ± 2; respiratorie acute/croniche +1/+3,5 e −2/−4 mmol/L ogni 10 mmHg; AG normale 12 ± 2 (16 ± 2 se calcolato con il K⁺); delta ratio di Wrenn. Non sostituisce il giudizio clinico.</p>
         </div>

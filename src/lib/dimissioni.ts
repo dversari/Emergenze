@@ -677,28 +677,31 @@ Chiami subito il 112 (non venga con mezzi propri) se:
 - dolore improvviso e lacerante al torace o alla schiena.`,
   },
   {
-    id: 'ipertensione', nome: 'Pressione alta senza danno d’organo', gruppo: 'Cardiovascolare e allergie',
-    testo: `Diagnosi: valori pressori elevati [... / ... mmHg] senza segni di danno d'organo (urgenza ipertensiva / ipertensione asintomatica). [ECG ed esami eseguiti senza alterazioni acute.]
+    id: 'ipertensione', nome: 'Pressione alta (rialzo pressorio senza danno d’organo)', gruppo: 'Cardiovascolare e allergie',
+    testo: `Diagnosi: rialzo pressorio [... / ... mmHg] [in corso di dolore / ansia / cefalea / ...], senza segni di danno d'organo. [ECG ed esami eseguiti senza alterazioni acute.] [Valori in riduzione spontanea durante la permanenza: ... / ... mmHg.]
 
-Non è necessario abbassare la pressione rapidamente: una riduzione graduale nei prossimi giorni è più sicura.
+Cosa significa:
+In Pronto Soccorso la pressione è alta nella grande maggioranza delle persone: dolore, ansia, mal di testa, nausea, agitazione e l'ambiente stesso mettono in circolo adrenalina, che la fa salire. È una reazione normale dell'organismo e, in questa situazione, non è pericolosa. Spesso è il malessere a far salire la pressione, non il contrario: il mal di testa, per esempio, è più spesso la causa che la conseguenza.
+Non c'è bisogno di abbassarla rapidamente: anzi, scendere troppo in fretta può far male.
 
-Terapia:
-- [Prosegua la terapia abituale e la assuma regolarmente.] [Si aggiunge: ...]
-- Non prenda farmaci «al bisogno» per abbassare la pressione di sua iniziativa.
+Cosa fare:
+- Curi la causa del malessere, non il numero: [se mal di testa o dolore: paracetamolo (Tachipirina) 1000 mg, fino a 3 volte al giorno a distanza di almeno 6 ore] [...]
+- Riposo, respirazione lenta e profonda, ambiente tranquillo: con il calmarsi del dolore e dell'ansia la pressione scende da sola.
+- [Prosegua la terapia abituale senza cambiarla.] Non prenda farmaci in più «al bisogno» per abbassare la pressione.
 
-Indicazioni:
-- Misuri la pressione a casa per 7 giorni: al mattino prima dei farmaci e la sera, seduto da 5 minuti, 2 misurazioni a 1 minuto di distanza; scriva i valori e li porti al medico curante.
-- Riduca il sale, l'alcol e la liquirizia; attività fisica regolare; non fumi. Eviti decongestionanti nasali e antinfiammatori (ibuprofene, ketoprofene, ecc.) se possibile.
-- Se la pressione è alta ma lei sta bene, non serve tornare in Pronto Soccorso: ne parli con il medico curante.
+Come misurarla (e quando NO):
+- Non la misuri ripetutamente durante la giornata né quando sta male, è agitato o ha dolore: il valore sarà alto per quel motivo e aumenterà solo la preoccupazione.
+- Per [7] giorni, solo al mattino: appena alzato, dopo aver urinato, prima di colazione, caffè, fumo e farmaci; seduto e tranquillo da 5 minuti, schiena appoggiata, braccio all'altezza del cuore, senza parlare. Faccia 2 misurazioni a 1 minuto di distanza e scriva entrambi i valori.
+- Porti i valori al medico curante: è lui che valuta se serve una terapia o una modifica. Una media al mattino sotto 135/85 è normale.
 
-${controlli('[Si allega richiesta per esami del sangue e delle urine / ecocardiogramma / visita cardiologica.]')}
+${controlli('[Si allega richiesta per esami del sangue e delle urine / ECG / ecocardiogramma.]')}
 
 ${RITORNO}
 - dolore al torace, fiato corto, battito irregolare;
-- mal di testa improvviso e molto forte, confusione, sonnolenza;
-- debolezza o formicolio di braccio/gamba, bocca storta, difficoltà a parlare;
-- disturbi della vista;
-- sangue dal naso che non si ferma.`,
+- mal di testa improvviso e violentissimo («il peggiore della vita»), confusione, sonnolenza;
+- debolezza o formicolio di braccio o gamba, bocca storta, difficoltà a parlare o a vedere;
+- sangue dal naso che non si ferma.
+Il solo valore della pressione alto, senza questi sintomi, non è un motivo per tornare in Pronto Soccorso.`,
   },
   {
     id: 'tvp', nome: 'Trombosi venosa profonda (cura a domicilio)', gruppo: 'Cardiovascolare e allergie',
