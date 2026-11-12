@@ -1,3 +1,4 @@
+import { AnalisiEga } from '../components/AnalisiEga'
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
@@ -651,8 +652,18 @@ export default function EmergenzeCalcolatori() {
     if (id) requestAnimationFrame(() => document.getElementById(`calc-${id}`)?.scrollIntoView({ block: 'start' }))
   }, [params])
 
+  const [ega, setEga] = useState(params.get('apri') === 'ega')
   return (
     <div className="elenco">
+      {ega && <AnalisiEga chiudi={() => setEga(false)} />}
+      <button onClick={() => setEga(true)} className="intero group relative overflow-hidden rounded-2xl bg-[#1f2b26] p-4 text-left text-white shadow-[var(--shadow-card)] active:scale-[0.99] transition-transform">
+        <svg viewBox="0 0 200 60" className="absolute right-0 top-0 h-full w-1/2 opacity-30" aria-hidden>
+          <path d="M0 40 L30 40 L40 12 L52 52 L62 30 L90 30 L100 18 L112 44 L124 30 L200 30" fill="none" stroke="#9fd3b5" strokeWidth="2.5" strokeLinejoin="round" />
+        </svg>
+        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#9fd3b5]">In evidenza · algoritmo</p>
+        <p className="text-xl font-black">Analisi EGA</p>
+        <p className="text-[13px] text-white/75">pH → disturbo primario → compenso → anion gap → delta ratio → cause → ossigenazione</p>
+      </button>
       <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder="Cerca un calcolatore…"
         className="rounded-xl border border-linea px-3 py-2.5 text-base" />
       {punteggi.map((p) => (
