@@ -95,6 +95,23 @@ const DISEGNI: Record<string, ReactNode> = {
       <path d="M32 22 c-3 -4 -9 -1 -6 4 l6 5 l6 -5 c3 -5 -3 -8 -6 -4 Z" className="fill-bordeaux stroke-bordeaux" strokeWidth={1} />
     </>
   ),
+  formazione: (
+    <>
+      <path d="M32 12 L58 24 L32 36 L6 24 Z" className="fill-verde3 stroke-verde-scuro" strokeWidth={2.4} strokeLinejoin="round" />
+      <path d="M17 30 v12 q15 9 30 0 v-12" className="fill-carta stroke-verde-scuro" strokeWidth={2.4} strokeLinejoin="round" />
+      <path d="M52 27 v14" {...T} strokeWidth={2.4} className="stroke-bordeaux" />
+      <circle cx="52" cy="44" r="3" className="fill-oro2" />
+    </>
+  ),
+  riunioni: (
+    <>
+      <rect x="10" y="8" width="34" height="42" rx="3" className="fill-carta stroke-verde-scuro" strokeWidth={2.2} />
+      <path d="M16 16 h22 M16 22 h22 M16 28 h14" {...T} strokeWidth={1.8} className="stroke-oro2" />
+      <circle cx="40" cy="40" r="8" className="fill-verde3 stroke-verde-scuro" strokeWidth={2.2} />
+      <circle cx="52" cy="40" r="8" className="fill-bordeaux3 stroke-bordeaux" strokeWidth={2.2} />
+      <path d="M28 58 q6 -10 12 -10 q6 0 8 4 q2 -4 6 -4 q6 0 8 10" {...T} strokeWidth={2.4} className="stroke-verde-scuro" />
+    </>
+  ),
   moduli: (
     <>
       <rect x="16" y="8" width="32" height="18" rx="2" className="fill-carta stroke-verde-scuro" strokeWidth={2.2} />
@@ -199,17 +216,17 @@ export default function Home() {
             </Link>
           ))}
           <Link to="/formazione" className="flex items-center gap-2 lg:gap-3 rounded-2xl border border-linea bg-[#ebebe8] px-2.5 py-2 lg:px-3 lg:py-2.5 active:bg-[#e0e0dc]">
-            <span className="text-2xl lg:text-3xl leading-none">🎓</span>
+            <svg viewBox="0 0 64 64" className="w-10 h-10 lg:w-12 lg:h-12 shrink-0" aria-hidden>{DISEGNI.formazione}</svg>
             <span className="min-w-0 flex-1">
               <span className="block font-extrabold text-[14px] lg:text-[16px] leading-tight">Formazione</span>
-              <span className="block text-[10.5px] lg:text-[12px] text-tenue leading-tight">regole 2026 in breve: codici, rimborsi, FAD</span>
+              <span className="block text-[10.5px] lg:text-[12px] text-tenue leading-tight">Regole 2026 in breve</span>
             </span>
           </Link>
           <Link to="/riunioni" className="flex items-center gap-2 lg:gap-3 rounded-2xl border border-linea bg-[#ebebe8] px-2.5 py-2 lg:px-3 lg:py-2.5 active:bg-[#e0e0dc]">
-            <span className="text-2xl lg:text-3xl leading-none">🗂️</span>
+            <svg viewBox="0 0 64 64" className="w-10 h-10 lg:w-12 lg:h-12 shrink-0" aria-hidden>{DISEGNI.riunioni}</svg>
             <span className="min-w-0 flex-1">
               <span className="block font-extrabold text-[14px] lg:text-[16px] leading-tight">Riunioni</span>
-              <span className="block text-[10.5px] lg:text-[12px] text-tenue leading-tight">verbali e comunicazioni del reparto 🔒</span>
+              <span className="block text-[10.5px] lg:text-[12px] text-tenue leading-tight">Verbali e comunicazioni 🔒</span>
             </span>
           </Link>
         </section>
