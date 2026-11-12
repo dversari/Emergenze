@@ -6,6 +6,7 @@ import Acr from './pages/Acr'
 import Calcolatori from './pages/Calcolatori'
 import Antibiotici from './pages/Antibiotici'
 import Rubrica from './pages/Rubrica'
+import Procedure from './pages/Procedure'
 import Turni from './pages/Turni'
 import Moduli from './pages/Moduli'
 import ModuloTrasfusione from './pages/ModuloTrasfusione'
@@ -13,7 +14,7 @@ import PaginaTesti from './components/PaginaTesti'
 import { DIMISSIONI } from './lib/dimissioni'
 import { ANAMNESI } from './lib/anamnesi'
 import PaginaSchede from './components/PaginaSchede'
-import { PROCEDURE, SEDAZIONE } from './lib/schede'
+import { SEDAZIONE } from './lib/schede'
 import { ElencoLineeGuida, RiassuntoLineaGuida } from './pages/LineeGuida'
 import Monogramma from './components/Monogramma'
 import { PopupEcg } from './components/EcgEquivalenti'
@@ -105,7 +106,7 @@ export default function App() {
           <Route path="calcolatori" element={<Calcolatori />} />
           <Route path="acr" element={<Acr />} />
           <Route path="antibiotici" element={<Antibiotici />} />
-          <Route path="procedure" element={<PaginaSchede key="p" schede={PROCEDURE} segnaposto="Cerca una procedura…" />} />
+          <Route path="procedure" element={<Procedure />} />
           <Route path="sedazione" element={<PaginaSchede key="s" schede={SEDAZIONE} segnaposto="Cerca uno schema…" />} />
           <Route path="anamnesi" element={<PaginaTesti key="a" voci={ANAMNESI} prefisso="anamnesi" segnaposto="Cerca un sintomo…" nota="Testo da adattare al paziente prima di copiarlo in cartella; cancella la sezione «Da non dimenticare» se non serve." />} />
           <Route path="dimissioni" element={<PaginaTesti key="d" voci={DIMISSIONI} prefisso="dimissione" segnaposto="Cerca una diagnosi…" nota="Dosi per adulto: verificare allergie, funzione renale, gravidanza e terapie in corso." />} />

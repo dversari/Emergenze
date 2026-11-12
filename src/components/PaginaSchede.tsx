@@ -38,7 +38,9 @@ export default function PaginaSchede({ schede, segnaposto }: { schede: Scheda[];
   const toggle = (id: string) => {
     const nuovo = aperto === id ? null : id
     setAperto(nuovo)
-    setParams(nuovo ? { apri: nuovo } : {}, { replace: true })
+    const np = new URLSearchParams(params)
+    if (nuovo) np.set('apri', nuovo); else np.delete('apri')
+    setParams(np, { replace: true })
   }
 
   const voci = schede.filter((s) => !q || `${s.nome} ${s.sintesi} ${s.gruppo}`.toLowerCase().includes(q))
