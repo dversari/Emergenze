@@ -108,6 +108,7 @@ const PROC: [RegExp, string][] = [
   [/\beFAST\b|\bFAST\b/, 'eco:efast'],
   [/\bCUS\b|compressione venosa/, 'eco:cus'],
   [/ecografia polmonare|\bLUS\b/, 'eco:torace'],
+  [/\bFoCUS\b|ecocardiografia (?:bedside|mirata)|eco ?cuore/i, 'eco:cuore'],
 ]
 const RE_PROC = new RegExp(`(${PROC.map(([r]) => r.source).join('|')})`, 'gi')
 const destProc = (id: string) => (id.startsWith('eco:') ? `/procedure?sez=eco&apri=${id.slice(4)}` : `/procedure?apri=${id}`)

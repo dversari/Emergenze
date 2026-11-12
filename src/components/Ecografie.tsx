@@ -7,10 +7,11 @@ import { useSearchParams } from 'react-router-dom'
  */
 
 // ─── Immagine «ecografica» facsimile ───
-function Us({ tipo, children, etichetta }: { tipo: 'convex' | 'lineare'; children: ReactNode; etichetta?: string }) {
+function Us({ tipo, children, etichetta }: { tipo: 'convex' | 'lineare' | 'settoriale'; children: ReactNode; etichetta?: string }) {
   const id = useId().replace(/:/g, '')
   const settore = tipo === 'convex'
     ? 'M70 18 A90 90 0 0 1 170 18 L226 170 A200 200 0 0 1 14 170 Z'
+    : tipo === 'settoriale' ? 'M114 8 L126 8 L222 150 A180 180 0 0 1 18 150 Z'
     : 'M40 10 H200 V172 H40 Z'
   return (
     <svg viewBox="0 0 240 180" className="w-full rounded-xl bg-black">
@@ -33,7 +34,7 @@ function Us({ tipo, children, etichetta }: { tipo: 'convex' | 'lineare'; childre
       </g>
       {/* scala di profondità e marcatore della sonda */}
       {[30, 60, 90, 120, 150].map((y) => <path key={y} d={`M232 ${y} h5`} stroke="#9a9a9a" strokeWidth="1" />)}
-      <circle cx={tipo === 'convex' ? 72 : 46} cy="8" r="3" fill="#8fd0ff" />
+      <circle cx={tipo === 'convex' ? 72 : tipo === 'settoriale' ? 108 : 46} cy="8" r="3" fill="#8fd0ff" />
       {etichetta && <text x="6" y="174" fontSize="9" fill="#cfcfcf" fontFamily="ui-monospace,monospace">{etichetta}</text>}
     </svg>
   )
@@ -207,6 +208,34 @@ Vena giugulare interna pervia, completamente comprimibile, senza materiale endol
 Arteria carotide comune pervia, pulsatile, [non flap intimale, non ispessimenti parietali significativi / placca [...]].
 Conclusione: [non segni di trombosi giugulare né alterazioni carotidee grossolane].
 Esame mirato bedside, non sostitutivo dell'ecocolordoppler dei tronchi sovraortici.`,
+  },
+  {
+    id: 'cuore', nome: 'Cuore (FoCUS)', sottotitolo: 'Shock, dispnea, ACR: funzione, VD, pericardio, cava', tono: 'border-l-[#b3261e]', sonda: 'Phased array (settoriale)',
+    scansioni: ['1 Parasternale asse lungo: 3°–4° spazio a sinistra dello sterno, marcatore verso la spalla destra', '1b Parasternale asse corto: ruotare di 90° (marcatore verso la spalla sinistra), livello dei papillari', '2 Apicale 4 camere: itto (5° spazio, ascellare anteriore), marcatore a sinistra', '3 Sottocostale 4 camere: sotto lo xifoide, sonda piatta verso la spalla sinistra (la finestra dell’ACR)', '4 Vena cava inferiore: dal sottocostale ruotare in longitudinale, misurare a 2 cm dall’atrio destro'],
+    corpo: <Tronco sonde={[{ x: 109, y: 90, n: '1', r: -60, lx: -15, ly: -6 }, { x: 124, y: 108, n: '2', r: 20, lx: 15, ly: -2 }, { x: 100, y: 122, n: '3', r: -20, lx: -15, ly: 4 }, { x: 104, y: 136, n: '4', r: 90, lx: 15, ly: 4 }]} />,
+    immagine: (
+      <Us tipo="settoriale" etichetta="PARASTERNALE ASSE LUNGO">
+        <path d="M0 0 H240 V42 Q120 34 0 44 Z" fill={grigio(120)} />
+        <path d="M30 46 Q120 36 210 48" stroke={grigio(200)} strokeWidth="3" fill="none" />
+        <path d="M44 54 Q120 46 196 58 L190 76 Q120 66 50 74 Z" fill={nero} />
+        <path d="M40 82 Q120 72 200 84 L202 96 Q120 86 40 94 Z" fill={grigio(150)} />
+        <path d="M36 100 Q100 92 150 100 Q160 128 120 132 Q60 134 36 122 Z" fill={nero} />
+        <path d="M150 100 Q170 96 196 104 L200 118 Q176 112 156 118 Z" fill={nero} />
+        <path d="M150 104 L136 128 M154 108 L170 126" stroke={grigio(225)} strokeWidth="2.5" />
+        <ellipse cx="176" cy="140" rx="24" ry="14" fill={nero} />
+        <path d="M30 150 Q120 160 214 150" stroke={grigio(235)} strokeWidth="3.5" fill="none" />
+        <circle cx="200" cy="164" r="7" fill={nero} />
+      </Us>
+    ),
+    didascalia: 'Dall’alto: ventricolo destro, setto, ventricolo sinistro (cavità nera), valvola mitrale, aorta e atrio sinistro a destra; in fondo il pericardio, linea più brillante. Versamento = banda nera tra pericardio e cuore, davanti all’aorta discendente. VD più grande del VS (apicale) = sovraccarico destro.',
+    referto: `ECOCARDIOGRAFIA MIRATA BEDSIDE (FoCUS)
+Finestre: [parasternale asse lungo e corto / apicale 4 camere / sottocostale]; qualità [buona / sufficiente / limitata].
+Ventricolo sinistro non dilatato, funzione sistolica globale [conservata / lievemente / moderatamente / severamente ridotta] alla valutazione visiva[, ipocinesia regionale in sede ...].
+Ventricolo destro non dilatato (rapporto VD/VS < 1), [non movimento paradosso del setto].
+Non versamento pericardico [/ versamento pericardico [lieve / moderato / severo], [con / senza] collasso diastolico delle sezioni destre].
+Vena cava inferiore [... cm], collassabilità [> 50% / < 50%] con il respiro.
+Non grossolane alterazioni valvolari [/ ...]. [Aorta ascendente ... cm.]
+Conclusione: [...]. Esame mirato bedside, non sostitutivo dell'ecocardiogramma completo.`,
   },
   {
     id: 'efast', nome: 'eFAST', sottotitolo: 'Trauma: liquido libero, PNX, versamento pericardico', tono: 'border-l-[#a3322a]', sonda: 'Convex (lineare per le pleure)',
