@@ -17,6 +17,7 @@ const SCORE: [RegExp, string][] = [
   [/sPESI/, 'spesi'],
   [/Cockcroft-Gault/, 'cockcroft'],
   [/GCS/, 'gcs'],
+  [/NIHSS/, 'nihss'],
   [/CURB-65/, 'curb65'],
   [/Glasgow-Blatchford/, 'gbs'],
   [/BISAP/, 'bisap'],

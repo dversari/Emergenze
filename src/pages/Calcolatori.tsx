@@ -29,6 +29,35 @@ interface Punteggio {
 
 const PUNTEGGI: Punteggio[] = [
   {
+    id: 'nihss',
+    nome: 'NIHSS',
+    ambito: 'Ictus · gravità del deficit neurologico (0–42)',
+    voci: [
+      { tipo: 'scelta', id: '1a', testo: '1a · Livello di coscienza', opzioni: [{ testo: 'vigile', punti: 0 }, { testo: 'risvegliabile con stimoli lievi', punti: 1 }, { testo: 'solo con stimoli ripetuti o dolorosi', punti: 2 }, { testo: 'solo riflessi o areattivo', punti: 3 }] },
+      { tipo: 'scelta', id: '1b', testo: '1b · Domande (mese ed età)', opzioni: [{ testo: 'entrambe giuste', punti: 0 }, { testo: 'una giusta', punti: 1 }, { testo: 'nessuna', punti: 2 }] },
+      { tipo: 'scelta', id: '1c', testo: '1c · Comandi (occhi, mano)', opzioni: [{ testo: 'entrambi', punti: 0 }, { testo: 'uno', punti: 1 }, { testo: 'nessuno', punti: 2 }] },
+      { tipo: 'scelta', id: '2', testo: 'Sguardo', opzioni: [{ testo: 'normale', punti: 0 }, { testo: 'paralisi parziale', punti: 1 }, { testo: 'deviazione forzata', punti: 2 }] },
+      { tipo: 'scelta', id: '3', testo: 'Campo visivo', opzioni: [{ testo: 'normale', punti: 0 }, { testo: 'emianopsia parziale', punti: 1 }, { testo: 'emianopsia completa', punti: 2 }, { testo: 'bilaterale / cecità', punti: 3 }] },
+      { tipo: 'scelta', id: '4', testo: 'Paralisi facciale', opzioni: [{ testo: 'normale', punti: 0 }, { testo: 'minima', punti: 1 }, { testo: 'parziale (metà inferiore)', punti: 2 }, { testo: 'completa', punti: 3 }] },
+      { tipo: 'scelta', id: '5a', testo: '5a · Braccio sinistro (10 s)', opzioni: [{ testo: 'nessuno slivellamento', punti: 0 }, { testo: 'slivella', punti: 1 }, { testo: 'qualche sforzo contro gravità', punti: 2 }, { testo: 'nessuno sforzo contro gravità', punti: 3 }, { testo: 'nessun movimento', punti: 4 }] },
+      { tipo: 'scelta', id: '5b', testo: '5b · Braccio destro (10 s)', opzioni: [{ testo: 'nessuno slivellamento', punti: 0 }, { testo: 'slivella', punti: 1 }, { testo: 'qualche sforzo contro gravità', punti: 2 }, { testo: 'nessuno sforzo contro gravità', punti: 3 }, { testo: 'nessun movimento', punti: 4 }] },
+      { tipo: 'scelta', id: '6a', testo: '6a · Gamba sinistra (5 s)', opzioni: [{ testo: 'nessuno slivellamento', punti: 0 }, { testo: 'slivella', punti: 1 }, { testo: 'qualche sforzo contro gravità', punti: 2 }, { testo: 'nessuno sforzo contro gravità', punti: 3 }, { testo: 'nessun movimento', punti: 4 }] },
+      { tipo: 'scelta', id: '6b', testo: '6b · Gamba destra (5 s)', opzioni: [{ testo: 'nessuno slivellamento', punti: 0 }, { testo: 'slivella', punti: 1 }, { testo: 'qualche sforzo contro gravità', punti: 2 }, { testo: 'nessuno sforzo contro gravità', punti: 3 }, { testo: 'nessun movimento', punti: 4 }] },
+      { tipo: 'scelta', id: '7', testo: 'Atassia degli arti', opzioni: [{ testo: 'assente', punti: 0 }, { testo: 'in un arto', punti: 1 }, { testo: 'in due arti', punti: 2 }] },
+      { tipo: 'scelta', id: '8', testo: 'Sensibilità', opzioni: [{ testo: 'normale', punti: 0 }, { testo: 'ridotta', punti: 1 }, { testo: 'grave o assente', punti: 2 }] },
+      { tipo: 'scelta', id: '9', testo: 'Linguaggio', opzioni: [{ testo: 'normale', punti: 0 }, { testo: 'afasia lieve-moderata', punti: 1 }, { testo: 'afasia grave', punti: 2 }, { testo: 'muto / afasia globale', punti: 3 }] },
+      { tipo: 'scelta', id: '10', testo: '10 · Disartria', opzioni: [{ testo: 'normale', punti: 0 }, { testo: 'lieve-moderata', punti: 1 }, { testo: 'grave', punti: 2 }] },
+      { tipo: 'scelta', id: '11', testo: '11 · Estinzione / inattenzione', opzioni: [{ testo: 'assente', punti: 0 }, { testo: 'in una modalità', punti: 1 }, { testo: 'grave o in più modalità', punti: 2 }] },
+    ],
+    esito: (t) =>
+      t === 0 ? { livello: 'basso', testo: '0 · nessun deficit misurabile (non esclude ictus del circolo posteriore).' }
+      : t <= 4 ? { livello: 'basso', testo: `${t} · ictus minore: trombolisi se il deficit è invalidante.` }
+      : t <= 15 ? { livello: 'medio', testo: `${t} · ictus moderato${t >= 6 ? ': sospettare occlusione di grosso vaso, angio-TC e neuroradiologia' : ''}.` }
+      : t <= 20 ? { livello: 'alto', testo: `${t} · moderato-grave: probabile grosso vaso, angio-TC e trombectomia.` }
+      : { livello: 'alto', testo: `${t} · grave.` },
+    fonte: 'NIH Stroke Scale (Brott 1989); versione italiana ISO-SPREAD',
+  },
+  {
     id: 'cha2ds2va',
     nome: 'CHA₂DS₂-VA',
     ambito: 'FA · rischio tromboembolico',
@@ -690,6 +719,13 @@ export default function EmergenzeCalcolatori() {
   return (
     <div className="elenco">
       {ega && <AnalisiEga chiudi={() => setEga(false)} />}
+      <button onClick={() => { setAperto('nihss'); requestAnimationFrame(() => document.getElementById('calc-nihss')?.scrollIntoView({ behavior: 'smooth', block: 'start' })) }}
+        className="intero relative overflow-hidden rounded-2xl border border-[#e2bcbc] bg-[#f6e3e3] p-4 text-left shadow-[var(--shadow-card)] active:scale-[0.99] transition-transform">
+        <span className="absolute -right-1 -bottom-5 text-[90px] leading-none opacity-10">🧠</span>
+        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-bordeaux">In evidenza · ictus</p>
+        <p className="text-xl font-black text-[#6e2f2f]">NIHSS</p>
+        <p className="text-[13px] text-tenue">15 voci, punto per punto, con il totale e cosa significa</p>
+      </button>
       <button onClick={() => setEga(true)} className="intero group relative overflow-hidden rounded-2xl bg-[#1f2b26] p-4 text-left text-white shadow-[var(--shadow-card)] active:scale-[0.99] transition-transform">
         <svg viewBox="0 0 200 60" className="absolute right-0 top-0 h-full w-1/2 opacity-30" aria-hidden>
           <path d="M0 40 L30 40 L40 12 L52 52 L62 30 L90 30 L100 18 L112 44 L124 30 L200 30" fill="none" stroke="#9fd3b5" strokeWidth="2.5" strokeLinejoin="round" />

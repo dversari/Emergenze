@@ -808,7 +808,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     area: 'Neurologia',
     fonte: { etichetta: 'Prabhakaran et al., Stroke 2026 (AHA/ASA)', url: 'https://doi.org/10.1161/STR.0000000000000513' },
     controllata: '2026-11-11',
-    calcolatori: [{ id: 'gcs', nome: 'GCS' }],
+    calcolatori: [{ id: 'nihss', nome: 'NIHSS' }, { id: 'gcs', nome: 'GCS' }],
     vediAnche: [{ etichetta: 'TIA', to: '/linee-guida/tia' }, { etichetta: 'Cartella: deficit neurologico', to: '/anamnesi?apri=deficit-neurologico' }],
     inBreve: [
       'Codice ictus: ora dell’ultima volta visto bene, glicemia subito, NIHSS, TC + angio-TC senza ritardi.',
