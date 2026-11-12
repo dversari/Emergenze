@@ -7,6 +7,7 @@ import Calcolatori from './pages/Calcolatori'
 import Antibiotici from './pages/Antibiotici'
 import Rubrica from './pages/Rubrica'
 import Procedure from './pages/Procedure'
+import Formazione from './pages/Formazione'
 import Turni from './pages/Turni'
 import Moduli from './pages/Moduli'
 import ModuloTrasfusione from './pages/ModuloTrasfusione'
@@ -121,6 +122,7 @@ export default function App() {
             <Link to="/dimissioni" className="text-sm text-tenue">‹ Dimissione</Link>} />} />
           <Route path="rubrica" element={<Rubrica />} />
           <Route path="turni" element={<Turni />} />
+          <Route path="formazione" element={<Formazione />} />
           <Route path="moduli" element={<Moduli />} />
           <Route path="modulo-trasfusione" element={<ModuloTrasfusione />} />
           <Route path="modulo-trasferimento" element={<ModuloTrasferimento />} />

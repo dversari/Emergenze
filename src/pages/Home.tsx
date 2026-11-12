@@ -198,6 +198,14 @@ export default function Home() {
               </div>
             </Link>
           ))}
+          <Link to="/formazione" className="col-span-2 flex items-center gap-2 lg:gap-3 rounded-2xl border border-[#e6d5b0] bg-[#f6eedd] px-3 py-2 lg:py-2.5 active:bg-[#efe3c8]">
+            <span className="text-2xl lg:text-3xl leading-none">🎓</span>
+            <span className="min-w-0 flex-1">
+              <span className="block font-extrabold text-[14px] lg:text-[16px] leading-tight text-[#7a5a17]">Formazione: le regole in breve</span>
+              <span className="block text-[10.5px] lg:text-[12px] text-tenue leading-tight">codici da timbrare, rimborsi, FAD, docenze · regolamento 2026</span>
+            </span>
+            <span className="text-tenue">›</span>
+          </Link>
         </section>
 
         <section className="hidden lg:flex lg:justify-center card flex-col gap-3 lg:col-start-2 lg:row-start-2">
