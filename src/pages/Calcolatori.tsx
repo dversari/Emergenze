@@ -370,6 +370,40 @@ const PUNTEGGI: Punteggio[] = [
     fonte: 'Duan et al., Intensive Care Med 2017',
   },
   {
+    id: 'plasmic',
+    nome: 'PLASMIC',
+    ambito: 'Microangiopatia trombotica · probabilità di PTT (ADAMTS-13 < 10%)',
+    voci: [
+      { tipo: 'si', id: 'p', testo: 'Piastrine < 30.000', punti: 1 },
+      { tipo: 'si', id: 'h', testo: 'Emolisi (reticolociti > 2,5%, aptoglobina non dosabile o bilirubina indiretta > 2 mg/dL)', punti: 1 },
+      { tipo: 'si', id: 'c', testo: 'NO neoplasia attiva nell’ultimo anno', punti: 1 },
+      { tipo: 'si', id: 't', testo: 'NO trapianto d’organo o di midollo', punti: 1 },
+      { tipo: 'si', id: 'm', testo: 'MCV < 90 fL', punti: 1 },
+      { tipo: 'si', id: 'i', testo: 'INR < 1,5', punti: 1 },
+      { tipo: 'si', id: 'k', testo: 'Creatinina < 2,0 mg/dL', punti: 1 },
+    ],
+    esito: (t) =>
+      t <= 4 ? { livello: 'basso', testo: 'Rischio basso (0–4%) di deficit grave di ADAMTS-13: cercare altre cause di MAT.' }
+      : t === 5 ? { livello: 'medio', testo: 'Rischio intermedio (5–24%): ematologo, ADAMTS-13 urgente.' }
+      : { livello: 'alto', testo: 'Rischio alto (62–82%): PTT probabile, plasmaferesi urgente dopo il prelievo per ADAMTS-13.' },
+    fonte: 'Bendapudi et al., Lancet Haematol 2017',
+  },
+  {
+    id: 'isth-dic',
+    nome: 'ISTH DIC',
+    ambito: 'CID conclamata · solo se c’è una causa predisponente',
+    voci: [
+      { tipo: 'scelta', id: 'p', testo: 'Piastrine', opzioni: [{ testo: '≥ 100.000', punti: 0 }, { testo: '50–100.000', punti: 1 }, { testo: '< 50.000', punti: 2 }] },
+      { tipo: 'scelta', id: 'd', testo: 'D-dimero', opzioni: [{ testo: 'Normale', punti: 0 }, { testo: 'Aumento moderato', punti: 2 }, { testo: 'Aumento marcato', punti: 3 }] },
+      { tipo: 'scelta', id: 't', testo: 'PT prolungato', opzioni: [{ testo: '< 3 s', punti: 0 }, { testo: '3–6 s', punti: 1 }, { testo: '> 6 s', punti: 2 }] },
+      { tipo: 'scelta', id: 'f', testo: 'Fibrinogeno', opzioni: [{ testo: '> 1 g/L', punti: 0 }, { testo: '≤ 1 g/L', punti: 1 }] },
+    ],
+    esito: (t) =>
+      t >= 5 ? { livello: 'alto', testo: 'Compatibile con CID conclamata: trattare la causa, ripetere il punteggio ogni giorno.' }
+      : { livello: 'basso', testo: 'Non suggestivo di CID conclamata (possibile fase precoce): ripetere in 24–48 h.' },
+    fonte: 'Taylor et al., Thromb Haemost 2001 (ISTH); ISTH 2025: D-dimero > 3× = 2 punti, > 7× = 3 punti',
+  },
+  {
     id: 'nexus',
     nome: 'NEXUS (rachide cervicale)',
     ambito: 'Trauma · serve l’imaging del rachide cervicale? Basso rischio solo se TUTTI assenti',

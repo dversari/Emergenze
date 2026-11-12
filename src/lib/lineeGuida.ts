@@ -2483,6 +2483,76 @@ export const LINEE_GUIDA: LineaGuida[] = [
       { data: '2026-11-12', testo: 'Aggiunto il modulo aziendale di richiesta di sangue e emocomponenti compilabile e stampabile.' },
     ],
   },
+  {
+    id: 'microangiopatie-cid',
+    titolo: 'Piastrinopenia acuta: PTT (Moschcowitz), SEU e CID',
+    ente: 'ISTH 2020/2025 · ISTH 2025 (CID)',
+    anno: 2025,
+    area: 'Ematologia · Nefrologia',
+    fonte: { etichetta: 'Zheng et al., J Thromb Haemost 2025 (ISTH, aggiornamento PTT)', url: 'https://doi.org/10.1016/j.jtha.2025.06.002' },
+    controllata: '2026-11-12',
+    calcolatori: [{ id: 'plasmic', nome: 'PLASMIC' }, { id: 'isth-dic', nome: 'ISTH DIC' }],
+    vediAnche: [
+      { etichetta: 'Anemia acuta e trasfusione', to: '/linee-guida/anemia-acuta' },
+      { etichetta: 'Modulo richiesta trasfusione', to: '/modulo-trasfusione' },
+      { etichetta: 'Sepsi', to: '/linee-guida/sepsi' },
+    ],
+    approfondimenti: [
+      { etichetta: 'ISTH 2020: diagnosi della PTT', url: 'https://doi.org/10.1111/jth.15006' },
+      { etichetta: 'ISTH 2025: nuova definizione e criteri di CID (Iba et al.)', url: 'https://scholars.duke.edu/publication/1685059' },
+    ],
+    inBreve: [
+      'Piastrine basse + anemia: striscio periferico subito. Schistociti + emolisi con Coombs negativo = microangiopatia trombotica (MAT): PTT o SEU finché non si dimostra altro.',
+      'Coagulazione (PT/INR, aPTT, fibrinogeno, D-dimero) normale o quasi → MAT; coagulazione alterata con fibrinogeno in calo → CID.',
+      'PTT (Moschcowitz): piastrine spesso < 30.000, sintomi neurologici, creatinina poco alterata. Punteggio PLASMIC 6–7 = alta probabilità: prelevare ADAMTS-13 PRIMA di plasma o terapie, ematologo e plasmaferesi subito.',
+      'SEU: insufficienza renale in primo piano. Con diarrea (spesso ematica) = da Shiga-tossina (STEC): niente antibiotici né antidiarroici, terapia di supporto, dialisi se serve. Senza diarrea = atipica (complemento): nefrologo, plasmaferesi in attesa di ADAMTS-13, poi eculizumab o ravulizumab.',
+      'CID: sempre secondaria (sepsi, trauma, ostetricia, neoplasie, leucemia promielocitica). Si cura la causa; emocomponenti solo se sanguina o deve fare procedure.',
+      'Nella PTT e nella SEU NON trasfondere piastrine se non per emorragia grave: possono peggiorare le trombosi.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Esami da fare subito',
+        punti: [
+          'Emocromo con reticolociti e striscio (schistociti > 1%), LDH, bilirubina indiretta, aptoglobina, Coombs diretto.',
+          'PT/INR, aPTT, fibrinogeno, D-dimero; creatinina, elettroliti, esame urine; troponina (coinvolgimento cardiaco nella PTT).',
+          'ADAMTS-13 (attività e anticorpi) su provetta citrato PRIMA di plasma o plasmaferesi.',
+          'Test di gravidanza; HIV, epatiti; coprocoltura e ricerca Shiga-tossina se diarrea; emocolture se febbre.',
+        ],
+      },
+      {
+        titolo: 'PTT (porpora trombotica trombocitopenica, Moschcowitz)',
+        punti: [
+          'Causa: deficit grave di ADAMTS-13 (attività < 10%), quasi sempre autoimmune. Senza terapia mortale nella grande maggioranza dei casi.',
+          'Plasmaferesi (scambio plasmatico) urgente con Medicina trasfusionale; se ritarda: plasma fresco congelato 15–20 mL/kg (≈ 4–5 unità) nell’attesa.',
+          'Steroide: metilprednisolone (Urbason) 1 mg/kg/die = 70 mg ev (oppure 1 g/die per 3 giorni nei casi gravi).',
+          'Caplacizumab (Cablivi) e rituximab: decisione dell’ematologo (il caplacizumab si sospende se ADAMTS-13 ≥ 20%).',
+          'Acido folico; profilassi antitrombotica solo quando le piastrine superano 50.000.',
+        ],
+      },
+      {
+        titolo: 'SEU (sindrome emolitico-uremica)',
+        punti: [
+          'STEC (diarrea ematica 5–10 giorni prima): idratazione, controllo della pressione, emazie se Hb < 7, dialisi se necessaria; evitare antibiotici, antidiarroici, FANS.',
+          'Atipica (complemento) o con ADAMTS-13 normale e senza diarrea: plasmaferesi finché non arriva ADAMTS-13, poi inibitore del C5 (eculizumab o ravulizumab) con profilassi antimeningococcica (vaccino + antibiotico).',
+          'Altre MAT: farmaci (gemcitabina, inibitori della calcineurina, chinino), ipertensione maligna, gravidanza (HELLP), lupus/antifosfolipidi, neoplasie.',
+        ],
+      },
+      {
+        titolo: 'CID (coagulazione intravascolare disseminata)',
+        punti: [
+          'Punteggio ISTH ≥ 5 = CID conclamata (piastrine, D-dimero, PT, fibrinogeno); ripetere ogni giorno.',
+          'Trattare la causa: antibiotico e controllo della fonte nella sepsi, evacuazione uterina nell’emorragia ostetrica, ATRA subito se leucemia promielocitica sospetta.',
+          'Se sanguina o deve fare procedure: piastrine se < 50.000; plasma 15 mL/kg se PT o aPTT > 1,5 volte; fibrinogeno < 1,5 g/L: fibrinogeno concentrato 3–4 g (o crioprecipitato).',
+          'Senza sanguinamento: piastrine solo se < 10–20.000; non correggere numeri.',
+          'Fenotipo trombotico (sepsi, neoplasie, porpora fulminante): profilassi eparinica se non sanguina. Acido tranexamico solo nelle forme iperfibrinolitiche (trauma, ostetricia), non nella CID trombotica.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2025-06-01', testo: 'ISTH 2025, aggiornamento sulla PTT: confermato il caplacizumab con plasmaferesi, steroidi e rituximab nella PTT immunomediata.' },
+      { data: '2025-08-19', testo: 'ISTH 2025, CID: fasi pre-CID, precoce e conclamata; nuove soglie del D-dimero (> 3 e > 7 volte il normale) nel punteggio; fenotipi trombotico ed emorragico.' },
+    ],
+  },
 ]
 
 export const lineaGuida = (id: string) => LINEE_GUIDA.find((l) => l.id === id)

@@ -14,6 +14,37 @@ export type Nodo =
 export interface Ramo { etichetta: string; tono?: 'si' | 'no' | 'neutro'; nodi: Nodo[]; fine?: string }
 
 export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: Nodo[] }> = {
+  'microangiopatie-cid': {
+    titolo: 'Algoritmo piastrinopenia acuta',
+    nota: 'ISTH. Prelevare ADAMTS-13 prima di qualsiasi plasma.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Piastrine basse ± anemia', righe: ['Escludere pseudopiastrinopenia (provetta citrato), farmaci (eparina: 4T), sequestro.'] },
+      { tipo: 'checklist', titolo: 'Subito', righe: ['Striscio: schistociti', 'LDH, bilirubina, aptoglobina, reticolociti, Coombs', 'PT/INR, aPTT, fibrinogeno, D-dimero', 'Creatinina, urine, troponina', 'ADAMTS-13 (citrato) prima del plasma'] },
+      { tipo: 'decisione', titolo: 'Coagulazione molto alterata, fibrinogeno basso, causa nota?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì: CID', tono: 'no', nodi: [
+              { tipo: 'passo', titolo: 'Punteggio ISTH DIC', righe: ['≥ 5 = CID conclamata; ripetere ogni giorno.'] },
+              { tipo: 'terapia', titolo: 'Trattare la causa', righe: ['Sepsi: antibiotico, controllo della fonte. Ostetricia: evacuazione. Promielocitica: ATRA.', 'Se sanguina: piastrine < 50.000, plasma 15 mL/kg se PT/aPTT > 1,5×, fibrinogeno < 1,5 g/L → fibrinogeno 3–4 g.'] },
+            ],
+          },
+          {
+            etichetta: 'No: schistociti + emolisi', tono: 'si', nodi: [
+              { tipo: 'decisione', titolo: 'MAT: PLASMIC score?', righe: ['Diarrea ematica? Insufficienza renale dominante? Sintomi neurologici?'] },
+              {
+                tipo: 'rami', rami: [
+                  { etichetta: 'PLASMIC 6–7', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'PTT probabile', righe: ['Ematologo + Trasfusionale: plasmaferesi urgente (nell’attesa plasma 15–20 mL/kg).', 'Metilprednisolone (Urbason) 70 mg ev; caplacizumab/rituximab su indicazione.', 'NO piastrine salvo emorragia grave.'] }] },
+                  { etichetta: 'Diarrea ematica', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'SEU da STEC', righe: ['Supporto: liquidi, emazie, dialisi (nefrologo).', 'NO antibiotici, antidiarroici, FANS.'] }] },
+                  { etichetta: 'Rene, senza diarrea', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'SEU atipica', righe: ['Nefrologo: plasmaferesi fino ad ADAMTS-13, poi eculizumab/ravulizumab.', 'Cercare: ipertensione maligna, HELLP, farmaci, lupus.'] }] },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
   'anemia-acuta': {
     titolo: 'Algoritmo anemia acuta',
     nota: 'AABB 2023. Modulo di richiesta compilabile e stampabile nell’app.',

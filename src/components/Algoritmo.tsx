@@ -32,12 +32,16 @@ const SCORE: [RegExp, string][] = [
   [/4AT/, '4at'],
   [/Canadian Syncope Risk Score/, 'csrs'],
   [/regola di Ottawa per ESA|Ottawa/, 'ottawa-esa'],
+  [/PLASMIC(?: score)?/, 'plasmic'],
+  [/(?:punteggio |score )?ISTH DIC/, 'isth-dic'],
 ]
 const RE_SCORE = new RegExp(`(${SCORE.map(([r]) => r.source).join('|')})`, 'g')
 
 /** Consulenti citati negli algoritmi → ricerca in Rubrica (con ritorno al PDTA). */
 const CONSULENTI: [RegExp, string][] = [
   [/neurochirurg(?:o|hi|ia)\b/i, 'neurochirurg'],
+  [/ematolog(?:o|i|ia)\b/i, 'Ematologia'],
+  [/(?:Medicina |Centro )?trasfusionale\b/i, 'Trasfusionale'],
   [/cardiochirurg(?:o|hi|ia)\b/i, 'cardiochirurgo'],
   [/neuroradiolog(?:o|i|ia)\b(?: interventistic?[ao])?/i, 'neuroradiologo'],
   [/stroke team/i, 'stroke team'],
