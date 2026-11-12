@@ -13,6 +13,7 @@ import ModuloTrasfusione from './pages/ModuloTrasfusione'
 import ModuloTrasferimento from './pages/ModuloTrasferimento'
 import PaginaTesti from './components/PaginaTesti'
 import { DIMISSIONI } from './lib/dimissioni'
+import { DIETE } from './lib/diete'
 import { ANAMNESI } from './lib/anamnesi'
 import PaginaSchede from './components/PaginaSchede'
 import { SEDAZIONE } from './lib/schede'
@@ -110,7 +111,14 @@ export default function App() {
           <Route path="procedure" element={<Procedure />} />
           <Route path="sedazione" element={<PaginaSchede key="s" schede={SEDAZIONE} segnaposto="Cerca uno schema…" />} />
           <Route path="anamnesi" element={<PaginaTesti key="a" voci={ANAMNESI} prefisso="anamnesi" segnaposto="Cerca un sintomo…" nota="Testo da adattare al paziente prima di copiarlo in cartella; cancella la sezione «Da non dimenticare» se non serve." />} />
-          <Route path="dimissioni" element={<PaginaTesti key="d" voci={DIMISSIONI} prefisso="dimissione" segnaposto="Cerca una diagnosi…" nota="Dosi per adulto: verificare allergie, funzione renale, gravidanza e terapie in corso." />} />
+          <Route path="dimissioni" element={<PaginaTesti key="d" voci={DIMISSIONI} prefisso="dimissione" segnaposto="Cerca una diagnosi…" nota="Dosi per adulto: verificare allergie, funzione renale, gravidanza e terapie in corso." testa={
+            <Link to="/dimissioni/diete" className="intero flex items-center gap-3 rounded-2xl border border-[#d9e3c8] bg-[#eef3e4] px-4 py-3.5 text-left shadow-[var(--shadow-card)]">
+              <span className="text-3xl leading-none">🥗</span>
+              <span className="flex-1"><span className="block text-lg font-black text-[#3f5a1f]">Diete e stili di vita</span><span className="block text-[13px] text-tenue">reflusso, gastrite, colon irritabile, colica biliare, allergie, diverticoli, gotta…</span></span>
+              <span className="text-tenue">›</span>
+            </Link>} />} />
+          <Route path="dimissioni/diete" element={<PaginaTesti key="diete" voci={DIETE} prefisso="dieta" segnaposto="Cerca una dieta…" nota="Testi da consegnare o allegare alla dimissione; adattarli al paziente." testa={
+            <Link to="/dimissioni" className="text-sm text-tenue">‹ Dimissione</Link>} />} />
           <Route path="rubrica" element={<Rubrica />} />
           <Route path="turni" element={<Turni />} />
           <Route path="moduli" element={<Moduli />} />

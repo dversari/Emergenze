@@ -1,3 +1,4 @@
+import type React from 'react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
@@ -71,7 +72,7 @@ function Editor({ d, k, onSalvato, onSporco }: { d: Dimissione; k: string; onSal
 }
 
 /** Elenco di card che aprono un testo modificabile, salvabile e copiabile. */
-export default function PaginaTesti({ voci: tutte, prefisso, segnaposto, nota }: { voci: TestoModificabile[]; prefisso: string; segnaposto: string; nota: string }) {
+export default function PaginaTesti({ voci: tutte, prefisso, segnaposto, nota, testa }: { voci: TestoModificabile[]; prefisso: string; segnaposto: string; nota: string; testa?: React.ReactNode }) {
   const chiave = (id: string) => `emergenze.${prefisso}.${id}`
   const [params, setParams] = useSearchParams()
   const [aperto, setAperto] = useState<string | null>(params.get('apri'))
@@ -102,6 +103,7 @@ export default function PaginaTesti({ voci: tutte, prefisso, segnaposto, nota }:
 
   return (
     <div className="elenco">
+      {testa}
       <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder={segnaposto}
         className="rounded-xl border border-linea px-3 py-2.5 text-base" />
       {gruppi.map((g) => (
