@@ -269,7 +269,7 @@ export const PROCEDURE: Scheda[] = [
     fonte: 'Indicazioni del produttore (EZ-IO), ERC 2025',
   },
   {
-    id: 'pacing', nome: 'Pacing transcutaneo', gruppo: 'Accessi',
+    id: 'pacing', nome: 'Pacing transcutaneo', gruppo: 'Terapia elettrica',
     sintesi: 'Piastre antero-posteriori, frequenza 70, energia in salita fino a cattura, +10 mA.',
     blocchi: [
       { titolo: 'Passaggi', numerato: true, righe: [
@@ -282,8 +282,14 @@ export const PROCEDURE: Scheda[] = [
         'Impostare 10 mA sopra la soglia di cattura.',
         'Ponte verso il pacing transvenoso.',
       ] },
+      { titolo: 'Comandi sui nostri apparecchi', righe: [
+        'TEC-5600: manopola PACING DEMAND → FREQUENZA ▲▼ → START/STOP → CORRENTE ▲.',
+        'TEC-5531K: solo con placche adesive; manopola STIMOLAZIONE DEMAND → FREQUENZA → START/STOP → CORRENTE.',
+        'DFM100: manopola Pacer → «Impostazioni pacer» (frequenza, corrente) → «Avvia pacing».',
+        'Dettagli e disegni nelle schede dei singoli defibrillatori.',
+      ] },
     ],
-    fonte: 'ERC 2025',
+    fonte: 'ERC 2025; manuali Nihon Kohden e Philips',
   },
   // ─── Blocchi nervosi ecoguidati ───
   {
@@ -406,7 +412,7 @@ export const PROCEDURE: Scheda[] = [
     fonte: 'NYSORA; Blanco 2013',
   },
   {
-    id: 'cve', nome: 'Cardioversione elettrica sincronizzata', gruppo: 'Accessi',
+    id: 'cve', nome: 'Cardioversione elettrica sincronizzata', gruppo: 'Terapia elettrica',
     sintesi: 'Sedazione, placche, SYNC verificato prima di ogni shock; FA all’energia massima, flutter/TPSV 70–120 J, TV 120–150 J.',
     blocchi: [
       { titolo: 'Prima', righe: [
@@ -418,8 +424,8 @@ export const PROCEDURE: Scheda[] = [
       { titolo: 'Passaggi', numerato: true, righe: [
         'Placche antero-laterali (sottoclaveare destra + apice) o antero-posteriori; cute asciutta, rasata se serve.',
         'Sedazione procedurale: propofol 0,5–1 mg/kg = 35–70 mg (3,5–7 mL di 1%) a boli lenti; con ipotensione dosi ridotte o ketamina 0,5–1 mg/kg (35–70 mg). Vedi scheda «Sedazione procedurale».',
-        'Premere SYNC e verificare i marcatori su ogni onda R; se non compaiono, cambiare derivazione o aumentare l’ampiezza.',
-        'Energia (bifasico): FA all’energia massima; flutter e TPSV 70–120 J; TV monomorfa con polso 120–150 J, poi a salire.',
+        'Premere SINC (TEC-5600/5531K) o Sync (DFM100, si illumina di blu) e verificare i marcatori su ogni onda R; se non compaiono, cambiare derivazione o aumentare l’ampiezza.',
+        'Energia (bifasico): FA all’energia massima (TEC 270 J, DFM100 200 J); flutter e TPSV 70–120 J; TV monomorfa con polso 120–150 J, poi a salire (tabella nella scheda «Defibrillazione»).',
         '«Tutti lontani, ossigeno via», tenere premuto il pulsante finché lo shock parte (il ritardo è normale).',
         'Controllare ritmo e polso; se serve ripetere: riattivare SYNC (molti defibrillatori lo tolgono dopo lo shock), al massimo 3 tentativi.',
         'Fallimento in instabile: amiodarone 300 mg in 10–20 min e ritentare. TV polimorfa o FV: defibrillazione NON sincronizzata.',
@@ -431,6 +437,129 @@ export const PROCEDURE: Scheda[] = [
       ] },
     ],
     fonte: 'ERC 2025; ESC 2024 (fibrillazione atriale)',
+  },
+  // ─── Terapia elettrica (nostri defibrillatori) ───
+  {
+    id: 'defibrillazione', nome: 'Defibrillazione (FV/TV senza polso)', gruppo: 'Terapia elettrica',
+    sintesi: 'Shock NON sincronizzato 150 J, poi a salire; carica durante le compressioni, pausa < 5 s, RCP subito dopo lo shock.',
+    blocchi: [
+      { titolo: 'Sequenza', numerato: true, righe: [
+        'RCP in corso; placche adesive antero-laterali (sottoclaveare destra + apice sulla linea ascellare media) o antero-posteriori. Piastre solo se mancano le placche.',
+        'Manopola sull’energia: 150 J (vedi tabella per il secondo shock e i successivi).',
+        'CARICA mentre si continuano le compressioni.',
+        'Pausa breve (< 5 s) per leggere il ritmo: se FV/TV senza polso → «tutti lontani, ossigeno via» → SCARICA.',
+        'Riprendere subito le compressioni per 2 minuti, senza controllare il polso.',
+        'Ritmo non defibrillabile con energia carica: annullare la carica (TEC-5600 manopola su DISARMA, TEC-5531K su AZZERA, DFM100 tasto «Annulla carica»).',
+      ] },
+      { titolo: 'Energie e FV refrattaria', righe: [
+        'Primo shock 150 J; i successivi a salire se l’apparecchio lo consente (TEC 200 → 270 J; DFM100 170 → 200 J).',
+        'Arresto testimoniato al monitor con FV/TV: fino a 3 shock in rapida sequenza, poi RCP.',
+        'FV refrattaria (≥ 3 shock): cambiare vettore portando le placche in antero-posteriore; amiodarone 300 mg ev dopo il 3° shock, 150 mg dopo il 5°.',
+      ] },
+      { titolo: 'Comandi rapidi', righe: [
+        'TEC-5600: manopola su 150 → 2 CARICA → 3 SCARICA (o i due pulsanti delle piastre insieme).',
+        'TEC-5531K: manopola su 150 → 2 CARICA (o sulla piastra) → premere INSIEME i pulsanti di scarica delle due piastre.',
+        'DFM100: manopola su 150 → 2 Carica (giallo) → 3 Scarica (arancio).',
+      ] },
+      { titolo: 'DAE e bambini', righe: [
+        'Modalità DAE: manopola su DAE (TEC) o AED (DFM100) e seguire i messaggi vocali.',
+        'Bambino: TEC-5600 tenere premuto DAE PEDIATRICA e girare su DAE; DFM100 tasto categoria paziente (icona adulto/bambino) a sinistra dello schermo. In manuale 4 J/kg.',
+      ] },
+      { titolo: 'Sicurezza', righe: [
+        'Ossigeno ad almeno 1 m durante la scarica; torace asciutto; rimuovere cerotti di nitroglicerina; placche ad almeno 8 cm da pacemaker/ICD.',
+      ] },
+    ],
+    fonte: 'ERC 2025; manuali Nihon Kohden TEC-5600/TEC-5500 e Philips Efficia DFM100',
+  },
+  {
+    id: 'nk-5600', nome: 'Nihon Kohden TEC-5600 (con pacing): comandi', gruppo: 'Terapia elettrica',
+    sintesi: 'Manopola unica per energia, DAE, monitor e pacing; tasti 2 CARICA e 3 SCARICA sul pannello, SINC in alto, pacing a sinistra.',
+    blocchi: [
+      { titolo: 'Defibrillazione', numerato: true, righe: [
+        'Collegare le placche (o usare le piastre).',
+        'Manopola sull’energia (150 J segnato in arancio).',
+        '2 CARICA/DAE (o il tasto di carica sulla piastra); segnale acustico a carica completata.',
+        '3 SCARICA (lampeggia quando è carico) oppure i pulsanti delle due piastre premuti insieme.',
+        'Annullare la carica: manopola su DISARMA.',
+      ] },
+      { titolo: 'Cardioversione', numerato: true, righe: [
+        'Elettrodi ECG collegati (traccia più pulita) e placche.',
+        'Manopola sull’energia (vedi tabella in «Defibrillazione»).',
+        'Premere SINC: compare SYNC sullo schermo e un marcatore su ogni onda R. Se manca, cambiare derivazione o aumentare l’ampiezza.',
+        '2 CARICA, poi tenere premuto 3 SCARICA finché lo shock parte (attende l’onda R).',
+        'Prima di un nuovo shock controllare che SYNC sia ancora attivo.',
+      ] },
+      { titolo: 'Pacing', numerato: true, righe: [
+        'Placche adesive (antero-posteriori) + elettrodi ECG collegati.',
+        'Manopola su PACING DEMAND (FISSO solo se l’ECG è disturbato o inaffidabile).',
+        'FREQUENZA STIMOLAZIONE ▲▼: 70 ppm.',
+        'START/STOP per avviare: la spia STIMOLO lampeggia a ogni impulso.',
+        'CORRENTE STIMOLAZIONE ▲: salire fino alla cattura elettrica, verificare il polso femorale, poi +10 mA.',
+        'Stop: START/STOP (o corrente a 0 mA).',
+      ] },
+      { titolo: 'Controlli', righe: [
+        'VERIFICA BASE sulla manopola = test giornaliero; spia di stato verde = pronto, rossa = da controllare.',
+      ] },
+    ],
+    fonte: 'Nihon Kohden Cardiolife TEC-5600: scheda tecnica e guida rapida',
+  },
+  {
+    id: 'nk-5531', nome: 'Nihon Kohden TEC-5531K (piastre): comandi', gruppo: 'Terapia elettrica',
+    sintesi: 'Carrello con piastre: lo shock si dà premendo insieme i pulsanti delle due piastre; pacing dal pannello in alto.',
+    blocchi: [
+      { titolo: 'Defibrillazione con le piastre', numerato: true, righe: [
+        'Gel sulle piastre: STERNUM sotto la clavicola destra, APEX sull’apice; premere con forza (circa 10 kg).',
+        'Manopola sull’energia (150 J).',
+        '2 CARICA/DAE sul pannello o il tasto di carica sulla piastra.',
+        'Premere INSIEME i pulsanti di scarica delle due piastre.',
+        'Annullare la carica: manopola su AZZERA.',
+      ] },
+      { titolo: 'Cardioversione', numerato: true, righe: [
+        'Elettrodi ECG e placche/piastre.',
+        'Manopola sull’energia; premere SINC (marcatore sulle onde R).',
+        '2 CARICA, poi tenere premuti insieme i pulsanti delle piastre finché lo shock parte.',
+        'Controllare che SINC sia ancora attivo prima di un nuovo shock.',
+      ] },
+      { titolo: 'Pacing (solo con placche adesive)', numerato: true, righe: [
+        'Placche adesive antero-posteriori (con le piastre non si stimola) + elettrodi ECG.',
+        'Manopola su STIMOLAZIONE DEMAND (FISSO solo se ECG inaffidabile).',
+        'FREQUENZA STIMOLAZIONE ▲▼ a 70 ppm, START/STOP per avviare (spia STIMOLO).',
+        'CORRENTE STIMOLAZIONE ▲ fino alla cattura; polso femorale; +10 mA.',
+      ] },
+      { titolo: 'Attenzione', righe: [
+        'Con le placche adesive: verificare sul vostro apparecchio dove si trova il pulsante di scarica (sul pannello non è visibile nella foto).',
+        'IMPOSTAZIONE e VERIFICA BASE sulla manopola: menu e test giornaliero.',
+      ] },
+    ],
+    fonte: 'Nihon Kohden Cardiolife TEC-5500: manuale di servizio e caratteristiche',
+  },
+  {
+    id: 'dfm100', nome: 'Philips Efficia DFM100: comandi', gruppo: 'Terapia elettrica',
+    sintesi: 'Manopola verde (AED a sinistra, Monitor/energie/Pacer a destra), 1-2-3: energia, Carica gialla, Scarica arancio; Sync blu.',
+    blocchi: [
+      { titolo: 'Defibrillazione', numerato: true, righe: [
+        'Placche collegate; manopola sull’energia (150 J).',
+        '2 Carica (giallo).',
+        '3 Scarica (arancio). Energia massima 200 J.',
+        'Annullare: tasto funzione «Annulla carica».',
+      ] },
+      { titolo: 'Cardioversione', numerato: true, righe: [
+        'Elettrodi ECG e placche; con il tasto a sinistra dello schermo scegliere la derivazione con l’onda R più ampia.',
+        'Manopola sull’energia, poi premere Sync: il tasto si illumina di blu e compaiono frecce sulle onde R.',
+        '2 Carica, poi tenere premuto 3 Scarica fino allo shock.',
+        'Prima di un nuovo shock verificare che Sync sia ancora acceso (blu).',
+      ] },
+      { titolo: 'Pacing', numerato: true, righe: [
+        'Placche antero-posteriori + elettrodi ECG (in demand servono per riconoscere le onde R).',
+        'Manopola su Pacer; scegliere la derivazione migliore con il tasto a sinistra dello schermo.',
+        'Tasto funzione «Impostazioni pacer» → Frequenza (70 ppm), poi Corrente (output).',
+        '«Avvia pacing»: controllare i marcatori di stimolo e le frecce sulle onde R.',
+        'Aumentare la corrente fino alla cattura, polso femorale, poi +10 mA.',
+        'Modalità fissa: «Pausa pacing», manopola Smart Select → Modalità pacer → Fissa, poi «Riprendi pacing».',
+        'Se il pacing si interrompe (es. elettrodo staccato in demand) va riavviato con il tasto funzione.',
+      ] },
+    ],
+    fonte: 'Philips Efficia DFM100, Istruzioni per l’uso e nota applicativa sul pacing transcutaneo',
   },
   // ─── Ventilazione non invasiva (Philips V60) ───
   {

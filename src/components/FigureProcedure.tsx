@@ -454,7 +454,152 @@ const NivMonitor = () => (
   </Fig>
 )
 
+
+// ─── Terapia elettrica: pannelli dei nostri defibrillatori ───
+const num = (x: number, y: number, n: string) => (
+  <g>
+    <circle cx={x} cy={y} r="6.5" className="fill-bordeaux" stroke="#fff" strokeWidth="1.2" />
+    <text x={x} y={y + 3} fontSize="8.5" fontWeight="800" textAnchor="middle" fill="#fff">{n}</text>
+  </g>
+)
+/** Manopola con etichette disposte a ventaglio (angoli in gradi, 0 = in alto, orario). */
+function Manopola({ cx, cy, r, etichette, punta, colore = '#f2efe8', anello = '#e06a1f' }: { cx: number; cy: number; r: number; etichette: { t: string; a: number; c?: string; b?: boolean }[]; punta: number; colore?: string; anello?: string }) {
+  const p = (a: number, d: number) => [cx + d * Math.sin((a * Math.PI) / 180), cy - d * Math.cos((a * Math.PI) / 180)]
+  const [px, py] = p(punta, r * 0.8)
+  return (
+    <g>
+      <circle cx={cx} cy={cy} r={r + 3} fill="none" stroke={anello} strokeWidth="2.5" strokeDasharray="1.5 2.5" />
+      <circle cx={cx} cy={cy} r={r} fill={colore} stroke="#9a9488" strokeWidth="1.2" />
+      <rect x={cx - 3.5} y={cy - r + 3} width="7" height={2 * r - 6} rx="3" fill="#fff" stroke="#c9c3b6" transform={`rotate(${punta} ${cx} ${cy})`} />
+      <path d={`M${cx} ${cy} L${px} ${py}`} stroke="#b3261e" strokeWidth="1.8" />
+      {etichette.map((e, i) => {
+        const [x, y] = p(e.a, r + 12)
+        return <text key={i} x={x} y={y + 2.5} fontSize="6.6" textAnchor={Math.abs(e.a % 180) < 15 ? 'middle' : (e.a % 360 + 360) % 360 < 180 ? 'start' : 'end'} fontWeight={e.b ? 800 : 600} fill={e.c ?? '#3a3d3b'}>{e.t}</text>
+      })}
+    </g>
+  )
+}
+const tasto = (x: number, y: number, w: number, h: number, fill: string, label?: string, lc = '#fff', fs = 7) => (
+  <g>
+    <rect x={x} y={y} width={w} height={h} rx={h / 2} fill={fill} stroke="#8d877b" strokeWidth="1" />
+    {label && <text x={x + w / 2} y={y + h / 2 + fs * 0.37} fontSize={fs} fontWeight="800" textAnchor="middle" fill={lc}>{label}</text>}
+  </g>
+)
+const freccette = (x: number, y: number, label: string) => (
+  <g>
+    <text x={x + 9} y={y - 4} fontSize="5.8" fontWeight="700" textAnchor="middle" fill="#eee">{label}</text>
+    <rect x={x} y={y} width="18" height="26" rx="9" fill="#e9e6df" stroke="#8d877b" />
+    <path d={`M${x + 9} ${y + 4} l-4 6 h8 z M${x + 9} ${y + 22} l-4 -6 h8 z`} fill="#3a3d3b" />
+  </g>
+)
+const ENERGIE_NK = ['5', '10', '20', '30', '50', '70', '100', '150', '200', '270']
+
+const NK5600 = () => (
+  <Fig alto={215} didascalia="Nihon Kohden TEC-5600 (carrello con pacing): ① manopola modalità/energia, ② CARICA/DAE, ③ SCARICA, ④ SINC; a sinistra il pannello PACING: ⑤ START/STOP, ⑥ FREQUENZA (ppm), ⑦ CORRENTE (mA), spia STIMOLO. Sulla manopola: DISARMA scarica internamente l’energia, VERIFICA BASE è il test giornaliero.">
+    <rect x="4" y="14" width="312" height="196" rx="14" fill="#f4f1ea" stroke="#9a9488" />
+    <rect x="10" y="22" width="300" height="160" rx="8" fill="#3b3e44" />
+    <rect x="10" y="22" width="52" height="160" rx="8" fill="#2f3237" />
+    {testo(36, 36, 'PACING', 'fill-white', 8, 'middle', true)}
+    <circle cx="20" cy="47" r="2.5" fill="#6ee07a" />{testo(26, 49.5, 'STIMOLO', 'fill-white', 5.6)}
+    {tasto(16, 58, 40, 14, '#5fbfa4', 'START/STOP', '#103a2e', 5.6)}
+    {freccette(27, 88, 'FREQ ppm')}
+    {freccette(27, 132, 'CORR mA')}
+    <rect x="68" y="34" width="132" height="104" rx="3" fill="#121416" />
+    <path d="M74 92 h14 l4 -18 l5 34 l4 -16 h18 l4 -18 l5 34 l4 -16 h22 l4 -18 l5 34 l4 -16 h20" fill="none" stroke="#7ee08a" strokeWidth="1.4" />
+    {testo(134, 155, 'cardiolife · ActiBiphasic', 'fill-[#c9c9c9]', 6.5, 'middle')}
+    <Manopola cx={258} cy={86} r={18} punta={180} etichette={[
+      ...ENERGIE_NK.map((t, i) => ({ t, a: -88 + i * 19, c: t === '150' ? '#ff9a5c' : '#eee', b: t === '150' })),
+      { t: 'DEMAND', a: 112, c: '#ff9a5c', b: true }, { t: 'FISSO', a: 134, c: '#eee' }, { t: 'VERIF.', a: 156, c: '#eee' },
+      { t: 'OFF', a: 180, c: '#fff', b: true }, { t: 'MONITOR', a: 207, c: '#eee' }, { t: 'DAE', a: 230, c: '#ff9a5c', b: true }, { t: 'DISARMA', a: 252, c: '#eee' },
+    ]} />
+    {tasto(272, 26, 30, 13, '#d7d3ca', 'SINC', '#3a3d3b')}
+    {tasto(250, 136, 52, 16, '#d7d3ca', '2 CARICA', '#3a3d3b')}
+    {tasto(250, 158, 52, 18, '#e8662a', '3 ⚡ SCARICA')}
+    {num(214, 60, '1')}{num(243, 144, '2')}{num(243, 167, '3')}{num(266, 33, '4')}
+    {num(8, 65, '5')}{num(20, 101, '6')}{num(20, 145, '7')}
+  </Fig>
+)
+
+const NK5531 = () => (
+  <Fig alto={215} didascalia="Nihon Kohden TEC-5531K (carrello con piastre): ① manopola, ② CARICA/DAE (anche sulla piastra), ③ shock premendo INSIEME i pulsanti delle due piastre, ④ SINC; in alto il pannello di stimolazione: ⑤ START/STOP, ⑥ FREQUENZA, ⑦ CORRENTE. AZZERA = scarica interna dell’energia.">
+    <rect x="70" y="4" width="46" height="30" rx="6" fill="#e8662a" stroke="#a9481c" />
+    <rect x="124" y="4" width="46" height="30" rx="6" fill="#e8662a" stroke="#a9481c" />
+    {testo(93, 22, 'APEX', 'fill-white', 7, 'middle', true)}{testo(147, 22, 'STERNUM', 'fill-white', 7, 'middle', true)}
+    <circle cx="80" cy="12" r="3.5" fill="#ffd34d" stroke="#a9481c" /><circle cx="160" cy="12" r="3.5" fill="#ffd34d" stroke="#a9481c" />
+    <rect x="4" y="40" width="312" height="170" rx="12" fill="#ece8df" stroke="#9a9488" />
+    <rect x="12" y="46" width="200" height="22" rx="4" fill="#dcd8cf" />
+    {testo(24, 55, 'FREQ', 'fill-[#3a3d3b]', 6, 'start', true)}<path d="M24 58 l4 6 l4 -6 z M36 64 l4 -6 l4 6 z" fill="#3a3d3b" />
+    {testo(62, 55, 'CORR', 'fill-[#3a3d3b]', 6, 'start', true)}<path d="M62 58 l4 6 l4 -6 z M74 64 l4 -6 l4 6 z" fill="#3a3d3b" />
+    {tasto(98, 51, 44, 13, '#5fbfa4', 'START/STOP', '#103a2e', 5.8)}
+    <circle cx="150" cy="57" r="2.5" fill="#6ee07a" />{testo(155, 59.5, 'STIMOLO', 'fill-[#3a3d3b]', 5.6)}
+    <rect x="12" y="74" width="176" height="128" rx="6" fill="#3b3e44" />
+    <rect x="22" y="84" width="140" height="92" rx="3" fill="#121416" />
+    <path d="M28 132 h14 l4 -18 l5 34 l4 -16 h18 l4 -18 l5 34 l4 -16 h22 l4 -18 l5 34 l4 -16 h12" fill="none" stroke="#7ee08a" strokeWidth="1.4" />
+    <rect x="196" y="74" width="114" height="128" rx="6" fill="#4f5aa6" />
+    <Manopola cx={254} cy={114} r={15} punta={180} colore="#f2efe8" anello="#e06a1f" etichette={[
+      ...ENERGIE_NK.map((t, i) => ({ t, a: -88 + i * 19, c: t === '150' ? '#ffb08a' : '#fff', b: t === '150' })),
+      { t: 'DEMAND', a: 112, c: '#ffb08a', b: true }, { t: 'FISSO', a: 134, c: '#fff' }, { t: 'VERIF.', a: 156, c: '#fff' },
+      { t: 'SPENTO', a: 180, c: '#fff', b: true }, { t: 'MONITOR', a: 207, c: '#fff' }, { t: 'DAE', a: 230, c: '#ffb08a', b: true }, { t: 'AZZERA', a: 252, c: '#fff' },
+    ]} />
+    {tasto(270, 158, 34, 12, '#d7d3ca', 'SINC', '#3a3d3b')}
+    {tasto(254, 180, 50, 16, '#d7d3ca', '2 CARICA', '#3a3d3b')}
+    {num(206, 86, '1')}{num(248, 188, '2')}{num(122, 12, '3')}{num(264, 166, '4')}{num(120, 46, '5')}{num(18, 52, '6')}{num(56, 52, '7')}
+  </Fig>
+)
+
+const DFM100 = () => (
+  <Fig alto={215} didascalia="Philips Efficia DFM100: ① manopola terapia (a sinistra AED, a destra Monitor, energie 1–200 J, Pacer), ② Carica (giallo), ③ Scarica (arancio), ④ Sync (si illumina di blu), ⑤ tasti funzione sotto lo schermo (es. «Impostazioni pacer», «Avvia pacing», «Annulla carica»), ⑥ manopola Smart Select (menu, es. modalità pacer Fissa/Demand), ⑦ tasto selezione derivazione.">
+    <rect x="18" y="6" width="290" height="204" rx="18" fill="#f4f1ea" stroke="#9a9488" />
+    {testo(150, 22, 'PHILIPS', 'fill-[#2b2d2c]', 10, 'middle', true)}
+    <rect x="34" y="30" width="262" height="168" rx="12" fill="#2e3033" />
+    <rect x="54" y="40" width="150" height="96" rx="3" fill="#121416" />
+    <path d="M60 92 h14 l4 -18 l5 34 l4 -16 h18 l4 -18 l5 34 l4 -16 h22 l4 -18 l5 34 l4 -16 h12" fill="none" stroke="#7ee08a" strokeWidth="1.4" />
+    {[0, 1, 2, 3].map((i) => <rect key={i} x={58 + i * 30} y={144} width="26" height="9" rx="2" fill="#1d1f21" stroke="#555" />)}
+    <circle cx="190" cy="152" r="10" fill="#1d1f21" stroke="#666" /><circle cx="190" cy="152" r="4" fill="#3b3e44" />
+    <rect x="38" y="48" width="12" height="12" rx="3" fill="#1d1f21" stroke="#666" /><rect x="38" y="66" width="12" height="12" rx="3" fill="#1d1f21" stroke="#666" />
+    <Manopola cx={256} cy={84} r={18} punta={-20} colore="#2f6b55" anello="#2f6b55" etichette={[
+      { t: 'AED', a: -40, c: '#9fe0bf', b: true }, { t: 'OFF', a: -12, c: '#fff', b: true }, { t: 'Monitor', a: 20, c: '#9fe0bf' },
+      { t: '1-10', a: 45, c: '#eee' }, { t: '20', a: 62, c: '#eee' }, { t: '50', a: 80, c: '#eee' }, { t: '100', a: 100, c: '#eee' },
+      { t: '120', a: 118, c: '#eee' }, { t: '150', a: 140, c: '#fff', b: true }, { t: '170', a: 160, c: '#eee' }, { t: '200', a: 182, c: '#eee' }, { t: 'Pacer', a: 215, c: '#9fe0bf', b: true },
+    ]} />
+    {tasto(232, 124, 26, 10, '#8fb3e8', 'Sync', '#123')}
+    {tasto(222, 142, 66, 18, '#f2d43c', '2  Carica', '#3a2f00')}
+    {tasto(222, 166, 66, 20, '#ee7a2c', '3  Scarica ⚡')}
+    {num(212, 66, '1')}{num(214, 151, '2')}{num(214, 176, '3')}{num(266, 129, '4')}{num(64, 166, '5')}{num(190, 172, '6')}{num(30, 54, '7')}
+  </Fig>
+)
+
+/** Energie consigliate per ritmo e per apparecchio. */
+const EnergieTabella = () => {
+  const righe: [string, string, string, string][] = [
+    ['FV / TV senza polso', 'NON sincronizzato', '150 → 200 → 270 J', '150 → 170 → 200 J'],
+    ['Fibrillazione atriale', 'SINC', '270 J (massima)', '200 J (massima)'],
+    ['Flutter, TPSV', 'SINC', '70 → 100 → 150 J', '70 → 120 → 150 J'],
+    ['TV monomorfa con polso', 'SINC', '150 → 200 J', '120 → 150 → 200 J'],
+    ['TV polimorfa instabile', 'NON sincronizzato', 'come FV', 'come FV'],
+  ]
+  const c = ['fill-bordeaux3', 'fill-oro3', 'fill-oro3', 'fill-oro3', 'fill-bordeaux3']
+  return (
+    <Fig alto={152} didascalia="Energie di partenza (bifasico) e incrementi: FA all’energia massima (ERC); flutter/TPSV 70–120 J; TV con polso 120–150 J. Dopo ogni shock sincronizzato verificare che la sincronizzazione sia ancora attiva.">
+      {testo(10, 14, 'Ritmo', 'fill-tenue', 8, 'start', true)}
+      {testo(196, 14, 'Nihon Kohden TEC', 'fill-tenue', 8, 'middle', true)}{testo(276, 14, 'Philips DFM100', 'fill-tenue', 8, 'middle', true)}
+      {righe.map((r, i) => (
+        <g key={i}>
+          <rect x="4" y={20 + i * 26} width="312" height="23" rx="5" className={c[i]} />
+          {testo(10, 31 + i * 26, r[0], 'fill-testo', 8, 'start', true)}
+          {testo(10, 40 + i * 26, r[1], r[1] === 'SINC' ? 'fill-[#35577a]' : 'fill-bordeaux', 6.6, 'start', true)}
+          {testo(196, 35 + i * 26, r[2], 'fill-testo', 8, 'middle', true)}{testo(276, 35 + i * 26, r[3], 'fill-testo', 8, 'middle', true)}
+        </g>
+      ))}
+    </Fig>
+  )
+}
+
 export const FIGURE: Record<string, () => ReactNode> = {
+  'nk-5600': NK5600,
+  'nk-5531': NK5531,
+  'dfm100': DFM100,
+  'defibrillazione': EnergieTabella,
   'niv-v60': NivMontaggio,
   'niv-parametri': NivSchema,
   'niv-monitor': NivMonitor,

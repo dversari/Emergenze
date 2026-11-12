@@ -104,6 +104,7 @@ const PROC: [RegExp, string][] = [
   [/blocco ESP\b|erettore della spina/i, 'esp'],
   [/serrato anteriore/i, 'serrato'],
   [/\bLAST\b/, 'last'],
+  [/defibrillazione|defibrillare/i, 'defibrillazione'],
   [/\beFAST\b|\bFAST\b/, 'eco:efast'],
   [/\bCUS\b|compressione venosa/, 'eco:cus'],
   [/ecografia polmonare|\bLUS\b/, 'eco:torace'],
