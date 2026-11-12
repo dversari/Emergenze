@@ -7,7 +7,8 @@ import { useSearchParams } from 'react-router-dom'
  */
 
 // ─── Immagine «ecografica» facsimile ───
-function Us({ tipo, children, etichetta }: { tipo: 'convex' | 'lineare' | 'settoriale'; children: ReactNode; etichetta?: string }) {
+type Lab = { x: number; y: number; t: string; a?: 'start' | 'middle' | 'end' }
+function Us({ tipo, children, etichetta, lab }: { tipo: 'convex' | 'lineare' | 'settoriale'; children: ReactNode; etichetta?: string; lab?: Lab[] }) {
   const id = useId().replace(/:/g, '')
   const settore = tipo === 'convex'
     ? 'M70 18 A90 90 0 0 1 170 18 L226 170 A200 200 0 0 1 14 170 Z'
@@ -35,6 +36,9 @@ function Us({ tipo, children, etichetta }: { tipo: 'convex' | 'lineare' | 'setto
       {/* scala di profondità e marcatore della sonda */}
       {[30, 60, 90, 120, 150].map((y) => <path key={y} d={`M232 ${y} h5`} stroke="#9a9a9a" strokeWidth="1" />)}
       <circle cx={tipo === 'convex' ? 72 : tipo === 'settoriale' ? 108 : 46} cy="8" r="3" fill="#8fd0ff" />
+      {lab?.map((l, i) => (
+        <text key={i} x={l.x} y={l.y} fontSize="11" fontWeight="800" textAnchor={l.a ?? 'middle'} fill="#ffe08a" stroke="#000" strokeWidth="2.5" paintOrder="stroke">{l.t}</text>
+      ))}
       {etichetta && <text x="6" y="174" fontSize="9" fill="#cfcfcf" fontFamily="ui-monospace,monospace">{etichetta}</text>}
     </svg>
   )
@@ -143,7 +147,7 @@ function Collo({ sonde }: { sonde: Sonda[] }) {
 }
 
 // ─── Le ecografie ───
-type Eco = { id: string; nome: string; sottotitolo: string; tono: string; sonda: string; scansioni: string[]; corpo: ReactNode; immagine: ReactNode; didascalia: string; referto: string }
+type Eco = { id: string; nome: string; sottotitolo: string; tono: string; sonda: string; scansioni: string[]; corpo: ReactNode; immagine: ReactNode; didascalia: string; referto: string; galleria?: { tit: string; img: ReactNode }[] }
 
 const ECO: Eco[] = [
   {
@@ -211,10 +215,10 @@ Esame mirato bedside, non sostitutivo dell'ecocolordoppler dei tronchi sovraorti
   },
   {
     id: 'cuore', nome: 'Cuore (FoCUS)', sottotitolo: 'Shock, dispnea, ACR: funzione, VD, pericardio, cava', tono: 'border-l-[#b3261e]', sonda: 'Phased array (settoriale)',
-    scansioni: ['1 Parasternale asse lungo: 3°–4° spazio a sinistra dello sterno, marcatore verso la spalla destra', '1b Parasternale asse corto: ruotare di 90° (marcatore verso la spalla sinistra), livello dei papillari', '2 Apicale 4 camere: itto (5° spazio, ascellare anteriore), marcatore a sinistra', '3 Sottocostale 4 camere: sotto lo xifoide, sonda piatta verso la spalla sinistra (la finestra dell’ACR)', '4 Vena cava inferiore: dal sottocostale ruotare in longitudinale, misurare a 2 cm dall’atrio destro'],
+    scansioni: ['1 Parasternale asse lungo: 3°–4° spazio a sinistra dello sterno, marcatore verso la spalla destra', '1b Parasternale asse corto: ruotare di 90° (marcatore verso la spalla sinistra), livello dei papillari', '2 Apicale 4 camere: itto (5° spazio, ascellare anteriore), marcatore a sinistra; ruotando in senso antiorario di circa 60° → apicale 2 camere (VS e AS)', '3 Sottocostale 4 camere: sotto lo xifoide, sonda piatta verso la spalla sinistra (la finestra dell’ACR)', '4 Vena cava inferiore: dal sottocostale ruotare in longitudinale, misurare a 2 cm dall’atrio destro'],
     corpo: <Tronco sonde={[{ x: 109, y: 90, n: '1', r: -60, lx: -15, ly: -6 }, { x: 124, y: 108, n: '2', r: 20, lx: 15, ly: -2 }, { x: 100, y: 122, n: '3', r: -20, lx: -15, ly: 4 }, { x: 104, y: 136, n: '4', r: 90, lx: 15, ly: 4 }]} />,
     immagine: (
-      <Us tipo="settoriale" etichetta="PARASTERNALE ASSE LUNGO">
+      <Us tipo="settoriale" etichetta="1 · PARASTERNALE ASSE LUNGO" lab={[{ x: 120, y: 70, t: 'VD' }, { x: 84, y: 118, t: 'VS' }, { x: 188, y: 114, t: 'Ao' }, { x: 176, y: 145, t: 'AS' }, { x: 120, y: 92, t: 'setto' }, { x: 120, y: 147, t: 'pericardio' }]}>
         <path d="M0 0 H240 V42 Q120 34 0 44 Z" fill={grigio(120)} />
         <path d="M30 46 Q120 36 210 48" stroke={grigio(200)} strokeWidth="3" fill="none" />
         <path d="M44 54 Q120 46 196 58 L190 76 Q120 66 50 74 Z" fill={nero} />
@@ -227,6 +231,55 @@ Esame mirato bedside, non sostitutivo dell'ecocolordoppler dei tronchi sovraorti
         <circle cx="200" cy="164" r="7" fill={nero} />
       </Us>
     ),
+    galleria: [
+      { tit: '1b · Parasternale asse corto (papillari)', img: (
+        <Us tipo="settoriale" lab={[{ x: 70, y: 70, t: 'VD' }, { x: 120, y: 114, t: 'VS' }, { x: 176, y: 150, t: 'pericardio' }]}>
+          <path d="M0 0 H240 V40 Q120 32 0 42 Z" fill={grigio(120)} />
+          <path d="M40 74 Q70 46 120 56 Q100 66 92 84 Q66 76 40 86 Z" fill={nero} />
+          <circle cx="120" cy="110" r="40" fill={grigio(150)} />
+          <circle cx="120" cy="110" r="27" fill={nero} />
+          <circle cx="104" cy="126" r="5" fill={grigio(200)} /><circle cx="138" cy="124" r="5" fill={grigio(200)} />
+          <path d="M60 156 Q120 170 186 152" stroke={grigio(235)} strokeWidth="3.5" fill="none" />
+        </Us>
+      ) },
+      { tit: '2 · Apicale 4 camere', img: (
+        <Us tipo="settoriale" lab={[{ x: 92, y: 76, t: 'VD' }, { x: 148, y: 76, t: 'VS' }, { x: 88, y: 146, t: 'AD' }, { x: 150, y: 146, t: 'AS' }]}>
+          <path d="M120 14 L60 110 Q90 118 116 112 Z" fill={nero} />
+          <path d="M124 14 L182 112 Q150 120 126 112 Z" fill={nero} />
+          <path d="M120 12 L120 160" stroke={grigio(170)} strokeWidth="6" />
+          <path d="M60 112 L116 116 M126 116 L184 114" stroke={grigio(225)} strokeWidth="3" />
+          <ellipse cx="88" cy="140" rx="28" ry="22" fill={nero} />
+          <ellipse cx="152" cy="140" rx="28" ry="22" fill={nero} />
+        </Us>
+      ) },
+      { tit: '2b · Apicale 2 camere (ruotare di 60° in senso antiorario)', img: (
+        <Us tipo="settoriale" lab={[{ x: 120, y: 80, t: 'VS' }, { x: 120, y: 148, t: 'AS' }, { x: 176, y: 116, t: 'mitrale', a: 'start' }]}>
+          <path d="M120 14 Q70 70 76 112 L166 112 Q172 70 120 14 Z" fill={nero} />
+          <path d="M74 114 L166 114" stroke={grigio(225)} strokeWidth="3" />
+          <ellipse cx="120" cy="142" rx="38" ry="22" fill={nero} />
+        </Us>
+      ) },
+      { tit: '3 · Sottocostale 4 camere', img: (
+        <Us tipo="settoriale" lab={[{ x: 60, y: 40, t: 'fegato', a: 'start' }, { x: 96, y: 92, t: 'VD' }, { x: 162, y: 118, t: 'VS' }, { x: 60, y: 128, t: 'AD' }, { x: 112, y: 152, t: 'AS' }]}>
+          <path d="M0 0 H240 V70 Q120 56 0 76 Z" fill={grigio(130)} />
+          <path d="M30 78 Q120 62 210 84" stroke={grigio(235)} strokeWidth="3" fill="none" />
+          <path d="M70 86 Q130 74 200 96 L196 108 Q130 92 76 100 Z" fill={nero} />
+          <path d="M60 104 Q140 98 204 118" stroke={grigio(170)} strokeWidth="6" fill="none" />
+          <path d="M120 112 Q170 112 204 128 Q180 150 130 140 Z" fill={nero} />
+          <ellipse cx="66" cy="132" rx="30" ry="18" fill={nero} />
+          <ellipse cx="114" cy="148" rx="26" ry="14" fill={nero} />
+        </Us>
+      ) },
+      { tit: '4 · Vena cava inferiore (longitudinale)', img: (
+        <Us tipo="settoriale" lab={[{ x: 70, y: 52, t: 'fegato', a: 'start' }, { x: 84, y: 120, t: 'VCI' }, { x: 170, y: 86, t: 'AD' }, { x: 120, y: 156, t: '↕ a 2 cm dall’AD' }]}>
+          <path d="M0 0 H240 V180 H0 Z" fill={grigio(128)} />
+          <path d="M40 112 Q110 102 160 106 L160 126 Q110 124 40 134 Z" fill={nero} />
+          <ellipse cx="172" cy="108" rx="22" ry="20" fill={nero} />
+          <path d="M112 104 Q118 80 134 66" stroke={nero} strokeWidth="8" fill="none" />
+          <path d="M138 98 V134" stroke="#ffe08a" strokeWidth="1.5" strokeDasharray="3 2" />
+        </Us>
+      ) },
+    ],
     didascalia: 'Dall’alto: ventricolo destro, setto, ventricolo sinistro (cavità nera), valvola mitrale, aorta e atrio sinistro a destra; in fondo il pericardio, linea più brillante. Versamento = banda nera tra pericardio e cuore, davanti all’aorta discendente. VD più grande del VS (apicale) = sovraccarico destro.',
     referto: `ECOCARDIOGRAFIA MIRATA BEDSIDE (FoCUS)
 Finestre: [parasternale asse lungo e corto / apicale 4 camere / sottocostale]; qualità [buona / sufficiente / limitata].
@@ -320,6 +373,16 @@ export default function Ecografie() {
                   <div>{e.corpo}</div>
                   <div>{e.immagine}</div>
                 </div>
+                {e.galleria && (
+                  <div className="grid grid-cols-2 gap-2">
+                    {e.galleria.map((g) => (
+                      <figure key={g.tit} className="flex flex-col gap-1">
+                        {g.img}
+                        <figcaption className="text-[11.5px] font-bold leading-tight text-tenue">{g.tit}</figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
                 <ol className="text-[13px] leading-snug space-y-0.5">{e.scansioni.map((s, i) => <li key={i}>{/^\d/.test(s) ? s : e.id === 'cus' && i === e.scansioni.length - 1 ? `→ ${s}` : `${i + 1}. ${s}`}</li>)}</ol>
                 <p className="rounded-lg bg-sabbia px-3 py-2 text-[12.5px] leading-snug"><b>Cosa si vede:</b> {e.didascalia}</p>
                 <div className="rounded-xl border border-linea bg-white p-3">
