@@ -83,8 +83,56 @@ function TestoCons({ t, scuro, ritorno }: { t: string; scuro?: boolean; ritorno:
   )
 }
 
+
+/* Procedure citate nel testo → link alla scheda (Procedure / Ventilazione / Ecografia). */
+const PROC: [RegExp, string][] = [
+  [/\bNIV\b(?:\/CPAP)?|ventilazione non invasiva|\bCPAP\b/, 'niv-v60'],
+  [/intubazione(?: oro-?tracheale| in sequenza rapida)?|\bIOT\b|\bRSI\b/i, 'rsi'],
+  [/cricotiro(?:ido)?tomia/i, 'crico'],
+  [/toracentesi/i, 'toracentesi'],
+  [/\bpigtail\b|drenaggio toracico|drenaggio pleurico/i, 'pigtail'],
+  [/tubo toracico/i, 'tubo'],
+  [/decompressione con ago|toracostomia (?:a dito|digitale)/i, 'decompressione'],
+  [/pericardiocentesi/i, 'pericardiocentesi'],
+  [/paracentesi/i, 'paracentesi'],
+  [/rachicentesi|puntura lombare/i, 'rachicentesi'],
+  [/\bCVC\b|catetere venoso centrale/, 'cvc'],
+  [/accesso intraosseo|accesso IO\b|intraosse[oa]/i, 'io'],
+  [/pacing(?: transcutaneo| esterno)?/i, 'pacing'],
+  [/cardioversione elettrica(?: sincronizzata)?|\bCVE\b|shock sincronizzato/, 'cve'],
+  [/blocco (?:della )?fascia iliaca|fascia iliaca/i, 'fascia-iliaca'],
+  [/blocco ESP\b|erettore della spina/i, 'esp'],
+  [/serrato anteriore/i, 'serrato'],
+  [/\bLAST\b/, 'last'],
+  [/\beFAST\b|\bFAST\b/, 'eco:efast'],
+  [/\bCUS\b|compressione venosa/, 'eco:cus'],
+  [/ecografia polmonare|\bLUS\b/, 'eco:torace'],
+]
+const RE_PROC = new RegExp(`(${PROC.map(([r]) => r.source).join('|')})`, 'gi')
+const destProc = (id: string) => (id.startsWith('eco:') ? `/procedure?sez=eco&apri=${id.slice(4)}` : `/procedure?apri=${id}`)
+
+function TestoProc({ t, scuro, ritorno }: { t: string; scuro?: boolean; ritorno: ReturnType<typeof useConRitorno> }) {
+  const parti = t.split(RE_PROC).filter((p) => p !== undefined && p !== '')
+  return (
+    <>
+      {parti.map((p, i) => {
+        const hit = PROC.find(([r]) => new RegExp(`^(?:${r.source})$`, r.flags).test(p))
+        if (hit) {
+          return (
+            <Link key={i} to={destProc(hit[1])} state={ritorno.state} onClick={ritorno.onClick}
+              className={`inline-block font-bold rounded-full px-1.5 leading-[1.35] ${scuro ? 'bg-white/20 text-white' : 'bg-[#e2eaf2] text-[#2d4f73]'}`}>
+              ✚&#xFE0E;&nbsp;{p}
+            </Link>
+          )
+        }
+        return <TestoCons key={i} t={p} scuro={scuro} ritorno={ritorno} />
+      })}
+    </>
+  )
+}
+
 /** Testo con score cliccabili (aprono il calcolatore) e farmaci evidenziati. */
-function Testo({ t, scuro }: { t: string; scuro?: boolean }) {
+export function Testo({ t, scuro }: { t: string; scuro?: boolean }) {
   const ritorno = useConRitorno()
   const parti = t.split(RE_SCORE).filter((p) => p !== undefined)
   return (
@@ -99,7 +147,7 @@ function Testo({ t, scuro }: { t: string; scuro?: boolean }) {
             </Link>
           )
         }
-        return <TestoCons key={i} t={p} scuro={scuro} ritorno={ritorno} />
+        return <TestoProc key={i} t={p} scuro={scuro} ritorno={ritorno} />
       })}
     </>
   )

@@ -1,4 +1,5 @@
-import { useId, useState, type ReactNode } from 'react'
+import { useEffect, useId, useState, type ReactNode } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 /*
  * Ecografia bedside: per ogni esame le scansioni (sonda sul corpo), un'immagine facsimile
@@ -263,13 +264,20 @@ function Copia({ testo }: { testo: string }) {
 }
 
 export default function Ecografie() {
-  const [aperto, setAperto] = useState<string | null>(null)
+  const [params] = useSearchParams()
+  const [aperto, setAperto] = useState<string | null>(params.get('apri'))
+  const apri = params.get('apri')
+  useEffect(() => {
+    if (!apri) return
+    setAperto(apri)
+    requestAnimationFrame(() => document.getElementById(`eco-${apri}`)?.scrollIntoView({ block: 'start' }))
+  }, [apri])
   return (
     <div className="elenco">
       {ECO.map((e) => {
         const open = aperto === e.id
         return (
-          <section key={e.id} className={`card !p-0 overflow-hidden border-l-[6px] ${e.tono}`}>
+          <section key={e.id} id={`eco-${e.id}`} className={`card !p-0 overflow-hidden scroll-mt-24 border-l-[6px] ${e.tono}`}>
             <button onClick={() => setAperto(open ? null : e.id)} className="w-full flex items-center gap-3 px-4 py-3 text-left">
               <div className="flex-1 min-w-0">
                 <p className="font-bold leading-tight">{e.nome}</p>

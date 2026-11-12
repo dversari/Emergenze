@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { RitornoCtx, riprendiScroll, useConRitorno } from '../lib/ritorno'
-import Algoritmo, { idSezione } from '../components/Algoritmo'
+import Algoritmo, { idSezione, Testo } from '../components/Algoritmo'
 import Manovre from '../components/Manovre'
 import EcgEquivalenti from '../components/EcgEquivalenti'
 import { ALGORITMI } from '../lib/algoritmi'
@@ -99,7 +99,7 @@ export function RiassuntoLineaGuida() {
           {l.inBreve.map((p, i) => (
             <li key={i} className="flex gap-2.5 text-[15px] leading-snug">
               <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-bordeaux shrink-0" />
-              <span>{p}</span>
+              <span><Testo t={p} /></span>
             </li>
           ))}
         </ul>
@@ -157,7 +157,7 @@ export function RiassuntoLineaGuida() {
             <span className="text-tenue transition-transform group-open:rotate-90">›</span>
           </summary>
           <ul className="px-4 pb-4 pt-1 flex flex-col gap-2 border-t border-linea">
-            {s.punti.map((p, i) => <li key={i} className="text-sm leading-snug pt-2">{p}</li>)}
+            {s.punti.map((p, i) => <li key={i} className="text-sm leading-snug pt-2"><Testo t={p} /></li>)}
           </ul>
         </details>
       ))}
