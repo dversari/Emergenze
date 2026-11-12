@@ -1773,7 +1773,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           '> 1500 mL di sangue in cavità all’inserimento del drenaggio o > 200 mL/h per 2–4 ore: shock, murmure ridotto, ottusità, giugulari vuote.',
           'Rianimazione emostatica e tubo toracico grosso (28–32 Fr) al 5° spazio ascellare medio.',
-          'Perdita massiva o persistente: chirurgo toracico / chirurgo di guardia per toracotomia; valutare il trasferimento a Careggi.',
+          'Perdita massiva o persistente: toracotomia. Il chirurgo toracico è a Careggi: trasferimento; se troppo instabile per il trasporto, chirurgo di guardia.',
         ],
       },
       {
@@ -1805,7 +1805,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           'Meccanismo ad alta energia, dolore pelvico, ipotensione, arto accorciato o ruotato, sangue al meato o ematoma perineale. Non fare la manovra di compressione ripetuta.',
           'Fascia pelvica all’altezza dei grandi trocanteri, ginocchia legate insieme.',
-          'Instabile con RX bacino positiva ed eFAST negativa: radiologo interventista (angioembolizzazione) o packing preperitoneale (ortopedico e chirurgo di guardia).',
+          'Instabile con RX bacino positiva ed eFAST negativa: angioembolizzazione (radiologo interventista di Careggi o di Torregalli secondo l’orario: vedi Rubrica) o packing preperitoneale (ortopedico e chirurgo di guardia).',
         ],
       },
       {
@@ -1875,7 +1875,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
           'Fratture costali: analgesia multimodale e blocchi; anziano con ≥ 3 coste fratturate = ricovero (rischio di polmonite).',
           'Lesione aortica traumatica (decelerazione): mediastino allargato alla RX, angio-TC; controllo della FC e PAS < 100–120 come nella dissezione; chirurgo vascolare per endoprotesi.',
           'Rottura del diaframma: più spesso a sinistra, visceri nel torace, sondino nel torace alla RX; chirurgia.',
-          'Lesione tracheo-bronchiale: pneumotorace con perdita d’aria persistente dal drenaggio, enfisema sottocutaneo massivo; broncoscopia, chirurgo toracico.',
+          'Lesione tracheo-bronchiale: pneumotorace con perdita d’aria persistente dal drenaggio, enfisema sottocutaneo massivo; broncoscopia, chirurgo toracico di Careggi.',
           'Lesione esofagea (penetrante): pneumomediastino, dolore sproporzionato; TC con contrasto orale, antibiotico, chirurgia.',
           'Contusione miocardica: ECG e troponina; aritmie o ipotensione → eco e monitoraggio.',
         ],
@@ -1884,7 +1884,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         titolo: 'Valutazione secondaria: addome e retroperitoneo',
         punti: [
           'Esame obiettivo poco affidabile (intossicati, trauma cranico, lesioni distraenti): TC con contrasto se stabile.',
-          'Milza e fegato: se stabile, trattamento non operatorio con osservazione o angioembolizzazione (radiologo interventista); instabile o peritonite: laparotomia.',
+          'Milza e fegato: se stabile, trattamento non operatorio con osservazione o angioembolizzazione (radiologo interventista di Careggi o Torregalli secondo l’orario); instabile o peritonite: laparotomia.',
           'Visceri cavi e mesentere: segno della cintura di sicurezza, frattura di Chance, liquido libero senza lesione d’organo solido → sospetto alto, chirurgo di guardia.',
           'Pancreas e duodeno: trauma epigastrico diretto (manubrio), amilasi/lipasi ripetute, TC.',
           'Rene e vie urinarie: ematuria → TC con fase tardiva; sangue al meato → uretrografia prima del catetere (urologo).',

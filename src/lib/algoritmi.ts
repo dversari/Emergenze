@@ -384,7 +384,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         tipo: 'rami', rami: [
           { etichetta: 'Pneumotorace iperteso', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Decompressione subito', righe: ['Decompressione con ago 4°–5° spazio ascellare medio o toracostomia a dito, poi tubo toracico.'], vedi: 'Pneumotorace iperteso' }] },
           { etichetta: 'Pneumotorace aperto', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Medicazione occlusiva con valvola', righe: ['Poi tubo toracico lontano dalla ferita.'], vedi: 'Pneumotorace aperto' }] },
-          { etichetta: 'Emotorace massivo', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Tubo toracico grosso + emoderivati', righe: ['> 1500 mL o > 200 mL/h: toracotomia (chirurgo toracico).'], vedi: 'Emotorace massivo' }] },
+          { etichetta: 'Emotorace massivo', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Tubo toracico grosso + emoderivati', righe: ['> 1500 mL o > 200 mL/h: toracotomia (chirurgo toracico di Careggi).'], vedi: 'Emotorace massivo' }] },
           { etichetta: 'Lembo costale', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Ossigeno, analgesia, blocchi', righe: ['La contusione polmonare peggiora nelle ore: NIV o intubazione se insufficienza.'], vedi: 'Lembo costale e contusione polmonare' }] },
         ],
       },
@@ -393,7 +393,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         tipo: 'rami', rami: [
           { etichetta: 'Shock emorragico', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Dove sanguina?', righe: ['Esterno, torace, addome, bacino-retroperitoneo, ossa lunghe.'], vedi: 'Shock emorragico' }] },
           { etichetta: 'Tamponamento', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Versamento pericardico all’eFAST', righe: ['Toracotomia o finestra pericardica; pericardiocentesi solo come ponte.'], vedi: 'Tamponamento cardiaco' }] },
-          { etichetta: 'Bacino instabile', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Fascia pelvica ai grandi trocanteri', righe: ['Instabile: angioembolizzazione (radiologo interventista) o packing.'], vedi: 'Frattura di bacino instabile' }] },
+          { etichetta: 'Bacino instabile', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Fascia pelvica ai grandi trocanteri', righe: ['Instabile: angioembolizzazione (radiologo interventista di Careggi o Torregalli secondo l’orario) o packing.'], vedi: 'Frattura di bacino instabile' }] },
           { etichetta: 'Non emorragico', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Ostruttivo, cardiogeno, neurogeno', righe: ['Ipotensione con bradicardia e cute calda: lesione midollare (dopo aver escluso il sanguinamento).'], vedi: 'Shock non emorragico' }] },
         ],
       },
