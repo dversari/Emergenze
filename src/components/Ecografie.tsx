@@ -147,7 +147,7 @@ function Collo({ sonde }: { sonde: Sonda[] }) {
 }
 
 // ─── Le ecografie ───
-type Eco = { id: string; nome: string; sottotitolo: string; tono: string; sonda: string; scansioni: string[]; corpo: ReactNode; immagine: ReactNode; didascalia: string; referto: string; galleria?: { tit: string; img: ReactNode }[] }
+type Eco = { id: string; nome: string; sottotitolo: string; tono: string; sonda: string; scansioni: string[]; corpo: ReactNode; immagine: ReactNode; didascalia: string; referto: string; galleria?: { tit: string; img: ReactNode }[]; punti?: { titolo: string; righe: string[] }; fonti?: { etichetta: string; url: string }[] }
 
 const ECO: Eco[] = [
   {
@@ -455,7 +455,17 @@ Una eFAST negativa non esclude lesioni d'organo né emoperitoneo di piccola enti
   },
   {
     id: 'torace', nome: 'Ecografia polmonare', sottotitolo: 'Dispnea: linee A/B, sliding, consolidamenti, versamento', tono: 'border-l-[#2f6652]', sonda: 'Convex o lineare',
-    scansioni: ['1–3 BLUE point superiore: 2°–3° spazio, emiclaveare', '2–4 BLUE point inferiore: 4°–5° spazio, ascellare anteriore', '5–6 PLAPS: base posterolaterale (versamento, consolidamento)', 'Sonda longitudinale tra due coste («bat sign»), marcatore verso la testa'],
+    punti: { titolo: 'Segni chiave (consenso internazionale 2025)', righe: [
+      'Zone: protocollo a 8 zone (per lato 2 anteriori e 2 laterali, superiore e inferiore); nel critico possono bastare le 4 anteriori, più le basi posterolaterali per consolidamenti e versamento.',
+      'Zona positiva = almeno 3 linee B in un fotogramma (o linee B confluenti). Sindrome interstiziale diffusa = ≥ 2 zone positive per lato; ogni altro quadro è focale. Linee B isolate alle basi laterali possono essere posturali.',
+      'Edema cardiogeno: linee B diffuse, bilaterali, omogenee, più fitte nelle zone declivi; l’assenza di sindrome interstiziale diffusa lo esclude meglio della RX.',
+      'Pneumotorace: sliding, linee B o polso polmonare presenti escludono il PNX in quel punto; se assenti cercare il lung point lateralmente (lo conferma); senza lung point il PNX è molto probabile. Paziente in shock o insufficienza grave: assenza di sliding, linee B e polso nella regione antero-inferiore basta per drenare se il sospetto è alto.',
+      'Polmonite batterica: consolidamento irregolare a margini sfumati, broncogramma aereo dinamico, artefatti a coda di cometa al margine profondo, flusso al color Doppler. Infarto polmonare: piccolo consolidamento periferico a cuneo (≥ 5 mm) con margini netti.',
+      'Versamento: spazio di solito anecogeno tra le pleure con «segno della sinusoide»; si cerca sulla linea ascellare posteriore sopra il diaframma; echi interni = essudato o sangue.',
+      'Dopo l’intubazione: sliding presente su entrambi i lati (meglio se confrontato con prima) conferma il tubo in trachea, meglio dell’auscultazione.',
+    ] },
+    fonti: [{ etichetta: 'Volpicelli et al., Intensive Care Med 2026 – consenso internazionale LUS 2025', url: 'https://doi.org/10.1007/s00134-026-08487-2' }],
+    scansioni: ['1–3 BLUE point superiore: 2°–3° spazio, emiclaveare', '2–4 BLUE point inferiore: 4°–5° spazio, ascellare anteriore', '5–6 PLAPS: base posterolaterale (versamento, consolidamento)', '→ Sonda longitudinale tra due coste («bat sign»), marcatore verso la testa'],
     corpo: <Tronco sonde={[{ x: 84, y: 80, n: '1', r: 90, lx: -13, ly: -6 }, { x: 72, y: 106, n: '2', r: 90, lx: -13, ly: -4 }, { x: 116, y: 80, n: '3', r: 90, lx: 13, ly: -6 }, { x: 128, y: 106, n: '4', r: 90, lx: 13, ly: -4 }, { x: 64, y: 126, n: '5', r: 90, lx: -14, ly: 4 }, { x: 136, y: 126, n: '6', r: 90, lx: 14, ly: 4 }]} />,
     immagine: (
       <Us tipo="lineare" etichetta="LINEE A · sliding +">
@@ -525,8 +535,14 @@ export default function Ecografie() {
                     ))}
                   </div>
                 )}
-                <ol className="text-[13px] leading-snug space-y-0.5">{e.scansioni.map((s, i) => <li key={i}>{/^\d/.test(s) ? s : e.id === 'cus' && i === e.scansioni.length - 1 ? `→ ${s}` : `${i + 1}. ${s}`}</li>)}</ol>
+                <ol className="text-[13px] leading-snug space-y-0.5">{e.scansioni.map((s, i) => <li key={i}>{/^[\d→]/.test(s) ? s : e.id === 'cus' && i === e.scansioni.length - 1 ? `→ ${s}` : `${i + 1}. ${s}`}</li>)}</ol>
                 <p className="rounded-lg bg-sabbia px-3 py-2 text-[12.5px] leading-snug"><b>Cosa si vede:</b> {e.didascalia}</p>
+                {e.punti && (
+                  <div className="rounded-xl border border-linea bg-white p-3">
+                    <p className="text-[11px] font-extrabold uppercase tracking-wide text-verde">{e.punti.titolo}</p>
+                    <ul className="mt-1.5 space-y-1 text-[13px] leading-snug">{e.punti.righe.map((r) => <li key={r} className="flex gap-2"><span className="text-tenue">•</span><span>{r}</span></li>)}</ul>
+                  </div>
+                )}
                 <div className="rounded-xl border border-linea bg-white p-3">
                   <div className="flex items-center gap-2 mb-1.5">
                     <p className="flex-1 text-[11px] font-extrabold uppercase tracking-wide text-verde">Referto standard</p>
@@ -534,6 +550,11 @@ export default function Ecografie() {
                   </div>
                   <p className="whitespace-pre-wrap text-[13px] leading-snug">{e.referto}</p>
                 </div>
+                {e.fonti && (
+                  <div className="flex flex-wrap gap-2">
+                    {e.fonti.map((f) => <a key={f.url} href={f.url} target="_blank" rel="noreferrer" className="rounded-full border border-verde px-3 py-1 text-[12.5px] font-bold text-verde">📄 {f.etichetta} ↗</a>)}
+                  </div>
+                )}
               </div>
             )}
           </section>
