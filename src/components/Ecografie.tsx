@@ -330,7 +330,7 @@ Diametro della guaina del nervo ottico (ONSD, 3 mm dietro il globo): dx ... mm, 
 Esame mirato bedside; valutazione oculistica [richiesta].`,
   },
   {
-    id: 'muscoli', nome: 'Muscoli e tessuti molli', sottotitolo: 'Lesioni muscolari, ematoma, cellulite/ascesso, corpo estraneo, versamento, frattura', tono: 'border-l-[#8a6a2e]', sonda: 'Lineare (convex se profondo)',
+    id: 'muscoli', nome: 'Muscoli e tessuti molli', sottotitolo: 'Contrattura, stiramento, strappo, ematoma, cellulite/ascesso, corpo estraneo, versamento, frattura', tono: 'border-l-[#8a6a2e]', sonda: 'Lineare (convex se profondo)',
     scansioni: ['Sempre confronto con il lato sano, in longitudinale e trasversale', 'Sonda sul punto dolente; contrazione o movimento attivo per vedere le lesioni dinamiche', 'Color Doppler per iperemia e per distinguere vasi da raccolte', 'Compressione: l’ascesso si muove (pus), il flemmone no'],
     corpo: <Gambe sonde={[{ x: 120, y: 92, n: '1', lineare: true, r: 90, lx: 16, ly: 0 }, { x: 116, y: 158, n: '2', lineare: true, lx: 18, ly: 0 }]} />,
     immagine: (
@@ -345,12 +345,38 @@ Esame mirato bedside; valutazione oculistica [richiesta].`,
       </Us>
     ),
     galleria: [
-      { tit: 'Lesione muscolare con ematoma: fibre interrotte, raccolta nera', img: (
+      { tit: 'Contrattura (e DOMS): ecografia normale, fibre integre; il dolore è funzionale', img: (
+        <Us tipo="lineare" lab={[{ x: 120, y: 92, t: 'normale' }]}>
+          <rect x="40" y="10" width="160" height="26" fill={grigio(120)} />
+          <rect x="40" y="40" width="160" height="100" fill={grigio(55)} />
+          {[0,1,2,3,4,5,6,7].map((i) => <path key={i} d={`M${30 + i * 24} 138 L${60 + i * 24} 44`} stroke={grigio(165)} strokeWidth="2" />)}
+        </Us>
+      ) },
+      { tit: 'Stiramento (grado I): fibre integre, area sfumata di edema, falda di liquido lungo la fascia; spesso eco quasi normale', img: (
+        <Us tipo="lineare" lab={[{ x: 120, y: 92, t: 'edema' }, { x: 120, y: 34, t: 'liquido perifasciale' }]}>
+          <rect x="40" y="10" width="160" height="26" fill={grigio(120)} />
+          <rect x="40" y="40" width="160" height="100" fill={grigio(55)} />
+          {[0,1,2,3,4,5,6,7].map((i) => <path key={i} d={`M${30 + i * 24} 138 L${60 + i * 24} 44`} stroke={grigio(165)} strokeWidth="2" />)}
+          <ellipse cx="120" cy="88" rx="44" ry="26" fill={grigio(140)} opacity="0.55" />
+          <path d="M50 41 Q120 47 190 41" stroke={nero} strokeWidth="5" fill="none" />
+        </Us>
+      ) },
+      { tit: 'Strappo parziale (grado II): interruzione di parte delle fibre con ematoma nel difetto', img: (
         <Us tipo="lineare" lab={[{ x: 120, y: 96, t: 'ematoma' }]}>
           <rect x="40" y="10" width="160" height="26" fill={grigio(120)} />
           <rect x="40" y="40" width="160" height="100" fill={grigio(55)} />
-          {[0, 1, 2, 6, 7].map((i) => <path key={i} d={`M${30 + i * 24} 138 L${60 + i * 24} 44`} stroke={grigio(165)} strokeWidth="2" />)}
+          {[0,1,2,6,7].map((i) => <path key={i} d={`M${30 + i * 24} 138 L${60 + i * 24} 44`} stroke={grigio(165)} strokeWidth="2" />)}
           <ellipse cx="120" cy="90" rx="38" ry="22" fill={nero} />
+        </Us>
+      ) },
+      { tit: 'Rottura completa (grado III): monconi retratti «a battaglio di campana», grande ematoma', img: (
+        <Us tipo="lineare" lab={[{ x: 120, y: 92, t: 'ematoma' }, { x: 62, y: 60, t: 'moncone', a: 'start' }]}>
+          <rect x="40" y="10" width="160" height="26" fill={grigio(120)} />
+          <rect x="40" y="40" width="160" height="100" fill={nero} />
+          <path d="M40 46 Q70 50 82 90 Q70 130 40 134 Z" fill={grigio(60)} />
+          <path d="M200 46 Q170 50 158 90 Q170 130 200 134 Z" fill={grigio(60)} />
+          <path d="M44 120 L66 60 M54 126 L74 74" stroke={grigio(165)} strokeWidth="2" />
+          <path d="M196 120 L174 60 M186 126 L166 74" stroke={grigio(165)} strokeWidth="2" />
         </Us>
       ) },
       { tit: 'Cellulite: «acciottolato» (cobblestone), sottocute ispessito', img: (
@@ -392,11 +418,13 @@ Esame mirato bedside; valutazione oculistica [richiesta].`,
         </Us>
       ) },
     ],
-    didascalia: 'Muscolo normale: fondo scuro con fibre chiare oblique «a penna» in longitudinale, aspetto «a cielo stellato» in trasversale. Ematoma e liquido sono neri; la cellulite dà sottocute ispessito ad acciottolato; l’ascesso è una raccolta con parete e rinforzo posteriore; i corpi estranei sono brillanti con ombra o riverbero.',
+    didascalia: 'Muscolo normale: fondo scuro con fibre chiare oblique «a penna» in longitudinale, aspetto «a cielo stellato» in trasversale. Lesioni muscolari: contrattura ed elongazione hanno eco normale; lo stiramento dà solo edema sfumato e liquido lungo la fascia; lo strappo è un’interruzione delle fibre con ematoma; il momento migliore per valutarle è 2–5 giorni dopo il trauma (prima l’ematoma può non essersi ancora formato). Ematoma e liquido sono neri; la cellulite dà sottocute ispessito ad acciottolato; l’ascesso è una raccolta con parete e rinforzo posteriore; i corpi estranei sono brillanti con ombra o riverbero.',
     referto: `ECOGRAFIA BEDSIDE DEI TESSUTI MOLLI / MUSCOLOSCHELETRICA – SEDE: [...]
 Confronto con il controlaterale.
 [Normale ecostruttura muscolare, non interruzioni delle fibre né raccolte.]
-[Lesione muscolare di [grado ...] del muscolo ..., con interruzione delle fibre per ... mm ed ematoma di ... × ... mm.]
+[Quadro compatibile con contrattura/elongazione: ecostruttura muscolare conservata.]
+[Area di edema sfumato del muscolo ... con falda fluida perifasciale, senza interruzione delle fibre: lesione di grado I (stiramento).]
+[Lesione muscolare di grado [II parziale / III completa] del muscolo ..., con interruzione delle fibre per ... mm[, monconi retratti] ed ematoma di ... × ... mm.]
 [Sottocute ispessito con aspetto ad acciottolato, compatibile con cellulite; non raccolte drenabili.]
 [Raccolta ipo-anecogena di ... × ... × ... mm a ... mm dalla cute, con parete iperemica al Doppler, compatibile con ascesso.]
 [Formazione iperecogena lineare di ... mm a ... mm di profondità, con [cono d'ombra / artefatto da riverbero], compatibile con corpo estraneo.]
