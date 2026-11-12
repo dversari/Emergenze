@@ -367,52 +367,71 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
   },
   'trauma-maggiore': {
     titolo: 'Algoritmo trauma maggiore',
-    nota: 'Linea guida europea 2023, ATLS. Dosi per 70 kg.',
+    nota: 'ATLS 11 (xABCDE) e linea guida europea 2023. Dosi per 70 kg. Se il paziente peggiora: ricominciare da x.',
     nodi: [
-      { tipo: 'avvio', titolo: 'Trauma maggiore', righe: ['Team in sala, preallerta emoteca, timer dall’ora del trauma.'] },
+      { tipo: 'avvio', titolo: 'Trauma maggiore in arrivo', righe: ['Team con ruoli assegnati, preallerta emoteca (emazie 0 negativo), fascia pelvica, laccio e materiale per il torace pronti.', 'Annotare l’ora del trauma (acido tranexamico entro 3 h).'] },
+      { tipo: 'passo', titolo: 'VALUTAZIONE PRIMARIA', righe: ['Trattare ogni lesione mortale appena la si trova, poi passare alla lettera successiva.'] },
+      { tipo: 'allarme', titolo: 'x · Emorragia esterna massiva', righe: ['Compressione, laccio emostatico (ora), garze emostatiche nelle ferite giunzionali.'], vedi: 'Emorragia esterna massiva (x)' },
+      { tipo: 'checklist', titolo: 'A · Vie aeree e rachide cervicale', righe: ['Parla? Stridore, sangue, vomito, corpi estranei', 'Fratture del volto, ematoma del collo, ustione inalatoria', 'Stabilizzazione manuale in linea del rachide'] },
       {
-        tipo: 'checklist', titolo: '<C>ABCDE',
-        righe: [
-          '<C> Emorragia esterna: compressione, laccio emostatico',
-          'A Vie aeree + rachide cervicale in linea',
-          'B Torace: pneumotorace iperteso → decompressione; emotorace → drenaggio',
-          'C Due accessi grossi o intraossea; eFAST; fascia pelvica se bacino sospetto',
-          'D GCS, pupille, glicemia',
-          'E Esporre, riscaldare',
-        ],
-        vai: [{ etichetta: 'Decompressione', to: '/procedure?apri=decompressione' }, { etichetta: 'Drenaggio', to: '/procedure?apri=tubo' }, { etichetta: 'Intraossea', to: '/procedure?apri=io' }],
-      },
-      { tipo: 'decisione', titolo: 'Shock emorragico?', righe: ['PAS < 90, FC > 120, shock index > 1, lattato alto, eFAST positiva.'] },
-      {
-        tipo: 'rami', rami: [
-          {
-            etichetta: 'Sì', tono: 'no', nodi: [
-              {
-                tipo: 'terapia', titolo: 'Rianimazione emostatica',
-                righe: [
-                  'Acido tranexamico (Tranex) 1 g in 10 min entro 3 h, poi 1 g in 8 h.',
-                  'Emazie e plasma presto; fibrinogeno 3–4 g se < 1,5 g/L; calcio.',
-                  'PAS 80–90 (PAM ≥ 80 se trauma cranico grave).',
-                  'Antagonizzare gli anticoagulanti.',
-                ],
-              },
-              { tipo: 'allarme', titolo: 'Controllo dell’emorragia', righe: ['Non risponde: sala operatoria o radiologia interventistica senza TC.', 'Risponde: TC total body.'] },
-            ],
-          },
-          {
-            etichetta: 'No', tono: 'si', nodi: [
-              { tipo: 'passo', titolo: 'TC total body', righe: ['Se meccanismo ad alta energia o lesioni multiple.'] },
-            ],
-          },
-        ],
-      },
-      { tipo: 'decisione', titolo: 'GCS ≤ 8 o vie aeree a rischio?' },
-      {
-        tipo: 'allarme', titolo: 'Intubazione',
-        righe: ['Evitare ipossia e ipotensione; normocapnia. Segni di erniazione: neurochirurgo di Careggi.'],
+        tipo: 'allarme', titolo: 'Ostruzione delle vie aeree',
+        righe: ['Aspirazione, sublussazione della mandibola, cannula. Intubazione con videolaringoscopio dopo aver trattato lo shock; cricotiroidotomia se non si intuba né si ossigena.'],
+        vedi: 'Ostruzione delle vie aeree (A)',
         vai: [{ etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' }],
       },
-      { tipo: 'esito', titolo: 'Destinazione', righe: ['Sala operatoria, terapia intensiva o trasferimento al trauma center (Careggi).'] },
+      { tipo: 'checklist', titolo: 'B · Respiro e ventilazione', righe: ['FR, SpO₂, espansione, murmure, percussione', 'Trachea, giugulari, enfisema sottocutaneo, ferite', 'Eco: sliding pleurico, versamento'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Pneumotorace iperteso', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Decompressione subito', righe: ['Decompressione con ago 4°–5° spazio ascellare medio o toracostomia a dito, poi tubo toracico.'], vedi: 'Pneumotorace iperteso' }] },
+          { etichetta: 'Pneumotorace aperto', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Medicazione occlusiva con valvola', righe: ['Poi tubo toracico lontano dalla ferita.'], vedi: 'Pneumotorace aperto' }] },
+          { etichetta: 'Emotorace massivo', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Tubo toracico grosso + emoderivati', righe: ['> 1500 mL o > 200 mL/h: toracotomia (chirurgo toracico).'], vedi: 'Emotorace massivo' }] },
+          { etichetta: 'Lembo costale', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Ossigeno, analgesia, blocchi', righe: ['La contusione polmonare peggiora nelle ore: NIV o intubazione se insufficienza.'], vedi: 'Lembo costale e contusione polmonare' }] },
+        ],
+      },
+      { tipo: 'checklist', titolo: 'C · Circolo e controllo dell’emorragia', righe: ['FC, PA, shock index, cute, tempo di riempimento, coscienza', '2 accessi grossi o accesso intraosseo; prelievi con gruppo e crociate', 'eFAST, RX torace e bacino in sala'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Shock emorragico', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Dove sanguina?', righe: ['Esterno, torace, addome, bacino-retroperitoneo, ossa lunghe.'], vedi: 'Shock emorragico' }] },
+          { etichetta: 'Tamponamento', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Versamento pericardico all’eFAST', righe: ['Toracotomia o finestra pericardica; pericardiocentesi solo come ponte.'], vedi: 'Tamponamento cardiaco' }] },
+          { etichetta: 'Bacino instabile', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Fascia pelvica ai grandi trocanteri', righe: ['Instabile: angioembolizzazione (radiologo interventista) o packing.'], vedi: 'Frattura di bacino instabile' }] },
+          { etichetta: 'Non emorragico', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Ostruttivo, cardiogeno, neurogeno', righe: ['Ipotensione con bradicardia e cute calda: lesione midollare (dopo aver escluso il sanguinamento).'], vedi: 'Shock non emorragico' }] },
+        ],
+      },
+      {
+        tipo: 'terapia', titolo: 'Rianimazione emostatica',
+        righe: [
+          'Acido tranexamico (Tranex) 1 g in 10 min entro 3 h, poi 1 g in 8 h.',
+          'Emazie e plasma presto (≥ 1:2), pochi cristalloidi; fibrinogeno 3–4 g se < 1,5 g/L; calcio.',
+          'PAS 80–90 (PAM ≥ 80 se trauma cranico grave). Antagonizzare gli anticoagulanti. Riscaldare.',
+        ],
+        vedi: 'Farmaci ed emoderivati (70 kg)',
+      },
+      { tipo: 'checklist', titolo: 'D · Stato neurologico', righe: ['GCS (motoria), pupille, lato del deficit', 'Livello sensitivo-motorio, priapismo', 'Glicemia'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Trauma cranico grave', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Evitare ipossia e ipotensione', righe: ['GCS ≤ 8: intubazione. Erniazione: testa a 30°, mannitolo, normocapnia; neurochirurgo di Careggi.'], vedi: 'Trauma cranico grave (D)' }] },
+          { etichetta: 'Lesione midollare', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Restrizione del rachide', righe: ['PAM 85–90, niente cortisonici; sopra C5 rischio respiratorio.'], vedi: 'Lesione midollare' }] },
+        ],
+      },
+      { tipo: 'passo', titolo: 'E · Esposizione e temperatura', righe: ['Spogliare, rotolamento in blocco (dorso, perineo), poi coprire e riscaldare.'], vedi: 'Esposizione e ipotermia (E)' },
+      { tipo: 'nota', titolo: 'In arresto cardiaco', righe: ['Trattare le cause insieme alla RCP: emorragia, ossigenazione, pneumotorace (toracostomia bilaterale), tamponamento.'], vedi: 'Arresto cardiaco traumatico' },
+      { tipo: 'decisione', titolo: 'Dopo la valutazione primaria: emodinamica?', righe: ['Risposta a emoderivati e controllo dell’emorragia esterna.'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Non risponde', tono: 'no', fine: 'sala operatoria, angiografia o trasferimento', nodi: [{ tipo: 'allarme', titolo: 'Controllo del danno senza TC', righe: ['eFAST positiva → laparotomia; bacino → angioembolizzazione o packing; torace → toracotomia.', 'Trauma center: Careggi.'] }] },
+          { etichetta: 'Stabile o risponde', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'TC total body con contrasto', righe: ['Encefalo, rachide, torace, addome, bacino.'] }] },
+        ],
+      },
+      { tipo: 'passo', titolo: 'VALUTAZIONE SECONDARIA', righe: ['Storia AMPLE e esame testa-piedi, fronte e retro; ripetere la valutazione primaria se peggiora.'], vedi: 'Raccolta della storia e casi particolari' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Torace', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Lesioni toraciche', righe: ['Pneumotorace ed emotorace semplici, coste, aorta, diaframma, trachea-bronchi, esofago, contusione miocardica.'], vedi: 'Valutazione secondaria: torace' }] },
+          { etichetta: 'Addome e retroperitoneo', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Organi e visceri', righe: ['Milza, fegato, visceri cavi, pancreas-duodeno, rene e uretra, ferite penetranti.'], vedi: 'Valutazione secondaria: addome e retroperitoneo' }] },
+          { etichetta: 'Rachide e arti', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Ossa, vasi, compartimenti', righe: ['Rachide (NEXUS), lesioni arteriose, fratture esposte, sindrome compartimentale, schiacciamento, amputazioni.'], vedi: 'Valutazione secondaria: rachide, arti e tessuti' }] },
+          { etichetta: 'Testa, volto e collo', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Cranio, occhi, collo', righe: ['Base cranica, globo oculare, massiccio facciale, ferite del collo, lesioni vascolari cervicali.'], vedi: 'Valutazione secondaria: testa, volto e collo' }] },
+        ],
+      },
+      { tipo: 'esito', titolo: 'Destinazione', righe: ['Sala operatoria, terapia intensiva, reparto o trasferimento al trauma center (Careggi). Valutazione terziaria a 24 h.'] },
     ],
   },
   'post-rosc': {

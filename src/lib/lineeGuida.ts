@@ -1705,59 +1705,227 @@ export const LINEE_GUIDA: LineaGuida[] = [
   {
     id: 'trauma-maggiore',
     titolo: 'Trauma maggiore',
-    ente: 'Task Force europea / ATLS',
-    anno: 2023,
+    ente: 'ATLS 11 · Task Force europea',
+    anno: 2025,
     area: 'Trauma',
-    fonte: { etichetta: 'Rossaint et al., Crit Care 2023 (linea guida europea, 6ª ed.)', url: 'https://doi.org/10.1186/s13054-023-04327-7' },
-    controllata: '2026-11-11',
-    calcolatori: [{ id: 'gcs', nome: 'GCS' }, { id: 'nexus', nome: 'NEXUS cervicale' }, { id: 'ccsr', nome: 'Canadian C-spine' }],
+    fonte: { etichetta: 'ATLS 11ª edizione (American College of Surgeons, 2025)', url: 'https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/' },
+    controllata: '2026-11-12',
+    calcolatori: [{ id: 'gcs', nome: 'GCS' }, { id: 'nexus', nome: 'NEXUS cervicale' }, { id: 'ccsr', nome: 'Canadian C-spine' }, { id: 'ccthr', nome: 'Canadian CT Head Rule' }],
     vediAnche: [
       { etichetta: 'Decompressione', to: '/procedure?apri=decompressione' },
       { etichetta: 'Drenaggio toracico', to: '/procedure?apri=tubo' },
+      { etichetta: 'Pericardiocentesi', to: '/procedure?apri=pericardiocentesi' },
+      { etichetta: 'Cricotiroidotomia', to: '/procedure?apri=crico' },
       { etichetta: 'Intraossea', to: '/procedure?apri=io' },
+      { etichetta: 'eFAST', to: '/procedure?sez=eco&apri=efast' },
       { etichetta: 'Sedazione: intubazione', to: '/sedazione?apri=intubazione' },
       { etichetta: 'Anticoagulato che sanguina', to: '/linee-guida/anticoagulato-sanguinamento' },
+      { etichetta: 'Aorta acuta', to: '/linee-guida/dissezione-aortica' },
+    ],
+    approfondimenti: [
+      { etichetta: 'Rossaint et al., linea guida europea sul trauma con sanguinamento (6ª ed., Crit Care 2023)', url: 'https://doi.org/10.1186/s13054-023-04327-7' },
+      { etichetta: 'ERC 2025: arresto cardiaco traumatico (circostanze speciali)', url: 'https://cprguidelines.eu/' },
     ],
     inBreve: [
-      '<C>ABCDE: prima l’emorragia esterna massiva (compressione, laccio emostatico), poi vie aeree con protezione del rachide.',
-      'Ipotensione permissiva finché il sanguinamento non è controllato: PAS 80–90 mmHg; PAM ≥ 80 se trauma cranico grave.',
-      'Acido tranexamico entro 3 h: 1 g in 10 min, poi 1 g in 8 h.',
-      'Emoderivati presto; fibrinogeno se < 1,5 g/L; calcio ionizzato nella norma; prevenire l’ipotermia.',
-      'Fascia pelvica se sospetta frattura di bacino con instabilità. eFAST; TC total body se stabile o rispondente.',
-      'Instabile con sanguinamento in cavità: chirurgia di controllo del danno o radiologia interventistica, senza aspettare la TC.',
+      'Valutazione primaria xABCDE: si trattano subito le lesioni che uccidono, nell’ordine in cui uccidono; se il paziente peggiora si ricomincia da x.',
+      'x: emorragia esterna massiva → compressione, laccio emostatico, garze emostatiche, prima delle vie aeree.',
+      'A-B: ostruzione delle vie aeree, pneumotorace iperteso, pneumotorace aperto, emotorace massivo, lembo costale. C: shock emorragico, tamponamento, bacino instabile.',
+      'Rianimare prima di intubare (ATLS 11): shock trattato, ketamina a dose ridotta, videolaringoscopio.',
+      'Ipotensione permissiva (PAS 80–90; PAM ≥ 80 se trauma cranico grave), acido tranexamico entro 3 h, emoderivati presto, calcio, niente ipotermia.',
+      'Instabile che non risponde: sala operatoria o radiologia interventistica senza TC. Stabile o rispondente: TC total body, poi valutazione secondaria testa-piedi.',
     ],
     sezioni: [
+      {
+        titolo: 'Emorragia esterna massiva (x)',
+        punti: [
+          'Compressione diretta forte e continua; laccio emostatico alto e stretto sull’arto (annotare l’ora), secondo laccio sopra il primo se non basta.',
+          'Ferite giunzionali (inguine, ascella, collo): zaffaggio con garza emostatica e compressione per almeno 3 minuti.',
+          'Scalpo: sutura rapida a punti larghi o graffette. Epistassi massiva: tamponamento anteriore e posteriore (catetere a palloncino).',
+        ],
+      },
+      {
+        titolo: 'Ostruzione delle vie aeree (A)',
+        punti: [
+          'Segni: stridore, voce alterata, agitazione, rientramenti, cianosi, GCS ≤ 8, sangue o vomito, fratture del massiccio facciale, ustione inalatoria.',
+          'Sublussazione della mandibola con il rachide in linea; aspirazione; cannula orofaringea (nasale no se sospetta frattura della base cranica).',
+          'Intubazione in sequenza rapida con videolaringoscopio, collare aperto e stabilizzazione manuale. Se non si intuba né si ossigena: cricotiroidotomia.',
+          'Ematoma cervicale espansivo, trauma laringeo (crepitio, enfisema, frattura palpabile): intubazione precoce dall’operatore più esperto, pronti alla via chirurgica.',
+        ],
+      },
+      {
+        titolo: 'Pneumotorace iperteso',
+        punti: [
+          'Diagnosi clinica, non radiologica: distress, ipotensione, murmure assente, iperespansione, turgore giugulare, deviazione tracheale (tardiva); in ventilazione meccanica ipossia e pressioni di picco alte.',
+          'Decompressione con ago al 4°–5° spazio sulla linea ascellare media (ago lungo, ≥ 8 cm) o toracostomia a dito nel paziente intubato; poi tubo toracico.',
+          'Eco: assenza di sliding e di polso polmonare, «punto polmone».',
+        ],
+      },
+      {
+        titolo: 'Pneumotorace aperto',
+        punti: [
+          'Ferita toracica soffiante più grande di 2/3 del diametro della trachea.',
+          'Medicazione occlusiva con valvola (chest seal) o fissata su tre lati; tubo toracico lontano dalla ferita; poi chiusura chirurgica.',
+          'Se compare ipertensione dopo la medicazione: sollevarla o decomprimere.',
+        ],
+      },
+      {
+        titolo: 'Emotorace massivo',
+        punti: [
+          '> 1500 mL di sangue in cavità all’inserimento del drenaggio o > 200 mL/h per 2–4 ore: shock, murmure ridotto, ottusità, giugulari vuote.',
+          'Rianimazione emostatica e tubo toracico grosso (28–32 Fr) al 5° spazio ascellare medio.',
+          'Perdita massiva o persistente: chirurgo toracico / chirurgo di guardia per toracotomia; valutare il trasferimento a Careggi.',
+        ],
+      },
+      {
+        titolo: 'Lembo costale e contusione polmonare',
+        punti: [
+          '≥ 2 coste fratturate in ≥ 2 punti: movimento paradosso; il problema principale è la contusione sottostante e il dolore.',
+          'Ossigeno, analgesia vera (oppioidi, blocco del serrato anteriore o blocco ESP), liquidi senza eccessi; NIV se collabora, intubazione se insufficienza respiratoria.',
+        ],
+      },
+      {
+        titolo: 'Shock emorragico',
+        punti: [
+          'Cercare il sangue in 5 sedi: esterno, torace (RX, eco), addome (eFAST), bacino e retroperitoneo (RX bacino), ossa lunghe (femore: fino a 1,5 L).',
+          'Segni: FC > 120, PAS < 90, shock index > 1, lattati > 2, deficit di basi < −6, cute fredda; anziani, beta-bloccati e sportivi possono non avere tachicardia.',
+          'Due accessi grossi o intraossea; prelievi con gruppo e prove crociate; emazie e plasma presto, pochi cristalloidi (max 1 L).',
+          'Risposta ai liquidi: rapida (stabile), transitoria (sanguina ancora → controllo chirurgico o angiografico), assente (sala subito).',
+        ],
+      },
+      {
+        titolo: 'Tamponamento cardiaco',
+        punti: [
+          'Ferita penetrante del torace o dell’epigastrio, ipotensione, giugulari turgide (possono mancare se ipovolemico); eFAST: versamento pericardico.',
+          'Liquidi come ponte; cardiochirurgo di Careggi o chirurgo di guardia per toracotomia/finestra pericardica.',
+          'Pericardiocentesi solo come ponte se la chirurgia non è immediata (il sangue spesso è coagulato).',
+        ],
+      },
+      {
+        titolo: 'Frattura di bacino instabile',
+        punti: [
+          'Meccanismo ad alta energia, dolore pelvico, ipotensione, arto accorciato o ruotato, sangue al meato o ematoma perineale. Non fare la manovra di compressione ripetuta.',
+          'Fascia pelvica all’altezza dei grandi trocanteri, ginocchia legate insieme.',
+          'Instabile con RX bacino positiva ed eFAST negativa: radiologo interventista (angioembolizzazione) o packing preperitoneale (ortopedico e chirurgo di guardia).',
+        ],
+      },
+      {
+        titolo: 'Shock non emorragico',
+        punti: [
+          'Ostruttivo: pneumotorace iperteso, tamponamento. Cardiogeno: contusione miocardica (ECG, troponina, eco).',
+          'Neurogeno: lesione midollare cervicale o toracica alta → ipotensione con bradicardia e cute calda; noradrenalina dopo aver escluso il sanguinamento.',
+        ],
+      },
+      {
+        titolo: 'Trauma cranico grave (D)',
+        punti: [
+          'GCS, pupille, lato del deficit; glicemia. Evitare ipossia (SpO₂ > 94%) e ipotensione (PAS ≥ 100–110, PAM ≥ 80).',
+          'Normocapnia (PaCO₂ 35–40); iperventilazione solo come ponte se erniazione.',
+          'Erniazione (midriasi, decerebrazione, Cushing): testa a 30°, mannitolo 18% 0,5–1 g/kg = 200–400 mL in 15 min o soluzione ipertonica; neurochirurgo di Careggi.',
+          'TC encefalo e rachide cervicale appena stabile; antagonizzare gli anticoagulanti.',
+        ],
+      },
+      {
+        titolo: 'Lesione midollare',
+        punti: [
+          'Deficit motori/sensitivi con livello, priapismo, respiro diaframmatico, shock neurogeno.',
+          'Restrizione del movimento del rachide (collare, tavola solo per il trasporto), PAM 85–90 per 7 giorni secondo il neurochirurgo; niente cortisonici.',
+          'Lesione alta (sopra C5): rischio di insufficienza respiratoria, intubazione precoce.',
+        ],
+      },
+      {
+        titolo: 'Esposizione e ipotermia (E)',
+        punti: [
+          'Spogliare completamente, rotolamento in blocco per ispezionare dorso e perineo, poi coprire.',
+          'Liquidi ed emoderivati caldi, coperta ad aria calda, sala calda: l’ipotermia (< 35 °C) peggiora la coagulopatia.',
+        ],
+      },
+      {
+        titolo: 'Arresto cardiaco traumatico',
+        punti: [
+          'Trattare le cause reversibili insieme alla RCP (ERC 2025): emorragia (laccio, fascia pelvica, emoderivati), ossigenazione (vie aeree), pneumotorace (toracostomia bilaterale a dito), tamponamento.',
+          'Le compressioni toraciche non devono ritardare il trattamento delle cause; in ipovolemia l’adrenalina ha un ruolo minore.',
+          'Toracotomia resuscitativa: solo trauma penetrante con arresto da < 15 minuti e operatore esperto.',
+        ],
+      },
+      {
+        titolo: 'Esami e strumenti della valutazione primaria',
+        punti: [
+          'ECG e monitor, SpO₂, EtCO₂ se intubato, EGA con lattati e deficit di basi, emocromo, coagulazione, fibrinogeno, gruppo e prove crociate, β-hCG nella donna fertile, alcolemia e tossici.',
+          'RX torace e bacino in sala, eFAST (versamento pericardico, liquido libero, pneumotorace).',
+          'Catetere vescicale: non se sangue al meato, ematoma perineale o prostata alta (prima uretrografia). Sondino gastrico: per bocca se sospetta frattura della base cranica.',
+        ],
+      },
       {
         titolo: 'Farmaci ed emoderivati (70 kg)',
         punti: [
           'Acido tranexamico (Tranex 500 mg/5 mL): 1 g = 2 fiale in 100 mL di SF in 10 min, poi 1 g in 8 h. Non dopo 3 h dal trauma.',
           'Fibrinogeno concentrato (Haemocomplettan o Fibryga 1 g): 3–4 g se fibrinogeno < 1,5 g/L o sanguinamento massivo.',
-          'Emazie e plasma presto (rapporto almeno 1:2) se emorragia massiva; poi guidati da esami o test viscoelastici.',
-          'Calcio cloruro 10% 10 mL o calcio gluconato 10% 30 mL se calcio ionizzato < 1,15 mmol/L.',
+          'Emazie e plasma presto (rapporto almeno 1:2) se emorragia massiva; piastrine se < 50.000; poi guidati da esami o test viscoelastici.',
+          'Calcio cloruro 10% 10 mL o calcio gluconato 10% 30 mL se calcio ionizzato < 1,15 mmol/L (anche a ogni 4 unità).',
+          'Intubazione nello shock: ketamina 0,5–1 mg/kg = 35–70 mg (dose ridotta), rocuronio 1,2 mg/kg = 84 mg (2 fiale da 50 mg); pronti con noradrenalina.',
+          'Analgesia: fentanil (Fentanest) 50 µg ev ripetibile o ketamina 0,2–0,3 mg/kg = 15–20 mg.',
           'Anticoagulanti: complesso protrombinico (PCC) e vitamina K (Konakion) per i dicumarolici; vedi PDTA dedicato.',
         ],
       },
       {
-        titolo: 'Primary survey',
+        titolo: 'Valutazione secondaria: torace',
         punti: [
-          '<C>: emorragia esterna catastrofica → compressione, laccio, agenti emostatici.',
-          'A: vie aeree con collare/immobilizzazione in linea; intubazione se GCS ≤ 8 o vie aeree a rischio.',
-          'B: pneumotorace iperteso → decompressione; emotorace massivo → drenaggio.',
-          'C: due accessi grossi (o intraossea), eFAST, fascia pelvica, emoderivati.',
-          'D: GCS, pupille, glicemia. E: esporre e riscaldare.',
+          'Pneumotorace semplice: drenaggio se sintomatico, se esteso o prima della ventilazione meccanica/trasporto aereo; piccolo e asintomatico: osservazione.',
+          'Emotorace non massivo: tubo toracico se visibile alla RX.',
+          'Fratture costali: analgesia multimodale e blocchi; anziano con ≥ 3 coste fratturate = ricovero (rischio di polmonite).',
+          'Lesione aortica traumatica (decelerazione): mediastino allargato alla RX, angio-TC; controllo della FC e PAS < 100–120 come nella dissezione; chirurgo vascolare per endoprotesi.',
+          'Rottura del diaframma: più spesso a sinistra, visceri nel torace, sondino nel torace alla RX; chirurgia.',
+          'Lesione tracheo-bronchiale: pneumotorace con perdita d’aria persistente dal drenaggio, enfisema sottocutaneo massivo; broncoscopia, chirurgo toracico.',
+          'Lesione esofagea (penetrante): pneumomediastino, dolore sproporzionato; TC con contrasto orale, antibiotico, chirurgia.',
+          'Contusione miocardica: ECG e troponina; aritmie o ipotensione → eco e monitoraggio.',
         ],
       },
       {
-        titolo: 'Trauma cranico grave',
+        titolo: 'Valutazione secondaria: addome e retroperitoneo',
         punti: [
-          'Evitare ipossia (SpO₂ > 94%) e ipotensione (PAS ≥ 100–110, PAM ≥ 80).',
-          'Normocapnia (PaCO₂ 35–40); iperventilazione solo come ponte se segni di erniazione.',
-          'Testa a 30°; mannitolo o soluzione ipertonica se segni di erniazione, con il neurochirurgo di Careggi.',
+          'Esame obiettivo poco affidabile (intossicati, trauma cranico, lesioni distraenti): TC con contrasto se stabile.',
+          'Milza e fegato: se stabile, trattamento non operatorio con osservazione o angioembolizzazione (radiologo interventista); instabile o peritonite: laparotomia.',
+          'Visceri cavi e mesentere: segno della cintura di sicurezza, frattura di Chance, liquido libero senza lesione d’organo solido → sospetto alto, chirurgo di guardia.',
+          'Pancreas e duodeno: trauma epigastrico diretto (manubrio), amilasi/lipasi ripetute, TC.',
+          'Rene e vie urinarie: ematuria → TC con fase tardiva; sangue al meato → uretrografia prima del catetere (urologo).',
+          'Ferite penetranti: peritonite, eviscerazione o shock → sala; stabile → TC ed esplorazione della ferita con il chirurgo.',
+        ],
+      },
+      {
+        titolo: 'Valutazione secondaria: rachide, arti e tessuti',
+        punti: [
+          'Rachide cervicale: NEXUS o Canadian C-spine per decidere la TC; nel politrauma con meccanismo maggiore TC comunque. Toraco-lombare: TC se dolore, deficit o meccanismo maggiore.',
+          'Lesione arteriosa degli arti: segni maggiori (emorragia pulsante, ematoma in espansione, polso assente, soffio/fremito, ischemia) → chirurgo vascolare; indice caviglia-braccio < 0,9 → angio-TC.',
+          'Lussazioni di ginocchio: rischio di lesione dell’arteria poplitea anche con polsi presenti → indice caviglia-braccio o angio-TC.',
+          'Fratture esposte: cefazolina 2 g ev (2 fiale da 1 g) entro 1 ora, profilassi antitetanica, foto e medicazione sterile, riduzione e immobilizzazione; ortopedico.',
+          'Sindrome compartimentale: dolore sproporzionato, dolore allo stiramento passivo, tensione; i polsi presenti non la escludono → fasciotomia (ortopedico).',
+          'Schiacciamento prolungato: rabdomiolisi e iperkaliemia; liquidi abbondanti prima della liberazione se possibile, CK, potassio, ECG.',
+          'Amputazione traumatica: laccio, parte amputata in garza umida in sacchetto su ghiaccio (non a contatto diretto); chirurgo plastico o della mano.',
+        ],
+      },
+      {
+        titolo: 'Valutazione secondaria: testa, volto e collo',
+        punti: [
+          'Cuoio capelluto, otorrea/rinorrea, segno di Battle e occhi da procione (frattura della base cranica), occhio (acuità, globo perforato: niente pressione, scudo rigido).',
+          'Fratture del massiccio facciale: vie aeree a rischio, epistassi massiva.',
+          'Ferite penetranti del collo che superano il platisma: niente esplorazione in PS; segni maggiori (emorragia, ematoma espansivo, soffio, aria dalla ferita, ematemesi) → sala; altrimenti angio-TC.',
+          'Lesioni vascolari cervicali da trauma chiuso: deficit neurologico non spiegato dalla TC encefalo, fratture del rachide cervicale o della base cranica → angio-TC collo.',
+        ],
+      },
+      {
+        titolo: 'Raccolta della storia e casi particolari',
+        punti: [
+          'AMPLE: allergie, medicine (anticoagulanti, antiaggreganti, beta-bloccanti), passato patologico e gravidanza, ultimo pasto, eventi e meccanismo.',
+          'Anziano: shock con PA «normale», fratture con traumi minori, anticoagulanti; soglia bassa per TC e ricovero.',
+          'Gravidanza: spostare l’utero a sinistra (cuneo sotto il fianco destro), salvare la madre salva il feto, ginecologo, immunoprofilassi anti-D se Rh negativa.',
+          'Bambino: dosi a peso, ipotensione tardiva (segno di shock grave), pediatra; possibili maltrattamenti.',
+          'Valutazione terziaria a 24 h: ripetere l’esame completo per le lesioni sfuggite (fino al 10% dei politraumi).',
         ],
       },
     ],
     aggiornamenti: [
       { data: '2023-03-01', testo: 'Linea guida europea 6ª edizione: 39 raccomandazioni; ipotensione permissiva, acido tranexamico precoce, gestione guidata dai test della coagulazione.' },
+      { data: '2025-08-01', testo: 'ATLS 11ª edizione: valutazione primaria xABCDE (emorragia esterna prima delle vie aeree), rianimazione prima dell’intubazione, videolaringoscopio di prima scelta, capitolo dedicato al trauma penetrante.' },
     ],
   },
   {
