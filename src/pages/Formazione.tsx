@@ -21,7 +21,7 @@ export const CORSI = [
   { nome: 'Corso decontaminazione', tipo: 'Maxi-emergenze' },
   { nome: 'PEIMAF', tipo: 'Maxi-emergenze' },
   { nome: 'Codice rosa', tipo: 'Violenza' },
-  { nome: 'Simulazione relazionale', tipo: 'Comunicazione' },
+  { nome: 'La comunicazione difficile: training in simulazione', tipo: 'Comunicazione' },
   { nome: 'Corso delirium', tipo: 'Geriatria' },
   { nome: 'Corso vertigini', tipo: 'Neurologia' },
   { nome: 'Ecografia (Winfocus): PoCUS dolore toracico, ecografia toracica, blocchi nervosi', tipo: 'Ecografia' },
