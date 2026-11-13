@@ -27,6 +27,100 @@ export const DOCUMENTI_ASL: DocumentoAsl[] = [
     usatoIn: [{ etichetta: 'Percorsi: notifica', to: '/percorsi?apri=notifica-infettive' }],
   },
   {
+    id: 'indirizzi-segnalazione', titolo: 'Indirizzi per la segnalazione delle malattie infettive (Toscana)', ente: 'Regione Toscana', data: '7/1/2026', area: 'Sanità pubblica',
+    file: 'docs/asl/indirizzi-segnalazione-malattie-infettive-2026.pdf',
+    descr: 'Email delle UF Igiene pubblica per zona (Pratese: malattieinfettiveigiene.prato@; Pistoiese e Val di Nievole: segnalazioni.malattieinfettive.pistoia@).',
+    usatoIn: [{ etichetta: 'Percorsi: notifica', to: '/percorsi?apri=notifica-infettive' }],
+  },
+  {
+    id: 'decreto-16355', titolo: 'Decreto dirigenziale RT n. 16355/2025: approvazione della scheda unica', codice: 'DD 16355 del 24/7/2025', ente: 'Regione Toscana', data: '24/7/2025', area: 'Sanità pubblica',
+    file: 'docs/asl/decreto-rt-16355-2025-scheda-unica.pdf',
+    descr: 'Atto regionale che approva la scheda unica di segnalazione delle malattie infettive.',
+    usatoIn: [{ etichetta: 'Percorsi: notifica', to: '/percorsi?apri=notifica-infettive' }],
+  },
+  {
+    id: 'arbovirosi-2026', titolo: 'Circolare arbovirosi, stagione vettoriale 2026', codice: 'Min. Salute prot. 1510 del 28/4/2026', ente: 'Ministero della Salute', data: '28/4/2026', area: 'Sanità pubblica',
+    file: 'docs/asl/circolare-arbovirosi-2026.pdf',
+    descr: 'Prevenzione, sorveglianza e risposta ad arbovirosi (Dengue, Chikungunya, Zika, West Nile…); inoltrata dal DEU il 2/9/2026 per i casi autoctoni di Dengue in Toscana.',
+    usatoIn: [{ etichetta: 'PDTA febbre al rientro', to: '/linee-guida/febbre-viaggiatore' }],
+  },
+  {
+    id: 'caso-dengue', titolo: 'Definizione di caso di Dengue', ente: 'Piano nazionale arbovirosi', data: '2026', area: 'Sanità pubblica',
+    file: 'docs/asl/definizione-caso-dengue.pdf', descr: 'Criteri clinici, di laboratorio ed epidemiologici; caso possibile, probabile, confermato.',
+    usatoIn: [{ etichetta: 'PDTA febbre al rientro', to: '/linee-guida/febbre-viaggiatore' }],
+  },
+  {
+    id: 'caso-chikungunya', titolo: 'Definizione di caso di Chikungunya', ente: 'Piano nazionale arbovirosi', data: '2025', area: 'Sanità pubblica',
+    file: 'docs/asl/definizione-caso-chikungunya.pdf', descr: 'Inviata dalla Regione il 4/11/2025 per i casi di rientro da Cuba (Chikungunya, Dengue, Oropouche).',
+    usatoIn: [{ etichetta: 'PDTA febbre al rientro', to: '/linee-guida/febbre-viaggiatore' }],
+  },
+  {
+    id: 'ebola-istruzione', titolo: 'Piano di gestione e controllo dell’infezione da virus Ebola negli ospedali ASL TC', codice: 'Istruzione di lavoro', ente: 'ASL Toscana Centro · Direzione Rete Ospedaliera', data: '23/6/2026', area: 'Biocontenimento',
+    file: 'docs/asl/istruzione-lavoro-ebola.pdf', descr: 'Definizioni di caso, stratificazione del rischio, gestione in PS del paziente in autopresentazione o dal 118, trasferimento a Careggi/Meyer. Versione finale inviata prima del format aziendale.',
+    usatoIn: [{ etichetta: 'Percorsi: Ebola', to: '/percorsi?apri=ebola' }],
+  },
+  {
+    id: 'ebola-dpi', titolo: 'DPI NBCR per agenti biologici di classe 4: vestizione e svestizione', ente: 'ASL Toscana Centro', data: '2026', area: 'Biocontenimento',
+    file: 'docs/asl/ebola-dpi-vestizione-svestizione.pdf', descr: 'Elenco dei DPI e sequenza di vestizione/svestizione per Ebola in PS e NBCR.',
+    usatoIn: [{ etichetta: 'Percorsi: Ebola', to: '/percorsi?apri=ebola' }],
+  },
+  {
+    id: 'ebola-comunicazione', titolo: 'Avviso relativo a malattia da virus Ebola', ente: 'Direzione Sanitaria ASL TC', data: '1/6/2026', area: 'Biocontenimento',
+    file: 'docs/asl/comunicazione-ebola-giugno-2026.pdf', descr: 'Triage dei rientri da RDC/Uganda con sintomi; strutture di riferimento di Area Vasta.',
+    usatoIn: [{ etichetta: 'Percorsi: Ebola', to: '/percorsi?apri=ebola' }],
+  },
+  {
+    id: 'hantavirus-3680', titolo: 'Infezione da virus Andes (hantavirus): casi sospetti, probabili e confermati', codice: 'Circolare Min. Salute n. 3680 del 15/5/2026', ente: 'Ministero della Salute', data: '15/5/2026', area: 'Biocontenimento',
+    file: 'docs/asl/circolare-3680-hantavirus-andes.pdf', descr: 'Gestione dei casi legati al focolaio sulla nave MV Hondius (maggio 2026).',
+  },
+  {
+    id: 'hantavirus-regioni', titolo: 'Circolare hantavirus alle Regioni', codice: 'Min. Salute prot. 3482 dell’11/5/2026', ente: 'Ministero della Salute', data: '11/5/2026', area: 'Biocontenimento',
+    file: 'docs/asl/circolare-hantavirus-regioni.pdf', descr: 'Indicazioni iniziali; richiamata anche dall’istruzione Ebola per il trasporto dei campioni.',
+  },
+  {
+    id: 'hantavirus-rt', titolo: 'Nota della Regione Toscana sull’hantavirus', ente: 'Regione Toscana', data: '12/5/2026', area: 'Biocontenimento',
+    file: 'docs/asl/circolare-trasmissione-hantavirus.pdf', descr: 'Trasmissione della circolare ministeriale alle Aziende.',
+  },
+  {
+    id: 'campioni-alto-rischio', titolo: 'Invio di campioni per malattie infettive altamente contagiose', ente: 'Ministero della Salute (allegato 1)', data: '2026', area: 'Biocontenimento',
+    file: 'docs/asl/hantavirus-procedure-invio-campioni.pdf', descr: 'Tipologia dei campioni, triplo involucro, trasporto e consegna al laboratorio di riferimento.',
+  },
+  {
+    id: 'scabbia', titolo: 'Gestione del paziente con scabbia sospetta o conclamata in ambiente ospedaliero', codice: 'PA.STDS.07 rev. 0', ente: 'ASL Toscana Centro · SOSD Infezioni correlate all’assistenza', data: '18/12/2024', area: 'Infezioni correlate all’assistenza',
+    file: 'docs/asl/PA.STDS.07-scabbia.pdf', descr: 'Procedura aziendale: definizioni, isolamento, terapia, notifica entro 48 h. Allegati: check list di triage, misure in ospedale e in comunità.',
+    usatoIn: [{ etichetta: 'Percorsi: scabbia', to: '/percorsi?apri=scabbia' }],
+  },
+  {
+    id: 'scabbia-all1', titolo: 'PA.STDS.07 · Allegato 1: criteri di isolamento in PS (check list triage)', ente: 'ASL Toscana Centro', data: '18/12/2024', area: 'Infezioni correlate all’assistenza',
+    file: 'docs/asl/PA.STDS.07-allegato-1.pdf', descr: 'Flow chart di triage: isolamento se ≥ 2 criteri.', usatoIn: [{ etichetta: 'Percorsi: scabbia', to: '/percorsi?apri=scabbia' }],
+  },
+  {
+    id: 'scabbia-all2', titolo: 'PA.STDS.07 · Allegato 2: misure di controllo in ospedale', ente: 'ASL Toscana Centro', data: '18/12/2024', area: 'Infezioni correlate all’assistenza',
+    file: 'docs/asl/PA.STDS.07-allegato-2.pdf', descr: 'DPI, isolamento, biancheria, effetti letterecci, ambiente.', usatoIn: [{ etichetta: 'Percorsi: scabbia', to: '/percorsi?apri=scabbia' }],
+  },
+  {
+    id: 'scabbia-all3', titolo: 'PA.STDS.07 · Allegato 3: misure di controllo in comunità', ente: 'ASL Toscana Centro', data: '18/12/2024', area: 'Infezioni correlate all’assistenza',
+    file: 'docs/asl/PA.STDS.07-allegato-3.pdf', descr: 'Indicazioni per il domicilio (da consegnare alla dimissione).', usatoIn: [{ etichetta: 'Percorsi: scabbia', to: '/percorsi?apri=scabbia' }],
+  },
+  {
+    id: 'colonizzato', titolo: 'Gestione del paziente colonizzato/infetto in ambiente ospedaliero', codice: 'PA.DRO.01', ente: 'ASL Toscana Centro · Rete Ospedaliera', data: '2025', area: 'Infezioni correlate all’assistenza',
+    file: 'docs/asl/PA.DRO.01-paziente-colonizzato.pdf', descr: 'Precauzioni standard, da contatto, droplet e aerea per germi multiresistenti e infezioni trasmissibili.',
+  },
+  {
+    id: 'tamponi-respiratori', titolo: 'Integrazioni sui tamponi per malattie respiratorie virali', ente: 'Direzione Rete Ospedaliera ASL TC', data: '3/2/2025', area: 'Infezioni correlate all’assistenza',
+    file: 'docs/asl/nota-tamponi-virus-respiratori-2025.pdf', descr: 'Tampone per virus respiratori se sospetto fondato; sempre, anche senza sintomi, nei ricoveri oncologici/oncoematologici.',
+  },
+  {
+    id: 'io-dro-72', titolo: 'Allontanamento e dimissione dei pazienti contro il parere sanitario', codice: 'IO.DRO.72 rev. 2', ente: 'ASL Toscana Centro · Rete Ospedaliera', data: '25/3/2025', area: 'Medico-legale',
+    file: 'docs/asl/IO.DRO.72-allontanamento-dimissione-contro-parere.pdf', descr: 'Pazienti a rischio, fasi di preallarme, allarme, ricerca e chiusura; dimissione contro il parere medico.',
+    usatoIn: [{ etichetta: 'Percorsi: rifiuto cure', to: '/percorsi?apri=rifiuto-cure' }],
+  },
+  {
+    id: 'io-dro-72-all1', titolo: 'IO.DRO.72 · Allegato 1: modulo di dimissione contro il parere medico', ente: 'ASL Toscana Centro', data: '25/3/2025', area: 'Medico-legale',
+    file: 'docs/asl/IO.DRO.72-allegato-1-modulo-dimissione-contro-parere.pdf', descr: 'Modulo da far firmare al paziente.',
+    usatoIn: [{ etichetta: 'Percorsi: rifiuto cure', to: '/percorsi?apri=rifiuto-cure' }],
+  },
+  {
     id: 'regolamento-formazione',
     titolo: 'Regolamento della formazione',
     codice: 'DOC.STDA.02',

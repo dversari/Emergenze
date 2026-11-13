@@ -228,7 +228,7 @@ export const LG_OST_INF_EMA: LineaGuida[] = [
     area: 'Infettivologia',
     fonte: { etichetta: 'OMS: linee guida sulla malaria', url: 'https://www.who.int/publications/i/item/guidelines-for-malaria' },
     controllata: OGGI,
-    vediAnche: [INF, { etichetta: 'Sepsi', to: '/linee-guida/sepsi' }, { etichetta: 'Meningite', to: '/linee-guida/meningite' }],
+    vediAnche: [{ etichetta: 'Sospetta Ebola', to: '/percorsi?apri=ebola' }, { etichetta: 'Arbovirosi 2026 (circolare)', to: '/documenti' }, INF, { etichetta: 'Sepsi', to: '/linee-guida/sepsi' }, { etichetta: 'Meningite', to: '/linee-guida/meningite' }],
     inBreve: [
       'Febbre entro 3 mesi (fino a 1 anno) dal rientro da zona malarica = malaria fino a prova contraria: striscio e goccia spessa (o test rapido) SUBITO, ripetuti ogni 12–24 h per 3 volte se negativi.',
       'Anche chi è nato in zona endemica e torna da una visita ai parenti (VFR) perde l’immunità: rischio alto.',

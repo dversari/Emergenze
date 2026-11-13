@@ -69,9 +69,13 @@ export const PERCORSI: Scheda[] = [
     ],
   },
   {
-    id: 'rifiuto-cure', nome: 'Rifiuto delle cure e dimissione contro parere', gruppo: 'Medico-legale',
-    sintesi: 'Il paziente capace può rifiutare qualunque trattamento: verificare la capacità, informare, documentare.',
-    fonte: 'Legge 219/2017 (consenso informato)',
+    id: 'rifiuto-cure', nome: 'Rifiuto delle cure, dimissione contro parere, allontanamento', gruppo: 'Medico-legale',
+    sintesi: 'Il paziente capace può rifiutare qualunque trattamento: verificare la capacità, informare, documentare. Allontanamento: procedura aziendale IO.DRO.72.',
+    fonte: 'Legge 219/2017; IO.DRO.72 rev. 2 (25/3/2025) ASL Toscana Centro',
+    link: [
+      { etichetta: '📄 IO.DRO.72 (procedura)', href: 'docs/asl/IO.DRO.72-allontanamento-dimissione-contro-parere.pdf', primario: true },
+      { etichetta: '📄 Modulo dimissione contro parere', href: 'docs/asl/IO.DRO.72-allegato-1-modulo-dimissione-contro-parere.pdf' },
+    ],
     blocchi: [
       { titolo: 'Passaggi', numerato: true, righe: [
         'Valutare la capacità decisionale: capisce le informazioni, le trattiene, le valuta, comunica una scelta (escludere intossicazione, delirium, ipoglicemia, trauma cranico).',
@@ -84,7 +88,13 @@ export const PERCORSI: Scheda[] = [
       { titolo: 'Se non è capace', righe: [
         'Pericolo imminente per la salute: trattamento in stato di necessità (art. 54 c.p.), coinvolgendo i familiari e, se esiste, l’amministratore di sostegno o il fiduciario.',
         'Disturbo psichico con rifiuto delle cure: valutare TSO.',
-        'Paziente che si allontana senza avvisare: annotare ora e circostanze; se a rischio per sé o altri, avvisare le forze dell’ordine e i familiari.',
+      ] },
+      { titolo: 'Allontanamento spontaneo (IO.DRO.72)', numerato: true, righe: [
+        'In PS la procedura vale dopo il triage per i pazienti con capacità di autodeterminazione non piena (demenza, disturbi psichiatrici, intossicati, sedati, alterazione dello stato mentale, rischio suicidario, malattie contagiose, TSO).',
+        'Preallarme subito: cercare con la vigilanza nel setting e nelle aree vicine (bagni, ambulatori, scale, uscite, ascensori); avvisare i reparti vicini e la guardia giurata.',
+        'Allarme: avvisare vigilanza, direttore e coordinatore, Centrale 118 (può intercettarlo e portarlo altrove), familiari, autorità che ha disposto il TSO, forze dell’ordine (persona scomparsa, L. 203/2012).',
+        'Annotare in cartella data, ora, circostanze e chi è stato avvisato, con firma.',
+        'Ritrovato: registrarlo e avvisare tutti quelli contattati. Non ritrovato dopo 24 h: chiusura con causale «dimissione volontaria».',
       ] },
     ],
   },
@@ -160,6 +170,7 @@ export const PERCORSI: Scheda[] = [
     link: [
       { etichetta: '📄 Scheda di notifica (PDF editabile)', href: 'docs/asl/scheda-notifica-malattie-infettive-2026.pdf', primario: true },
       { etichetta: '✉ Invia all’Igiene pubblica', href: 'mailto:malattieinfettiveigiene.prato@uslcentro.toscana.it,infezionicorrelate.prato@uslcentro.toscana.it?subject=Notifica%20malattia%20infettiva' },
+      { etichetta: '📄 Indirizzi Igiene pubblica (Toscana)', href: 'docs/asl/indirizzi-segnalazione-malattie-infettive-2026.pdf' },
       { etichetta: 'Documenti ASL', href: '/documenti' },
     ],
     blocchi: [
@@ -182,6 +193,70 @@ export const PERCORSI: Scheda[] = [
         'Lebbra · Leishmaniosi cutanea e viscerale · Leptospirosi · Linfogranuloma venereo · Listeriosi · Meningiti virali · Micobatteriosi non tubercolare* · Parotite · Pediculosi e ftiriasi · Pertosse · Psittacosi · Rickettsiosi',
         'Scabbia · Scarlattina · Shigellosi · Sifilide e sifilide congenita · Toxoplasmosi e toxoplasmosi congenita · Tubercolosi* · Tularemia · Altro (specificare)',
         '* = sorveglianza speciale (schede aggiuntive dedicate, di solito curate da Malattie infettive/Igiene pubblica).',
+      ] },
+    ],
+  },
+  {
+    id: 'ebola', nome: 'Sospetta Ebola (malattia da virus Ebola) in PS', gruppo: 'Sanità pubblica', urgente: true,
+    sintesi: 'Febbre ≥ 38,6 °C + sintomi e soggiorno in RDC/Uganda (o contatto con caso) nei 21 giorni: isolamento subito, DPI, infettivologo, trasferimento a Careggi.',
+    fonte: 'Istruzione di lavoro aziendale ASL TC (giugno 2026); Circolare Min. Salute 4258 del 29/5/2026; nota Direzione Sanitaria 1/6/2026',
+    link: [
+      { etichetta: '📄 Istruzione di lavoro Ebola', href: 'docs/asl/istruzione-lavoro-ebola.pdf', primario: true },
+      { etichetta: '📄 DPI: vestizione e svestizione', href: 'docs/asl/ebola-dpi-vestizione-svestizione.pdf' },
+      { etichetta: '📄 Comunicazione DS 1/6/2026', href: 'docs/asl/comunicazione-ebola-giugno-2026.pdf' },
+      { etichetta: '☎ Spallanzani 06 551701', href: 'tel:+3906551701' },
+    ],
+    blocchi: [
+      { titolo: 'Caso sospetto', righe: [
+        'Criterio clinico: febbre ≥ 38,6 °C + almeno uno tra cefalea intensa, vomito, diarrea, dolore addominale, emorragie inspiegate, insufficienza multiorgano (o morte improvvisa inspiegata).',
+        'Criterio epidemiologico (21 giorni prima dei sintomi): soggiorno in area del focolaio (RDC, Uganda; aree aggiornate su ECDC) o contatto con caso probabile/confermato.',
+        'Sospetto = clinico + epidemiologico, oppure esposizione ad alto rischio + qualunque sintomo (anche febbre di qualsiasi grado).',
+        'Alto rischio: contatto entro 1 m senza DPI con caso sintomatico, liquidi biologici, puntura/mucose, riti funebri, rapporti non protetti fino a 3 mesi dalla guarigione, contatto con pipistrelli/primati o carne di selvaggina.',
+      ] },
+      { titolo: 'Triage e isolamento', numerato: true, righe: [
+        'Infermiere di triage: camice tipo 4B, guanti lunghi, visiera; mascherina chirurgica e guanti al paziente.',
+        'Accompagnare subito nel locale di isolamento a 2 m di distanza, senza contatto; la porta la apre l’operatore. Cartello «Accesso vietato – caso sospetto agente biologico».',
+        'Capoturno: avvisa Direzione medica di presidio e Direttore DEA, attiva la ditta di decontaminazione, individua chi farà la vestizione NBCR.',
+        'Area di svestizione davanti al locale (guanti, gel, telini, contenitori rifiuti infetti, disinfettante).',
+        'Annotare tutte le persone presenti nelle aree interessate (tracciamento dei contatti).',
+      ] },
+      { titolo: 'Valutazione e trasferimento', numerato: true, righe: [
+        'Entrare solo con DPI NBCR completi; pianificare prima con l’infettivologo per ridurre gli accessi.',
+        'Parametri, temperatura, esame clinico, anamnesi epidemiologica (paesi, date, esposizioni, esordio).',
+        'Infettivologo di riferimento: per Prato (Malattie Infettive 2) il medico di guardia/reperibile delle Malattie Infettive del San Jacopo di Pistoia.',
+        'Grave: intervento solo con NBCR, area sgomberata, poi consulenza infettivologica.',
+        'Diagnostica solo bedside (POCT, eco, RX portatile); niente campioni nei percorsi ordinari. Prelievo per Spallanzani solo su indicazione dell’infettivologo, previo accordo telefonico (06 551701, h24), triplo involucro; trasporto campione SVS (CO 0586 888888).',
+        'Sospetto ad alto rischio stabilizzato: trasferimento a Careggi (adulti; Meyer i bambini) dopo contatto con il referente regionale (SOD Malattie Infettive e Tropicali AOUC); trasporto in biocontenimento 118/Protezione civile.',
+        'Paziente portato dal 118 instabile: PS preallertato, camera calda sgombra, percorso interdetto, équipe già vestita.',
+        'Notifica immediata (12 h) e avviso a Igiene pubblica; decontaminazione e sanificazione di ambienti e percorsi.',
+      ] },
+      { titolo: 'Senza sintomi', righe: [
+        'Viaggiatore asintomatico dalle aree colpite: non accedere in ospedale; domicilio, isolamento se indicato e contatto immediato con Igiene pubblica.',
+      ] },
+    ],
+  },
+  {
+    id: 'scabbia', nome: 'Scabbia in PS', gruppo: 'Sanità pubblica',
+    sintesi: 'Sospetto se ≥ 2 criteri della check list di triage; precauzioni da contatto, isolamento solo nella forma crostosa (norvegese); notifica entro 48 h.',
+    fonte: 'PA.STDS.07 rev. 0 (18/12/2024) ASL Toscana Centro, SOSD Infezioni correlate all’assistenza',
+    link: [
+      { etichetta: '📄 PA.STDS.07', href: 'docs/asl/PA.STDS.07-scabbia.pdf', primario: true },
+      { etichetta: '📄 All. 1: check list triage', href: 'docs/asl/PA.STDS.07-allegato-1.pdf' },
+      { etichetta: '📄 All. 2: misure in ospedale', href: 'docs/asl/PA.STDS.07-allegato-2.pdf' },
+      { etichetta: '📄 All. 3: misure a domicilio', href: 'docs/asl/PA.STDS.07-allegato-3.pdf' },
+    ],
+    blocchi: [
+      { titolo: 'In PS', righe: [
+        'Misure di isolamento al triage quando sono soddisfatti almeno due dei tre criteri della check list (allegato 1).',
+        'Operatori: guanti e camice monouso a maniche lunghe per ogni contatto con cute e biancheria; igiene delle mani prima e dopo. Cuffia e mascherina non servono.',
+        'Isolamento da contatto in stanza singola per 24 h solo nella scabbia crostosa (norvegese); negli altri casi precauzioni standard e da contatto.',
+        'Biancheria del paziente in sacco chiuso; effetti letterecci in sacco idrosolubile dentro sacco rosso, senza scuotere; materassi e cuscini come «materiale infetto».',
+      ] },
+      { titolo: 'Terapia (adulto)', righe: [
+        'Permetrina 5% crema su tutto il corpo dal collo in giù (mani, unghie, pieghe), lasciata 8–12 h; ripetere dopo 7 giorni. È la prima linea.',
+        'Ivermectina 200 µg/kg per bocca (70 kg: 14 mg) in dose unica, ripetuta dopo 7–14 giorni; nella forma crostosa associata alla terapia topica.',
+        'Trattare insieme i contatti stretti (conviventi, partner); lavare indumenti e lenzuola a ≥ 60 °C o chiuderli in un sacco per 72 h.',
+        'Notifica entro 48 h (scheda unica).',
       ] },
     ],
   },
