@@ -499,26 +499,24 @@ export const ALG_OST_INF_EMA: Alg = {
     nota: 'Circolare Min. Salute 2026. Notifica del sospetto entro 12 h.',
     nodi: [
       { tipo: 'avvio', titolo: 'Febbre acuta o recente', righe: ['+ rash, artralgie/dolore retro-orbitale, coinvolgimento d’organo o cluster.'] },
-      { tipo: 'decisione', titolo: 'Criterio epidemiologico?', righe: ['Viaggio in zona endemica (3 settimane), comune con trasmissione nella stagione, contatto con un caso.'] },
+      { tipo: 'decisione', titolo: 'Criterio epidemiologico o stagione dei vettori?', righe: ['Viaggio in zona endemica (3 settimane), comune con trasmissione, contatto con un caso.'] },
       {
         tipo: 'rami', rami: [
-          { etichetta: 'No, fuori stagione', tono: 'si', fine: 'Arbovirosi improbabile: altra causa', nodi: [] },
-          {
-            etichetta: 'Sì o in stagione', tono: 'no', nodi: [
-              { tipo: 'checklist', titolo: 'Subito', righe: ['Malaria se dai tropici (striscio/test rapido)', 'Emocromo, transaminasi, creatinina', 'Siero + EDTA + urine: NS1, PCR, sierologia', 'Scheda di notifica (12 h) allegata ai campioni', 'Repellente/zanzariera al paziente', 'Solo paracetamolo'], vai: [{ etichetta: 'Notifica', to: '/percorsi?apri=notifica-infettive' }] },
-              { tipo: 'decisione', titolo: 'Segni d’allarme Dengue o forma neurologica?', righe: ['Dolore addominale, vomito persistente, sanguinamento, letargia, versamenti, Ht ↑ con piastrine ↓; meningite/encefalite.'] },
-              {
-                tipo: 'rami', rami: [
-                  { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Ricovero (infettivologo)', righe: ['Cristalloidi 5–7 mL/kg/h, poi secondo Ht e diuresi; shock: 10–20 mL/kg.', 'Neuro: rachicentesi con PCR su liquor.'] }] },
-                  { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Domicilio', righe: ['Paracetamolo, idratazione, emocromo a 24–48 h, rientro se segni d’allarme; protezione dalle zanzare per 7 giorni.'] }] },
-                ],
-              },
-            ],
-          },
+          { etichetta: 'No', tono: 'si', fine: 'Arbovirosi improbabile: cercare altra causa', nodi: [] },
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'passo', titolo: 'Arbovirosi possibile' }] },
+        ],
+      },
+      { tipo: 'checklist', titolo: 'Subito', righe: ['Malaria se dai tropici (striscio/test rapido)', 'Emocromo, transaminasi, creatinina', 'Siero + EDTA + urine: NS1, PCR, sierologia', 'Scheda di notifica (12 h) allegata ai campioni', 'Repellente/zanzariera al paziente', 'Solo paracetamolo'], vai: [{ etichetta: 'Compila la notifica', to: '/modulo-notifica' }] },
+      { tipo: 'decisione', titolo: 'Segni d’allarme Dengue o forma neurologica?', righe: ['Dolore addominale, vomito persistente, sanguinamento, letargia, versamenti, Ht ↑ con piastrine ↓; meningite/encefalite.'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Ricovero', righe: ['Cristalloidi 5–7 mL/kg/h, poi secondo Ht e diuresi; shock 10–20 mL/kg.', 'Neuro: rachicentesi, PCR su liquor.'] }] },
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Domicilio', righe: ['Paracetamolo, idratazione, emocromo a 24–48 h, rientro se segni d’allarme.', 'Repellente per 7 giorni.'] }] },
         ],
       },
     ],
   },
+
   'metrorragia-primo-trimestre': {
     titolo: 'Algoritmo sanguinamento nel primo trimestre',
     nota: 'NICE NG126.',

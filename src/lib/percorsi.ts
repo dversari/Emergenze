@@ -221,7 +221,9 @@ export const PERCORSI: Scheda[] = [
     fonte: 'Istruzione di lavoro aziendale ASL TC (giugno 2026); Circolare Min. Salute 4258 del 29/5/2026; nota Direzione Sanitaria 1/6/2026',
     link: [
       { etichetta: '📄 Istruzione di lavoro Ebola', href: 'docs/asl/istruzione-lavoro-ebola.pdf', primario: true },
-      { etichetta: '📄 DPI: vestizione e svestizione', href: 'docs/asl/ebola-dpi-vestizione-svestizione.pdf' },
+      { etichetta: 'Vestizione NBCR illustrata', href: '/procedure?apri=nbcr-vestizione' },
+      { etichetta: 'Svestizione NBCR illustrata', href: '/procedure?apri=nbcr-svestizione' },
+      { etichetta: '📄 DPI: elenco aziendale', href: 'docs/asl/ebola-dpi-vestizione-svestizione.pdf' },
       { etichetta: '📄 Comunicazione DS 1/6/2026', href: 'docs/asl/comunicazione-ebola-giugno-2026.pdf' },
       { etichetta: '☎ Spallanzani 06 551701', href: 'tel:+3906551701' },
     ],
@@ -256,17 +258,19 @@ export const PERCORSI: Scheda[] = [
   },
   {
     id: 'scabbia', nome: 'Scabbia in PS', gruppo: 'Sanità pubblica',
-    sintesi: 'Sospetto se ≥ 2 criteri della check list di triage; precauzioni da contatto, isolamento solo nella forma crostosa (norvegese); notifica entro 48 h.',
+    sintesi: 'Sospetto se ≥ 2 criteri su 3 (prurito notturno, sedi tipiche, familiari con gli stessi sintomi); precauzioni da contatto, isolamento solo nella forma crostosa (norvegese); notifica entro 48 h.',
     fonte: 'PA.STDS.07 rev. 0 (18/12/2024) ASL Toscana Centro, SOSD Infezioni correlate all’assistenza',
     link: [
       { etichetta: '📄 PA.STDS.07', href: 'docs/asl/PA.STDS.07-scabbia.pdf', primario: true },
       { etichetta: '📄 All. 1: check list triage', href: 'docs/asl/PA.STDS.07-allegato-1.pdf' },
       { etichetta: '📄 All. 2: misure in ospedale', href: 'docs/asl/PA.STDS.07-allegato-2.pdf' },
       { etichetta: '📄 All. 3: misure a domicilio', href: 'docs/asl/PA.STDS.07-allegato-3.pdf' },
+      { etichetta: '✎ Testo di dimissione', href: '/dimissioni?apri=scabbia' },
     ],
     blocchi: [
       { titolo: 'In PS', righe: [
-        'Misure di isolamento al triage quando sono soddisfatti almeno due dei tre criteri della check list (allegato 1).',
+        'Check list di triage (allegato 1), paziente con sintomi cutanei: 1) prurito intenso nelle ore notturne? 2) prurito localizzato a mani/piedi, regione ombelicale, area genitale, glutei, ascelle, areole? 3) stessi sintomi in altri componenti del nucleo familiare?',
+        'Almeno due criteri positivi = sospetto di scabbia → isolamento funzionale da subito; altrimenti prosegue l’iter diagnostico.',
         'Operatori: guanti e camice monouso a maniche lunghe per ogni contatto con cute e biancheria; igiene delle mani prima e dopo. Cuffia e mascherina non servono.',
         'Isolamento da contatto in stanza singola per 24 h solo nella scabbia crostosa (norvegese); negli altri casi precauzioni standard e da contatto.',
         'Biancheria del paziente in sacco chiuso; effetti letterecci in sacco idrosolubile dentro sacco rosso, senza scuotere; materassi e cuscini come «materiale infetto».',

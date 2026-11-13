@@ -6,7 +6,7 @@
 export interface VoceIsolamento { nome: string; prec: string; materiale?: string; durata?: string; note?: string; alias?: string }
 
 export const DURATE: Record<string, string> = {
-  DI: 'per tutta la durata della malattia (ferite: fino a fine secrezione; gastroenteriti: fino a fine diarrea)',
+  DI: 'per tutta la malattia',
   CN: 'fino a fine antibiotico e colture negative',
   U24: 'fino a 24 h dall’inizio di una terapia efficace',
 }

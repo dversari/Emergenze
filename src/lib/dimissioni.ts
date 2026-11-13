@@ -633,6 +633,31 @@ ${RITORNO}
 - strie rosse che risalgono l'arto.`,
   },
   {
+    id: 'scabbia', nome: 'Scabbia', gruppo: 'Infezioni',
+    testo: `Diagnosi: [sospetta / accertata] scabbia. È stata inviata la notifica all'Igiene pubblica.
+
+Terapia:
+- Permetrina 5% crema: la sera, dopo la doccia e a pelle asciutta, la stenda su tutto il corpo dal collo in giù, comprese mani, spazi tra le dita, sotto le unghie, piedi, pieghe, genitali, glutei. La lasci 8–12 ore (tutta la notte) e la tolga con la doccia al mattino. Ripeta il trattamento dopo 7 giorni.
+- [Ivermectina 3 mg: ... compresse in un'unica dose a stomaco vuoto, da ripetere dopo 7–14 giorni.]
+- Prurito: [cetirizina 10 mg la sera]. Il prurito può durare ancora 2–4 settimane anche se la cura ha funzionato: non è un fallimento.
+- Tagli le unghie corte per non lesionare la pelle grattando.
+
+Indicazioni per lei e per chi vive con lei:
+- Stia lontano da scuola, lavoro, comunità per 24 ore dopo il primo trattamento.
+- Conviventi, partner e contatti stretti devono fare il trattamento NELLO STESSO GIORNO, anche se non hanno sintomi; chi ha prurito si rivolga al proprio medico.
+- Fino alla fine del trattamento cambi ogni giorno biancheria, lenzuola, federe, asciugamani.
+- Lavi biancheria intima, lenzuola e vestiti venuti a contatto con la pelle in lavatrice a più di 60 °C per almeno 20 minuti.
+- Ciò che non si può lavare a caldo (coperte, cuscini, scarpe, peluche) lo chiuda in un sacco di plastica sigillato per almeno 72 ore (meglio una settimana) o lo lavi a secco.
+- Divani, poltrone e materassi: aspirapolvere o vapore ad alta temperatura dopo il trattamento.
+
+${controlli('[Controllo dal medico curante dopo il secondo trattamento.]')}
+
+${RITORNO}
+- lesioni che si infettano (pus, arrossamento che si allarga, febbre);
+- croste spesse e diffuse su mani, piedi o corpo;
+- prurito e lesioni ancora presenti 4 settimane dopo il secondo trattamento.`,
+  },
+  {
     id: 'zoster', nome: 'Herpes zoster (fuoco di Sant’Antonio)', gruppo: 'Infezioni',
     testo: `Diagnosi: herpes zoster [sede/dermatomero ...].
 

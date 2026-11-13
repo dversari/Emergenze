@@ -670,6 +670,31 @@ export const PROCEDURE: Scheda[] = [
     ],
     fonte: 'ERS/ATS 2017; BTS/ICS 2016; Duan 2017 (HACOR); Vignaux 2009 (asincronie in NIV); manuale Philips V60',
   },
+  // ─── Protezione NBCR ───
+  {
+    id: 'nbcr-vestizione', nome: 'Vestizione con DPI NBCR', gruppo: 'Protezione NBCR', urgente: true,
+    sintesi: 'Tuta, stivali, doppi guanti, maschera pieno facciale con filtro, nastro telato: 12 passaggi illustrati.',
+    fonte: 'Schede del PS di Prato; DPI NBCR per agenti biologici di classe 4 (ASL TC, 2026)',
+    blocchi: [
+      { titolo: 'Prima di iniziare', righe: [
+        'Sempre in coppia: un collega controlla ogni passaggio e la tenuta finale (nastro su volto e polsi, cerniera chiusa).',
+        'Bere e andare in bagno prima; preparare il materiale e il contenitore dei rifiuti e quello ermetico per la decontaminazione.',
+        'Pianificare con il medico e l’infettivologo cosa fare dentro, per ridurre gli ingressi.',
+      ] },
+    ],
+  },
+  {
+    id: 'nbcr-svestizione', nome: 'Svestizione dei DPI NBCR', gruppo: 'Protezione NBCR', urgente: true,
+    sintesi: 'Il momento più a rischio di contaminazione: lentamente, con il collega che guida, dall’esterno verso l’interno.',
+    fonte: 'Schede del PS di Prato; DPI NBCR per agenti biologici di classe 4 (ASL TC, 2026)',
+    blocchi: [
+      { titolo: 'Regole', righe: [
+        'Nell’area di svestizione davanti al locale di isolamento, con telini assorbenti, contenitori dei rifiuti e contenitore ermetico.',
+        'Il collega legge i passaggi ad alta voce e controlla; disinfettare i guanti esterni tra un passaggio e l’altro se indicato dalla procedura.',
+        'Non toccare mai la cute o la divisa con le parti esterne dei DPI; in caso di contatto: lavare subito e segnalare (infortunio biologico).',
+      ] },
+    ],
+  },
 ]
 
 /*
