@@ -10,7 +10,9 @@ const SCHEDE = [
   { to: '/formazione/programmi', icona: 'programmi', titolo: 'Programmi dei corsi', testo: 'Contenuti, durata e materiale di ogni corso.' },
 ]
 
-export const CORSI = [
+type Corso = { nome: string; tipo: string; dettagli?: string[] }
+
+export const CORSI: Corso[] = [
   { nome: 'ACLS e simulazione ACLS', tipo: 'Rianimazione' },
   { nome: 'PALS', tipo: 'Rianimazione pediatrica' },
   { nome: 'ATLS', tipo: 'Trauma' },
@@ -21,7 +23,16 @@ export const CORSI = [
   { nome: 'Corso decontaminazione', tipo: 'Maxi-emergenze' },
   { nome: 'PEIMAF', tipo: 'Maxi-emergenze' },
   { nome: 'Codice rosa', tipo: 'Violenza' },
-  { nome: 'La comunicazione difficile: training in simulazione', tipo: 'Comunicazione' },
+  {
+    nome: 'La comunicazione difficile: training in simulazione', tipo: 'Comunicazione',
+    dettagli: [
+      'Organizza: AOU Careggi, UO Formazione (edizione 4: ottobre 2026).',
+      '3 giornate: la 1ª in FAD sincrona su Zoom (pomeriggio, dalle 14), la 2ª e la 3ª in presenza a Careggi con simulazioni.',
+      'Collegarsi a Zoom con nome e cognome: la presenza è registrata dal software.',
+      'Crediti ECM: presenza ≥ 90%; prova di apprendimento online entro 72 ore dalla FAD (WHR Time › Area Formazione › Compilazione apprendimento); prova pratica con check list; questionario di gradimento entro 14 giorni (WHR Time › Area Formazione › Questionario di gradimento).',
+      'L’attestato arriva per email dalla segreteria del corso.',
+    ],
+  },
   { nome: 'Corso delirium', tipo: 'Geriatria' },
   { nome: 'Corso vertigini', tipo: 'Neurologia' },
   { nome: 'Ecografia (Winfocus): PoCUS dolore toracico, ecografia toracica, blocchi nervosi', tipo: 'Ecografia' },
@@ -41,7 +52,9 @@ export function Programmi() {
           <div key={c.nome} className="rounded-2xl border border-linea bg-white p-3 shadow-[var(--shadow-card)]">
             <p className="text-[10.5px] font-extrabold uppercase tracking-wide text-tenue">{c.tipo}</p>
             <p className="mt-0.5 text-[15px] font-black leading-tight">{c.nome}</p>
-            <p className="mt-1.5 text-[12px] text-tenue">Programma da inserire</p>
+            {c.dettagli
+              ? <ul className="mt-1.5 space-y-1 text-[13px] leading-snug">{c.dettagli.map((d) => <li key={d} className="flex gap-1.5"><span className="opacity-50">•</span><span>{d}</span></li>)}</ul>
+              : <p className="mt-1.5 text-[12px] text-tenue">Programma da inserire</p>}
           </div>
         ))}
       </div>
