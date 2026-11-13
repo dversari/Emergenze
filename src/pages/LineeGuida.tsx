@@ -5,7 +5,7 @@ import Manovre from '../components/Manovre'
 import EcgEquivalenti from '../components/EcgEquivalenti'
 import { ALGORITMI } from '../lib/algoritmi'
 import { Link, useParams } from 'react-router-dom'
-import { LINEE_GUIDA, lineaGuida } from '../lib/lineeGuida'
+import { LINEE_GUIDA, lineaGuida, conCav, CAV_FIRENZE } from '../lib/lineeGuida'
 import ChiediLineaGuida from '../components/ChiediLineaGuida'
 
 /** «ESC 2024», oppure l'ente così com'è se contiene già gli anni (confronti tra società). */
@@ -114,6 +114,13 @@ export function RiassuntoLineaGuida() {
           </div>
         )}
       </section>
+
+      {conCav(l) && (
+        <a href={CAV_FIRENZE.tel} className="card !py-3 flex items-center justify-between gap-3 bg-bordeaux text-white no-underline">
+          <span><span className="block text-[11px] font-bold uppercase tracking-wide opacity-80">Centro antiveleni di Firenze · 24 h</span><span className="text-lg font-extrabold">{CAV_FIRENZE.numero}</span></span>
+          <span className="rounded-full bg-white text-bordeaux font-extrabold text-sm px-4 py-2">Chiama</span>
+        </a>
+      )}
 
       {(l.id === 'stemi' || l.id === 'nste-sca') && <EcgEquivalenti />}
 

@@ -26,6 +26,8 @@ export interface LineaGuida {
   fonti?: { id: string; etichetta: string }[]
   /** schede dell'app collegate (antibiotici, procedure, dimissioni…) */
   vediAnche?: { etichetta: string; to: string }[]
+  /** pulsante «Chiama il CAV di Firenze» (automatico per l'area Tossicologia) */
+  cav?: boolean
   /** manovre illustrate da mostrare (id in lib/manovre) */
   manovre?: string[]
   /** testi esterni utili (figure, video, manovre) */
@@ -2908,5 +2910,9 @@ export const LINEE_GUIDA: LineaGuida[] = [
   ...LG_ADDOME_TORACE_NEURO,
   ...LG_OST_INF_EMA,
 ]
+
+/** Centro antiveleni di Firenze (Careggi), attivo 24 h. */
+export const CAV_FIRENZE = { numero: '055 794 7819', tel: 'tel:+390557947819' }
+export const conCav = (l: LineaGuida) => l.cav || l.area.startsWith('Tossicologia')
 
 export const lineaGuida = (id: string) => LINEE_GUIDA.find((l) => l.id === id)

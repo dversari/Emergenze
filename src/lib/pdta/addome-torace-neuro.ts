@@ -106,6 +106,7 @@ export const LG_ADDOME_TORACE_NEURO: LineaGuida[] = [
   },
   {
     id: 'caustici-corpi-estranei',
+    cav: true,
     titolo: 'Caustici e corpi estranei ingeriti',
     ente: 'ESGE · WSES',
     anno: 2016,

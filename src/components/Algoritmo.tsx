@@ -6,6 +6,7 @@ import { apriManovra } from './Manovre'
 import { apriEcg, ECG } from './EcgEquivalenti'
 import { manovra } from '../lib/manovre'
 import { useConRitorno } from '../lib/ritorno'
+import { CAV_FIRENZE } from '../lib/lineeGuida'
 
 /** Score citati nel testo → calcolatore corrispondente. */
 const SCORE: [RegExp, string][] = [
@@ -226,6 +227,9 @@ function Blocco({ n, piccolo }: { n: Extract<Nodo, { titolo: string }>; piccolo?
             </li>
           ))}
         </ul>
+      )}
+      {/\b(CAV|[Cc]entro antiveleni)\b/.test(testo) && (
+        <a href={CAV_FIRENZE.tel} className="inline-block mt-2 mr-1 text-[11px] font-bold rounded-full px-2 py-1 bg-bordeaux text-white no-underline">☎ CAV Firenze {CAV_FIRENZE.numero}</a>
       )}
       {n.vai && <Vai voci={n.vai} scuro={scuro} />}
       {n.manovre && (
