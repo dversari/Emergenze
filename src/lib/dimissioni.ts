@@ -20,7 +20,7 @@ export const DIMISSIONI: Dimissione[] = [
 Terapia:
 - Ibuprofene 600 mg: 1 compressa ogni 8 ore dopo i pasti, per 5 giorni o finché c'è dolore. In alternativa o in aggiunta paracetamolo 1 g: 1 compressa fino a 3 volte al giorno (almeno 6 ore tra una dose e l'altra).
 - [Tamsulosina 0,4 mg: 1 compressa la sera fino all'espulsione del calcolo, per massimo 4 settimane. Può dare capogiri alzandosi in piedi. Uso off-label: il farmaco è registrato solo per l'ipertrofia prostatica (nella donna non ha indicazioni autorizzate); è prescritto perché favorisce l'espulsione dei calcoli dell'uretere distale. Il paziente è stato informato e acconsente.]
-- [Deltacortene (prednisone) 25 mg: 1 compressa al mattino dopo colazione per ... giorni, insieme alla tamsulosina. Se diabetico controlli la glicemia.]
+- [Deltacortene (prednisone) 25 mg: 1 compressa al mattino dopo colazione per 10 giorni, insieme alla tamsulosina. Se diabetico controlli la glicemia.]
 - [Gastroprotezione: pantoprazolo 20 mg 1 compressa al mattino a digiuno finché assume antinfiammatorio/cortisone.]
 
 Indicazioni:

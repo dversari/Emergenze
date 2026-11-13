@@ -121,7 +121,7 @@ export default function App() {
           <Route path="acr" element={<Acr />} />
           <Route path="antibiotici" element={<Antibiotici />} />
           <Route path="procedure" element={<Procedure />} />
-          <Route path="sedazione" element={<PaginaSchede key="s" schede={SEDAZIONE} segnaposto="Cerca uno schema…" />} />
+          <Route path="sedazione" element={<PaginaSchede key="s" sezione="sedazione" schede={SEDAZIONE} segnaposto="Cerca uno schema…" />} />
           <Route path="anamnesi" element={<PaginaTesti key="a" voci={ANAMNESI} prefisso="anamnesi" segnaposto="Cerca un sintomo…" nota="Testo da adattare al paziente prima di copiarlo in cartella; cancella la sezione «Da non dimenticare» se non serve." />} />
           <Route path="dimissioni" element={<PaginaTesti key="d" voci={DIMISSIONI} prefisso="dimissione" segnaposto="Cerca una diagnosi…" nota="Dosi per adulto: verificare allergie, funzione renale, gravidanza e terapie in corso." testa={
             <Link to="/dimissioni/diete" className="intero flex items-center gap-3 rounded-2xl border border-[#d9e3c8] bg-[#eef3e4] px-4 py-3.5 text-left shadow-[var(--shadow-card)]">

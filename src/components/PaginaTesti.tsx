@@ -1,5 +1,7 @@
 import type React from 'react'
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
+import Riconoscimenti, { FiltroRiconoscimenti } from './Riconoscimenti'
+import { aziendale, passaFiltro, statoRevisione, type Filtro } from '../lib/riconoscimenti'
 import { useSearchParams } from 'react-router-dom'
 
 /** Testo modificabile con versione salvata sul telefono (dimissioni, anamnesi…). */
@@ -74,6 +76,8 @@ function Editor({ d, k, onSalvato, onSporco }: { d: Dimissione; k: string; onSal
 /** Elenco di card che aprono un testo modificabile, salvabile e copiabile. */
 export default function PaginaTesti({ voci: tutte, prefisso, segnaposto, nota, testa }: { voci: TestoModificabile[]; prefisso: string; segnaposto: string; nota: string; testa?: React.ReactNode }) {
   const chiave = (id: string) => `emergenze.${prefisso}.${id}`
+  const ch = (id: string) => `${prefisso}/${id}`
+  const [filtro, setFiltro] = useState<Filtro>('tutte')
   const [params, setParams] = useSearchParams()
   const [aperto, setAperto] = useState<string | null>(params.get('apri'))
   const [cerca, setCerca] = useState('')
@@ -98,7 +102,9 @@ export default function PaginaTesti({ voci: tutte, prefisso, segnaposto, nota, t
     setParams(nuovo ? { apri: nuovo } : {}, { replace: true })
   }
 
-  const voci = tutte.filter((d) => !q || `${d.nome} ${d.gruppo}`.toLowerCase().includes(q))
+  const voci = tutte.filter((d) => (!q || `${d.nome} ${d.gruppo}`.toLowerCase().includes(q)) && passaFiltro(filtro, ch(d.id), d))
+  const nRev = tutte.filter((d) => statoRevisione(ch(d.id), d)?.stato === 'revisionata').length
+  const nAsl = tutte.filter((d) => aziendale(ch(d.id)).length).length
   const gruppi = [...new Set(voci.map((d) => d.gruppo))]
 
   return (
@@ -106,6 +112,7 @@ export default function PaginaTesti({ voci: tutte, prefisso, segnaposto, nota, t
       {testa}
       <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder={segnaposto}
         className="rounded-xl border border-linea px-3 py-2.5 text-base" />
+      <FiltroRiconoscimenti valore={filtro} onCambia={setFiltro} revisionate={nRev} aziendali={nAsl} />
       {gruppi.map((g) => (
         <Fragment key={g}>
           <p className="etichetta px-1 mt-1">{g}</p>
@@ -116,6 +123,7 @@ export default function PaginaTesti({ voci: tutte, prefisso, segnaposto, nota, t
               <section key={d.id} id={`d-${d.id}`} className="card !p-0 overflow-hidden scroll-mt-24">
                 <button onClick={() => toggle(d.id)} className="w-full flex items-center gap-3 px-4 py-3 text-left">
                   <p className="flex-1 min-w-0 font-bold leading-tight">{d.nome}</p>
+                  <Riconoscimenti chiave={ch(d.id)} contenuto={d} />
                   {mod && <span className="text-[10px] font-bold uppercase tracking-wide text-oro bg-oro3 rounded-full px-2 py-0.5">personalizzata</span>}
                   <span className={`text-tenue transition-transform shrink-0 ${open ? 'rotate-90' : ''}`}>›</span>
                 </button>

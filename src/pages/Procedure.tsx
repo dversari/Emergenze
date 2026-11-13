@@ -43,7 +43,7 @@ export default function Procedure() {
         <h1 className="text-xl font-black">{s.nome}</h1>
       </div>
       {sez === 'eco' ? <Ecografie /> : sez === 'elettrica' ? <Elettrica /> : (
-        <PaginaSchede key={sez} schede={PROCEDURE.filter((p) => sezioneDi(p.gruppo) === sez)} segnaposto={sez === 'invasive' ? 'Cerca una procedura…' : 'Cerca…'} />
+        <PaginaSchede sezione="procedure" key={sez} schede={PROCEDURE.filter((p) => sezioneDi(p.gruppo) === sez)} segnaposto={sez === 'invasive' ? 'Cerca una procedura…' : 'Cerca…'} />
       )}
     </div>
   )
@@ -93,7 +93,7 @@ function Elettrica() {
           ))}
         </div>
       </div>
-      {scelta.length > 0 && <PaginaSchede key={sel} schede={scelta} segnaposto="" senzaCerca senzaGruppi />}
+      {scelta.length > 0 && <PaginaSchede sezione="procedure" key={sel} schede={scelta} segnaposto="" senzaCerca senzaGruppi />}
     </div>
   )
 }

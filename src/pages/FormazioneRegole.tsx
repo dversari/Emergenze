@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import Riconoscimenti from '../components/Riconoscimenti'
 import { Link } from 'react-router-dom'
 
 /*
@@ -30,7 +31,7 @@ export default function FormazioneRegole() {
       <div>
         <Link to="/formazione" className="text-sm font-bold text-verde">← Formazione</Link>
         <p className="etichetta !text-oro mt-1">ASL Toscana Centro · 2026</p>
-        <h1 className="text-2xl font-black leading-tight">Formazione: le regole in breve</h1>
+        <h1 className="text-2xl font-black leading-tight">Formazione: le regole in breve <Riconoscimenti chiave="formazione/regole" grande /></h1>
         <p className="mt-1 text-[13px] text-tenue">Riassunto non ufficiale del Regolamento della Formazione e delle FAQ. In caso di dubbio vale il testo originale.</p>
         <div className="mt-2 flex flex-wrap gap-2">
           <Link to="/pdf?f=docs%2Fregolamento-formazione-2026.pdf&t=Regolamento%20della%20formazione" className="rounded-full bg-verde px-3 py-1.5 text-sm font-bold text-white">📄 Regolamento (DOC.STDA.02)</Link>

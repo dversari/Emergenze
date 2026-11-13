@@ -7,6 +7,9 @@ import { ALGORITMI } from '../lib/algoritmi'
 import { Link, useParams } from 'react-router-dom'
 import { LINEE_GUIDA, lineaGuida, conCav, CAV_FIRENZE } from '../lib/lineeGuida'
 import ChiediLineaGuida from '../components/ChiediLineaGuida'
+import Riconoscimenti, { FiltroRiconoscimenti } from '../components/Riconoscimenti'
+import { aziendale, passaFiltro, statoRevisione, type Filtro } from '../lib/riconoscimenti'
+import type { LineaGuida } from '../lib/lineeGuida'
 
 /** «ESC 2024», oppure l'ente così com'è se contiene già gli anni (confronti tra società). */
 const enteAnno = (l: { ente: string; anno: number }) => (/\d{4}/.test(l.ente) ? l.ente : `${l.ente} ${l.anno}`)
@@ -17,16 +20,24 @@ const data = (iso: string) =>
 /** PDTA tempo-dipendenti mostrati in cima all'elenco. */
 const EVIDENZA = ['post-rosc', 'stemi', 'ictus', 'sepsi', 'anafilassi', 'trauma-maggiore', 'stato-di-male', 'emorragia-cerebrale', 'dissezione-aortica', 'embolia-polmonare', 'tachicardia', 'bradicardia', 'anticoagulato-sanguinamento', 'emorragia-digestiva', 'iperkaliemia', 'chetoacidosi']
 
+/** Contenuto su cui si calcola l'impronta della revisione: riassunto + algoritmo. */
+export const contenutoLG = (l: LineaGuida) => ({ l, alg: ALGORITMI[l.id] ?? null })
+const chiaveLG = (id: string) => `linee-guida/${id}`
+
 /** Elenco delle linee guida: tocca una voce per aprirne il riassunto. */
 export function ElencoLineeGuida() {
   const [cerca, setCerca] = useState('')
+  const [filtro, setFiltro] = useState<Filtro>('tutte')
   const q = cerca.trim().toLowerCase()
-  const voci = LINEE_GUIDA.filter((l) => !q || `${l.titolo} ${l.ente} ${l.area}`.toLowerCase().includes(q))
+  const voci = LINEE_GUIDA.filter((l) => (!q || `${l.titolo} ${l.ente} ${l.area}`.toLowerCase().includes(q)) && passaFiltro(filtro, chiaveLG(l.id), contenutoLG(l)))
+  const nRev = LINEE_GUIDA.filter((l) => statoRevisione(chiaveLG(l.id), contenutoLG(l))?.stato === 'revisionata').length
+  const nAsl = LINEE_GUIDA.filter((l) => aziendale(chiaveLG(l.id)).length).length
   return (
     <div className="flex flex-col gap-2.5">
       <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder="Cerca un PDTA…"
         className="rounded-xl border border-linea px-3 py-2.5 text-base" />
-      {!q && (
+      <FiltroRiconoscimenti valore={filtro} onCambia={setFiltro} revisionate={nRev} aziendali={nAsl} />
+      {!q && filtro === 'tutte' && (
         <div className="elenco !gap-2">
           <p className="etichetta px-1 mt-1 !text-bordeaux">In evidenza · tempo-dipendenti</p>
           {EVIDENZA.map((id) => LINEE_GUIDA.find((l) => l.id === id)).filter((l) => !!l).map((l) => (
@@ -35,6 +46,7 @@ export function ElencoLineeGuida() {
                 {(l.titolo.includes(' ') ? l.titolo.split(' ').map((p) => p[0]).join('') : l.titolo).slice(0, 2).toUpperCase()}
               </div>
               <p className="flex-1 min-w-0 font-bold leading-tight">{l.titolo}</p>
+              <Riconoscimenti chiave={chiaveLG(l.id)} contenuto={contenutoLG(l)} />
               <span className="text-tenue">›</span>
             </Link>
           ))}
@@ -54,6 +66,7 @@ export function ElencoLineeGuida() {
             <p className="text-xs text-tenue">{enteAnno(l)} · {l.area}</p>
             <p className="text-[11px] text-verde mt-0.5">✓ controllata il {data(l.controllata)}</p>
           </div>
+          <Riconoscimenti chiave={chiaveLG(l.id)} contenuto={contenutoLG(l)} />
           <span className="text-tenue">›</span>
         </Link>
       ))}
@@ -87,7 +100,7 @@ export function RiassuntoLineaGuida() {
 
       <div>
         <p className="text-[11px] uppercase tracking-[0.12em] text-bordeaux font-bold">{enteAnno(l)} · {l.area}</p>
-        <h2 className="font-extrabold text-2xl tracking-tight leading-tight">{l.titolo}</h2>
+        <h2 className="font-extrabold text-2xl tracking-tight leading-tight">{l.titolo} <Riconoscimenti chiave={chiaveLG(l.id)} contenuto={contenutoLG(l)} grande /></h2>
         <a href={l.fonte.url} target="_blank" rel="noreferrer" className="text-sm text-verde font-semibold underline">
           Testo completo: {l.fonte.etichetta} ↗
         </a>

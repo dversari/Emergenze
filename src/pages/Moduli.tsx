@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Riconoscimenti from '../components/Riconoscimenti'
 
 type Modulo = { to: string; titolo: string; descr: string; pdta?: { to: string; etichetta: string } }
 
@@ -37,7 +38,7 @@ export default function Moduli() {
         {MODULI.map((m) => (
           <div key={m.to} className="rounded-2xl border border-linea bg-white p-4 shadow-[var(--shadow-card)]">
             <Link to={m.to} className="block">
-              <div className="text-[17px] font-bold text-testo">🖨︎ {m.titolo}</div>
+              <div className="text-[17px] font-bold text-testo flex items-center gap-2"><span className="flex-1">🖨︎ {m.titolo}</span><Riconoscimenti chiave={`modulo/${m.to.replace('/modulo-', '')}`} /></div>
               <div className="mt-1 text-sm text-tenue">{m.descr}</div>
             </Link>
             <div className="mt-3 flex gap-2 text-sm">

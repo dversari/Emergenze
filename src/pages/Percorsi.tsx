@@ -8,7 +8,7 @@ export default function Percorsi() {
       <div className="rounded-2xl border border-[#e6d5b0] bg-[#f6eedd] px-4 py-3 text-[13px] leading-snug text-[#7a5a17]">
         <b>Bozza.</b> Riferimenti normativi nazionali; modulistica e passaggi operativi vanno allineati alle procedure aziendali. PEIMAF e maxiemergenza in attesa del protocollo aziendale.
       </div>
-      <PaginaSchede schede={PERCORSI} segnaposto="Cerca un percorso…" />
+      <PaginaSchede sezione="percorsi" schede={PERCORSI} segnaposto="Cerca un percorso…" />
     </div>
   )
 }

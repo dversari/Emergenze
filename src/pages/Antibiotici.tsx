@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import Riconoscimenti from '../components/Riconoscimenti'
 import { CONDIZIONI, FARMACI, REGOLE, farmaco, type Condizione } from '../lib/antibiotici'
 
 /* Terapia antibiotica empirica: card per condizione e per farmaco.
@@ -39,6 +40,7 @@ function CardCondizione({ c, aperto, onToggle, apri }: { c: Condizione; aperto: 
           <p className="font-bold leading-tight">{c.nome}</p>
           <p className="text-xs text-tenue leading-snug mt-0.5">{c.sintesi}</p>
         </div>
+        <Riconoscimenti chiave={`antibiotici/${c.id}`} contenuto={c} />
         <Freccia aperto={aperto} />
       </button>
       {aperto && (
@@ -75,6 +77,7 @@ function CardFarmaco({ id, aperto, onToggle }: { id: string; aperto: boolean; on
           <p className="font-bold leading-tight">{f.nome} <span className="ml-1 align-middle text-[10px] font-extrabold uppercase tracking-wide rounded-full px-2 py-0.5 bg-verde3 text-verde-scuro">{f.via}</span></p>
           <p className="text-xs text-tenue leading-snug mt-0.5">{f.dose}</p>
         </div>
+        <Riconoscimenti chiave={`farmaci/${f.id}`} contenuto={f} />
         <Freccia aperto={aperto} />
       </button>
       {aperto && (

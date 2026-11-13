@@ -20,6 +20,14 @@ Strumenti per il pronto soccorso, in un'app web installabile sul telefono: calco
 
 Le dosi riportate vanno sempre verificate su linee guida e scheda tecnica.
 
+## Riconoscimenti delle card
+
+`src/lib/riconoscimenti.ts`, componente `src/components/Riconoscimenti.tsx`. Chiave della card: `<pagina>/<id>` (es. `linee-guida/colica-renale`, `percorsi/ebola`, `dimissione/scabbia`, `modulo/trasfusione`).
+
+- **Revisione tra pari** (cerchio con le sigle): verde = revisionata, ambra = commenti da integrare, grigio tratteggiato «!» = card modificata dopo la revisione (l'impronta del contenuto non coincide più). Si registra in `REVISIONI` con l'impronta data da `npm run impronte`.
+- **Impianto aziendale** (scudo blu ASL): automatico per le schede citate in `usatoIn` dei `DOCUMENTI_ASL`, più le voci di `AZIENDALI`.
+- Sopra gli elenchi compare il filtro Tutte / Revisionate / ASL quando ci sono card con riconoscimento.
+
 ## Domande sul testo completo
 
 In fondo a ogni linea guida con `fonti` c'è una barra «Chiedi al testo completo». Chiama la Edge Function `emergenze-chiedi` del progetto Supabase del Cruscotto (`supabase/functions/emergenze-chiedi`, deploy con `verify_jwt` disattivato perché l'app non ha login):

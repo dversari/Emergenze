@@ -1813,7 +1813,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       {
         tipo: 'terapia', titolo: 'Analgesia subito',
         righe: [
-          'Ketorolac 30 mg ev = 1 fiala, oppure diclofenac 75 mg = 1 fiala, oppure metamizolo 1–2 g ev; + paracetamolo 1 g ev.',
+          'Ketorolac 30 mg ev = 1 fiala, oppure diclofenac 75 mg = 1 fiala; + paracetamolo 1 g ev.',
           'FANS no se insufficienza renale, rene unico, terzo trimestre, ulcera attiva.',
           'Seconda scelta: morfina 2–4 mg ev ripetibile. Antiemetico se vomito.',
         ],
@@ -1845,7 +1845,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 tipo: 'passo', titolo: 'Gestione',
                 righe: [
                   '< 5 mm: espulsione spontanea probabile; analgesia.',
-                  '5–10 mm uretere distale: + alfa-litico (tamsulosina 0,4 mg la sera, off-label) ± cortisone (uso locale).',
+                  '5–10 mm uretere distale: + alfa-litico (tamsulosina 0,4 mg la sera, off-label) ± cortisone: prednisone (Deltacortene) 25 mg 1 cp al mattino per 10 giorni (uso locale).',
                   '> 10 mm o prossimale: urologo.',
                 ],
               },

@@ -2,6 +2,8 @@ import { Fragment, createElement, useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import type { Scheda } from '../lib/schede'
 import { FIGURE } from './FigureProcedure'
+import Riconoscimenti, { FiltroRiconoscimenti } from './Riconoscimenti'
+import { aziendale, passaFiltro, statoRevisione, type Filtro } from '../lib/riconoscimenti'
 
 // Nomi dei farmaci evidenziati in rosso grassetto dentro i testi.
 const FARMACI = [
@@ -33,7 +35,9 @@ export function Evidenzia({ t }: { t: string }) {
 }
 
 /** Elenco di card raggruppate che si aprono sui passaggi (Procedure, Sedazione). */
-export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGruppi }: { schede: Scheda[]; segnaposto: string; senzaCerca?: boolean; senzaGruppi?: boolean }) {
+export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGruppi, sezione }: { schede: Scheda[]; segnaposto: string; senzaCerca?: boolean; senzaGruppi?: boolean; /** pagina per i riconoscimenti: 'procedure', 'sedazione', 'percorsi' */ sezione: string }) {
+  const [filtro, setFiltro] = useState<Filtro>('tutte')
+  const ch = (id: string) => `${sezione}/${id}`
   const [params, setParams] = useSearchParams()
   const [aperto, setAperto] = useState<string | null>(params.get('apri'))
   const [cerca, setCerca] = useState('')
@@ -55,13 +59,16 @@ export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGrup
     setParams(np, { replace: true })
   }
 
-  const voci = schede.filter((s) => !q || `${s.nome} ${s.sintesi} ${s.gruppo}`.toLowerCase().includes(q))
+  const voci = schede.filter((s) => (!q || `${s.nome} ${s.sintesi} ${s.gruppo}`.toLowerCase().includes(q)) && passaFiltro(filtro, ch(s.id), s))
+  const nRev = schede.filter((s) => statoRevisione(ch(s.id), s)?.stato === 'revisionata').length
+  const nAsl = schede.filter((s) => aziendale(ch(s.id)).length).length
   const gruppi = [...new Set(voci.map((s) => s.gruppo))]
 
   return (
     <div className="elenco">
       {!senzaCerca && <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder={segnaposto}
         className="rounded-xl border border-linea px-3 py-2.5 text-base" />}
+      {!senzaCerca && <FiltroRiconoscimenti valore={filtro} onCambia={setFiltro} revisionate={nRev} aziendali={nAsl} />}
       {gruppi.map((g) => (
         <Fragment key={g}>
           {!senzaGruppi && <p className="etichetta px-1 mt-1">{g}</p>}
@@ -74,6 +81,7 @@ export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGrup
                     <p className="font-bold leading-tight">{s.urgente && <span className="mr-1.5 align-middle text-[10px] font-black uppercase tracking-wide rounded-full px-2 py-0.5 bg-bordeaux text-white">Urgenza</span>}{s.nome}</p>
                     <p className="text-xs text-tenue leading-snug mt-0.5"><Evidenzia t={s.sintesi} /></p>
                   </div>
+                  <Riconoscimenti chiave={ch(s.id)} contenuto={s} />
                   <span className={`text-tenue transition-transform shrink-0 ${open ? 'rotate-90' : ''}`}>›</span>
                 </button>
                 {open && (

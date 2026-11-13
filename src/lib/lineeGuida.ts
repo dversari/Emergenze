@@ -367,17 +367,17 @@ export const LINEE_GUIDA: LineaGuida[] = [
     anno: 2026,
     area: 'Urologia',
     fonte: { etichetta: 'EAU Guidelines on Urolithiasis 2026', url: 'https://uroweb.org/guidelines/urolithiasis' },
-    controllata: '2026-11-11',
+    controllata: '2026-11-13',
     vediAnche: [
       { etichetta: 'Dimissione colica renale', to: '/dimissioni?apri=colica-renale' },
       { etichetta: 'Antibiotici: pielonefrite', to: '/antibiotici?apri=pielonefrite' },
       { etichetta: 'Cartella: dolore al fianco', to: '/anamnesi?apri=colica-renale' },
     ],
     inBreve: [
-      'Prima l’analgesia: FANS (compreso il metamizolo) di prima scelta, più efficaci degli oppioidi; oppioidi come seconda scelta.',
+      'Prima l’analgesia: FANS (ketorolac, diclofenac) di prima scelta, più efficaci degli oppioidi; oppioidi come seconda scelta.',
       'Ecografia come primo esame; TC a basse dosi senza contrasto per confermare se la diagnosi resta dubbia dopo l’ecografia.',
       'Febbre o sepsi con rene ostruito, anuria, rene unico ostruito o dolore che non si controlla: decompressione urgente (stent o nefrostomia) → urologo.',
-      'Terapia espulsiva con alfa-litico per i calcoli dell’uretere distale di 5–10 mm (uso off-label). Sul cortisone insieme all’alfa-litico l’EAU non dà raccomandazioni.',
+      'Terapia espulsiva con alfa-litico per i calcoli dell’uretere distale di 5–10 mm (uso off-label): tamsulosina 0,4 mg la sera. Cortisone in aggiunta (uso degli urologi di Prato): prednisone (Deltacortene) 25 mg = 1 cp al mattino per 10 giorni; l’EAU non dà raccomandazioni.',
       'Calcoli < 5 mm: espulsione spontanea nella grande maggioranza dei casi.',
       'Anziano senza calcolosi nota: escludere l’aneurisma dell’aorta addominale.',
     ],
@@ -385,7 +385,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Analgesia in PS (70 kg)',
         punti: [
-          'Ketorolac 30 mg ev = 1 fiala (indicazione registrata per la colica renale), oppure diclofenac 75 mg im/ev = 1 fiala, oppure metamizolo 1–2 g ev = 1–2 fiale da 1 g; paracetamolo 1 g ev in aggiunta.',
+          'Ketorolac 30 mg ev = 1 fiala (indicazione registrata per la colica renale), oppure diclofenac 75 mg im/ev = 1 fiala; paracetamolo 1 g ev in aggiunta.',
           'FANS da evitare o ridurre: insufficienza renale, eGFR basso, rene unico, terzo trimestre di gravidanza, ulcera attiva, scompenso.',
           'Seconda scelta: oppioidi (morfina 2–4 mg ev ripetibile; tramadolo). Antiemetico se vomito.',
           'Dolore refrattario all’analgesia: decompressione o rimozione del calcolo.',
@@ -413,12 +413,13 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           'EAU (forte): alfa-litici come opzione per i calcoli dell’uretere distale > 5 mm; gli studi recenti mostrano efficacia tra 5 e 10 mm.',
           'In Italia la tamsulosina è registrata solo per l’ipertrofia prostatica: per i calcoli è off-label (nelle donne nessuna indicazione autorizzata).',
-          'Corticosteroide (es. Deltacortene, usato dagli urologi di Prato) insieme all’alfa-litico: l’EAU non dà raccomandazioni per dati insufficienti.',
+          'Corticosteroide insieme all’alfa-litico (uso degli urologi di Prato): prednisone (Deltacortene) 25 mg = 1 cp al mattino dopo colazione per 10 giorni (equivale al deflazacort 30 mg/die per 10 giorni degli studi di Porpiglia; Dellabella usava metilprednisolone 16 mg/die). Gastroprotezione (pantoprazolo 20 mg) se associato a FANS; glicemia nel diabetico. L’EAU non dà raccomandazioni per dati insufficienti.',
           'Controllo urologico/ecografico se il calcolo non è espulso entro 4–6 settimane.',
         ],
       },
     ],
     aggiornamenti: [
+      { data: '2026-11-13', testo: 'Revisione di D. Versari: tolto il metamizolo dall’analgesia; aggiunta la dose del cortisone (prednisone 25 mg/die per 10 giorni) nella terapia espulsiva.' },
       { data: '2026-03-01', testo: 'EAU 2026: aggiornamento completo; rivista la sezione sulla terapia espulsiva (efficacia sui calcoli di 5–10 mm) e sulla colica renale. Prossimo aggiornamento completo nel 2028.' },
     ],
   },
