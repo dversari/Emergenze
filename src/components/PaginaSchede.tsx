@@ -106,9 +106,10 @@ export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGrup
                       <div className="flex flex-wrap gap-1.5">
                         {s.link.map((l) => {
                           const cls = `text-xs font-bold rounded-full px-3 py-1.5 ${l.primario ? 'bg-verde text-white' : 'border border-verde text-verde'}`
+                          if (l.href.startsWith('docs/')) return <Link key={l.href} to={`/pdf?f=${encodeURIComponent(l.href)}&t=${encodeURIComponent(l.etichetta.replace(/^\S+\s/, ''))}`} className={cls}>{l.etichetta}</Link>
                           return l.href.startsWith('/')
                             ? <Link key={l.href} to={l.href} className={cls}>{l.etichetta} →</Link>
-                            : <a key={l.href} href={l.href.startsWith('docs/') ? `${import.meta.env.BASE_URL}${l.href}` : l.href} target={l.href.startsWith('docs/') || l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className={cls}>{l.etichetta}</a>
+                            : <a key={l.href} href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className={cls}>{l.etichetta}</a>
                         })}
                       </div>
                     )}

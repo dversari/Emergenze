@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
  * Regolamento della formazione ASL Toscana Centro (DOC.STDA.02, rev. 0, 2026) e FAQ (24/08/2026):
  * scheda riassuntiva con link ai documenti originali.
  */
-const base = import.meta.env.BASE_URL
 
 const CODICI = [
   { c: '28001', t: 'Formazione obbligatoria in sede', n: 'digitarlo all’orologio della sede del corso, in entrata e in uscita, poi OK' },
@@ -34,8 +33,8 @@ export default function FormazioneRegole() {
         <h1 className="text-2xl font-black leading-tight">Formazione: le regole in breve</h1>
         <p className="mt-1 text-[13px] text-tenue">Riassunto non ufficiale del Regolamento della Formazione e delle FAQ. In caso di dubbio vale il testo originale.</p>
         <div className="mt-2 flex flex-wrap gap-2">
-          <a href={`${base}docs/regolamento-formazione-2026.pdf`} target="_blank" rel="noreferrer" className="rounded-full bg-verde px-3 py-1.5 text-sm font-bold text-white">📄 Regolamento (DOC.STDA.02)</a>
-          <a href={`${base}docs/faq-regolamento-formazione-2026.pdf`} target="_blank" rel="noreferrer" className="rounded-full border border-verde px-3 py-1.5 text-sm font-bold text-verde">❓ FAQ (agosto 2026)</a>
+          <Link to="/pdf?f=docs%2Fregolamento-formazione-2026.pdf&t=Regolamento%20della%20formazione" className="rounded-full bg-verde px-3 py-1.5 text-sm font-bold text-white">📄 Regolamento (DOC.STDA.02)</Link>
+          <Link to="/pdf?f=docs%2Ffaq-regolamento-formazione-2026.pdf&t=FAQ%20formazione" className="rounded-full border border-verde px-3 py-1.5 text-sm font-bold text-verde">❓ FAQ (agosto 2026)</Link>
         </div>
       </div>
 

@@ -1,5 +1,7 @@
 import Percorsi from './pages/Percorsi'
 import Documenti from './pages/Documenti'
+import { lazy, Suspense } from 'react'
+const VisorePdf = lazy(() => import('./pages/VisorePdf'))
 import { useEffect, useRef } from 'react'
 import { HashRouter, Link, NavLink, Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import type { Provenienza } from './lib/ritorno'
@@ -129,6 +131,7 @@ export default function App() {
             <Link to="/dimissioni" className="text-sm text-tenue">‹ Dimissione</Link>} />} />
           <Route path="percorsi" element={<Percorsi />} />
           <Route path="documenti" element={<Documenti />} />
+          <Route path="pdf" element={<Suspense fallback={<p className="text-sm text-tenue">Apro il documento…</p>}><VisorePdf /></Suspense>} />
           <Route path="rubrica" element={<Rubrica />} />
           <Route path="turni" element={<Turni />} />
           <Route path="formazione" element={<Formazione />} />

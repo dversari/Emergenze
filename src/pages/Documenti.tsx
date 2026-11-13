@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { DOCUMENTI_ASL } from '../lib/documentiAsl'
 
 const base = import.meta.env.BASE_URL
+const pdf = (d: { file: string; titolo: string }) => `/pdf?f=${encodeURIComponent(d.file)}&t=${encodeURIComponent(d.titolo)}`
 
 /** Documenti aziendali originali usati come riferimento nelle schede dell'app. */
 export default function Documenti() {
@@ -20,13 +21,14 @@ export default function Documenti() {
           <p className="etichetta px-1 mt-1">{a}</p>
           {voci.filter((d) => d.area === a).map((d) => (
             <div key={d.id} className="rounded-2xl border border-linea bg-white p-4 shadow-[var(--shadow-card)]">
-              <a href={`${base}${d.file}`} target="_blank" rel="noreferrer" className="block">
+              <Link to={pdf(d)} className="block">
                 <div className="text-[16px] font-bold leading-tight">📄 {d.titolo}</div>
                 <div className="mt-0.5 text-[11px] font-bold text-oro">{[d.codice, d.ente, d.data].filter(Boolean).join(' · ')}</div>
                 <div className="mt-1 text-sm text-tenue leading-snug">{d.descr}</div>
-              </a>
+              </Link>
               <div className="mt-3 flex flex-wrap gap-1.5 text-xs">
-                <a href={`${base}${d.file}`} target="_blank" rel="noreferrer" className="rounded-full bg-verde px-3 py-1.5 font-bold text-white">Apri</a>
+                <Link to={pdf(d)} className="rounded-full bg-verde px-3 py-1.5 font-bold text-white">Apri</Link>
+                <a href={`${base}${d.file}`} download className="rounded-full border border-verde px-3 py-1.5 font-bold text-verde">⬇︎ Scarica</a>
                 {d.usatoIn?.map((u) => <Link key={u.to} to={u.to} className="rounded-full border border-linea px-3 py-1.5 font-bold text-tenue">{u.etichetta} →</Link>)}
               </div>
             </div>
