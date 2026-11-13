@@ -86,6 +86,33 @@ export const DOCUMENTI_ASL: DocumentoAsl[] = [
     file: 'docs/asl/hantavirus-procedure-invio-campioni.pdf', descr: 'Tipologia dei campioni, triplo involucro, trasporto e consegna al laboratorio di riferimento.',
   },
   {
+    id: 'pdta-trauma-cranico', titolo: 'Protocollo aziendale per la gestione del trauma cranico lieve', codice: 'PDTA', ente: 'ASL Toscana Centro · Dipartimento Emergenza Urgenza', data: '25/5/2026', area: 'PDTA clinici',
+    file: 'docs/asl/PDTA-trauma-cranico-lieve.pdf', descr: 'Definizione e classificazione (GCS 14–15), criteri e tempi della TC (entro 1 h / entro 8 h), anticoagulati e antiaggregati, osservazione e dimissione. Inviato dal DEU il 25/5/2026.',
+    usatoIn: [
+      { etichetta: 'PDTA trauma cranico', to: '/linee-guida/trauma-cranico' },
+      { etichetta: 'Cartella: trauma cranico', to: '/anamnesi?apri=trauma-cranico' },
+      { etichetta: 'Dimissione trauma cranico', to: '/dimissioni?apri=trauma-cranico' },
+      { etichetta: 'Dimissione in anticoagulante', to: '/dimissioni?apri=trauma-cranico-tao' },
+    ],
+  },
+  {
+    id: 'pdta-trauma-cranico-schema-tc', titolo: 'PDTA trauma cranico · Schema 3: indicazione alla TC cranio nel trauma cranico lieve', ente: 'ASL Toscana Centro · Dipartimento Emergenza Urgenza', data: '25/5/2026', area: 'PDTA clinici',
+    file: 'docs/asl/PDTA-trauma-cranico-schema-TC.pdf', descr: 'Flow chart della gestione del trauma cranico lieve (GCS 14–15) e dei criteri per la TC.',
+    usatoIn: [
+      { etichetta: 'PDTA trauma cranico', to: '/linee-guida/trauma-cranico' },
+      { etichetta: 'Cartella: trauma cranico', to: '/anamnesi?apri=trauma-cranico' },
+    ],
+  },
+  {
+    id: 'pdta-trauma-cranico-osservazione', titolo: 'PDTA trauma cranico · Protocollo di osservazione domiciliare', ente: 'ASL Toscana Centro · Dipartimento Emergenza Urgenza', data: '25/5/2026', area: 'PDTA clinici',
+    file: 'docs/asl/PDTA-trauma-cranico-osservazione-domiciliare.pdf', descr: 'Foglio informativo per i pazienti dimessi dopo trauma cranico e per chi li assiste: sintomi attesi e segni per tornare in PS.',
+    usatoIn: [
+      { etichetta: 'PDTA trauma cranico', to: '/linee-guida/trauma-cranico' },
+      { etichetta: 'Dimissione trauma cranico', to: '/dimissioni?apri=trauma-cranico' },
+      { etichetta: 'Dimissione in anticoagulante', to: '/dimissioni?apri=trauma-cranico-tao' },
+    ],
+  },
+  {
     id: 'scabbia', titolo: 'Gestione del paziente con scabbia sospetta o conclamata in ambiente ospedaliero', codice: 'PA.STDS.07 rev. 0', ente: 'ASL Toscana Centro · SOSD Infezioni correlate all’assistenza', data: '18/12/2024', area: 'Infezioni correlate all’assistenza',
     file: 'docs/asl/PA.STDS.07-scabbia.pdf', descr: 'Procedura aziendale: definizioni, isolamento, terapia, notifica entro 48 h. Allegati: check list di triage, misure in ospedale e in comunità.',
     usatoIn: [{ etichetta: 'Percorsi: scabbia', to: '/percorsi?apri=scabbia' }],

@@ -48,10 +48,6 @@ type Rif = string | RifLibero
 
 /** Card di impianto aziendale non collegate (o non solo) tramite `usatoIn` dei documenti. */
 export const AZIENDALI: Record<string, Rif[]> = {
-  'linee-guida/trauma-cranico': [{ titolo: 'PDTA aziendale del trauma cranico lieve (PS Prato)', nota: 'Documento non ancora in Docs ASL.' }],
-  'dimissione/trauma-cranico': [{ titolo: 'PDTA aziendale del trauma cranico lieve: osservazione domiciliare', nota: 'Documento non ancora in Docs ASL.' }],
-  'dimissione/trauma-cranico-tao': [{ titolo: 'PDTA aziendale del trauma cranico lieve: paziente in terapia anticoagulante', nota: 'Documento non ancora in Docs ASL.' }],
-  'anamnesi/trauma-cranico': [{ titolo: 'PDTA aziendale del trauma cranico lieve', nota: 'Documento non ancora in Docs ASL.' }],
   'percorsi/isolamento': ['colonizzato', 'tamponi-respiratori'],
   'dimissione/scabbia': ['scabbia', 'scabbia-all3'],
   'procedure/nbcr-vestizione': ['ebola-dpi'],
@@ -63,8 +59,14 @@ export const AZIENDALI: Record<string, Rif[]> = {
 }
 
 /** '/percorsi?apri=ebola' → 'percorsi/ebola'; '/linee-guida/x' → 'linee-guida/x'. */
+/** Nome della pagina nelle chiavi, quando è diverso dalla rotta (es. /dimissioni → «dimissione»). */
+const PAGINA: Record<string, string> = { dimissioni: 'dimissione', 'dimissioni/diete': 'dieta' }
+
 export function chiaveDaRotta(to: string): string {
-  const [percorso, query = ''] = to.replace(/^\//, '').split('?')
+  const [rotta, query = ''] = to.replace(/^\//, '').split('?')
+  const modulo = rotta.match(/^modulo-(.+)$/)
+  if (modulo) return `modulo/${modulo[1]}`
+  const percorso = PAGINA[rotta] ?? rotta
   const apri = new URLSearchParams(query).get('apri')
   return apri ? `${percorso}/${apri}` : percorso
 }
