@@ -14,6 +14,18 @@ const MODULI: Modulo[] = [
     titolo: 'Trasferimento di emergenza (118)',
     descr: 'Allegato 1 alla PA.A118.01: sintesi clinica, GCS e classe di Ehrenwerth per il trasporto. Compilabile e stampabile.',
   },
+  {
+    to: '/modulo-notifica',
+    titolo: 'Notifica di malattia infettiva',
+    descr: 'Scheda unica regionale (DM 7/3/2022): spunta la malattia (☎ 12 h, ✉ 48 h), compila, crea il PDF e invialo per mail all’Igiene pubblica di Prato.',
+    pdta: { to: '/percorsi?apri=notifica-infettive', etichetta: 'Percorso notifica' },
+  },
+  {
+    to: '/modulo-dimissione-contro-parere',
+    titolo: 'Dimissione contro parere medico',
+    descr: 'Allegato I alla IO.DRO.72 rev. 2: motivazioni, dichiarazione e firme. Compilabile e stampabile.',
+    pdta: { to: '/percorsi?apri=rifiuto-cure', etichetta: 'Percorso rifiuto cure' },
+  },
 ]
 
 export default function Moduli() {

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { DOCUMENTI_ASL } from '../lib/documentiAsl'
+import { condividiFileUrl } from '../lib/stampaModulo'
 
 const base = import.meta.env.BASE_URL
 const pdf = (d: { file: string; titolo: string }) => `/pdf?f=${encodeURIComponent(d.file)}&t=${encodeURIComponent(d.titolo)}`
@@ -28,7 +29,7 @@ export default function Documenti() {
               </Link>
               <div className="mt-3 flex flex-wrap gap-1.5 text-xs">
                 <Link to={pdf(d)} className="rounded-full bg-verde px-3 py-1.5 font-bold text-white">Apri</Link>
-                <a href={`${base}${d.file}`} download className="rounded-full border border-verde px-3 py-1.5 font-bold text-verde">⬇︎ Scarica</a>
+                <button onClick={() => condividiFileUrl(`${base}${d.file}`, d.file.split('/').pop() ?? 'documento.pdf', d.titolo)} className="rounded-full border border-verde px-3 py-1.5 font-bold text-verde">⬇︎ Scarica</button>
                 {d.usatoIn?.map((u) => <Link key={u.to} to={u.to} className="rounded-full border border-linea px-3 py-1.5 font-bold text-tenue">{u.etichetta} →</Link>)}
               </div>
             </div>

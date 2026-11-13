@@ -42,17 +42,17 @@ export const DOCUMENTI_ASL: DocumentoAsl[] = [
     id: 'arbovirosi-2026', titolo: 'Circolare arbovirosi, stagione vettoriale 2026', codice: 'Min. Salute prot. 1510 del 28/4/2026', ente: 'Ministero della Salute', data: '28/4/2026', area: 'Sanità pubblica',
     file: 'docs/asl/circolare-arbovirosi-2026.pdf',
     descr: 'Prevenzione, sorveglianza e risposta ad arbovirosi (Dengue, Chikungunya, Zika, West Nile…); inoltrata dal DEU il 2/9/2026 per i casi autoctoni di Dengue in Toscana.',
-    usatoIn: [{ etichetta: 'PDTA febbre al rientro', to: '/linee-guida/febbre-viaggiatore' }],
+    usatoIn: [{ etichetta: 'PDTA arbovirosi', to: '/linee-guida/arbovirosi' }],
   },
   {
     id: 'caso-dengue', titolo: 'Definizione di caso di Dengue', ente: 'Piano nazionale arbovirosi', data: '2026', area: 'Sanità pubblica',
     file: 'docs/asl/definizione-caso-dengue.pdf', descr: 'Criteri clinici, di laboratorio ed epidemiologici; caso possibile, probabile, confermato.',
-    usatoIn: [{ etichetta: 'PDTA febbre al rientro', to: '/linee-guida/febbre-viaggiatore' }],
+    usatoIn: [{ etichetta: 'PDTA arbovirosi', to: '/linee-guida/arbovirosi' }],
   },
   {
     id: 'caso-chikungunya', titolo: 'Definizione di caso di Chikungunya', ente: 'Piano nazionale arbovirosi', data: '2025', area: 'Sanità pubblica',
     file: 'docs/asl/definizione-caso-chikungunya.pdf', descr: 'Inviata dalla Regione il 4/11/2025 per i casi di rientro da Cuba (Chikungunya, Dengue, Oropouche).',
-    usatoIn: [{ etichetta: 'PDTA febbre al rientro', to: '/linee-guida/febbre-viaggiatore' }],
+    usatoIn: [{ etichetta: 'PDTA arbovirosi', to: '/linee-guida/arbovirosi' }],
   },
   {
     id: 'ebola-istruzione', titolo: 'Piano di gestione e controllo dell’infezione da virus Ebola negli ospedali ASL TC', codice: 'Istruzione di lavoro', ente: 'ASL Toscana Centro · Direzione Rete Ospedaliera', data: '23/6/2026', area: 'Biocontenimento',

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useEffect, useMemo, useState } from 'react'
 import { CHIAVE_DATI, CHIAVE_PIN, leggi, scarica } from './Rubrica'
 
@@ -40,7 +41,7 @@ function Data({ d }: { d: string }) {
 function FileAllegato({ a, chiave }: { a: Allegato; chiave: string }) {
   const [url, setUrl] = useState<string | null>(null)
   const [stato, setStato] = useState<'' | 'carico' | 'errore'>('')
-  useEffect(() => () => { if (url) URL.revokeObjectURL(url) }, [url])
+  useEffect(() => () => { if (url && !a.mime.includes('pdf')) URL.revokeObjectURL(url) }, [url, a.mime])
   const prepara = async () => {
     setStato('carico')
     try { setUrl(URL.createObjectURL(new Blob([await decifra(chiave, a.file)], { type: a.mime }))); setStato('') } catch { setStato('errore') }
@@ -51,7 +52,9 @@ function FileAllegato({ a, chiave }: { a: Allegato; chiave: string }) {
       <span className="text-lg leading-none">{icona}</span>
       <span className="min-w-0 flex-1 text-[13px] font-bold leading-tight">{a.nome}<span className="ml-1 font-normal text-tenue">· {a.kb >= 1024 ? `${(a.kb / 1024).toFixed(1)} MB` : `${a.kb} KB`}</span></span>
       {url
-        ? <a href={url} target="_blank" rel="noopener" download={a.mime.includes('pdf') ? undefined : a.nome} className="rounded-full bg-verde px-3 py-1 text-[13px] font-extrabold text-white">Apri</a>
+        ? a.mime.includes('pdf')
+          ? <Link to={`/pdf?b=${encodeURIComponent(url)}&t=${encodeURIComponent(a.nome)}`} className="rounded-full bg-verde px-3 py-1 text-[13px] font-extrabold text-white">Apri</Link>
+          : <a href={url} download={a.nome} className="rounded-full bg-verde px-3 py-1 text-[13px] font-extrabold text-white">Apri</a>
         : <button onClick={prepara} disabled={stato === 'carico'} className="rounded-full border border-verde px-3 py-1 text-[13px] font-extrabold text-verde disabled:opacity-50">
             {stato === 'carico' ? 'Carico…' : stato === 'errore' ? 'Riprova' : 'Scarica'}
           </button>}

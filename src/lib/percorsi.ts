@@ -74,7 +74,8 @@ export const PERCORSI: Scheda[] = [
     fonte: 'Legge 219/2017; IO.DRO.72 rev. 2 (25/3/2025) ASL Toscana Centro',
     link: [
       { etichetta: '📄 IO.DRO.72 (procedura)', href: 'docs/asl/IO.DRO.72-allontanamento-dimissione-contro-parere.pdf', primario: true },
-      { etichetta: '📄 Modulo dimissione contro parere', href: 'docs/asl/IO.DRO.72-allegato-1-modulo-dimissione-contro-parere.pdf' },
+      { etichetta: '✎ Compila il modulo di dimissione contro parere', href: '/modulo-dimissione-contro-parere' },
+      { etichetta: '📄 Modulo originale', href: 'docs/asl/IO.DRO.72-allegato-1-modulo-dimissione-contro-parere.pdf' },
     ],
     blocchi: [
       { titolo: 'Passaggi', numerato: true, righe: [
@@ -168,7 +169,8 @@ export const PERCORSI: Scheda[] = [
     sintesi: 'Scheda unica regionale (DM 7 marzo 2022), anche per il solo sospetto: entro 12 h o 48 h secondo la malattia, per email all’Igiene pubblica di Prato.',
     fonte: 'Scheda unica di segnalazione delle malattie infettive, Regione Toscana (prot. AOOGRT 0623609 dell’1/8/2025); modulo PDF editabile inviato dal DEU ASL TC il 15/1/2026',
     link: [
-      { etichetta: '📄 Scheda di notifica (PDF editabile)', href: 'docs/asl/scheda-notifica-malattie-infettive-2026.pdf', primario: true },
+      { etichetta: '✎ Compila la scheda nell’app', href: '/modulo-notifica', primario: true },
+      { etichetta: '📄 Scheda originale (PDF)', href: 'docs/asl/scheda-notifica-malattie-infettive-2026.pdf' },
       { etichetta: '✉ Invia all’Igiene pubblica', href: 'mailto:malattieinfettiveigiene.prato@uslcentro.toscana.it,infezionicorrelate.prato@uslcentro.toscana.it?subject=Notifica%20malattia%20infettiva' },
       { etichetta: '📄 Indirizzi Igiene pubblica (Toscana)', href: 'docs/asl/indirizzi-segnalazione-malattie-infettive-2026.pdf' },
       { etichetta: 'Documenti ASL', href: '/documenti' },
@@ -193,6 +195,23 @@ export const PERCORSI: Scheda[] = [
         'Lebbra · Leishmaniosi cutanea e viscerale · Leptospirosi · Linfogranuloma venereo · Listeriosi · Meningiti virali · Micobatteriosi non tubercolare* · Parotite · Pediculosi e ftiriasi · Pertosse · Psittacosi · Rickettsiosi',
         'Scabbia · Scarlattina · Shigellosi · Sifilide e sifilide congenita · Toxoplasmosi e toxoplasmosi congenita · Tubercolosi* · Tularemia · Altro (specificare)',
         '* = sorveglianza speciale (schede aggiuntive dedicate, di solito curate da Malattie infettive/Igiene pubblica).',
+      ] },
+    ],
+  },
+  {
+    id: 'isolamento', nome: 'Isolamento: quali precauzioni per quale infezione', gruppo: 'Sanità pubblica',
+    sintesi: 'Tabella aziendale con precauzioni da contatto, droplet o respiratorie, materiale infettante e durata per ogni germe o malattia.',
+    fonte: 'PA.DRO.01 rev. 3, tabella 5.5 (ASL Toscana Centro); nota Direzione Rete Ospedaliera 3/2/2025 sui tamponi',
+    link: [
+      { etichetta: '📄 PA.DRO.01', href: 'docs/asl/PA.DRO.01-paziente-colonizzato.pdf', primario: true },
+      { etichetta: '📄 Nota tamponi 2025', href: 'docs/asl/nota-tamponi-virus-respiratori-2025.pdf' },
+    ],
+    blocchi: [
+      { titolo: 'In PS', righe: [
+        'Precauzioni standard sempre, per tutti: igiene delle mani, guanti/camice/mascherina se rischio di contatto con liquidi biologici.',
+        'Senza stanza singola: isolamento di coorte (stesso germe) o funzionale (distanza ≥ 1 m, tenda, materiale dedicato).',
+        'Avvisare il reparto e il personale del trasporto delle precauzioni prima del trasferimento.',
+        'Tampone per virus respiratori solo se il sospetto è fondato e cambia prognosi o terapia; sempre, anche senza sintomi, nei pazienti da ricoverare in oncologia o oncoematologia.',
       ] },
     ],
   },

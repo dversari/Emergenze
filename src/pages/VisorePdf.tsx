@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.mjs'
+import { condividiFileUrl } from '../lib/stampaModulo'
 import workerUrl from 'pdfjs-dist/legacy/build/pdf.worker.min.mjs?url'
 
 pdfjs.GlobalWorkerOptions.workerSrc = workerUrl
@@ -16,14 +17,15 @@ export default function VisorePdf() {
   const navigate = useNavigate()
   const file = params.get('f') ?? ''
   const titolo = params.get('t') ?? file.split('/').pop() ?? 'Documento'
-  const url = `${base}${file}`
+  const blob = params.get('b')
+  const url = blob?.startsWith('blob:') ? blob : `${base}${file}`
   const box = useRef<HTMLDivElement>(null)
   const [stato, setStato] = useState<'carico' | 'ok' | 'errore'>('carico')
   const [pagine, setPagine] = useState(0)
   const [zoom, setZoom] = useState(1)
 
   useEffect(() => {
-    if (!file.startsWith('docs/') || file.includes('..')) { setStato('errore'); return }
+    if (!url.startsWith('blob:') && (!file.startsWith('docs/') || file.includes('..'))) { setStato('errore'); return }
     let annullato = false
     const contenitore = box.current
     if (!contenitore) return
@@ -66,13 +68,13 @@ export default function VisorePdf() {
           <button onClick={() => setZoom((z) => Math.max(1, z - 0.5))} disabled={zoom <= 1} className="px-3 py-2 disabled:opacity-30">−</button>
           <button onClick={() => setZoom((z) => Math.min(3, z + 0.5))} disabled={zoom >= 3} className="px-3 py-2 border-l border-linea disabled:opacity-30">+</button>
         </div>
-        <a href={url} download className="rounded-full border border-verde px-3 py-2 text-sm font-bold text-verde shrink-0">⬇︎</a>
+        <button onClick={() => condividiFileUrl(url, (file.split('/').pop() || titolo.replace(/[^\w.-]+/g, '-')) + (file ? '' : '.pdf'), titolo)} aria-label="Scarica o condividi" className="rounded-full border border-verde px-3 py-2 text-sm font-bold text-verde shrink-0">⬇︎</button>
       </div>
       {stato === 'carico' && <p className="text-sm text-tenue px-1">Apro il documento…</p>}
       {stato === 'errore' && <p className="text-sm text-bordeaux px-1">Non riesco ad aprire il documento. Prova con «Scarica».</p>}
       {stato === 'ok' && pagine > 1 && <p className="text-[11px] text-tenue px-1">{pagine} pagine</p>}
       <div ref={box} className={`flex flex-col gap-3 pb-8 ${zoom > 1 ? 'overflow-x-auto items-start' : ''}`} />
-      <p className="text-[11px] text-tenue px-1 -mt-6">I moduli compilabili vanno scaricati («Scarica») e compilati nell’app dei file o in un lettore PDF.</p>
+      <p className="text-[11px] text-tenue px-1 -mt-6">⬇︎ apre la condivisione: Salva su File, Stampa, Mail.</p>
     </div>
   )
 }

@@ -3,6 +3,7 @@
  * in scala: servono a ricordare repere, punto d'ingresso e direzione.
  */
 import type { ReactNode } from 'react'
+import IsolamentoTabella from './IsolamentoTabella'
 
 const T = { fill: 'none', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const }
 const pelle = 'fill-sabbia stroke-tenue'
@@ -596,6 +597,7 @@ const EnergieTabella = () => {
 }
 
 export const FIGURE: Record<string, () => ReactNode> = {
+  isolamento: IsolamentoTabella,
   'nk-5600': NK5600,
   'nk-5531': NK5531,
   'dfm100': DFM100,

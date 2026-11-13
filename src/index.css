@@ -133,3 +133,6 @@ input, select, textarea {
 .foglio.in-pdf { box-shadow: none; border: 0; margin: 0; width: 210mm; min-height: 0; padding: 7mm 9mm; line-height: 1.25; }
 .foglio.in-pdf .campo, .foglio.in-pdf .box { background: transparent !important; }
 .foglio.in-pdf textarea::placeholder, .foglio.in-pdf input::placeholder { color: transparent; }
+
+.foglio.notifica p.flex { white-space: nowrap; }
+.foglio.notifica p.flex .campo { min-width: 8mm; }

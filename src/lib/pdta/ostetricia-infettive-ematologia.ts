@@ -228,7 +228,7 @@ export const LG_OST_INF_EMA: LineaGuida[] = [
     area: 'Infettivologia',
     fonte: { etichetta: 'OMS: linee guida sulla malaria', url: 'https://www.who.int/publications/i/item/guidelines-for-malaria' },
     controllata: OGGI,
-    vediAnche: [{ etichetta: 'Sospetta Ebola', to: '/percorsi?apri=ebola' }, { etichetta: 'Arbovirosi 2026 (circolare)', to: '/documenti' }, INF, { etichetta: 'Sepsi', to: '/linee-guida/sepsi' }, { etichetta: 'Meningite', to: '/linee-guida/meningite' }],
+    vediAnche: [{ etichetta: 'Sospetta Ebola', to: '/percorsi?apri=ebola' }, { etichetta: 'Arbovirosi (Dengue, Chikungunya…)', to: '/linee-guida/arbovirosi' }, INF, { etichetta: 'Sepsi', to: '/linee-guida/sepsi' }, { etichetta: 'Meningite', to: '/linee-guida/meningite' }],
     inBreve: [
       'Febbre entro 3 mesi (fino a 1 anno) dal rientro da zona malarica = malaria fino a prova contraria: striscio e goccia spessa (o test rapido) SUBITO, ripetuti ogni 12–24 h per 3 volte se negativi.',
       'Anche chi è nato in zona endemica e torna da una visita ai parenti (VFR) perde l’immunità: rischio alto.',
@@ -428,9 +428,97 @@ export const LG_OST_INF_EMA: LineaGuida[] = [
     ],
     aggiornamenti: [{ data: '2020-08-01', testo: 'WFH 2020: trattamento immediato prima degli accertamenti; gestione con emicizumab e nei pazienti con inibitori.' }],
   },
+  {
+    id: 'arbovirosi',
+    titolo: 'Arbovirosi: Dengue, Chikungunya, Zika, West Nile',
+    ente: 'Ministero della Salute · OMS',
+    anno: 2026,
+    area: 'Infettivologia',
+    fonte: { etichetta: 'ISS EpiCentro: arbovirosi (bollettini e piano nazionale)', url: 'https://www.epicentro.iss.it/arbovirosi/' },
+    controllata: OGGI,
+    vediAnche: [
+      { etichetta: '📄 Circolare arbovirosi 2026', to: '/pdf?f=docs%2Fasl%2Fcircolare-arbovirosi-2026.pdf&t=Circolare%20arbovirosi%202026' },
+      { etichetta: '📄 Definizione caso Dengue', to: '/pdf?f=docs%2Fasl%2Fdefinizione-caso-dengue.pdf&t=Definizione%20di%20caso%20Dengue' },
+      { etichetta: '📄 Definizione caso Chikungunya', to: '/pdf?f=docs%2Fasl%2Fdefinizione-caso-chikungunya.pdf&t=Definizione%20di%20caso%20Chikungunya' },
+      { etichetta: 'Notifica (entro 12 h)', to: '/percorsi?apri=notifica-infettive' },
+      { etichetta: 'Febbre al rientro / malaria', to: '/linee-guida/febbre-viaggiatore' },
+      { etichetta: 'Meningite', to: '/linee-guida/meningite' },
+    ],
+    inBreve: [
+      'Sospetto (circolare 2026): febbre acuta o recente (anche solo trattata con antipiretici) + almeno uno tra rash, artralgie o dolore retro-orbitale, coinvolgimento d’organo (neurologico, epatico, cardiaco), cluster di casi.',
+      'Criterio epidemiologico: viaggio in zona endemica nelle 3 settimane prima dei sintomi (anche scali), OPPURE permanenza in un comune con trasmissione documentata nella stagione (Toscana 2026: casi autoctoni di Dengue), OPPURE convivente/partner di un caso.',
+      'In stagione (primavera–inizio autunno) anche la sola febbre senza altra causa, o febbri a grappolo in famiglia o quartiere, fanno pensare a trasmissione locale.',
+      'Notifica del caso SOSPETTO entro 12 h (scheda unica), con copia della scheda allegata ai campioni.',
+      'Prima escludere ciò che uccide prima: malaria nel viaggiatore dai tropici, sepsi, meningococco.',
+      'Niente FANS né aspirina finché la Dengue non è esclusa: solo paracetamolo.',
+      'Paziente viremico: repellente e zanzariera/aria condizionata, per non far pungere le zanzare locali (Aedes albopictus) e innescare un focolaio.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Quadri suggestivi',
+        punti: [
+          'Dengue: rash maculo-papulare confluente («isole bianche in mare rosso»), mialgie, dolore retro-orbitale, leucopenia e piastrinopenia, transaminasi alte.',
+          'Chikungunya: artralgie importanti, simmetriche, invalidanti; rash morbilliforme dopo 3–5 giorni, spesso pruriginoso.',
+          'Zika: rash pruriginoso meno confluente, congiuntivite; in gravidanza rischio fetale (ginecologo). Trasmissione anche sessuale.',
+          'West Nile, Toscana virus, TBE: febbre con meningite a liquor limpido, encefalite, paralisi flaccida, quadri simil Guillain-Barré; pannello liquorale negativo → pensare all’arbovirus.',
+          'Miocardite o aritmie nuove in estate senza altra causa: considerare un arbovirus.',
+        ],
+      },
+      {
+        titolo: 'Dengue: segni d’allarme e gestione (70 kg)',
+        punti: [
+          'Segni d’allarme (fase critica, di solito quando cala la febbre, giorni 3–7): dolore o tensione addominale, vomito persistente, sanguinamento mucoso, letargia o agitazione, epatomegalia > 2 cm, versamenti (pleura, peri-colecisti, Douglas all’eco), ematocrito in aumento con piastrine in calo.',
+          'Senza segni d’allarme, beve e urina: domicilio con paracetamolo (massimo 3 g/die), idratazione orale, emocromo ogni 24–48 h, rientro subito se compaiono segni d’allarme.',
+          'Con segni d’allarme, gravidanza, comorbidità o anziano: ricovero; cristalloidi 5–7 mL/kg/h (350–500 mL/h) per 1–2 h, poi scalare secondo ematocrito e diuresi (≥ 0,5 mL/kg/h); evitare il sovraccarico.',
+          'Shock da Dengue: 10–20 mL/kg (700–1.400 mL) in 15–30 min, poi rivalutare; emorragia grave: emazie. Piastrine solo se sanguina, non per il numero.',
+          'Niente FANS, aspirina, iniezioni intramuscolo.',
+        ],
+      },
+      {
+        titolo: 'Esami da inviare (circolare 2026)',
+        punti: [
+          'Prelevare insieme siero, sangue intero/EDTA, plasma EDTA e URINE: le urine restano positive alla PCR anche dopo 7–15 giorni.',
+          'Giorni 0–10: antigene NS1 per la Dengue (un negativo non esclude).',
+          'Giorni 0–15: test molecolare (PCR) su sangue e urine; anche su liquor nelle forme neurologiche.',
+          'Sierologia IgM/IgG: due prelievi, il primo entro 7 giorni e il secondo dopo 2 settimane (cross-reattività tra flavivirus: serve conferma).',
+          'Allegare ai campioni la scheda di notifica compilata; vaccinazioni recenti (Dengue, febbre gialla) possono dare falsi positivi.',
+          'Emocromo, transaminasi, creatinina, PCR; striscio o test rapido per malaria se viaggio in zona malarica.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2026-04-28', testo: 'Circolare ministeriale arbovirosi 2026: definizione sindromica del sospetto, schema diagnostico con urine, notifica entro 12 h.' },
+      { data: '2026-09-01', testo: 'Regione Toscana: 3 casi di Dengue autoctona (uno confermato, soggiorno a Piombino); massima attenzione in PS ai quadri compatibili.' },
+    ],
+  },
 ]
 
 export const ALG_OST_INF_EMA: Alg = {
+  arbovirosi: {
+    titolo: 'Algoritmo sospetta arbovirosi',
+    nota: 'Circolare Min. Salute 2026. Notifica del sospetto entro 12 h.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Febbre acuta o recente', righe: ['+ rash, artralgie/dolore retro-orbitale, coinvolgimento d’organo o cluster.'] },
+      { tipo: 'decisione', titolo: 'Criterio epidemiologico?', righe: ['Viaggio in zona endemica (3 settimane), comune con trasmissione nella stagione, contatto con un caso.'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'No, fuori stagione', tono: 'si', fine: 'Arbovirosi improbabile: altra causa', nodi: [] },
+          {
+            etichetta: 'Sì o in stagione', tono: 'no', nodi: [
+              { tipo: 'checklist', titolo: 'Subito', righe: ['Malaria se dai tropici (striscio/test rapido)', 'Emocromo, transaminasi, creatinina', 'Siero + EDTA + urine: NS1, PCR, sierologia', 'Scheda di notifica (12 h) allegata ai campioni', 'Repellente/zanzariera al paziente', 'Solo paracetamolo'], vai: [{ etichetta: 'Notifica', to: '/percorsi?apri=notifica-infettive' }] },
+              { tipo: 'decisione', titolo: 'Segni d’allarme Dengue o forma neurologica?', righe: ['Dolore addominale, vomito persistente, sanguinamento, letargia, versamenti, Ht ↑ con piastrine ↓; meningite/encefalite.'] },
+              {
+                tipo: 'rami', rami: [
+                  { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Ricovero (infettivologo)', righe: ['Cristalloidi 5–7 mL/kg/h, poi secondo Ht e diuresi; shock: 10–20 mL/kg.', 'Neuro: rachicentesi con PCR su liquor.'] }] },
+                  { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Domicilio', righe: ['Paracetamolo, idratazione, emocromo a 24–48 h, rientro se segni d’allarme; protezione dalle zanzare per 7 giorni.'] }] },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
   'metrorragia-primo-trimestre': {
     titolo: 'Algoritmo sanguinamento nel primo trimestre',
     nota: 'NICE NG126.',
