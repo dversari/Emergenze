@@ -1,7 +1,7 @@
 /*
  * «Percorsi»: adempimenti medico-legali, percorsi protetti, sanità pubblica, maxiemergenza.
  * BOZZA: riferimenti normativi nazionali; i dettagli operativi vanno allineati alle procedure
- * aziendali dell'ASL Toscana Centro (PEIMAF e maxiemergenza in attesa del protocollo aziendale).
+ * aziendali dell'ASL Toscana Centro (PEIMAF dal PS.DRO.62 rev. 1).
  */
 import type { Scheda } from './schede'
 
@@ -310,29 +310,156 @@ export const PERCORSI: Scheda[] = [
 
   // ─── Maxiemergenza ───
   {
-    id: 'peimaf', nome: 'PEIMAF (massiccio afflusso di feriti)', gruppo: 'Maxiemergenza', urgente: true,
-    sintesi: 'IN ATTESA DEL PROTOCOLLO AZIENDALE. Piano di emergenza interno per il massiccio afflusso di feriti.',
+    id: 'peimaf', nome: 'PEIMAF: allarme, comando e prime azioni', gruppo: 'Maxiemergenza', urgente: true,
+    sintesi: 'Piano per il massiccio afflusso di feriti al Santo Stefano. Lo attiva il Direttore sanitario aziendale; in PS il medico che riceve l’allarme fa da DSS-H finché il direttore della Medicina d’urgenza non lo designa. Prima ora di giorno: al massimo 14 pazienti (2 codici 1, 4 codici 2, 8 codici 3).',
+    fonte: 'PS.DRO.62 rev. 1 (09/08/2023) ASL Toscana Centro, PO Santo Stefano; DOC.DS.03 rev. 3 (Piano aziendale maxiemergenza) e modulo METHANE TPX 5956',
+    link: [
+      { etichetta: '☎ Numeri maxiemergenza (Rubrica)', href: '/rubrica?cerca=maxiemergenza', primario: true },
+      { etichetta: 'Assetto del DEA', href: '/percorsi?apri=peimaf-dea' },
+      { etichetta: 'PEIMAF NBCRe', href: '/percorsi?apri=peimaf-nbcr' },
+      { etichetta: 'Triage di massa', href: '/percorsi?apri=maxiemergenza' },
+    ],
     blocchi: [
-      { titolo: 'Da inserire dal protocollo aziendale', righe: [
-        'Chi attiva il piano e come (allerta dalla Centrale 118, livelli di attivazione).',
-        'Catena di comando: responsabile del PS, direzione sanitaria, ruoli (scheda di azione per ruolo).',
-        'Aree: triage di maxiemergenza, area rossa/gialla/verde, area decessi, area familiari e stampa.',
-        'Richiamo del personale, liberazione dei letti, blocco delle attività programmate.',
-        'Materiali, numeri da chiamare, cartellini di triage, registrazione dei pazienti.',
-        'Disattivazione e debriefing.',
+      { titolo: 'Da dove arriva la notizia', righe: [
+        'Centrale 118: chiama la linea dedicata del PS (telefono analogico con suoneria diversa e spia luminosa) o la radio del PS (canale 16 regionale, sempre accesa). Numero e selettiva in Rubrica.',
+        'Autopresentazione di molti feriti: il triage avvisa SUBITO la Centrale 118, la Direzione medica di presidio e il Coordinatore maxiemergenze.',
+        'Emergenza interna all’ospedale: la notizia arriva dalla Direzione medica di presidio o dalla Centrale 118.',
+      ] },
+      { titolo: 'Livelli', righe: [
+        'Attivazione preventiva: evento prevedibile (allerta meteo, epidemie, grandi eventi); di norma comunicata alla Direzione medica di presidio.',
+        'Preallarme: la Centrale 118 avvisa il medico del PS per verificare quanti pazienti l’ospedale può ricevere davvero.',
+        'Allarme / attivazione definitiva: massiccio afflusso confermato. Il PEIMAF lo attiva il Direttore sanitario aziendale dopo la dichiarazione di maxiemergenza.',
+        'Gravità secondo la Centrale (modulo METHANE): livello 1 = 10–30 feriti, livello 2 = 30–100, livello 3 = oltre 100.',
+      ] },
+      { titolo: 'Cosa farsi dire dalla Centrale 118', numerato: true, righe: [
+        'Natura dell’evento (convenzionale o NBCRe) e luogo esatto.',
+        'Numero stimato di vittime.',
+        'Tempo stimato di arrivo dei primi pazienti.',
+        'Tipo prevalente di lesioni (traumi, ustioni, intossicati, contaminati).',
+        'Altri ospedali coinvolti.',
+        'Se sono attivate l’Unità di crisi aziendale e/o quella zonale.',
+        'Annotare ora della chiamata e recapito di ritorno; se il canale lo consente, pericoli, vie di accesso e punto di raccolta.',
+      ] },
+      { titolo: 'Allarme: liberare il PS (subito)', numerato: true, righe: [
+        'Ricoverare o assegnare alla specialistica i pazienti già in PS che hanno un posto (seguendo le schede di azione).',
+        'Dimettere i dimissibili ancora in corso di accertamenti con programma di post-ricovero o con indicazione a rientrare.',
+        'Allontanare dalle sale d’attesa i codici 4 e 5 con i loro accompagnatori, spiegando il motivo; cartello all’ingresso «Maxiemergenza in atto».',
+        'Il portiere, avvisato dalla Direzione medica di presidio, annuncia all’interfono «Attenzione, maxiemergenza in atto».',
+        'Riallestire il DEA secondo l’assetto PEIMAF (card «Assetto del DEA»).',
+      ] },
+      { titolo: 'Catena di comando', righe: [
+        'DSS-H (Direttore dei soccorsi sanitari in ospedale): coordina i soccorsi in ospedale. Lo designa il Direttore della Medicina d’urgenza; se non è presente o raggiungibile, nell’ordine: vicedirettore → medico fuori turno del PS → medico capoturno (flussista) o il medico in turno più esperto di maxiemergenza.',
+        'Ruoli e compiti sono nei tape SISmax (Allegato 2 al PS.DRO.62); ogni ruolo indossa la pettorina del colore del bordo del proprio tape.',
+        'Comunicazioni tra i ruoli via radio, con la dotazione della Control Room fornita dall’Area tecnica di presidio.',
+        'Avvisare la Control Room che si usa la porta d’emergenza n. 58 dell’Open space, per far tacitare l’allarme.',
+        'Unità sanitaria di crisi zonale (coordinata dal Direttore della Direzione medica di presidio): Medicina d’urgenza, gestione infermieristica, Rianimazione, 118 Prato, Area tecnica, Farmacia, Prevenzione (PISLL), Zona-distretto, SePP. Elenco dei reperibili della Direzione sanitaria in portineria e in Control Room. Concorda con le Forze dell’ordine il controllo degli accessi all’ospedale.',
+      ] },
+      { titolo: 'Capacità della prima ora', righe: [
+        'Di giorno: al massimo 14 pazienti, cioè 2 codici 1, 4 codici 2, 8 codici 3.',
+        'Stima da ridurre di notte, nei mesi estivi e se il PS è già sovraffollato: comunicarlo alla Centrale 118 in fase di preallarme.',
+        'Fattori che la limitano: postazioni per codici maggiori, sale operatorie d’urgenza con équipe, letti monitorati, ecografia ed Rx per la prima valutazione, TC e sangue subito disponibili, personale reclutabile.',
+      ] },
+      { titolo: 'Personale', righe: [
+        'Restano in servizio tutti gli smontanti, che si sommano ai montanti.',
+        'Il personale in pronta disponibilità viene convocato dalla Direzione infermieristica e dalla Direzione medica di presidio.',
+        'Internisti, chirurghi, ortopedici e rianimatori in turno vengono destinati al PS: prima di scendere avvisano il reperibile del proprio reparto.',
+        'Servizi diagnostici e degenze specialistiche si mettono a disposizione per le consulenze; squadre di trasporto dedicate.',
+        'TSRM: attivazione con il percorso di chiamata dei reperibili.',
+        'In una seconda fase smontano i trattenuti, sostituiti dal personale non in servizio al momento dell’evento.',
+      ] },
+      { titolo: 'Aree speciali', righe: [
+        'Area nera: sosta salme, fino a 8 vittime; oltre, Sala multiculto e/o Cappella, presidiate.',
+        'Informazioni ai parenti: hall principale, davanti alle scale mobili (sedie e transenne a cura del gestore), con personale per il supporto psicologico garantito dalla Direzione medica di presidio.',
+        'Comunicati stampa: Sala del Cembalo.',
+        'Unità di crisi: Sala Magnolfi, 1° piano della Palazzina dei servizi; chiavi in Control Room (piano terra della stessa palazzina).',
+      ] },
+      { titolo: 'Oltre la prima ora e fine', righe: [
+        'Se l’evento si prolunga, Direzione medica e Direzione infermieristica (in Unità di crisi zonale) bloccano o rimodulano nell’ordine: ambulatori e Day Service, chirurgia programmata, sale operatorie.',
+        'La fine della maxiemergenza la dichiara la Direzione medica di presidio, sulla base delle notizie di PS, 118, Prefettura e Protezione civile; poi si scioglie l’Unità di crisi zonale e si torna all’attività ordinaria.',
+        'Registrazione dei pazienti: First Aid Web e scheda di triage regionale (Allegato 2 al DOC.DS.03).',
+        'Copie cartacee del piano: bancone del triage, Control Room, segreteria amministrativa del DEA.',
       ] },
     ],
   },
   {
-    id: 'maxiemergenza', nome: 'Maxiemergenza: triage e principi', gruppo: 'Maxiemergenza',
-    sintesi: 'IN ATTESA DEL PROTOCOLLO AZIENDALE. Principi generali di triage di massa.',
+    id: 'peimaf-dea', nome: 'PEIMAF: assetto del DEA e accessi', gruppo: 'Maxiemergenza', urgente: true,
+    sintesi: 'Il DEA si divide in due: area maxiemergenza (sale rossa e arancio, triage, sala gessi, sala rosa) e area per l’emergenza ordinaria (Open space e OBI). Radiologia e TC del PS solo per la maxiemergenza.',
+    fonte: 'PS.DRO.62 rev. 1 (09/08/2023), par. 9–10 e Allegati 3–4 (piantine e cartellonistica)',
+    link: [
+      { etichetta: 'Allarme e comando', href: '/percorsi?apri=peimaf' },
+      { etichetta: 'PEIMAF NBCRe', href: '/percorsi?apri=peimaf-nbcr' },
+    ],
     blocchi: [
-      { titolo: 'Principi generali (da allineare al protocollo)', righe: [
+      { titolo: 'Area maxiemergenza', righe: [
+        'Sala rossa: 2 postazioni → codici 1 e 2.',
+        'Sala arancio: 6 postazioni → codici 1 e 2.',
+        'Triage interno, sala gessi, sala rosa → codici 3 e codici minori.',
+        'Triage esterno → codici minori che arrivano a piedi.',
+        'Sala d’attesa del PS: cassa di espansione per i pazienti della maxiemergenza a bassa intensità.',
+        'Radiologia del DEA e TC del PS: solo pazienti della maxiemergenza.',
+        'Triage come di consueto: triage interno per i barellati, triage esterno per chi arriva da solo.',
+      ] },
+      { titolo: 'Area emergenza ordinaria', righe: [
+        'I pazienti ordinari che si trovano nell’area destinata alla maxiemergenza si spostano in Open space e OBI.',
+        'Open space, area monitor: codici 1 e 2 ordinari in arrivo.',
+        'OBI (ex HDU): pazienti già valutati che hanno bisogno del monitor.',
+        'Open space senza monitor, corridoi paralleli, box C e box D: pazienti già valutati, stabili, senza ossigeno.',
+        'Triage dell’ordinario allestito nell’ex sala 1 dell’Open space; postazione con PC e carrello dell’emergenza nel box D.',
+        'Cassa di espansione: corridoi verso OBI e Psichiatria (solo pazienti stabili, senza ossigeno).',
+        'Medico di riferimento dell’area: ex stanza visita medico-pediatrica.',
+        'Diagnostica: radiologia ordinaria e TC 128, raggiunte dal corridoio in uscita dall’OBI.',
+      ] },
+      { titolo: 'Accessi in maxiemergenza convenzionale', righe: [
+        'Barellati della maxiemergenza: camera calda → triage interno.',
+        'Barellati ordinari: porta d’emergenza dell’Open space → triage nell’ex stanza 1.',
+        'Deambulanti della maxiemergenza: sala d’attesa → triage esterno.',
+        'Deambulanti ordinari: uscita d’emergenza dell’Open space → triage nell’ex stanza 1.',
+        'Far sgombrare il parcheggio del PS per le manovre dei mezzi di soccorso.',
+      ] },
+    ],
+  },
+  {
+    id: 'peimaf-nbcr', nome: 'PEIMAF NBCRe: contaminati e decontaminazione', gruppo: 'Maxiemergenza', urgente: true,
+    sintesi: 'Evento nucleare, biologico, chimico, radiologico o esplosivo: stessa catena di comando, accessi diversi. Stanza di decontaminazione per un paziente alla volta, con accesso separato dalla camera calda.',
+    fonte: 'PS.DRO.62 rev. 1 (09/08/2023), par. 11',
+    link: [
+      { etichetta: 'Vestizione NBCR illustrata', href: '/procedure?apri=nbcr-vestizione', primario: true },
+      { etichetta: 'Svestizione NBCR illustrata', href: '/procedure?apri=nbcr-svestizione' },
+      { etichetta: 'Antidoti e consulenze', href: '/procedure?apri=nbcr-antidoti' },
+      { etichetta: 'Allarme e comando', href: '/percorsi?apri=peimaf' },
+    ],
+    blocchi: [
+      { titolo: 'Accessi (diversi dal convenzionale)', righe: [
+        'Deambulanti della maxiemergenza: camera calda → direttamente in stanza di decontaminazione → triage interno.',
+        'Barellati della maxiemergenza: sala d’attesa → triage esterno.',
+        'Pazienti ordinari: come nel convenzionale (porta e uscita d’emergenza dell’Open space → triage nell’ex stanza 1).',
+        'Far sgombrare subito il parcheggio del PS.',
+      ] },
+      { titolo: 'Stanza di decontaminazione', numerato: true, righe: [
+        'Un OSS del PS prende le chiavi della stanza Maxiemergenze nel primo cassetto del bancone del triage.',
+        'Nella stanza c’è l’armadio con tute, maschere, cerotto e calzature per chi esegue la decontaminazione.',
+        'Vestizione degli addetti secondo la sequenza NBCR prima di toccare il paziente.',
+        'Un paziente alla volta; nessun contaminato entra nel DEA prima della decontaminazione.',
+      ] },
+      { titolo: 'Se i contaminati sono molti', righe: [
+        'L’Unità di crisi aziendale può attivare, tramite la SOC Coordinamento maxiemergenze, la tenda DECO montata e gestita dalla Protezione civile.',
+        'Per altri DPI si passa dalla stessa via.',
+        'Catena di comando, DSS-H e aree speciali come nel PEIMAF convenzionale.',
+      ] },
+    ],
+  },
+  {
+    id: 'maxiemergenza', nome: 'Maxiemergenza: triage di massa', gruppo: 'Maxiemergenza',
+    sintesi: 'Principi generali di triage di massa (START). La scheda di triage da usare in ospedale è quella regionale (Allegato 2 al DOC.DS.03).',
+    fonte: 'Principi generali; PS.DRO.62 rev. 1 per strumenti e registrazione',
+    link: [{ etichetta: 'PEIMAF: allarme e comando', href: '/percorsi?apri=peimaf' }],
+    blocchi: [
+      { titolo: 'Principi', righe: [
         'Obiettivo: il massimo beneficio per il maggior numero di persone, non il massimo per il singolo.',
         'Triage START (adulti): cammina → verde; non respira dopo apertura delle vie aeree → nero; FR > 30, refill > 2 s/polso radiale assente, non esegue ordini semplici → rosso; altrimenti giallo.',
         'Solo manovre salvavita durante il triage: apertura delle vie aeree, controllo delle emorragie (tourniquet), posizione laterale.',
-        'Ritriage continuo; registrare ogni paziente con il cartellino.',
-        'Eventi NBCR (chimico, biologico, radiologico): decontaminazione prima dell’ingresso, DPI; procedura dedicata.',
+        'Ritriage continuo; ogni paziente registrato su First Aid Web e con la scheda di triage regionale.',
+        'Eventi NBCRe: decontaminazione prima dell’ingresso (card «PEIMAF NBCRe»).',
       ] },
     ],
   },

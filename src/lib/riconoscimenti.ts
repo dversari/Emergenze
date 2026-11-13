@@ -56,6 +56,9 @@ export const AZIENDALI: Record<string, Rif[]> = {
   'modulo/trasferimento': [{ titolo: 'Trasferimento di emergenza: Allegato 1', codice: 'PA.A118.01' }],
   'modulo/notifica': ['notifica-malattie-infettive', 'indirizzi-segnalazione'],
   'modulo/dimissione-contro-parere': ['io-dro-72-all1', 'io-dro-72'],
+  'percorsi/peimaf': [{ titolo: 'Piano Emergenza Intraospedaliera Massiccio Afflusso di Feriti (PEIMAF) nell’Ospedale S. Stefano di Prato', codice: 'PS.DRO.62 rev. 1', data: '09/08/2023' }, { titolo: 'Piano aziendale per la gestione degli eventi di maxiemergenza', codice: 'DOC.DS.03 rev. 3', data: '09/02/2022' }],
+  'percorsi/peimaf-dea': [{ titolo: 'Piano Emergenza Intraospedaliera Massiccio Afflusso di Feriti (PEIMAF) nell’Ospedale S. Stefano di Prato', codice: 'PS.DRO.62 rev. 1', data: '09/08/2023' }],
+  'percorsi/peimaf-nbcr': [{ titolo: 'Piano Emergenza Intraospedaliera Massiccio Afflusso di Feriti (PEIMAF) nell’Ospedale S. Stefano di Prato', codice: 'PS.DRO.62 rev. 1', data: '09/08/2023' }],
 }
 
 /** '/percorsi?apri=ebola' → 'percorsi/ebola'; '/linee-guida/x' → 'linee-guida/x'. */
