@@ -688,11 +688,39 @@ export const PROCEDURE: Scheda[] = [
     sintesi: 'Il momento più a rischio di contaminazione: lentamente, con il collega che guida, dall’esterno verso l’interno.',
     fonte: 'Schede del PS di Prato; DPI NBCR per agenti biologici di classe 4 (ASL TC, 2026)',
     blocchi: [
+      { titolo: 'Prima della svestizione: decontaminazione tecnica', numerato: true, righe: [
+        'Chimico e biologico: lavaggio e decontaminazione esterna della tuta, con i DPI ancora indossati.',
+        'Radiologico: monitorare tutta la superficie con il contatore Geiger per trovare le aree contaminate, lavarle, poi ricontrollare.',
+        'Tecnica di monitoraggio (REAC/TS): piante dei piedi prima di uscire dall’area contaminata; in piedi a gambe leggermente divaricate, braccia tese, palmi in su e dita distese.',
+        'Prima viso e mani; poi dalla sommità della testa al tronco, braccia e mani, gambe. Lento e metodico, 100% della superficie; poi girarsi e ripetere sul retro.',
+      ] },
       { titolo: 'Regole', righe: [
-        'Nell’area di svestizione davanti al locale di isolamento, con telini assorbenti, contenitori dei rifiuti e contenitore ermetico.',
+        'Nell’area di svestizione davanti al locale di isolamento, con contenitori dei rifiuti e contenitore ermetico. A terra: chimico e biologico telino assorbente; radiologico telino adesivo o telo umido (trattiene le particelle).',
         'Il collega legge i passaggi ad alta voce e controlla; disinfettare i guanti esterni tra un passaggio e l’altro se indicato dalla procedura.',
         'Non toccare mai la cute o la divisa con le parti esterne dei DPI; in caso di contatto: lavare subito e segnalare (infortunio biologico).',
       ] },
+    ],
+    link: [{ etichetta: '📄 Monitoraggio radiologico del personale (REAC/TS)', href: 'docs/reacts-monitoraggio-personale.pdf' }],
+  },
+  {
+    id: 'nbcr-antidoti', nome: 'Contaminazione NBCR: antidoti e consulenze', gruppo: 'Protezione NBCR', urgente: true,
+    sintesi: 'Antidoti della Scorta nazionale e radiologici: CAV di Pavia h24 (0382 24444). Scorta ASL TC alla farmacia di Ponte a Niccheri.',
+    fonte: 'Revisione di M. Longo (tesi su emergenze radio-nucleari); CAV Pavia – Centro Nazionale di Informazione Tossicologica; ORISE REAC/TS',
+    blocchi: [
+      { titolo: 'Chi chiamare', righe: [
+        'CAV di Pavia (IRCCS Maugeri, Centro nazionale di informazione tossicologica), h24: 0382 24444. Primo numero per attivare la Scorta nazionale antidoti e farmaci (SNAF) e per la posologia in emergenza, anche degli antidoti radiologici.',
+        'Intossicazioni ordinarie: resta il CAV di Firenze (Careggi).',
+        'Emergenza radiologica: REAC/TS (Oak Ridge, USA), centro di riferimento mondiale, h24, consulenza gratuita: +1 865 576 1005 fuori orario (chiedere di REAC/TS), +1 865 576 3131 in orario d’ufficio.',
+        'Valutazione dei dati radiologici: fisica sanitaria / esperto di radioprotezione; il SOS-RN lavora in raccordo con il CAV e il Ministero della Salute per antidoti e cure specifiche.',
+      ] },
+      { titolo: 'Dove sono gli antidoti', righe: [
+        'Scorta ASL Toscana Centro: farmacia dell’ospedale di Ponte a Niccheri (Santa Maria Annunziata).',
+      ] },
+    ],
+    link: [
+      { etichetta: '☎ CAV Pavia 0382 24444', href: 'tel:+39038224444', primario: true },
+      { etichetta: '☎ REAC/TS h24', href: 'tel:+18655761005' },
+      { etichetta: '📄 Monitoraggio radiologico (REAC/TS)', href: 'docs/reacts-monitoraggio-personale.pdf' },
     ],
   },
 ]

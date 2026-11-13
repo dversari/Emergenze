@@ -15,7 +15,7 @@ import { DOCUMENTI_ASL, type DocumentoAsl } from './documentiAsl'
 
 /** Sigle dei colleghi (come nei turni). */
 export const REVISORI: Record<string, string> = {
-  VR: 'Daniele Versari', BN: 'Banchelli', DC: 'De Curtis', CG: 'Caruso', GR: 'Grassi', LO: 'Longo', CL: 'Casalini',
+  VR: 'Daniele Versari', BN: 'Banchelli', DC: 'De Curtis', CG: 'Caruso', GR: 'Grassi', LO: 'Martino Longo', CL: 'Casalini',
   MT: 'Matteuzzi', EB: 'Bosco', PT: 'Pollastri', MN: 'Monda', AB: 'Ambrosio', CH: 'Chiellini', GA: 'Galarducci',
   GE: 'Geri', MI: 'Meoni', AP: 'Poggi',
 }
@@ -24,7 +24,7 @@ export interface Revisione {
   sigla: keyof typeof REVISORI | string
   /** AAAA-MM-GG */
   data: string
-  /** 'ok' = revisione conclusa; 'aperta' = commenti ancora da integrare */
+  /** 'ok' = revisione conclusa e approvata; 'aperta' = revisione in corso, in attesa di approvazione definitiva */
   esito: 'ok' | 'aperta'
   nota?: string
   /** impronta del contenuto al momento della revisione (npm run impronte) */
@@ -32,6 +32,12 @@ export interface Revisione {
 }
 
 export const REVISIONI: Record<string, Revisione[]> = {
+  'procedure/nbcr-svestizione': [
+    { sigla: 'LO', data: '2026-11-13', esito: 'aperta', nota: 'Telino assorbente per chimico e biologico, adesivo o umido per il radiologico; decontaminazione tecnica prima della svestizione (lavaggio della tuta; contatore Geiger nel radiologico).' },
+  ],
+  'procedure/nbcr-antidoti': [
+    { sigla: 'LO', data: '2026-11-13', esito: 'aperta', nota: 'Scorta antidoti ASL TC a Ponte a Niccheri; CAV di Pavia per la Scorta nazionale; REAC/TS.' },
+  ],
   'linee-guida/colica-renale': [
     { sigla: 'VR', data: '2026-11-13', esito: 'ok', nota: 'Tolto il metamizolo; dosi del cortisone (prednisone 25 mg/die per 10 giorni).', impronta: '273acd8f' },
   ],

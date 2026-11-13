@@ -9,7 +9,7 @@ const dataIt = (iso: string) => new Date(iso + 'T12:00:00').toLocaleDateString('
 
 const TONO: Record<StatoRevisione, { cerchio: string; testo: string; etichetta: string }> = {
   revisionata: { cerchio: 'bg-verde text-white border-verde', testo: 'text-verde', etichetta: 'Revisionata' },
-  aperta: { cerchio: 'bg-[#c98a1b] text-white border-[#c98a1b]', testo: 'text-[#9a6a12]', etichetta: 'Commenti da integrare' },
+  aperta: { cerchio: 'bg-[#c98a1b] text-white border-[#c98a1b]', testo: 'text-[#9a6a12]', etichetta: 'Revisione in corso' },
   superata: { cerchio: 'bg-white text-tenue border-linea-forte border-dashed', testo: 'text-tenue', etichetta: 'Modificata dopo la revisione' },
 }
 const BLU = '#2d4f73'
@@ -80,7 +80,7 @@ function Dettaglio({ chiave, contenuto, onChiudi }: { chiave: string; contenuto?
                   <span className={`h-8 min-w-8 px-1 inline-flex items-center justify-center rounded-full text-[11px] font-black ${v.esito === 'ok' ? 'bg-verde text-white' : 'bg-[#c98a1b] text-white'}`}>{v.sigla}</span>
                   <div className="min-w-0">
                     <p className="font-bold leading-tight">{REVISORI[v.sigla] ?? v.sigla}</p>
-                    <p className="text-[12px] text-tenue">{dataIt(v.data)} · {v.esito === 'ok' ? 'revisione conclusa' : 'commenti aperti'}</p>
+                    <p className="text-[12px] text-tenue">{dataIt(v.data)} · {v.esito === 'ok' ? 'revisione conclusa' : 'in attesa di approvazione definitiva'}</p>
                     {v.nota && <p className="text-[13px] leading-snug mt-0.5">{v.nota}</p>}
                   </div>
                 </li>
