@@ -114,29 +114,52 @@ export const PERCORSI: Scheda[] = [
     ],
   },
 
-  // ─── Percorsi protetti ───
+  // ─── Codice Rosa (in evidenza in cima alla pagina) ───
   {
-    id: 'codice-rosa', nome: 'Codice Rosa (violenza)', gruppo: 'Percorsi protetti', urgente: true,
-    sintesi: 'Percorso regionale toscano per le vittime di violenza: stanza dedicata, task force, prove conservate, centro antiviolenza.',
+    id: 'codice-rosa', nome: 'Accoglienza e valutazione del rischio', gruppo: 'Codice Rosa', urgente: true,
+    sintesi: 'Attivazione al triage, stanza Rosa, mai sola né con il presunto autore; cure, documentazione, valutazione del rischio.',
     fonte: 'Rete regionale Codice Rosa (DGR Toscana); Legge 69/2019 «Codice rosso»',
     blocchi: [
       { titolo: 'Accoglienza', numerato: true, righe: [
         'Codice di priorità adeguato e attivazione del percorso Codice Rosa al triage; stanza Rosa dedicata, la persona non resta sola né con il presunto autore.',
-        'Domande dirette e non giudicanti; valutazione del rischio (screening di rischio di recidiva/letalità previsto dal percorso).',
-        'Cure delle lesioni prima di tutto; documentazione accurata: descrizione, misure, foto con consenso e righello.',
-      ] },
-      { titolo: 'Violenza sessuale', righe: [
-        'Ginecologo (o urologo/chirurgo) del percorso; kit per la raccolta delle prove; non far lavare né urinare prima dei prelievi se possibile.',
-        'Indumenti in buste di carta separate, sigillate ed etichettate; catena di custodia.',
-        'Profilassi: IST, HIV (PEP entro 72 h), HBV, contraccezione d’emergenza; prelievi tossicologici se sospetta sostanza (urine e sangue).',
-      ] },
-      { titolo: 'Dopo', righe: [
-        'Referto all’autorità giudiziaria se il reato è procedibile d’ufficio (maltrattamenti, minori, lesioni gravi, ecc.); negli altri casi informare la persona della possibilità di querela.',
-        'Contatto con il centro antiviolenza (rubrica) e, se necessario, ospitalità protetta; servizi sociali.',
-        'Dimissione solo in sicurezza: dove va, con chi; numero 1522 (antiviolenza e stalking, 24 h).',
+        'Domande dirette e non giudicanti, senza la presenza di accompagnatori; interprete professionale se serve (non familiari).',
+        'Valutazione del rischio di recidiva/letalità con lo strumento previsto dal percorso (minacce di morte, strangolamento, armi, escalation, gravidanza, figli coinvolti).',
+        'Cure delle lesioni prima di tutto; documentazione accurata: sede, forma, dimensioni, colore; foto con consenso e righello.',
+        'Minori coinvolti o testimoni di violenza: segnalazione obbligatoria (referto/Procura minori).',
       ] },
     ],
   },
+  {
+    id: 'codice-rosa-sessuale', nome: 'Violenza sessuale: prove e profilassi', gruppo: 'Codice Rosa', urgente: true,
+    sintesi: 'Ginecologo del percorso, kit prove con catena di custodia, profilassi IST/HIV/HBV e contraccezione d’emergenza.',
+    link: [{ etichetta: 'Profilassi post-esposizione', href: '/linee-guida/pep-hiv-hbv' }],
+    blocchi: [
+      { titolo: 'Prove', righe: [
+        'Ginecologo (o urologo/chirurgo) del percorso; kit per la raccolta delle prove; non far lavare né urinare prima dei prelievi se possibile.',
+        'Indumenti in buste di carta separate, sigillate ed etichettate; catena di custodia.',
+        'Prelievi tossicologici (sangue e urine) se sospetta sostanza (GHB, benzodiazepine, alcol): prima possibile.',
+      ] },
+      { titolo: 'Profilassi', righe: [
+        'HIV: PEP entro 72 h (meglio entro 2–4 h). HBV: vaccino ± immunoglobuline se non immune.',
+        'IST: ceftriaxone 500 mg im + doxiciclina 100 mg × 2 per 7 giorni + metronidazolo 2 g.',
+        'Contraccezione d’emergenza (levonorgestrel entro 72 h, ulipristal entro 120 h).',
+      ] },
+    ],
+  },
+  {
+    id: 'codice-rosa-dopo', nome: 'Referto, rete antiviolenza e dimissione protetta', gruppo: 'Codice Rosa',
+    sintesi: 'Referto se procedibile d’ufficio, informazione sulla querela, centro antiviolenza, 1522; dimissione solo in sicurezza.',
+    link: [{ etichetta: 'Referto all’AG', href: '/percorsi?apri=referto' }, { etichetta: '☎ 1522', href: 'tel:1522' }],
+    blocchi: [
+      { titolo: 'Dopo', righe: [
+        'Referto all’autorità giudiziaria se il reato è procedibile d’ufficio (maltrattamenti, minori, lesioni gravi, atti persecutori con lesioni, ecc.); negli altri casi informare la persona della possibilità di querela.',
+        'Contatto con il centro antiviolenza (rubrica) e, se necessario, ospitalità protetta; servizi sociali.',
+        'Dimissione solo in sicurezza: dove va, con chi; numero 1522 (antiviolenza e stalking, 24 h).',
+        'Annotare in cartella in modo oggettivo, con le parole della persona tra virgolette.',
+      ] },
+    ],
+  },
+  // ─── Percorsi protetti ───
   {
     id: 'tso', nome: 'TSO e ASO (trattamento e accertamento sanitario obbligatorio)', gruppo: 'Percorsi protetti',
     sintesi: 'TSO per malattia mentale: tre condizioni insieme, proposta + convalida di due medici, ordinanza del sindaco.',
