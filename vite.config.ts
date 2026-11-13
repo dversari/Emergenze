@@ -36,7 +36,8 @@ export default defineConfig({
         ],
       },
       // Tutto in cache: l'app funziona anche senza rete (sotterranei, zone senza campo).
-      workbox: { skipWaiting: true, clientsClaim: true, cleanupOutdatedCaches: true, globPatterns: ['**/*.{js,css,html,ico,png,svg}'] },
+      // I PDF in docs/ vanno aperti dal server, non sostituiti dall'app (navigateFallback).
+      workbox: { navigateFallbackDenylist: [/\/docs\//, /\.pdf$/i], skipWaiting: true, clientsClaim: true, cleanupOutdatedCaches: true, globPatterns: ['**/*.{js,css,html,ico,png,svg}'] },
     }),
   ],
   server: { host: '127.0.0.1' },
