@@ -32,7 +32,27 @@ function Giglio() {
   )
 }
 
-const DISEGNI: Record<string, ReactNode> = {
+export const DISEGNI: Record<string, ReactNode> = {
+  calendario: (
+    <>
+      <rect x="8" y="12" width="48" height="44" rx="5" className="fill-carta stroke-verde-scuro" strokeWidth={2.4} />
+      <path d="M8 24 h48" {...T} className="stroke-verde-scuro" />
+      <path d="M20 7 v10 M44 7 v10" {...T} className="stroke-bordeaux" />
+      <rect x="15" y="30" width="8" height="7" rx="1.5" className="fill-verde3" />
+      <rect x="28" y="30" width="8" height="7" rx="1.5" className="fill-oro2" />
+      <rect x="41" y="30" width="8" height="7" rx="1.5" className="fill-verde3" />
+      <rect x="15" y="42" width="8" height="7" rx="1.5" className="fill-bordeaux3" />
+      <rect x="28" y="42" width="8" height="7" rx="1.5" className="fill-verde3" />
+    </>
+  ),
+  programmi: (
+    <>
+      <rect x="12" y="10" width="40" height="48" rx="4" className="fill-carta stroke-verde-scuro" strokeWidth={2.4} />
+      <rect x="24" y="6" width="16" height="8" rx="2" className="fill-oro2 stroke-verde-scuro" strokeWidth={2} />
+      <path d="M20 26 l3 3 l5 -6 M20 38 l3 3 l5 -6" {...T} className="stroke-verde" />
+      <path d="M32 27 h12 M32 39 h12 M20 50 h24" {...T} strokeWidth={2} className="stroke-oro2" />
+    </>
+  ),
   calcolatori: (
     <>
       <rect x="14" y="8" width="36" height="48" rx="7" className="fill-carta stroke-verde-scuro" strokeWidth={2.4} />
@@ -219,7 +239,7 @@ export default function Home() {
             <svg viewBox="0 0 64 64" className="w-10 h-10 lg:w-12 lg:h-12 shrink-0" aria-hidden>{DISEGNI.formazione}</svg>
             <span className="min-w-0 flex-1">
               <span className="block font-extrabold text-[14px] lg:text-[16px] leading-tight">Formazione</span>
-              <span className="block text-[10.5px] lg:text-[12px] text-tenue leading-tight">Regole 2026 in breve</span>
+              <span className="block text-[10.5px] lg:text-[12px] text-tenue leading-tight">Regole, calendario, programmi</span>
             </span>
           </Link>
           <Link to="/riunioni" className="flex items-center gap-2 lg:gap-3 rounded-2xl border border-linea bg-[#ebebe8] px-2.5 py-2 lg:px-3 lg:py-2.5 active:bg-[#e0e0dc]">

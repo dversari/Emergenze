@@ -11,9 +11,9 @@ type Voce = { id: string; data: string; tipo: 'riunione' | 'comunicazione'; tito
 
 const base = import.meta.env.BASE_URL
 const MESI = ['gen', 'feb', 'mar', 'apr', 'mag', 'giu', 'lug', 'ago', 'set', 'ott', 'nov', 'dic']
-const chiaveSalvata = (): string | null => { try { return JSON.parse(leggi(CHIAVE_DATI) ?? '{}').riunioni ?? null } catch { return null } }
+export const chiaveSalvata = (): string | null => { try { return JSON.parse(leggi(CHIAVE_DATI) ?? '{}').riunioni ?? null } catch { return null } }
 
-async function decifra(chiave: string, file: string): Promise<ArrayBuffer> {
+export async function decifra(chiave: string, file: string): Promise<ArrayBuffer> {
   const r = await fetch(`${base}r/${file}`, { cache: 'no-cache' })
   if (!r.ok) throw new Error('File non trovato')
   const b = new Uint8Array(await r.arrayBuffer())
@@ -87,13 +87,13 @@ function Scheda({ v, chiave, aperta, apri }: { v: Voce; chiave: string; aperta: 
   )
 }
 
-function PinRiunioni({ fatto }: { fatto: () => void }) {
+export function PinRiunioni({ fatto, titolo = 'Riunioni e comunicazioni', testo = 'Comunicazioni interne del reparto' }: { fatto: () => void; titolo?: string; testo?: string }) {
   const [pin, setPin] = useState(''); const [err, setErr] = useState<string | null>(null); const [att, setAtt] = useState(false)
   const entra = async () => { setAtt(true); setErr(null); try { await scarica(pin.trim()); fatto() } catch (e) { setErr((e as Error).message) } finally { setAtt(false) } }
   return (
     <section className="card text-center max-w-md mx-auto w-full">
-      <h2 className="font-black text-xl">Riunioni e comunicazioni</h2>
-      <p className="text-[13px] text-tenue mt-1 leading-snug">Comunicazioni interne del reparto: serve lo stesso PIN della Rubrica (una volta sola su questo dispositivo).</p>
+      <h2 className="font-black text-xl">{titolo}</h2>
+      <p className="text-[13px] text-tenue mt-1 leading-snug">{testo}: serve lo stesso PIN della Rubrica (una volta sola su questo dispositivo).</p>
       <input value={pin} onChange={(e) => setPin(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && entra()} inputMode="numeric" placeholder="PIN"
         className="mt-3 w-full rounded-xl border border-linea-forte bg-white px-3 py-2 text-center text-lg tracking-[0.3em]" />
       {err && <p className="mt-2 text-sm text-bordeaux">{err}</p>}

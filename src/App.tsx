@@ -7,7 +7,9 @@ import Calcolatori from './pages/Calcolatori'
 import Antibiotici from './pages/Antibiotici'
 import Rubrica from './pages/Rubrica'
 import Procedure from './pages/Procedure'
-import Formazione from './pages/Formazione'
+import Formazione, { Programmi } from './pages/Formazione'
+import FormazioneRegole from './pages/FormazioneRegole'
+import FormazioneCalendario from './pages/FormazioneCalendario'
 import Riunioni from './pages/Riunioni'
 import Turni from './pages/Turni'
 import Moduli from './pages/Moduli'
@@ -124,6 +126,9 @@ export default function App() {
           <Route path="rubrica" element={<Rubrica />} />
           <Route path="turni" element={<Turni />} />
           <Route path="formazione" element={<Formazione />} />
+          <Route path="formazione/regole" element={<FormazioneRegole />} />
+          <Route path="formazione/calendario" element={<FormazioneCalendario />} />
+          <Route path="formazione/programmi" element={<Programmi />} />
           <Route path="riunioni" element={<Riunioni />} />
           <Route path="moduli" element={<Moduli />} />
           <Route path="modulo-trasfusione" element={<ModuloTrasfusione />} />
