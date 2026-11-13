@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import type { Scheda } from '../lib/schede'
 import { FIGURE } from './FigureProcedure'
 
@@ -102,6 +102,16 @@ export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGrup
                         )}
                       </div>
                     ))}
+                    {s.link && (
+                      <div className="flex flex-wrap gap-1.5">
+                        {s.link.map((l) => {
+                          const cls = `text-xs font-bold rounded-full px-3 py-1.5 ${l.primario ? 'bg-verde text-white' : 'border border-verde text-verde'}`
+                          return l.href.startsWith('/')
+                            ? <Link key={l.href} to={l.href} className={cls}>{l.etichetta} →</Link>
+                            : <a key={l.href} href={l.href.startsWith('docs/') ? `${import.meta.env.BASE_URL}${l.href}` : l.href} target={l.href.startsWith('docs/') || l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer" className={cls}>{l.etichetta}</a>
+                        })}
+                      </div>
+                    )}
                     {s.fonte && <p className="text-[11px] text-tenue">Fonte: {s.fonte}</p>}
                   </div>
                 )}

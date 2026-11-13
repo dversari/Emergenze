@@ -141,6 +141,15 @@ export const DISEGNI: Record<string, ReactNode> = {
       <circle cx="32" cy="10" r="3" className="fill-bordeaux" />
     </>
   ),
+  documenti: (
+    <>
+      <path d="M18 8 h20 l10 10 v38 h-30 Z" className="fill-carta stroke-verde-scuro" strokeWidth={2.4} strokeLinejoin="round" />
+      <path d="M38 8 v10 h10" {...T} strokeWidth={2} className="stroke-verde-scuro" />
+      <path d="M24 28 h18 M24 35 h18 M24 42 h12" {...T} strokeWidth={1.8} className="stroke-oro2" />
+      <circle cx="44" cy="48" r="7" className="fill-bordeaux3 stroke-bordeaux" strokeWidth={2} />
+      <path d="M44 44 v8 M40 48 h8" {...T} strokeWidth={1.8} className="stroke-bordeaux" />
+    </>
+  ),
   moduli: (
     <>
       <rect x="16" y="8" width="32" height="18" rx="2" className="fill-carta stroke-verde-scuro" strokeWidth={2.2} />
@@ -184,6 +193,7 @@ const PAGINE = [
   { id: 'moduli', to: '/moduli', nome: 'Moduli', testo: 'Da compilare e stampare' },
   { id: 'percorsi', to: '/percorsi', nome: 'Percorsi', testo: 'Referto, INAIL, decesso, TSO, Codice Rosa, PEIMAF' },
   { id: 'turni', to: '/turni', nome: 'Turni', testo: 'Chi c’è oggi, i miei turni' },
+  { id: 'documenti', to: '/documenti', nome: 'Docs ASL', testo: 'Protocolli e moduli aziendali originali' },
 ]
 
 const AVVERTENZE = [

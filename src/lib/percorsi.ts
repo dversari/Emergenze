@@ -154,20 +154,34 @@ export const PERCORSI: Scheda[] = [
 
   // ─── Sanità pubblica ───
   {
-    id: 'notifica-infettive', nome: 'Notifica delle malattie infettive', gruppo: 'Sanità pubblica',
-    sintesi: 'Obbligatoria per il medico che pone la diagnosi, anche solo sospetta; alcune vanno comunicate entro 12 h per telefono all’Igiene pubblica.',
-    fonte: 'DM Salute 7 marzo 2022 (sistema PREMAL)',
+    id: 'notifica-infettive', nome: 'Notifica delle malattie infettive', gruppo: 'Sanità pubblica', urgente: true,
+    sintesi: 'Scheda unica regionale (DM 7 marzo 2022), anche per il solo sospetto: entro 12 h o 48 h secondo la malattia, per email all’Igiene pubblica di Prato.',
+    fonte: 'Scheda unica di segnalazione delle malattie infettive, Regione Toscana (prot. AOOGRT 0623609 dell’1/8/2025); modulo PDF editabile inviato dal DEU ASL TC il 15/1/2026',
+    link: [
+      { etichetta: '📄 Scheda di notifica (PDF editabile)', href: 'docs/asl/scheda-notifica-malattie-infettive-2026.pdf', primario: true },
+      { etichetta: '✉ Invia all’Igiene pubblica', href: 'mailto:malattieinfettiveigiene.prato@uslcentro.toscana.it,infezionicorrelate.prato@uslcentro.toscana.it?subject=Notifica%20malattia%20infettiva' },
+      { etichetta: 'Documenti ASL', href: '/documenti' },
+    ],
     blocchi: [
-      { titolo: 'Subito (telefono all’Igiene pubblica reperibile + scheda)', righe: [
-        'Meningite e sepsi meningococcica, altre meningiti batteriche invasive (secondo procedura).',
-        'Morbillo, rosolia, difterite, poliomielite, botulismo, colera, peste, rabbia (anche solo morso da animale a rischio), febbri emorragiche virali, SARS/nuovi patogeni.',
-        'Legionellosi, tubercolosi contagiosa, epatite A, tossinfezioni alimentari con più casi: secondo i tempi previsti (in caso di dubbio, telefonare).',
+      { titolo: 'Come', numerato: true, righe: [
+        'Si notifica il caso SOSPETTO o CONFERMATO: non aspettare la conferma di laboratorio.',
+        'Compilare la scheda unica (PDF editabile): malattia, dati anagrafici e recapiti, inizio sintomi, viaggi, ricovero, gravidanza, vaccinazione, criteri diagnostici (clinici, epidemiologici, laboratorio), origine del contagio, comunità frequentate (scuola, RSA), sospetta origine alimentare, altre persone coinvolte, dati del medico.',
+        'Firmare (autografa o digitale) e inviare per email a malattieinfettiveigiene.prato@uslcentro.toscana.it e infezionicorrelate.prato@uslcentro.toscana.it.',
+        'Malattie entro 12 h fuori orario e casi gravi (meningococco, morbillo, febbri emorragiche, rabbia, botulismo, difterite…): oltre alla scheda, telefonare all’Igiene pubblica reperibile (rubrica) per la profilassi dei contatti.',
+        'Sospetta tossinfezione alimentare: raccogliere feci/vomito PRIMA di antibiotici e disinfettanti.',
+        'Annotare in cartella data e ora dell’invio.',
       ] },
-      { titolo: 'Come', righe: [
-        'Scheda di segnalazione sul sistema/procedura aziendale (PREMAL tramite l’Igiene pubblica dell’ASL).',
-        'Dati: paziente, recapiti, data di esordio, criteri clinici e di laboratorio, contatti stretti, viaggi, collettività frequentate.',
-        'Annotare in cartella data e ora della segnalazione.',
-        'Profilassi dei contatti (meningococco, ecc.): la dispone l’Igiene pubblica; in PS si trattano gli operatori esposti secondo indicazione.',
+      { titolo: '☎ Entro 12 ore', righe: [
+        'Antrace · Botulismo* · Chikungunya* · Colera · Dengue* · Difterite · Encefalite virale da zecche* · Encefalite virale trasmessa da artropodi* · Epatite A · Febbre emorragica virale · Febbre gialla · Febbre West Nile*',
+        'Influenza grave* · Influenza aviaria* · Legionellosi* · Malaria* · Malattia batterica invasiva (meningococco, pneumococco, emofilo)* · Creutzfeldt-Jakob* · Morbillo* · Peste · Poliomielite* · Rabbia',
+        'Rosolia* · Rosolia congenita* · Rosolia in gravidanza* · MERS-CoV* · Tetano · Tifo esantematico · Tossinfezioni alimentari · Trichinellosi · Vaiolo · Mpox* · Varicella · Zika* · Zika congenita*',
+      ] },
+      { titolo: '✉ Entro 48 ore', righe: [
+        'Borreliosi · Brucellosi · Criptosporidiosi · Dermatofitosi · Echinococcosi · Epatiti B, C, D, E e altre acute · Febbre Q · Febbre tifoide e paratifoide · Giardiasi · Herpes zoster',
+        'Infezione correlata all’assistenza (ICA)* · Chlamydia · Gonorrea · Campylobacter · STEC/VTEC compresa SEU · Enterobatteri produttori di carbapenemasi (CPE)* · Yersinia · Salmonella',
+        'Lebbra · Leishmaniosi cutanea e viscerale · Leptospirosi · Linfogranuloma venereo · Listeriosi · Meningiti virali · Micobatteriosi non tubercolare* · Parotite · Pediculosi e ftiriasi · Pertosse · Psittacosi · Rickettsiosi',
+        'Scabbia · Scarlattina · Shigellosi · Sifilide e sifilide congenita · Toxoplasmosi e toxoplasmosi congenita · Tubercolosi* · Tularemia · Altro (specificare)',
+        '* = sorveglianza speciale (schede aggiuntive dedicate, di solito curate da Malattie infettive/Igiene pubblica).',
       ] },
     ],
   },

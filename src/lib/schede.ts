@@ -13,6 +13,8 @@ export interface Scheda {
   sintesi: string
   blocchi: { titolo: string; righe: string[]; numerato?: boolean }[]
   fonte?: string
+  /** pulsanti in fondo alla scheda: '/…' pagina dell'app, 'docs/…' file pubblicato, mailto:/tel:/https: esterni */
+  link?: { etichetta: string; href: string; primario?: boolean }[]
   /** scheda d'urgenza: bordo rosso e etichetta */
   urgente?: boolean
 }
