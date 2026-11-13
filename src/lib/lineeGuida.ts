@@ -32,6 +32,11 @@ export interface LineaGuida {
   approfondimenti?: (Collegamento & { nota?: string })[]
 }
 
+import { LG_TOSSICOLOGIA } from './pdta/tossicologia'
+import { LG_METABOLISMO } from './pdta/metabolismo-ambiente'
+import { LG_ADDOME_TORACE_NEURO } from './pdta/addome-torace-neuro'
+import { LG_OST_INF_EMA } from './pdta/ostetricia-infettive-ematologia'
+
 export const LINEE_GUIDA: LineaGuida[] = [
   {
     id: 'fibrillazione-atriale',
@@ -60,7 +65,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Controllo della frequenza in acuto',
         punti: [
-          'FE >40%: beta-bloccante (metoprololo (Lopresor) 2,5–5 mg ev in 2 min, ripetibile fino a 15 mg; esmololo 500 µg/kg in 1 min, poi 50–300 µg/kg/min) oppure diltiazem 0,25 mg/kg ev in 5 min, poi 5–15 mg/h, o verapamil (Isoptin) 2,5–10 mg ev in 5 min.',
+          'FE >40%: beta-bloccante (metoprololo (Lopresor) 2,5–5 mg ev in 2 min, ripetibile fino a 15 mg; esmololo non disponibile in PS) oppure diltiazem 0,25 mg/kg ev in 5 min, poi 5–15 mg/h, o verapamil (Isoptin) 2,5–10 mg ev in 5 min.',
           'FE ≤40% o scompenso: beta-bloccante a basse dosi con cautela, digossina (Lanoxin) 0,5 mg ev (fino a 0,75–1,5 mg in 24 h in dosi frazionate), amiodarone (Cordarone) se refrattaria o instabile.',
           'Niente diltiazem/verapamil (Isoptin) con FE ≤40%.',
           'FA pre-eccitata (QRS larghi, irregolari, molto veloci): niente farmaci che rallentano il nodo AV (beta-bloccanti, calcioantagonisti, digossina (Lanoxin), amiodarone (Cordarone)). Cardioversione elettrica.',
@@ -2898,6 +2903,10 @@ export const LINEE_GUIDA: LineaGuida[] = [
       { data: '2025-08-19', testo: 'ISTH 2025, CID: fasi pre-CID, precoce e conclamata; nuove soglie del D-dimero (> 3 e > 7 volte il normale) nel punteggio; fenotipi trombotico ed emorragico.' },
     ],
   },
+  ...LG_TOSSICOLOGIA,
+  ...LG_METABOLISMO,
+  ...LG_ADDOME_TORACE_NEURO,
+  ...LG_OST_INF_EMA,
 ]
 
 export const lineaGuida = (id: string) => LINEE_GUIDA.find((l) => l.id === id)

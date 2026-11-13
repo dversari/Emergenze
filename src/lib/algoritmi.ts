@@ -13,6 +13,11 @@ export type Nodo =
 /** fine: il ramo termina qui (non prosegue nel flusso principale). */
 export interface Ramo { etichetta: string; tono?: 'si' | 'no' | 'neutro'; nodi: Nodo[]; fine?: string }
 
+import { ALG_TOSSICOLOGIA } from './pdta/tossicologia'
+import { ALG_METABOLISMO } from './pdta/metabolismo-ambiente'
+import { ALG_ADDOME_TORACE_NEURO } from './pdta/addome-torace-neuro'
+import { ALG_OST_INF_EMA } from './pdta/ostetricia-infettive-ematologia'
+
 export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: Nodo[] }> = {
   'microangiopatie-cid': {
     titolo: 'Algoritmo piastrinopenia acuta',
@@ -2776,4 +2781,8 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       },
     ],
   },
+  ...ALG_TOSSICOLOGIA,
+  ...ALG_METABOLISMO,
+  ...ALG_ADDOME_TORACE_NEURO,
+  ...ALG_OST_INF_EMA,
 }

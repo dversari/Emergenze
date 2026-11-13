@@ -22,6 +22,7 @@ const FARMACI = [
   'amoxicillina', 'clavulanato', 'ampicillina', 'piperacillina', 'tazobactam', 'ceftriaxone', 'cefotaxime', 'cefazolina', 'ceftazidima', 'cefepime',
   'meropenem', 'ertapenem', 'vancomicina', 'linezolid', 'daptomicina', 'clindamicina', 'gentamicina', 'amikacina', 'azitromicina', 'claritromicina',
   'doxiciclina', 'ciprofloxacina', 'levofloxacina', 'metronidazolo', 'fosfomicina', 'nitrofurantoina', 'cotrimossazolo', 'tobramicina',
+'pralidossima', 'dantrolene', 'ciproeptadina', 'bromocriptina', 'fomepizolo', 'emulsione lipidica', 'acido zoledronico', 'zoledronato', 'denosumab', 'calcitonina', 'metimazolo', 'propiltiouracile', 'propranololo', 'Lugol', 'levotiroxina', 'silibinina', 'siero antivipera', 'lattulosio', 'rifaximina', 'immunoglobuline', 'ossitocina', 'metilergometrina', 'misoprostolo', 'sulprostone', 'rasburicase', 'allopurinolo', 'fattore VIII', 'fattore IX', 'artesunato', 'artemetere', 'atovaquone', 'dolutegravir', 'raltegravir', 'emtricitabina', 'tenofovir', 'icatibant', 'C1-inibitore', 'oxacillina', 'rifampicina', 'piridossina', 'acido folinico', 'Gastrografin', 'anti-D', 'Cyanokit', 'Igantet', 'Truvada', 'Tivicay',
   'aciclovir', 'valaciclovir', 'oseltamivir', 'fluconazolo', 'timololo', 'ATRA', 'procainamide', 'plasma', 'emazie',
 ]
 const RE_FARMACI = new RegExp(`\\b(${[...FARMACI].sort((a, b) => b.length - a.length).join('|')})\\b`, 'gi')
