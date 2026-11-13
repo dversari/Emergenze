@@ -1,3 +1,4 @@
+import Percorsi from './pages/Percorsi'
 import { useEffect, useRef } from 'react'
 import { HashRouter, Link, NavLink, Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import type { Provenienza } from './lib/ritorno'
@@ -37,6 +38,7 @@ const schede = [
   { to: '/anamnesi', label: 'Cartella', icona: '☰\uFE0E' },
   { to: '/dimissioni', label: 'Dimissione', icona: '✎\uFE0E' },
   { to: '/moduli', label: 'Moduli', icona: '⎙\uFE0E' },
+  { to: '/percorsi', label: 'Percorsi', icona: '⚖\uFE0E' },
   { to: '/turni', label: 'Turni', icona: '▦\uFE0E' },
 ]
 
@@ -123,6 +125,7 @@ export default function App() {
             </Link>} />} />
           <Route path="dimissioni/diete" element={<PaginaTesti key="diete" voci={DIETE} prefisso="dieta" segnaposto="Cerca una dieta…" nota="Testi da consegnare o allegare alla dimissione; adattarli al paziente." testa={
             <Link to="/dimissioni" className="text-sm text-tenue">‹ Dimissione</Link>} />} />
+          <Route path="percorsi" element={<Percorsi />} />
           <Route path="rubrica" element={<Rubrica />} />
           <Route path="turni" element={<Turni />} />
           <Route path="formazione" element={<Formazione />} />

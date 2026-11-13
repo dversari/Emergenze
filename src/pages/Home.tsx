@@ -132,6 +132,15 @@ export const DISEGNI: Record<string, ReactNode> = {
       <path d="M28 58 q6 -10 12 -10 q6 0 8 4 q2 -4 6 -4 q6 0 8 10" {...T} strokeWidth={2.4} className="stroke-verde-scuro" />
     </>
   ),
+  percorsi: (
+    <>
+      <path d="M32 10 V54 M20 54 h24" {...T} className="stroke-verde-scuro" />
+      <path d="M12 18 h40" {...T} strokeWidth={2} className="stroke-verde-scuro" />
+      <path d="M12 18 l-6 14 h12 Z" className="fill-oro3 stroke-oro" strokeWidth={2} strokeLinejoin="round" />
+      <path d="M52 18 l-6 14 h12 Z" className="fill-bordeaux3 stroke-bordeaux" strokeWidth={2} strokeLinejoin="round" />
+      <circle cx="32" cy="10" r="3" className="fill-bordeaux" />
+    </>
+  ),
   moduli: (
     <>
       <rect x="16" y="8" width="32" height="18" rx="2" className="fill-carta stroke-verde-scuro" strokeWidth={2.2} />
@@ -173,6 +182,7 @@ const PAGINE = [
   { id: 'anamnesi', to: '/anamnesi', nome: 'Cartella', testo: 'Anamnesi ed EO per sintomo' },
   { id: 'dimissioni', to: '/dimissioni', nome: 'Dimissione', testo: 'Testi pronti da adattare' },
   { id: 'moduli', to: '/moduli', nome: 'Moduli', testo: 'Da compilare e stampare' },
+  { id: 'percorsi', to: '/percorsi', nome: 'Percorsi', testo: 'Referto, INAIL, decesso, TSO, Codice Rosa, PEIMAF' },
   { id: 'turni', to: '/turni', nome: 'Turni', testo: 'Chi c’è oggi, i miei turni' },
 ]
 
