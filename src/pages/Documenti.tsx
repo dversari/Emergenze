@@ -2,16 +2,24 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { DOCUMENTI_ASL } from '../lib/documentiAsl'
 import { condividiFileUrl } from '../lib/stampaModulo'
+import { urlRiservato, useSessione } from '../lib/riservati'
+import AccessoRiservato from '../components/AccessoRiservato'
 
-const base = import.meta.env.BASE_URL
 const pdf = (d: { file: string; titolo: string }) => `/pdf?f=${encodeURIComponent(d.file)}&t=${encodeURIComponent(d.titolo)}`
 
 /** Documenti aziendali originali usati come riferimento nelle schede dell'app. */
 export default function Documenti() {
+  const sessione = useSessione()
   const [cerca, setCerca] = useState('')
   const q = cerca.trim().toLowerCase()
   const voci = DOCUMENTI_ASL.filter((d) => !q || `${d.titolo} ${d.codice ?? ''} ${d.ente} ${d.area} ${d.descr}`.toLowerCase().includes(q))
   const aree = [...new Set(voci.map((d) => d.area))].sort()
+  if (sessione === undefined) return null
+  if (sessione === null) return <div className="flex flex-col gap-3"><h1 className="font-display text-2xl font-extrabold">Documenti ASL</h1><AccessoRiservato /></div>
+  const scarica = async (d: { file: string; titolo: string }) => {
+    try { const u = await urlRiservato(d.file); await condividiFileUrl(u, d.file.split('/').pop() ?? 'documento.pdf', d.titolo); setTimeout(() => URL.revokeObjectURL(u), 60000) }
+    catch { alert('Non riesco a scaricare il documento.') }
+  }
   return (
     <div className="flex flex-col gap-3">
       <h1 className="font-display text-2xl font-extrabold">Documenti ASL</h1>
@@ -29,7 +37,7 @@ export default function Documenti() {
               </Link>
               <div className="mt-3 flex flex-wrap gap-1.5 text-xs">
                 <Link to={pdf(d)} className="rounded-full bg-verde px-3 py-1.5 font-bold text-white">Apri</Link>
-                <button onClick={() => condividiFileUrl(`${base}${d.file}`, d.file.split('/').pop() ?? 'documento.pdf', d.titolo)} className="rounded-full border border-verde px-3 py-1.5 font-bold text-verde">⬇︎ Scarica</button>
+                <button onClick={() => scarica(d)} className="rounded-full border border-verde px-3 py-1.5 font-bold text-verde">⬇︎ Scarica</button>
                 {d.usatoIn?.map((u) => <Link key={u.to} to={u.to} className="rounded-full border border-linea px-3 py-1.5 font-bold text-tenue">{u.etichetta} →</Link>)}
               </div>
             </div>

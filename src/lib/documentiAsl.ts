@@ -1,5 +1,6 @@
 /*
- * Documenti aziendali originali (ASL Toscana Centro / Regione Toscana) pubblicati in public/docs.
+ * Documenti aziendali originali (ASL Toscana Centro / Regione Toscana): i PDF non sono pubblici,
+ * stanno nel bucket privato «emergenze-docs» di Supabase (vedi lib/riservati.ts).
  * Ogni voce: file, struttura che lo ha emesso, data, e le schede dell'app che lo usano.
  */
 export interface DocumentoAsl {

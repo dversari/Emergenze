@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.mjs'
 import { condividiFileUrl } from '../lib/stampaModulo'
+import { riservato, urlRiservato, useSessione } from '../lib/riservati'
+import AccessoRiservato from '../components/AccessoRiservato'
 import workerUrl from 'pdfjs-dist/legacy/build/pdf.worker.min.mjs?url'
 
 pdfjs.GlobalWorkerOptions.workerSrc = workerUrl
@@ -18,13 +20,25 @@ export default function VisorePdf() {
   const file = params.get('f') ?? ''
   const titolo = params.get('t') ?? file.split('/').pop() ?? 'Documento'
   const blob = params.get('b')
-  const url = blob?.startsWith('blob:') ? blob : `${base}${file}`
+  const prot = !blob && riservato(file)
+  const sessione = useSessione()
+  const [urlProt, setUrlProt] = useState<string | null>(null)
+  const url = blob?.startsWith('blob:') ? blob : prot ? (urlProt ?? '') : `${base}${file}`
   const box = useRef<HTMLDivElement>(null)
   const [stato, setStato] = useState<'carico' | 'ok' | 'errore'>('carico')
   const [pagine, setPagine] = useState(0)
   const [zoom, setZoom] = useState(1)
 
   useEffect(() => {
+    if (!prot || !sessione) return
+    let vivo = true
+    let u: string | null = null
+    urlRiservato(file).then((x) => { u = x; if (vivo) setUrlProt(x); else URL.revokeObjectURL(x) }).catch(() => { if (vivo) setStato('errore') })
+    return () => { vivo = false; if (u) URL.revokeObjectURL(u); setUrlProt(null) }
+  }, [prot, sessione, file])
+
+  useEffect(() => {
+    if (prot && !urlProt) return
     if (!url.startsWith('blob:') && (!file.startsWith('docs/') || file.includes('..'))) { setStato('errore'); return }
     let annullato = false
     const contenitore = box.current
@@ -55,9 +69,11 @@ export default function VisorePdf() {
       }
     }).catch(() => { if (!annullato) setStato('errore') })
     return () => { annullato = true; task.destroy() }
-  }, [file, url, zoom])
+  }, [file, url, zoom, prot, urlProt])
 
   const indietro = () => (window.history.length > 1 ? navigate(-1) : navigate('/documenti'))
+
+  if (prot && sessione === null) return <AccessoRiservato />
 
   return (
     <div className="flex flex-col gap-3">

@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import type { Scheda } from '../lib/schede'
 import { FIGURE } from './FigureProcedure'
 import Riconoscimenti, { FiltroRiconoscimenti } from './Riconoscimenti'
+import { useSessione } from '../lib/riservati'
 import { aziendale, passaFiltro, statoRevisione, type Filtro } from '../lib/riconoscimenti'
 
 // Nomi dei farmaci evidenziati in rosso grassetto dentro i testi.
@@ -37,6 +38,7 @@ export function Evidenzia({ t }: { t: string }) {
 /** Elenco di card raggruppate che si aprono sui passaggi (Procedure, Sedazione). */
 export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGruppi, sezione }: { schede: Scheda[]; segnaposto: string; senzaCerca?: boolean; senzaGruppi?: boolean; /** pagina per i riconoscimenti: 'procedure', 'sedazione', 'percorsi' */ sezione: string }) {
   const [filtro, setFiltro] = useState<Filtro>('tutte')
+  const sessione = useSessione()
   const ch = (id: string) => `${sezione}/${id}`
   const [params, setParams] = useSearchParams()
   const [aperto, setAperto] = useState<string | null>(params.get('apri'))
@@ -114,6 +116,7 @@ export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGrup
                       <div className="flex flex-wrap gap-1.5">
                         {s.link.map((l) => {
                           const cls = `text-xs font-bold rounded-full px-3 py-1.5 ${l.primario ? 'bg-verde text-white' : 'border border-verde text-verde'}`
+                          if (l.href.startsWith('docs/asl/') && !sessione) return null
                           if (l.href.startsWith('docs/')) return <Link key={l.href} to={`/pdf?f=${encodeURIComponent(l.href)}&t=${encodeURIComponent(l.etichetta.replace(/^\S+\s/, ''))}`} className={cls}>{l.etichetta}</Link>
                           return l.href.startsWith('/')
                             ? <Link key={l.href} to={l.href} className={cls}>{l.etichetta} →</Link>

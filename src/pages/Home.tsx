@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Monogramma from '../components/Monogramma'
 import Segnala from '../components/Segnala'
 import { Link } from 'react-router-dom'
+import { useSessione } from '../lib/riservati'
 import type { ReactNode } from 'react'
 
 /* Disegnini a tratto, nei colori dell'app. */
@@ -218,6 +219,7 @@ const IN_DIVENIRE = 'DEA-LIRIO è un cantiere aperto: cresce turno dopo turno. E
 /** Schermata iniziale. */
 export default function Home() {
   const [avvisi, setAvvisi] = useState(false)
+  const sessione = useSessione()
   return (
     <div className="flex flex-col gap-2.5 lg:grid lg:grid-cols-2 lg:gap-5 lg:items-stretch lg:grid-rows-[auto_auto] lg:max-w-6xl lg:mx-auto">
       <div className="flex flex-col gap-2.5 lg:contents">
@@ -246,7 +248,7 @@ export default function Home() {
 
       <div className="flex flex-col gap-2.5 lg:contents">
         <section className="grid grid-cols-2 gap-2 lg:gap-3 lg:col-start-2 lg:row-start-1">
-          {PAGINE.map((p) => (
+          {PAGINE.filter((p) => p.id !== 'documenti' || sessione).map((p) => (
             <Link key={p.id} to={p.to} className={`card !p-2 lg:!p-3 !rounded-2xl flex items-center gap-2 lg:gap-3 active:bg-sabbia lg:hover:border-verde2`}>
               <svg viewBox="0 0 64 64" className="w-10 h-10 lg:w-12 lg:h-12 shrink-0" aria-hidden>{DISEGNI[p.id]}</svg>
               <div className="min-w-0">
