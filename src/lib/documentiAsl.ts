@@ -18,7 +18,7 @@ export const DOCUMENTI_ASL: DocumentoAsl[] = [
   {
     id: 'peimaf', titolo: 'Piano di emergenza intraospedaliera per massiccio afflusso di feriti (PEIMAF) nell’Ospedale S. Stefano di Prato', codice: 'PS.DRO.62 rev. 1', ente: 'ASL Toscana Centro · SOC DSPO Santo Stefano', data: '09/08/2023', area: 'Maxiemergenza',
     file: 'docs/asl/PS.DRO.62-PEIMAF-Santo-Stefano.pdf',
-    descr: 'Attivazione e fasi, catena di comando (DSS-H), capacità della prima ora (14 pazienti), riorganizzazione del DEA, accessi convenzionali e NBCRe, aree speciali, reclutamento del personale. Revisione prevista entro 3 anni (08/2026). L’Allegato 1 (cellulari dell’Unità di crisi zonale) non è pubblicato: i numeri sono in Rubrica.',
+    descr: 'Attivazione e fasi, catena di comando (DSS-H), capacità della prima ora (14 pazienti), riorganizzazione del DEA, accessi convenzionali e NBCRe, aree speciali, reclutamento del personale. Revisione prevista entro 3 anni (08/2026). L’Allegato 1 (cellulari dell’Unità di crisi zonale) non è pubblicato: l’elenco aggiornato dei reperibili è in portineria e in Control Room.',
     usatoIn: [
       { etichetta: 'PEIMAF: allarme e comando', to: '/percorsi?apri=peimaf' },
       { etichetta: 'PEIMAF: assetto del DEA', to: '/percorsi?apri=peimaf-dea' },
