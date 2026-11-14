@@ -16,6 +16,12 @@ const MODULI: Modulo[] = [
     descr: 'Allegato 1 alla PA.A118.01: sintesi clinica, GCS e classe di Ehrenwerth per il trasporto. Compilabile e stampabile.',
   },
   {
+    to: '/modulo-eparina',
+    titolo: 'Schema terapia con eparina sodica ev',
+    descr: 'Modulo DEA/OBI 2011 rivisto: dal peso calcola bolo (UI e mL della fiala) e velocità in mL/h; tabella di aggiustamento per aPTT, registro delle variazioni, HIT e protamina. Stampabile.',
+    pdta: { to: '/linee-guida/embolia-polmonare', etichetta: 'PDTA embolia polmonare' },
+  },
+  {
     to: '/modulo-notifica',
     titolo: 'Notifica di malattia infettiva',
     descr: 'Scheda unica regionale (DM 7/3/2022): spunta la malattia (☎ 12 h, ✉ 48 h), compila, crea il PDF e invialo per mail all’Igiene pubblica di Prato.',

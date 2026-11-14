@@ -55,6 +55,7 @@ export const AZIENDALI: Record<string, Rif[]> = {
   'modulo/trasfusione': [{ titolo: 'Richiesta di sangue e emocomponenti', codice: 'SOC Immunoematologia Prato-Pistoia', data: '2019' }],
   'modulo/trasferimento': [{ titolo: 'Trasferimento di emergenza: Allegato 1', codice: 'PA.A118.01' }],
   'modulo/notifica': ['notifica-malattie-infettive', 'indirizzi-segnalazione'],
+  'modulo/eparina': [{ titolo: 'Schema terapia con eparina (Emergenza e accettazione, OBI, HDU)', codice: '01125MOD16 rev. 0', data: '03/01/2011', nota: 'Rivisto nell’app: calcolo dal peso, mL/h esatti, registro, HIT e protamina' }],
   'modulo/dimissione-contro-parere': ['io-dro-72-all1', 'io-dro-72'],
 }
 
