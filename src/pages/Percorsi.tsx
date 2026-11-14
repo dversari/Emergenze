@@ -6,7 +6,7 @@ import { PERCORSI } from '../lib/percorsi'
 /** Percorsi in evidenza in cima alla pagina: un tocco apre le loro schede. */
 const PRIORITARI = [
   { gruppo: 'Codice Rosa', titolo: 'Codice Rosa', testo: 'Violenza: accoglienza, prove, profilassi, rete antiviolenza', icona: '♀', colore: 'bg-[#f7e3ea] border-[#e7b9c9] text-[#8a2347]', attivo: 'bg-[#8a2347] border-[#8a2347] text-white' },
-  { gruppo: 'Maxiemergenza', titolo: 'Maxiemergenza', testo: 'PEIMAF, assetto del DEA, NBCRe, triage di massa', icona: '⚠', colore: 'bg-[#fbeee0] border-[#ecc9a2] text-[#8a4a12]', attivo: 'bg-[#8a4a12] border-[#8a4a12] text-white' },
+  { gruppo: 'Maxiemergenza', titolo: 'Maxiemergenza', testo: 'PEIMAF, assetto del DEA, NBCRe, triage di massa', icona: '⚠', colore: 'bg-[#fde4e1] border-[#f1aea7] text-[#b3261e]', attivo: 'bg-[#b3261e] border-[#b3261e] text-white' },
 ] as const
 
 /** Adempimenti medico-legali, percorsi protetti, sanità pubblica; Codice Rosa e Maxiemergenza in evidenza. */
@@ -18,9 +18,19 @@ export default function Percorsi() {
   useEffect(() => { if (gruppoApri && PRIORITARI.some((p) => p.gruppo === gruppoApri)) setScelto(gruppoApri) }, [gruppoApri])
   const prio = new Set<string>(PRIORITARI.map((p) => p.gruppo))
   const sel = PRIORITARI.find((p) => p.gruppo === scelto)
+  const [q, setQ] = useState('')
+  const t = q.trim().toLowerCase()
+  const trovate = t ? PERCORSI.filter((s) => JSON.stringify([s.nome, s.gruppo, s.sintesi, s.blocchi]).toLowerCase().includes(t)) : []
 
   return (
     <div className="flex flex-col gap-3">
+      <div className="rounded-2xl border border-[#e6d5b0] bg-[#f6eedd] px-4 py-3 text-[13px] leading-snug text-[#7a5a17]">
+        <b>Bozza.</b> Riferimenti normativi nazionali; modulistica e passaggi operativi vanno allineati alle procedure aziendali. Il PEIMAF segue la procedura aziendale PS.DRO.62.
+      </div>
+      <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Cerca un percorso…" className="rounded-xl border border-linea bg-white px-3 py-2.5 text-base" />
+      {t ? (
+        <PaginaSchede sezione="percorsi" schede={trovate} segnaposto="" senzaCerca />
+      ) : (<>
       <div className="grid grid-cols-2 gap-2.5">
         {PRIORITARI.map((p) => {
           const on = scelto === p.gruppo
@@ -38,10 +48,8 @@ export default function Percorsi() {
           <PaginaSchede key={sel.gruppo} sezione="percorsi" schede={PERCORSI.filter((s) => s.gruppo === sel.gruppo)} segnaposto="" senzaCerca senzaGruppi />
         </div>
       )}
-      <div className="rounded-2xl border border-[#e6d5b0] bg-[#f6eedd] px-4 py-3 text-[13px] leading-snug text-[#7a5a17]">
-        <b>Bozza.</b> Riferimenti normativi nazionali; modulistica e passaggi operativi vanno allineati alle procedure aziendali. Il PEIMAF segue la procedura aziendale PS.DRO.62.
-      </div>
-      <PaginaSchede sezione="percorsi" schede={PERCORSI.filter((s) => !prio.has(s.gruppo))} segnaposto="Cerca un percorso…" />
+      <PaginaSchede sezione="percorsi" schede={PERCORSI.filter((s) => !prio.has(s.gruppo))} segnaposto="" senzaCerca />
+      </>)}
     </div>
   )
 }
