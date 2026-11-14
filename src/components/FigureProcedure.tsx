@@ -5,6 +5,7 @@
 import type { ReactNode } from 'react'
 import IsolamentoTabella from './IsolamentoTabella'
 import { FiguraSvestizione, FiguraVestizione } from './PassiNbcr'
+import { FiguraDea, FiguraNbcre, FiguraRuoli, FiguraTriageMassa } from './FigurePeimaf'
 
 const T = { fill: 'none', strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const }
 const pelle = 'fill-sabbia stroke-tenue'
@@ -601,6 +602,10 @@ export const FIGURE: Record<string, () => ReactNode> = {
   isolamento: IsolamentoTabella,
   'nbcr-vestizione': FiguraVestizione,
   'nbcr-svestizione': FiguraSvestizione,
+  'peimaf-ruoli': FiguraRuoli,
+  'peimaf-dea': FiguraDea,
+  'peimaf-nbcr': FiguraNbcre,
+  maxiemergenza: FiguraTriageMassa,
   'nk-5600': NK5600,
   'nk-5531': NK5531,
   'dfm100': DFM100,

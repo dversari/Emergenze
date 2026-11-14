@@ -16,6 +16,46 @@ export interface DocumentoAsl {
 
 export const DOCUMENTI_ASL: DocumentoAsl[] = [
   {
+    id: 'peimaf', titolo: 'Piano di emergenza intraospedaliera per massiccio afflusso di feriti (PEIMAF) nell’Ospedale S. Stefano di Prato', codice: 'PS.DRO.62 rev. 1', ente: 'ASL Toscana Centro · SOC DSPO Santo Stefano', data: '09/08/2023', area: 'Maxiemergenza',
+    file: 'docs/asl/PS.DRO.62-PEIMAF-Santo-Stefano.pdf',
+    descr: 'Attivazione e fasi, catena di comando (DSS-H), capacità della prima ora (14 pazienti), riorganizzazione del DEA, accessi convenzionali e NBCRe, aree speciali, reclutamento del personale. Revisione prevista entro 3 anni (08/2026). L’Allegato 1 (cellulari dell’Unità di crisi zonale) non è pubblicato: i numeri sono in Rubrica.',
+    usatoIn: [
+      { etichetta: 'PEIMAF: allarme e comando', to: '/percorsi?apri=peimaf' },
+      { etichetta: 'PEIMAF: assetto del DEA', to: '/percorsi?apri=peimaf-dea' },
+      { etichetta: 'PEIMAF NBCRe', to: '/percorsi?apri=peimaf-nbcr' },
+    ],
+  },
+  {
+    id: 'peimaf-all2', titolo: 'PS.DRO.62 · Allegato 2: tape SISmax (schede di azione per ruolo)', ente: 'ASL Toscana Centro', data: '09/08/2023', area: 'Maxiemergenza',
+    file: 'docs/asl/PS.DRO.62-allegato-2-tape-SISmax.pdf', descr: 'DSS-H, DCA, DD, RI, RT, RST in assetto convenzionale e NBCRe; vestizione e svestizione NBCRe; piramide della comunicazione.',
+    usatoIn: [{ etichetta: 'PEIMAF: ruoli', to: '/percorsi?apri=peimaf-ruoli' }],
+  },
+  {
+    id: 'peimaf-all3', titolo: 'PS.DRO.62 · Allegato 3: piantine di accesso al DEA (convenzionale e NBCRe)', ente: 'ASL Toscana Centro', data: '09/08/2023', area: 'Maxiemergenza',
+    file: 'docs/asl/PS.DRO.62-allegato-3-piantine.pdf', descr: 'Riorganizzazione delle aree del PS e percorsi di barellati e deambulanti, maxiemergenza e ordinari.',
+    usatoIn: [{ etichetta: 'PEIMAF: assetto del DEA', to: '/percorsi?apri=peimaf-dea' }, { etichetta: 'PEIMAF NBCRe', to: '/percorsi?apri=peimaf-nbcr' }],
+  },
+  {
+    id: 'peimaf-all4', titolo: 'PS.DRO.62 · Allegato 4: cartellonistica e percorsi maxiemergenza', ente: 'ASL Toscana Centro', data: '09/08/2023', area: 'Maxiemergenza',
+    file: 'docs/asl/PS.DRO.62-allegato-4-cartellonistica.pdf', descr: 'Cartelli per maxiemergenza e ordinari, percorsi delle ambulanze e posizionamento dei cartelli (convenzionale e NBCRe).',
+    usatoIn: [{ etichetta: 'PEIMAF: assetto del DEA', to: '/percorsi?apri=peimaf-dea' }, { etichetta: 'PEIMAF NBCRe', to: '/percorsi?apri=peimaf-nbcr' }],
+  },
+  {
+    id: 'doc-ds-03', titolo: 'Piano aziendale per la gestione degli eventi di maxiemergenza', codice: 'DOC.DS.03 rev. 3', ente: 'ASL Toscana Centro · SOC Maxiemergenze ed eventi a carattere straordinario', data: '09/02/2022', area: 'Maxiemergenza',
+    file: 'docs/asl/DOC.DS.03-piano-aziendale-maxiemergenza.pdf', descr: 'Piano aziendale: Unità di crisi, Centrali 118, triage START/FAST, PMA, eventi NBCRe e decontaminazione, PEIMAF (ruoli e pettorine), PEVAC, grandi eventi, fragilità.',
+    usatoIn: [{ etichetta: 'PEIMAF: allarme e comando', to: '/percorsi?apri=peimaf' }, { etichetta: 'PEIMAF: ruoli', to: '/percorsi?apri=peimaf-ruoli' }, { etichetta: 'Triage di massa', to: '/percorsi?apri=maxiemergenza' }],
+  },
+  {
+    id: 'doc-ds-03-all1', titolo: 'DOC.DS.03 · Allegato 1: modulo raccolta dati METHANE', codice: 'TPX 5956', ente: 'SOC Coordinamento maxiemergenze', data: '14/02/2022', area: 'Maxiemergenza',
+    file: 'docs/asl/DOC.DS.03-allegato-1-modulo-METHANE.pdf', descr: 'PDF compilabile: ente chiamante, localizzazione, tipo di evento, pericoli, accessi, livello (1: 10–30 feriti; 2: 30–100; 3: oltre 100), convenzionale o NBCR.',
+    usatoIn: [{ etichetta: 'PEIMAF: allarme e comando', to: '/percorsi?apri=peimaf' }],
+  },
+  {
+    id: 'doc-ds-03-all2', titolo: 'DOC.DS.03 · Allegato 2: scheda sanitaria PMA (kit triage regionale)', ente: 'Regione Toscana · Sistema integrato sanità in maxiemergenza', data: '09/02/2022', area: 'Maxiemergenza',
+    file: 'docs/asl/DOC.DS.03-allegato-2-scheda-triage.pdf', descr: 'Scheda con triage START (territorio e PMA), ABCDE, monitoraggio, triage FAST, destinazione; cartellini T1–T4.',
+    usatoIn: [{ etichetta: 'Triage di massa', to: '/percorsi?apri=maxiemergenza' }],
+  },
+  {
     id: 'notifica-malattie-infettive',
     titolo: 'Scheda unica di segnalazione delle malattie infettive',
     codice: 'DM 7/3/2022 · prot. AOOGRT 0623609',

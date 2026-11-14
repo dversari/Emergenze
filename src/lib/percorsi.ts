@@ -338,9 +338,13 @@ export const PERCORSI: Scheda[] = [
     fonte: 'PS.DRO.62 rev. 1 (09/08/2023) ASL Toscana Centro, PO Santo Stefano; DOC.DS.03 rev. 3 (Piano aziendale maxiemergenza) e modulo METHANE TPX 5956',
     link: [
       { etichetta: '☎ Numeri maxiemergenza (Rubrica)', href: '/rubrica?cerca=maxiemergenza', primario: true },
+      { etichetta: 'Ruoli e schede di azione', href: '/percorsi?apri=peimaf-ruoli' },
       { etichetta: 'Assetto del DEA', href: '/percorsi?apri=peimaf-dea' },
       { etichetta: 'PEIMAF NBCRe', href: '/percorsi?apri=peimaf-nbcr' },
       { etichetta: 'Triage di massa', href: '/percorsi?apri=maxiemergenza' },
+      { etichetta: '📄 PS.DRO.62 (procedura)', href: 'docs/asl/PS.DRO.62-PEIMAF-Santo-Stefano.pdf' },
+      { etichetta: '📄 Modulo METHANE', href: 'docs/asl/DOC.DS.03-allegato-1-modulo-METHANE.pdf' },
+      { etichetta: '📄 DOC.DS.03 (piano aziendale)', href: 'docs/asl/DOC.DS.03-piano-aziendale-maxiemergenza.pdf' },
     ],
     blocchi: [
       { titolo: 'Da dove arriva la notizia', righe: [
@@ -371,8 +375,8 @@ export const PERCORSI: Scheda[] = [
         'Riallestire il DEA secondo l’assetto PEIMAF (card «Assetto del DEA»).',
       ] },
       { titolo: 'Catena di comando', righe: [
-        'DSS-H (Direttore dei soccorsi sanitari in ospedale): coordina i soccorsi in ospedale. Lo designa il Direttore della Medicina d’urgenza; se non è presente o raggiungibile, nell’ordine: vicedirettore → medico fuori turno del PS → medico capoturno (flussista) o il medico in turno più esperto di maxiemergenza.',
-        'Ruoli e compiti sono nei tape SISmax (Allegato 2 al PS.DRO.62); ogni ruolo indossa la pettorina del colore del bordo del proprio tape.',
+        'DSS-H (Direttore dei soccorsi sanitari in ospedale, pettorina rossa): coordina i soccorsi in ospedale. Lo designa il Direttore della Medicina d’urgenza; se non è presente o raggiungibile, nell’ordine: vicedirettore → medico fuori turno del PS → medico capoturno (flussista) o il medico in turno più esperto di maxiemergenza.',
+        'Il DSS-H nomina subito: DCA (medico, verde), DD (radiologo, gialla), RI (infermiere, azzurra), RT (infermiere di triage, rosa), RST (ausiliario, grigia). Compiti di ciascuno nella card «Ruoli e schede di azione» (tape SISmax).',
         'Comunicazioni tra i ruoli via radio, con la dotazione della Control Room fornita dall’Area tecnica di presidio.',
         'Avvisare la Control Room che si usa la porta d’emergenza n. 58 dell’Open space, per far tacitare l’allarme.',
         'Unità sanitaria di crisi zonale (coordinata dal Direttore della Direzione medica di presidio): Medicina d’urgenza, gestione infermieristica, Rianimazione, 118 Prato, Area tecnica, Farmacia, Prevenzione (PISLL), Zona-distretto, SePP. Elenco dei reperibili della Direzione sanitaria in portineria e in Control Room. Concorda con le Forze dell’ordine il controllo degli accessi all’ospedale.',
@@ -405,10 +409,28 @@ export const PERCORSI: Scheda[] = [
     ],
   },
   {
+    id: 'peimaf-ruoli', nome: 'PEIMAF: ruoli e schede di azione (tape SISmax)', gruppo: 'Maxiemergenza', urgente: true,
+    sintesi: 'Sei ruoli, ciascuno con pettorina e tape del suo colore: DSS-H rosso, DCA verde, DD giallo, RI azzurro, RT rosa, RST grigio. In NBCRe alcuni ruoli hanno azioni da fare prima di quelle convenzionali.',
+    fonte: 'PS.DRO.62 rev. 1, Allegato 2 (tape SISmax); DOC.DS.03 rev. 3, cap. 7 (chi ricopre il ruolo, pettorine)',
+    link: [
+      { etichetta: '📄 Tape SISmax originali', href: 'docs/asl/PS.DRO.62-allegato-2-tape-SISmax.pdf', primario: true },
+      { etichetta: 'Allarme e comando', href: '/percorsi?apri=peimaf' },
+    ],
+    blocchi: [
+      { titolo: 'Come si usano', righe: [
+        'Il DSS-H prende il proprio tape e la pettorina rossa, poi consegna tape e pettorina a ciascun referente che nomina.',
+        'Ogni referente spunta le azioni del proprio tape; le comunicazioni passano per il DSS-H (piramide della comunicazione), via radio con le sigle Delta Hotel, Delta Charlie, Delta Delta, Romeo India, Romeo Tango, Romeo Sierra.',
+        'In un presidio piccolo una persona può ricoprire più ruoli (es. DSS-H e DCA), senza togliere l’assistenza.',
+      ] },
+    ],
+  },
+  {
     id: 'peimaf-dea', nome: 'PEIMAF: assetto del DEA e accessi', gruppo: 'Maxiemergenza', urgente: true,
     sintesi: 'Il DEA si divide in due: area maxiemergenza (sale rossa e arancio, triage, sala gessi, sala rosa) e area per l’emergenza ordinaria (Open space e OBI). Radiologia e TC del PS solo per la maxiemergenza.',
     fonte: 'PS.DRO.62 rev. 1 (09/08/2023), par. 9–10 e Allegati 3–4 (piantine e cartellonistica)',
     link: [
+      { etichetta: '📄 Piantine (Allegato 3)', href: 'docs/asl/PS.DRO.62-allegato-3-piantine.pdf' },
+      { etichetta: '📄 Cartellonistica (Allegato 4)', href: 'docs/asl/PS.DRO.62-allegato-4-cartellonistica.pdf' },
       { etichetta: 'Allarme e comando', href: '/percorsi?apri=peimaf' },
       { etichetta: 'PEIMAF NBCRe', href: '/percorsi?apri=peimaf-nbcr' },
     ],
@@ -438,6 +460,11 @@ export const PERCORSI: Scheda[] = [
         'Deambulanti della maxiemergenza: sala d’attesa → triage esterno.',
         'Deambulanti ordinari: uscita d’emergenza dell’Open space → triage nell’ex stanza 1.',
         'Far sgombrare il parcheggio del PS per le manovre dei mezzi di soccorso.',
+        'Avvisare la Control Room che si usa la porta d’emergenza n. 58 dell’Open space, per far tacitare l’allarme.',
+      ] },
+      { titolo: 'Cartellonistica', righe: [
+        'Cartelli rossi «Maxiemergenza» (frecce per pedoni e ambulanze) e «Ingresso maxiemergenza»; cartelli gialli «Ordinari» (2 con freccia avanti, 1 con freccia a destra) e 1 «Ingresso ordinari».',
+        'Posizioni dei cartelli e percorsi delle ambulanze nelle tavole qui sotto.',
       ] },
     ],
   },
@@ -449,7 +476,8 @@ export const PERCORSI: Scheda[] = [
       { etichetta: 'Vestizione NBCR illustrata', href: '/procedure?apri=nbcr-vestizione', primario: true },
       { etichetta: 'Svestizione NBCR illustrata', href: '/procedure?apri=nbcr-svestizione' },
       { etichetta: 'Antidoti e consulenze', href: '/procedure?apri=nbcr-antidoti' },
-      { etichetta: 'Allarme e comando', href: '/percorsi?apri=peimaf' },
+      { etichetta: 'Ruoli NBCRe', href: '/percorsi?apri=peimaf-ruoli' },
+      { etichetta: '📄 Piantine (Allegato 3)', href: 'docs/asl/PS.DRO.62-allegato-3-piantine.pdf' },
     ],
     blocchi: [
       { titolo: 'Accessi (diversi dal convenzionale)', righe: [
@@ -467,22 +495,30 @@ export const PERCORSI: Scheda[] = [
       { titolo: 'Se i contaminati sono molti', righe: [
         'L’Unità di crisi aziendale può attivare, tramite la SOC Coordinamento maxiemergenze, la tenda DECO montata e gestita dalla Protezione civile.',
         'Per altri DPI si passa dalla stessa via.',
-        'Catena di comando, DSS-H e aree speciali come nel PEIMAF convenzionale.',
+        'Catena di comando, DSS-H e aree speciali come nel PEIMAF convenzionale; i ruoli hanno azioni NBCRe da fare per prime (card «Ruoli e schede di azione»).',
+      ] },
+      { titolo: 'Vestizione e svestizione (tape SISmax)', righe: [
+        'Vestizione: sottotuta → tuta fino ai fianchi → stivali → braccia nelle maniche con linguetta al pollice → primo paio di guanti in lattice sigillati alla tuta → cerniera fino allo sterno → maschera senza filtro (antiappannante, prova di tenuta) → cappuccio e cerniere fino al collo → nastro tra maschera e tuta → secondo paio di guanti cat. 3 sigillati → filtro avvitato dopo aver tolto i sigilli → controllo visivo e ingresso in Area arancio.',
+        'Svestizione (con l’operatore DECO): nastro della maschera → stivali nei contenitori → guanti cat. 3 sfilati dall’operatore DECO → cerniera e cappuccio aperti toccando solo l’esterno → tuta sfilata fino al tronco, poi gli arti inferiori restando con i piedi dentro la tuta → un passo in Area gialla → maschera tolta dal filtro con un unico movimento all’indietro → secondo paio di guanti → DPI e rifiuti nei contenitori → doccia.',
+        'Tempi: DECO primaria 5 min, secondaria 5 min, deambulanti 5 min, non deambulanti 20 min.',
       ] },
     ],
   },
   {
-    id: 'maxiemergenza', nome: 'Maxiemergenza: triage di massa', gruppo: 'Maxiemergenza',
-    sintesi: 'Principi generali di triage di massa (START). La scheda di triage da usare in ospedale è quella regionale (Allegato 2 al DOC.DS.03).',
-    fonte: 'Principi generali; PS.DRO.62 rev. 1 per strumenti e registrazione',
-    link: [{ etichetta: 'PEIMAF: allarme e comando', href: '/percorsi?apri=peimaf' }],
+    id: 'maxiemergenza', nome: 'Maxiemergenza: triage di massa (START e FAST)', gruppo: 'Maxiemergenza',
+    sintesi: 'Scheda sanitaria regionale: START all’ingresso (T1 rosso, T2 giallo, T3 verde, T4 blu), FAST per la rivalutazione e l’uscita. Una scheda per paziente, che lo identifica e registra le manovre.',
+    fonte: 'DOC.DS.03 rev. 3 (09/02/2022), par. 6.2.2 e 6.3.6, Allegato 2 (scheda sanitaria PMA); PS.DRO.62 rev. 1',
+    link: [
+      { etichetta: '📄 Scheda di triage regionale', href: 'docs/asl/DOC.DS.03-allegato-2-scheda-triage.pdf', primario: true },
+      { etichetta: 'PEIMAF: allarme e comando', href: '/percorsi?apri=peimaf' },
+    ],
     blocchi: [
       { titolo: 'Principi', righe: [
         'Obiettivo: il massimo beneficio per il maggior numero di persone, non il massimo per il singolo.',
-        'Triage START (adulti): cammina → verde; non respira dopo apertura delle vie aeree → nero; FR > 30, refill > 2 s/polso radiale assente, non esegue ordini semplici → rosso; altrimenti giallo.',
         'Solo manovre salvavita durante il triage: apertura delle vie aeree, controllo delle emorragie (tourniquet), posizione laterale.',
-        'Ritriage continuo; ogni paziente registrato su First Aid Web e con la scheda di triage regionale.',
-        'Eventi NBCRe: decontaminazione prima dell’ingresso (card «PEIMAF NBCRe»).',
+        'Triage START all’arrivo (primario sul posto, secondario all’ingresso del PMA o del PS); FAST per rivalutare e al momento dell’uscita/trasferimento.',
+        'Ogni paziente ha la sua scheda regionale (identificazione, manovre, destinazione) ed è registrato su First Aid Web; ritriage continuo.',
+        'NBCRe: triage dopo la decontaminazione, alle postazioni FAST all’uscita del corridoio DECO (card «PEIMAF NBCRe»).',
       ] },
     ],
   },
