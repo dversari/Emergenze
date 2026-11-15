@@ -44,6 +44,7 @@ export const CATEGORIE: Categoria[] = [
   { id: 'lab', nome: 'Laboratorio · Trasfusionale · Anatomia patologica', tono: 'bordeaux', parole: 'sangue emoteca analisi' },
   { id: 'osp', nome: 'Altri ospedali e DEA', tono: 'tenue', parole: 'careggi pistoia torregalli aouc' },
   { id: 'terr', nome: '118 · Trasporti · Territorio', tono: 'oro', parole: 'ambulanza trasferimento seus antiviolenza cure intermedie' },
+  { id: 'rsa', nome: 'RSA · Provincia di Prato', tono: 'tenue', parole: 'rsa residenza sanitaria assistenziale casa di riposo ospizio anziani struttura montemurlo vaiano carmignano comeana poggio a caiano vernio' },
   { id: 'serv', nome: 'Centralino e servizi ospedalieri', tono: 'tenue', parole: 'centralino vigilanza ced mediazione interprete direzione' },
   { id: 'dub', nome: 'Annotazioni non attribuite', tono: 'oro', parole: '' },
 ]
@@ -52,7 +53,7 @@ export const CATEGORIE: Categoria[] = [
 export type DatiRubrica = Record<string, Riga[]>
 
 function leggiNumeri(s: string): Numero[] {
-  const t = s.split(' ')
+  const t = s.split(' ').filter(Boolean)
   const out: Numero[] = []
   for (let i = 0; i < t.length; i++) {
     let a = t[i]
@@ -106,6 +107,7 @@ export const ICONE: Record<string, string> = {
  lab:'<path d="M12 3s-5 6-5 10a5 5 0 0 0 10 0c0-4-5-10-5-10z"/>',
  osp:'<path d="M4 21V8l8-5 8 5v13"/><path d="M10 21v-5h4v5M12 8v4M10 10h4"/>',
  terr:'<path d="M3 16V8a1 1 0 0 1 1-1h10v9M14 10h4l3 3v3h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M8 10v3M6.5 11.5h3"/>',
+ rsa:'<path d="M3 11l9-7 9 7"/><path d="M5 9.5V20h14V9.5"/><path d="M12 17.5s-3-1.8-3-3.8a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2-3 3.8-3 3.8z"/>',
  serv:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
  dub:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.7M12 17h.01"/>'
 };
