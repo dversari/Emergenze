@@ -262,6 +262,24 @@ const PUNTEGGI: Punteggio[] = [
     fonte: 'Blatchford, Lancet 2000. Urea convertita: mmol/L × 6 = mg/dL.',
   },
   {
+    id: 'oakland',
+    nome: 'Oakland',
+    ambito: 'Emorragia digestiva bassa · dimissione sicura (sanguinamento autolimitato)',
+    voci: [
+      { tipo: 'scelta', id: 'eta', testo: 'Età', opzioni: [{ testo: '<40', punti: 0 }, { testo: '40–69', punti: 1 }, { testo: '≥70', punti: 2 }] },
+      { tipo: 'si', id: 'm', testo: 'Sesso maschile', punti: 1 },
+      { tipo: 'si', id: 'prec', testo: 'Precedente ricovero per emorragia bassa', punti: 1 },
+      { tipo: 'si', id: 'er', testo: 'Sangue all’esplorazione rettale', punti: 1 },
+      { tipo: 'scelta', id: 'fc', testo: 'FC (bpm)', opzioni: [{ testo: '<70', punti: 0 }, { testo: '70–89', punti: 1 }, { testo: '90–109', punti: 2 }, { testo: '≥110', punti: 3 }] },
+      { tipo: 'scelta', id: 'pas', testo: 'PAS (mmHg)', opzioni: [{ testo: '≥160', punti: 0 }, { testo: '130–159', punti: 2 }, { testo: '120–129', punti: 3 }, { testo: '90–119', punti: 4 }, { testo: '<90', punti: 5 }] },
+      { tipo: 'scelta', id: 'hb', testo: 'Emoglobina (g/dL)', opzioni: [{ testo: '≥16', punti: 0 }, { testo: '13–15,9', punti: 4 }, { testo: '11–12,9', punti: 8 }, { testo: '9–10,9', punti: 13 }, { testo: '7–8,9', punti: 17 }, { testo: '<7', punti: 22 }] },
+    ],
+    esito: (t) =>
+      t <= 8 ? { livello: 'basso', testo: 'Oakland ≤ 8: probabilità di dimissione sicura ≥ 95%. Se il sanguinamento si è fermato e non ci sono altri motivi di ricovero, dimissione con colonscopia ambulatoriale a breve.' }
+      : { livello: 'alto', testo: 'Oakland > 8: ricovero; colonscopia durante il ricovero.' },
+    fonte: 'Oakland, Lancet Gastroenterol Hepatol 2017; ESGE 2021, BSG 2019 (soglia ≤ 8).',
+  },
+  {
     id: 'bisap',
     nome: 'BISAP',
     ambito: 'Pancreatite acuta · rischio di mortalità (prime 24 h)',

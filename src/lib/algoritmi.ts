@@ -1964,7 +1964,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
   },
   'emorragia-digestiva': {
     titolo: 'Algoritmo emorragia digestiva',
-    nota: 'ESGE 2021 (non varicosa) e 2022 (varici). Dosi per 70 kg; verificare i formati in reparto.',
+    nota: 'ESGE 2026 (ulcera peptica), 2022 (varici), 2021 (bassa). Dosi per 70 kg; verificare i formati in reparto.',
     nodi: [
       {
         tipo: 'avvio', titolo: 'Ematemesi, vomito caffeano, melena o ematochezia',
@@ -1979,8 +1979,8 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 tipo: 'allarme', titolo: 'Rianimazione',
                 righe: [
                   'Cristalloidi; emazie (protocollo trasfusionale massivo se necessario).',
-                  'Protezione delle vie aeree se ematemesi massiva o coscienza alterata.',
-                  'Endoscopista subito; anticoagulante: antagonizzare.',
+                  'Intubazione se emorragia massiva, scarso controllo delle vie aeree, coscienza alterata o agitazione.',
+                  'Avvisare l’endoscopista; EGDS dopo la stabilizzazione (subito solo se resta instabile nonostante la rianimazione). Anticoagulante: antagonizzare.',
                 ],
               },
             ],
@@ -2003,10 +2003,12 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'terapia', titolo: 'Subito',
                 righe: [
-                  'Terlipressina (Glypressin) 2 mg ev = 2 fiale da 1 mg ogni 4 h (poi 1 mg ogni 4 h), oppure somatostatina 250 µg in bolo + 250–500 µg/h.',
+                  'Terlipressina (Glypressin) 2 mg ev = 2 fiale da 1 mg ogni 4 h (poi 1 mg ogni 4 h).',
+                  'Rischio ischemico (cardiopatia ischemica, arteriopatia, ischemia d’arto, angina abdominis): octreotide (Sandostatina) 50 µg ev in bolo, poi 50 µg/h.',
                   'Ceftriaxone 1 g ev/die fino a 7 giorni.',
-                  'Eritromicina 250 mg ev 30–120 min prima dell’endoscopia.',
-                  'Endoscopia (legatura) entro 12 h; Hb obiettivo 7–9, evitare la sovratrasfusione.',
+                  'Eritromicina 250 mg ev 30–120 min prima dell’endoscopia (se manca: metoclopramide 10 mg ev = 1 fiala).',
+                  'Endoscopia (legatura) entro 12 h, dopo la stabilizzazione; Hb obiettivo 7–9, evitare la sovratrasfusione.',
+                  'Lattulosio 25 mL ogni 12 h per prevenire l’encefalopatia, specie se alvo chiuso (opzione).',
                   'Refrattaria: sonda di Sengstaken o stent esofageo come ponte alla TIPS.',
                 ],
               },
@@ -2018,8 +2020,8 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 tipo: 'terapia', titolo: 'Terapia',
                 righe: [
                   'Pantoprazolo/esomeprazolo 80 mg ev = 2 fiale da 40 mg, poi 8 mg/h o 40 mg ogni 12 h.',
-                  'Eritromicina 250 mg ev se sanguinamento importante.',
-                  'Endoscopia entro 24 h dopo la stabilizzazione.',
+                  'Eritromicina 250 mg ev se sanguinamento importante (se manca: metoclopramide 10 mg ev = 1 fiala).',
+                  'Endoscopia entro 24 h dopo la stabilizzazione; non entro 6–12 h salvo instabilità persistente.',
                   'Niente sondino di routine; niente acido tranexamico.',
                 ],
               },
@@ -2029,7 +2031,10 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       },
       {
         tipo: 'nota', titolo: 'Emorragia bassa',
-        righe: ['Ematochezia con instabilità: considerare una fonte alta (EGDS); angio-TC per localizzare, poi embolizzazione o endoscopia. Stabile: colonscopia nel ricovero.'],
+        righe: [
+          'Ematochezia con instabilità: considerare una fonte alta (EGDS); angio-TC per localizzare, poi embolizzazione o endoscopia.',
+          'Stabile e autolimitata: Oakland ≤ 8 → dimissione con colonscopia ambulatoriale; > 8 → ricovero e colonscopia nel ricovero.',
+        ],
       },
     ],
   },

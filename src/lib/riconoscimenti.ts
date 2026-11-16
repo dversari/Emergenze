@@ -16,7 +16,7 @@ import { DOCUMENTI_ASL, type DocumentoAsl } from './documentiAsl'
 /** Sigle dei colleghi (come nei turni). */
 export const REVISORI: Record<string, string> = {
   VR: 'Daniele Versari', BN: 'Banchelli', DC: 'De Curtis', CG: 'Caruso', GR: 'Grassi', LO: 'Martino Longo', CL: 'Casalini',
-  MT: 'Matteuzzi', EB: 'Bosco', PT: 'Pollastri', MN: 'Monda', AB: 'Ambrosio', CH: 'Chiellini', GA: 'Galarducci',
+  MT: 'Matteuzzi', EB: 'Emma Bosco', PT: 'Pollastri', MN: 'Monda', AB: 'Ambrosio', CH: 'Chiellini', GA: 'Galarducci',
   GE: 'Geri', MI: 'Meoni', AP: 'Poggi',
 }
 
@@ -37,6 +37,9 @@ export const REVISIONI: Record<string, Revisione[]> = {
   ],
   'procedure/nbcr-antidoti': [
     { sigla: 'LO', data: '2026-11-13', esito: 'aperta', nota: 'Scorta antidoti ASL TC a Ponte a Niccheri; CAV di Pavia per la Scorta nazionale; REAC/TS.' },
+  ],
+  'linee-guida/emorragia-digestiva': [
+    { sigla: 'EB', data: '2026-11-16', esito: 'aperta', nota: 'ESGE 2026; metoclopramide se manca l’eritromicina; octreotide se rischio ischemico; lattulosio; stabilizzare prima dell’EGDS; intubazione; Oakland score. Da chiarire: sangue o cristalloidi nell’instabile.' },
   ],
   'linee-guida/colica-renale': [
     { sigla: 'VR', data: '2026-11-13', esito: 'ok', nota: 'Tolto il metamizolo; dosi del cortisone (prednisone 25 mg/die per 10 giorni).', impronta: '273acd8f' },

@@ -23,6 +23,7 @@ const SCORE: [RegExp, string][] = [
   [/NIHSS/, 'nihss'],
   [/CURB-65/, 'curb65'],
   [/Glasgow-Blatchford/, 'gbs'],
+  [/Oakland/, 'oakland'],
   [/BISAP/, 'bisap'],
   [/ICH score/, 'ich'],
   [/ADD-RS/, 'addrs'],
