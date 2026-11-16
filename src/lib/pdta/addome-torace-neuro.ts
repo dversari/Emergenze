@@ -9,6 +9,88 @@ const OGGI = '2026-11-13'
 
 export const LG_ADDOME_TORACE_NEURO: LineaGuida[] = [
   {
+    id: 'diverticolite',
+    titolo: 'Diverticolite acuta e malattia diverticolare',
+    ente: 'WSES 2020 · ACP 2022 · ASCRS 2020',
+    anno: 2022,
+    area: 'Gastroenterologia · Chirurgia',
+    fonte: { etichetta: 'Sartelli et al., World J Emerg Surg 2020 (WSES, diverticolite acuta del colon sinistro)', url: 'https://doi.org/10.1186/s13017-020-00313-4' },
+    controllata: '2026-11-16',
+    vediAnche: [
+      { etichetta: 'Antibiotici: diverticolite', to: '/antibiotici?apri=diverticolite' },
+      { etichetta: 'Dimissione: diverticolite', to: '/dimissioni?apri=diverticolite' },
+      { etichetta: 'Emorragia digestiva (sanguinamento diverticolare)', to: '/linee-guida/emorragia-digestiva' },
+    ],
+    inBreve: [
+      'Diverticolosi = diverticoli, spesso reperto occasionale. Malattia diverticolare: diverticolite acuta (non complicata o complicata), sanguinamento diverticolare (percorso dell’emorragia bassa), SCAD (colite segmentaria associata ai diverticoli: diarrea, crampi, ematochezia; non è una diverticolite), SUDD (dolore ricorrente senza diverticolite).',
+      'Diagnosi con imaging: TC addome con contrasto (o ecografia esperta); stadiare con Hinchey modificata (Wasvary).',
+      'Non complicata, immunocompetente, stabile, che beve e assume farmaci per os, dolore controllato, follow-up affidabile: domicilio, paracetamolo, antibiotico non di routine.',
+      'Rischio di decorso complicato (non criteri automatici di ricovero): età avanzata, ASA alto, PCR > 140 mg/L, leucociti > 15.000/mm³, immunodepressione.',
+      'Complicata o sepsi: ricovero, antibiotico ev (Gram-negativi e anaerobi); ascesso ≥ 3–4 cm: drenaggio percutaneo; peritonite diffusa o perforazione libera: chirurgo urgente.',
+      'Colonscopia a 6–8 settimane dalla guarigione, mai in fase acuta.',
+    ],
+    sezioni: [
+      {
+        titolo: 'Classificazione di Hinchey modificata (Wasvary)',
+        punti: [
+          '0 · diverticolite clinica lieve, senza complicanze.',
+          'Ia · infiammazione o flemmone pericolico confinato.',
+          'Ib · ascesso pericolico o mesocolico.',
+          'II · ascesso pelvico, intra-addominale a distanza o retroperitoneale.',
+          'III · peritonite purulenta generalizzata.',
+          'IV · peritonite fecale generalizzata.',
+          'Stadi 0–II: diagnosi radiologica. Stadi III–IV: valutazione chirurgica urgente.',
+        ],
+      },
+      {
+        titolo: 'Clinica e complicanze',
+        punti: [
+          'Dolore addominale, tipicamente in fossa iliaca sinistra (non sempre); nausea e vomito; febbre o febbricola; stipsi o diarrea; dolorabilità, talvolta massa palpabile; sintomi urinari da irritazione delle strutture vicine.',
+          'Complicanze: ascesso pericolico o a distanza, fistola (soprattutto colovescicale: pneumaturia, fecaluria, infezioni urinarie ricorrenti), stenosi o occlusione, perforazione e peritonite, sepsi.',
+          'Rare: ascesso epatico, pileflebite e altre complicanze settiche portali; non vanno ricercate di routine.',
+        ],
+      },
+      {
+        titolo: 'Ricovero se',
+        punti: [
+          'Diverticolite complicata, soprattutto Hinchey Ib–II; peritonite, perforazione libera, sepsi o instabilità.',
+          'Dolore non controllabile o vomito persistente; non riesce ad assumere liquidi o terapia per os.',
+          'Immunodepressione; fragilità o comorbidità importanti; supporto a domicilio insufficiente o follow-up ravvicinato impossibile.',
+          'Infiammazione marcata (PCR molto alta, leucocitosi importante) o peggioramento clinico.',
+        ],
+      },
+      {
+        titolo: 'Terapia a domicilio (non complicata confermata all’imaging)',
+        punti: [
+          'Analgesia: paracetamolo 1 g fino a 3 volte al giorno. FANS da evitare, soprattutto se ripetuti o nei pazienti a rischio (associati a perforazione); cortisonici: nessun ruolo.',
+          'Alimentazione: liquidi chiari o dieta leggera solo se dolore, nausea o vomito lo richiedono; poi rialimentazione secondo tolleranza, senza digiuno o dieta liquida per un periodo fisso.',
+          'Antibiotico non di routine nell’immunocompetente senza compromissione sistemica; considerarlo se comorbidità importanti, PCR molto alta, febbre persistente o fattori di rischio (vedi scheda Antibiotici).',
+          'Istruzioni chiare: tornare se febbre persistente, dolore in aumento, vomito, distensione, sangue nelle feci o non riesce ad alimentarsi; rivalutazione a 2–3 giorni se i sintomi non migliorano.',
+        ],
+      },
+      {
+        titolo: 'Terapia in ospedale',
+        punti: [
+          'Liquidi ev, analgesia, antiemetici, monitoraggio clinico e degli esami.',
+          'Antibiotico ad ampio spettro (Gram-negativi e anaerobi) se complicata, sepsi, compromissione sistemica, immunodepressione o alto rischio di progressione; rivalutare a circa 48 h (o dopo la TC) e passare per os appena possibile.',
+          'Ascesso accessibile: drenaggio percutaneo se ≥ 3–4 cm (la soglia varia da 3 a 5 cm fra le linee guida, secondo sede e radiologo); sotto la soglia, solo antibiotico.',
+          'Peritonite generalizzata, perforazione libera, sepsi non controllata o mancato miglioramento nonostante terapia medica e drenaggio: chirurgo urgente.',
+        ],
+      },
+      {
+        titolo: 'Colonscopia dopo l’episodio',
+        punti: [
+          'Non in fase acuta (salvo indicazioni eccezionali, dopo aver escluso perforazione e ascesso).',
+          'A 6–8 settimane dalla guarigione: indicata dopo diverticolite complicata, decorso atipico, sintomi persistenti o screening del colon-retto non aggiornato.',
+          'Dopo un episodio non complicato tipico si può omettere se c’è una colonscopia di qualità recente e nessun segno d’allarme.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2026-11-16', testo: 'Scheda proposta da E. Bosco (revisione in corso).' },
+    ],
+  },
+  {
     id: 'occlusione-intestinale',
     titolo: 'Occlusione intestinale',
     ente: 'WSES',

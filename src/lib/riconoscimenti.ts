@@ -41,6 +41,9 @@ export const REVISIONI: Record<string, Revisione[]> = {
   'linee-guida/emorragia-digestiva': [
     { sigla: 'EB', data: '2026-11-16', esito: 'aperta', nota: 'ESGE 2026; metoclopramide se manca l’eritromicina; octreotide se rischio ischemico; lattulosio; stabilizzare prima dell’EGDS; intubazione; Oakland score. Da chiarire: sangue o cristalloidi nell’instabile.' },
   ],
+  'linee-guida/diverticolite': [
+    { sigla: 'EB', data: '2026-11-16', esito: 'aperta', nota: 'Scheda scritta da E. Bosco e integrata (Hinchey, ricovero, terapia a domicilio e in ospedale, colonscopia).' },
+  ],
   'linee-guida/colica-renale': [
     { sigla: 'VR', data: '2026-11-13', esito: 'ok', nota: 'Tolto il metamizolo; dosi del cortisone (prednisone 25 mg/die per 10 giorni).', impronta: '273acd8f' },
   ],

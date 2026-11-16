@@ -137,10 +137,10 @@ Terapia:
 - [Antibiotico: amoxicillina/acido clavulanico 875/125 mg, 1 compressa ogni 8 ore per 7 giorni.]
 
 Indicazioni:
-- Per 2–3 giorni dieta leggera e povera di scorie (brodo, riso, pasta, carne e pesce magri), poi ritorno graduale all'alimentazione normale.
+- Mangi secondo tolleranza: se ha dolore o nausea, liquidi e cibi leggeri (brodo, riso, pasta, carne e pesce magri), poi torni gradualmente all'alimentazione normale appena se la sente.
 - Dopo la guarigione: dieta ricca di fibre (frutta, verdura, cereali integrali) e molta acqua per prevenire nuovi episodi.
 
-${controlli('[Si allega richiesta per colonscopia da eseguire a 6–8 settimane dalla guarigione.]')}
+${controlli('Se i sintomi non migliorano entro 2–3 giorni contatti il medico curante per una rivalutazione. [Si allega richiesta per colonscopia da eseguire a 6–8 settimane dalla guarigione.]')}
 
 ${RITORNO}
 - febbre sopra 38 °C;

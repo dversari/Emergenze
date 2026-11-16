@@ -390,8 +390,8 @@ export const CONDIZIONI: Condizione[] = [
     id: 'diverticolite', nome: 'Diverticolite acuta', gruppo: 'Addominali',
     sintesi: 'Non complicata: spesso senza antibiotico. Complicata: amoxicillina/clavulanato ev.',
     blocchi: [
-      { titolo: 'Non complicata, immunocompetente, senza sepsi', righe: ['Osservazione senza antibiotico (WSES, AGA)', 'Antibiotico se comorbidità importanti, immunodepressione, PCR molto alta o febbre persistente: {amoxclav} 875/125 mg os ogni 8 h'] },
-      { titolo: 'Complicata (ascesso, perforazione)', righe: ['{amoxclav} 2,2 g ev ogni 8 h', 'Oppure {ceftriaxone} 2 g ev ogni 24 h + {metronidazolo} 500 mg ev ogni 8 h', 'Ascesso >4–5 cm: drenaggio percutaneo'] },
+      { titolo: 'Non complicata, immunocompetente, senza sepsi', righe: ['Osservazione senza antibiotico (WSES, AGA)', 'Antibiotico se comorbidità importanti, immunodepressione, PCR > 140 mg/L, leucociti > 15.000 o febbre persistente: {amoxclav} 875/125 mg os ogni 8 h'] },
+      { titolo: 'Complicata (ascesso, perforazione)', righe: ['{amoxclav} 2,2 g ev ogni 8 h', 'Oppure {ceftriaxone} 2 g ev ogni 24 h + {metronidazolo} 500 mg ev ogni 8 h', 'Ascesso ≥ 3–4 cm (soglia 3–5 cm secondo le linee guida e il radiologo): drenaggio percutaneo'] },
       { titolo: 'Sepsi, peritonite diffusa o infezione nosocomiale', righe: ['{piptazo} 4,5 g ev ogni 6 h; rischio ESBL o shock: {meropenem} 1 g ev ogni 8 h'] },
       { titolo: 'Allergia grave ai betalattamici', righe: ['{ciprofloxacina} 400 mg ev ogni 12 h (500 mg os) + {metronidazolo} 500 mg ev ogni 8 h'] },
     ],
