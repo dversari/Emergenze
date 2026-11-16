@@ -10,6 +10,7 @@ import type { Provenienza } from './lib/ritorno'
 import Home from './pages/Home'
 import Acr from './pages/Acr'
 import Calcolatori from './pages/Calcolatori'
+import Farmaci from './pages/Farmaci'
 import Antibiotici from './pages/Antibiotici'
 import Rubrica from './pages/Rubrica'
 import Procedure from './pages/Procedure'
@@ -38,6 +39,7 @@ const schede = [
   { to: '/rubrica', label: 'Rubrica', icona: '☎\uFE0E' },
   { to: '/linee-guida', label: 'PDTA', icona: '▤︎' },
   { to: '/calcolatori', label: 'Calcolatori', icona: '±' },
+  { to: '/farmaci', label: 'Farmaci', icona: '⚗\uFE0E' },
   { to: '/antibiotici', label: 'Antibiotici', icona: '℞' },
   { to: '/procedure', label: 'Procedure', icona: '⌖' },
   { to: '/sedazione', label: 'Sedazione', icona: '☾\uFE0E' },
@@ -119,6 +121,7 @@ export default function App() {
         <Route element={<Guscio />}>
           <Route index element={<Home />} />
           <Route path="calcolatori" element={<Calcolatori />} />
+          <Route path="farmaci" element={<Farmaci />} />
           <Route path="acr" element={<Acr />} />
           <Route path="antibiotici" element={<Antibiotici />} />
           <Route path="procedure" element={<Procedure />} />

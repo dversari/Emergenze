@@ -62,6 +62,17 @@ export const DISEGNI: Record<string, ReactNode> = {
       {[0, 1, 2].map((r) => [0, 1, 2].map((c) => <circle key={`${r}${c}`} cx={23 + c * 9} cy={33 + r * 8} r="2.6" className={r === 2 && c === 2 ? 'fill-bordeaux' : 'fill-oro2'} />))}
     </>
   ),
+  farmaci: (
+    <>
+      <g transform="rotate(-40 32 32)">
+        <rect x="22" y="14" width="20" height="34" rx="3" className="fill-carta stroke-verde-scuro" strokeWidth={2.4} />
+        <rect x="24.5" y="30" width="15" height="15.5" rx="1.5" className="fill-verde3" />
+        <path d="M22 22 h7 M22 28 h5 M22 34 h7 M22 40 h5" {...T} strokeWidth={1.6} className="stroke-verde" />
+        <path d="M27 14 v-5 h10 v5 M32 9 v-4 M27 5 h10" {...T} strokeWidth={2.2} className="stroke-verde-scuro" />
+        <path d="M32 48 v10" {...T} strokeWidth={2} className="stroke-bordeaux" />
+      </g>
+    </>
+  ),
   antibiotici: (
     <>
       <g transform="rotate(-35 32 32)">
@@ -186,6 +197,7 @@ const PAGINE = [
   { id: 'rubrica', to: '/rubrica', nome: 'Rubrica', testo: 'Numeri interni ed esterni' },
   { id: 'linee-guida', to: '/linee-guida', nome: 'PDTA', testo: 'Percorsi, linee guida, algoritmi' },
   { id: 'calcolatori', to: '/calcolatori', nome: 'Calcolatori', testo: 'Score, clearance, elettroliti' },
+  { id: 'farmaci', to: '/farmaci', nome: 'Farmaci', testo: 'Fiale, diluizioni, mL/h per peso' },
   { id: 'antibiotici', to: '/antibiotici', nome: 'Antibiotici', testo: 'Empirica toscana, fiale, rene' },
   { id: 'procedure', to: '/procedure', nome: 'Procedure', testo: 'Passaggi e schemi disegnati' },
   { id: 'sedazione', to: '/sedazione', nome: 'Sedazione', testo: 'Schemi per 70 kg' },
