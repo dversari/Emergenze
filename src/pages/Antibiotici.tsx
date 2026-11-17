@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Riconoscimenti from '../components/Riconoscimenti'
 import Algoritmo from '../components/Algoritmo'
-import { ALGORITMI_ANTIBIOTICI } from '../lib/antibioticiAlgoritmi'
+import { ALGORITMI_NON_GRAVI, algoritmoSepsi } from '../lib/antibioticiAlgoritmi'
 import { CONDIZIONI, FAMIGLIE, FARMACI, REGOLE, farmaco, type Condizione } from '../lib/antibiotici'
 
 /* Terapia antibiotica empirica: card per condizione e per farmaco.
@@ -47,10 +47,19 @@ function CardCondizione({ c, aperto, onToggle, apri }: { c: Condizione; aperto: 
       </button>
       {aperto && (
         <div className="px-4 pb-4 pt-1 border-t border-linea flex flex-col gap-3">
-          {ALGORITMI_ANTIBIOTICI[c.id] && (
-            <div className="-mx-2 mt-2"><Algoritmo {...ALGORITMI_ANTIBIOTICI[c.id]} /></div>
+          {ALGORITMI_NON_GRAVI[c.id] && (
+            <>
+              <p className="etichetta mt-2">{algoritmoSepsi(c.id) ? 'Senza sepsi' : 'Algoritmo'}</p>
+              <div className="-mx-2 [&_*]:[overflow-wrap:anywhere]"><Algoritmo {...ALGORITMI_NON_GRAVI[c.id]} /></div>
+            </>
           )}
-          {ALGORITMI_ANTIBIOTICI[c.id] && <p className="etichetta mt-2">Dettaglio e forme non gravi</p>}
+          {algoritmoSepsi(c.id) && (
+            <>
+              <p className="etichetta mt-2 !text-bordeaux">Sepsi o shock settico</p>
+              <div className="-mx-2 [&_*]:[overflow-wrap:anywhere]"><Algoritmo {...algoritmoSepsi(c.id)!} /></div>
+            </>
+          )}
+          {(ALGORITMI_NON_GRAVI[c.id] || algoritmoSepsi(c.id)) && <p className="etichetta mt-2">Dettaglio</p>}
           {c.blocchi.map((b) => (
             <div key={b.titolo}>
               <p className="etichetta mt-2 mb-1">{b.titolo}</p>

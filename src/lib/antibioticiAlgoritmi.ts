@@ -458,3 +458,336 @@ const GREZZI: Record<string, AlgoritmoAb> = {
 export const ALGORITMI_ANTIBIOTICI: Record<string, AlgoritmoAb> = Object.fromEntries(
   Object.entries(GREZZI).map(([k, v]) => [k, { ...v, nodi: appiattisci(v.nodi) }]),
 )
+
+/* ───────────── Forme senza sepsi (in alto nella card) ───────────── */
+
+
+const NON_GRAVI_GREZZI: Record<string, AlgoritmoAb> = {
+  cap: {
+    titolo: 'Polmonite comunitaria senza sepsi',
+    nota: 'CURB-65 o PSI per decidere dove curarla.',
+    nodi: [
+      { tipo: 'avvio', titolo: 'CAP senza sepsi' },
+      { tipo: 'decisione', titolo: 'Può essere curata a domicilio?', righe: ['CURB-65 0–1, saturazione e assunzione per os conservate, supporto a casa'] },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Domicilio', tono: 'si', nodi: [
+              { tipo: 'decisione', titolo: 'Comorbidità?', righe: ['BPCO, cuore, rene, fegato, diabete, alcol, neoplasia'] },
+              {
+                tipo: 'rami', rami: [
+                  { etichetta: 'No', nodi: [{ tipo: 'terapia', titolo: 'Amoxicillina', righe: ['Amoxicillina 1 g os ogni 8 h', 'Alternative: doxiciclina 100 mg ogni 12 h; claritromicina 500 mg ogni 12 h'] }] },
+                  { etichetta: 'Sì', nodi: [{ tipo: 'terapia', titolo: 'Amoxicillina/clavulanato + macrolide', righe: ['Amoxicillina/clavulanato 875/125 mg os ogni 8 h + claritromicina 500 mg ogni 12 h (o doxiciclina)', 'Alternativa: levofloxacina 500 mg os ogni 24 h da sola'] }] },
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'Ricovero', tono: 'no', nodi: [{
+              tipo: 'terapia', titolo: 'Ceftriaxone + macrolide', righe: [
+                'Ceftriaxone 1–2 g ev ogni 24 h + claritromicina 500 mg ev ogni 12 h (o azitromicina 500 mg ev ogni 24 h)',
+                'Rischio Pseudomonas: piperacillina/tazobactam al posto del ceftriaxone; rischio MRSA: + linezolid o vancomicina',
+                'Allergia grave: levofloxacina 500 mg ev ogni 12 h',
+              ],
+            }],
+          },
+        ],
+      },
+      { tipo: 'esito', titolo: 'Durata 5 giorni (almeno 3 se stabile)' },
+    ],
+  },
+
+  hap: {
+    titolo: 'Polmonite nosocomiale senza sepsi',
+    nodi: [
+      { tipo: 'avvio', titolo: 'HAP non grave', righe: ['Esordio ≥ 48 h dopo il ricovero; nessun antibiotico ev negli ultimi 90 giorni.'] },
+      { tipo: 'terapia', titolo: 'Un anti-Pseudomonas', righe: ['Piperacillina/tazobactam 4,5 g ev ogni 6 h', 'Oppure cefepime 2 g ev ogni 8 h o levofloxacina 500 mg ev ogni 12 h'] },
+      { tipo: 'decisione', titolo: 'Rischio MRSA?', righe: ['MRSA noto, reparto con MRSA > 20%'] },
+      { tipo: 'terapia', titolo: 'Se sì: + linezolid 600 mg ogni 12 h o vancomicina' },
+      { tipo: 'esito', titolo: 'Durata 7 giorni' },
+    ],
+  },
+
+  bpco: {
+    titolo: 'Riacutizzazione di BPCO',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Riacutizzazione di BPCO' },
+      { tipo: 'decisione', titolo: 'Espettorato purulento + più dispnea o più espettorato, oppure NIV/intubazione?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Niente antibiotico', righe: ['Broncodilatatori, cortisonico.'] }] },
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'decisione', titolo: 'Rischio Pseudomonas?', righe: ['FEV1 < 30%, bronchiectasie, isolamento precedente'] },
+              {
+                tipo: 'rami', rami: [
+                  { etichetta: 'No', nodi: [{ tipo: 'terapia', titolo: 'Amoxicillina/clavulanato', righe: ['875/125 mg os ogni 12 h', 'Alternative: doxiciclina 100 mg ogni 12 h; claritromicina 500 mg ogni 12 h'] }] },
+                  { etichetta: 'Sì', nodi: [{ tipo: 'terapia', titolo: 'Chinolone', righe: ['Ciprofloxacina 750 mg os ogni 12 h o levofloxacina 500 mg os ogni 12 h'] }] },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      { tipo: 'esito', titolo: 'Durata 5 giorni' },
+    ],
+  },
+
+  faringite: {
+    titolo: 'Faringotonsillite',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Mal di gola' },
+      { tipo: 'decisione', titolo: 'Centor/McIsaac ≥ 2–3?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Sintomatici, niente test né antibiotico' }] },
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              { tipo: 'decisione', titolo: 'Test rapido o coltura positivi?' },
+              {
+                tipo: 'rami', rami: [
+                  { etichetta: 'No', nodi: [{ tipo: 'esito', titolo: 'Niente antibiotico' }] },
+                  { etichetta: 'Sì', nodi: [{ tipo: 'terapia', titolo: 'Amoxicillina 10 giorni', righe: ['Amoxicillina 1 g os ogni 24 h (o 500 mg ogni 12 h); aderenza incerta: benzatina 1.200.000 UI im', 'Allergia non grave: cefalexina 500 mg ogni 12 h', 'Allergia grave: claritromicina 250 mg ogni 12 h (10 giorni) o azitromicina 500 mg/die (5 giorni)'] }] },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      { tipo: 'allarme', titolo: 'Trisma, voce «a patata», asimmetria: ascesso peritonsillare → ORL' },
+    ],
+  },
+
+  cistite: {
+    titolo: 'Cistite',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Disuria, pollachiuria, urgenza', righe: ['Senza febbre né dolore al fianco (altrimenti pielonefrite).'] },
+      { tipo: 'decisione', titolo: 'Chi è il paziente?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Donna non gravida', tono: 'si', nodi: [{ tipo: 'terapia', titolo: 'Fosfomicina o nitrofurantoina', righe: ['Fosfomicina 3 g os dose singola', 'Oppure nitrofurantoina 100 mg os ogni 6 h per 5 giorni', 'Niente chinoloni, cotrimossazolo, amoxicillina/clavulanato in empirica (resistenze in Toscana)'] }] },
+          { etichetta: 'Gravida', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Fosfomicina o cefalexina', righe: ['Fosfomicina 3 g dose singola, o cefalexina 500 mg ogni 8 h per 5–7 giorni', 'Sempre urinocoltura e controllo dopo'] }] },
+          { etichetta: 'Uomo', tono: 'no', nodi: [{ tipo: 'terapia', titolo: '7 giorni secondo urinocoltura', righe: ['Nitrofurantoina o cotrimossazolo', 'Febbre o dolore perineale: prostatite'] }] },
+        ],
+      },
+    ],
+  },
+
+  pielonefrite: {
+    titolo: 'Pielonefrite senza sepsi',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Febbre, dolore al fianco ± sintomi urinari', righe: ['Urinocoltura (ed emocolture se ricovero).'] },
+      { tipo: 'decisione', titolo: 'Può essere curata a domicilio?', righe: ['Assume per os, nessun vomito, nessuna ostruzione, non gravida, supporto a casa'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Domicilio', tono: 'si', nodi: [{ tipo: 'terapia', titolo: 'Ceftriaxone in PS, poi os', righe: ['Ceftriaxone 1 g ev o im in PS', 'Poi cefixima 400 mg os ogni 24 h, o secondo antibiogramma (chinoloni solo se sensibile)', 'Controllo dal curante con l’urinocoltura'] }] },
+          {
+            etichetta: 'Ricovero', tono: 'no', nodi: [
+              { tipo: 'decisione', titolo: 'Fattori di rischio ESBL ≥ 2?', righe: FDR_ESBL },
+              {
+                tipo: 'rami', rami: [
+                  { etichetta: '0–1', nodi: [{ tipo: 'terapia', titolo: 'Ceftriaxone', righe: ['Ceftriaxone 1–2 g ev ogni 24 h'] }] },
+                  { etichetta: '≥ 2', nodi: [{ tipo: 'terapia', titolo: 'Ertapenem', righe: ['Ertapenem 1 g ev ogni 24 h'] }] },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      { tipo: 'esito', titolo: 'Durata 7 giorni se risposta rapida' },
+    ],
+  },
+
+  prostatite: {
+    titolo: 'Prostatite acuta senza sepsi',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Febbre, disuria, dolore perineale', righe: ['Niente massaggio prostatico; ritenzione: catetere.'] },
+      { tipo: 'decisione', titolo: 'Può essere curata a domicilio?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Domicilio', tono: 'si', nodi: [{ tipo: 'terapia', titolo: 'Chinolone os', righe: ['Levofloxacina 500 mg os ogni 24 h o ciprofloxacina 500 mg ogni 12 h, secondo antibiogramma', 'Alternativa: cotrimossazolo 800/160 mg ogni 12 h'] }] },
+          { etichetta: 'Ricovero', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Ceftriaxone', righe: ['Ceftriaxone 2 g ev ogni 24 h; rischio ESBL: piperacillina/tazobactam o meropenem'] }] },
+        ],
+      },
+      { tipo: 'esito', titolo: 'Durata 2–4 settimane' },
+    ],
+  },
+
+  orchiepididimite: {
+    titolo: 'Orchiepididimite',
+    nodi: [
+      { tipo: 'allarme', titolo: 'Escludere la torsione (eco-doppler)' },
+      { tipo: 'decisione', titolo: 'Probabile causa?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'IST (< 35 anni)', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Ceftriaxone + doxiciclina', righe: ['Ceftriaxone 500 mg im dose singola + doxiciclina 100 mg ogni 12 h per 10 giorni', 'Rapporti anali insertivi: levofloxacina al posto della doxiciclina'] }] },
+          { etichetta: 'Enterici (> 35 anni, procedure urologiche)', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Levofloxacina', righe: ['500 mg os ogni 24 h per 10 giorni (o secondo urinocoltura)'] }] },
+        ],
+      },
+    ],
+  },
+
+  enterocolite: {
+    titolo: 'Gastroenterite ed enterocolite',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Diarrea acuta' },
+      { tipo: 'decisione', titolo: 'Antibiotici o ricovero recenti?' },
+      { tipo: 'terapia', titolo: 'Se sì: cercare C. difficile (vedi scheda)' },
+      { tipo: 'decisione', titolo: 'Da trattare?', righe: ['Febbre alta o sangue con quadro sistemico, immunodepressione, anziano con comorbidità, protesi vascolari, diarrea del viaggiatore grave'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Idratazione, niente antibiotico', righe: ['Sangue senza febbre o focolaio (STEC): mai antibiotici.'] }] },
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Azitromicina', righe: ['1 g os dose singola o 500 mg/die per 3 giorni', 'Alternativa: ciprofloxacina 500 mg ogni 12 h per 3 giorni'] }] },
+        ],
+      },
+    ],
+  },
+
+  cdiff: {
+    titolo: 'Colite da C. difficile',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Diarrea con test C. difficile positivo', righe: ['Sospendere l’antibiotico responsabile; niente antidiarroici.'] },
+      { tipo: 'decisione', titolo: 'Fulminante?', righe: ['Ipotensione, shock, ileo, megacolon'] },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'terapia', titolo: 'Fidaxomicina o vancomicina os', righe: ['Fidaxomicina 200 mg ogni 12 h (preferita; recidiva: sempre)', 'Oppure vancomicina 125 mg os ogni 6 h', 'Durata 10 giorni'] }] },
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Vancomicina os alte dosi + metronidazolo ev', righe: ['Vancomicina 500 mg ogni 6 h per os o SNG (+ clistere se ileo) + metronidazolo 500 mg ev ogni 8 h', 'Chirurgo'] }] },
+        ],
+      },
+    ],
+  },
+
+  diverticolite: {
+    titolo: 'Diverticolite senza sepsi',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Diverticolite confermata all’imaging' },
+      { tipo: 'decisione', titolo: 'Complicata (ascesso, perforazione)?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'decisione', titolo: 'Immunodepressione, comorbidità importanti, PCR > 140, leucociti > 15.000, febbre persistente?' },
+              {
+                tipo: 'rami', rami: [
+                  { etichetta: 'No', nodi: [{ tipo: 'esito', titolo: 'Senza antibiotico', righe: ['Paracetamolo, alimentazione secondo tolleranza, controllo a 2–3 giorni.'] }] },
+                  { etichetta: 'Sì', nodi: [{ tipo: 'terapia', titolo: 'Amoxicillina/clavulanato os', righe: ['875/125 mg ogni 8 h; allergia: ciprofloxacina + metronidazolo'] }] },
+                ],
+              },
+            ],
+          },
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Ricovero, antibiotico ev', righe: ['Amoxicillina/clavulanato 2,2 g ev ogni 8 h, o ceftriaxone 2 g + metronidazolo 500 mg ogni 8 h', 'Ascesso ≥ 3–4 cm: drenaggio percutaneo'] }] },
+        ],
+      },
+    ],
+  },
+
+  appendicite: {
+    titolo: 'Appendicite',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Appendicite' },
+      { tipo: 'decisione', titolo: 'Complicata (perforata, ascesso, peritonite)?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'terapia', titolo: 'Profilassi preoperatoria', righe: ['Cefazolina 2 g + metronidazolo 500 mg ev, o amoxicillina/clavulanato 2,2 g ev, in dose singola', 'Gestione conservativa: amoxicillina/clavulanato 2,2 g ev ogni 8 h, poi os (7–10 giorni)'] }] },
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Terapia', righe: ['Amoxicillina/clavulanato 2,2 g ev ogni 8 h, o ceftriaxone 2 g + metronidazolo', '4 giorni dopo il controllo della fonte'] }] },
+        ],
+      },
+    ],
+  },
+
+  colecistite: {
+    titolo: 'Colecistite e colangite senza sepsi',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Colecistite o colangite', righe: ['Grado secondo Tokyo 2018.'] },
+      { tipo: 'decisione', titolo: 'Legata all’assistenza (stent, anastomosi bilio-digestiva)?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'terapia', titolo: 'Ceftriaxone + metronidazolo', righe: ['Ceftriaxone 2 g ev ogni 24 h + metronidazolo 500 mg ogni 8 h', 'Rischio ESBL: ertapenem 1 g/die'] }] },
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Piperacillina/tazobactam', righe: ['4,5 g ev ogni 6 h (+ vancomicina per l’enterococco)'] }] },
+        ],
+      },
+      { tipo: 'allarme', titolo: 'Colangite: drenaggio biliare (CPRE)' },
+    ],
+  },
+
+  peritonite: {
+    titolo: 'Infezione intra-addominale senza sepsi',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Infezione intra-addominale complicata, stabile', righe: ['Controllo della fonte comunque necessario.'] },
+      { tipo: 'decisione', titolo: 'Comunitaria senza fattori di rischio ESBL?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì', tono: 'si', nodi: [{ tipo: 'terapia', titolo: 'Ceftriaxone + metronidazolo', righe: ['Ceftriaxone 2 g ev ogni 24 h + metronidazolo 500 mg ogni 8 h, o amoxicillina/clavulanato 2,2 g ogni 8 h'] }] },
+          { etichetta: 'No', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Piperacillina/tazobactam o ertapenem', righe: ['Piperacillina/tazobactam 4,5 g ogni 6 h; ESBL noto: ertapenem 1 g/die (meropenem se Pseudomonas)'] }] },
+        ],
+      },
+      { tipo: 'esito', titolo: '4 giorni dopo il controllo della fonte' },
+    ],
+  },
+
+  pbs: {
+    titolo: 'Peritonite batterica spontanea',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Cirrotico con ascite', righe: ['Paracentesi diagnostica: neutrofili ≥ 250/mm³.'] },
+      { tipo: 'decisione', titolo: 'Nosocomiale o in profilassi con chinoloni?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'No', tono: 'si', nodi: [{ tipo: 'terapia', titolo: 'Ceftriaxone', righe: ['2 g ev ogni 24 h'] }] },
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Piperacillina/tazobactam', righe: ['4,5 g ev ogni 6 h; ESBL o shock: meropenem'] }] },
+        ],
+      },
+      { tipo: 'terapia', titolo: 'Albumina 1,5 g/kg il giorno 1 e 1 g/kg il giorno 3' },
+      { tipo: 'esito', titolo: 'Paracentesi di controllo a 48 h' },
+    ],
+  },
+
+  cellulite: {
+    titolo: 'Cellulite, erisipela, ascesso',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Infezione cutanea senza sepsi', righe: ['Segnare i margini.'] },
+      { tipo: 'decisione', titolo: 'Purulenta (ascesso)?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'No', tono: 'si', nodi: [
+              { tipo: 'decisione', titolo: 'Domicilio?' },
+              {
+                tipo: 'rami', rami: [
+                  { etichetta: 'Sì', nodi: [{ tipo: 'terapia', titolo: 'Cefalexina o amoxicillina/clavulanato', righe: ['Cefalexina 500 mg os ogni 6 h o amoxicillina/clavulanato 875/125 mg ogni 8 h', 'Erisipela tipica: amoxicillina 1 g ogni 8 h', 'Allergia: clindamicina 300–450 mg ogni 6–8 h'] }] },
+                  { etichetta: 'No', nodi: [{ tipo: 'terapia', titolo: 'Cefazolina ev', righe: ['Cefazolina 2 g ev ogni 8 h o amoxicillina/clavulanato 2,2 g ogni 8 h', 'Allergia: clindamicina 600 mg ev ogni 8 h'] }] },
+                ],
+              },
+            ],
+          },
+          { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Incisione e drenaggio', righe: ['Antibiotico se esteso o febbre: cotrimossazolo forte 1–2 cp ogni 12 h o doxiciclina 100 mg ogni 12 h'] }] },
+        ],
+      },
+      { tipo: 'nota', titolo: 'Morso', righe: ['Amoxicillina/clavulanato 875/125 mg ogni 12 h per 3–5 giorni (profilassi) o 7–14 (infezione).'] },
+      { tipo: 'esito', titolo: 'Durata 5 giorni, prolungare se non migliora' },
+    ],
+  },
+
+  neutropenia: {
+    titolo: 'Neutropenia febbrile',
+    nodi: [
+      { tipo: 'avvio', titolo: 'Neutrofili < 500 + febbre', righe: ['Antibiotico entro 1 h, emocolture da periferica e da CVC.'] },
+      { tipo: 'decisione', titolo: 'MASCC ≥ 21 e stabile?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Sì (basso rischio)', tono: 'si', nodi: [{ tipo: 'terapia', titolo: 'Domicilio, os', righe: ['Ciprofloxacina 750 mg ogni 12 h + amoxicillina/clavulanato 875/125 mg ogni 12 h'] }] },
+          { etichetta: 'No (alto rischio)', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'Anti-Pseudomonas ev', righe: ['Piperacillina/tazobactam 4,5 g ogni 6 h o cefepime 2 g ogni 8 h', 'Instabile o ESBL noto: meropenem ± amikacina', '+ vancomicina se instabile, CVC, cute, polmonite, MRSA noto'] }] },
+        ],
+      },
+    ],
+  },
+}
+
+export const ALGORITMI_NON_GRAVI: Record<string, AlgoritmoAb> = Object.fromEntries(
+  Object.entries(NON_GRAVI_GREZZI).map(([k, v]) => [k, { ...v, nodi: appiattisci(v.nodi) }]),
+)
+
+/** Quale algoritmo di sepsi mostrare sotto, per condizione. */
+const SEPSI_DI: Record<string, string> = {
+  prostatite: 'pielonefrite', diverticolite: 'peritonite', appendicite: 'peritonite', colecistite: 'peritonite', pbs: 'peritonite', cellulite: 'fascite',
+}
+export const algoritmoSepsi = (id: string) => ALGORITMI_ANTIBIOTICI[SEPSI_DI[id] ?? id]
