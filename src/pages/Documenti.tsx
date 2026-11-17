@@ -42,6 +42,7 @@ export default function Documenti() {
               <div className="mt-3 flex flex-wrap gap-1.5 text-xs">
                 <Link to={pdf(d)} className="rounded-full bg-verde px-3 py-1.5 font-bold text-white">Apri</Link>
                 <button onClick={() => scarica(d)} className="rounded-full border border-verde px-3 py-1.5 font-bold text-verde">⬇︎ Scarica</button>
+                {d.intranet && <a href={d.intranet} target="_blank" rel="noopener noreferrer" className="rounded-full border border-bordeaux px-3 py-1.5 font-bold text-bordeaux">↗ Area riservata ASL</a>}
                 {d.usatoIn?.map((u) => <Link key={u.to} to={u.to} className="rounded-full border border-linea px-3 py-1.5 font-bold text-tenue">{u.etichetta} →</Link>)}
               </div>
             </div>
