@@ -927,7 +927,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     vediAnche: [{ etichetta: 'Timer ACR', to: '/acr' }],
     inBreve: [
       'Lieve 5,5–5,9; moderata 6,0–6,4; grave ≥ 6,5 mmol/L. ECG e monitor se ≥ 6,0. Escludere la pseudoiperkaliemia (emolisi): ricontrollo su EGA.',
-      'Proteggere il cuore se ci sono alterazioni ECG: calcio gluconato 10% 30 mL ev in 10 min (calcio cloruro 10 mL nell’arresto).',
+      'Proteggere il cuore se ci sono alterazioni ECG: calcio gluconato 10% 30 mL (3 fiale da 10 mL) ev in 10 min (calcio cloruro 10% 10 mL = 1 fiala nell’arresto).',
       'Spostare il potassio: insulina 10 UI + 25 g di glucosio in 15 min; salbutamolo (Broncovaleas) 10–20 mg nebulizzato in aggiunta.',
       'Eliminare il potassio: in PS c’è il sodio polistirene sulfonato (Kayexalate), lento e poco efficace in acuto; la linea guida preferisce lo zirconio ciclosilicato (Lokelma). Dialisi se refrattaria o insufficienza renale grave.',
       'Glicemia controllata per 6 ore dopo l’insulina: l’ipoglicemia tardiva è frequente.',
@@ -1881,7 +1881,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
           'Acido tranexamico (Tranex 500 mg/5 mL): 1 g = 2 fiale in 100 mL di SF in 10 min, poi 1 g in 8 h. Non dopo 3 h dal trauma.',
           'Fibrinogeno concentrato (RiaSTAP flacone 1 g, 50 mL di acqua ppi): 3–4 g = 3–4 flaconi se fibrinogeno < 1,5 g/L o sanguinamento massivo.',
           'Emazie e plasma presto (rapporto almeno 1:2) se emorragia massiva; piastrine se < 50.000; poi guidati da esami o test viscoelastici.',
-          'Calcio cloruro 10% 10 mL o calcio gluconato 10% 30 mL se calcio ionizzato < 1,15 mmol/L (anche a ogni 4 unità).',
+          'Calcio cloruro 10% 10 mL (1 fiala) o calcio gluconato 10% 30 mL (3 fiale) se calcio ionizzato < 1,15 mmol/L (anche a ogni 4 unità).',
           'Intubazione nello shock: ketamina 0,5–1 mg/kg = 35–70 mg (dose ridotta), rocuronio 1,2 mg/kg = 84 mg (2 fiale da 50 mg); pronti con noradrenalina.',
           'Analgesia: fentanil (Fentanest) 50 µg ev ripetibile o ketamina 0,2–0,3 mg/kg = 15–20 mg.',
           'Anticoagulanti: complesso protrombinico (PCC) e vitamina K (Konakion) per i dicumarolici; vedi PDTA dedicato.',
@@ -2009,7 +2009,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           'Naloxone (Narcan 0,4 mg/1 mL): 0,04–0,1 mg ev (fiala diluita in 10 mL: 1–2,5 mL) ripetuti ogni 2–3 min fino a FR ≥ 10; apnea: 0,4 mg ev o im; fino a 2 mg e oltre per oppioidi sintetici.',
           'Infusione: ogni ora 2/3 della dose che ha fatto respirare.',
-          'Flumazenil (Anexate 0,5 mg/5 mL): 0,2 mg ev (2 mL) in 30 s, poi 0,1 mg ogni minuto fino a 1 mg; solo se nessuna controindicazione.',
+          'Flumazenil (Anexate 0,5 mg/5 mL): 0,2 mg ev (2 mL, meno di ½ fiala) in 30 s, poi 0,1 mg ogni minuto fino a 1 mg; solo se nessuna controindicazione.',
         ],
       },
       {
@@ -2343,7 +2343,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
           'Nifedipina (Adalat) 10 mg per bocca (non sublinguale), ripetibile dopo 30 min, se labetalolo controindicato (asma).',
           'Magnesio solfato: carico 4 g ev (4 fiale da 1 g/10 mL in 100 mL) in 5–15 min, poi 1 g/h per 24 h.',
           'Recidiva di convulsione: altri 2 g ev in 5 min.',
-          'Tossicità da magnesio (riflessi assenti, FR < 12, oliguria): sospendere; calcio gluconato 10% 10 mL ev in 10 min.',
+          'Tossicità da magnesio (riflessi assenti, FR < 12, oliguria): sospendere; calcio gluconato 10% 10 mL (1 fiala) ev in 10 min.',
         ],
       },
       {

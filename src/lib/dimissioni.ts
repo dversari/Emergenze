@@ -134,7 +134,7 @@ ${RITORNO}
 
 Terapia:
 - Paracetamolo 1 g fino a 3 volte al giorno per il dolore. Eviti gli antinfiammatori (ibuprofene, ketoprofene).
-- [Antibiotico: amoxicillina/acido clavulanico 875/125 mg, 1 compressa ogni 8 ore per 7 giorni.]
+- [Antibiotico: amoxicillina/acido clavulanico (Augmentin, Clavulin) 875/125 mg, 1 compressa ogni 8 ore per 7 giorni.]
 
 Indicazioni:
 - Mangi secondo tolleranza: se ha dolore o nausea, liquidi e cibi leggeri (brodo, riso, pasta, carne e pesce magri), poi torni gradualmente all'alimentazione normale appena se la sente.
@@ -198,7 +198,7 @@ ${RITORNO}
 
 Terapia:
 - Paracetamolo 1 g fino a 3 volte al giorno, oppure ibuprofene 400–600 mg ogni 8 ore dopo i pasti, per febbre e dolore.
-- [Antibiotico: amoxicillina 1 g, 1 compressa ogni 12 ore per 10 giorni. Lo prenda per tutti i 10 giorni anche se sta meglio prima.]
+- [Antibiotico: amoxicillina (Zimox, Velamox) 1 g, 1 compressa ogni 12 ore per 10 giorni. Lo prenda per tutti i 10 giorni anche se sta meglio prima.]
 
 Indicazioni:
 - Beva molto anche se deglutire fa male; cibi morbidi e tiepidi.
@@ -223,7 +223,7 @@ Terapia:
 - Paracetamolo 1 g fino a 3 volte al giorno o ibuprofene 400–600 mg ogni 8 ore dopo i pasti.
 - [Spray nasale cortisonico (mometasone): 2 spruzzi per narice una volta al giorno per 10–14 giorni.]
 - [Decongestionante nasale: al massimo 5 giorni.]
-- [Antibiotico (se sintomi oltre 10 giorni o peggioramento dopo un miglioramento): amoxicillina/acido clavulanico 875/125 mg ogni 12 ore per 5–7 giorni.]
+- [Antibiotico (se sintomi oltre 10 giorni o peggioramento dopo un miglioramento): amoxicillina/acido clavulanico (Augmentin, Clavulin) 875/125 mg ogni 12 ore per 5–7 giorni.]
 
 ${controlli()}
 
@@ -239,7 +239,7 @@ ${RITORNO}
 Terapia:
 - Salbutamolo spray 100 µg: 2–4 spruzzi con distanziatore ogni 4–6 ore per 5–7 giorni, poi al bisogno.
 - Prednisone 25 mg: 2 compresse (40–50 mg) al mattino per 5 giorni, poi stop.
-- [Antibiotico: amoxicillina/acido clavulanico 875/125 mg, 1 compressa ogni 12 ore per 5 giorni.]
+- [Antibiotico: amoxicillina/acido clavulanico (Augmentin, Clavulin) 875/125 mg, 1 compressa ogni 12 ore per 5 giorni.]
 - Continui la sua terapia inalatoria abituale [...].
 
 Indicazioni:
@@ -420,7 +420,7 @@ Chi assume anticoagulanti o antiaggreganti può avere questi sintomi anche a dis
 Indicazioni:
 - Tenga la medicazione pulita e asciutta per 48 ore; poi può fare la doccia e asciugare tamponando. Niente bagni, piscina, mare finché non si tolgono i punti.
 - Medicazione [ogni 2–3 giorni] con disinfettante e garza, dal medico curante, in ambulatorio infermieristico o a casa.
-- [Antibiotico: amoxicillina/acido clavulanico 875/125 mg ogni 12 ore per 5 giorni.]
+- [Antibiotico: amoxicillina/acido clavulanico (Augmentin, Clavulin) 875/125 mg ogni 12 ore per 5 giorni.]
 - Dolore: paracetamolo 1 g fino a 3 volte al giorno.
 - Dopo la guarigione protegga la cicatrice dal sole per 6–12 mesi (crema protezione alta).
 
@@ -574,13 +574,13 @@ ${RITORNO}
     testo: `Diagnosi: cistite acuta non complicata. [Urinocoltura eseguita: il risultato andrà visionato dal medico curante.]
 
 Terapia:
-- [Fosfomicina 3 g: 1 bustina sciolta in mezzo bicchiere d'acqua, la sera a vescica vuota, a stomaco vuoto, dose unica.]
-- [Oppure nitrofurantoina 100 mg: 1 capsula ogni 6 ore per 5 giorni, durante i pasti. Può colorare le urine di scuro.]
+- [Fosfomicina (Monuril, Fosfocin) 3 g: 1 bustina sciolta in mezzo bicchiere d'acqua, la sera a vescica vuota, a stomaco vuoto, dose unica.]
+- [Oppure nitrofurantoina (Neofuradantin) 100 mg: 1 capsula ogni 6 ore per 5 giorni, durante i pasti. Può colorare le urine di scuro.]
 - Paracetamolo 1 g fino a 3 volte al giorno per bruciore e dolore.
 
 Indicazioni:
 - Beva 1,5–2 litri al giorno e non trattenga a lungo l'urina.
-- I disturbi migliorano in 2–3 giorni; un lieve bruciore può durare qualche giorno dopo la fosfomicina.
+- I disturbi migliorano in 2–3 giorni; un lieve bruciore può durare qualche giorno dopo la fosfomicina (Monuril, Fosfocin).
 
 ${controlli()}
 
@@ -593,10 +593,10 @@ ${RITORNO}
   {
     id: 'pielonefrite', nome: 'Pielonefrite non complicata', gruppo: 'Infezioni',
     testo: `Diagnosi: pielonefrite acuta [destra/sinistra] non complicata. [Ecografia: non dilatazione delle vie urinarie.] [Urinocoltura ed emocolture eseguite: il risultato andrà visionato dal medico curante per adeguare la terapia.]
-[In Pronto Soccorso: ceftriaxone 1 g ev.]
+[In Pronto Soccorso: ceftriaxone (Rocefin) 1 g ev.]
 
 Terapia:
-- [Cefixima 400 mg: 1 compressa al giorno, sempre alla stessa ora, per ... giorni (in totale 7–10 giorni di antibiotico).] Lo prenda fino alla fine anche se sta meglio.
+- [Cefixima (Cefixoral, Suprax) 400 mg: 1 compressa al giorno, sempre alla stessa ora, per ... giorni (in totale 7–10 giorni di antibiotico).] Lo prenda fino alla fine anche se sta meglio.
 - Paracetamolo 1 g fino a 3 volte al giorno per febbre e dolore.
 
 Indicazioni:
@@ -616,7 +616,7 @@ ${RITORNO}
     testo: `Diagnosi: [cellulite / erisipela] [sede ...]. I margini dell'arrossamento sono stati segnati con il pennarello.
 
 Terapia:
-- [Cefalessina 500 mg: 1 compressa ogni 6 ore per 5–7 giorni] [oppure amoxicillina/acido clavulanico 875/125 mg ogni 8 ore per 5–7 giorni].
+- [Cefalessina (Keforal) 500 mg: 1 compressa ogni 6 ore per 5–7 giorni] [oppure amoxicillina/acido clavulanico (Augmentin, Clavulin) 875/125 mg ogni 8 ore per 5–7 giorni].
 - Paracetamolo 1 g fino a 3 volte al giorno.
 
 Indicazioni:
@@ -964,7 +964,7 @@ ${RITORNO}
 [È stata fatta segnalazione al Servizio Veterinario della ASL. Il proprietario dell'animale deve tenerlo in osservazione per 10 giorni, come indicato dal Servizio Veterinario.]
 
 Terapia:
-- [Amoxicillina/acido clavulanico 875/125 mg: 1 compressa ogni 12 ore per 3–5 giorni.]
+- [Amoxicillina/acido clavulanico (Augmentin, Clavulin) 875/125 mg: 1 compressa ogni 12 ore per 3–5 giorni.]
 - Paracetamolo 1 g fino a 3 volte al giorno.
 
 Indicazioni:
@@ -1010,7 +1010,7 @@ Torni in Pronto Soccorso se la zona diventa rossa, calda e dolente dopo alcuni g
 
 Terapia:
 - Lavaggi con soluzione fisiologica sterile più volte al giorno, togliendo le secrezioni con garza sterile dall'interno verso l'esterno (una garza per occhio).
-- [Batterica: collirio antibiotico (es. netilmicina/tobramicina) 1 goccia 4 volte al giorno per 5–7 giorni.]
+- [Batterica: collirio antibiotico (es. netilmicina (Nettacin) o tobramicina (Tobral)) 1 goccia 4 volte al giorno per 5–7 giorni.]
 - [Allergica: collirio antistaminico (es. ketotifene) 1 goccia 2 volte al giorno.]
 - [Lacrime artificiali al bisogno.]
 

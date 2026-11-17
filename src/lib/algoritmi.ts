@@ -1395,7 +1395,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       {
         tipo: 'terapia', titolo: '3 · Insulina ev a dose fissa',
         righe: [
-          'Actrapid 50 UI in 50 mL di SF (1 UI/mL).',
+          'Actrapid: 0,2 mL del flacone (20 UI) + 19,8 mL di SF = 20 mL (1 UI/mL).',
           'DKA: 0,1 U/kg/h = 7 mL/h. HHS: 0,05 U/kg/h = 3,5 mL/h (solo se la glicemia non scende con i liquidi).',
           'Glicemia < 250: glucosata 5–10% e insulina a 0,05 U/kg/h (3,5 mL/h).',
           'Euglicemica da SGLT2-inibitori: glucosata subito.',

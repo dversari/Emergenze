@@ -6,6 +6,7 @@ import type { Scheda } from '../lib/schede'
 import { FIGURE } from './FigureProcedure'
 import Riconoscimenti, { FiltroRiconoscimenti } from './Riconoscimenti'
 import { useSessione } from '../lib/riservati'
+import { conCommerciali } from '../lib/commerciali'
 import { aziendale, passaFiltro, statoRevisione, type Filtro } from '../lib/riconoscimenti'
 
 // Nomi dei farmaci evidenziati in rosso grassetto dentro i testi.
@@ -33,7 +34,7 @@ const FARMACI = [
 const RE_FARMACI = new RegExp(`\\b(${[...FARMACI].sort((a, b) => b.length - a.length).join('|')})\\b`, 'gi')
 
 export function Evidenzia({ t }: { t: string }) {
-  const parti = t.split(RE_FARMACI)
+  const parti = conCommerciali(t).split(RE_FARMACI)
   return <>{parti.map((p, i) => (i % 2 === 1 ? <strong key={i} className="font-extrabold text-bordeaux">{p}</strong> : p))}</>
 }
 

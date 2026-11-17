@@ -16,6 +16,18 @@ const leggiPeso = () => {
   try { const v = Number(localStorage.getItem(CHIAVE_PESO)); return v >= 30 && v <= 200 ? v : 70 } catch { return 70 }
 }
 
+/** quantità → numero di fiale (o flaconi), es. «2 fiale», «½ fiala», «2,3 fiale» */
+function fiale(f: Farmaco, q: number, dq: Dose['q']) {
+  if (!f.pz) return ''
+  const n = converti(q, dq, f.pz.q) / f.pz.v
+  if (!isFinite(n) || n < 0.05) return ''
+  const frazioni: Record<string, string> = { '0.25': '¼', '0.5': '½', '0.75': '¾' }
+  const r = Math.round(n * 100) / 100
+  const testo = frazioni[String(r)] ?? num(Math.round(n * 10) / 10)
+  const [sing, plur] = f.pz.nome === 'flacone' ? ['flacone', 'flaconi'] : ['fiala', 'fiale']
+  return `${testo} ${r <= 1 ? sing : plur}`
+}
+
 const VIA: Record<Prep['via'], string> = { siringa: 'Pompa siringa', volumetrica: 'Pompa volumetrica', bolo: 'Diluizione per boli', puro: 'Puro' }
 
 function Riga({ d, peso, f }: { d: Dose; peso: number; f: Farmaco }) {
@@ -30,18 +42,21 @@ function Riga({ d, peso, f }: { d: Dose; peso: number; f: Farmaco }) {
     const ora = allOra(d, q)
     const indici = d.prep ?? prep.map((p, i) => (p.via === 'bolo' ? -1 : i)).filter((i) => i >= 0)
     risultati = indici.map((i) => ({ etichetta: `${VIA[prep[i].via]} (${prep[i].testo})`, valore: `${num(mLh(ora, d.q, prep[i]))} mL/h` }))
+    const nDie = fiale(f, ora * 24, d.q)
     risultati.unshift({ etichetta: 'Quantità', valore: `${num(ora)} ${d.q}/h${d.t === 'die' ? ` (${num(q)} ${d.q}/die)` : d.t === 'min' ? ` (${num(q)} ${d.q}/min)` : ''}` })
+    if (nDie) risultati.push({ etichetta: 'In 24 h', valore: nDie })
   } else {
-    risultati.push({ etichetta: 'Dose', valore: `${num(q)} ${d.q}` })
+    const nf = fiale(f, q, d.q)
+    risultati.push({ etichetta: 'Dose', valore: `${num(q)} ${d.q}${nf ? ` (${nf})` : ''}` })
     if (d.prep) {
       for (const i of d.prep) {
         const ml = converti(q, d.q, prep[i].q) / prep[i].conc
-        risultati.push({ etichetta: `${VIA[prep[i].via]} (${prep[i].testo})`, valore: `${num(ml)} mL` })
+        risultati.push({ etichetta: `${VIA[prep[i].via]} (${prep[i].testo})`, valore: `${num(ml)} mL${nf && prep[i].via !== 'bolo' ? ` (${nf})` : ''}` })
         if (d.inMin) risultati.push({ etichetta: `In ${d.inMin} min`, valore: `${num(ml / (d.inMin / 60))} mL/h` })
       }
     } else if (f.conc) {
       const ml = converti(q, d.q, f.conc.q) / f.conc.v
-      risultati.push({ etichetta: 'Fiala pura', valore: `${num(ml)} mL` })
+      risultati.push({ etichetta: f.pz?.nome === 'flacone' ? 'Dal flacone' : 'Dalla fiala', valore: `${num(ml)} mL${nf ? ` (${nf})` : ''}` })
       if (d.inMin && d.sacca) risultati.push({ etichetta: `${d.sacca} mL in ${d.inMin} min`, valore: `${num((d.sacca + ml) / (d.inMin / 60))} mL/h` })
     }
   }

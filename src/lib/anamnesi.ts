@@ -191,7 +191,7 @@ Esplorazione rettale: [feci normocoliche / melena / sangue rosso vivo], [non] ma
 
 DA NON DIMENTICARE
 - Glasgow-Blatchford (≤ 1 → gestione ambulatoriale possibile); Hb, gruppo e prove crociate, coagulazione, urea.
-- Varici sospette: terlipressina + ceftriaxone prima dell'endoscopia.
+- Varici sospette: terlipressina + ceftriaxone (Rocefin) prima dell'endoscopia.
 - Trasfondere con soglia Hb 7 g/dL (8 se cardiopatia).`,
   },
   {

@@ -5,6 +5,7 @@ import Algoritmo, { ConScore } from '../components/Algoritmo'
 import { RitornoCtx, riprendiScroll } from '../lib/ritorno'
 import { ALGORITMI_NON_GRAVI, algoritmoSepsi } from '../lib/antibioticiAlgoritmi'
 import { CONDIZIONI, FAMIGLIE, FARMACI, REGOLE, farmaco, type Condizione } from '../lib/antibiotici'
+import { conCommerciali } from '../lib/commerciali'
 
 /* Terapia antibiotica empirica: card per condizione e per farmaco.
    I nomi dei farmaci dentro le condizioni aprono la scheda del farmaco (dose, fiale, preparazione, rene). */
@@ -23,11 +24,11 @@ function Testo({ t, apri }: { t: string; apri: (id: string) => void }) {
       {parti.map((p, i) => {
         const m = p.match(/^\{([a-z]+)\}$/)
         const f = m && farmaco(m[1])
-        if (!f) return <ConScore key={i} t={p} resto={(x) => x} />
+        if (!f) return <ConScore key={i} t={p} resto={(x) => conCommerciali(x)} />
         return (
           <button key={i} onClick={(e) => { e.stopPropagation(); apri(f.id) }}
             className="font-bold text-verde underline decoration-verde2/50 underline-offset-2">
-            {f.nome}
+            {conCommerciali(f.nome)}
           </button>
         )
       })}
@@ -45,7 +46,7 @@ function CardCondizione({ c, aperto, onToggle, apri }: { c: Condizione; aperto: 
       <button onClick={onToggle} className="w-full flex items-center gap-3 px-4 py-3 text-left">
         <div className="flex-1 min-w-0">
           <p className="font-bold leading-tight">{c.nome}</p>
-          <p className="text-xs text-tenue leading-snug mt-0.5">{c.sintesi}</p>
+          <p className="text-xs text-tenue leading-snug mt-0.5">{conCommerciali(c.sintesi)}</p>
         </div>
         <Riconoscimenti chiave={`antibiotici/${c.id}`} contenuto={c} />
         <Freccia aperto={aperto} />
@@ -96,7 +97,7 @@ function CardFarmaco({ id, aperto, onToggle }: { id: string; aperto: boolean; on
     <section id={`f-${f.id}`} className="card !p-0 overflow-hidden scroll-mt-24">
       <button onClick={onToggle} className="w-full flex items-center gap-3 px-4 py-3 text-left">
         <div className="flex-1 min-w-0">
-          <p className="font-bold leading-tight">{f.nome} <span className="ml-1 align-middle text-[10px] font-extrabold uppercase tracking-wide rounded-full px-2 py-0.5 bg-verde3 text-verde-scuro">{f.via}</span></p>
+          <p className="font-bold leading-tight">{conCommerciali(f.nome)} <span className="ml-1 align-middle text-[10px] font-extrabold uppercase tracking-wide rounded-full px-2 py-0.5 bg-verde3 text-verde-scuro">{f.via}</span></p>
           <p className="text-xs text-tenue leading-snug mt-0.5">{f.dose}</p>
         </div>
         <Riconoscimenti chiave={`farmaci/${f.id}`} contenuto={f} />
@@ -152,7 +153,7 @@ export default function Antibiotici() {
 
   const condizioni = CONDIZIONI.filter((c) => !q || `${c.nome} ${c.sintesi} ${c.gruppo}`.toLowerCase().includes(q))
   const farmaci = [...FARMACI].sort((a, b) => a.nome.localeCompare(b.nome, 'it'))
-    .filter((f) => !q || `${f.nome} ${f.fiale}`.toLowerCase().includes(q))
+    .filter((f) => !q || `${conCommerciali(f.nome)} ${f.fiale}`.toLowerCase().includes(q))
 
   return (
     <div className="elenco">
@@ -210,7 +211,7 @@ export default function Antibiotici() {
               {REGOLE.map((r) => (
                 <section key={r.titolo} className="card !py-3">
                   <p className="font-bold mb-1">{r.titolo}</p>
-                  <ul className="flex flex-col gap-1 text-sm leading-snug">{r.righe.map((x, i) => <li key={i}><ConScore t={x} resto={(y) => y} /></li>)}</ul>
+                  <ul className="flex flex-col gap-1 text-sm leading-snug">{r.righe.map((x, i) => <li key={i}><ConScore t={x} resto={(y) => conCommerciali(y)} /></li>)}</ul>
                 </section>
               ))}
             </>
