@@ -280,6 +280,177 @@ const PUNTEGGI: Punteggio[] = [
     fonte: 'Oakland, Lancet Gastroenterol Hepatol 2017; ESGE 2021, BSG 2019 (soglia ≤ 8).',
   },
   {
+    id: 'mcisaac',
+    nome: 'Centor / McIsaac',
+    ambito: 'Faringotonsillite · quando fare il test per lo streptococco',
+    voci: [
+      { tipo: 'si', id: 'febbre', testo: 'Febbre > 38 °C', punti: 1 },
+      { tipo: 'si', id: 'tosse', testo: 'Assenza di tosse', punti: 1 },
+      { tipo: 'si', id: 'linf', testo: 'Linfonodi laterocervicali anteriori ingrossati e dolenti', punti: 1 },
+      { tipo: 'si', id: 'ess', testo: 'Essudato o tumefazione tonsillare', punti: 1 },
+      { tipo: 'scelta', id: 'eta', testo: 'Età (McIsaac)', opzioni: [{ testo: '15–44', punti: 0 }, { testo: '≥ 45', punti: -1 }] },
+    ],
+    esito: (t) =>
+      t <= 1 ? { livello: 'basso', testo: 'Rischio basso: niente test né antibiotico.' }
+      : t <= 3 ? { livello: 'medio', testo: 'Test rapido (o coltura): antibiotico solo se positivo.' }
+      : { livello: 'alto', testo: 'Probabilità alta: test rapido; antibiotico se positivo (alcune linee guida: empirico se il test non è disponibile).' },
+    fonte: 'Centor 1981; McIsaac, CMAJ 1998; IDSA 2012.',
+  },
+  {
+    id: 'mascc',
+    nome: 'MASCC',
+    ambito: 'Neutropenia febbrile · basso rischio, gestione domiciliare',
+    voci: [
+      { tipo: 'scelta', id: 'sint', testo: 'Gravità dei sintomi', opzioni: [{ testo: 'nessuno o lievi', punti: 5 }, { testo: 'moderati', punti: 3 }, { testo: 'gravi', punti: 0 }] },
+      { tipo: 'si', id: 'pas', testo: 'Niente ipotensione (PAS > 90)', punti: 5 },
+      { tipo: 'si', id: 'bpco', testo: 'Niente BPCO', punti: 4 },
+      { tipo: 'si', id: 'tum', testo: 'Tumore solido, o ematologico senza infezione fungina pregressa', punti: 4 },
+      { tipo: 'si', id: 'disid', testo: 'Niente disidratazione che richiede liquidi ev', punti: 3 },
+      { tipo: 'si', id: 'amb', testo: 'Febbre insorta a domicilio (non ricoverato)', punti: 3 },
+      { tipo: 'si', id: 'eta', testo: 'Età < 60 anni', punti: 2 },
+    ],
+    esito: (t) =>
+      t >= 21 ? { livello: 'basso', testo: 'MASCC ≥ 21: basso rischio; possibile terapia orale a domicilio se stabile e con controllo ravvicinato.' }
+      : { livello: 'alto', testo: 'MASCC < 21: alto rischio; ricovero e antibiotico ev.' },
+    fonte: 'Klastersky, J Clin Oncol 2000; ASCO/IDSA 2018.',
+  },
+  {
+    id: 'qsofa',
+    nome: 'qSOFA',
+    ambito: 'Infezione · rischio di esito sfavorevole (non come screening da solo)',
+    voci: [
+      { tipo: 'si', id: 'fr', testo: 'FR ≥ 22/min', punti: 1 },
+      { tipo: 'si', id: 'mente', testo: 'Alterazione dello stato mentale (GCS < 15)', punti: 1 },
+      { tipo: 'si', id: 'pas', testo: 'PAS ≤ 100 mmHg', punti: 1 },
+    ],
+    esito: (t) =>
+      t >= 2 ? { livello: 'alto', testo: 'qSOFA ≥ 2: rischio alto di mortalità; cercare disfunzione d’organo (SOFA, lattati).' }
+      : { livello: 'medio', testo: 'qSOFA < 2 non esclude la sepsi: per lo screening meglio NEWS2 o SIRS (SSC 2021).' },
+    fonte: 'Seymour, JAMA 2016; Surviving Sepsis Campaign 2021.',
+  },
+  {
+    id: 'news2',
+    nome: 'NEWS2',
+    ambito: 'Deterioramento clinico · screening della sepsi',
+    voci: [
+      { tipo: 'scelta', id: 'fr', testo: 'FR (/min)', opzioni: [{ testo: '≤ 8', punti: 3 }, { testo: '9–11', punti: 1 }, { testo: '12–20', punti: 0 }, { testo: '21–24', punti: 2 }, { testo: '≥ 25', punti: 3 }] },
+      { tipo: 'scelta', id: 'spo2', testo: 'SpO₂ (%) — scala 1', opzioni: [{ testo: '≤ 91', punti: 3 }, { testo: '92–93', punti: 2 }, { testo: '94–95', punti: 1 }, { testo: '≥ 96', punti: 0 }] },
+      { tipo: 'si', id: 'o2', testo: 'Ossigeno supplementare', punti: 2 },
+      { tipo: 'scelta', id: 'pas', testo: 'PAS (mmHg)', opzioni: [{ testo: '≤ 90', punti: 3 }, { testo: '91–100', punti: 2 }, { testo: '101–110', punti: 1 }, { testo: '111–219', punti: 0 }, { testo: '≥ 220', punti: 3 }] },
+      { tipo: 'scelta', id: 'fc', testo: 'FC (bpm)', opzioni: [{ testo: '≤ 40', punti: 3 }, { testo: '41–50', punti: 1 }, { testo: '51–90', punti: 0 }, { testo: '91–110', punti: 1 }, { testo: '111–130', punti: 2 }, { testo: '≥ 131', punti: 3 }] },
+      { tipo: 'scelta', id: 'avpu', testo: 'Coscienza', opzioni: [{ testo: 'vigile', punti: 0 }, { testo: 'confusione nuova, V, P o U', punti: 3 }] },
+      { tipo: 'scelta', id: 't', testo: 'Temperatura (°C)', opzioni: [{ testo: '≤ 35,0', punti: 3 }, { testo: '35,1–36,0', punti: 1 }, { testo: '36,1–38,0', punti: 0 }, { testo: '38,1–39,0', punti: 1 }, { testo: '≥ 39,1', punti: 2 }] },
+    ],
+    esito: (t, r) =>
+      t >= 7 ? { livello: 'alto', testo: 'NEWS2 ≥ 7: rischio alto, valutazione immediata (rianimatore).' }
+      : t >= 5 ? { livello: 'alto', testo: 'NEWS2 5–6: rischio medio; con infezione sospetta, percorso sepsi (lattati, emocolture, antibiotico).' }
+      : Object.values(r).includes(3) ? { livello: 'medio', testo: 'Un singolo parametro a 3: valutazione medica urgente.' }
+      : { livello: 'basso', testo: 'NEWS2 0–4: rischio basso; rivalutare.' },
+    fonte: 'Royal College of Physicians 2017. Nell’ipercapnico noto usare la scala 2 della SpO₂ (obiettivo 88–92%).',
+  },
+  {
+    id: 'lrinec',
+    nome: 'LRINEC',
+    ambito: 'Fascite necrotizzante · aiuta, non esclude',
+    voci: [
+      { tipo: 'si', id: 'pcr', testo: 'PCR ≥ 150 mg/L', punti: 4 },
+      { tipo: 'scelta', id: 'gb', testo: 'Leucociti (/mm³)', opzioni: [{ testo: '< 15.000', punti: 0 }, { testo: '15.000–25.000', punti: 1 }, { testo: '> 25.000', punti: 2 }] },
+      { tipo: 'scelta', id: 'hb', testo: 'Emoglobina (g/dL)', opzioni: [{ testo: '> 13,5', punti: 0 }, { testo: '11–13,5', punti: 1 }, { testo: '< 11', punti: 2 }] },
+      { tipo: 'si', id: 'na', testo: 'Sodio < 135 mmol/L', punti: 2 },
+      { tipo: 'si', id: 'cr', testo: 'Creatinina > 1,6 mg/dL', punti: 2 },
+      { tipo: 'si', id: 'gl', testo: 'Glicemia > 180 mg/dL', punti: 1 },
+    ],
+    esito: (t) =>
+      t >= 8 ? { livello: 'alto', testo: 'LRINEC ≥ 8: probabilità alta. Chirurgo subito.' }
+      : t >= 6 ? { livello: 'medio', testo: 'LRINEC 6–7: sospetto. Chirurgo; il sospetto clinico prevale sul punteggio.' }
+      : { livello: 'basso', testo: 'LRINEC < 6 non esclude la fascite (sensibilità bassa): decide la clinica.' },
+    fonte: 'Wong, Crit Care Med 2004; Fernando, Ann Surg 2019 (sensibilità 68%).',
+  },
+  {
+    id: '4t',
+    nome: '4T',
+    ambito: 'Piastrinopenia da eparina (HIT) · probabilità pre-test',
+    voci: [
+      { tipo: 'scelta', id: 'pi', testo: 'Piastrinopenia', opzioni: [{ testo: 'calo > 50% e nadir ≥ 20.000', punti: 2 }, { testo: 'calo 30–50% o nadir 10–19.000', punti: 1 }, { testo: 'calo < 30% o nadir < 10.000', punti: 0 }] },
+      { tipo: 'scelta', id: 'tempo', testo: 'Tempi del calo', opzioni: [{ testo: '5–10 giorni (o ≤ 1 giorno se eparina nei 30 giorni prima)', punti: 2 }, { testo: '> 10 giorni, non chiaro, o ≤ 1 giorno se eparina 30–100 giorni prima', punti: 1 }, { testo: '< 4 giorni senza esposizione recente', punti: 0 }] },
+      { tipo: 'scelta', id: 'trombo', testo: 'Trombosi o altre conseguenze', opzioni: [{ testo: 'nuova trombosi, necrosi cutanea, reazione sistemica al bolo', punti: 2 }, { testo: 'trombosi progressiva o ricorrente, lesioni non necrotiche, sospetta', punti: 1 }, { testo: 'nessuna', punti: 0 }] },
+      { tipo: 'scelta', id: 'altre', testo: 'Altre cause di piastrinopenia', opzioni: [{ testo: 'nessuna', punti: 2 }, { testo: 'possibili', punti: 1 }, { testo: 'certe', punti: 0 }] },
+    ],
+    esito: (t) =>
+      t >= 6 ? { livello: 'alto', testo: '6–8: probabilità alta. Sospendere ogni eparina, anticoagulante non eparinico, anticorpi anti-PF4.' }
+      : t >= 4 ? { livello: 'medio', testo: '4–5: probabilità intermedia. Sospendere l’eparina, anticorpi anti-PF4, ematologo.' }
+      : { livello: 'basso', testo: '0–3: probabilità bassa (valore predittivo negativo ~99%).' },
+    fonte: 'Lo, J Thromb Haemost 2006; ASH 2018.',
+  },
+  {
+    id: 'ginevra',
+    nome: 'Ginevra modificato',
+    ambito: 'Embolia polmonare · probabilità clinica',
+    voci: [
+      { tipo: 'si', id: 'eta', testo: 'Età > 65 anni', punti: 1 },
+      { tipo: 'si', id: 'prec', testo: 'TVP o EP pregressa', punti: 3 },
+      { tipo: 'si', id: 'chir', testo: 'Chirurgia in anestesia generale o frattura degli arti inferiori nell’ultimo mese', punti: 2 },
+      { tipo: 'si', id: 'neo', testo: 'Neoplasia attiva (o guarita da < 1 anno)', punti: 2 },
+      { tipo: 'si', id: 'dol', testo: 'Dolore unilaterale a un arto inferiore', punti: 3 },
+      { tipo: 'si', id: 'emo', testo: 'Emottisi', punti: 2 },
+      { tipo: 'scelta', id: 'fc', testo: 'FC (bpm)', opzioni: [{ testo: '< 75', punti: 0 }, { testo: '75–94', punti: 3 }, { testo: '≥ 95', punti: 5 }] },
+      { tipo: 'si', id: 'palp', testo: 'Dolore alla palpazione venosa profonda ed edema unilaterale', punti: 4 },
+    ],
+    esito: (t) =>
+      t >= 11 ? { livello: 'alto', testo: '≥ 11: probabilità alta → angio-TC (D-dimero inutile).' }
+      : t >= 4 ? { livello: 'medio', testo: '4–10: probabilità intermedia → D-dimero (soglia per età); positivo → angio-TC.' }
+      : { livello: 'basso', testo: '0–3: probabilità bassa → PERC; se non negativo, D-dimero.' },
+    fonte: 'Le Gal, Ann Intern Med 2006; ESC 2019.',
+  },
+  {
+    id: 'wfns',
+    nome: 'WFNS',
+    ambito: 'Emorragia subaracnoidea · gravità clinica',
+    voci: [
+      { tipo: 'scelta', id: 'g', testo: 'GCS e deficit motorio', opzioni: [{ testo: 'GCS 15, nessun deficit', punti: 1 }, { testo: 'GCS 13–14, nessun deficit', punti: 2 }, { testo: 'GCS 13–14 con deficit', punti: 3 }, { testo: 'GCS 7–12', punti: 4 }, { testo: 'GCS 3–6', punti: 5 }] },
+    ],
+    formato: (t) => (t ? `grado ${['', 'I', 'II', 'III', 'IV', 'V'][t]}` : '—'),
+    esito: (t) =>
+      t >= 4 ? { livello: 'alto', testo: 'Grado IV–V (alto grado): proteggere le vie aeree, neurochirurgo (Careggi) subito.' }
+      : t >= 1 ? { livello: t === 3 ? 'medio' : 'basso', testo: 'Grado I–III (basso grado). Neurochirurgo (Careggi) per il trattamento dell’aneurisma.' }
+      : { livello: 'basso', testo: 'Scegliere il grado.' },
+    fonte: 'Drake, J Neurosurg 1988; AHA/ASA 2023.',
+  },
+  {
+    id: 'hunthess',
+    nome: 'Hunt-Hess',
+    ambito: 'Emorragia subaracnoidea · gravità clinica',
+    voci: [
+      { tipo: 'scelta', id: 'g', testo: 'Quadro clinico', opzioni: [
+        { testo: 'asintomatico, cefalea lieve, lieve rigidità nucale', punti: 1 },
+        { testo: 'cefalea moderata-grave, rigidità nucale; solo deficit dei nervi cranici', punti: 2 },
+        { testo: 'sonnolenza, confusione o lieve deficit focale', punti: 3 },
+        { testo: 'stupore, emiparesi moderata-grave', punti: 4 },
+        { testo: 'coma, decerebrazione', punti: 5 },
+      ] },
+    ],
+    formato: (t) => (t ? `grado ${['', 'I', 'II', 'III', 'IV', 'V'][t]}` : '—'),
+    esito: (t) =>
+      t >= 4 ? { livello: 'alto', testo: 'Grado IV–V: prognosi severa; vie aeree, neurochirurgo subito.' }
+      : { livello: t === 3 ? 'medio' : 'basso', testo: 'Grado I–III: neurochirurgo (Careggi) per il trattamento dell’aneurisma.' },
+    fonte: 'Hunt e Hess, J Neurosurg 1968.',
+  },
+  {
+    id: 'light',
+    nome: 'Criteri di Light',
+    ambito: 'Versamento pleurico · essudato o trasudato',
+    voci: [
+      { tipo: 'si', id: 'prot', testo: 'Proteine pleura/siero > 0,5', punti: 1 },
+      { tipo: 'si', id: 'ldh', testo: 'LDH pleura/siero > 0,6', punti: 1 },
+      { tipo: 'si', id: 'ldh2', testo: 'LDH pleurico > 2/3 del limite superiore del siero', punti: 1 },
+    ],
+    formato: (t) => (t >= 1 ? 'essudato' : 'trasudato'),
+    esito: (t) =>
+      t >= 1 ? { livello: 'medio', testo: 'Almeno un criterio: essudato. Nel cardiopatico in diuretico, se dubbio: gradiente albumina siero − pleura > 1,2 g/dL = trasudato.' }
+      : { livello: 'basso', testo: 'Nessun criterio: trasudato (scompenso, cirrosi, sindrome nefrosica).' },
+    fonte: 'Light, Ann Intern Med 1972.',
+  },
+  {
     id: 'bisap',
     nome: 'BISAP',
     ambito: 'Pancreatite acuta · rischio di mortalità (prime 24 h)',

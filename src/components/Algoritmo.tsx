@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { Fragment, createContext, useContext, useState, type ReactNode } from 'react'
 import type { Nodo, Ramo, Tono } from '../lib/algoritmi'
 import { Link } from 'react-router-dom'
 import { Evidenzia } from './PaginaSchede'
@@ -39,6 +39,17 @@ const SCORE: [RegExp, string][] = [
   [/regola di Ottawa per ESA|Ottawa/, 'ottawa-esa'],
   [/PLASMIC(?: score)?/, 'plasmic'],
   [/(?:punteggio |score )?ISTH DIC/, 'isth-dic'],
+  [/HACOR/, 'hacor'],
+  [/Centor\/McIsaac|McIsaac|Centor/, 'mcisaac'],
+  [/MASCC/, 'mascc'],
+  [/qSOFA/, 'qsofa'],
+  [/NEWS2?(?![a-z])/, 'news2'],
+  [/LRINEC/, 'lrinec'],
+  [/(?<![0-9A-Z])4T(?![a-z])/, '4t'],
+  [/Ginevra/, 'ginevra'],
+  [/WFNS/, 'wfns'],
+  [/Hunt-Hess/, 'hunthess'],
+  [/criteri di Light|\bLight\b/, 'light'],
 ]
 const RE_SCORE = new RegExp(`(${SCORE.map(([r]) => r.source).join('|')})`, 'g')
 
@@ -140,6 +151,26 @@ function TestoProc({ t, scuro, ritorno }: { t: string; scuro?: boolean; ritorno:
           )
         }
         return <TestoCons key={i} t={p} scuro={scuro} ritorno={ritorno} />
+      })}
+    </>
+  )
+}
+
+/** Solo gli score cliccabili (con ritorno); il resto del testo lo disegna `resto`. */
+export function ConScore({ t, resto }: { t: string; resto: (p: string) => ReactNode }) {
+  const ritorno = useConRitorno()
+  const parti = t.split(RE_SCORE).filter((p) => p !== undefined && p !== '')
+  return (
+    <>
+      {parti.map((p, i) => {
+        const hit = SCORE.find(([r]) => new RegExp(`^(${r.source})$`).test(p))
+        if (!hit) return <Fragment key={i}>{resto(p)}</Fragment>
+        return (
+          <Link key={i} to={`/calcolatori?apri=${hit[1]}`} state={ritorno.state} onClick={ritorno.onClick}
+            className="inline-block font-bold rounded-full px-1.5 leading-[1.35] bg-verde text-white">
+            {p}&nbsp;↗
+          </Link>
+        )
       })}
     </>
   )

@@ -1,7 +1,8 @@
 import { Fragment, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Riconoscimenti from '../components/Riconoscimenti'
-import Algoritmo from '../components/Algoritmo'
+import Algoritmo, { ConScore } from '../components/Algoritmo'
+import { RitornoCtx, riprendiScroll } from '../lib/ritorno'
 import { ALGORITMI_NON_GRAVI, algoritmoSepsi } from '../lib/antibioticiAlgoritmi'
 import { CONDIZIONI, FAMIGLIE, FARMACI, REGOLE, farmaco, type Condizione } from '../lib/antibiotici'
 
@@ -22,7 +23,7 @@ function Testo({ t, apri }: { t: string; apri: (id: string) => void }) {
       {parti.map((p, i) => {
         const m = p.match(/^\{([a-z]+)\}$/)
         const f = m && farmaco(m[1])
-        if (!f) return <Fragment key={i}>{p}</Fragment>
+        if (!f) return <ConScore key={i} t={p} resto={(x) => x} />
         return (
           <button key={i} onClick={(e) => { e.stopPropagation(); apri(f.id) }}
             className="font-bold text-verde underline decoration-verde2/50 underline-offset-2">
@@ -50,6 +51,7 @@ function CardCondizione({ c, aperto, onToggle, apri }: { c: Condizione; aperto: 
         <Freccia aperto={aperto} />
       </button>
       {aperto && (
+        <RitornoCtx.Provider value={c.nome}>
         <div className="px-4 pb-4 pt-1 border-t border-linea flex flex-col gap-3">
           {ALGORITMI_NON_GRAVI[c.id] && (
             <>
@@ -82,6 +84,7 @@ function CardCondizione({ c, aperto, onToggle, apri }: { c: Condizione; aperto: 
           </div>
           {c.note?.map((n, i) => <p key={i} className="text-xs text-tenue leading-snug"><Testo t={n} apri={apri} /></p>)}
         </div>
+        </RitornoCtx.Provider>
       )}
     </section>
   )
@@ -133,6 +136,13 @@ export default function Antibiotici() {
   }
   useEffect(() => { setAperto(params.get('apri')) }, [params])
   const apriFarmaco = (id: string) => vai('farmaci', id)
+  /** Aprire/chiudere una card aggiorna l'indirizzo: tornando da un calcolatore la card resta aperta. */
+  const apriCard = (v: 'condizioni' | 'farmaci', id: string) => {
+    const nuovo = aperto === id ? null : id
+    setAperto(nuovo)
+    setParams(nuovo ? { vista: v, apri: nuovo } : { vista: v }, { replace: true })
+  }
+  useEffect(() => { riprendiScroll('/antibiotici') }, [])
 
   useEffect(() => {
     if (!aperto) return
@@ -189,7 +199,7 @@ export default function Antibiotici() {
                 <p className="etichetta px-1 mt-1">{g}</p>
                 {voci.map((c) => (
                   <CardCondizione key={c.id} c={c} aperto={aperto === c.id} apri={apriFarmaco}
-                    onToggle={() => setAperto((a) => (a === c.id ? null : c.id))} />
+                    onToggle={() => apriCard('condizioni', c.id)} />
                 ))}
               </Fragment>
             )
@@ -209,7 +219,7 @@ export default function Antibiotici() {
       ) : (
         farmaci.map((f) => (
           <CardFarmaco key={f.id} id={f.id} aperto={aperto === f.id}
-            onToggle={() => setAperto((a) => (a === f.id ? null : f.id))} />
+            onToggle={() => apriCard('farmaci', f.id)} />
         ))
       )}
       <p className="intero text-[11px] text-tenue px-1 mt-1">Adulto, funzione epatica normale. Terapia empirica: adattarla all’antibiogramma locale e alle colture.</p>

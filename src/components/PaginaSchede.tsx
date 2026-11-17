@@ -1,5 +1,7 @@
 import { Fragment, createElement, useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
+import { ConScore } from './Algoritmo'
+import { RitornoCtx, riprendiScroll } from '../lib/ritorno'
 import type { Scheda } from '../lib/schede'
 import { FIGURE } from './FigureProcedure'
 import Riconoscimenti, { FiltroRiconoscimenti } from './Riconoscimenti'
@@ -61,6 +63,8 @@ export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGrup
     setParams(np, { replace: true })
   }
 
+  const { pathname } = useLocation()
+  useEffect(() => { riprendiScroll(pathname) }, [pathname])
   const voci = schede.filter((s) => (!q || `${s.nome} ${s.sintesi} ${s.gruppo}`.toLowerCase().includes(q)) && passaFiltro(filtro, ch(s.id), s))
   const nRev = schede.filter((s) => statoRevisione(ch(s.id), s)?.stato === 'revisionata').length
   const nAsl = schede.filter((s) => aziendale(ch(s.id)).length).length
@@ -87,6 +91,7 @@ export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGrup
                   <span className={`text-tenue transition-transform shrink-0 ${open ? 'rotate-90' : ''}`}>›</span>
                 </button>
                 {open && (
+                  <RitornoCtx.Provider value={s.nome}>
                   <div className="px-4 pb-4 pt-1 border-t border-linea flex flex-col gap-3">
                     {FIGURE[s.id] && <div className="mt-2">{createElement(FIGURE[s.id])}</div>}
                     {s.blocchi.map((b) => (
@@ -97,7 +102,7 @@ export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGrup
                             {b.righe.map((r, i) => (
                               <li key={i} className="flex gap-2.5 text-sm leading-snug">
                                 <span className="shrink-0 w-5 h-5 rounded-full bg-verde text-white text-[11px] font-bold flex items-center justify-center mt-px">{i + 1}</span>
-                                <span><Evidenzia t={r} /></span>
+                                <span><ConScore t={r} resto={(p) => <Evidenzia t={p} />} /></span>
                               </li>
                             ))}
                           </ol>
@@ -105,7 +110,7 @@ export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGrup
                           <ul className="flex flex-col gap-1">
                             {b.righe.map((r, i) => (
                               <li key={i} className="text-sm leading-snug pl-3 relative">
-                                <span className="absolute left-0 top-[0.55em] w-1 h-1 rounded-full bg-tenue" /><Evidenzia t={r} />
+                                <span className="absolute left-0 top-[0.55em] w-1 h-1 rounded-full bg-tenue" /><ConScore t={r} resto={(p) => <Evidenzia t={p} />} />
                               </li>
                             ))}
                           </ul>
@@ -126,6 +131,7 @@ export default function PaginaSchede({ schede, segnaposto, senzaCerca, senzaGrup
                     )}
                     {s.fonte && <p className="text-[11px] text-tenue">Fonte: {s.fonte}</p>}
                   </div>
+                  </RitornoCtx.Provider>
                 )}
               </section>
             )
