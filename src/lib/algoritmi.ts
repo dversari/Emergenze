@@ -2470,7 +2470,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 tipo: 'allarme', titolo: 'Ridistribuzione più che sovraccarico',
                 righe: [
                   'CPAP subito.',
-                  'Nitroglicerina in pompa: 10 fiale da 5 mg/1,5 mL (50 mg = 15 mL) + 35 mL di SF = 50 mL (1 mg/mL). Partire da 10–20 µg/min (0,6–1,2 mL/h), aumentare ogni 3–5 min fino a 100–200 µg/min (6–12 mL/h), finché PAS ≥ 110 mmHg.',
+                  'Isosorbide dinitrato (Diniket) in pompa: 5 fiale da 10 mg/10 mL pure = 50 mg in 50 mL (1 mg/mL). Partire da 1–2 mg/h (1–2 mL/h), aumentare ogni 5–10 min fino a 10 mg/h (10 mL/h), finché PAS ≥ 110 mmHg.',
                   'In attesa della pompa: isosorbide dinitrato (Carvasin) 5 mg sublinguale.',
                   'Furosemide (Lasix) a dose bassa (es. 40 mg ev = 2 fiale da 20 mg): spesso il paziente non è in sovraccarico.',
                   'Niente morfina di routine (solo distress grave refrattario).',
@@ -2482,7 +2482,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
             etichetta: 'Caldo-umido', tono: 'neutro', nodi: [
               {
                 tipo: 'passo', titolo: 'Congesto, ben perfuso (il più frequente)',
-                righe: ['Decongestione con diuretico (sotto); nitroglicerina se PAS > 110 e congestione polmonare.'],
+                righe: ['Decongestione con diuretico (sotto); Diniket ev se PAS > 110 e congestione polmonare.'],
               },
             ],
           },
@@ -2782,7 +2782,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
           'Eparina non frazionata 5.000 UI ev in bolo (70–100 U/kg) = 1 mL della fiala da 25.000 UI/5 mL. Se il paziente assume anticoagulanti orali: dose da concordare con l’emodinamista.',
           'Inibitore P2Y12 deciso con l’emodinamista (il pretrattamento «può essere considerato»): prasugrel (Efient) 60 mg = 6 cp da 10 mg (non se ictus/TIA pregresso; mantenimento 5 mg se ≥ 75 anni o < 60 kg); ticagrelor (Brilique) 180 mg = 2 cp da 90 mg; clopidogrel (Plavix) 600 mg = 8 cp da 75 mg se anticoagulante orale o alto rischio emorragico.',
           'Dolore: morfina 2–4 mg ev (fiala 10 mg/1 mL in 10 mL di SF: 2–4 mL), ripetibile ogni 5–10 min; oppure fentanil (Fentanest) 50 µg ev = 1 mL della fiala da 100 µg/2 mL. Gli oppioidi rallentano l’effetto degli antiaggreganti orali.',
-          'Isosorbide dinitrato (Carvasin) 5 mg sublinguale se PAS > 90 mmHg; no se infarto del ventricolo destro o inibitori della PDE5 nelle 24–48 h. Nitroglicerina in infusione se ipertensione o scompenso.',
+          'Isosorbide dinitrato (Carvasin) 5 mg sublinguale se PAS > 90 mmHg; no se infarto del ventricolo destro o inibitori della PDE5 nelle 24–48 h. Diniket ev in infusione se ipertensione o scompenso.',
           'Ossigeno solo se SpO₂ < 90%.',
           'Nausea: ondansetron (Zofran) 4 mg ev = 1 fiala da 4 mg/2 mL.',
           'Metoprololo (Lopresor) 5 mg ev (1 fiala da 5 mg/5 mL), ripetibile fino a 15 mg: da considerare solo se PAS > 120 mmHg e nessun segno di scompenso (meglio decidere con l’emodinamista).',
@@ -2856,7 +2856,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
                 tipo: 'passo', titolo: 'Scompenso acuto',
                 righe: [
                   'Furosemide (Lasix) 40 mg ev = 2 fiale da 20 mg.',
-                  'Nitroglicerina in infusione se PAS > 110 mmHg; CPAP.',
+                  'Diniket ev in infusione se PAS > 110 mmHg; CPAP.',
                 ],
               },
             ],

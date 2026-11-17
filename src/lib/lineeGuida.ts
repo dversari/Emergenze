@@ -166,7 +166,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Vasodilatatori, inotropi, vasopressori',
         punti: [
-          'Nitroglicerina o nitroprussiato ev utili soprattutto nell’edema polmonare con pressione alta e poca ritenzione di liquidi; monitorare la pressione, l’ipotensione è dannosa. Riducono le intubazioni, non la mortalità. Dosi nella tabella supplementare S14 (uso comune: nitroglicerina da 10–20 µg/min, fino a 200 µg/min).',
+          'Nitrati ev (in PS: isosorbide dinitrato, Diniket) utili soprattutto nell’edema polmonare con pressione alta e poca ritenzione di liquidi; monitorare la pressione, l’ipotensione è dannosa. Riducono le intubazioni, non la mortalità. Diniket puro in pompa (fiale 10 mg/10 mL = 1 mg/mL): da 1–2 mg/h = 1–2 mL/h, fino a 10 mg/h (tabella supplementare S14).',
           'Inotropi solo se PAS <90 mmHg con ipoperfusione che non risponde al trattamento standard, compreso un carico di liquidi. In chi prende beta-bloccanti meglio levosimendan o inibitori PDE-III rispetto alla dobutamina.',
           'Vasopressore se ipoteso: noradrenalina prima scelta (rispetto a dopamina e adrenalina).',
           'Oppioidi non di routine: solo ansia o distress grave refrattari, con cautela per il rischio respiratorio.',

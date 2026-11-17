@@ -257,16 +257,6 @@ export const FARMACI_URGENZA: Farmaco[] = [
     avvisi: ['NO se scompenso, ipotensione, WPW, tachicardia a QRS largo di origine incerta.'],
   },
   {
-    id: 'esmololo', nome: 'Esmololo', commerciale: 'Brevibloc', gruppo: 'Antiaritmici e frequenza',
-    fiala: 'fiale 100 mg/10 mL (10 mg/mL)', conc: { v: 10, q: 'mg' },
-    prep: [{ via: 'siringa', testo: 'puro: 5 fiale = 50 mL', conc: 10, q: 'mg' }],
-    dosi: [
-      { etichetta: 'Carico in 1 min', q: 'mg', kg: true, min: 0.5, max: 0.5, start: 0.5, passo: 0.1 },
-      { etichetta: 'Mantenimento', q: 'mcg', kg: true, t: 'min', min: 25, max: 300, start: 50, passo: 25 },
-    ],
-    righe: ['Range 25–300 mcg/kg/min; bolo iniziale con la stessa siringa (PS Prato: 5 fiale pure = 500 mg in 50 mL).', 'Aumentare di 50 mcg/kg/min ogni 5 min, ripetendo ogni volta il carico, fino al bersaglio.'],
-  },
-  {
     id: 'landiololo', nome: 'Landiololo', commerciale: 'Landiobloc', gruppo: 'Antiaritmici e frequenza',
     fiala: 'fiale 300 mg polvere; fiale 20 mg/2 mL (frigo) per i boli', conc: { v: 10, q: 'mg' },
     prep: [{ via: 'siringa', testo: '1 fiala da 300 mg + 50 mL SF', conc: 6, q: 'mg' }],
@@ -323,22 +313,15 @@ export const FARMACI_URGENZA: Farmaco[] = [
     ],
   },
   {
-    id: 'nitroglicerina', nome: 'Nitroglicerina', commerciale: 'Venitrin', gruppo: 'Antipertensivi e nitrati',
-    fiala: 'fiale 5 mg/1,5 mL', conc: { v: 5 / 1.5, q: 'mg' },
-    prep: [{ via: 'siringa', testo: 'PS Prato: 10 fiale (50 mg, 15 mL) + 35 mL SF = 50 mL (1 mg/mL)', conc: 1, q: 'mg' }],
-    dosi: [{ etichetta: 'Infusione', q: 'mcg', t: 'min', min: 5, max: 200, start: 10, passo: 5 }],
-    righe: ['Range 5–200 mcg/min: partire da 10–20 mcg/min (0,6–1,2 mL/h), aumentare ogni 3–5 min.'],
-    avvisi: ['NO se PAS < 90, infarto del ventricolo destro, inibitori della PDE-5 nelle 24–48 h, stenosi aortica severa.'],
-  },
-  {
     id: 'isosorbide', nome: 'Isosorbide dinitrato', commerciale: 'Diniket', gruppo: 'Antipertensivi e nitrati',
     fiala: 'fiale 10 mg/10 mL (1 mg/mL)', conc: { v: 1, q: 'mg' },
     prep: [
-      { via: 'siringa', testo: 'puro (1 mg/mL)', conc: 1, q: 'mg' },
+      { via: 'siringa', testo: 'PS Prato: 5 fiale pure (50 mg) = 50 mL (1 mg/mL)', conc: 1, q: 'mg' },
       { via: 'volumetrica', testo: '2,5 fiale (25 mg) + 225 mL SF = 250 mL', conc: 0.1, q: 'mg' },
     ],
-    dosi: [{ etichetta: 'Infusione', q: 'mg', t: 'h', min: 2, max: 10, start: 2, passo: 1 }],
-    avvisi: ['NO se PAS < 90, infarto del ventricolo destro, inibitori della PDE-5 nelle 24–48 h.'],
+    dosi: [{ etichetta: 'Infusione', q: 'mg', t: 'h', min: 1, max: 10, start: 2, passo: 1 }],
+    righe: ['Unico nitrato ev del PS. Range 1–10 mg/h: partire da 1–2 mg/h e salire ogni 5–10 min (edema polmonare iperteso, SCA con dolore o ipertensione, crisi ipertensiva).'],
+    avvisi: ['NO se PAS < 90, infarto del ventricolo destro, inibitori della PDE-5 nelle 24–48 h, stenosi aortica severa.'],
   },
   // ── Coagulazione e trombolisi ──
   {

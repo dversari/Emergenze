@@ -163,7 +163,7 @@ export const LG_TOSSICOLOGIA: LineaGuida[] = [
       'Agitazione, tachicardia, ipertensione, midriasi, sudorazione, ipertermia. Complicanze: SCA, dissezione, emorragia cerebrale, convulsioni, rabdomiolisi, aritmie.',
       'Benzodiazepine prima di tutto: agitazione, tachicardia, ipertensione e ipertermia migliorano insieme.',
       'Temperatura > 40 °C: raffreddamento aggressivo subito; se refrattaria intubare e curarizzare (rocuronio, non succinilcolina).',
-      'Ipertensione persistente dopo le benzodiazepine: nitroglicerina o urapidil; labetalolo accettabile; evitare i beta-bloccanti puri in acuto.',
+      'Ipertensione persistente dopo le benzodiazepine: isosorbide dinitrato (Diniket) ev o urapidil; labetalolo accettabile; evitare i beta-bloccanti puri in acuto.',
       'Dolore toracico: come SCA (ASA, nitrati, benzodiazepine); ECG seriati e troponina; pensare alla dissezione.',
       'QRS largo da cocaina: bicarbonato come nei triciclici.',
     ],
@@ -172,7 +172,7 @@ export const LG_TOSSICOLOGIA: LineaGuida[] = [
         titolo: 'Farmaci (70 kg)',
         punti: [
           'Diazepam (Valium) 10 mg ev (1 fiala da 10 mg/2 mL) ogni 5–10 min fino a sedazione; midazolam 5–10 mg im se senza accesso.',
-          'Nitroglicerina (50 mg in 50 mL) da 0,6 mL/h (10 µg/min), aumentare ogni 5 min; urapidil (Ebrantil) 12,5–25 mg ev.',
+          'Diniket puro in pompa (1 mg/mL) da 1–2 mL/h (1–2 mg/h), aumentare ogni 5–10 min fino a 10 mg/h; urapidil (Ebrantil) 12,5–25 mg ev.',
           'Bicarbonato di sodio 8,4% 100 mL ev se QRS > 120 ms.',
           'Esami: CK, creatinina, troponina, K, EGA, glicemia; TC encefalo se cefalea, deficit o coma.',
         ],
@@ -469,7 +469,7 @@ export const ALG_TOSSICOLOGIA: Alg = {
         ],
       },
       { tipo: 'checklist', titolo: 'Complicanze da cercare', righe: ['ECG e troponina: SCA, QRS largo (→ bicarbonato)', 'Dolore toracico/dorsale: dissezione', 'Cefalea o deficit: TC encefalo', 'CK, creatinina, K: rabdomiolisi'] },
-      { tipo: 'terapia', titolo: 'Ipertensione persistente', righe: ['Nitroglicerina in infusione o urapidil 12,5–25 mg ev; labetalolo accettabile.'] },
+      { tipo: 'terapia', titolo: 'Ipertensione persistente', righe: ['Diniket in infusione o urapidil 12,5–25 mg ev; labetalolo accettabile.'] },
     ],
   },
   'serotoninergica-snm': {

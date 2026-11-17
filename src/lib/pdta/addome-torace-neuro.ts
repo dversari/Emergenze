@@ -331,16 +331,16 @@ export const LG_ADDOME_TORACE_NEURO: LineaGuida[] = [
       'Senza danno d’organo non è un’emergenza: niente farmaci ev; trattare dolore e ansia, riprendere/aggiustare la terapia orale, controllo dal curante.',
       'Esami: ECG, troponina, creatinina, urine, emocromo con LDH/aptoglobina/schistociti, fundus; TC encefalo se sintomi neurologici; test di gravidanza.',
       'Obiettivo e velocità dipendono dal quadro (tabella sotto). In generale ridurre la PAM del 20–25% nelle prime ore, non normalizzare.',
-      'In PS a Prato per via ev: labetalolo, urapidil, nitroglicerina.',
+      'In PS a Prato per via ev: labetalolo, urapidil, isosorbide dinitrato (Diniket).',
     ],
     sezioni: [
       {
         titolo: 'Obiettivi per quadro',
         punti: [
           'Ipertensione maligna / encefalopatia: −20–25% PAM in alcune ore → labetalolo o urapidil.',
-          'Dissezione aortica: PAS < 120 e FC < 60 entro 20 min → prima labetalolo (beta), poi urapidil/nitroglicerina.',
-          'Edema polmonare: PAS < 140 subito → nitroglicerina + urapidil, diuretico.',
-          'SCA: PAS < 140 → nitroglicerina (labetalolo se tachicardia).',
+          'Dissezione aortica: PAS < 120 e FC < 60 entro 20 min → prima labetalolo (beta), poi urapidil o Diniket.',
+          'Edema polmonare: PAS < 140 subito → Diniket + urapidil, diuretico.',
+          'SCA: PAS < 140 → Diniket (labetalolo se tachicardia).',
           'Ictus ischemico: < 185/110 se trombolisi (poi < 180/105); senza trombolisi trattare solo se > 220/120.',
           'Emorragia cerebrale: PAS 140–160 (vedi PDTA). Preeclampsia: < 160/110 → labetalolo.',
           'Cocaina/feocromocitoma: benzodiazepine, poi urapidil (alfa) prima di qualunque beta-bloccante.',
@@ -351,7 +351,7 @@ export const LG_ADDOME_TORACE_NEURO: LineaGuida[] = [
         punti: [
           'Labetalolo (Trandate fiale 100 mg/20 mL): 20 mg ev in 2 min (4 mL), poi 20–80 mg ogni 10 min (max 300 mg); oppure in pompa pura (2 fiale = 200 mg in 40 mL, 5 mg/mL) 15–160 mg/h = 3–32 mL/h (1–2 mg/min = 12–24 mL/h).',
           'Urapidil (Ebrantil fiale 50 mg/10 mL): 12,5–25 mg ev (2,5–5 mL), ripetibile dopo 5 min; poi 5–30 mg/h in pompa pura (5 fiale = 250 mg in 50 mL, 5 mg/mL): 1–6 mL/h.',
-          'Nitroglicerina (50 mg in 50 mL): 10–200 µg/min = 0,6–12 mL/h; iniziare a 1–2 mL/h nell’edema polmonare.',
+          'Isosorbide dinitrato (Diniket fiale 10 mg/10 mL, puro in pompa 1 mg/mL): 1–10 mg/h = 1–10 mL/h; iniziare a 1–2 mL/h e salire ogni 5–10 min (più rapidamente nell’edema polmonare).',
         ],
       },
     ],
@@ -648,7 +648,7 @@ export const ALG_ADDOME_TORACE_NEURO: Alg = {
   },
   'emergenza-ipertensiva': {
     titolo: 'Algoritmo pressione molto alta',
-    nota: 'ESC 2024. Farmaci ev a Prato: labetalolo, urapidil, nitroglicerina.',
+    nota: 'ESC 2024. Farmaci ev a Prato: labetalolo, urapidil, isosorbide dinitrato (Diniket).',
     nodi: [
       { tipo: 'avvio', titolo: 'PA > 180/120', righe: ['Ripetere a riposo, dopo analgesia/ansiolisi.'] },
       { tipo: 'checklist', titolo: 'Danno d’organo?', righe: ['ECG, troponina', 'Creatinina, urine, emocromo, LDH, schistociti', 'Neurologico, fundus', 'Test di gravidanza'] },
@@ -661,7 +661,7 @@ export const ALG_ADDOME_TORACE_NEURO: Alg = {
               {
                 tipo: 'rami', rami: [
                   { etichetta: 'Dissezione', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'PAS < 120, FC < 60 in 20 min', righe: ['Labetalolo, poi urapidil.'] }] },
-                  { etichetta: 'Edema polmonare / SCA', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'PAS < 140', righe: ['Nitroglicerina ± urapidil.'] }] },
+                  { etichetta: 'Edema polmonare / SCA', tono: 'no', nodi: [{ tipo: 'terapia', titolo: 'PAS < 140', righe: ['Diniket ± urapidil.'] }] },
                   { etichetta: 'Ictus / emorragia', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Soglie dei PDTA neuro', vai: [{ etichetta: 'Ictus', to: '/linee-guida/ictus' }, { etichetta: 'Emorragia cerebrale', to: '/linee-guida/emorragia-cerebrale' }] }] },
                   { etichetta: 'Encefalopatia / maligna', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: '−20–25% PAM in ore', righe: ['Labetalolo o urapidil.'] }] },
                   { etichetta: 'Gravidanza', tono: 'neutro', nodi: [{ tipo: 'passo', titolo: 'Preeclampsia', vai: [{ etichetta: 'Preeclampsia', to: '/linee-guida/preeclampsia' }] }] },

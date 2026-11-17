@@ -98,7 +98,6 @@ export const AZIENDALI: Record<string, Rif[]> = {
   'modulo/notifica': ['notifica-malattie-infettive', 'indirizzi-segnalazione'],
   'modulo/eparina': [{ titolo: 'Schema terapia con eparina (Emergenza e accettazione, OBI, HDU)', codice: '01125MOD16 rev. 0', data: '03/01/2011', nota: 'Rivisto nell’app: calcolo dal peso, mL/h esatti, registro, HIT e protamina' }],
   'modulo/dimissione-contro-parere': ['io-dro-72-all1', 'io-dro-72'],
-  'linee-guida/ematuria': [{ titolo: 'Ematuria: flow chart', codice: 'PS Prato', nota: 'Integrata con la letteratura (cause di pseudoematuria, lavaggio, studio urologico)' }],
 }
 
 /** '/percorsi?apri=ebola' → 'percorsi/ebola'; '/linee-guida/x' → 'linee-guida/x'. */
