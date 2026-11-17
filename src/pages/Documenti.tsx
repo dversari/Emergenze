@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { DOCUMENTI_ASL } from '../lib/documentiAsl'
 import { condividiFileUrl } from '../lib/stampaModulo'
-import { urlRiservato, useSessione } from '../lib/riservati'
+import { supabase, urlRiservato, useSessione } from '../lib/riservati'
 import AccessoRiservato from '../components/AccessoRiservato'
 
 const pdf = (d: { file: string; titolo: string }) => `/pdf?f=${encodeURIComponent(d.file)}&t=${encodeURIComponent(d.titolo)}`
@@ -22,7 +22,11 @@ export default function Documenti() {
   }
   return (
     <div className="flex flex-col gap-3">
-      <h1 className="font-display text-2xl font-extrabold">Documenti ASL</h1>
+      <div className="flex items-center justify-between gap-2">
+        <h1 className="font-display text-2xl font-extrabold">Documenti ASL</h1>
+        <button onClick={() => supabase.auth.signOut()} className="rounded-full border border-linea px-3 py-1.5 text-sm font-bold text-tenue"
+          title="Esce dall’account (anche dal Cruscotto in questo browser)">Esci</button>
+      </div>
       <p className="text-sm text-tenue">Originali aziendali e regionali a cui rimandano le schede dell’app. In caso di differenze vale il documento.</p>
       <input value={cerca} onChange={(e) => setCerca(e.target.value)} placeholder="Cerca un documento…" className="rounded-xl border border-linea px-3 py-2.5 text-base" />
       {aree.map((a) => (

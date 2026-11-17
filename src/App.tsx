@@ -33,6 +33,7 @@ import { SEDAZIONE } from './lib/schede'
 import { ElencoLineeGuida, RiassuntoLineaGuida } from './pages/LineeGuida'
 import Monogramma from './components/Monogramma'
 import { PopupEcg } from './components/EcgEquivalenti'
+import { useSessione } from './lib/riservati'
 
 declare const __VERSIONE__: string
 
@@ -56,6 +57,8 @@ const schede = [
 function Guscio() {
   const barra = useRef<HTMLDivElement>(null)
   const { pathname } = useLocation()
+  const sessione = useSessione()
+  const visibili = schede.filter((s) => s.to !== '/documenti' || sessione)
   useEffect(() => {
     const el = barra.current?.querySelector('.attiva-si') as HTMLElement | null
     el?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' })
@@ -85,7 +88,7 @@ function Guscio() {
       </main>
 
       <nav className="hidden lg:flex fixed left-0 top-[63px] bottom-0 w-56 z-20 flex-col gap-1 border-r border-linea bg-fondo px-3 py-4">
-        {schede.map((s) => (
+        {visibili.map((s) => (
           <NavLink key={s.to} to={s.to}
             className={({ isActive }) =>
               `flex items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] font-bold transition-colors ${
@@ -99,7 +102,7 @@ function Guscio() {
 
       <nav className="lg:hidden fixed bottom-0 inset-x-0 z-20 bg-fondo/95 backdrop-blur-md border-t border-linea pt-2 pb-[max(14px,calc(env(safe-area-inset-bottom)+6px))]">
         <div ref={barra} className="flex gap-1 overflow-x-auto snap-x px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {schede.map((s) => (
+          {visibili.map((s) => (
             <NavLink key={s.to} to={s.to}
               className={({ isActive }) =>
                 `attiva-${isActive ? 'si' : 'no'} snap-start shrink-0 min-w-[68px] flex flex-col items-center justify-center gap-1 rounded-[14px] px-2 py-2 text-[11px] font-bold transition-colors ${
