@@ -698,7 +698,7 @@ const NON_GRAVI_GREZZI: Record<string, AlgoritmoAb> = {
   colecistite: {
     titolo: 'Colecistite e colangite senza sepsi',
     nodi: [
-      { tipo: 'avvio', titolo: 'Colecistite o colangite', righe: ['Grado secondo Tokyo 2018.'] },
+      { tipo: 'avvio', titolo: 'Colecistite o colangite', righe: ['Gravità: Tokyo colecistite o Tokyo colangite.'] },
       { tipo: 'decisione', titolo: 'Legata all’assistenza (stent, anastomosi bilio-digestiva)?' },
       {
         tipo: 'rami', rami: [

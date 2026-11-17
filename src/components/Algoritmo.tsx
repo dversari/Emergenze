@@ -50,6 +50,10 @@ const SCORE: [RegExp, string][] = [
   [/WFNS/, 'wfns'],
   [/Hunt-Hess/, 'hunthess'],
   [/criteri di Light|\bLight\b/, 'light'],
+  [/\bPSI\b/, 'psi'],
+  [/GRACE(?!-)/, 'grace'],
+  [/Tokyo(?: 2018)? colangite/, 'tokyo-colangite'],
+  [/Tokyo(?: 2018)?(?: colecistite)?/, 'tokyo-colecistite'],
 ]
 const RE_SCORE = new RegExp(`(${SCORE.map(([r]) => r.source).join('|')})`, 'g')
 

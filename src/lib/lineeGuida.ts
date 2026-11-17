@@ -431,6 +431,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     area: 'Gastroenterologia · Chirurgia',
     fonte: { etichetta: 'Pisano et al., World J Emerg Surg 2020 (WSES)', url: 'https://doi.org/10.1186/s13017-020-00336-x' },
     controllata: '2026-11-11',
+    calcolatori: [{ id: 'tokyo-colecistite', nome: 'Tokyo colecistite' }, { id: 'tokyo-colangite', nome: 'Tokyo colangite' }],
     vediAnche: [
       { etichetta: 'Antibiotici: colecistite e colangite', to: '/antibiotici?apri=colecistite' },
       { etichetta: 'Dimissione colica biliare', to: '/dimissioni?apri=colica-biliare' },
@@ -732,7 +733,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     area: 'Pneumologia · Infettivologia',
     fonte: { etichetta: 'Jones et al., Am J Respir Crit Care Med 2025 (ATS)', url: 'https://doi.org/10.1164/rccm.202507-1692ST' },
     controllata: '2026-11-11',
-    calcolatori: [{ id: 'curb65', nome: 'CURB-65' }],
+    calcolatori: [{ id: 'curb65', nome: 'CURB-65' }, { id: 'psi', nome: 'PSI' }],
     vediAnche: [
       { etichetta: 'Antibiotici: polmonite comunitaria', to: '/antibiotici?apri=cap' },
       { etichetta: 'Antibiotici: polmonite nosocomiale', to: '/antibiotici?apri=hap' },
@@ -1294,7 +1295,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     area: 'Cardiologia',
     fonte: { etichetta: 'Byrne et al., Eur Heart J 2023 (ESC)', url: 'https://doi.org/10.1093/eurheartj/ehad191' },
     controllata: '2026-11-11',
-    calcolatori: [{ id: 'heart', nome: 'HEART' }],
+    calcolatori: [{ id: 'heart', nome: 'HEART' }, { id: 'grace', nome: 'GRACE' }],
     vediAnche: [
       { etichetta: 'STEMI', to: '/linee-guida/stemi' },
       { etichetta: 'Dissezione aortica', to: '/linee-guida/dissezione-aortica' },

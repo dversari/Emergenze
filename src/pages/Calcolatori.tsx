@@ -451,6 +451,73 @@ const PUNTEGGI: Punteggio[] = [
     fonte: 'Light, Ann Intern Med 1972.',
   },
   {
+    id: 'grace',
+    nome: 'GRACE',
+    ambito: 'SCA senza sopraslivellamento ST · mortalità intraospedaliera e tempi della coronarografia',
+    voci: [
+      { tipo: 'scelta', id: 'eta', testo: 'Età', opzioni: [{ testo: '< 40', punti: 0 }, { testo: '40–49', punti: 25 }, { testo: '50–59', punti: 41 }, { testo: '60–69', punti: 58 }, { testo: '70–79', punti: 75 }, { testo: '80–89', punti: 91 }, { testo: '≥ 90', punti: 100 }] },
+      { tipo: 'scelta', id: 'fc', testo: 'FC (bpm)', opzioni: [{ testo: '< 50', punti: 0 }, { testo: '50–69', punti: 3 }, { testo: '70–89', punti: 9 }, { testo: '90–109', punti: 15 }, { testo: '110–149', punti: 24 }, { testo: '150–199', punti: 38 }, { testo: '≥ 200', punti: 46 }] },
+      { tipo: 'scelta', id: 'pas', testo: 'PAS (mmHg)', opzioni: [{ testo: '< 80', punti: 58 }, { testo: '80–99', punti: 53 }, { testo: '100–119', punti: 43 }, { testo: '120–139', punti: 34 }, { testo: '140–159', punti: 24 }, { testo: '160–199', punti: 10 }, { testo: '≥ 200', punti: 0 }] },
+      { tipo: 'scelta', id: 'cr', testo: 'Creatinina (mg/dL)', opzioni: [{ testo: '< 0,4', punti: 1 }, { testo: '0,4–0,79', punti: 4 }, { testo: '0,8–1,19', punti: 7 }, { testo: '1,2–1,59', punti: 10 }, { testo: '1,6–1,99', punti: 13 }, { testo: '2–3,99', punti: 21 }, { testo: '≥ 4', punti: 28 }] },
+      { tipo: 'scelta', id: 'killip', testo: 'Classe Killip', opzioni: [{ testo: 'I', punti: 0 }, { testo: 'II (rantoli, S3)', punti: 20 }, { testo: 'III (edema polmonare)', punti: 39 }, { testo: 'IV (shock)', punti: 59 }] },
+      { tipo: 'si', id: 'acr', testo: 'Arresto cardiaco all’arrivo', punti: 39 },
+      { tipo: 'si', id: 'st', testo: 'Deviazione del tratto ST', punti: 28 },
+      { tipo: 'si', id: 'enz', testo: 'Troponina elevata', punti: 14 },
+    ],
+    esito: (t) =>
+      t > 140 ? { livello: 'alto', testo: 'GRACE > 140: rischio alto (mortalità intraospedaliera > 3%) → coronarografia entro 24 h.' }
+      : t >= 109 ? { livello: 'medio', testo: 'GRACE 109–140: rischio intermedio (1–3%) → coronarografia nel ricovero.' }
+      : { livello: 'basso', testo: 'GRACE ≤ 108: rischio basso (< 1%) → strategia invasiva selettiva.' },
+    fonte: 'Granger, Arch Intern Med 2003 (GRACE intraospedaliero); ESC 2023 SCA. Il calcolatore online GRACE 2.0 usa valori continui.',
+  },
+  {
+    id: 'tokyo-colecistite',
+    nome: 'Tokyo 2018: colecistite',
+    ambito: 'Colecistite acuta · gravità (grado I–III)',
+    voci: [
+      { tipo: 'si', id: 'cv', testo: 'Ipotensione che richiede amine (dopamina ≥ 5 mcg/kg/min o qualsiasi noradrenalina)', punti: 10 },
+      { tipo: 'si', id: 'neuro', testo: 'Alterazione della coscienza', punti: 10 },
+      { tipo: 'si', id: 'resp', testo: 'P/F < 300', punti: 10 },
+      { tipo: 'si', id: 'rene', testo: 'Oliguria o creatinina > 2 mg/dL', punti: 10 },
+      { tipo: 'si', id: 'fegato', testo: 'INR > 1,5', punti: 10 },
+      { tipo: 'si', id: 'plt', testo: 'Piastrine < 100.000', punti: 10 },
+      { tipo: 'si', id: 'gb', testo: 'Leucociti > 18.000', punti: 1 },
+      { tipo: 'si', id: 'massa', testo: 'Massa dolente palpabile in ipocondrio destro', punti: 1 },
+      { tipo: 'si', id: 'durata', testo: 'Sintomi da più di 72 h', punti: 1 },
+      { tipo: 'si', id: 'locale', testo: 'Infiammazione locale marcata (gangrenosa, enfisematosa, ascesso, peritonite biliare)', punti: 1 },
+    ],
+    formato: (t) => (t >= 10 ? 'grado III' : t >= 1 ? 'grado II' : 'grado I'),
+    esito: (t) =>
+      t >= 10 ? { livello: 'alto', testo: 'Grado III (disfunzione d’organo): supporto d’organo, antibiotico; drenaggio della colecisti (colecistostomia) o colecistectomia solo in casi selezionati in centro esperto.' }
+      : t >= 1 ? { livello: 'medio', testo: 'Grado II: colecistectomia laparoscopica precoce in centro esperto; se alto rischio operatorio, drenaggio.' }
+      : { livello: 'basso', testo: 'Grado I: colecistectomia laparoscopica precoce (entro 72 h dall’esordio, al più entro 7 giorni).' },
+    fonte: 'Tokyo Guidelines 2018 (Yokoe, J Hepatobiliary Pancreat Sci 2018). Ogni disfunzione d’organo vale «+10» per indicare il grado III.',
+  },
+  {
+    id: 'tokyo-colangite',
+    nome: 'Tokyo 2018: colangite',
+    ambito: 'Colangite acuta · gravità (grado I–III)',
+    voci: [
+      { tipo: 'si', id: 'cv', testo: 'Ipotensione che richiede amine (dopamina ≥ 5 mcg/kg/min o qualsiasi noradrenalina)', punti: 10 },
+      { tipo: 'si', id: 'neuro', testo: 'Alterazione della coscienza', punti: 10 },
+      { tipo: 'si', id: 'resp', testo: 'P/F < 300', punti: 10 },
+      { tipo: 'si', id: 'rene', testo: 'Oliguria o creatinina > 2 mg/dL', punti: 10 },
+      { tipo: 'si', id: 'fegato', testo: 'INR > 1,5', punti: 10 },
+      { tipo: 'si', id: 'plt', testo: 'Piastrine < 100.000', punti: 10 },
+      { tipo: 'si', id: 'gb', testo: 'Leucociti > 12.000 o < 4.000', punti: 1 },
+      { tipo: 'si', id: 'febbre', testo: 'Febbre ≥ 39 °C', punti: 1 },
+      { tipo: 'si', id: 'eta', testo: 'Età ≥ 75 anni', punti: 1 },
+      { tipo: 'si', id: 'bili', testo: 'Bilirubina totale ≥ 5 mg/dL', punti: 1 },
+      { tipo: 'si', id: 'alb', testo: 'Albumina < 0,7 × limite inferiore', punti: 1 },
+    ],
+    formato: (t) => (t >= 10 ? 'grado III' : t >= 2 ? 'grado II' : 'grado I'),
+    esito: (t) =>
+      t >= 10 ? { livello: 'alto', testo: 'Grado III: supporto d’organo e drenaggio biliare urgente (CPRE) appena stabilizzato.' }
+      : t >= 2 ? { livello: 'medio', testo: 'Grado II (almeno 2 criteri): drenaggio biliare precoce (entro 24 h) + antibiotico.' }
+      : { livello: 'basso', testo: 'Grado I: antibiotico; drenaggio se non risponde in 24 h.' },
+    fonte: 'Tokyo Guidelines 2018 (Kiriyama, J Hepatobiliary Pancreat Sci 2018). Ogni disfunzione d’organo vale «+10» per indicare il grado III.',
+  },
+  {
     id: 'bisap',
     nome: 'BISAP',
     ambito: 'Pancreatite acuta · rischio di mortalità (prime 24 h)',
@@ -861,6 +928,52 @@ function Risultato({ etichetta, valore, nota }: { etichetta: string; valore: str
   )
 }
 
+const PSI_VOCI: [string, number][] = [
+  ['Residente in RSA', 10], ['Neoplasia attiva', 30], ['Epatopatia', 20], ['Scompenso cardiaco', 10], ['Malattia cerebrovascolare', 10], ['Nefropatia', 10],
+  ['Alterazione dello stato mentale', 20], ['FR ≥ 30/min', 20], ['PAS < 90 mmHg', 20], ['T < 35 °C o ≥ 40 °C', 15], ['FC ≥ 125 bpm', 10],
+  ['pH arterioso < 7,35', 30], ['Urea ≥ 64 mg/dL (BUN ≥ 30)', 20], ['Sodio < 130 mmol/L', 20], ['Glicemia ≥ 250 mg/dL', 10], ['Ematocrito < 30%', 10],
+  ['PaO₂ < 60 mmHg o SpO₂ < 90%', 10], ['Versamento pleurico', 10],
+]
+
+function Psi({ aperto, onToggle }: { aperto: boolean; onToggle: () => void }) {
+  const [eta, setEta] = useState('')
+  const [donna, setDonna] = useState(false)
+  const [sel, setSel] = useState<Record<number, boolean>>({})
+  const e = num(eta)
+  const somma = PSI_VOCI.reduce((a, [, p], i) => a + (sel[i] ? p : 0), 0)
+  const tot = e ? e - (donna ? 10 : 0) + somma : null
+  // Classe I: < 50 anni, nessuna comorbidità (prime 6 voci) e nessuna alterazione dei parametri vitali (voci 7–11).
+  const classeI = e !== null && e < 50 && !PSI_VOCI.slice(0, 11).some((_, i) => sel[i])
+  const classe = tot === null ? null : classeI ? 'I' : tot <= 70 ? 'II' : tot <= 90 ? 'III' : tot <= 130 ? 'IV' : 'V'
+  const mort: Record<string, string> = { I: '0,1%', II: '0,6%', III: '0,9–2,8%', IV: '8–9%', V: '27–31%' }
+  const dove: Record<string, string> = { I: 'domicilio', II: 'domicilio', III: 'osservazione breve o ricovero breve', IV: 'ricovero', V: 'ricovero (valutare terapia intensiva)' }
+  return (
+    <Scheda id="psi" nome="PSI (Pneumonia Severity Index)" ambito="Polmonite comunitaria · dove curarla"
+      aperto={aperto} onToggle={onToggle} riassunto={classe ? `classe ${classe}` : undefined}
+      livello={classe ? (classe === 'I' || classe === 'II' ? 'basso' : classe === 'III' ? 'medio' : 'alto') : undefined}>
+      <div className="grid grid-cols-2 gap-2 items-end">
+        <Campo etichetta="Età" unita="anni" valore={eta} onChange={setEta} />
+        <label className="flex items-center gap-2 text-sm pb-2.5"><input type="checkbox" className="w-5 h-5 accent-[#2f6652]" checked={donna} onChange={(x) => setDonna(x.target.checked)} /> Donna (−10)</label>
+      </div>
+      <div className="flex flex-col gap-1.5 mt-2">
+        {PSI_VOCI.map(([t, p], i) => (
+          <label key={t} className={`flex items-center gap-3 rounded-xl px-3 py-2 border cursor-pointer select-none ${sel[i] ? 'bg-verde3 border-verde2/50' : 'bg-white border-linea'}`}>
+            <input type="checkbox" className="w-5 h-5 accent-[#2f6652]" checked={!!sel[i]} onChange={(x) => setSel((s) => ({ ...s, [i]: x.target.checked }))} />
+            <span className="flex-1 text-sm">{t}</span>
+            <span className="text-xs font-bold text-tenue">+{p}</span>
+          </label>
+        ))}
+      </div>
+      {classe && (
+        <div className="mt-3">
+          <Risultato etichetta={`Punteggio ${tot} · classe ${classe}`} valore={`mortalità a 30 giorni ${mort[classe]}`} nota={`Indicazione: ${dove[classe]}. Il giudizio clinico (ipossiemia, contesto sociale) prevale.`} />
+        </div>
+      )}
+      <p className="text-[11px] text-tenue mt-2">Fine, N Engl J Med 1997; ATS/IDSA 2019 (PSI preferito al CURB-65).</p>
+    </Scheda>
+  )
+}
+
 function CockcroftGault({ aperto, onToggle }: { aperto: boolean; onToggle: () => void }) {
   const [eta, setEta] = useState('')
   const [peso, setPeso] = useState('')
@@ -919,6 +1032,7 @@ function Elettroliti({ aperto, onToggle }: { aperto: boolean; onToggle: () => vo
 // ─── Pagina ──────────────────────────────────────────────────────────────────
 
 const ALTRI = [
+  { id: 'psi', nome: 'PSI Pneumonia Severity Index polmonite comunitaria', Comp: Psi },
   { id: 'cockcroft', nome: 'Clearance creatinina Cockcroft-Gault DOAC', Comp: CockcroftGault },
   { id: 'elettroliti', nome: 'Gap anionico sodio calcio corretto albumina glicemia emogas', Comp: Elettroliti },
 ]
