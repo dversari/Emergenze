@@ -342,6 +342,7 @@ export const PERCORSI: Scheda[] = [
       { etichetta: 'Assetto del DEA', href: '/percorsi?apri=peimaf-dea' },
       { etichetta: 'PEIMAF NBCRe', href: '/percorsi?apri=peimaf-nbcr' },
       { etichetta: 'Triage di massa', href: '/percorsi?apri=maxiemergenza' },
+      { etichetta: '↗ PS.DRO.62 (area riservata ASL)', href: 'https://areariservata.uslcentro.toscana.it/index.php/documenti-usl-tc/direttore-sanitario-1/rete-ospedaliera/direzione-sanitaria-presidio-ospedaliero-santo-stefano/1980-ps-dro-62-piano-emergenza-intraospedaliera-massiccio-afflusso-di-feriti-peimaf-nell-ospedale-s-stefano-di-prato/file' },
       { etichetta: '📄 PS.DRO.62 (procedura)', href: 'docs/asl/PS.DRO.62-PEIMAF-Santo-Stefano.pdf' },
       { etichetta: '📄 Modulo METHANE', href: 'docs/asl/DOC.DS.03-allegato-1-modulo-METHANE.pdf' },
       { etichetta: '📄 DOC.DS.03 (piano aziendale)', href: 'docs/asl/DOC.DS.03-piano-aziendale-maxiemergenza.pdf' },
@@ -415,6 +416,7 @@ export const PERCORSI: Scheda[] = [
     link: [
       { etichetta: '📄 Tape SISmax originali', href: 'docs/asl/PS.DRO.62-allegato-2-tape-SISmax.pdf', primario: true },
       { etichetta: 'Allarme e comando', href: '/percorsi?apri=peimaf' },
+      { etichetta: '↗ PS.DRO.62 (area riservata ASL)', href: 'https://areariservata.uslcentro.toscana.it/index.php/documenti-usl-tc/direttore-sanitario-1/rete-ospedaliera/direzione-sanitaria-presidio-ospedaliero-santo-stefano/1980-ps-dro-62-piano-emergenza-intraospedaliera-massiccio-afflusso-di-feriti-peimaf-nell-ospedale-s-stefano-di-prato/file' },
     ],
     blocchi: [
       { titolo: 'Come si usano', righe: [
@@ -433,6 +435,7 @@ export const PERCORSI: Scheda[] = [
       { etichetta: '📄 Cartellonistica (Allegato 4)', href: 'docs/asl/PS.DRO.62-allegato-4-cartellonistica.pdf' },
       { etichetta: 'Allarme e comando', href: '/percorsi?apri=peimaf' },
       { etichetta: 'PEIMAF NBCRe', href: '/percorsi?apri=peimaf-nbcr' },
+      { etichetta: '↗ PS.DRO.62 (area riservata ASL)', href: 'https://areariservata.uslcentro.toscana.it/index.php/documenti-usl-tc/direttore-sanitario-1/rete-ospedaliera/direzione-sanitaria-presidio-ospedaliero-santo-stefano/1980-ps-dro-62-piano-emergenza-intraospedaliera-massiccio-afflusso-di-feriti-peimaf-nell-ospedale-s-stefano-di-prato/file' },
     ],
     blocchi: [
       { titolo: 'Area maxiemergenza', righe: [
@@ -478,6 +481,7 @@ export const PERCORSI: Scheda[] = [
       { etichetta: 'Antidoti e consulenze', href: '/procedure?apri=nbcr-antidoti' },
       { etichetta: 'Ruoli NBCRe', href: '/percorsi?apri=peimaf-ruoli' },
       { etichetta: '📄 Piantine (Allegato 3)', href: 'docs/asl/PS.DRO.62-allegato-3-piantine.pdf' },
+      { etichetta: '↗ PS.DRO.62 (area riservata ASL)', href: 'https://areariservata.uslcentro.toscana.it/index.php/documenti-usl-tc/direttore-sanitario-1/rete-ospedaliera/direzione-sanitaria-presidio-ospedaliero-santo-stefano/1980-ps-dro-62-piano-emergenza-intraospedaliera-massiccio-afflusso-di-feriti-peimaf-nell-ospedale-s-stefano-di-prato/file' },
     ],
     blocchi: [
       { titolo: 'Accessi (diversi dal convenzionale)', righe: [
