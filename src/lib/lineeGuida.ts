@@ -2608,6 +2608,101 @@ export const LINEE_GUIDA: LineaGuida[] = [
     ],
   },
   {
+    id: 'ematuria',
+    titolo: 'Ematuria macroscopica',
+    ente: 'PS Prato · AUA/SUFU',
+    anno: 2025,
+    area: 'Urologia',
+    fonte: { etichetta: 'Flow chart ematuria PS Prato; Barocas et al., J Urol 2025 (AUA/SUFU)', url: 'https://doi.org/10.1097/JU.0000000000004490' },
+    controllata: '2026-11-17',
+    vediAnche: [
+      { etichetta: 'Colica renale', to: '/linee-guida/colica-renale' },
+      { etichetta: 'Infezioni delle vie urinarie', to: '/linee-guida/infezione-urinaria' },
+      { etichetta: 'Anticoagulato che sanguina', to: '/linee-guida/anticoagulato-sanguinamento' },
+      { etichetta: 'Cartella: disturbi urinari', to: '/anamnesi?apri=urinari' },
+      { etichetta: 'Modulo trasfusione', to: '/modulo-trasfusione' },
+    ],
+    inBreve: [
+      'Ematuria traumatica: PDTA trauma (TC con fase tardiva; sangue al meato → niente catetere, urologo). Qui solo la non traumatica.',
+      'Prima confermare: urine rosse con stick negativo = pseudoematuria (alimenti, farmaci, porfiria); stick positivo senza globuli rossi al sedimento = emoglobinuria o mioglobinuria (CK).',
+      'Coaguli in vescica o ritenzione: catetere a 3 vie, prima lavaggio forzato manuale fino a togliere tutti i coaguli, poi lavaggio continuo.',
+      'Anticoagulato con INR > 3: riportare l’INR in range, catetere a 3 vie e lavaggi. L’anticoagulante non spiega l’ematuria: va studiata comunque.',
+      'Proteinuria, cilindri eritrocitari, globuli rossi dismorfici: origine glomerulare → ecografia e nefrologo.',
+      'Ogni ematuria macroscopica dell’adulto, anche se risolta: cistoscopia e studio dell’alta via (rischio di neoplasia uroteliale alto, soprattutto se indolore, > 50 anni, fumatore).',
+    ],
+    sezioni: [
+      {
+        titolo: 'Cause di pseudoematuria',
+        punti: [
+          'Stick negativo: alimenti (barbabietola, more, rabarbaro); farmaci (rifampicina, fenitoina, fenotiazine, lassativi con fenolftaleina, nitrofurantoina); bilirubinuria; porfiria.',
+          'Stick positivo, sedimento senza globuli rossi: emoglobinuria (emolisi: LDH, aptoglobina, bilirubina) o mioglobinuria (rabdomiolisi: CK, potassio, creatinina).',
+          'Sangue di origine vaginale o rettale: chiedere, ispezionare; nella donna urine da catetere se dubbio.',
+        ],
+      },
+      {
+        titolo: 'Anamnesi e indizi sulla sede',
+        punti: [
+          'Ematuria iniziale: uretra/prostata; terminale: collo vescicale, prostata; totale: vescica o alta via. Coaguli vermiformi: alta via.',
+          'Con dolore colico: litiasi. Indolore: neoplasia fino a prova contraria (vescica, rene, alta via).',
+          'Disuria, febbre: infezione. Sintomi prostatici, uomo anziano: ipertrofia prostatica (ematuria da varici prostatiche).',
+          'Procedure recenti (TURP, biopsia prostatica, cateterismo traumatico), radioterapia pelvica (cistite attinica, anche dopo anni), ciclofosfamide o ifosfamide (cistite emorragica).',
+          'Anticoagulanti e antiaggreganti; fumo ed esposizione professionale (coloranti, gomma, vernici: amine aromatiche).',
+          'Infezione delle vie aeree pochi giorni prima, edemi, ipertensione: glomerulonefrite (IgA). Esercizio fisico estremo recente: ematuria da sforzo.',
+        ],
+      },
+      {
+        titolo: 'Esami in PS',
+        punti: [
+          'Esame urine completo con sedimento (globuli rossi dismorfici, cilindri, proteinuria); urinocoltura se leucocituria, nitriti o febbre.',
+          'Emocromo, creatinina, elettroliti, PT/INR, aPTT; gruppo e prove crociate se Hb bassa o sanguinamento importante; CK se si sospetta mioglobinuria.',
+          'Ecografia: vescica (coaguli, massa, residuo, posizione del catetere), reni (idronefrosi, masse, calcoli).',
+          'Angio-TC in urgenza solo se instabile o se si sospetta un sanguinamento renale (angiomiolipoma, fistola artero-venosa, dopo biopsia o nefrostomia); per il resto l’uro-TC si programma.',
+        ],
+      },
+      {
+        titolo: 'Catetere e lavaggio vescicale',
+        punti: [
+          'Catetere a 3 vie 20–24 Ch; per il lavaggio usare l’apposito catetere prostatico rivestito di idrogel (rigido, non collassa in aspirazione).',
+          'Prima lavaggio forzato manuale: siringa a cono da catetere 50–60 mL con soluzione fisiologica, instillare e aspirare finché non escono più coaguli e il liquido torna chiaro.',
+          'Poi lavaggio continuo con sacche di fisiologica: velocità regolata per avere urine rosate chiare, senza coaguli.',
+          'Non iniziare il lavaggio continuo con coaguli ancora in vescica: sovradistensione, dolore, rischio di rottura. Dolore sovrapubico o catetere che non drena: ostruzione → nuovo lavaggio manuale.',
+          'Bilancio: diuresi vera = volume raccolto − volume di lavaggio infuso.',
+        ],
+      },
+      {
+        titolo: 'Paziente anticoagulato',
+        punti: [
+          'Dicumarolico con INR > 3: sospendere e riportare l’INR in range (vitamina K (Konakion) 2–5 mg; se sanguinamento maggiore PCC secondo il PDTA anticoagulato), catetere a 3 vie, lavaggi.',
+          'INR in range o DOAC: lavaggio se coaguli; niente antagonista se non c’è un sanguinamento maggiore (instabilità, calo di Hb ≥ 2 g/dL, trasfusione).',
+          'Antiaggreganti: non sospendere d’iniziativa, soprattutto con stent recente; decidere con urologo e cardiologo.',
+          'L’ematuria in terapia anticoagulante, anche in range, va studiata come le altre: smaschera spesso una lesione sottostante.',
+        ],
+      },
+      {
+        titolo: 'Situazioni particolari',
+        punti: [
+          'Infezione: antibiotico (scheda Antibiotici) e ricontrollo dell’esame urine dopo la terapia; se l’ematuria persiste, studio urologico.',
+          'Cistite emorragica attinica o da chemioterapici: lavaggio continuo, urologo; spesso ricovero.',
+          'Acido tranexamico: non di routine; nell’ematuria dell’alta via può formare coaguli che ostruiscono l’uretere.',
+          'Ematuria da sforzo: idratazione e osservazione; deve risolversi in 24–72 h, altrimenti va studiata.',
+        ],
+      },
+      {
+        titolo: 'Ricovero, OBI o dimissione',
+        punti: [
+          'Ricovero (urologo): ematuria che persiste dopo il lavaggio o richiede lavaggio continuo, Hb in calo o trasfusione, idronefrosi o insufficienza renale acuta, sepsi, instabilità, cistite emorragica.',
+          'OBI: lavaggio in corso con ematuria in risoluzione; anticoagulato da ricontrollare; osservazione dopo sforzo estremo.',
+          'Dimissione: urine chiare o rosate senza coaguli, minzione spontanea (o catetere a dimora ben funzionante), Hb stabile. Terapia idropinica, antibiotico se infezione.',
+          'Alla dimissione prenotare la cistoscopia (valutazione urologica) e lo studio dell’alta via; con proteinuria o sedimento glomerulare ecografia e visita nefrologica. Tornare se ritenzione, coaguli, febbre.',
+        ],
+      },
+    ],
+    aggiornamenti: [
+      { data: '2026-11-17', testo: 'Nuovo PDTA: flow chart ematuria del PS di Prato integrata con la letteratura (AUA/SUFU 2025 sull’ematuria microscopica, per lo studio urologico).' },
+      { data: '2025-02-27', testo: 'AUA/SUFU 2025: aggiornamento della linea guida sull’ematuria microscopica (stratificazione del rischio); l’ematuria macroscopica resta indicazione a cistoscopia e imaging dell’alta via.', link: { etichetta: 'PubMed 40013563', url: 'https://pubmed.ncbi.nlm.nih.gov/40013563/' } },
+    ],
+  },
+  {
     id: 'gastrite-dispepsia',
     titolo: 'Gastrite e dispepsia',
     ente: 'ACG/CAG',

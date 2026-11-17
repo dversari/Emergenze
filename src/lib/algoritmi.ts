@@ -1860,6 +1860,92 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       },
     ],
   },
+  'ematuria': {
+    titolo: 'Algoritmo ematuria macroscopica',
+    nota: 'Flow chart del PS di Prato. Ematuria traumatica: PDTA trauma.',
+    nodi: [
+      {
+        tipo: 'avvio', titolo: 'Ematuria macroscopica non traumatica',
+        righe: ['Escludere la pseudoematuria (alimenti, farmaci, porfiria, emo/mioglobinuria). Confermare con esame urine e sedimento.'],
+        vedi: 'Cause di pseudoematuria',
+      },
+      {
+        tipo: 'checklist', titolo: 'Subito',
+        righe: ['Parametri, globo vescicale, dolore', 'Emocromo, creatinina, elettroliti, PT/INR, aPTT', 'Esame urine con sedimento; urinocoltura se infezione', 'Ecografia: coaguli in vescica, idronefrosi, masse'],
+      },
+      { tipo: 'decisione', titolo: 'Paziente in TAO?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'INR > 3', tono: 'no', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Correggere l’INR, catetere a 3 vie, lavaggi',
+                righe: ['Sospendere il dicumarolico; vitamina K (Konakion) 2–5 mg; se sanguinamento maggiore PCC (PDTA anticoagulato).', 'Catetere a 3 vie con lavaggio forzato, poi continuo.'],
+                vai: [{ etichetta: 'Anticoagulato che sanguina', to: '/linee-guida/anticoagulato-sanguinamento' }],
+              },
+            ],
+          },
+          { etichetta: 'INR < 3 o non in TAO', tono: 'si', nodi: [{ tipo: 'nota', titolo: 'L’anticoagulante non spiega l’ematuria', righe: ['Si studia comunque.'] }] },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Coaguli in vescica o ritenzione?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'no', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Lavaggio vescicale',
+                righe: ['Catetere prostatico a 3 vie rivestito di idrogel, 20–24 Ch.', 'Prima lavaggio forzato con siringa da 50–60 mL fino a togliere tutti i coaguli; poi lavaggio continuo con sacca di fisiologica.'],
+                vedi: 'Catetere e lavaggio vescicale',
+              },
+              {
+                tipo: 'passo', titolo: 'Persiste l’ematuria dopo il lavaggio?',
+                righe: ['Sì: valutazione urologica; ricovero se serve lavaggio continuo, Hb in calo, idronefrosi, insufficienza renale.', 'No: dimissione e cistoscopia prenotata (valutazione urologica).'],
+              },
+            ],
+            fine: 'urologo o dimissione',
+          },
+          { etichetta: 'No', tono: 'si', nodi: [] },
+        ],
+      },
+      { tipo: 'decisione', titolo: 'Clinica e anamnesi compatibili con litiasi, infezione, ipertrofia prostatica, neoplasia…?' },
+      {
+        tipo: 'rami', rami: [
+          {
+            etichetta: 'Sì', tono: 'neutro', nodi: [
+              {
+                tipo: 'terapia', titolo: 'Terapia della causa',
+                righe: ['Terapia idropinica; antibiotico urinario se infezione; analgesia se colica.'],
+                vai: [{ etichetta: 'Colica renale', to: '/linee-guida/colica-renale' }, { etichetta: 'Infezioni urinarie', to: '/linee-guida/infezione-urinaria' }],
+              },
+              { tipo: 'decisione', titolo: 'Risoluzione in 24–48 h?' },
+              {
+                tipo: 'rami', rami: [
+                  { etichetta: 'Sì', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Dimissione', righe: ['Prenotare la cistoscopia; ricontrollo dell’esame urine dopo la terapia.'] }], fine: 'dimissione' },
+                  { etichetta: 'No', tono: 'no', nodi: [{ tipo: 'allarme', titolo: 'Valutazione urologica' }], fine: 'urologo' },
+                ],
+              },
+            ],
+          },
+          {
+            etichetta: 'No', tono: 'neutro', nodi: [
+              { tipo: 'decisione', titolo: 'Esame urine patologico?', righe: ['Proteinuria, cilindri eritrocitari, globuli rossi dismorfici: malattia glomerulare.'] },
+              {
+                tipo: 'rami', rami: [
+                  { etichetta: 'Sì', tono: 'no', nodi: [{ tipo: 'passo', titolo: 'Ecografia addome e valutazione nefrologica' }], fine: 'nefrologo' },
+                  {
+                    etichetta: 'No', tono: 'neutro', nodi: [
+                      { tipo: 'passo', titolo: 'Esercizio fisico estremo recente?', righe: ['Sì: idratazione e osservazione (OBI); CK.', 'No: valutazione urologica (cistoscopia, studio dell’alta via).'] },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
   'colica-biliare': {
     titolo: 'Algoritmo dolore biliare',
     nota: 'Tokyo 2018 e WSES 2020.',
