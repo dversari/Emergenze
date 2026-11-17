@@ -8,6 +8,10 @@ import { CONDIZIONI, FAMIGLIE, FARMACI, REGOLE, farmaco, type Condizione } from 
 /* Terapia antibiotica empirica: card per condizione e per farmaco.
    I nomi dei farmaci dentro le condizioni aprono la scheda del farmaco (dose, fiale, preparazione, rene). */
 
+const COLORI_FAMIGLIA = [
+  'bg-carta border-verde', 'bg-bordeaux3 border-bordeaux', 'bg-oro3 border-oro', 'bg-carta border-verde-scuro', 'bg-sabbia border-bordeaux2', 'bg-carta border-oro2',
+]
+
 const GRUPPI: Condizione['gruppo'][] = ['Respiratorie', 'Urogenitali', 'Addominali', 'SNC', 'Cute', 'Sistemiche']
 
 /** Testo con {id}: i farmaci diventano pulsanti. */
@@ -142,18 +146,18 @@ export default function Antibiotici() {
 
   return (
     <div className="elenco">
-      <details className="intero card !p-0 overflow-hidden">
+      <details className="intero rounded-2xl overflow-hidden border-[1.5px] border-verde bg-verde3 shadow-card">
         <summary className="px-4 py-3 cursor-pointer list-none flex items-center gap-3">
           <div className="flex-1 min-w-0">
-            <p className="font-bold leading-tight">Famiglie di antibiotici</p>
-            <p className="text-xs text-tenue leading-snug mt-0.5">Classi, spettro e molecole in commercio in Italia</p>
+            <p className="font-black leading-tight text-verde-scuro">℞ Famiglie di antibiotici</p>
+            <p className="text-xs text-verde-scuro/80 leading-snug mt-0.5">Classi, spettro e molecole in commercio in Italia</p>
           </div>
-          <span className="text-tenue">›</span>
+          <span className="text-verde-scuro font-black">›</span>
         </summary>
-        <div className="px-4 pb-4 pt-1 border-t border-linea flex flex-col gap-3">
-          {FAMIGLIE.map((f) => (
-            <div key={f.nome}>
-              <p className="font-bold text-sm mt-2">{f.nome}</p>
+        <div className="px-3 pb-4 pt-3 border-t border-verde2/40 flex flex-col gap-2">
+          {FAMIGLIE.map((f, i) => (
+            <div key={f.nome} className={`rounded-xl px-3 py-2 border-l-4 ${COLORI_FAMIGLIA[i % COLORI_FAMIGLIA.length]}`}>
+              <p className="font-bold text-sm">{f.nome}</p>
               <p className="text-xs text-tenue leading-snug">{f.spettro}</p>
               <p className="text-sm leading-relaxed mt-0.5">
                 {f.molecole.map((m, i) => <Fragment key={i}>{i > 0 && ' · '}<Testo t={m} apri={apriFarmaco} /></Fragment>)}
