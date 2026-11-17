@@ -33,7 +33,7 @@ export interface Revisione {
 }
 
 export const REVISIONI: Record<string, Revisione[]> = {
-  ...Object.fromEntries(CONDIZIONI.map((c) => [`antibiotici/${c.id}`, [{ sigla: 'CZ', data: '2026-11-17', esito: 'ok' as const, nota: 'Revisione della scheda antibiotici.' }]])),
+  ...Object.fromEntries(CONDIZIONI.map((c) => [`antibiotici/${c.id}`, [{ sigla: 'CZ', data: '2026-11-17', esito: 'aperta' as const, nota: 'Revisione della scheda antibiotici.' }]])),
   'procedure/nbcr-svestizione': [
     { sigla: 'LO', data: '2026-11-13', esito: 'aperta', nota: 'Telino assorbente per chimico e biologico, adesivo o umido per il radiologico; decontaminazione tecnica prima della svestizione (lavaggio della tuta; contatore Geiger nel radiologico).' },
   ],
@@ -47,37 +47,37 @@ export const REVISIONI: Record<string, Revisione[]> = {
     { sigla: 'EB', data: '2026-11-16', esito: 'aperta', nota: 'Scheda scritta da E. Bosco e integrata (Hinchey, ricovero, terapia a domicilio e in ospedale, colonscopia).' },
   ],
   'linee-guida/stemi': [
-    { sigla: 'CZ', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: 'a93e6449' },
+    { sigla: 'CZ', data: '2026-11-17', esito: 'aperta', nota: 'Revisione del PDTA.', impronta: 'a93e6449' },
   ],
   'linee-guida/nste-sca': [
-    { sigla: 'CZ', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '076b331a' },
+    { sigla: 'CZ', data: '2026-11-17', esito: 'aperta', nota: 'Revisione del PDTA.', impronta: '076b331a' },
   ],
   'linee-guida/sincope': [
-    { sigla: 'TA', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: 'a1b2ac18' },
+    { sigla: 'TA', data: '2026-11-17', esito: 'aperta', nota: 'Revisione del PDTA.', impronta: 'a1b2ac18' },
   ],
   'linee-guida/scompenso-cardiaco': [
-    { sigla: 'TA', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '2bf45c17' },
+    { sigla: 'TA', data: '2026-11-17', esito: 'aperta', nota: 'Revisione del PDTA.', impronta: '2bf45c17' },
   ],
   'linee-guida/sepsi': [
-    { sigla: 'MN', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: 'b20e25e1' },
+    { sigla: 'MN', data: '2026-11-17', esito: 'aperta', nota: 'Revisione del PDTA.', impronta: 'b20e25e1' },
   ],
   'linee-guida/anafilassi': [
-    { sigla: 'CZ', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: 'a1c525a1' },
+    { sigla: 'CZ', data: '2026-11-17', esito: 'aperta', nota: 'Revisione del PDTA.', impronta: 'a1c525a1' },
   ],
   'linee-guida/embolia-polmonare': [
-    { sigla: 'MN', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '82edfca6' },
+    { sigla: 'MN', data: '2026-11-17', esito: 'aperta', nota: 'Revisione del PDTA.', impronta: '82edfca6' },
   ],
   'linee-guida/emorragia-cerebrale': [
-    { sigla: 'EB', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '1c3f5cb5' },
+    { sigla: 'EB', data: '2026-11-17', esito: 'aperta', nota: 'Revisione del PDTA.', impronta: '1c3f5cb5' },
   ],
   'linee-guida/fibrillazione-atriale': [
-    { sigla: 'CG', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '3028c68c' },
+    { sigla: 'CG', data: '2026-11-17', esito: 'aperta', nota: 'Revisione del PDTA.', impronta: '3028c68c' },
   ],
   'linee-guida/tachicardia': [
-    { sigla: 'CG', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '39d5b056' },
+    { sigla: 'CG', data: '2026-11-17', esito: 'aperta', nota: 'Revisione del PDTA.', impronta: '39d5b056' },
   ],
   'linee-guida/bradicardia': [
-    { sigla: 'CG', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '33119209' },
+    { sigla: 'CG', data: '2026-11-17', esito: 'aperta', nota: 'Revisione del PDTA.', impronta: '33119209' },
   ],
   'linee-guida/colica-renale': [
     { sigla: 'VR', data: '2026-11-13', esito: 'ok', nota: 'Tolto il metamizolo; dosi del cortisone (prednisone 25 mg/die per 10 giorni).', impronta: '273acd8f' },
