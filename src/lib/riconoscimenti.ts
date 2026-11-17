@@ -18,7 +18,7 @@ import { CONDIZIONI } from './antibiotici'
 export const REVISORI: Record<string, string> = {
   VR: 'Daniele Versari', BN: 'Banchelli', DC: 'De Curtis', CG: 'Caruso', GR: 'Grassi', LO: 'Martino Longo', CL: 'Casalini',
   MT: 'Matteuzzi', EB: 'Emma Bosco', PT: 'Pollastri', MN: 'Monda', AB: 'Ambrosio', CH: 'Chiellini', GA: 'Galarducci',
-  GE: 'Geri', CZ: 'CZ', TA: 'TA', GC: 'GC', MI: 'Meoni', AP: 'Poggi',
+  GE: 'Geri', CZ: 'Chiara Chizzolini', TA: 'Andrea Taddei', MI: 'Meoni', AP: 'Poggi',
 }
 
 export interface Revisione {
@@ -71,13 +71,13 @@ export const REVISIONI: Record<string, Revisione[]> = {
     { sigla: 'EB', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '1c3f5cb5' },
   ],
   'linee-guida/fibrillazione-atriale': [
-    { sigla: 'GC', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '3028c68c' },
+    { sigla: 'CG', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '3028c68c' },
   ],
   'linee-guida/tachicardia': [
-    { sigla: 'GC', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '39d5b056' },
+    { sigla: 'CG', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '39d5b056' },
   ],
   'linee-guida/bradicardia': [
-    { sigla: 'GC', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '33119209' },
+    { sigla: 'CG', data: '2026-11-17', esito: 'ok', nota: 'Revisione del PDTA.', impronta: '33119209' },
   ],
   'linee-guida/colica-renale': [
     { sigla: 'VR', data: '2026-11-13', esito: 'ok', nota: 'Tolto il metamizolo; dosi del cortisone (prednisone 25 mg/die per 10 giorni).', impronta: '273acd8f' },
