@@ -118,7 +118,6 @@ export const FARMACI_URGENZA: Farmaco[] = [
     prep: [{ via: 'siringa', testo: '3 fiale (3 mg) + 47 mL SF o G5% = 50 mL', conc: 60, q: 'mcg' }],
     dosi: [{ etichetta: 'Infusione', q: 'mcg', kg: true, t: 'min', min: 0.01, max: 0.5, start: 0.05, passo: 0.005 }],
     righe: ['Dose abituale 0,01–0,3 mcg/kg/min (inotropo e vasopressore; anafilassi refrattaria, bradicardia).'],
-    avvisi: ['Corretto: la tabella originale era calcolata su 80 mcg/mL, non sui 60 mcg/mL della diluizione indicata.'],
   },
   {
     id: 'dopamina', nome: 'Dopamina', commerciale: 'Revivan', gruppo: 'Vasoattivi e inotropi',
@@ -160,7 +159,7 @@ export const FARMACI_URGENZA: Farmaco[] = [
     fiala: 'fiale 0,2 mg/mL', conc: { v: 0.2, q: 'mg' },
     dosi: [{ etichetta: 'Bolo lento ev', q: 'mg', min: 1, max: 2, start: 2, passo: 1 }],
     righe: ['Emorragia da varici: 2 mg ev ogni 4 h fino al controllo (24–48 h), poi 1 mg ogni 4 h, per 2–5 giorni in tutto.'],
-    avvisi: ['Corretto: non «max 24 h». Evitarla se cardiopatia ischemica, arteriopatia periferica, ischemia d’arto o intestinale: usare octreotide.'],
+    avvisi: ['Evitarla se cardiopatia ischemica, arteriopatia periferica, ischemia d’arto o intestinale: usare octreotide.'],
   },
   // ── Vasopressori in bolo ──
   {
@@ -342,7 +341,7 @@ export const FARMACI_URGENZA: Farmaco[] = [
         ['> 96,1″', 'sospendere 1 h, poi ridurre di 3 UI/kg/h'],
       ],
     },
-    avvisi: ['Corretto: lo schema 80 + 18 UI/kg è per il tromboembolismo venoso; nelle SCA 60 UI/kg (max 4000) + 12 UI/kg/h (max 1000).'],
+    avvisi: ['80 + 18 UI/kg nel tromboembolismo venoso; nelle SCA 60 UI/kg (max 4000) + 12 UI/kg/h (max 1000).'],
   },
   {
     id: 'protamina', nome: 'Protamina cloridrato', gruppo: 'Coagulazione e trombolisi',
@@ -353,7 +352,6 @@ export const FARMACI_URGENZA: Farmaco[] = [
       'Durante un’infusione: 1 mg ogni 100 UI dell’eparina infusa nelle ultime 2–3 ore (es. 1250 UI/h → circa 3000 UI → 30 mg).',
       'Enoxaparina: 1 mg ogni 1 mg di enoxaparina se data da < 8 h (neutralizzazione parziale).',
     ],
-    avvisi: ['Corretto: non «metà dell’eparina infusa nell’ultima ora», che sottodosa di circa 5 volte.'],
   },
   {
     id: 'proplex', nome: 'Complesso protrombinico (PCC)', commerciale: 'Proplex', gruppo: 'Coagulazione e trombolisi', frigo: true,
@@ -412,7 +410,7 @@ export const FARMACI_URGENZA: Farmaco[] = [
       { etichetta: '2ª sacca: 500 mL G5% in 4 h', q: 'mg', kg: true, min: 50, max: 50, start: 50, passo: 10, tetto: 5500, inMin: 240, sacca: 500 },
       { etichetta: '3ª sacca: 1000 mL G5% in 16 h', q: 'mg', kg: true, min: 100, max: 100, start: 100, passo: 10, tetto: 11000, inMin: 960, sacca: 1000 },
     ],
-    avvisi: ['Corretto: prima sacca in 60 min (non 15) e terza sacca in 1000 mL (non 100). Peso massimo di calcolo 110 kg.'],
+    avvisi: ['Peso massimo di calcolo 110 kg.'],
   },
   {
     id: 'naloxone', nome: 'Naloxone', commerciale: 'Narcan', gruppo: 'Antidoti',
@@ -428,7 +426,7 @@ export const FARMACI_URGENZA: Farmaco[] = [
       { etichetta: 'Boli successivi ogni 60 s', q: 'mg', min: 0.1, max: 0.1, start: 0.1, passo: 0.1 },
     ],
     righe: ['Fino a un massimo di 1 mg (di solito bastano 0,3–0,6 mg).'],
-    avvisi: ['Corretto lo schema. Rischio di convulsioni se uso cronico di benzodiazepine o intossicazione da proconvulsivanti (triciclici).'],
+    avvisi: ['Rischio di convulsioni se uso cronico di benzodiazepine o intossicazione da proconvulsivanti (triciclici).'],
   },
   {
     id: 'glucagone', nome: 'Glucagone', commerciale: 'Glucagen', gruppo: 'Antidoti', frigo: true,
@@ -439,7 +437,7 @@ export const FARMACI_URGENZA: Farmaco[] = [
       { etichetta: 'Infusione', q: 'mg', t: 'h', min: 1, max: 5, start: 2, passo: 0.5 },
     ],
     righe: ['Ipoglicemia: 1 mg IM o SC.'],
-    avvisi: ['Corretto: nei betabloccanti il bolo è 3–10 mg (50–150 mcg/kg), non 1–5 mg. Dà vomito: proteggere le vie aeree.'],
+    avvisi: ['Nei betabloccanti 50–150 mcg/kg. Dà vomito: proteggere le vie aeree.'],
   },
   // ── Analgesia e sedazione ──
   {
@@ -465,7 +463,6 @@ export const FARMACI_URGENZA: Farmaco[] = [
       { etichetta: 'Bolo (diluita 1 mg/mL)', q: 'mg', min: 2, max: 4, start: 2, passo: 1, prep: [0], nota: 'titolare ogni 5–10 min nel dolore acuto' },
       { etichetta: 'Infusione', q: 'mg', kg: true, t: 'h', min: 0.003, max: 0.15, start: 0.02, passo: 0.005, prep: [1, 2] },
     ],
-    avvisi: ['Corretto: la dose in infusione è in mg/kg/h (la scheda di partenza diceva mg/kg/min).'],
   },
   {
     id: 'ketamina', nome: 'Ketamina', gruppo: 'Analgesia e sedazione',
@@ -489,7 +486,6 @@ export const FARMACI_URGENZA: Farmaco[] = [
       { etichetta: 'Carico in 5 min', q: 'mg', kg: true, min: 0.03, max: 0.3, start: 0.05, passo: 0.01, prep: [0] },
       { etichetta: 'Mantenimento', q: 'mg', kg: true, t: 'h', min: 0.03, max: 0.2, start: 0.05, passo: 0.01 },
     ],
-    avvisi: ['Corretto: la tabella originale era calcolata su 0,5 mg/mL ma posta accanto alla siringa da 1 mg/mL (doppia dose).'],
   },
   {
     id: 'propofol', nome: 'Propofol', commerciale: 'Diprivan', gruppo: 'Analgesia e sedazione',
@@ -528,7 +524,6 @@ export const FARMACI_URGENZA: Farmaco[] = [
       { etichetta: 'Stato di male: bolo in 2 min', q: 'mg', kg: true, min: 0.1, max: 0.1, start: 0.1, passo: 0.05, tetto: 4, nota: 'ripetibile dopo 5 min' },
       { etichetta: 'Infusione', q: 'mg', kg: true, t: 'h', min: 0.005, max: 0.12, start: 0.02, passo: 0.005 },
     ],
-    avvisi: ['Corretto: la dose in infusione è in mg/kg/h (la scheda di partenza diceva mg/kg/min).'],
   },
   {
     id: 'sedazione-palliativa', nome: 'Sedazione palliativa (miscela)', gruppo: 'Analgesia e sedazione',
@@ -553,7 +548,7 @@ export const FARMACI_URGENZA: Farmaco[] = [
     fiala: '100 mg/10 mL (10 mg/mL)', conc: { v: 10, q: 'mg' },
     dosi: [{ etichetta: 'Bolo', q: 'mg', kg: true, min: 1, max: 1.5, start: 1.5, passo: 0.5 }],
     righe: ['Inizio 45 s–1 min, durata 5–10 min.'],
-    avvisi: ['Corretto: NO se iperkaliemia (non ipo-), ipertermia maligna, ustioni o schiacciamento dopo 24–48 h, denervazione (ictus, lesione midollare non recente), miopatie, immobilità prolungata.'],
+    avvisi: ['NO se iperkaliemia, ipertermia maligna, ustioni o schiacciamento dopo 24–48 h, denervazione (ictus, lesione midollare non recente), miopatie, immobilità prolungata.'],
   },
   {
     id: 'rocuronio', nome: 'Rocuronio', commerciale: 'Esmeron', gruppo: 'Intubazione (RSI)', frigo: true,
@@ -583,7 +578,7 @@ export const FARMACI_URGENZA: Farmaco[] = [
     id: 'olanzapina', nome: 'Olanzapina', commerciale: 'Zyprexa', gruppo: 'Agitazione',
     fiala: 'fiale 10 mg (ricostituite in 2 mL)', conc: { v: 5, q: 'mg' },
     righe: ['5–10 mg IM, ripetibile dopo 2–4 h. Massimo 20 mg/die.', 'Per os: 5–10 mg una volta al giorno, eventualmente +5 mg fino a 20 mg/die.'],
-    avvisi: ['Corretto: massimo 20 mg/die (non 30). NO insieme a benzodiazepine parenterali (ipotensione, depressione respiratoria): distanziare di almeno 1 h.'],
+    avvisi: ['Massimo 20 mg/die. NO insieme a benzodiazepine parenterali (ipotensione, depressione respiratoria): distanziare di almeno 1 h.'],
   },
   {
     id: 'aloperidolo', nome: 'Aloperidolo', commerciale: 'Serenase', gruppo: 'Agitazione',
@@ -600,7 +595,7 @@ export const FARMACI_URGENZA: Farmaco[] = [
       { via: 'volumetrica', testo: 'alta concentrazione (solo centrale): 5 fiale (100 mEq) in 200 mL SF = 250 mL (togliere 50 mL dalla sacca da 250)', conc: 0.4, q: 'mEq' },
     ],
     dosi: [{ etichetta: 'Infusione', q: 'mEq', t: 'h', min: 2, max: 20, start: 5, passo: 1 }],
-    avvisi: ['Periferica massimo 10 mEq/h (flebiti); centrale massimo 20 mEq/h, con monitor.', 'Corretto: 5 fiale in una sacca da 250 mL danno 300 mL (0,33 mEq/mL): togliere prima 50 mL.'],
+    avvisi: ['Periferica massimo 10 mEq/h (flebiti); centrale massimo 20 mEq/h, con monitor.'],
   },
   {
     id: 'nacl-3', nome: 'Sodio cloruro 3%', gruppo: 'Elettroliti e metabolismo',
@@ -616,7 +611,7 @@ export const FARMACI_URGENZA: Farmaco[] = [
     fiala: 'fiale 10 mL al 10% (1,36 mEq/mL; 27,2 mg/mL di calcio)', conc: { v: 1.36, q: 'mEq' },
     dosi: [{ etichetta: 'Dose (ev lenta)', q: 'mEq', kg: true, min: 0.4, max: 0.8, start: 0.4, passo: 0.1 }],
     righe: ['0,4–0,8 mEq/kg = 0,3–0,6 mL/kg al giorno.', 'Urgenza (iperkaliemia con alterazioni ECG, calcioantagonisti, ipocalcemia sintomatica): 10 mL in 5–10 min, meglio in vena centrale.'],
-    avvisi: ['Corretto: 0,4–0,8 mEq/kg corrispondono a 0,3–0,6 mL/kg, non 0,2–0,4. Necrosi se stravasa.'],
+    avvisi: ['Necrosi se stravasa.'],
   },
   {
     id: 'calcio-gluconato', nome: 'Calcio gluconato 10%', gruppo: 'Elettroliti e metabolismo',
