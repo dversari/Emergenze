@@ -141,7 +141,7 @@ export const LG_ADDOME_TORACE_NEURO: LineaGuida[] = [
       {
         titolo: 'Farmaci (70 kg)',
         punti: [
-          'Eparina non frazionata 5.000 UI ev in bolo (80 UI/kg), poi 18 UI/kg/h ≈ 1.250 UI/h; aPTT 1,5–2,5 volte.',
+          'Eparina non frazionata 5.000 UI ev in bolo (80 UI/kg), poi 18 UI/kg/h ≈ 1.250 UI/h (siringa 10.000 UI in 50 mL: 6,3 mL/h); aPTT 1,5–2,5 volte.',
           'Piperacillina/tazobactam 4,5 g ev ogni 6 h (allergia: vedi antibiotici, peritonite).',
           'Cristalloidi per perfusione; noradrenalina se necessario (evitare alte dosi).',
         ],
@@ -178,7 +178,7 @@ export const LG_ADDOME_TORACE_NEURO: LineaGuida[] = [
           'Lattulosio sciroppo 25 mL ogni 1–2 h per bocca/SNG fino a 2 evacuazioni morbide, poi titolare per 2–3 al giorno; se non può bere: clistere con 300 mL di lattulosio in 700 mL d’acqua.',
           'Rifaximina 550 mg ogni 12 h (o 400 mg ogni 8 h) in aggiunta.',
           'Albumina 20% 1 g/kg = 70 g ev (350 mL) al giorno per 2 giorni nell’insufficienza renale acuta.',
-          'Sindrome epatorenale: terlipressina (Glypressin 1 mg) 1 mg ev ogni 4–6 h (o infusione 2 mg/24 h) + albumina 20–40 g/die.',
+          'Sindrome epatorenale: terlipressina 1 mg ev ogni 4–6 h (EVER 0,2 mg/mL: 5 mL; SUN 0,1 mg/mL: 10 mL) o infusione 2 mg/24 h + albumina 20–40 g/die.',
           'Paracentesi > 5 L: albumina 8 g per litro rimosso.',
           'Tiamina 100 mg se alcol; evitare benzodiazepine (se astinenza: lorazepam o oxazepam a basse dosi).',
         ],
@@ -349,8 +349,8 @@ export const LG_ADDOME_TORACE_NEURO: LineaGuida[] = [
       {
         titolo: 'Farmaci (70 kg)',
         punti: [
-          'Labetalolo (Trandate fiale 100 mg/20 mL): 20 mg ev in 2 min (4 mL), poi 20–80 mg ogni 10 min (max 300 mg); oppure infusione 1–2 mg/min (fiale pure in siringa da 50: 0,2–0,4 mL/min = 12–24 mL/h).',
-          'Urapidil (Ebrantil fiale 50 mg/10 mL): 12,5–25 mg ev (2,5–5 mL), ripetibile dopo 5 min; poi 5–30 mg/h (es. 100 mg in 50 mL: 2,5–15 mL/h).',
+          'Labetalolo (Trandate fiale 100 mg/20 mL): 20 mg ev in 2 min (4 mL), poi 20–80 mg ogni 10 min (max 300 mg); oppure in pompa pura (2 fiale = 200 mg in 40 mL, 5 mg/mL) 15–160 mg/h = 3–32 mL/h (1–2 mg/min = 12–24 mL/h).',
+          'Urapidil (Ebrantil fiale 50 mg/10 mL): 12,5–25 mg ev (2,5–5 mL), ripetibile dopo 5 min; poi 5–30 mg/h in pompa pura (5 fiale = 250 mg in 50 mL, 5 mg/mL): 1–6 mL/h.',
           'Nitroglicerina (50 mg in 50 mL): 10–200 µg/min = 0,6–12 mL/h; iniziare a 1–2 mL/h nell’edema polmonare.',
         ],
       },

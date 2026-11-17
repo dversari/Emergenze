@@ -119,7 +119,7 @@ export const FARMACI: Farmaco[] = [
   {
     id: 'vancomicina', via: 'ev', nome: 'Vancomicina', fiale: 'fl 500 mg e 1 g',
     prep: 'Massimo 10 mg/min e 5 mg/mL: 1 g in 250 mL di SF in 100 min; 1,5 g in 300–500 mL in 150 min. Più veloce = sindrome dell’uomo rosso.',
-    dose: 'Paziente di 70 kg: carico 2 g ev = 2 fiale da 1 g (25–30 mg/kg di peso reale, massimo 3 g), poi 1–1,5 g ogni 12 h = 1 fiala da 1 g + 1 da 500 mg (15–20 mg/kg). In alternativa, dopo il carico, infusione continua 2 g/24 h in pompa (livello stazionario 20–25 mg/L)',
+    dose: 'Paziente di 70 kg: carico 2 g ev = 2 fiale da 1 g (25–30 mg/kg di peso reale, massimo 3 g), poi 1–1,5 g ogni 12 h = 1 fiala da 1 g + 1 da 500 mg (15–20 mg/kg). In alternativa, dopo il carico, infusione continua 2 g/24 h in pompa (livello stazionario 20–25 mg/L): siringa del PS 2 g (o 1 g) in 50 mL di SF a 2 mL/h',
     rene: [
       'Carico sempre pieno',
       'CrCl 50–90: 1–1,5 g ogni 12 h',

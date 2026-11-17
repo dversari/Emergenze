@@ -79,7 +79,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
           'Senza cardiopatia strutturale (no IVS marcata, no FE ridotta, no coronaropatia): flecainide (Almarytm) 2 mg/kg ev in 10 min (max 150 mg) o 200–300 mg os; propafenone (Rytmonorm) 1,5–2 mg/kg ev in 10 min o 450–600 mg os.',
           'Con flecainide (Almarytm) o propafenone (Rytmonorm) dare prima un farmaco che rallenta il nodo atrio-ventricolare: beta-bloccante (metoprololo (Lopresor) 5 mg ev, o per bocca) oppure verapamil (Isoptin) o diltiazem. Motivo: questi farmaci possono trasformare la FA in un flutter lento che passa ai ventricoli 1:1, con frequenza molto alta.',
           'Vernakalant (non disponibile in PS a Prato) 3 mg/kg ev in 10 min, seconda dose 2 mg/kg dopo 15 min. Non con SCA recente, scompenso grave, PAS <100, stenosi aortica severa, QT lungo.',
-          'Con cardiopatia strutturale o scompenso: amiodarone (Cordarone) 300 mg ev in 30–60 min, poi 900–1200 mg nelle 24 h. Conversione lenta (ore).',
+          'Con cardiopatia strutturale o scompenso: amiodarone (Cordarone) 300 mg ev in 30–60 min, poi 900 mg nelle 24 h (pompa: 6 fiale + 32 mL G5% = 18 mg/mL a 2,1 mL/h; fino a 1200 mg). Conversione lenta (ore).',
         ],
       },
       {
@@ -541,7 +541,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       'Intubare se emorragia massiva, scarso controllo delle vie aeree o agitazione.',
       'Glasgow-Blatchford ≤ 1: gestione ambulatoriale con endoscopia programmata.',
       'Non varicosa: endoscopia entro 24 h dopo la stabilizzazione; non entro 6–12 h salvo instabilità che persiste nonostante la rianimazione (ESGE 2026). IPP ad alte dosi prima, senza ritardare l’endoscopia; procinetico prima se sanguinamento importante: eritromicina 250 mg ev, se non disponibile metoclopramide 10 mg ev.',
-      'Sospetta varicosa (cirrosi): vasoattivo subito: terlipressina (Glypressin) di scelta; octreotide (Sandostatina) se cardiopatia ischemica, arteriopatia periferica, ischemia d’arto o angina abdominis. Ceftriaxone 1 g/die fino a 7 giorni, procinetico, endoscopia entro 12 h dopo la stabilizzazione.',
+      'Sospetta varicosa (cirrosi): vasoattivo subito: terlipressina di scelta; octreotide se cardiopatia ischemica, arteriopatia periferica, ischemia d’arto o angina abdominis. Ceftriaxone 1 g/die fino a 7 giorni, procinetico, endoscopia entro 12 h dopo la stabilizzazione.',
       'Emorragia bassa, stabile e autolimitata: Oakland ≤ 8 → dimissione con colonscopia ambulatoriale.',
       'Niente sondino naso-gastrico di routine. Acido tranexamico non raccomandato.',
     ],
@@ -549,11 +549,11 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Farmaci (70 kg)',
         punti: [
-          'IPP: esomeprazolo o pantoprazolo 80 mg ev in bolo = 2 fiale da 40 mg, poi 8 mg/h (o 40 mg ogni 12 h); dopo emostasi endoscopica ad alto rischio, alte dosi per 72 h.',
+          'IPP: omeprazolo (Antra) 80 mg ev in bolo = 2 fiale da 40 mg, poi 8 mg/h: siringa del PS 5 fiale (200 mg) in 50 mL di SF (4 mg/mL) a 2 mL/h (o 40 mg ogni 12 h); dopo emostasi endoscopica ad alto rischio, alte dosi per 72 h.',
           'Eritromicina 250 mg ev in 20–30 min, 30–120 min prima dell’endoscopia (controllare QT).',
           'Se l’eritromicina non è disponibile: metoclopramide (Plasil) 10 mg ev = 1 fiala da 10 mg/2 mL prima dell’endoscopia (ESGE 2026, raccomandazione debole).',
-          'Terlipressina (Glypressin) 2 mg ev ogni 4 h (2 fiale da 1 mg) fino al controllo, poi 1 mg ogni 4 h, per 2–5 giorni. Evitarla se cardiopatia ischemica, arteriopatia periferica, ischemia d’arto o intestinale, aritmie.',
-          'Octreotide (Sandostatina) in alternativa: 50 µg ev in bolo (½ fiala da 100 µg; ripetibile dopo 1 h se sanguina ancora), poi 50 µg/h per 2–5 giorni: 5 fiale da 100 µg in 50 mL di fisiologica = 10 µg/mL a 5 mL/h. Verificare il formato in reparto.',
+          'Terlipressina 2 mg ev ogni 4 h fino al controllo, poi 1 mg ogni 4 h, per 2–5 giorni. In PS due formati: EVER 0,2 mg/mL (fiala 5 mL = 1 mg: 2 mg = 2 fiale = 10 mL) e SUN 0,1 mg/mL (fiala 8,5 mL = 0,85 mg: 2 mg = 20 mL = 2 fiale + 3 mL). Controllare la scatola: a parità di mL la SUN dà metà dose. Evitarla se cardiopatia ischemica, arteriopatia periferica, ischemia d’arto o intestinale, aritmie.',
+          'Octreotide in alternativa (fiale 0,1 mg/1 mL = 100 µg): 50 µg ev in bolo (½ fiala; ripetibile dopo 1 h se sanguina ancora), poi 50 µg/h per 2–5 giorni: 5 fiale (500 µg) + 45 mL di fisiologica = 10 µg/mL a 5 mL/h.',
           'Somatostatina: 250 µg in bolo poi 250–500 µg/h.',
           'Ceftriaxone 1 g ev al giorno fino a 7 giorni in tutti i cirrotici con emorragia.',
           'Varicosa, per prevenire l’encefalopatia (opzione, non obbligatoria): lattulosio 25 mL ogni 12 h per os o da sondino fino a 2–3 evacuazioni morbide al giorno, specie se l’alvo è chiuso; clistere evacuativo se non può assumere per os.',
@@ -800,7 +800,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         titolo: 'Farmaci (70 kg)',
         punti: [
           'Ringer lattato/acetato 30 mL/kg ≈ 2.100 mL nelle prime 3 h (boli da 500 mL rivalutando); peso ideale/aggiustato se BMI > 30.',
-          'Noradrenalina: 2 fiale da 2 mg in SF fino a 50 mL (80 µg/mL), partire da 0,05 µg/kg/min ≈ 2,5 mL/h; da vena periferica grossa e controllata (verificare il formato in reparto).',
+          'Noradrenalina (fiale 2 mg/1 mL): 4 fiale (8 mg) + 36 mL SF = 40 mL (200 µg/mL); 70 kg: 0,05 µg/kg/min ≈ 1 mL/h, 0,1 ≈ 2,1 mL/h; da vena periferica grossa e controllata finché non c’è il CVC.',
           'Idrocortisone (Flebocortid) 200 mg/die: 50 mg ev ogni 6 h (o infusione) se servono vasopressori; senza fludrocortisone di routine.',
           'Vasopressina da aggiungere se noradrenalina 0,25–0,5 µg/kg/min senza raggiungere la PAM (terapia intensiva).',
         ],
@@ -888,7 +888,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Insulina e potassio (70 kg)',
         punti: [
-          'Insulina rapida (Actrapid) 50 UI in SF fino a 50 mL = 1 UI/mL: 0,1 U/kg/h = 7 mL/h; 0,05 U/kg/h = 3,5 mL/h. Bolo solo se la pompa ritarda.',
+          'Insulina rapida (Actrapid, flacone 1000 UI/10 mL): 0,2 mL (20 UI) + 19,8 mL SF = 20 mL = 1 UI/mL: 0,1 U/kg/h = 7 mL/h; 0,05 U/kg/h = 3,5 mL/h. Bolo solo se la pompa ritarda.',
           'K < 3,5: niente insulina; KCl 10–20 mEq/h (fiale 2 mEq/mL da 10 mL = 20 mEq) con monitor, fino a K ≥ 3,5.',
           'K 3,5–5: 10–20 mEq di KCl in ogni litro di liquidi.',
           'K > 5: niente potassio, ricontrollare ogni 1–2 h.',
@@ -1022,7 +1022,8 @@ export const LINEE_GUIDA: LineaGuida[] = [
         titolo: 'Farmaci (70 kg)',
         punti: [
           'Diazepam (Valium) 10 mg ev = 1 fiala da 10 mg/2 mL in 2 min, ripetibile una volta dopo 5 min (0,15–0,2 mg/kg per dose, max 10 mg).',
-          'Senza vena: midazolam (Ipnovel) 10 mg im = 2 fiale da 5 mg/1 mL (o buccale/intranasale); diazepam (Valium) 10 mg rettale (Micropam).',
+          'In alternativa lorazepam (fiale 4 mg/1 mL, in frigo) 4 mg ev = 1 fiala in 2 min (0,1 mg/kg, max 4 mg), ripetibile una volta dopo 5 min.',
+          'Senza vena: midazolam (Ipnovel) 10 mg im = 2 mL della fiala da 15 mg/3 mL (o buccale/intranasale); diazepam (Valium) 10 mg rettale (Micropam).',
           'Levetiracetam (Keppra) 60 mg/kg (max 4.500 mg) = 4.200 mg = 42 mL (8,4 fiale da 500 mg/5 mL) in 100 mL di SF in 10 min.',
           'Valproato (Depakin) 40 mg/kg (max 3.000 mg) = 2.800 mg = 7 flaconi da 400 mg in 100 mL di SF in 10 min (no in gravidanza, epatopatia, malattie mitocondriali).',
           'Fenitoina (Dintoina) 20 mg/kg = 1.400 mg = 5,6 fiale da 250 mg/5 mL, non più di 50 mg/min (≈ 28 min) con monitor (ipotensione, aritmie).',
@@ -1068,7 +1069,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Forma refrattaria (70 kg)',
         punti: [
-          'Adrenalina 1 mg (1 fiala da 1 mg/mL) in 100 mL di SF (10 µg/mL): partire da 0,5–1 mL/kg/h = 35–70 mL/h, titolare; monitor e PA invasiva se possibile.',
+          'Adrenalina in pompa (siringa del PS: 5 fiale da 1 mg + 45 mL SF = 100 µg/mL): partire da 0,05–0,1 µg/kg/min = 2–4 mL/h a 70 kg, titolare (range 0,01–0,5); monitor e PA invasiva se possibile.',
           'Liquidi: cristalloidi 500–1.000 mL in bolo, ripetibili (anche diversi litri).',
           'Beta-bloccati: glucagone (GlucaGen) 1–2 mg ev ogni 5 min.',
           'Broncospasmo: salbutamolo (Broncovaleas) nebulizzato; edema laringeo: adrenalina nebulizzata 5 mg (5 fiale), intubazione precoce da parte di esperto.',
@@ -1156,8 +1157,8 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Pressione arteriosa (70 kg)',
         punti: [
-          'Labetalolo (Trandate 100 mg/20 mL): 10–20 mg ev in 2 min, ripetibile ogni 10 min fino a 300 mg; poi 0,5–2 mg/min.',
-          'Urapidil (Ebrantil 50 mg/10 mL): 10–25 mg ev lento, ripetibile dopo 5 min; poi 5–30 mg/h.',
+          'Labetalolo (Trandate 100 mg/20 mL): 10–20 mg ev in 2 min, ripetibile ogni 10 min fino a 300 mg; poi 0,5–2 mg/min (in pompa pura: 2 fiale = 200 mg in 40 mL, 5 mg/mL; range del PS 15–160 mg/h = 3–32 mL/h).',
+          'Urapidil (Ebrantil 50 mg/10 mL): 10–25 mg ev lento, ripetibile dopo 5 min; poi 5–30 mg/h (pompa: 5 fiale pure = 250 mg in 50 mL, 5 mg/mL: 1–6 mL/h).',
           'PAS > 220: infusione continua con controllo ravvicinato (ogni 5–10 min o arteriosa).',
         ],
       },
@@ -1453,7 +1454,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       {
         titolo: 'Terapia in PS (70 kg)',
         punti: [
-          'Eparina sodica 5000 UI ev in bolo (1 fiala da 5000 UI/mL), poi infusione 18 UI/kg/h = circa 1250 UI/h (25.000 UI in 50 mL = 2,5 mL/h) secondo il chirurgo vascolare; aPTT ratio 1,5–2,5.',
+          'Eparina sodica 5000 UI ev in bolo (1 fiala da 5000 UI/mL), poi infusione 18 UI/kg/h = circa 1250 UI/h (siringa del PS: 2 mL = 10.000 UI + 48 mL SF = 200 UI/mL: 6,3 mL/h) secondo il chirurgo vascolare; aPTT ratio 1,5–2,5.',
           'Analgesia: morfina 2–4 mg ev ripetibile o fentanil (Fentanest) 50 µg ev.',
           'Arto in posizione declive, protetto, niente borse calde o fredde. Digiuno, accesso venoso, idratazione.',
           'Trombolisi intra-arteriosa e trombectomia percutanea: le decide il chirurgo vascolare o il radiologo interventista (classe I–IIa).',
@@ -1668,8 +1669,8 @@ export const LINEE_GUIDA: LineaGuida[] = [
         titolo: 'Farmaci (70 kg)',
         punti: [
           'Atropina 0,5 mg ev (1 fiala da 0,5 mg) ogni 3–5 min, massimo 3 mg.',
-          'Isoprenalina: 1 fiala da 0,2 mg in 50 mL di glucosata 5% (4 µg/mL): 5 µg/min = 75 mL/h, titolare.',
-          'Adrenalina: 1 mg in 50 mL di SF (20 µg/mL): 2–10 µg/min = 6–30 mL/h.',
+          'Isoprenalina: 5 fiale da 0,2 mg (1 mg) + 45 mL SF = 50 mL (20 µg/mL): 5 µg/min = 15 mL/h; range 1–20 µg/min = 3–60 mL/h, titolare.',
+          'Adrenalina: 5 fiale da 1 mg + 45 mL SF = 50 mL (100 µg/mL): 2–10 µg/min = 1,2–6 mL/h.',
           'Beta-bloccante o calcio-antagonista: glucagone (GlucaGen) 2–10 mg ev (con calcio e insulina ad alte dosi su consiglio del tossicologo).',
           'Digossina (Lanoxin): anticorpi antidigossina (Tossicologia).',
           'Trapiantato o lesione midollare: aminofillina 100–200 mg ev lenta.',
@@ -1713,7 +1714,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
           'Valsalva modificata: soffiare 15 s in una siringa da 10 mL (40 mmHg) da semiseduto, poi subito supino con gambe sollevate a 45° per 15 s.',
           'Adenosina (Krenosin) 6 mg (1 fiala) in bolo rapido + 20 mL di SF in vena grossa; poi 12 mg, poi 18 mg. Avvisare il paziente: per qualche secondo vampate, oppressione toracica e sensazione di morte imminente, è atteso; evitare nell’asma grave e nella preeccitazione con FA.',
           'Alternativa nella TPSV: verapamil (Isoptin) 5 mg ev in 2 min (no se QRS largo o scompenso) o metoprololo (Lopresor) 5 mg ev.',
-          'Amiodarone (Cordarone) 300 mg = 2 fiale da 150 mg in 250 mL di glucosata 5%.',
+          'Amiodarone (Cordarone) 300 mg = 2 fiale da 150 mg in 250 mL di glucosata 5%; poi pompa: 6 fiale (900 mg) + 32 mL G5% = 50 mL (18 mg/mL), 2,1 mL/h = 900 mg/die (vena centrale se possibile).',
         ],
       },
     ],
@@ -1878,7 +1879,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         titolo: 'Farmaci ed emoderivati (70 kg)',
         punti: [
           'Acido tranexamico (Tranex 500 mg/5 mL): 1 g = 2 fiale in 100 mL di SF in 10 min, poi 1 g in 8 h. Non dopo 3 h dal trauma.',
-          'Fibrinogeno concentrato (Haemocomplettan o Fibryga 1 g): 3–4 g se fibrinogeno < 1,5 g/L o sanguinamento massivo.',
+          'Fibrinogeno concentrato (RiaSTAP flacone 1 g, 50 mL di acqua ppi): 3–4 g = 3–4 flaconi se fibrinogeno < 1,5 g/L o sanguinamento massivo.',
           'Emazie e plasma presto (rapporto almeno 1:2) se emorragia massiva; piastrine se < 50.000; poi guidati da esami o test viscoelastici.',
           'Calcio cloruro 10% 10 mL o calcio gluconato 10% 30 mL se calcio ionizzato < 1,15 mmol/L (anche a ogni 4 unità).',
           'Intubazione nello shock: ketamina 0,5–1 mg/kg = 35–70 mg (dose ridotta), rocuronio 1,2 mg/kg = 84 mg (2 fiale da 50 mg); pronti con noradrenalina.',
@@ -1969,7 +1970,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         titolo: 'Ventilazione e circolo (70 kg)',
         punti: [
           'Volume corrente 6–8 mL/kg di peso ideale (420–560 mL per 70 kg), PEEP 5–8.',
-          'Noradrenalina: 2 fiale da 2 mg in SF fino a 50 mL (80 µg/mL), partenza 0,05 µg/kg/min ≈ 2,5 mL/h.',
+          'Noradrenalina: 4 fiale da 2 mg/1 mL + 36 mL SF = 40 mL (200 µg/mL); 70 kg: 0,05 µg/kg/min ≈ 1 mL/h.',
           'Sedazione con propofol (Diprivan) o midazolam (Ipnovel) + fentanil (Fentanest).',
         ],
       },
@@ -2914,7 +2915,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
           'Emazie concentrate: 1 unità ≈ +1 g/dL di Hb; in 1–2 h (più lenta se scompenso: considerare furosemide 20 mg ev tra le unità).',
           'Piastrine: < 10.000 profilassi; < 50.000 se sanguinamento o procedura invasiva; < 100.000 se sanguinamento cerebrale o neurochirurgia. 1 pool ≈ +20–30.000.',
           'Plasma fresco congelato: sanguinamento con PT/INR > 1,5 o aPTT > 1,5 volte: 15 mL/kg ≈ 1.000 mL (4 unità). Dicumarolici: complesso protrombinico, non plasma.',
-          'Fibrinogeno < 1,5 g/L con sanguinamento: fibrinogeno concentrato 3–4 g.',
+          'Fibrinogeno < 1,5 g/L con sanguinamento: fibrinogeno concentrato (RiaSTAP 1 g) 3–4 g.',
           'Emorragia massiva: emazie e plasma presto (almeno 1:2), acido tranexamico, calcio; vedi PDTA trauma maggiore.',
         ],
       },
@@ -3001,7 +3002,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
         punti: [
           'Punteggio ISTH ≥ 5 = CID conclamata (piastrine, D-dimero, PT, fibrinogeno); ripetere ogni giorno.',
           'Trattare la causa: antibiotico e controllo della fonte nella sepsi, evacuazione uterina nell’emorragia ostetrica, ATRA subito se leucemia promielocitica sospetta.',
-          'Se sanguina o deve fare procedure: piastrine se < 50.000; plasma 15 mL/kg se PT o aPTT > 1,5 volte; fibrinogeno < 1,5 g/L: fibrinogeno concentrato 3–4 g (o crioprecipitato).',
+          'Se sanguina o deve fare procedure: piastrine se < 50.000; plasma 15 mL/kg se PT o aPTT > 1,5 volte; fibrinogeno < 1,5 g/L: fibrinogeno concentrato (RiaSTAP 1 g) 3–4 g (o crioprecipitato).',
           'Senza sanguinamento: piastrine solo se < 10–20.000; non correggere numeri.',
           'Fenotipo trombotico (sepsi, neoplasie, porpora fulminante): profilassi eparinica se non sanguina. Acido tranexamico solo nelle forme iperfibrinolitiche (trauma, ostetricia), non nella CID trombotica.',
         ],

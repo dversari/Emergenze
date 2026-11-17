@@ -1,7 +1,8 @@
 /*
  * Farmaci d'urgenza: fiale, preparazioni, dosi e calcolo della velocità per il peso del paziente.
  * Base: schede di infusione del DEA (versione 4.0, 05/05/2025), corrette e integrate (16/11/2026).
- * Fiale e diluizioni come nella scheda di partenza: verificare le confezioni del proprio reparto.
+ * 17/11/2026: fiale e preparazioni allineate alla tabella delle infusioni del PS di Prato e alle confezioni
+ * fotografate in reparto (le voci con «PS Prato» nella preparazione). Le altre restano come nella scheda di partenza.
  *
  * Calcolo: dose × peso (se /kg) → quantità all'ora → mL/h = quantità / concentrazione della preparazione.
  */
@@ -63,6 +64,7 @@ export type Gruppo =
   | 'Antipertensivi e nitrati'
   | 'Coagulazione e trombolisi'
   | 'Antidoti'
+  | 'Respiratorio e allergia'
   | 'Analgesia e sedazione'
   | 'Intubazione (RSI)'
   | 'Agitazione'
@@ -71,7 +73,7 @@ export type Gruppo =
 
 export const GRUPPI: Gruppo[] = [
   'Vasoattivi e inotropi', 'Vasopressori in bolo', 'Antiaritmici e frequenza', 'Antipertensivi e nitrati',
-  'Coagulazione e trombolisi', 'Antidoti', 'Analgesia e sedazione', 'Intubazione (RSI)', 'Agitazione',
+  'Coagulazione e trombolisi', 'Antidoti', 'Respiratorio e allergia', 'Analgesia e sedazione', 'Intubazione (RSI)', 'Agitazione',
   'Elettroliti e metabolismo', 'Gastro e diuretici',
 ]
 
@@ -108,58 +110,67 @@ export const FARMACI_URGENZA: Farmaco[] = [
   {
     id: 'noradrenalina', nome: 'Noradrenalina', gruppo: 'Vasoattivi e inotropi', foto: true,
     fiala: 'fiale 2 mg/1 mL', conc: { v: 2, q: 'mg' },
-    prep: [{ via: 'siringa', testo: '8 fiale (16 mg) + 42 mL G5% = 50 mL', conc: 320, q: 'mcg' }],
-    dosi: [{ etichetta: 'Infusione', q: 'mcg', kg: true, t: 'min', min: 0.02, max: 1, start: 0.1, passo: 0.01 }],
-    righe: ['Dose abituale 0,05–0,5 mcg/kg/min, titolare sulla PAM ≥ 65 mmHg.', 'Via centrale appena possibile; periferica solo temporanea, in vena grossa e controllata.'],
+    prep: [{ via: 'siringa', testo: 'PS Prato: 4 fiale (8 mg) + 36 mL SF = 40 mL (0,2 mg/mL)', conc: 200, q: 'mcg' }],
+    dosi: [{ etichetta: 'Infusione', q: 'mcg', kg: true, t: 'min', min: 0.01, max: 1, start: 0.1, passo: 0.01 }],
+    righe: ['Range 0,01–1 mcg/kg/min; abituale 0,05–0,5, titolare sulla PAM ≥ 65 mmHg.', 'Via centrale appena possibile; periferica solo temporanea, in vena grossa e controllata.'],
   },
   {
     id: 'adrenalina-infusione', nome: 'Adrenalina in infusione', gruppo: 'Vasoattivi e inotropi', frigo: true, foto: true,
     fiala: 'fiale 1 mg/1 mL', conc: { v: 1, q: 'mg' },
-    prep: [{ via: 'siringa', testo: '3 fiale (3 mg) + 47 mL SF o G5% = 50 mL', conc: 60, q: 'mcg' }],
+    prep: [{ via: 'siringa', testo: 'PS Prato: 5 fiale (5 mg) + 45 mL SF = 50 mL (0,1 mg/mL)', conc: 100, q: 'mcg' }],
     dosi: [{ etichetta: 'Infusione', q: 'mcg', kg: true, t: 'min', min: 0.01, max: 0.5, start: 0.05, passo: 0.005 }],
-    righe: ['Dose abituale 0,01–0,3 mcg/kg/min (inotropo e vasopressore; anafilassi refrattaria, bradicardia).'],
+    righe: ['Range 0,01–0,5 mcg/kg/min (inotropo e vasopressore; anafilassi refrattaria, bradicardia). Bradicardia: 2–10 mcg/min = 1,2–6 mL/h.'],
   },
   {
     id: 'dopamina', nome: 'Dopamina', commerciale: 'Revivan', gruppo: 'Vasoattivi e inotropi',
     fiala: 'fiale 200 mg/5 mL', conc: { v: 40, q: 'mg' },
     prep: [
-      { via: 'siringa', testo: '1 fiala + 45 mL SF = 50 mL', conc: 4, q: 'mg' },
+      { via: 'siringa', testo: 'PS Prato: 2 fiale (400 mg) + 40 mL SF = 50 mL (8 mg/mL)', conc: 8, q: 'mg' },
       { via: 'volumetrica', testo: '1 fiala + 250 mL SF (circa 0,8 mg/mL)', conc: 200 / 255, q: 'mg' },
     ],
     dosi: [{ etichetta: 'Infusione', q: 'mcg', kg: true, t: 'min', min: 2, max: 20, start: 5, passo: 0.5 }],
     righe: ['Dose base 5–10 mcg/kg/min; alta 10–20 mcg/kg/min (oltre 20 nessun beneficio, più aritmie).'],
   },
   {
-    id: 'dobutamina', nome: 'Dobutamina', commerciale: 'Miozac', gruppo: 'Vasoattivi e inotropi',
+    id: 'dobutamina', nome: 'Dobutamina', commerciale: 'Dobutrex', gruppo: 'Vasoattivi e inotropi',
     fiala: 'fiale 250 mg/20 mL', conc: { v: 12.5, q: 'mg' },
     prep: [
-      { via: 'siringa', testo: '1 fiala + 30 mL SF o G5% = 50 mL', conc: 5, q: 'mg' },
+      { via: 'siringa', testo: 'PS Prato: 1 fiala (250 mg) + 30 mL SF = 50 mL (5 mg/mL)', conc: 5, q: 'mg' },
       { via: 'volumetrica', testo: '1 fiala + 230 mL SF o G5% = 250 mL', conc: 1, q: 'mg' },
     ],
     dosi: [{ etichetta: 'Infusione', q: 'mcg', kg: true, t: 'min', min: 2.5, max: 20, start: 5, passo: 0.5 }],
-    righe: ['Dose abituale 2,5–10 mcg/kg/min (fino a 20).'],
+    righe: ['Range 2–20 mcg/kg/min; abituale 2,5–10.'],
   },
   {
-    id: 'argipressina', nome: 'Argipressina (vasopressina)', commerciale: 'Empressin', gruppo: 'Vasoattivi e inotropi', frigo: true,
-    fiala: 'fiale 40 UI/2 mL (20 UI/mL)', conc: { v: 20, q: 'UI' },
-    prep: [{ via: 'siringa', testo: '1 fiala + 48 mL G5% = 50 mL', conc: 0.8, q: 'UI' }],
-    dosi: [{ etichetta: 'Infusione', q: 'UI', t: 'min', min: 0.01, max: 0.04, start: 0.03, passo: 0.005 }],
-    righe: ['0,01–0,03 UI/min in aggiunta alla noradrenalina; 0,04 UI/min solo temporaneamente.'],
+    id: 'argipressina', nome: 'Argipressina (vasopressina)', gruppo: 'Vasoattivi e inotropi', frigo: true,
+    fiala: 'fiale 20 UI/1 mL', conc: { v: 20, q: 'UI' },
+    prep: [{ via: 'siringa', testo: 'PS Prato: 2 fiale (40 UI) + 48 mL SF = 50 mL (0,8 UI/mL)', conc: 0.8, q: 'UI' }],
+    dosi: [{ etichetta: 'Infusione', q: 'UI', t: 'min', min: 0.01, max: 0.05, start: 0.03, passo: 0.005 }],
+    righe: ['Range 0,01–0,05 UI/min in aggiunta alla noradrenalina; di solito 0,03 UI/min.'],
+    avvisi: ['La tabella del reparto riporta 1 UI/mL, ma 40 UI in 50 mL fanno 0,8 UI/mL: il calcolo usa 0,8.'],
   },
   {
     id: 'isoprenalina', nome: 'Isoprenalina', gruppo: 'Vasoattivi e inotropi',
     fiala: 'fiale 0,2 mg/1 mL', conc: { v: 0.2, q: 'mg' },
-    prep: [{ via: 'siringa', testo: '5 fiale (1 mg) + 45 mL SF o G5% = 50 mL', conc: 20, q: 'mcg' }],
-    dosi: [{ etichetta: 'Infusione', q: 'mcg', t: 'min', min: 1, max: 10, start: 2, passo: 0.5 }],
-    righe: ['2–10 mcg/min, titolare sulla frequenza.'],
+    prep: [{ via: 'siringa', testo: 'PS Prato: 5 fiale (1 mg) + 45 mL SF = 50 mL (20 mcg/mL)', conc: 20, q: 'mcg' }],
+    dosi: [{ etichetta: 'Infusione', q: 'mcg', t: 'min', min: 1, max: 20, start: 2, passo: 0.5 }],
+    righe: ['Range 1–20 mcg/min, titolare sulla frequenza (di solito 2–10).'],
     avvisi: ['NO se aritmie ventricolari o sindrome coronarica acuta.'],
   },
   {
-    id: 'terlipressina', nome: 'Terlipressina', commerciale: 'Glipressina', gruppo: 'Vasoattivi e inotropi', frigo: true,
-    fiala: 'fiale 0,2 mg/mL', conc: { v: 0.2, q: 'mg' },
-    dosi: [{ etichetta: 'Bolo lento ev', q: 'mg', min: 1, max: 2, start: 2, passo: 1 }],
-    righe: ['Emorragia da varici: 2 mg ev ogni 4 h fino al controllo (24–48 h), poi 1 mg ogni 4 h, per 2–5 giorni in tutto.'],
-    avvisi: ['Evitarla se cardiopatia ischemica, arteriopatia periferica, ischemia d’arto o intestinale: usare octreotide.'],
+    id: 'terlipressina', nome: 'Terlipressina', commerciale: 'EVER Pharma, SUN', gruppo: 'Vasoattivi e inotropi', frigo: true,
+    fiala: 'EVER 0,2 mg/mL, fiale 5 mL = 1 mg; SUN 0,1 mg/mL, fiale 8,5 mL = 0,85 mg', conc: { v: 0.2, q: 'mg' },
+    prep: [{ via: 'siringa', testo: 'infusione: 2 fiale EVER (2 mg, 10 mL) + 40 mL SF = 50 mL (0,04 mg/mL)', conc: 0.04, q: 'mg' }],
+    dosi: [
+      { etichetta: 'Bolo lento ev (mL della EVER 0,2 mg/mL)', q: 'mg', min: 1, max: 2, start: 2, passo: 1 },
+      { etichetta: 'Infusione continua (sindrome epatorenale)', q: 'mg', t: 'die', min: 2, max: 12, start: 2, passo: 1, prep: [0] },
+    ],
+    righe: [
+      'Emorragia da varici: 2 mg ev ogni 4 h fino al controllo (24–48 h), poi 1 mg ogni 4 h, per 2–5 giorni.',
+      'EVER (0,2 mg/mL): 1 mg = 5 mL = 1 fiala; 2 mg = 10 mL = 2 fiale.',
+      'SUN (0,1 mg/mL): 1 mg = 10 mL (1 fiala + 1,5 mL); 2 mg = 20 mL (2 fiale + 3 mL).',
+    ],
+    avvisi: ['Due concentrazioni in reparto: a parità di mL la SUN dà metà dose. Controllare la scatola.', 'Evitarla se cardiopatia ischemica, arteriopatia periferica, ischemia d’arto o intestinale: usare octreotide.'],
   },
   // ── Vasopressori in bolo ──
   {
@@ -194,12 +205,15 @@ export const FARMACI_URGENZA: Farmaco[] = [
   {
     id: 'amiodarone', nome: 'Amiodarone', commerciale: 'Cordarone', gruppo: 'Antiaritmici e frequenza',
     fiala: 'fiale 150 mg/3 mL', conc: { v: 50, q: 'mg' },
-    prep: [{ via: 'volumetrica', testo: '4 fiale (600 mg) + 250 mL G5% (circa 2,3 mg/mL)', conc: 600 / 262, q: 'mg' }],
+    prep: [
+      { via: 'siringa', testo: 'PS Prato: 6 fiale (900 mg) + 32 mL G5% = 50 mL (18 mg/mL), vena centrale se possibile', conc: 18, q: 'mg' },
+      { via: 'volumetrica', testo: '4 fiale (600 mg) + 250 mL G5% (circa 2,3 mg/mL)', conc: 600 / 262, q: 'mg' },
+    ],
     dosi: [
       { etichetta: 'Carico in 100 mL G5% in 30 min', q: 'mg', kg: true, min: 5, max: 5, start: 5, passo: 1, inMin: 30, sacca: 100 },
-      { etichetta: 'Infusione', q: 'mg', kg: true, t: 'die', min: 10, max: 15, start: 15, passo: 1, tetto: 1200 },
+      { etichetta: 'Infusione', q: 'mg', kg: true, t: 'die', min: 8, max: 15, start: 13, passo: 1, tetto: 1200 },
     ],
-    righe: ['Arresto in FV/TV senza polso: 300 mg ev in bolo, poi 150 mg.'],
+    righe: ['Siringa del PS: 2,1 mL/h = 900 mg/die; 1,7 mL/h = 750 mg/die; 1,4 mL/h = 600 mg/die.', 'Arresto in FV/TV senza polso: 300 mg ev in bolo, poi 150 mg.'],
     avvisi: ['Massimo 1200 mg nelle 24 h (oltre 80 kg il calcolo si ferma al tetto).', 'Concentrazioni > 2 mg/mL: preferire la vena centrale (flebiti).'],
   },
   {
@@ -248,9 +262,9 @@ export const FARMACI_URGENZA: Farmaco[] = [
     prep: [{ via: 'siringa', testo: 'puro: 5 fiale = 50 mL', conc: 10, q: 'mg' }],
     dosi: [
       { etichetta: 'Carico in 1 min', q: 'mg', kg: true, min: 0.5, max: 0.5, start: 0.5, passo: 0.1 },
-      { etichetta: 'Mantenimento', q: 'mg', kg: true, t: 'min', min: 0.05, max: 0.3, start: 0.05, passo: 0.05 },
+      { etichetta: 'Mantenimento', q: 'mcg', kg: true, t: 'min', min: 25, max: 300, start: 50, passo: 25 },
     ],
-    righe: ['Aumentare di 0,05 mg/kg/min ogni 5 min, ripetendo ogni volta il carico, fino al bersaglio.'],
+    righe: ['Range 25–300 mcg/kg/min; bolo iniziale con la stessa siringa (PS Prato: 5 fiale pure = 500 mg in 50 mL).', 'Aumentare di 50 mcg/kg/min ogni 5 min, ripetendo ogni volta il carico, fino al bersaglio.'],
   },
   {
     id: 'landiololo', nome: 'Landiololo', commerciale: 'Landiobloc', gruppo: 'Antiaritmici e frequenza',
@@ -265,20 +279,20 @@ export const FARMACI_URGENZA: Farmaco[] = [
   {
     id: 'lidocaina', nome: 'Lidocaina', gruppo: 'Antiaritmici e frequenza',
     fiala: 'fiale 200 mg/10 mL (20 mg/mL)', conc: { v: 20, q: 'mg' },
-    prep: [{ via: 'siringa', testo: 'pura (20 mg/mL)', conc: 20, q: 'mg' }],
+    prep: [{ via: 'siringa', testo: 'PS Prato: 5 fiale pure (1000 mg) = 50 mL (20 mg/mL)', conc: 20, q: 'mg' }],
     dosi: [
       { etichetta: 'Bolo', q: 'mg', kg: true, min: 1, max: 1.5, start: 1, passo: 0.5 },
-      { etichetta: 'Infusione', q: 'mg', kg: true, t: 'min', min: 0.01, max: 0.05, start: 0.02, passo: 0.005 },
+      { etichetta: 'Infusione', q: 'mcg', kg: true, t: 'min', min: 15, max: 50, start: 20, passo: 5 },
     ],
-    righe: ['Infusione 0,5–4 mg/min.'],
+    righe: ['Range 15–50 mcg/kg/min (circa 1–3,5 mg/min a 70 kg).'],
     avvisi: ['NO se WPW o BAV avanzato.'],
   },
   // ── Antipertensivi ──
   {
-    id: 'urapidil', nome: 'Urapidil', commerciale: 'Urasap, Ebrantil', gruppo: 'Antipertensivi e nitrati',
+    id: 'urapidil', nome: 'Urapidil', commerciale: 'Ebrantil', gruppo: 'Antipertensivi e nitrati',
     fiala: 'fiale 50 mg/10 mL (5 mg/mL)', conc: { v: 5, q: 'mg' },
     prep: [
-      { via: 'siringa', testo: 'puro (5 mg/mL)', conc: 5, q: 'mg' },
+      { via: 'siringa', testo: 'PS Prato: 5 fiale pure (250 mg) = 50 mL (5 mg/mL)', conc: 5, q: 'mg' },
       { via: 'volumetrica', testo: '5 fiale + 450 mL SF = 500 mL', conc: 0.5, q: 'mg' },
     ],
     dosi: [
@@ -290,12 +304,12 @@ export const FARMACI_URGENZA: Farmaco[] = [
     id: 'labetalolo', nome: 'Labetalolo', commerciale: 'Trandate', gruppo: 'Antipertensivi e nitrati',
     fiala: 'fiale 100 mg/20 mL (5 mg/mL)', conc: { v: 5, q: 'mg' },
     prep: [
-      { via: 'siringa', testo: 'puro (5 mg/mL)', conc: 5, q: 'mg' },
+      { via: 'siringa', testo: 'PS Prato: 2 fiale pure (200 mg) = 40 mL (5 mg/mL)', conc: 5, q: 'mg' },
       { via: 'volumetrica', testo: '10 fiale + 300 mL SF = 500 mL', conc: 2, q: 'mg' },
     ],
     dosi: [
       { etichetta: 'Bolo (carico 20 mg, poi 20–80 mg ogni 5–10 min)', q: 'mg', min: 20, max: 80, start: 20, passo: 10 },
-      { etichetta: 'Infusione', q: 'mg', t: 'min', min: 0.5, max: 2, start: 1, passo: 0.25 },
+      { etichetta: 'Infusione', q: 'mg', t: 'h', min: 15, max: 160, start: 60, passo: 5, nota: 'range del PS 15–160 mg/h (1–2 mg/min = 60–120 mg/h)' },
     ],
     avvisi: ['Massimo 300 mg in totale con i boli. NO se asma, BAV, bradicardia, scompenso acuto.'],
   },
@@ -307,6 +321,14 @@ export const FARMACI_URGENZA: Farmaco[] = [
       { etichetta: 'Bolo in 10 mL SF in 10 min', q: 'mcg', min: 75, max: 150, start: 150, passo: 75, nota: 'massimo 4 volte al giorno' },
       { etichetta: 'Infusione', q: 'mcg', kg: true, t: 'min', min: 0.05, max: 0.1, start: 0.05, passo: 0.01 },
     ],
+  },
+  {
+    id: 'nitroglicerina', nome: 'Nitroglicerina', commerciale: 'Venitrin', gruppo: 'Antipertensivi e nitrati',
+    fiala: 'fiale 5 mg/1,5 mL', conc: { v: 5 / 1.5, q: 'mg' },
+    prep: [{ via: 'siringa', testo: 'PS Prato: 10 fiale (50 mg, 15 mL) + 35 mL SF = 50 mL (1 mg/mL)', conc: 1, q: 'mg' }],
+    dosi: [{ etichetta: 'Infusione', q: 'mcg', t: 'min', min: 5, max: 200, start: 10, passo: 5 }],
+    righe: ['Range 5–200 mcg/min: partire da 10–20 mcg/min (0,6–1,2 mL/h), aumentare ogni 3–5 min.'],
+    avvisi: ['NO se PAS < 90, infarto del ventricolo destro, inibitori della PDE-5 nelle 24–48 h, stenosi aortica severa.'],
   },
   {
     id: 'isosorbide', nome: 'Isosorbide dinitrato', commerciale: 'Diniket', gruppo: 'Antipertensivi e nitrati',
@@ -322,7 +344,7 @@ export const FARMACI_URGENZA: Farmaco[] = [
   {
     id: 'eparina', nome: 'Eparina sodica', gruppo: 'Coagulazione e trombolisi',
     fiala: 'fiale 25.000 UI/5 mL (5000 UI/mL)', conc: { v: 5000, q: 'UI' },
-    prep: [{ via: 'volumetrica', testo: '3 mL (15.000 UI) + 250 mL SF (circa 60 UI/mL)', conc: 15000 / 253, q: 'UI' }],
+    prep: [{ via: 'siringa', testo: 'PS Prato: 2 mL (10.000 UI) + 48 mL SF = 50 mL (200 UI/mL)', conc: 200, q: 'UI' }],
     dosi: [
       { etichetta: 'TEV: bolo', q: 'UI', kg: true, min: 80, max: 80, start: 80, passo: 10 },
       { etichetta: 'TEV: infusione iniziale', q: 'UI', kg: true, t: 'h', min: 18, max: 18, start: 18, passo: 1 },
@@ -341,12 +363,14 @@ export const FARMACI_URGENZA: Farmaco[] = [
         ['> 96,1″', 'sospendere 1 h, poi ridurre di 3 UI/kg/h'],
       ],
     },
+    righe: ['Range in pompa 200–2000 UI/h (1–10 mL/h). Modulo eparina compilabile nella scheda Moduli.'],
     avvisi: ['80 + 18 UI/kg nel tromboembolismo venoso; nelle SCA 60 UI/kg (max 4000) + 12 UI/kg/h (max 1000).'],
   },
   {
     id: 'protamina', nome: 'Protamina cloridrato', gruppo: 'Coagulazione e trombolisi',
     fiala: 'fiale 50 mg/5 mL (10 mg/mL)', conc: { v: 10, q: 'mg' },
     righe: [
+      'PS Prato: in pompa pura, 2 fiale = 100 mg in 10 mL (10 mg/mL).',
       '1 mg neutralizza 100 UI di eparina non frazionata; infondere in 10 min, massimo 50 mg per volta.',
       'Dopo un bolo recente: 1 mg ogni 100 UI del bolo.',
       'Durante un’infusione: 1 mg ogni 100 UI dell’eparina infusa nelle ultime 2–3 ore (es. 1250 UI/h → circa 3000 UI → 30 mg).',
@@ -384,9 +408,15 @@ export const FARMACI_URGENZA: Farmaco[] = [
     righe: ['Trauma (entro 3 h): 1 g ev in 10 min, poi 1 g in 250 mL SF in 8 h (31 mL/h).'],
   },
   {
-    id: 'fibrinogeno', nome: 'Fibrinogeno', commerciale: 'Haemocomplettan', gruppo: 'Coagulazione e trombolisi', frigo: true,
-    fiala: 'flaconi 1 g',
-    righe: ['2–4 g ev (se possibile guidati da ROTEM o fibrinogeno < 1,5 g/L).'],
+    id: 'fibrinogeno', nome: 'Fibrinogeno umano', commerciale: 'RiaSTAP', gruppo: 'Coagulazione e trombolisi',
+    fiala: 'flacone 1 g di polvere (con filtro e dispositivo di trasferimento)',
+    righe: ['Ricostituire con 50 mL di acqua per preparazioni iniettabili (20 mg/mL); infondere con il filtro, non oltre 5 mL/min.', '3–4 g ev = 3–4 flaconi se fibrinogeno < 1,5 g/L (< 2 g/L nell’emorragia ostetrica) o sanguinamento massivo, se possibile guidati da ROTEM.'],
+  },
+  {
+    id: 'fattore-vii', nome: 'Fattore VII umano', commerciale: 'Provertinum', gruppo: 'Coagulazione e trombolisi', frigo: true,
+    fiala: 'flacone 600 UI (polvere e solvente)',
+    righe: ['Solo deficit congenito di fattore VII, su indicazione dell’ematologo.'],
+    avvisi: ['Non è il fattore VII attivato (NovoSeven) degli emofilici con inibitori e non sostituisce il complesso protrombinico nel paziente anticoagulato.'],
   },
   {
     id: 'alteplase', nome: 'Alteplase', commerciale: 'Actilyse', gruppo: 'Coagulazione e trombolisi',
@@ -439,6 +469,20 @@ export const FARMACI_URGENZA: Farmaco[] = [
     righe: ['Ipoglicemia: 1 mg IM o SC.'],
     avvisi: ['Nei betabloccanti 50–150 mcg/kg. Dà vomito: proteggere le vie aeree.'],
   },
+  // ── Respiratorio e allergia ──
+  {
+    id: 'salbutamolo-ev', nome: 'Salbutamolo ev', commerciale: 'Ventolin', gruppo: 'Respiratorio e allergia',
+    fiala: 'fiale 500 mcg/1 mL', conc: { v: 500, q: 'mcg' },
+    prep: [{ via: 'siringa', testo: 'PS Prato: 2 fiale (1 mg) + 48 mL SF = 50 mL (20 mcg/mL)', conc: 20, q: 'mcg' }],
+    dosi: [{ etichetta: 'Infusione', q: 'mcg', t: 'min', min: 3, max: 20, start: 5, passo: 1 }],
+    righe: ['Asma grave che non risponde all’aerosol: range 3–20 mcg/min (9–60 mL/h).'],
+    avvisi: ['Tachicardia, aritmie, ipokaliemia, iperlattatemia: monitor, potassio e lattati.'],
+  },
+  {
+    id: 'c1-inibitore', nome: 'C1-inibitore umano', commerciale: 'Berinert', gruppo: 'Respiratorio e allergia', frigo: true,
+    fiala: 'flacone 500 UI (polvere e solvente)',
+    righe: ['Angioedema ereditario (o da deficit acquisito di C1-inibitore): 20 UI/kg ev lenta; a 70 kg 1.400 UI → 3 flaconi = 1.500 UI.', 'Nell’angioedema da ACE-inibitori l’efficacia è incerta.'],
+  },
   // ── Analgesia e sedazione ──
   {
     id: 'fentanil', nome: 'Fentanil', commerciale: 'Fentanest', gruppo: 'Analgesia e sedazione',
@@ -456,12 +500,11 @@ export const FARMACI_URGENZA: Farmaco[] = [
     fiala: 'fiale 10 mg/1 mL', conc: { v: 10, q: 'mg' },
     prep: [
       { via: 'bolo', testo: '1 fiala + 9 mL SF = 1 mg/mL', conc: 1, q: 'mg' },
-      { via: 'siringa', testo: '5 fiale + 45 mL SF = 50 mL', conc: 1, q: 'mg' },
-      { via: 'volumetrica', testo: '5 fiale + 100 mL SF (circa 0,5 mg/mL)', conc: 50 / 105, q: 'mg' },
+      { via: 'siringa', testo: 'PS Prato: 2 fiale (20 mg) + 18 mL SF = 20 mL (1 mg/mL)', conc: 1, q: 'mg' },
     ],
     dosi: [
       { etichetta: 'Bolo (diluita 1 mg/mL)', q: 'mg', min: 2, max: 4, start: 2, passo: 1, prep: [0], nota: 'titolare ogni 5–10 min nel dolore acuto' },
-      { etichetta: 'Infusione', q: 'mg', kg: true, t: 'h', min: 0.003, max: 0.15, start: 0.02, passo: 0.005, prep: [1, 2] },
+      { etichetta: 'Infusione', q: 'mg', kg: true, t: 'h', min: 0.003, max: 0.15, start: 0.02, passo: 0.005, prep: [1] },
     ],
   },
   {
@@ -477,10 +520,9 @@ export const FARMACI_URGENZA: Farmaco[] = [
   },
   {
     id: 'midazolam', nome: 'Midazolam', commerciale: 'Ipnovel', gruppo: 'Analgesia e sedazione',
-    fiala: 'fiale 5 mg/mL o 15 mg/3 mL (5 mg/mL)', conc: { v: 5, q: 'mg' },
+    fiala: 'fiale 15 mg/3 mL (5 mg/mL)', conc: { v: 5, q: 'mg' },
     prep: [
-      { via: 'siringa', testo: '50 mg + 40 mL SF = 50 mL', conc: 1, q: 'mg' },
-      { via: 'volumetrica', testo: '50 mg + 90 mL SF = 100 mL', conc: 0.5, q: 'mg' },
+      { via: 'siringa', testo: 'PS Prato: 3 fiale (45 mg) + 36 mL SF = 45 mL (1 mg/mL)', conc: 1, q: 'mg' },
     ],
     dosi: [
       { etichetta: 'Carico in 5 min', q: 'mg', kg: true, min: 0.03, max: 0.3, start: 0.05, passo: 0.01, prep: [0] },
@@ -496,19 +538,30 @@ export const FARMACI_URGENZA: Farmaco[] = [
     ],
     dosi: [
       { etichetta: 'Induzione (bolo lento)', q: 'mg', kg: true, min: 0.5, max: 2, start: 1, passo: 0.25, prep: [0] },
-      { etichetta: 'Infusione', q: 'mg', kg: true, t: 'h', min: 0.3, max: 4, start: 1, passo: 0.1 },
+      { etichetta: 'Infusione', q: 'mg', kg: true, t: 'h', min: 0.3, max: 6, start: 1, passo: 0.1 },
     ],
-    righe: ['Dopo l’intubazione si arriva in genere a 1–4 mg/kg/h.'],
+    righe: ['Range del PS 1–6 mg/kg/h, puro (1% o 2%). Oltre 4 mg/kg/h e oltre 48 h: rischio di sindrome da infusione di propofol (acidosi, rabdomiolisi, trigliceridi).'],
   },
   {
     id: 'dexmedetomidina', nome: 'Dexmedetomidina', commerciale: 'Dexdor', gruppo: 'Analgesia e sedazione',
-    fiala: 'fiale 100 mcg/mL (2, 4, 10 mL)', conc: { v: 100, q: 'mcg' },
-    prep: [{ via: 'siringa', testo: '400 mcg (4 mL) + 46 mL SF = 50 mL', conc: 8, q: 'mcg' }],
+    fiala: 'fiale 200 mcg/2 mL (100 mcg/mL)', conc: { v: 100, q: 'mcg' },
+    prep: [{ via: 'siringa', testo: 'PS Prato: 1 fiala (200 mcg) + 48 mL SF = 50 mL (4 mcg/mL)', conc: 4, q: 'mcg' }],
     dosi: [
       { etichetta: 'Procedurale: bolo in 10–20 min', q: 'mcg', kg: true, min: 0.5, max: 1, start: 0.5, passo: 0.1, prep: [0], inMin: 15 },
       { etichetta: 'Infusione', q: 'mcg', kg: true, t: 'h', min: 0.2, max: 1.4, start: 0.5, passo: 0.1 },
     ],
     righe: ['NIV: 0,2–0,7 mcg/kg/h; paziente intubato: 0,7–1,4. Procedurale: dopo il bolo 0,6–0,7 mcg/kg/h (0,2–1).', 'Bradicardia e ipotensione frequenti.'],
+  },
+  {
+    id: 'remifentanil', nome: 'Remifentanil', commerciale: 'Ultiva', gruppo: 'Analgesia e sedazione',
+    fiala: 'flaconi 1 mg (polvere)',
+    prep: [
+      { via: 'siringa', testo: 'PS Prato: 4 flaconi (4 mg) + 40 mL SF (0,1 mg/mL)', conc: 100, q: 'mcg' },
+      { via: 'siringa', testo: 'sala operatoria/risveglio: 2 flaconi (2 mg) + 40 mL SF (0,05 mg/mL)', conc: 50, q: 'mcg' },
+    ],
+    dosi: [{ etichetta: 'Infusione', q: 'mcg', kg: true, t: 'min', min: 0.01, max: 0.2, start: 0.05, passo: 0.01 }],
+    righe: ['Range 0,01–0,2 mcg/kg/min. Effetto che finisce in pochi minuti alla sospensione: prevedere l’analgesia successiva.'],
+    avvisi: ['Bradicardia, ipotensione, rigidità toracica con boli rapidi.'],
   },
   {
     id: 'diazepam', nome: 'Diazepam', commerciale: 'Valium', gruppo: 'Analgesia e sedazione',
@@ -517,7 +570,7 @@ export const FARMACI_URGENZA: Farmaco[] = [
     righe: ['Mantenimento 0,03–0,1 mg/kg (1–7 mg) ogni 30 min–6 h. Infusione continua non raccomandata.'],
   },
   {
-    id: 'lorazepam', nome: 'Lorazepam', commerciale: 'Tavor', gruppo: 'Analgesia e sedazione', frigo: true,
+    id: 'lorazepam', nome: 'Lorazepam', commerciale: 'Lorazepam Macure', gruppo: 'Analgesia e sedazione', frigo: true,
     fiala: 'fiale 4 mg/1 mL', conc: { v: 4, q: 'mg' },
     prep: [{ via: 'siringa', testo: '10 fiale (40 mg) + 40 mL SF = 50 mL', conc: 0.8, q: 'mg' }],
     dosi: [
@@ -552,12 +605,28 @@ export const FARMACI_URGENZA: Farmaco[] = [
   },
   {
     id: 'rocuronio', nome: 'Rocuronio', commerciale: 'Esmeron', gruppo: 'Intubazione (RSI)', frigo: true,
-    fiala: '10 mg/mL', conc: { v: 10, q: 'mg' },
+    fiala: 'fiale 50 mg/5 mL (10 mg/mL)', conc: { v: 10, q: 'mg' },
+    prep: [{ via: 'siringa', testo: 'PS Prato: 10 fiale pure (500 mg) = 50 mL (10 mg/mL)', conc: 10, q: 'mg' }],
     dosi: [
       { etichetta: 'Intubazione (RSI 1,2)', q: 'mg', kg: true, min: 0.6, max: 1.2, start: 1.2, passo: 0.1 },
       { etichetta: 'Richiamo', q: 'mg', kg: true, min: 0.15, max: 0.15, start: 0.15, passo: 0.05 },
+      { etichetta: 'Infusione', q: 'mg', kg: true, t: 'h', min: 0.3, max: 0.6, start: 0.3, passo: 0.05 },
     ],
     righe: ['Inizio 1–3 min, durata 20–40 min (più lunga a dosi alte).'],
+  },
+  {
+    id: 'cisatracurio', nome: 'Cisatracurio', commerciale: 'Nimbex', gruppo: 'Intubazione (RSI)', frigo: true,
+    fiala: 'fiale 10 mg/5 mL (2 mg/mL)', conc: { v: 2, q: 'mg' },
+    prep: [{ via: 'siringa', testo: 'PS Prato: 10 fiale pure (100 mg) = 50 mL (2 mg/mL)', conc: 2, q: 'mg' }],
+    dosi: [{ etichetta: 'Infusione', q: 'mg', kg: true, t: 'h', min: 0.03, max: 0.6, start: 0.1, passo: 0.01 }],
+    righe: ['Range della tabella del reparto 0,03–0,6 mg/kg/h (scheda tecnica: di solito 0,06–0,18 mg/kg/h). Eliminazione indipendente da rene e fegato.'],
+  },
+  {
+    id: 'atracurio', nome: 'Atracurio', commerciale: 'Tracrium', gruppo: 'Intubazione (RSI)', frigo: true,
+    fiala: 'fiale 50 mg/5 mL (10 mg/mL)', conc: { v: 10, q: 'mg' },
+    prep: [{ via: 'siringa', testo: 'PS Prato: 10 fiale pure (500 mg) = 50 mL (10 mg/mL)', conc: 10, q: 'mg' }],
+    dosi: [{ etichetta: 'Infusione', q: 'mg', kg: true, t: 'h', min: 0.3, max: 0.6, start: 0.3, passo: 0.05 }],
+    righe: ['Libera istamina (ipotensione, broncospasmo) a dosi alte.'],
   },
   {
     id: 'sugammadex', nome: 'Sugammadex', commerciale: 'Bridion', gruppo: 'Intubazione (RSI)',
@@ -620,9 +689,9 @@ export const FARMACI_URGENZA: Farmaco[] = [
     righe: ['0,4–0,8 mEq/kg = 1–2 mL/kg al giorno.', 'Urgenza: 30 mL (3 fiale) in 5–10 min, ripetibile.'],
   },
   {
-    id: 'insulina', nome: 'Insulina rapida in infusione', commerciale: 'Humulin R', gruppo: 'Elettroliti e metabolismo', frigo: true,
-    fiala: 'flaconi 10 mL da 100 UI/mL', conc: { v: 100, q: 'UI' },
-    prep: [{ via: 'siringa', testo: '50 UI + 49,5 mL SF = 50 mL', conc: 1, q: 'UI' }],
+    id: 'insulina', nome: 'Insulina rapida in infusione', commerciale: 'Actrapid', gruppo: 'Elettroliti e metabolismo', frigo: true,
+    fiala: 'flaconi 1000 UI/10 mL (100 UI/mL)', conc: { v: 100, q: 'UI' },
+    prep: [{ via: 'siringa', testo: 'PS Prato: 0,2 mL (20 UI) + 19,8 mL SF = 20 mL (1 UI/mL)', conc: 1, q: 'UI' }],
     tabella: {
       titolo: 'Iperglicemia nel paziente critico (stick ogni 1–2 h per 12 h)',
       righe: [
@@ -641,6 +710,16 @@ export const FARMACI_URGENZA: Farmaco[] = [
     righe: ['Chetoacidosi: seguire lo schema dedicato (0,1 UI/kg/h a dose fissa).', 'Soluzione tamponata: 5 g di glucosio per 1 UI (2,5 g/UI nei diabetici). Iperkaliemia: 10 UI in 500 mL G5% in 15 min (o 25 g di glucosio).'],
   },
   // ── Gastro e diuretici ──
+  {
+    id: 'omeprazolo', nome: 'Omeprazolo', commerciale: 'Antra', gruppo: 'Gastro e diuretici',
+    fiala: 'fiale 40 mg (polvere)',
+    prep: [{ via: 'siringa', testo: 'PS Prato: 5 fiale (200 mg) in 50 mL SF (4 mg/mL)', conc: 4, q: 'mg' }],
+    dosi: [
+      { etichetta: 'Bolo in 15 min (2 fiale)', q: 'mg', min: 80, max: 80, start: 80, passo: 40 },
+      { etichetta: 'Infusione', q: 'mg', t: 'h', min: 8, max: 8, start: 8, passo: 1 },
+    ],
+    righe: ['8 mg/h = 2 mL/h (la tabella del reparto indica 2,1 mL/h). Per 72 h dopo emostasi endoscopica ad alto rischio.'],
+  },
   {
     id: 'pantoprazolo', nome: 'Pantoprazolo', commerciale: 'Pantorc', gruppo: 'Gastro e diuretici',
     fiala: 'flaconi 40 mg liofilizzato (precipita in 12 h)',
@@ -662,14 +741,14 @@ export const FARMACI_URGENZA: Farmaco[] = [
     righe: ['Per 3–5 giorni.'],
   },
   {
-    id: 'octreotide', nome: 'Octreotide', commerciale: 'Siroctid', gruppo: 'Gastro e diuretici', frigo: true,
-    fiala: 'fiale 0,05–0,5 mg',
-    prep: [{ via: 'siringa', testo: '0,5 mg in 50 mL SF (10 mcg/mL) — proposta, non nella scheda di partenza', conc: 10, q: 'mcg' }],
+    id: 'octreotide', nome: 'Octreotide', commerciale: 'Bioindustria L.I.M.', gruppo: 'Gastro e diuretici', frigo: true,
+    fiala: 'fiale 0,1 mg/1 mL (100 mcg), sc o ev', conc: { v: 100, q: 'mcg' },
+    prep: [{ via: 'siringa', testo: '5 fiale (500 mcg) + 45 mL SF = 50 mL (10 mcg/mL)', conc: 10, q: 'mcg' }],
     dosi: [
       { etichetta: 'Bolo', q: 'mcg', min: 50, max: 50, start: 50, passo: 50, prep: [0] },
       { etichetta: 'Infusione', q: 'mcg', t: 'h', min: 50, max: 50, start: 50, passo: 10 },
     ],
-    righe: ['Per 3–5 giorni (varici: preferirla alla terlipressina se rischio ischemico).'],
+    righe: ['Bolo 50 mcg = ½ fiala; infusione 50 mcg/h = 5 mL/h, per 3–5 giorni (varici: preferirla alla terlipressina se rischio ischemico).', 'Ipoglicemia da sulfaniluree: 50–100 mcg sc ogni 6–8 h.'],
   },
   {
     id: 'furosemide', nome: 'Furosemide', commerciale: 'Lasix', gruppo: 'Gastro e diuretici', foto: true,

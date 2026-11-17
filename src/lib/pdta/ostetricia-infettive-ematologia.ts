@@ -412,7 +412,7 @@ export const LG_OST_INF_EMA: LineaGuida[] = [
       'Sanguinamenti gravi: intracranico, collo/gola, addominale/retroperitoneale (ileopsoas), compartimentale, emorragia digestiva, trauma maggiore.',
       'Niente iniezioni im, niente FANS; acido tranexamico utile nei sanguinamenti mucosi (non nell’ematuria).',
       'In profilassi con emicizumab (Hemlibra): gli esami della coagulazione sono falsati; per sanguinamento usare il fattore VIII, evitare il complesso protrombinico attivato (aPCC).',
-      'Pazienti con inibitori: agenti bypassanti (fattore VII attivato) secondo il Centro.',
+      'Pazienti con inibitori: agenti bypassanti (fattore VII attivato ricombinante, NovoSeven) secondo il Centro. Il Provertinum del PS è fattore VII umano non attivato: serve solo nel deficit congenito di fattore VII.',
     ],
     sezioni: [
       {

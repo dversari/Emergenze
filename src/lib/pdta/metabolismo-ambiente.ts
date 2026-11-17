@@ -32,7 +32,7 @@ export const LG_METABOLISMO: LineaGuida[] = [
         punti: [
           'Glucosio 33% 50 mL (16,5 g) ev in 2–3 min, ripetibile ogni 10–15 min finché > 100 mg/dL; poi glucosio 10% a 100 mL/h.',
           'Senza accesso: glucagone (GlucaGen 1 mg) 1 mg im o sc; inefficace se glicogeno esaurito (alcol, digiuno, epatopatia).',
-          'Sulfaniluree con recidive: octreotide (Sandostatina) 50 µg sc ogni 6–8 h (o 100 µg).',
+          'Sulfaniluree con recidive: octreotide 50 µg sc ogni 6–8 h = ½ fiala da 0,1 mg/1 mL (o 100 µg = 1 fiala).',
           'Tiamina (Benerva) 100 mg ev negli alcolisti e malnutriti.',
           'Glicemia capillare ogni ora per le prime 4–6 h, poi ogni 2–4 h.',
         ],

@@ -450,7 +450,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
       },
       {
         tipo: 'checklist', titolo: 'C: circolo',
-        righe: ['Accesso arterioso', 'PAS > 100 o PAM > 60–65', 'Liquidi, noradrenalina 2,5 mL/h (2 fiale da 2 mg in 50 mL)', 'ECG a 12 derivazioni', 'Eco al letto'],
+        righe: ['Accesso arterioso', 'PAS > 100 o PAM > 60–65', 'Liquidi, noradrenalina 1–2 mL/h (4 fiale da 2 mg + 36 mL SF = 200 µg/mL)', 'ECG a 12 derivazioni', 'Eco al letto'],
       },
       { tipo: 'decisione', titolo: 'Causa cardiaca probabile?' },
       {
@@ -1125,7 +1125,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               { tipo: 'decisione', titolo: 'Risposta?' },
               {
                 tipo: 'allarme', titolo: 'No: farmaci e pacing',
-                righe: ['Isoprenalina 5 µg/min (0,2 mg in 50 mL: 75 mL/h) o adrenalina 2–10 µg/min (1 mg in 50 mL: 6–30 mL/h).', 'Pacing transcutaneo come ponte; cardiologo per il transvenoso.'],
+                righe: ['Isoprenalina 5 µg/min (5 fiale da 0,2 mg + 45 mL SF = 20 µg/mL: 15 mL/h) o adrenalina 2–10 µg/min (5 mg + 45 mL SF = 100 µg/mL: 1,2–6 mL/h).', 'Pacing transcutaneo come ponte; cardiologo per il transvenoso.'],
                 vai: [{ etichetta: 'Pacing', to: '/procedure?apri=pacing' }],
               },
             ],
@@ -1240,7 +1240,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'terapia', titolo: 'Shock',
                 righe: [
-                  'Noradrenalina: 2 fiale da 2 mg in SF fino a 50 mL (80 µg/mL), da 0,05 µg/kg/min ≈ 2,5 mL/h.',
+                  'Noradrenalina: 4 fiale da 2 mg/1 mL + 36 mL SF = 40 mL (200 µg/mL), da 0,05 µg/kg/min ≈ 1 mL/h (70 kg).',
                   'PAM obiettivo 65 (60–65 se ≥ 65 anni).',
                   'Idrocortisone (Flebocortid) 50 mg ev ogni 6 h.',
                   'Accesso arterioso, catetere vescicale, rianimatore.',
@@ -1545,7 +1545,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
         tipo: 'terapia', titolo: '5 min: benzodiazepina a dose piena', tempo: '5–20 min',
         righe: [
           'Diazepam (Valium) 10 mg ev = 1 fiala in 2 min, ripetibile una volta dopo 5 min.',
-          'Senza vena: midazolam (Ipnovel) 10 mg im (2 fiale da 5 mg) o diazepam (Valium) rettale 10 mg (Micropam).',
+          'Senza vena: midazolam (Ipnovel) 10 mg im (2 mL della fiala da 15 mg/3 mL) o diazepam (Valium) rettale 10 mg (Micropam).',
         ],
       },
       { tipo: 'decisione', titolo: 'Ancora crisi dopo 2 dosi?' },
@@ -1609,7 +1609,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'allarme', titolo: 'Ancora? Anafilassi refrattaria',
                 righe: [
-                  'Adrenalina 1 mg in 100 mL SF: 35–70 mL/h, titolare (esperto, terapia intensiva).',
+                  'Adrenalina in pompa: 5 mg + 45 mL SF (100 µg/mL), 0,05–0,1 µg/kg/min = 2–4 mL/h, titolare (esperto, terapia intensiva).',
                   'Beta-bloccati: glucagone (GlucaGen) 1–2 mg ev.',
                   'Stridore: adrenalina nebulizzata 5 mg; intubazione precoce.',
                   'Arresto: ALS.',
@@ -2089,8 +2089,8 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'terapia', titolo: 'Subito',
                 righe: [
-                  'Terlipressina (Glypressin) 2 mg ev = 2 fiale da 1 mg ogni 4 h (poi 1 mg ogni 4 h).',
-                  'Rischio ischemico (cardiopatia ischemica, arteriopatia, ischemia d’arto, angina abdominis): octreotide (Sandostatina) 50 µg ev in bolo, poi 50 µg/h.',
+                  'Terlipressina 2 mg ev ogni 4 h (poi 1 mg): EVER 0,2 mg/mL = 10 mL (2 fiale); SUN 0,1 mg/mL = 20 mL (2 fiale da 8,5 mL + 3 mL).',
+                  'Rischio ischemico (cardiopatia ischemica, arteriopatia, ischemia d’arto, angina abdominis): octreotide 50 µg ev in bolo (½ fiala da 0,1 mg/1 mL), poi 50 µg/h (5 fiale + 45 mL SF: 5 mL/h).',
                   'Ceftriaxone 1 g ev/die fino a 7 giorni.',
                   'Eritromicina 250 mg ev 30–120 min prima dell’endoscopia (se manca: metoclopramide 10 mg ev = 1 fiala).',
                   'Endoscopia (legatura) entro 12 h, dopo la stabilizzazione; Hb obiettivo 7–9, evitare la sovratrasfusione.',
@@ -2105,7 +2105,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'terapia', titolo: 'Terapia',
                 righe: [
-                  'Pantoprazolo/esomeprazolo 80 mg ev = 2 fiale da 40 mg, poi 8 mg/h o 40 mg ogni 12 h.',
+                  'Omeprazolo (Antra) 80 mg ev = 2 fiale da 40 mg, poi 8 mg/h (5 fiale in 50 mL SF: 2 mL/h) o 40 mg ogni 12 h.',
                   'Eritromicina 250 mg ev se sanguinamento importante (se manca: metoclopramide 10 mg ev = 1 fiala).',
                   'Endoscopia entro 24 h dopo la stabilizzazione; non entro 6–12 h salvo instabilità persistente.',
                   'Niente sondino di routine; niente acido tranexamico.',
@@ -2377,7 +2377,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'terapia', titolo: 'Amiodarone o elettrica',
                 righe: [
-                  'Amiodarone (Cordarone) 300 mg = 2 fiale da 150 mg in 250 mL di glucosata 5% in 30–60 min, poi 900–1200 mg nelle 24 h. Conversione lenta (ore).',
+                  'Amiodarone (Cordarone) 300 mg = 2 fiale da 150 mg in 250 mL di glucosata 5% in 30–60 min, poi 900 mg nelle 24 h: 6 fiale + 32 mL G5% = 50 mL (18 mg/mL) a 2,1 mL/h. Conversione lenta (ore).',
                   'Oppure cardioversione elettrica sincronizzata.',
                 ],
               },
@@ -2440,7 +2440,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'allarme', titolo: 'PAS < 90 con ipoperfusione',
                 righe: [
-                  'Noradrenalina: 2 fiale da 2 mg in SF fino a 50 mL (80 µg/mL), da 0,05 µg/kg/min ≈ 2,5 mL/h.',
+                  'Noradrenalina: 4 fiale da 2 mg/1 mL + 36 mL SF = 40 mL (200 µg/mL), da 0,05 µg/kg/min ≈ 1 mL/h (70 kg).',
                   'Dobutamina se bassa portata: 1 fiala da 250 mg in SF fino a 50 mL (5 mg/mL), 2,5–5 µg/kg/min = 2–4 mL/h (in beta-bloccati meglio levosimendan).',
                   'Bolo di liquidi solo se non congesto.',
                   'Shock team; da STEMI → emodinamica.',
@@ -2574,7 +2574,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'terapia', titolo: 'Trattamento immediato',
                 righe: [
-                  'Eparina non frazionata 80 U/kg ≈ 5.600 UI ev in bolo (≈ 1,1 mL della fiala da 25.000 UI/5 mL), poi 18 U/kg/h ≈ 1.250 UI/h.',
+                  'Eparina non frazionata 80 U/kg ≈ 5.600 UI ev in bolo (≈ 1,1 mL della fiala da 25.000 UI/5 mL), poi 18 U/kg/h ≈ 1.250 UI/h = 6,3 mL/h della siringa 10.000 UI in 50 mL (200 UI/mL).',
                   'Trombolisi: alteplase (Actilyse) 100 mg in 2 h (10 mg in bolo + 90 mg) = 2 flaconi da 50 mg; regime accelerato 0,6 mg/kg in 15 min (≈ 42 mg, max 50 mg).',
                   'Controindicata o fallita: catetere o chirurgia (team PERT).',
                   'Noradrenalina se ipoteso; liquidi al massimo 500 mL; evitare intubazione e sedazione profonda se possibile.',

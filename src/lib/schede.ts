@@ -277,7 +277,7 @@ export const PROCEDURE: Scheda[] = [
       { titolo: 'Passaggi', numerato: true, righe: [
         'Bradicardia instabile non responsiva ad atropina 0,5 mg ev = 1 fiala (ripetibile ogni 3–5 min fino a 3 mg = 6 fiale), isoprenalina o adrenalina 2–10 µg/min.',
         'Piastre: anteriore sul precordio (sinistra dello sterno), posteriore tra le scapole a sinistra; elettrodi ECG del defibrillatore collegati.',
-        'Analgesia/sedazione: fentanil 25–50 µg ev = 1/4–1/2 fiala da 100 µg (0,5–1 mL) ± midazolam 1–2 mg ev (1–2 mL di 1 fiala da 5 mg diluita a 5 mL).',
+        'Analgesia/sedazione: fentanil 25–50 µg ev = 1/4–1/2 fiala da 100 µg (0,5–1 mL) ± midazolam 1–2 mg ev (1–2 mL di 1 fiala da 15 mg diluita a 15 mL).',
         'Modalità demand, frequenza 60–70/min.',
         'Aumentare la corrente da 0 mA a passi di 5–10 mA fino alla cattura elettrica (QRS largo dopo ogni spike).',
         'Verificare la cattura meccanica: polso femorale o eco (non il carotideo, alterato dalle contrazioni muscolari).',
@@ -738,8 +738,8 @@ export const SEDAZIONE: Scheda[] = [
     blocchi: [
       { titolo: 'Ipnotici e sedativi', righe: [
         'Ketamina: fiala da 100 mg in 2 mL (50 mg/mL). 1 mL = 50 mg. Per titolare: 2 fiale (200 mg, 4 mL) + 16 mL SF in siringa da 20 mL → 1 mL = 10 mg.',
-        'Propofol 1%: fiala da 200 mg in 20 mL; flacone da 500 mg in 50 mL (10 mg/mL). 1 mL = 10 mg.',
-        'Midazolam: fiala da 5 mg in 1 mL, oppure fiala da 15 mg in 3 mL (5 mg/mL). Per ev: 1 fiala da 5 mg + 4 mL SF in siringa da 5 mL → 1 mL = 1 mg.',
+        'Propofol 1%: flacone da 500 mg in 50 mL (10 mg/mL, 1 mL = 10 mg); propofol 2%: 1000 mg in 50 mL (20 mg/mL). In pompa si usa puro.',
+        'Midazolam: fiala da 15 mg in 3 mL (5 mg/mL). Per ev: 1 fiala + 12 mL SF in siringa da 20 mL → 1 mL = 1 mg.',
       ] },
       { titolo: 'Oppioidi', righe: [
         'Fentanil: fiala da 100 µg in 2 mL. 1 mL = 50 µg.',
@@ -755,14 +755,19 @@ export const SEDAZIONE: Scheda[] = [
       { titolo: 'Altri', righe: [
         'Aloperidolo: fiala da 5 mg in 1 mL. Lorazepam: fiala da 4 mg in 1 mL. Diazepam: fiala da 10 mg in 2 mL.',
         'Clorpromazina: fiala da 50 mg in 2 mL. Butilscopolamina: fiala da 20 mg in 1 mL. Ondansetron: fiala da 4 mg in 2 mL.',
-        'Adrenalina: fiala da 1 mg in 1 mL. Noradrenalina: fiala da 2 mg in 2 mL (verificare il formato in reparto).',
+        'Adrenalina: fiala da 1 mg in 1 mL. Noradrenalina: fiala da 2 mg in 1 mL.',
       ] },
       { titolo: 'Infusioni (siringa da 50 mL)', righe: [
         'Fentanil: 5 fiale da 100 µg (10 mL) + 40 mL SF = 500 µg in 50 mL → 1 mL = 10 µg.',
-        'Midazolam: 10 fiale da 5 mg (o 3 fiale da 15 mg + 1 da 5 mg) = 50 mg, SF fino a 50 mL → 1 mL = 1 mg.',
+        'Midazolam: 3 fiale da 15 mg (45 mg, 9 mL) + 36 mL SF = 45 mL → 1 mL = 1 mg.',
         'Ketamina: 5 fiale da 100 mg (10 mL) + 40 mL SF = 500 mg in 50 mL → 1 mL = 10 mg.',
         'Propofol 1%: 1 flacone da 500 mg (50 mL) puro → 1 mL = 10 mg.',
-        'Noradrenalina: 2 fiale da 2 mg (4 mL) + 46 mL SF = 4 mg in 50 mL → 1 mL = 80 µg.',
+        'Noradrenalina: 4 fiale da 2 mg (4 mL) + 36 mL SF = 8 mg in 40 mL → 1 mL = 200 µg.',
+        'Adrenalina: 5 fiale da 1 mg + 45 mL SF = 5 mg in 50 mL → 1 mL = 100 µg.',
+        'Morfina: 2 fiale da 10 mg + 18 mL SF = 20 mg in 20 mL → 1 mL = 1 mg.',
+        'Dexmedetomidina (Dexdor): 1 fiala da 200 µg/2 mL + 48 mL SF → 1 mL = 4 µg.',
+        'Remifentanil (Ultiva): 4 flaconi da 1 mg + 40 mL SF → 1 mL = 0,1 mg (100 µg).',
+        'Rocuronio: 10 fiale da 50 mg puro = 500 mg in 50 mL → 1 mL = 10 mg.',
       ] },
       { titolo: 'Adrenalina in bolo («push-dose»)', righe: [
         '1 fiala da 1 mg in una sacca da 100 mL di SF → 10 µg/mL; aspirare 10 mL in siringa. Bolo 1–2 mL (10–20 µg) ogni 2–5 min.',
@@ -793,7 +798,7 @@ export const SEDAZIONE: Scheda[] = [
       { titolo: 'Ketofol', righe: ['Ketamina 35 mg = 3,5 mL di 1 fiala da 100 mg portata a 10 mL + propofol 35 mg = 3,5 mL, ev (0,5 + 0,5 mg/kg). Se serve: 20 mg + 20 mg (2 mL + 2 mL). Meno ipotensione del propofol, meno vomito della ketamina.'] },
       { titolo: 'Paziente instabile (cardioversione in ipotensione)', righe: ['Ketamina 35–50 mg ev = 1/3–1/2 fiala da 100 mg (0,7–1 mL) (0,5–0,7 mg/kg), oppure propofol a dose ridotta 20 mg = 2 mL ripetuto con prudenza.'] },
       { titolo: 'Midazolam + fentanil (procedure minori, ansiolisi)', righe: [
-        'Fentanil 50 µg ev = mezza fiala (1 mL), poi midazolam 1–2 mg ev = 1–2 mL della siringa diluita (1 fiala da 5 mg portata a 5 mL).',
+        'Fentanil 50 µg ev = mezza fiala (1 mL), poi midazolam 1–2 mg ev = 1–2 mL della siringa diluita (1 fiala da 15 mg portata a 15 mL).',
         'Ripetere metà dose ogni 2–3 min; massimo midazolam 3,5 mg (0,05 mg/kg) e fentanil 100 µg = 1 fiala. Anziano: metà dosi.',
       ] },
       { titolo: 'Antidoti', righe: [
@@ -818,9 +823,9 @@ export const SEDAZIONE: Scheda[] = [
         'Psicosi nota: aloperidolo 5 mg os + lorazepam 2 mg os.',
       ] },
       { titolo: 'Moderata–grave, non collabora (im)', righe: [
-        'Aloperidolo 5 mg im = 1 fiala (1 mL) + midazolam 5 mg im = 1 fiala da 5 mg/1 mL, nella stessa siringa.',
+        'Aloperidolo 5 mg im = 1 fiala (1 mL) + midazolam 5 mg im = 1 mL della fiala da 15 mg/3 mL, nella stessa siringa.',
         'Oppure olanzapina 10 mg im = 1 fiala in polvere ricostituita con 2,1 mL di acqua ppi. Non entro 1 h da benzodiazepine im/ev.',
-        'Oppure midazolam 5–10 mg im = 1–2 fiale da 5 mg (1–2 mL) (stimolanti, astinenza alcolica).',
+        'Oppure midazolam 5–10 mg im = 1–2 mL della fiala da 15 mg/3 mL (stimolanti, astinenza alcolica).',
         'Ripetibile una volta dopo 15–30 min.',
       ] },
       { titolo: 'Estrema, pericolosa (delirium iperattivo)', righe: [
@@ -844,7 +849,7 @@ export const SEDAZIONE: Scheda[] = [
       { titolo: 'Induttore (scegliere uno)', righe: [
         'Ketamina 100 mg ev = 1 fiala da 100 mg/2 mL (1,5 mg/kg; range 1–2). Shock: 50 mg = mezza fiala, 1 mL (0,5–1 mg/kg). Prima scelta nell’instabile e nel broncospasmo.',
         'Propofol 100 mg ev = 10 mL, mezza fiala da 200 mg/20 mL (1,5 mg/kg; range 1–2). Anziano: 50 mg = 5 mL. Solo se la pressione è stabile; utile nello stato di male.',
-        'Midazolam 10–20 mg ev = 2–4 fiale da 5 mg (0,15–0,3 mg/kg): lento e ipotensivo, ultima scelta.',
+        'Midazolam 10–20 mg ev = 2–4 mL della fiala da 15 mg/3 mL (0,15–0,3 mg/kg): lento e ipotensivo, ultima scelta.',
         'Obeso: dosare l’induttore sul peso magro.',
       ] },
       { titolo: 'Curaro', righe: [
@@ -864,7 +869,7 @@ export const SEDAZIONE: Scheda[] = [
       { titolo: 'Dopo l’intubazione (prima l’analgesia)', righe: [
         'Fentanil 50–100 µg/h = 5–10 mL/h della siringa 500 µg/50 mL (5 fiale) (0,7–1,5 µg/kg/h).',
         '+ propofol 70–210 mg/h = 7–21 mL/h di propofol 1% puro (1–3 mg/kg/h); attenzione a PA e trigliceridi oltre 48 h.',
-        'Oppure midazolam 2–5 mg/h = 2–5 mL/h della siringa 50 mg/50 mL (10 fiale da 5 mg) (0,03–0,07 mg/kg/h).',
+        'Oppure midazolam 2–5 mg/h = 2–5 mL/h della siringa 45 mg/45 mL (3 fiale da 15 mg + 36 mL SF) (0,03–0,07 mg/kg/h).',
         'Oppure, se instabile, ketamina 35–140 mg/h = 3,5–14 mL/h della siringa 500 mg/50 mL (5 fiale) (0,5–2 mg/kg/h).',
         'Partire entro 10 min se si è usato il rocuronio (paralizzato ma sveglio). Obiettivo RASS da −2 a 0.',
       ] },
@@ -892,9 +897,9 @@ export const SEDAZIONE: Scheda[] = [
         'Ultima linea (in ospedale, con esperti): propofol 35–70 mg/h = 3,5–7 mL/h di propofol 1% puro (0,5–1 mg/kg/h).',
       ] },
       { titolo: 'Sintomi associati', righe: [
-        'Dispnea o dolore (non in oppioidi): morfina 2–5 mg ev/sc = 2–5 mL della diluizione (1 fiala da 10 mg portata a 10 mL); sc anche 0,2–0,5 mL della fiala pura. Infusione 0,5–1 mg/h. Se già in oppioide: aumentare la dose del 25–50%.',
+        'Dispnea o dolore (non in oppioidi): morfina 2–5 mg ev/sc = 2–5 mL della diluizione (1 fiala da 10 mg portata a 10 mL); sc anche 0,2–0,5 mL della fiala pura. Infusione 0,5–1 mg/h (siringa 2 fiale = 20 mg + 18 mL SF, 1 mg/mL: 0,5–1 mL/h). Se già in oppioide: aumentare la dose del 25–50%.',
         'Rantolo terminale: butilscopolamina 20 mg sc = 1 fiala, ogni 6–8 h; riposizionare, ridurre i liquidi.',
-        'Emorragia massiva: midazolam 5–10 mg ev o sc = 1–2 fiale da 5 mg in bolo; teli scuri.',
+        'Emorragia massiva: midazolam 5–10 mg ev o sc = 1–2 mL della fiala da 15 mg/3 mL in bolo; teli scuri.',
         'Sospendere farmaci ed esami inutili; idratazione solo se utile al comfort.',
       ] },
     ],
