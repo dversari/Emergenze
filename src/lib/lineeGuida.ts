@@ -48,7 +48,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
     area: 'Cardiologia',
     fonte: { etichetta: 'Van Gelder et al., Eur Heart J 2024', url: 'https://doi.org/10.1093/eurheartj/ehae176' },
     controllata: '2026-11-09',
-    vediAnche: [{ etichetta: 'Cardioversione elettrica', to: '/procedure?apri=cve' }, { etichetta: 'Tachicardia', to: '/linee-guida/tachicardia' }],
+    vediAnche: [{ etichetta: 'Check-list cardioversione elettrica', to: '/modulo-cve' }, { etichetta: 'Cardioversione elettrica', to: '/procedure?apri=cve' }, { etichetta: 'Tachicardia', to: '/linee-guida/tachicardia' }],
     fonti: [{ id: 'esc-fa-2024', etichetta: 'ESC 2024' }],
     calcolatori: [
       { id: 'cha2ds2va', nome: 'CHA₂DS₂-VA' },

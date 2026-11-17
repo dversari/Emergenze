@@ -210,7 +210,7 @@ export default function Antibiotici() {
               {REGOLE.map((r) => (
                 <section key={r.titolo} className="card !py-3">
                   <p className="font-bold mb-1">{r.titolo}</p>
-                  <ul className="flex flex-col gap-1 text-sm leading-snug">{r.righe.map((x, i) => <li key={i}>{x}</li>)}</ul>
+                  <ul className="flex flex-col gap-1 text-sm leading-snug">{r.righe.map((x, i) => <li key={i}><ConScore t={x} resto={(y) => y} /></li>)}</ul>
                 </section>
               ))}
             </>

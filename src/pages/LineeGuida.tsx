@@ -161,7 +161,7 @@ export function RiassuntoLineaGuida() {
                 {l.approfondimenti.map((a) => (
                   <li key={a.url}>
                     <a href={a.url} target="_blank" rel="noreferrer" className="text-sm font-semibold text-verde underline">{a.etichetta} ↗</a>
-                    {a.nota && <p className="text-[12px] text-tenue leading-snug">{a.nota}</p>}
+                    {a.nota && <p className="text-[12px] text-tenue leading-snug"><Testo t={a.nota} /></p>}
                   </li>
                 ))}
               </ul>
@@ -189,7 +189,7 @@ export function RiassuntoLineaGuida() {
             <li key={i} className="relative">
               <span className="absolute -left-[17px] top-1.5 w-2 h-2 rounded-full bg-oro" />
               <p className="text-[11px] font-bold text-oro">{data(a.data)}</p>
-              <p className="text-sm leading-snug">{a.testo}</p>
+              <p className="text-sm leading-snug"><Testo t={a.testo} /></p>
               {a.link && <a href={a.link.url} target="_blank" rel="noreferrer" className="text-xs text-verde underline">{a.link.etichetta} ↗</a>}
             </li>
           ))}

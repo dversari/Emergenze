@@ -329,6 +329,104 @@ const PUNTEGGI: Punteggio[] = [
     fonte: 'Seymour, JAMA 2016; Surviving Sepsis Campaign 2021.',
   },
   {
+    id: 'sirs',
+    nome: 'SIRS',
+    ambito: 'Infezione · risposta infiammatoria sistemica (screening, poco specifico)',
+    voci: [
+      { tipo: 'si', id: 't', testo: 'Temperatura > 38 °C o < 36 °C', punti: 1 },
+      { tipo: 'si', id: 'fc', testo: 'FC > 90/min', punti: 1 },
+      { tipo: 'si', id: 'fr', testo: 'FR > 20/min o PaCO₂ < 32 mmHg', punti: 1 },
+      { tipo: 'si', id: 'gb', testo: 'GB > 12.000 o < 4.000/mm³ o > 10% forme immature', punti: 1 },
+    ],
+    esito: (t) =>
+      t >= 2 ? { livello: 'alto', testo: 'SIRS ≥ 2: se c’è un’infezione sospetta, cercare la disfunzione d’organo (lattati, SOFA) e avviare il bundle.' }
+      : { livello: 'basso', testo: 'SIRS < 2: non esclude la sepsi se il quadro clinico è suggestivo.' },
+    fonte: 'Bone, Chest 1992; Surviving Sepsis Campaign 2021.',
+  },
+  {
+    id: 'hestia',
+    nome: 'Hestia',
+    ambito: 'Embolia polmonare · idoneità al trattamento domiciliare',
+    voci: [
+      { tipo: 'si', id: 'emo', testo: 'Instabilità emodinamica (PAS < 100 e FC > 100, necessità di terapia intensiva o giudizio clinico)', punti: 1 },
+      { tipo: 'si', id: 'trombo', testo: 'Trombolisi o embolectomia necessaria', punti: 1 },
+      { tipo: 'si', id: 'sangue', testo: 'Sanguinamento attivo o alto rischio di sanguinamento', punti: 1 },
+      { tipo: 'si', id: 'o2', testo: 'Ossigeno necessario per SpO₂ > 90% per più di 24 h', punti: 1 },
+      { tipo: 'si', id: 'tao', testo: 'EP diagnosticata in corso di anticoagulazione', punti: 1 },
+      { tipo: 'si', id: 'dolore', testo: 'Dolore che richiede oppioidi ev per più di 24 h', punti: 1 },
+      { tipo: 'si', id: 'sociale', testo: 'Motivi medici o sociali per ricovero > 24 h', punti: 1 },
+      { tipo: 'si', id: 'crcl', testo: 'Clearance creatinina < 30 mL/min', punti: 1 },
+      { tipo: 'si', id: 'fegato', testo: 'Insufficienza epatica grave', punti: 1 },
+      { tipo: 'si', id: 'gravida', testo: 'Gravidanza', punti: 1 },
+      { tipo: 'si', id: 'hit', testo: 'Storia di trombocitopenia da eparina (HIT)', punti: 1 },
+    ],
+    esito: (t) =>
+      t === 0 ? { livello: 'basso', testo: 'Hestia negativo: candidabile a dimissione precoce/trattamento domiciliare, con follow-up garantito.' }
+      : { livello: 'alto', testo: 'Almeno un criterio presente: ricovero.' },
+    fonte: 'Zondag, J Thromb Haemost 2011; ESC 2019.',
+  },
+  {
+    id: 'bova',
+    nome: 'Bova',
+    ambito: 'Embolia polmonare normotesa · rischio di complicanze a 30 giorni',
+    voci: [
+      { tipo: 'si', id: 'pas', testo: 'PAS 90–100 mmHg', punti: 2 },
+      { tipo: 'si', id: 'trop', testo: 'Troponina elevata', punti: 2 },
+      { tipo: 'si', id: 'vd', testo: 'Disfunzione del ventricolo destro (eco o TC)', punti: 2 },
+      { tipo: 'si', id: 'fc', testo: 'FC ≥ 110/min', punti: 1 },
+    ],
+    esito: (t) =>
+      t >= 5 ? { livello: 'alto', testo: 'Stadio III (5–7): rischio alto di complicanze (≈ 29%); monitoraggio intensivo.' }
+      : t >= 3 ? { livello: 'medio', testo: 'Stadio II (3–4): rischio intermedio (≈ 10%); ricovero monitorato.' }
+      : { livello: 'basso', testo: 'Stadio I (0–2): rischio basso (≈ 4%).' },
+    fonte: 'Bova, Eur Respir J 2014.',
+  },
+  {
+    id: 'child-pugh',
+    nome: 'Child-Pugh',
+    ambito: 'Cirrosi · gravità della malattia epatica',
+    voci: [
+      { tipo: 'scelta', id: 'bil', testo: 'Bilirubina (mg/dL)', opzioni: [{ testo: '< 2', punti: 1 }, { testo: '2–3', punti: 2 }, { testo: '> 3', punti: 3 }] },
+      { tipo: 'scelta', id: 'alb', testo: 'Albumina (g/dL)', opzioni: [{ testo: '> 3,5', punti: 1 }, { testo: '2,8–3,5', punti: 2 }, { testo: '< 2,8', punti: 3 }] },
+      { tipo: 'scelta', id: 'inr', testo: 'INR', opzioni: [{ testo: '< 1,7', punti: 1 }, { testo: '1,7–2,3', punti: 2 }, { testo: '> 2,3', punti: 3 }] },
+      { tipo: 'scelta', id: 'asc', testo: 'Ascite', opzioni: [{ testo: 'Assente', punti: 1 }, { testo: 'Lieve', punti: 2 }, { testo: 'Moderata-grave', punti: 3 }] },
+      { tipo: 'scelta', id: 'enc', testo: 'Encefalopatia', opzioni: [{ testo: 'Assente', punti: 1 }, { testo: 'Grado 1–2', punti: 2 }, { testo: 'Grado 3–4', punti: 3 }] },
+    ],
+    formato: (t) => (t < 5 ? '—' : `${t} · classe ${t <= 6 ? 'A' : t <= 9 ? 'B' : 'C'}`),
+    esito: (t) =>
+      t < 5 ? { livello: 'basso', testo: 'Compilare tutte le voci.' }
+      : t <= 6 ? { livello: 'basso', testo: 'Classe A (5–6): malattia compensata. DOAC utilizzabili.' }
+      : t <= 9 ? { livello: 'medio', testo: 'Classe B (7–9): compromissione significativa. DOAC con cautela (non rivaroxaban).' }
+      : { livello: 'alto', testo: 'Classe C (10–15): scompensata. DOAC controindicati.' },
+    fonte: 'Pugh, Br J Surg 1973; EHRA 2021 (DOAC).',
+  },
+  {
+    id: 'rass',
+    nome: 'RASS',
+    ambito: 'Sedazione e agitazione · livello',
+    voci: [
+      { tipo: 'scelta', id: 'r', testo: 'Livello osservato', opzioni: [
+        { testo: '+4 Combattivo, violento, pericolo per il personale', punti: 9 },
+        { testo: '+3 Molto agitato: tira o rimuove tubi e cateteri, aggressivo', punti: 8 },
+        { testo: '+2 Agitato: movimenti finalistici frequenti, lotta con il ventilatore', punti: 7 },
+        { testo: '+1 Irrequieto: ansioso, movimenti non aggressivi', punti: 6 },
+        { testo: '0 Sveglio e calmo', punti: 5 },
+        { testo: '−1 Sonnolento: si sveglia alla voce, contatto visivo > 10 s', punti: 4 },
+        { testo: '−2 Sedazione lieve: si sveglia alla voce, contatto visivo < 10 s', punti: 3 },
+        { testo: '−3 Sedazione moderata: movimento o apertura occhi alla voce, senza contatto visivo', punti: 2 },
+        { testo: '−4 Sedazione profonda: nessuna risposta alla voce, movimento allo stimolo fisico', punti: 1 },
+        { testo: '−5 Non risvegliabile: nessuna risposta né alla voce né allo stimolo fisico', punti: 0.5 },
+      ] },
+    ],
+    formato: (t) => (t ? `RASS ${t === 0.5 ? '−5' : t - 5 > 0 ? `+${t - 5}` : t - 5 === 0 ? '0' : `−${5 - t}`}` : '—'),
+    esito: (t) =>
+      !t ? { livello: 'basso', testo: 'Scegliere il livello.' }
+      : t >= 7 ? { livello: 'alto', testo: 'Agitazione pericolosa: sicurezza, cause organiche (ipossia, dolore, globo, astinenza), sedazione.' }
+      : t >= 3 ? { livello: 'basso', testo: 'Nel bersaglio abituale (da −2 a +1).' }
+      : { livello: 'medio', testo: 'Sedazione profonda: vie aeree, ridurre i sedativi se non indicata.' },
+    fonte: 'Sessler, Am J Respir Crit Care Med 2002.',
+  },
+  {
     id: 'news2',
     nome: 'NEWS2',
     ambito: 'Deterioramento clinico · screening della sepsi',

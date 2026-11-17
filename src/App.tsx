@@ -23,6 +23,7 @@ import Moduli from './pages/Moduli'
 import ModuloTrasfusione from './pages/ModuloTrasfusione'
 import ModuloTrasferimento from './pages/ModuloTrasferimento'
 import ModuloEparina from './pages/ModuloEparina'
+import ModuloCve from './pages/ModuloCve'
 import PaginaTesti from './components/PaginaTesti'
 import { DIMISSIONI } from './lib/dimissioni'
 import { DIETE } from './lib/diete'
@@ -151,6 +152,7 @@ export default function App() {
           <Route path="modulo-trasfusione" element={<ModuloTrasfusione />} />
           <Route path="modulo-trasferimento" element={<ModuloTrasferimento />} />
           <Route path="modulo-eparina" element={<ModuloEparina />} />
+          <Route path="modulo-cve" element={<ModuloCve />} />
           <Route path="linee-guida" element={<ElencoLineeGuida />} />
           <Route path="linee-guida/:id" element={<RiassuntoLineaGuida />} />
           <Route path="*" element={<Navigate to="/" replace />} />

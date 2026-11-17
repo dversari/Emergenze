@@ -439,6 +439,7 @@ export const PROCEDURE: Scheda[] = [
       ] },
     ],
     fonte: 'ERC 2025; ESC 2024 (fibrillazione atriale)',
+    link: [{ etichetta: '⎙ Check-list da stampare', href: '/modulo-cve', primario: true }],
   },
   // ─── Terapia elettrica (nostri defibrillatori) ───
   {

@@ -22,6 +22,12 @@ const MODULI: Modulo[] = [
     pdta: { to: '/linee-guida/embolia-polmonare', etichetta: 'PDTA embolia polmonare' },
   },
   {
+    to: '/modulo-cve',
+    titolo: 'Check-list cardioversione elettrica',
+    descr: 'Check-list del PS di Prato (prima, ABCD, farmaci, durante, dopo) con spunte e dosi della sedazione calcolate dal peso. Stampabile in una pagina.',
+    pdta: { to: '/linee-guida/fibrillazione-atriale', etichetta: 'PDTA fibrillazione atriale' },
+  },
+  {
     to: '/modulo-notifica',
     titolo: 'Notifica di malattia infettiva',
     descr: 'Scheda unica regionale (DM 7/3/2022): spunta la malattia (☎ 12 h, ✉ 48 h), compila, crea il PDF e invialo per mail all’Igiene pubblica di Prato.',

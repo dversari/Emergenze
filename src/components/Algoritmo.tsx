@@ -18,7 +18,12 @@ const SCORE: [RegExp, string][] = [
   [/score di Constans|Constans/, 'constans'],
   [/PERC/, 'perc'],
   [/sPESI/, 'spesi'],
-  [/Cockcroft-Gault/, 'cockcroft'],
+  [/Cockcroft(?:-Gault)?/, 'cockcroft'],
+  [/\bSIRS\b/, 'sirs'],
+  [/Hestia/, 'hestia'],
+  [/\bBova\b/, 'bova'],
+  [/Child-Pugh|\bChild\b/, 'child-pugh'],
+  [/\bRASS\b/, 'rass'],
   [/GCS/, 'gcs'],
   [/NIHSS/, 'nihss'],
   [/CURB-65/, 'curb65'],
@@ -38,7 +43,9 @@ const SCORE: [RegExp, string][] = [
   [/Canadian Syncope Risk Score/, 'csrs'],
   [/regola di Ottawa per ESA|Ottawa/, 'ottawa-esa'],
   [/PLASMIC(?: score)?/, 'plasmic'],
-  [/(?:punteggio |score )?ISTH DIC/, 'isth-dic'],
+  [/(?:punteggio |score )?ISTH DIC|[Pp]unteggio ISTH/, 'isth-dic'],
+  [/Canadian C-spine(?: Rule)?/, 'ccsr'],
+  [/Canadian CT Head(?: Rule)?/, 'ccthr'],
   [/HACOR/, 'hacor'],
   [/Centor\/McIsaac|McIsaac|Centor/, 'mcisaac'],
   [/MASCC/, 'mascc'],
@@ -344,7 +351,7 @@ function Rami({ rami, continua }: { rami: Ramo[]; continua?: boolean }) {
       {rami.map((r) => (
         <div key={r.etichetta} className={affiancati ? 'flex flex-col' : 'rounded-2xl border border-linea bg-fondo p-2'}>
           <div className={`flex ${affiancati ? 'justify-center' : ''}`}>
-            <span className={`text-[11px] font-extrabold uppercase tracking-wide rounded-full px-3 py-1 ${CHIP[r.tono ?? 'neutro']}`}>{r.etichetta}</span>
+            <span className={`text-[11px] font-extrabold uppercase tracking-wide rounded-full px-3 py-1 ${CHIP[r.tono ?? 'neutro']}`}><ConScore t={r.etichetta} resto={(y) => y} /></span>
           </div>
           <Freccia corta />
           <Sequenza nodi={r.nodi} piccolo />
@@ -406,7 +413,7 @@ export default function Algoritmo({ titolo, nota, nodi, sezioni }: { titolo: str
     <section className="card">
       <p className="etichetta">Algoritmo</p>
       <h3 className="font-extrabold text-lg leading-tight mt-0.5">{titolo}</h3>
-      {nota && <p className="text-[12px] text-tenue leading-snug mt-1 mb-3">{nota}</p>}
+      {nota && <p className="text-[12px] text-tenue leading-snug mt-1 mb-3"><Testo t={nota} /></p>}
       <Sequenza nodi={nodi} />
       <div className="flex flex-wrap gap-x-3 gap-y-1 mt-4 text-[10.5px] text-tenue">
         <span><span className="text-oro font-black">◆</span> decisione</span>

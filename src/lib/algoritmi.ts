@@ -1164,7 +1164,7 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
               {
                 tipo: 'allarme', titolo: 'Cardioversione sincronizzata',
                 righe: ['In sedazione, fino a 3 tentativi. FA: energia massima; flutter/TPSV 70–120 J; TV 120–150 J.', 'Fallisce: amiodarone (Cordarone) 300 mg in 10–20 min e ritentare.'],
-                vai: [{ etichetta: 'Cardioversione elettrica', to: '/procedure?apri=cve' }, { etichetta: 'Sedazione procedurale', to: '/sedazione?apri=procedurale' }],
+                vai: [{ etichetta: 'Cardioversione elettrica', to: '/procedure?apri=cve' }, { etichetta: 'Check-list CVE', to: '/modulo-cve' }, { etichetta: 'Sedazione procedurale', to: '/sedazione?apri=procedurale' }],
               },
             ],
             fine: 'poi amiodarone (Cordarone) 900 mg/24 h',
