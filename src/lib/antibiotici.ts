@@ -639,3 +639,29 @@ export const REGOLE: { titolo: string; righe: string[] }[] = [
 ]
 
 export const farmaco = (id: string) => FARMACI.find((f) => f.id === id)
+
+/** Famiglie di antibiotici con le molecole in commercio in Italia ({id} = scheda nell'app). */
+export const FAMIGLIE: { nome: string; spettro: string; molecole: string[] }[] = [
+  { nome: 'Penicilline', spettro: 'Streptococchi, enterococco (ampicillina), anaerobi con inibitore; piperacillina anche Pseudomonas.', molecole: ['Benzilpenicillina (penicillina G)', '{benzatina}', '{amoxicillina}', '{ampicillina}', '{amoxclav}', '{ampisulb}', '{piptazo}'] },
+  { nome: 'Cefalosporine I–II generazione', spettro: 'Stafilococco sensibile, streptococchi; II: anche H. influenzae.', molecole: ['{cefazolina}', '{cefalexina} (os)', 'Cefuroxima (os, ev)', 'Cefaclor (os)'] },
+  { nome: 'Cefalosporine III–IV generazione', spettro: 'Gram-negativi; ceftazidime e cefepime anche Pseudomonas. Non enterococco, non ESBL.', molecole: ['{ceftriaxone}', 'Cefotaxime', 'Ceftazidime', '{cefepime}', '{cefixima} (os)', 'Cefpodoxima (os)', 'Ceftibuten (os)', 'Cefditoren (os)'] },
+  { nome: 'Cefalosporine anti-MRSA', spettro: 'MRSA + Gram-negativi comunitari.', molecole: ['Ceftarolina', 'Ceftobiprolo'] },
+  { nome: 'Cefalosporine con inibitore e siderofore (riservate)', spettro: 'Gram-negativi multiresistenti (ESBL, KPC, OXA-48, Pseudomonas MDR; cefiderocol anche MBL e Acinetobacter).', molecole: ['{ceftazavi}', '{ceftolozano}', '{cefiderocol}'] },
+  { nome: 'Carbapenemi', spettro: 'Ampio spettro, ESBL, anaerobi; ertapenem non Pseudomonas né enterococco.', molecole: ['{meropenem}', '{imipenem}', '{ertapenem}', 'Meropenem/vaborbactam (KPC)', 'Imipenem/relebactam (KPC)'] },
+  { nome: 'Monobattami', spettro: 'Solo Gram-negativi aerobi; sicuro nell’allergia alle penicilline.', molecole: ['{aztreonam}'] },
+  { nome: 'Glicopeptidi e lipoglicopeptidi', spettro: 'Gram-positivi compreso MRSA.', molecole: ['{vancomicina}', '{vancomicinaos} (C. difficile)', 'Teicoplanina', 'Dalbavancina (dose singola)', 'Oritavancina (dose singola)'] },
+  { nome: 'Lipopeptidi', spettro: 'Gram-positivi compreso MRSA e VRE; non nella polmonite.', molecole: ['{daptomicina}'] },
+  { nome: 'Ossazolidinoni', spettro: 'Gram-positivi compreso MRSA e VRE; ottima biodisponibilità orale.', molecole: ['{linezolid}', 'Tedizolid'] },
+  { nome: 'Aminoglicosidi', spettro: 'Gram-negativi (sinergia); nefro- e ototossici, dose unica giornaliera.', molecole: ['{gentamicina}', '{amikacina}', 'Tobramicina'] },
+  { nome: 'Macrolidi', spettro: 'Atipici (Legionella, Mycoplasma, Chlamydia), Campylobacter.', molecole: ['{azitromicina}', '{claritromicina}', 'Eritromicina'] },
+  { nome: 'Lincosamidi', spettro: 'Gram-positivi e anaerobi; antitossina.', molecole: ['{clindamicina}'] },
+  { nome: 'Tetracicline e glicilcicline', spettro: 'Atipici, MRSA comunitario, rickettsie, Borrelia; tigeciclina: multiresistenti.', molecole: ['{doxiciclina}', 'Minociclina', '{tigeciclina}'] },
+  { nome: 'Fluorochinoloni', spettro: 'Gram-negativi (cipro: Pseudomonas); levo e moxi anche respiratori. Avvertenze EMA.', molecole: ['{ciprofloxacina}', '{levofloxacina}', 'Moxifloxacina', 'Prulifloxacina (os)'] },
+  { nome: 'Sulfamidici', spettro: 'Gram-negativi urinari, MRSA comunitario, Pneumocystis, Listeria, Stenotrophomonas.', molecole: ['{cotrimossazolo}'] },
+  { nome: 'Nitroimidazoli', spettro: 'Anaerobi, protozoi; C. difficile solo se non c’è alternativa.', molecole: ['{metronidazolo}'] },
+  { nome: 'Antibiotici urinari e fosfomicina', spettro: 'Cistite; fosfomicina ev nelle associazioni contro i multiresistenti.', molecole: ['{fosfomicina} (os)', 'Fosfomicina disodica (ev)', '{nitrofurantoina}'] },
+  { nome: 'Polimixine', spettro: 'Gram-negativi multiresistenti (non Proteus, Serratia); nefrotossica.', molecole: ['{colistina}'] },
+  { nome: 'Rifamicine', spettro: 'Stafilococco su protesi (mai da sola), tubercolosi; rifaximina non assorbita.', molecole: ['Rifampicina', 'Rifaximina (os)'] },
+  { nome: 'Altri per C. difficile', spettro: 'Solo intestinale.', molecole: ['{fidaxomicina}'] },
+  { nome: 'Antimicotici', spettro: 'Echinocandine di prima scelta nella candidemia del paziente critico.', molecole: ['{caspofungina}', 'Anidulafungina', 'Micafungina', 'Fluconazolo', 'Voriconazolo', 'Amfotericina B liposomiale'] },
+]

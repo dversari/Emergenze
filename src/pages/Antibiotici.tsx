@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import Riconoscimenti from '../components/Riconoscimenti'
 import Algoritmo from '../components/Algoritmo'
 import { ALGORITMI_ANTIBIOTICI } from '../lib/antibioticiAlgoritmi'
-import { CONDIZIONI, FARMACI, REGOLE, farmaco, type Condizione } from '../lib/antibiotici'
+import { CONDIZIONI, FAMIGLIE, FARMACI, REGOLE, farmaco, type Condizione } from '../lib/antibiotici'
 
 /* Terapia antibiotica empirica: card per condizione e per farmaco.
    I nomi dei farmaci dentro le condizioni aprono la scheda del farmaco (dose, fiale, preparazione, rene). */
@@ -133,6 +133,27 @@ export default function Antibiotici() {
 
   return (
     <div className="elenco">
+      <details className="intero card !p-0 overflow-hidden">
+        <summary className="px-4 py-3 cursor-pointer list-none flex items-center gap-3">
+          <div className="flex-1 min-w-0">
+            <p className="font-bold leading-tight">Famiglie di antibiotici</p>
+            <p className="text-xs text-tenue leading-snug mt-0.5">Classi, spettro e molecole in commercio in Italia</p>
+          </div>
+          <span className="text-tenue">›</span>
+        </summary>
+        <div className="px-4 pb-4 pt-1 border-t border-linea flex flex-col gap-3">
+          {FAMIGLIE.map((f) => (
+            <div key={f.nome}>
+              <p className="font-bold text-sm mt-2">{f.nome}</p>
+              <p className="text-xs text-tenue leading-snug">{f.spettro}</p>
+              <p className="text-sm leading-relaxed mt-0.5">
+                {f.molecole.map((m, i) => <Fragment key={i}>{i > 0 && ' · '}<Testo t={m} apri={apriFarmaco} /></Fragment>)}
+              </p>
+            </div>
+          ))}
+          <p className="text-[11px] text-tenue">In verde le molecole con scheda (dose, fiale, rene): toccale per aprirla.</p>
+        </div>
+      </details>
       <div className="intero grid grid-cols-2 gap-1 p-1 rounded-2xl bg-sabbia border border-linea">
         {(['condizioni', 'farmaci'] as const).map((v) => (
           <button key={v} onClick={() => vai(v)}
