@@ -7,8 +7,10 @@ import { CHIAVE_DATI, CHIAVE_PIN, leggi, scarica } from './Rubrica'
  * Postazioni per posizione — mattina: F1 F2 A A B B L L L; pomeriggio: TVR (se la prima è in corsivo) poi come la mattina.
  */
 type Giorno = { g: number; m: string; p: string; n: string; nn: string; rm: string; rp: string; rn: string }
-type Mese = { mese: string; dati: { mese: string; giorni: Giorno[] } }
-type Sigla = { s: string; agg: boolean; tvr: boolean; p?: string }
+/* Cambio turno: nel giorno g, turno t, la sigla in posizione i (da) è sostituita da «a» */
+type Cambio = { g: number; t: keyof Omit<Giorno, 'g'>; i: number; da: string; a: string }
+type Mese = { mese: string; dati: { mese: string; giorni: Giorno[]; cambi?: Cambio[] } }
+type Sigla = { s: string; agg: boolean; tvr: boolean; p?: string; barrato?: boolean; sub?: boolean }
 
 const POS = ['F1', 'F2', 'A', 'A', 'B', 'B', 'L', 'L', 'L']
 const spezza = (t: string): Sigla[] => t.split(' ').filter(Boolean).map((x) => ({ s: x.replace(/[*~]/g, ''), agg: x.includes('*'), tvr: x.includes('~') }))
@@ -16,6 +18,19 @@ const conPos = (t: string): Sigla[] => {
   const v = spezza(t)
   const pos = v[0]?.tvr ? ['TVR', ...POS] : POS
   return v.map((x, i) => ({ ...x, p: pos[i] ?? '' }))
+}
+/* Applica i cambi: l'originale resta barrato, chi subentra va in fondo alla riga con la stessa postazione */
+const conCambi = (v: Sigla[], cambi: Cambio[]): Sigla[] => {
+  if (!cambi.length) return v
+  const out = v.map((x) => ({ ...x }))
+  const nuovi: Sigla[] = []
+  for (const c of cambi) {
+    const j = out[c.i]?.s === c.da ? c.i : out.findIndex((x) => x.s === c.da && !x.barrato)
+    if (j < 0) continue
+    out[j].barrato = true
+    nuovi.push({ s: c.a, agg: false, tvr: false, p: out[j].p, sub: true })
+  }
+  return [...out, ...nuovi]
 }
 const GIORNI = ['dom', 'lun', 'mar', 'mer', 'gio', 'ven', 'sab']
 const MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre']
@@ -31,14 +46,23 @@ const TONO: Record<string, string> = {
   nn: 'bg-[#2b2d2c] text-white border-[#2b2d2c]',
   r: 'bg-white text-tenue border-dashed border-linea-forte',
 }
+/* Chi subentra con un cambio: stesso colore del turno, più scuro */
+const SCURO: Record<string, string> = {
+  m: 'bg-[#2c5a43] text-white border-[#2c5a43]',
+  p: 'bg-[#6e2f2f] text-white border-[#6e2f2f]',
+  n: 'bg-[#3a3d3b] text-white border-[#3a3d3b]',
+  nn: 'bg-[#000000] text-white border-[#000000] ring-1 ring-[#8a8d8b]',
+  r: 'bg-[#3a3d3b] text-white border-[#3a3d3b]',
+}
 
 function Chip({ x, tono, mia }: { x: Sigla; tono: string; mia: boolean }) {
   const t = tono
+  const colore = mia && !x.barrato ? 'bg-[#e8c34a] text-[#2b2410] border-[#b8902a] font-black shadow-sm' : x.sub ? `${SCURO[t]} font-black` : `${TONO[t]} font-bold`
   return (
-    <span className={`inline-flex items-baseline gap-1 rounded-lg border px-1.5 py-0.5 text-[13px] leading-tight ${mia ? 'bg-[#e8c34a] text-[#2b2410] border-[#b8902a] font-black shadow-sm' : `${TONO[t]} font-bold`} ${x.agg ? 'border-2 !border-current' : ''}`}
-      title={x.agg ? 'Produttività aggiuntiva' : undefined}>
+    <span className={`inline-flex items-baseline gap-1 rounded-lg border px-1.5 py-0.5 text-[13px] leading-tight ${colore} ${x.agg ? 'border-2 !border-current' : ''} ${x.barrato ? 'opacity-55' : ''} ${mia && x.barrato ? 'outline outline-2 outline-[#e8c34a]' : ''}`}
+      title={x.barrato ? 'Cambio turno: sostituito' : x.sub ? 'Subentrato con cambio turno' : x.agg ? 'Produttività aggiuntiva' : undefined}>
       {x.p && <span className="text-[9.5px] font-extrabold opacity-70">{x.p}</span>}
-      <span className={x.s === 'YY' ? 'opacity-50' : ''}>{x.s}</span>
+      <span className={`${x.s === 'YY' ? 'opacity-50' : ''} ${x.barrato ? 'line-through decoration-2' : ''}`}>{x.s}</span>
     </span>
   )
 }
@@ -90,10 +114,15 @@ export default function Turni() {
   const giorni = useMemo(() => {
     if (!mese) return []
     const [a, mm] = mese.mese.split('-').map(Number)
+    const cambi = mese.dati.cambi ?? []
     return mese.dati.giorni.map((g) => {
       const d = new Date(a, mm - 1, g.g)
-      const r = { d, g, m: conPos(g.m), p: conPos(g.p), n: spezza(g.n), nn: spezza(g.nn), rm: spezza(g.rm), rp: spezza(g.rp), rn: spezza(g.rn) }
-      const tutti = [...r.m, ...r.p, ...r.n, ...r.nn, ...r.rm, ...r.rp, ...r.rn]
+      const cc = (t: Cambio['t']) => cambi.filter((c) => c.g === g.g && c.t === t)
+      const r = {
+        d, g, m: conCambi(conPos(g.m), cc('m')), p: conCambi(conPos(g.p), cc('p')), n: conCambi(spezza(g.n), cc('n')), nn: conCambi(spezza(g.nn), cc('nn')),
+        rm: conCambi(spezza(g.rm), cc('rm')), rp: conCambi(spezza(g.rp), cc('rp')), rn: conCambi(spezza(g.rn), cc('rn')),
+      }
+      const tutti = [...r.m, ...r.p, ...r.n, ...r.nn, ...r.rm, ...r.rp, ...r.rn].filter((x) => !x.barrato)
       return { ...r, mio: !!S && tutti.some((x) => x.s === S) }
     })
   }, [mese, S])
@@ -103,10 +132,11 @@ export default function Turni() {
 
   const [anno, nm] = mese.mese.split('-').map(Number)
   const miei = giorni.filter((x) => x.mio)
+  const io = (y: Sigla) => y.s === S && !y.barrato
   const turniMiei = (x: typeof giorni[number]) => [
-    ...x.m.filter((y) => y.s === S).map((y) => `M-${y.p}`), ...x.p.filter((y) => y.s === S).map((y) => `P-${y.p}`),
-    ...(x.n.some((y) => y.s === S) ? ['Notte'] : []), ...(x.nn.some((y) => y.s === S) ? ['Nottina'] : []),
-    ...(x.rm.some((y) => y.s === S) ? ['Rep M'] : []), ...(x.rp.some((y) => y.s === S) ? ['Rep P'] : []), ...(x.rn.some((y) => y.s === S) ? ['Rep N'] : []),
+    ...x.m.filter(io).map((y) => `M-${y.p}`), ...x.p.filter(io).map((y) => `P-${y.p}`),
+    ...(x.n.some(io) ? ['Notte'] : []), ...(x.nn.some(io) ? ['Nottina'] : []),
+    ...(x.rm.some(io) ? ['Rep M'] : []), ...(x.rp.some(io) ? ['Rep P'] : []), ...(x.rn.some(io) ? ['Rep N'] : []),
   ]
 
   return (
@@ -164,7 +194,8 @@ export default function Turni() {
       <section className="card !p-3 text-[12px] text-tenue leading-snug flex flex-wrap gap-x-4 gap-y-1">
         <span><b>F1/F2</b> flussi</span><span><b>A</b> alta</span><span><b>B</b> boarding</span><span><b>L</b> bassa</span><span><b>TVR</b></span>
         <span>bordo spesso = produttività aggiuntiva</span><span>in giallo: la sigla scritta in «La mia sigla»</span><span>fuori turno e OBI non riportati</span>
-        <span>Fonte: prospetto mensile (I. Grassi); i cambi successivi non sono inclusi.</span>
+        <span><s>barrato</s> = ceduto con cambio turno; in colore scuro, in fondo alla riga, chi subentra</span>
+        <span>Fonte: prospetto mensile (I. Grassi) + cambi turno segnalati.</span>
       </section>
     </div>
   )
