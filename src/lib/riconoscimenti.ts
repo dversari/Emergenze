@@ -79,6 +79,9 @@ export const REVISIONI: Record<string, Revisione[]> = {
   'linee-guida/bradicardia': [
     { sigla: 'CG', data: '2026-11-17', esito: 'aperta', nota: 'Revisione del PDTA.', impronta: '33119209' },
   ],
+  'linee-guida/emergenza-ipertensiva': [
+    { sigla: 'VR', data: '2026-11-19', esito: 'ok', nota: 'Blocchi iniziali: ansia (diazepam gocce) o dolore (paracetamolo), poi rivalutazione della PA prima di cercare il danno d’organo.', impronta: 'a652842b' },
+  ],
   'linee-guida/colica-renale': [
     { sigla: 'VR', data: '2026-11-13', esito: 'ok', nota: 'Tolto il metamizolo; dosi del cortisone (prednisone 25 mg/die per 10 giorni).', impronta: '273acd8f' },
   ],
