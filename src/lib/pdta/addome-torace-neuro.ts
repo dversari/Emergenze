@@ -650,8 +650,16 @@ export const ALG_ADDOME_TORACE_NEURO: Alg = {
     titolo: 'Algoritmo pressione molto alta',
     nota: 'ESC 2024. Farmaci ev a Prato: labetalolo, urapidil, isosorbide dinitrato (Diniket).',
     nodi: [
-      { tipo: 'avvio', titolo: 'PA > 180/120', righe: ['Ripetere a riposo, dopo analgesia/ansiolisi.'] },
-      { tipo: 'checklist', titolo: 'Danno d’organo?', righe: ['ECG, troponina', 'Creatinina, urine, emocromo, LDH, schistociti', 'Neurologico, fundus', 'Test di gravidanza'] },
+      { tipo: 'avvio', titolo: 'PA > 180/120', righe: ['Quasi sempre da attivazione adrenergica: prima trattare la causa.'] },
+      { tipo: 'decisione', titolo: 'Ansia o dolore?' },
+      {
+        tipo: 'rami', rami: [
+          { etichetta: 'Ansia', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Ansiolisi', righe: ['Diazepam (Valium gocce 5 mg/mL) 15–20 gocce per bocca (= 3–4 mg; 1 goccia = 0,2 mg).'] }] },
+          { etichetta: 'Dolore / cefalea', tono: 'neutro', nodi: [{ tipo: 'terapia', titolo: 'Analgesia', righe: ['Paracetamolo (Tachipirina) 1 g ev o per bocca; analgesia adeguata se il dolore è forte.'] }] },
+        ],
+      },
+      { tipo: 'passo', titolo: 'Rivalutare la PA dopo 30–60 min a riposo', righe: ['Se scesa e senza sintomi d’organo: dimissione, misurazione al mattino in condizioni standard.'] },
+      { tipo: 'checklist', titolo: 'Ancora > 180/120: danno d’organo?', righe: ['ECG, troponina', 'Creatinina, urine, emocromo, LDH, schistociti', 'Neurologico, fundus', 'Test di gravidanza'] },
       {
         tipo: 'rami', rami: [
           { etichetta: 'No danno', tono: 'si', nodi: [{ tipo: 'esito', titolo: 'Non è un’emergenza', righe: ['Niente ev; dolore/ansia; terapia orale; curante.'], vai: [{ etichetta: 'Dimissione: pressione alta', to: '/dimissioni' }] }] },
