@@ -10,6 +10,8 @@ import ChiediLineaGuida from '../components/ChiediLineaGuida'
 import Riconoscimenti, { FiltroRiconoscimenti } from '../components/Riconoscimenti'
 import { aziendale, passaFiltro, statoRevisione, type Filtro } from '../lib/riconoscimenti'
 import type { LineaGuida } from '../lib/lineeGuida'
+import { IconaSindrome } from '../components/IconeTossiche'
+import { PDTA_TOSSICOLOGIA } from './Tossicologia'
 
 /** «ESC 2024», oppure l'ente così com'è se contiene già gli anni (confronti tra società). */
 const enteAnno = (l: { ente: string; anno: number }) => (/\d{4}/.test(l.ente) ? l.ente : `${l.ente} ${l.anno}`)
@@ -53,7 +55,26 @@ export function ElencoLineeGuida() {
           <p className="etichetta px-1 mt-3">Tutti i PDTA per area</p>
         </div>
       )}
-      {[...new Set(voci.map((l) => l.area.split(' · ')[0]))].sort().map((area) => (
+      {q && 'tossicologia sindromi tossiche toxidromi intossicazione avvelenamento anticolinergica colinergica simpaticomimetica oppioide sedativo ipnotica serotoninergica neurolettica maligna astinenza antidoti'.includes(q) && (
+        <Link to="/linee-guida/tossicologia" className="card !py-3 flex items-center gap-3 bg-bordeaux text-white !border-bordeaux">
+          <IconaSindrome id="anticolinergico" className="w-8 h-8 shrink-0" />
+          <span className="flex-1 font-bold">Tossicologia: sindromi tossiche e approccio</span>
+          <span className="text-white/80">›</span>
+        </Link>
+      )}
+      {[...new Set(voci.map((l) => l.area.split(' · ')[0]))].sort().map((area) => area === 'Tossicologia' && !q && filtro === 'tutte' ? (
+        <div key={area} className="elenco !gap-2">
+          <p className="etichetta px-1 mt-1">{area}</p>
+          <Link to="/linee-guida/tossicologia" className="card !py-3 flex items-center gap-3 bg-bordeaux text-white active:opacity-90 !border-bordeaux">
+            <div className="w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center shrink-0"><IconaSindrome id="anticolinergico" className="w-8 h-8" /></div>
+            <div className="flex-1 min-w-0">
+              <p className="font-bold leading-tight">Tossicologia</p>
+              <p className="text-xs text-white/80">Sindromi tossiche, approccio, indizi · {PDTA_TOSSICOLOGIA.length} PDTA · CAV</p>
+            </div>
+            <span className="text-white/80">›</span>
+          </Link>
+        </div>
+      ) : (
         <div key={area} className="elenco !gap-2">
           <p className="etichetta px-1 mt-1">{area}</p>
       {voci.filter((l) => l.area.split(' · ')[0] === area).map((l) => (
@@ -133,6 +154,13 @@ export function RiassuntoLineaGuida() {
           <span><span className="block text-[11px] font-bold uppercase tracking-wide opacity-80">Centro antiveleni di Firenze · 24 h</span><span className="text-lg font-extrabold">{CAV_FIRENZE.numero}</span></span>
           <span className="rounded-full bg-white text-bordeaux font-extrabold text-sm px-4 py-2">Chiama</span>
         </a>
+      )}
+      {conCav(l) && (
+        <LinkR to="/linee-guida/tossicologia" className="card !py-2.5 flex items-center gap-3 no-underline active:bg-sabbia">
+          <IconaSindrome id="colinergico" className="w-8 h-8 text-bordeaux shrink-0" />
+          <span className="flex-1 min-w-0"><span className="block font-bold leading-tight">Sindromi tossiche e approccio</span><span className="text-xs text-tenue">Area Tossicologia</span></span>
+          <span className="text-tenue">›</span>
+        </LinkR>
       )}
 
       {(l.id === 'stemi' || l.id === 'nste-sca') && <EcgEquivalenti />}

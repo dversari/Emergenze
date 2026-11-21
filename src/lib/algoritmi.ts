@@ -17,6 +17,7 @@ import { ALG_TOSSICOLOGIA } from './pdta/tossicologia'
 import { ALG_METABOLISMO } from './pdta/metabolismo-ambiente'
 import { ALG_ADDOME_TORACE_NEURO } from './pdta/addome-torace-neuro'
 import { ALG_OST_INF_EMA } from './pdta/ostetricia-infettive-ematologia'
+import { ALG_GASTRO } from './pdta/gastro'
 
 export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: Nodo[] }> = {
   'microangiopatie-cid': {
@@ -2876,4 +2877,5 @@ export const ALGORITMI: Record<string, { titolo: string; nota?: string; nodi: No
   ...ALG_METABOLISMO,
   ...ALG_ADDOME_TORACE_NEURO,
   ...ALG_OST_INF_EMA,
+  ...ALG_GASTRO,
 }

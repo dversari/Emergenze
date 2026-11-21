@@ -38,6 +38,7 @@ import { LG_TOSSICOLOGIA } from './pdta/tossicologia'
 import { LG_METABOLISMO } from './pdta/metabolismo-ambiente'
 import { LG_ADDOME_TORACE_NEURO } from './pdta/addome-torace-neuro'
 import { LG_OST_INF_EMA } from './pdta/ostetricia-infettive-ematologia'
+import { LG_GASTRO } from './pdta/gastro'
 
 export const LINEE_GUIDA: LineaGuida[] = [
   {
@@ -3017,6 +3018,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
   ...LG_METABOLISMO,
   ...LG_ADDOME_TORACE_NEURO,
   ...LG_OST_INF_EMA,
+  ...LG_GASTRO,
 ]
 
 /** Centro antiveleni di Firenze (Careggi), attivo 24 h. */
