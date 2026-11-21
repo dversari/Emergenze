@@ -296,11 +296,11 @@ export const LG_TOSSICOLOGIA: LineaGuida[] = [
     vediAnche: [CAV, { etichetta: 'Paracetamolo (NAC)', to: '/linee-guida/paracetamolo' }],
     inBreve: [
       'La domanda chiave è la latenza tra pasto e primi sintomi (vomito, diarrea).',
-      'Latenza < 6 h: di solito sindromi benigne (gastroenterica, muscarinica, panterinica) → terapia di supporto, osservazione.',
+      'Latenza < 6 h: di solito sindromi benigne (gastroenterica, muscarinica, panterinica, psicotropa, coprinica) → terapia di supporto, osservazione. Tabella completa qui sotto.',
       'Latenza > 6 h (spesso 8–24 h): sospetta amanitina (Amanita phalloides) → pericolo di insufficienza epatica fulminante. Ricovero e CAV anche se i sintomi migliorano (falsa remissione al giorno 2).',
       'Tutti i commensali vanno richiamati e valutati.',
       'Conservare i resti dei funghi, gli scarti di pulizia e il vomito per il micologo (tramite CAV / ASL).',
-      'Altre sindromi gravi tardive: Cortinarius (insufficienza renale dopo giorni), Gyromitra (convulsioni: piridossina).',
+      'Altre sindromi gravi tardive: orellanica (Cortinarius: insufficienza renale dopo giorni), giromitrica (Gyromitra: convulsioni, piridossina), rabdomiolitica (Tricholoma equestre).',
     ],
     sezioni: [
       {
@@ -315,7 +315,7 @@ export const LG_TOSSICOLOGIA: LineaGuida[] = [
         ],
       },
     ],
-    aggiornamenti: [{ data: OGGI, testo: 'Aggiunto: gestione per latenza, schema per amanitina.' }],
+    aggiornamenti: [{ data: '2026-11-21', testo: 'Aggiunta la tabella delle sindromi per latenza (incluse coprinica, psicotropa, paxillica, giromitrica, rabdomiolitica).' }, { data: OGGI, testo: 'Aggiunto: gestione per latenza, schema per amanitina.' }],
   },
   {
     id: 'vipera',
@@ -524,7 +524,7 @@ export const ALG_TOSSICOLOGIA: Alg = {
       { tipo: 'decisione', titolo: 'Latenza pasto → sintomi?' },
       {
         tipo: 'rami', rami: [
-          { etichetta: '< 6 h', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'Sindrome precoce', righe: ['Supporto (liquidi, antiemetico); muscarinica: atropina.', 'Ma: pasto misto o più pasti → trattare come tardiva.'] }] },
+          { etichetta: '< 6 h', tono: 'si', nodi: [{ tipo: 'passo', titolo: 'Sindrome precoce', righe: ['Supporto (liquidi, antiemetico); muscarinica: atropina.', 'Panterinica: diazepam, niente atropina.', 'Ma: pasto misto o più pasti → trattare come tardiva.'] }] },
           {
             etichetta: '> 6 h', tono: 'no', nodi: [
               { tipo: 'allarme', titolo: 'Sospetta amanitina', righe: ['Ricovero e CAV anche se migliora.'] },

@@ -4,6 +4,7 @@ import { RitornoCtx, riprendiScroll, useConRitorno } from '../lib/ritorno'
 import { Testo } from '../components/Algoritmo'
 import { IconaSindrome, SegnoCute, SegnoFreccia, SegnoPupille } from '../components/IconeTossiche'
 import { APPROCCIO, INDIZI, SINDROMI, sindrome, type Freccia, type Sindrome } from '../lib/sindromiTossiche'
+import TabellaFunghi from '../components/TabellaFunghi'
 import { LINEE_GUIDA, conCav, CAV_FIRENZE } from '../lib/lineeGuida'
 
 /** PDTA dell'area tossicologica (area Tossicologia o con pulsante CAV). */
@@ -181,6 +182,14 @@ export default function Tossicologia() {
             ))}
           </ol>
         </section>
+
+        <details className="card !p-0 overflow-hidden group">
+          <summary className="px-4 py-3 font-bold cursor-pointer list-none flex items-center justify-between">
+            Funghi · sindromi per latenza
+            <span className="text-tenue transition-transform group-open:rotate-90">›</span>
+          </summary>
+          <div className="border-t border-linea [&>section]:!border-0 [&>section]:!shadow-none"><TabellaFunghi senzaTitolo /></div>
+        </details>
 
         {INDIZI.map((g) => (
           <details key={g.titolo} className="card !p-0 overflow-hidden group">
