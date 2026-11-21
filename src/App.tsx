@@ -1,5 +1,6 @@
 import Percorsi from './pages/Percorsi'
 import Tossicologia from './pages/Tossicologia'
+import Micologia from './pages/Micologia'
 import Documenti from './pages/Documenti'
 import ModuloNotifica from './pages/ModuloNotifica'
 import ModuloDimissioneContro from './pages/ModuloDimissioneContro'
@@ -159,6 +160,7 @@ export default function App() {
           <Route path="modulo-cve" element={<ModuloCve />} />
           <Route path="linee-guida" element={<ElencoLineeGuida />} />
           <Route path="linee-guida/tossicologia" element={<Tossicologia />} />
+          <Route path="linee-guida/micologia" element={<Micologia />} />
           <Route path="linee-guida/:id" element={<RiassuntoLineaGuida />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>

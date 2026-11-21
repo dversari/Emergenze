@@ -293,7 +293,7 @@ export const LG_TOSSICOLOGIA: LineaGuida[] = [
     area: 'Tossicologia',
     fonte: { etichetta: 'PubMed: amatoxin poisoning management (revisioni)', url: 'https://pubmed.ncbi.nlm.nih.gov/?term=amatoxin+poisoning+management+review' },
     controllata: OGGI,
-    vediAnche: [CAV, { etichetta: 'Paracetamolo (NAC)', to: '/linee-guida/paracetamolo' }],
+    vediAnche: [CAV, { etichetta: 'Micologia: tavole dei funghi', to: '/linee-guida/micologia' }, { etichetta: 'Paracetamolo (NAC)', to: '/linee-guida/paracetamolo' }],
     inBreve: [
       'La domanda chiave è la latenza tra pasto e primi sintomi (vomito, diarrea).',
       'Latenza < 6 h: di solito sindromi benigne (gastroenterica, muscarinica, panterinica, psicotropa, coprinica) → terapia di supporto, osservazione. Tabella completa qui sotto.',

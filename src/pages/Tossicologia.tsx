@@ -5,6 +5,8 @@ import { Testo } from '../components/Algoritmo'
 import { IconaSindrome, SegnoCute, SegnoFreccia, SegnoPupille } from '../components/IconeTossiche'
 import { APPROCCIO, INDIZI, SINDROMI, sindrome, type Freccia, type Sindrome } from '../lib/sindromiTossiche'
 import TabellaFunghi from '../components/TabellaFunghi'
+import Fungo from '../components/Fungo'
+import { specie } from '../lib/micologia'
 import { LINEE_GUIDA, conCav, CAV_FIRENZE } from '../lib/lineeGuida'
 
 /** PDTA dell'area tossicologica (area Tossicologia o con pulsante CAV). */
@@ -182,6 +184,15 @@ export default function Tossicologia() {
             ))}
           </ol>
         </section>
+
+        <LinkR to="/linee-guida/micologia" className="card !p-0 overflow-hidden flex items-stretch no-underline active:bg-sabbia">
+          <div className="w-28 shrink-0 bg-[#fbfaf5] border-r border-linea"><Fungo s={specie('amanita-phalloides')!} etichette={false} className="w-full h-24" /></div>
+          <div className="flex-1 min-w-0 px-3 py-2.5 flex flex-col justify-center">
+            <p className="font-extrabold text-lg leading-tight">Micologia</p>
+            <p className="text-xs text-tenue leading-snug">Tavole dei funghi tossici con le parti da riconoscere, per sindrome</p>
+          </div>
+          <span className="self-center pr-3 text-tenue">›</span>
+        </LinkR>
 
         <details className="card !p-0 overflow-hidden group">
           <summary className="px-4 py-3 font-bold cursor-pointer list-none flex items-center justify-between">

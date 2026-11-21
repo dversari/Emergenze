@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useConRitorno } from '../lib/ritorno'
 import { SINDROMI_FUNGHI } from '../lib/sindromiTossiche'
+import { specieDi } from '../lib/micologia'
+import Fungo from './Fungo'
 
 /** Tabella delle sindromi da funghi divise per latenza (breve < 6 h, lunga > 6 h). */
 export default function TabellaFunghi({ senzaTitolo }: { senzaTitolo?: boolean }) {
@@ -21,6 +23,17 @@ export default function TabellaFunghi({ senzaTitolo }: { senzaTitolo?: boolean }
           <p className="text-[13px] leading-snug mt-1"><b className={breve ? 'text-verde' : 'text-bordeaux'}>In PS:</b> {s.ps}
             {s.to && <Link to={s.to} state={r.state} onClick={r.onClick} className="ml-1.5 text-xs font-semibold text-verde underline">apri ›</Link>}
           </p>
+          {specieDi(s.id).length > 0 && (
+            <div className="flex gap-1.5 mt-2 overflow-x-auto">
+              {specieDi(s.id).map((f) => (
+                <Link key={f.id} to={`/linee-guida/micologia?apri=${f.id}`} state={r.state} onClick={r.onClick}
+                  className="shrink-0 w-[84px] rounded-lg border border-linea bg-[#fbfaf5] overflow-hidden no-underline">
+                  <Fungo s={f} etichette={false} className="w-full h-16" />
+                  <p className="text-[10px] leading-tight italic px-1 pb-1 text-testo">{f.nome.split(' (')[0].replace(' e A. virosa', '…')}</p>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </div>
@@ -29,6 +42,7 @@ export default function TabellaFunghi({ senzaTitolo }: { senzaTitolo?: boolean }
     <section className="card flex flex-col gap-3">
       {!senzaTitolo && <p className="etichetta">Sindromi da funghi per latenza</p>}
       <p className="text-[13px] leading-snug">La latenza fra pasto e primi sintomi è la domanda chiave. <b>Pasto misto o più pasti consecutivi: comportarsi come se fosse a latenza lunga.</b></p>
+      <Link to="/linee-guida/micologia" state={r.state} onClick={r.onClick} className="self-start text-xs font-semibold rounded-full px-3 py-1.5 bg-verde text-white no-underline">Micologia: le tavole dei funghi →</Link>
       {gruppo(true)}
       {gruppo(false)}
     </section>
