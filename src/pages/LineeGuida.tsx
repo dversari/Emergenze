@@ -43,6 +43,14 @@ export function ElencoLineeGuida() {
       {!q && filtro === 'tutte' && (
         <div className="elenco !gap-2">
           <p className="etichetta px-1 mt-1 !text-bordeaux">In evidenza · tempo-dipendenti</p>
+          <Link to="/linee-guida/tossicologia" className="card !py-3 flex items-center gap-3 bg-bordeaux text-white active:opacity-90 !border-bordeaux">
+            <div className="w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center shrink-0"><IconaSindrome id="anticolinergico" className="w-8 h-8" /></div>
+            <div className="flex-1 min-w-0">
+              <p className="font-bold leading-tight">Tossicologia</p>
+              <p className="text-xs text-white/80">Sindromi tossiche, approccio, indizi · {PDTA_TOSSICOLOGIA.length} PDTA · CAV</p>
+            </div>
+            <span className="text-white/80">›</span>
+          </Link>
           {EVIDENZA.map((id) => LINEE_GUIDA.find((l) => l.id === id)).filter((l) => !!l).map((l) => (
             <Link key={l.id} to={`/linee-guida/${l.id}`} className="card !py-2.5 flex items-center gap-3 active:bg-sabbia !border-bordeaux2/50">
               <div className="w-9 h-9 rounded-xl bg-bordeaux text-white flex items-center justify-center font-extrabold text-xs shrink-0">
@@ -63,19 +71,7 @@ export function ElencoLineeGuida() {
           <span className="text-white/80">›</span>
         </Link>
       )}
-      {[...new Set(voci.map((l) => l.area.split(' · ')[0]))].sort().map((area) => area === 'Tossicologia' && !q && filtro === 'tutte' ? (
-        <div key={area} className="elenco !gap-2">
-          <p className="etichetta px-1 mt-1">{area}</p>
-          <Link to="/linee-guida/tossicologia" className="card !py-3 flex items-center gap-3 bg-bordeaux text-white active:opacity-90 !border-bordeaux">
-            <div className="w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center shrink-0"><IconaSindrome id="anticolinergico" className="w-8 h-8" /></div>
-            <div className="flex-1 min-w-0">
-              <p className="font-bold leading-tight">Tossicologia</p>
-              <p className="text-xs text-white/80">Sindromi tossiche, approccio, indizi · {PDTA_TOSSICOLOGIA.length} PDTA · CAV</p>
-            </div>
-            <span className="text-white/80">›</span>
-          </Link>
-        </div>
-      ) : (
+      {[...new Set(voci.map((l) => l.area.split(' · ')[0]))].sort().map((area) => area === 'Tossicologia' && !q && filtro === 'tutte' ? null : (
         <div key={area} className="elenco !gap-2">
           <p className="etichetta px-1 mt-1">{area}</p>
       {voci.filter((l) => l.area.split(' · ')[0] === area).map((l) => (
