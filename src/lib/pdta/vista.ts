@@ -35,7 +35,7 @@ export const LG_VISTA: LineaGuida[] = [
     ],
     inBreve: [
       'Tre domande: vede meno, vede doppio o vede luci? Un occhio o entrambi (coprire un occhio alla volta)? Da quando, ed è passato?',
-      'Visus di ogni occhio, pupille con riflesso afferente relativo (RAPD), campo visivo per confronto di ogni occhio separato, motilità oculare. Senza visus misurato non c’è valutazione.',
+      'Visus di ogni occhio, pupille e RAPD (difetto pupillare afferente relativo, pupilla di Marcus Gunn: l’occhio malato «sente» meno luce; vedi Esame in 5 minuti), campo visivo per confronto di ogni occhio separato, motilità oculare. Senza visus misurato non c’è valutazione.',
       'Calo visivo monoculare improvviso e indolore = occlusione dell’arteria centrale della retina fino a prova contraria: è un ictus. Percorso ictus, oculista subito, VES e PCR se > 50 anni (arterite).',
       'Amaurosi fugace (perdita monoculare transitoria) = TIA: stesso percorso, studio carotideo urgente.',
       'Emianopsia omonima (stessa metà del campo nei due occhi) = lesione dietro il chiasma, quasi sempre ictus: codice ictus se nei tempi.',
@@ -50,7 +50,9 @@ export const LG_VISTA: LineaGuida[] = [
         titolo: 'Esame in 5 minuti',
         punti: [
           'Visus di ogni occhio con gli occhiali: ottotipo, tabella da vicino o, se molto basso, conta dita, movimento della mano, percezione della luce. Il foro stenopeico che migliora il visus indica un difetto di rifrazione.',
-          'Pupille: diametro, reazione, test della torcia alternata. RAPD = lesione del nervo ottico o retinica estesa (non la cataratta, non le lesioni corticali).',
+          'Pupille: diametro e reazione. A riposo sono uguali anche in presenza di RAPD (difetto pupillare afferente relativo, pupilla di Marcus Gunn): il segnale luminoso di un occhio arriva al cervello ridotto rispetto all’altro.',
+          'Test della torcia alternata: penombra, paziente che fissa lontano; illuminare un occhio 2–3 s (le due pupille si stringono), poi spostare rapidamente la luce sull’altro, avanti e indietro. Normale: le pupille restano strette. RAPD: quando la luce arriva sull’occhio malato entrambe le pupille si dilatano.',
+          'RAPD presente = retina estesa o nervo ottico (occlusione dell’arteria centrale, neurite ottica, neuropatia ischemica, arterite, distacco ampio): calo visivo organico. Non lo danno cataratta, rifrazione e lesioni dietro il chiasma (emianopsie, cecità corticale). Calo monoculare grave senza RAPD: pensare anche a un disturbo funzionale. Danno uguale nei due occhi: test negativo, perché il difetto è relativo.',
           'Campo visivo per confronto, un occhio alla volta, nei 4 quadranti: monoculare, bitemporale, omonimo, altitudinale (metà superiore o inferiore).',
           'Desaturazione del rosso (un oggetto rosso appare sbiadito da un occhio): neurite ottica.',
           'Motilità e cover test: in quale direzione la diplopia peggiora, orizzontale o verticale; ptosi, proptosi, nistagmo.',
@@ -138,7 +140,7 @@ export const ALG_VISTA: Alg = {
     nota: 'Coprire un occhio alla volta: è la domanda che orienta tutto.',
     nodi: [
       { tipo: 'avvio', titolo: 'Disturbo visivo acuto', righe: ['Da quando? È passato? Dolore? Altri deficit?'] },
-      { tipo: 'checklist', titolo: 'Esame in 5 minuti', righe: ['Visus di ogni occhio', 'Pupille e RAPD', 'Campo visivo per confronto, un occhio alla volta', 'Motilità, cover test, ptosi', 'Fundus o ecografia oculare', 'PA, glicemia, ECG, NIHSS; > 50 anni: VES e PCR'], vedi: 'Esame in 5 minuti' },
+      { tipo: 'checklist', titolo: 'Esame in 5 minuti', righe: ['Visus di ogni occhio', 'Pupille e RAPD (torcia alternata: le pupille si dilatano illuminando l’occhio malato)', 'Campo visivo per confronto, un occhio alla volta', 'Motilità, cover test, ptosi', 'Fundus o ecografia oculare', 'PA, glicemia, ECG, NIHSS; > 50 anni: VES e PCR'], vedi: 'Esame in 5 minuti' },
       { tipo: 'decisione', titolo: 'Che cosa vede?' },
       {
         tipo: 'rami', rami: [
