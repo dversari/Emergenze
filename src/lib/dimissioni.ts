@@ -633,7 +633,7 @@ ${RITORNO}
 - strie rosse che risalgono l'arto.`,
   },
   {
-    id: 'ascesso-pilonidale', nome: 'Ascesso pilonidale / integluteo', gruppo: 'Infezioni',
+    id: 'ascesso-pilonidale', nome: 'Ascesso pilonidale / integluteo (drenato in PS)', gruppo: 'Infezioni',
     testo: `Diagnosi: ascesso [pilonidale / integluteo] [sede ...]. [Eseguita in PS incisione e drenaggio in anestesia locale, con zaffo di garza nella cavità.]
 
 Terapia:
@@ -654,6 +654,29 @@ ${RITORNO}
 - arrossamento, gonfiore o dolore che aumentano invece di diminuire dopo 48 ore;
 - pus che si riaccumula (la zona torna tesa e dolorosa);
 - sanguinamento che non si ferma premendo per 10 minuti.`,
+  },
+  {
+    id: 'ascesso-pilonidale-non-drenato', nome: 'Ascesso pilonidale / integluteo (non drenato: antibiotico e impacchi)', gruppo: 'Infezioni',
+    testo: `Diagnosi: [ascesso in formazione / flemmone] [pilonidale / integluteo] [sede ...]. Al momento la raccolta non è ancora matura per essere incisa e drenata.
+
+Terapia:
+- Augmentin (amoxicillina/acido clavulanico) 875/125 mg: 1 compressa ogni 12 ore dopo i pasti per [5–7] giorni. [Se allergico alla penicillina: Dalacin C (clindamicina) 300 mg: 1 capsula ogni 8 ore per [5–7] giorni, con un bicchiere d'acqua; sospenda e chiami il medico se diarrea abbondante.]
+- Dolore: Brufen (ibuprofene) 600 mg: 1 compressa ogni 8 ore dopo i pasti per 3–5 giorni; in alternativa o in aggiunta Tachipirina (paracetamolo) 1 g fino a 3 volte al giorno (almeno 6 ore tra una dose e l'altra). [Pantoprazolo 20 mg al mattino a digiuno finché assume ibuprofene.]
+
+Indicazioni:
+- Impacchi caldo-umidi (panno o garza bagnati in acqua calda, non bollente) sulla zona per 15–20 minuti, 3–4 volte al giorno: favoriscono la maturazione dell'ascesso. In alternativa semicupi in acqua tiepida.
+- Non schiacci e non punga la zona. Se l'ascesso si apre da solo: lavi sotto la doccia con acqua e sapone neutro e copra con garza pulita.
+- Tenga la zona pulita e asciutta; eviti di stare seduto a lungo (si alzi spesso, cuscino morbido).
+- L'antibiotico da solo spesso non basta: se si forma pus, l'ascesso va aperto e drenato. Anche dopo la guarigione la cisti pilonidale tende a riformarsi: è indicata una valutazione chirurgica per l'intervento definitivo.
+- Per ridurre le recidive tenga depilata la zona tra i glutei (crema depilatoria, rasoio elettrico o laser).
+
+${controlli('[Si allega richiesta per visita chirurgica ambulatoriale entro [48–72 ore / il giorno ...] per rivalutazione ed eventuale incisione e drenaggio.]')}
+
+${RITORNO}
+- febbre sopra 38 °C o brividi;
+- dolore, gonfiore o arrossamento che aumentano nonostante l'antibiotico;
+- la zona diventa molle, tesa e molto dolorosa (pus da drenare) prima del controllo;
+- arrossamento che si allarga oltre i glutei o malessere importante.`,
   },
   {
     id: 'scabbia', nome: 'Scabbia', gruppo: 'Infezioni',
