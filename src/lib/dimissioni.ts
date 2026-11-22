@@ -633,6 +633,29 @@ ${RITORNO}
 - strie rosse che risalgono l'arto.`,
   },
   {
+    id: 'ascesso-pilonidale', nome: 'Ascesso pilonidale / integluteo', gruppo: 'Infezioni',
+    testo: `Diagnosi: ascesso [pilonidale / integluteo] [sede ...]. [Eseguita in PS incisione e drenaggio in anestesia locale, con zaffo di garza nella cavità.]
+
+Terapia:
+- Dolore: Brufen (ibuprofene) 600 mg: 1 compressa ogni 8 ore dopo i pasti per 3–5 giorni; in alternativa o in aggiunta Tachipirina (paracetamolo) 1 g fino a 3 volte al giorno (almeno 6 ore tra una dose e l'altra). [Pantoprazolo 20 mg al mattino a digiuno finché assume ibuprofene.]
+- [Antibiotico (solo se arrossamento esteso intorno all'ascesso, febbre, diabete o difese immunitarie ridotte): Augmentin (amoxicillina/acido clavulanico) 875/125 mg: 1 compressa ogni 12 ore dopo i pasti per 5–7 giorni. Se allergico alla penicillina: Dalacin C (clindamicina) 300 mg: 1 capsula ogni 8 ore per 5–7 giorni, con un bicchiere d'acqua; sospenda e chiami il medico se diarrea abbondante.]
+
+Indicazioni:
+- [Tolga lo zaffo dopo 24–48 ore, sotto la doccia o dal medico/infermiere.] Poi lavi la zona 1–2 volte al giorno sotto la doccia con acqua tiepida e sapone neutro, asciughi tamponando e copra con garza pulita. La ferita resta aperta e guarisce da sola dal fondo: è normale che esca un po' di liquido o sangue nei primi giorni.
+- Medicazione [ogni 2–3 giorni] dal medico curante, in ambulatorio infermieristico o a casa, finché la ferita non è chiusa.
+- Tenga la zona pulita e asciutta; eviti di stare seduto a lungo (si alzi spesso, cuscino morbido); niente bagni in vasca, piscina e mare finché la ferita non è guarita.
+- Il drenaggio risolve l'ascesso ma non la cisti pilonidale, che spesso si riforma: dopo la guarigione è indicata una valutazione chirurgica per l'intervento definitivo.
+- Per ridurre le recidive tenga depilata la zona tra i glutei (crema depilatoria, rasoio elettrico o laser) e tagliati corti i peli; mantenga il peso forma.
+
+${controlli('[Si allega richiesta per visita chirurgica (valutazione dell\'intervento sulla cisti pilonidale) dopo la guarigione della ferita.]')}
+
+${RITORNO}
+- febbre sopra 38 °C o brividi;
+- arrossamento, gonfiore o dolore che aumentano invece di diminuire dopo 48 ore;
+- pus che si riaccumula (la zona torna tesa e dolorosa);
+- sanguinamento che non si ferma premendo per 10 minuti.`,
+  },
+  {
     id: 'scabbia', nome: 'Scabbia', gruppo: 'Infezioni',
     testo: `Diagnosi: [sospetta / accertata] scabbia. È stata inviata la notifica all'Igiene pubblica.
 
