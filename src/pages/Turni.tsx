@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { CHIAVE_DATI, CHIAVE_PIN, leggi, scarica } from './Rubrica'
+import { leggiNumeri, type Numero } from '../lib/rubrica'
 import SelettoreMese, { nomeMese, useMeseUrl } from '../components/SelettoreMese'
 
 /*
@@ -38,6 +40,65 @@ const CHIAVE_SIGLA = 'emergenze.turni.sigla'
 
 const leggiTurni = (): Mese[] => { try { return JSON.parse(leggi(CHIAVE_DATI) ?? '{}').turni ?? [] } catch { return [] } }
 
+/* Colleghi dalla rubrica (dati.colleghi: [etichetta, numero, { s: sigla, n: gruppo }]); più voci con la stessa sigla restano tutte */
+type Collega = { nome: string; gruppo: string; numeri: Numero[] }
+const leggiColleghi = (): Record<string, Collega[]> => {
+  const out: Record<string, Collega[]> = {}
+  try {
+    const righe: [string, string, { s?: string; n?: string }?][] = JSON.parse(leggi(CHIAVE_DATI) ?? '{}').dati?.colleghi ?? []
+    for (const [nome, num, o] of righe) {
+      const s = o?.s?.trim().toUpperCase()
+      if (s) (out[s] ??= []).push({ nome, gruppo: o?.n ?? '', numeri: leggiNumeri(num ?? '').filter((n) => n.cifre) })
+    }
+  } catch { /* cache rovinata */ }
+  return out
+}
+/* Numero internazionale per WhatsApp: solo cellulari italiani (3xx) */
+const perWa = (c: string) => { const d = c.replace(/^0039|^39(?=3\d{8,9}$)/, ''); return /^3\d{8,9}$/.test(d) ? '39' + d : null }
+
+function SchedaCollega({ sigla, voci, chiudi }: { sigla: string; voci: Collega[]; chiudi: () => void }) {
+  useEffect(() => {
+    const esc = (e: KeyboardEvent) => { if (e.key === 'Escape') chiudi() }
+    window.addEventListener('keydown', esc)
+    return () => window.removeEventListener('keydown', esc)
+  }, [chiudi])
+  return createPortal(
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/30" onClick={chiudi}>
+      <div onClick={(e) => e.stopPropagation()} className="w-full sm:max-w-md max-h-[80vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl bg-carta p-5 pb-8 shadow-xl flex flex-col gap-4">
+        {voci.map((v, i) => (
+          <section key={i} className="flex flex-col gap-2.5">
+            <div className="flex items-center gap-3">
+              <span className="h-11 min-w-11 px-1.5 inline-flex items-center justify-center rounded-full bg-verde text-white text-[15px] font-black">{sigla}</span>
+              <div className="min-w-0">
+                <p className="font-black text-lg leading-tight">{v.nome}</p>
+                {v.gruppo && <p className="text-[13px] text-tenue">{v.gruppo}</p>}
+              </div>
+            </div>
+            {v.numeri.length ? v.numeri.map((n, j) => {
+              const wa = perWa(n.cifre)
+              return (
+                <div key={j} className="flex flex-col gap-2">
+                  <p className={`text-xl font-bold tracking-wide ${n.barrato ? 'line-through opacity-60' : ''}`}>
+                    {n.n}{n.anomalo && <span className="ml-2 text-[12px] font-bold text-bordeaux">formato anomalo</span>}{n.incerto && <span className="ml-2 text-[12px] font-bold text-bordeaux">da verificare</span>}
+                  </p>
+                  <div className="grid grid-cols-2 gap-2">
+                    <a href={`tel:${n.cifre}`} className="rounded-xl bg-verde text-white font-bold text-sm py-3 text-center">Chiama</a>
+                    {wa
+                      ? <a href={`https://wa.me/${wa}`} target="_blank" rel="noopener noreferrer" className="rounded-xl bg-[#1f7a4d] text-white font-bold text-sm py-3 text-center">WhatsApp</a>
+                      : <span className="rounded-xl border border-linea text-tenue text-sm py-3 text-center">WhatsApp n.d.</span>}
+                  </div>
+                </div>
+              )
+            }) : <p className="text-sm italic text-tenue">Numero non presente in rubrica.</p>}
+          </section>
+        ))}
+        <button onClick={chiudi} className="rounded-full border border-linea-forte py-2.5 font-bold text-tenue">Chiudi</button>
+      </div>
+    </div>,
+    document.body,
+  )
+}
+
 /* Colori uguali per turno: mattina verde, pomeriggio rosso, notte grigio, nottina nero */
 const TONO: Record<string, string> = {
   m: 'bg-[#e1ece4] text-[#2c5a43] border-[#c5d9cb]',
@@ -55,24 +116,26 @@ const SCURO: Record<string, string> = {
   r: 'bg-[#3a3d3b] text-white border-[#3a3d3b]',
 }
 
-function Chip({ x, tono, mia }: { x: Sigla; tono: string; mia: boolean }) {
+function Chip({ x, tono, mia, apri }: { x: Sigla; tono: string; mia: boolean; apri?: (s: string) => void }) {
   const t = tono
   const colore = mia && !x.barrato ? 'bg-[#e8c34a] text-[#2b2410] border-[#b8902a] font-black shadow-sm' : x.sub ? `${SCURO[t]} font-black` : `${TONO[t]} font-bold`
-  return (
-    <span className={`inline-flex items-baseline gap-1 rounded-lg border px-1.5 py-0.5 text-[13px] leading-tight ${colore} ${x.agg ? 'border-2 !border-current' : ''} ${x.barrato ? 'opacity-55' : ''} ${mia && x.barrato ? 'outline outline-2 outline-[#e8c34a]' : ''}`}
-      title={x.barrato ? 'Cambio turno: sostituito' : x.sub ? 'Subentrato con cambio turno' : x.agg ? 'Produttività aggiuntiva' : undefined}>
-      {x.p && <span className="text-[9.5px] font-extrabold opacity-70">{x.p}</span>}
-      <span className={`${x.s === 'YY' ? 'opacity-50' : ''} ${x.barrato ? 'line-through decoration-2' : ''}`}>{x.s}</span>
-    </span>
-  )
+  const cls = `inline-flex items-baseline gap-1 rounded-lg border px-1.5 py-0.5 text-[13px] leading-tight ${colore} ${x.agg ? 'border-2 !border-current' : ''} ${x.barrato ? 'opacity-55' : ''} ${mia && x.barrato ? 'outline outline-2 outline-[#e8c34a]' : ''}`
+  const title = x.barrato ? 'Cambio turno: sostituito' : x.sub ? 'Subentrato con cambio turno' : x.agg ? 'Produttività aggiuntiva' : undefined
+  const dentro = (<>
+    {x.p && <span className="text-[9.5px] font-extrabold opacity-70">{x.p}</span>}
+    <span className={`${x.s === 'YY' ? 'opacity-50' : ''} ${x.barrato ? 'line-through decoration-2' : ''} ${apri ? 'underline decoration-dotted decoration-1 underline-offset-2' : ''}`}>{x.s}</span>
+  </>)
+  return apri
+    ? <button type="button" onClick={() => apri(x.s)} className={`${cls} cursor-pointer active:scale-95`} title={title}>{dentro}</button>
+    : <span className={cls} title={title}>{dentro}</span>
 }
 
-function Riga({ et, v, tono, mia, vuoto }: { et: string; v: Sigla[]; tono: string; mia: (s: string) => boolean; vuoto?: string }) {
+function Riga({ et, v, tono, mia, vuoto, apri }: { et: string; v: Sigla[]; tono: string; mia: (s: string) => boolean; vuoto?: string; apri: (s: string) => ((s: string) => void) | undefined }) {
   return (
     <div className="flex gap-2 items-start">
       <span className="w-[62px] shrink-0 pt-1 text-[10.5px] font-extrabold uppercase tracking-wide text-tenue">{et}</span>
       <div className="flex flex-wrap gap-1">
-        {v.length ? v.map((x, i) => <Chip key={i} x={x} tono={tono} mia={mia(x.s)} />) : <span className="pt-0.5 text-[12px] italic text-bordeaux">{vuoto ?? '—'}</span>}
+        {v.length ? v.map((x, i) => <Chip key={i} x={x} tono={tono} mia={mia(x.s)} apri={apri(x.s)} />) : <span className="pt-0.5 text-[12px] italic text-bordeaux">{vuoto ?? '—'}</span>}
       </div>
     </div>
   )
@@ -100,11 +163,14 @@ export default function Turni() {
   const disponibili = useMemo(() => mesi.map((m) => m.mese), [mesi])
   const { mese: scelto, vai } = useMeseUrl(disponibili)
   const [soloMiei, setSoloMiei] = useState(false)
+  const [colleghi, setColleghi] = useState(leggiColleghi)
+  const [aperto, setAperto] = useState<string | null>(null)
+  const apri = (s: string) => (colleghi[s] ? setAperto : undefined)
   const rifOggi = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const p = leggi(CHIAVE_PIN)
-    if (p) scarica(p).then(() => setMesi(leggiTurni())).catch(() => {})
+    if (p) scarica(p).then(() => { setMesi(leggiTurni()); setColleghi(leggiColleghi()) }).catch(() => {})
   }, [])
   const mese = mesi.find((m) => m.mese === scelto)
   useEffect(() => { rifOggi.current?.scrollIntoView({ block: 'start', behavior: 'smooth' }) }, [mese?.mese])
@@ -127,7 +193,7 @@ export default function Turni() {
     })
   }, [mese, S])
 
-  if (!leggi(CHIAVE_PIN) && !mesi.length) return <PinTurni fatto={() => setMesi(leggiTurni())} />
+  if (!leggi(CHIAVE_PIN) && !mesi.length) return <PinTurni fatto={() => { setMesi(leggiTurni()); setColleghi(leggiColleghi()) }} />
   const selettore = (
     <div className="flex flex-wrap items-center gap-2">
       <h1 className="font-display text-2xl font-extrabold">Turni</h1>
@@ -153,6 +219,7 @@ export default function Turni() {
   return (
     <div className="flex flex-col gap-3">
       {selettore}
+      {aperto && colleghi[aperto] && <SchedaCollega sigla={aperto} voci={colleghi[aperto]} chiudi={() => setAperto(null)} />}
 
       <section className="card !p-3 flex flex-wrap items-center gap-2">
         <label className="text-sm font-bold">La mia sigla</label>
@@ -181,14 +248,14 @@ export default function Turni() {
                 <span className={`text-sm font-bold capitalize ${festivo ? 'text-bordeaux' : 'text-tenue'}`}>{GIORNI[x.d.getDay()]}</span>
                 {eOggi && <span className="rounded-full bg-verde px-2 text-[11px] font-bold text-white">oggi</span>}
               </div>
-              <Riga et="Mattina" v={x.m} tono="m" mia={mia} />
-              <Riga et="Pomer." v={x.p} tono="p" mia={mia} />
-              <Riga et="Notte" v={x.n} tono="n" mia={mia} />
-              <Riga et="Nottina" v={x.nn} tono="nn" mia={mia} vuoto="scoperta" />
+              <Riga et="Mattina" v={x.m} tono="m" mia={mia} apri={apri} />
+              <Riga et="Pomer." v={x.p} tono="p" mia={mia} apri={apri} />
+              <Riga et="Notte" v={x.n} tono="n" mia={mia} apri={apri} />
+              <Riga et="Nottina" v={x.nn} tono="nn" mia={mia} apri={apri} vuoto="scoperta" />
               <div className="flex gap-2 items-start">
                 <span className="w-[62px] shrink-0 pt-1 text-[10.5px] font-extrabold uppercase tracking-wide text-tenue">Reper.</span>
                 <div className="flex flex-wrap gap-1">
-                  {([['M', x.rm], ['P', x.rp], ['N', x.rn]] as const).flatMap(([k, v]) => v.map((y, i) => <Chip key={k + i} x={{ ...y, p: k }} tono="r" mia={mia(y.s)} />))}
+                  {([['M', x.rm], ['P', x.rp], ['N', x.rn]] as const).flatMap(([k, v]) => v.map((y, i) => <Chip key={k + i} x={{ ...y, p: k }} tono="r" mia={mia(y.s)} apri={apri(y.s)} />))}
                 </div>
               </div>
             </div>
@@ -198,7 +265,7 @@ export default function Turni() {
 
       <section className="card !p-3 text-[12px] text-tenue leading-snug flex flex-wrap gap-x-4 gap-y-1">
         <span><b>F1/F2</b> flussi</span><span><b>A</b> alta</span><span><b>B</b> boarding</span><span><b>L</b> bassa</span><span><b>TVR</b></span>
-        <span>bordo spesso = produttività aggiuntiva</span><span>in giallo: la sigla scritta in «La mia sigla»</span><span>fuori turno e OBI non riportati</span>
+        <span>bordo spesso = produttività aggiuntiva</span><span>sigla sottolineata: tocca per nome e numero</span><span>in giallo: la sigla scritta in «La mia sigla»</span><span>fuori turno e OBI non riportati</span>
         <span><s>barrato</s> = ceduto con cambio turno; in colore scuro, in fondo alla riga, chi subentra</span>
         <span>Fonte: prospetto mensile (I. Grassi) + cambi turno segnalati.</span>
       </section>

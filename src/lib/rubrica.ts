@@ -52,7 +52,7 @@ export const CATEGORIE: Categoria[] = [
 /** Dati grezzi della rubrica: arrivano dalla Edge Function «emergenze-rubrica» dopo il PIN (non stanno nel codice pubblico). */
 export type DatiRubrica = Record<string, Riga[]>
 
-function leggiNumeri(s: string): Numero[] {
+export function leggiNumeri(s: string): Numero[] {
   const t = s.split(' ').filter(Boolean)
   const out: Numero[] = []
   for (let i = 0; i < t.length; i++) {
