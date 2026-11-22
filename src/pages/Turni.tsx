@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { CHIAVE_DATI, CHIAVE_PIN, leggi, scarica } from './Rubrica'
+import SelettoreMese, { nomeMese, useMeseUrl } from '../components/SelettoreMese'
 
 /*
  * Turni del PS dal prospetto mensile (scaricati con il PIN della rubrica, mai nel codice pubblico).
@@ -33,7 +34,6 @@ const conCambi = (v: Sigla[], cambi: Cambio[]): Sigla[] => {
   return [...out, ...nuovi]
 }
 const GIORNI = ['dom', 'lun', 'mar', 'mer', 'gio', 'ven', 'sab']
-const MESI = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre']
 const CHIAVE_SIGLA = 'emergenze.turni.sigla'
 
 const leggiTurni = (): Mese[] => { try { return JSON.parse(leggi(CHIAVE_DATI) ?? '{}').turni ?? [] } catch { return [] } }
@@ -97,8 +97,8 @@ export default function Turni() {
   const [mesi, setMesi] = useState<Mese[]>(leggiTurni)
   const [sigla, setSigla] = useState(() => leggi(CHIAVE_SIGLA) ?? '')
   const oggi = new Date()
-  const chiaveOggi = `${oggi.getFullYear()}-${String(oggi.getMonth() + 1).padStart(2, '0')}`
-  const [scelto, setScelto] = useState<string | null>(null)
+  const disponibili = useMemo(() => mesi.map((m) => m.mese), [mesi])
+  const { mese: scelto, vai } = useMeseUrl(disponibili)
   const [soloMiei, setSoloMiei] = useState(false)
   const rifOggi = useRef<HTMLDivElement>(null)
 
@@ -106,7 +106,7 @@ export default function Turni() {
     const p = leggi(CHIAVE_PIN)
     if (p) scarica(p).then(() => setMesi(leggiTurni())).catch(() => {})
   }, [])
-  const mese = mesi.find((m) => m.mese === (scelto ?? chiaveOggi)) ?? mesi[mesi.length - 1]
+  const mese = mesi.find((m) => m.mese === scelto)
   useEffect(() => { rifOggi.current?.scrollIntoView({ block: 'start', behavior: 'smooth' }) }, [mese?.mese])
 
   const S = sigla.trim().toUpperCase()
@@ -128,9 +128,20 @@ export default function Turni() {
   }, [mese, S])
 
   if (!leggi(CHIAVE_PIN) && !mesi.length) return <PinTurni fatto={() => setMesi(leggiTurni())} />
-  if (!mese) return <p className="card text-tenue">Nessun prospetto caricato.</p>
+  const selettore = (
+    <div className="flex flex-wrap items-center gap-2">
+      <h1 className="font-display text-2xl font-extrabold">Turni</h1>
+      <span className="flex-1" />
+      <SelettoreMese mese={scelto} disponibili={disponibili} vai={vai} />
+    </div>
+  )
+  if (!mese) return (
+    <div className="flex flex-col gap-3">
+      {selettore}
+      <p className="card text-tenue">{mesi.length ? `Nessun prospetto per ${nomeMese(scelto)}.` : 'Nessun prospetto caricato.'}</p>
+    </div>
+  )
 
-  const [anno, nm] = mese.mese.split('-').map(Number)
   const miei = giorni.filter((x) => x.mio)
   const io = (y: Sigla) => y.s === S && !y.barrato
   const turniMiei = (x: typeof giorni[number]) => [
@@ -141,13 +152,7 @@ export default function Turni() {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex flex-wrap items-center gap-2">
-        <h1 className="font-display text-2xl font-extrabold capitalize">Turni {MESI[nm - 1]} {anno}</h1>
-        <span className="flex-1" />
-        {mesi.length > 1 && mesi.map((m) => (
-          <button key={m.mese} onClick={() => setScelto(m.mese)} className={`rounded-full px-3 py-1 text-sm font-bold capitalize ${m.mese === mese.mese ? 'bg-verde text-white' : 'border border-linea text-tenue'}`}>{MESI[Number(m.mese.slice(5)) - 1].slice(0, 3)}</button>
-        ))}
-      </div>
+      {selettore}
 
       <section className="card !p-3 flex flex-wrap items-center gap-2">
         <label className="text-sm font-bold">La mia sigla</label>
