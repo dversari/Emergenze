@@ -453,7 +453,7 @@ export const LG_ADDOME_TORACE_NEURO: LineaGuida[] = [
     area: 'Neurologia · Oculistica',
     fonte: { etichetta: 'Hellmich et al., Ann Rheum Dis 2024 (EULAR 2023, vasculiti dei grandi vasi)', url: 'https://pubmed.ncbi.nlm.nih.gov/?term=Hellmich+EULAR+recommendations+large+vessel+vasculitis+2023' },
     controllata: OGGI,
-    vediAnche: [{ etichetta: 'Cefalea acuta', to: '/linee-guida/cefalea' }, { etichetta: 'Occhio rosso', to: '/linee-guida/occhio-rosso' }],
+    vediAnche: [{ etichetta: 'Cefalea acuta', to: '/linee-guida/cefalea' }, { etichetta: 'Occhio rosso', to: '/linee-guida/occhio-rosso' }, { etichetta: 'Disturbi della vista e diplopia', to: '/linee-guida/disturbi-visivi' }],
     inBreve: [
       'Età > 50 anni con cefalea nuova (temporale), dolorabilità del cuoio capelluto, claudicatio della mandibola, disturbi visivi (amaurosi fugace, diplopia, perdita della vista), polimialgia, febbre, calo di peso.',
       'VES e PCR alte (normali in < 5%); piastrine alte.',

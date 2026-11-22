@@ -4,6 +4,7 @@ import Algoritmo, { idSezione, Testo } from '../components/Algoritmo'
 import Manovre from '../components/Manovre'
 import EcgEquivalenti from '../components/EcgEquivalenti'
 import TabellaFunghi from '../components/TabellaFunghi'
+import VieOttiche from '../components/VieOttiche'
 import { ALGORITMI } from '../lib/algoritmi'
 import { Link, useParams } from 'react-router-dom'
 import { LINEE_GUIDA, lineaGuida, conCav, CAV_FIRENZE } from '../lib/lineeGuida'
@@ -162,6 +163,7 @@ export function RiassuntoLineaGuida() {
 
       {(l.id === 'stemi' || l.id === 'nste-sca') && <EcgEquivalenti />}
       {l.id === 'funghi' && <TabellaFunghi />}
+      {l.id === 'disturbi-visivi' && <VieOttiche />}
 
       <div className="flex flex-col gap-3 lg:hidden">
         {ALGORITMI[l.id] && <Algoritmo {...ALGORITMI[l.id]} sezioni={l.sezioni} />}

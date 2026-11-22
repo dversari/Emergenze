@@ -39,6 +39,7 @@ import { LG_METABOLISMO } from './pdta/metabolismo-ambiente'
 import { LG_ADDOME_TORACE_NEURO } from './pdta/addome-torace-neuro'
 import { LG_OST_INF_EMA } from './pdta/ostetricia-infettive-ematologia'
 import { LG_GASTRO } from './pdta/gastro'
+import { LG_VISTA } from './pdta/vista'
 
 export const LINEE_GUIDA: LineaGuida[] = [
   {
@@ -2493,6 +2494,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
       { etichetta: 'Cartella: occhio rosso', to: '/anamnesi?apri=occhio-rosso' },
       { etichetta: 'Dimissione congiuntivite', to: '/dimissioni?apri=congiuntivite' },
       { etichetta: 'Dimissione corpo estraneo', to: '/dimissioni?apri=corpo-estraneo-occhio' },
+      { etichetta: 'Disturbi della vista e diplopia', to: '/linee-guida/disturbi-visivi' },
     ],
     inBreve: [
       'Prima domanda: il visus è calato? Misurarlo sempre (ottotipo o conta dita).',
@@ -3019,6 +3021,7 @@ export const LINEE_GUIDA: LineaGuida[] = [
   ...LG_ADDOME_TORACE_NEURO,
   ...LG_OST_INF_EMA,
   ...LG_GASTRO,
+  ...LG_VISTA,
 ]
 
 /** Centro antiveleni di Firenze (Careggi), attivo 24 h. */
