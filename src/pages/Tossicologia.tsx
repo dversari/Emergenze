@@ -114,6 +114,15 @@ export default function Tossicologia() {
           <span className="rounded-full bg-white text-bordeaux font-extrabold text-sm px-4 py-2">Chiama</span>
         </a>
 
+        <LinkR to="/linee-guida/ingestione" className="card !py-3 flex items-center gap-3 no-underline active:bg-sabbia border-2 !border-bordeaux2/50">
+          <div className="w-11 h-11 rounded-xl bg-bordeaux text-white flex items-center justify-center text-xl font-black shrink-0">℞</div>
+          <div className="flex-1 min-w-0">
+            <p className="font-extrabold text-lg leading-tight">Ingestione di farmaci</p>
+            <p className="text-xs text-tenue leading-snug">Inserisci farmaci e quantità: effetti attesi, monitoraggio, interazioni, terapia</p>
+          </div>
+          <span className="text-tenue">›</span>
+        </LinkR>
+
         <section className="flex flex-col gap-2">
           <p className="etichetta px-1">Sindromi tossiche · tocca per aprire</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
