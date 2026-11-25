@@ -221,27 +221,30 @@ export default function Turni() {
       {selettore}
       {aperto && colleghi[aperto] && <SchedaCollega sigla={aperto} voci={colleghi[aperto]} chiudi={() => setAperto(null)} />}
 
-      <section className="card !p-3 flex flex-wrap items-center gap-2">
-        <label className="text-sm font-bold">La mia sigla</label>
-        <input value={sigla} maxLength={3} onChange={(e) => { const v = e.target.value.toUpperCase(); setSigla(v); try { localStorage.setItem(CHIAVE_SIGLA, v) } catch { /* privata */ } }}
-          placeholder="es. VR" className="w-20 rounded-lg border border-linea-forte bg-white px-2 py-1 text-center font-bold uppercase" />
-        {S && <button onClick={() => setSoloMiei((v) => !v)} className={`rounded-full px-3 py-1 text-sm font-bold ${soloMiei ? 'bg-verde text-white' : 'border border-linea text-tenue'}`}>Solo i miei giorni</button>}
-        {S && <span className="text-sm text-tenue">{miei.length} giorni con turni</span>}
-        {S && miei.length > 0 && (
-          <div className="w-full flex flex-wrap gap-1.5 pt-1">
-            {miei.map((x) => (
-              <span key={x.g.g} className="rounded-lg bg-oro3 px-2 py-0.5 text-[12px]"><b>{GIORNI[x.d.getDay()]} {x.g.g}</b> {turniMiei(x).join(' · ')}</span>
-            ))}
-          </div>
-        )}
-      </section>
+      <div className="sticky top-[var(--h-testata,0px)] z-[9] -mx-1 px-1 py-1.5 bg-fondo/95 backdrop-blur">
+        <section className="card !p-3 flex flex-wrap items-center gap-2 shadow-sm">
+          <label className="text-sm font-bold">La mia sigla</label>
+          <input value={sigla} maxLength={3} onChange={(e) => { const v = e.target.value.toUpperCase(); setSigla(v); try { localStorage.setItem(CHIAVE_SIGLA, v) } catch { /* privata */ } }}
+            placeholder="es. VR" className="w-20 rounded-lg border border-linea-forte bg-white px-2 py-1 text-center font-bold uppercase" />
+          {S && <button onClick={() => setSoloMiei((v) => !v)} className={`rounded-full px-3 py-1 text-sm font-bold ${soloMiei ? 'bg-verde text-white' : 'border border-linea text-tenue'}`}>Solo i miei giorni</button>}
+          {S && <span className="text-sm text-tenue">{miei.length} giorni con turni</span>}
+        </section>
+      </div>
+
+      {S && miei.length > 0 && (
+        <section className="card !p-3 flex flex-wrap gap-1.5">
+          {miei.map((x) => (
+            <span key={x.g.g} className="rounded-lg bg-oro3 px-2 py-0.5 text-[12px]"><b>{GIORNI[x.d.getDay()]} {x.g.g}</b> {turniMiei(x).join(' · ')}</span>
+          ))}
+        </section>
+      )}
 
       <div className="grid gap-2.5 lg:grid-cols-2 xl:grid-cols-3">
         {giorni.filter((x) => !soloMiei || x.mio).map((x) => {
           const festivo = x.d.getDay() === 0 || x.d.getDay() === 6
           const eOggi = x.d.toDateString() === oggi.toDateString()
           return (
-            <div key={x.g.g} ref={eOggi ? rifOggi : undefined}
+            <div key={x.g.g} ref={eOggi ? rifOggi : undefined} style={{ scrollMarginTop: 'calc(var(--h-testata, 0px) + 76px)' }}
               className={`card !p-3 scroll-mt-24 flex flex-col gap-1.5 ${eOggi ? '!border-verde border-2' : ''} ${x.d < oggi && !eOggi ? 'opacity-60' : ''}`}>
               <div className="flex items-baseline gap-2">
                 <span className={`text-xl font-black ${festivo ? 'text-bordeaux' : ''}`}>{x.g.g}</span>

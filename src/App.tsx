@@ -66,9 +66,17 @@ function Guscio() {
     const el = barra.current?.querySelector('.attiva-si') as HTMLElement | null
     el?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' })
   }, [pathname])
+  const testata = useRef<HTMLElement>(null)
+  useEffect(() => {
+    const el = testata.current
+    if (!el || typeof ResizeObserver === 'undefined') return
+    const ro = new ResizeObserver(() => document.documentElement.style.setProperty('--h-testata', `${el.offsetHeight}px`))
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
   return (
     <div className="min-h-screen bg-fondo text-testo">
-      <header className="px-4 pt-[calc(14px+env(safe-area-inset-top))] pb-2 sticky top-0 bg-fondo/95 backdrop-blur z-10 flex items-center gap-2.5 lg:px-8 lg:pt-4 lg:pb-3 lg:border-b lg:border-linea">
+      <header ref={testata} className="px-4 pt-[calc(14px+env(safe-area-inset-top))] pb-2 sticky top-0 bg-fondo/95 backdrop-blur z-10 flex items-center gap-2.5 lg:px-8 lg:pt-4 lg:pb-3 lg:border-b lg:border-linea">
         <Link to="/" className="flex items-center gap-2.5" aria-label="Pagina iniziale">
           <img src="./favicon.svg" alt="" className="w-8 h-8" />
           <div>
