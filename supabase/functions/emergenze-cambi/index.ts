@@ -68,7 +68,7 @@ Deno.serve(async (req) => {
       const { count: recenti } = await admin.from('emergenze_cambi').select('id', { count: 'exact', head: true }).eq('ip_hash', ip).gte('creato_il', unOraFa)
       if ((recenti ?? 0) >= MAX_CAMBI_ORA) return out(429, { error: 'Troppi cambi segnati da questo dispositivo nell’ultima ora' })
       const cambi: Cambio[] = Array.isArray(c.cambi) ? c.cambi : []
-      if (cambi.length < 1 || cambi.length > 2) return out(400, { error: 'Richiesta non valida' })
+      if (cambi.length < 1 || cambi.length > 8) return out(400, { error: 'Richiesta non valida' })
       for (const x of cambi) {
         if (typeof x?.mese !== 'string' || !/^\d{4}-\d{2}$/.test(x.mese) || !Number.isInteger(x.g) || !TURNI.has(x.t) || !Number.isInteger(x.i)
           || typeof x.da !== 'string' || typeof x.a !== 'string' || !SIGLA.test(x.da) || !SIGLA.test(x.a) || x.da === x.a

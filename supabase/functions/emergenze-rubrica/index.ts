@@ -65,7 +65,7 @@ Deno.serve(async (req) => {
     const dal = d.toISOString().slice(0, 7)
     const { data: turni } = await admin.from('emergenze_turni').select('mese, dati, aggiornato_il').gte('mese', dal).order('mese')
     const { data: cambi } = await admin.from('emergenze_cambi')
-      .select('id, gruppo, mese, g, t, i, da, a, autore, creato_il, annullato_il, annullato_autore').gte('mese', dal).order('id')
+      .select('id, gruppo, mese, g, t, i, pos, da, a, autore, creato_il, annullato_il, annullato_autore').gte('mese', dal).order('id')
     const conRegistro = (turni ?? []).map((m) => ({ ...m, registro: (cambi ?? []).filter((x) => x.mese === m.mese) }))
     await admin.from('emergenze_accessi').insert({ esito: 'ok', ip_hash: ip })
     return out(200, { dati: data.dati, aggiornato_il: data.aggiornato_il, turni: conRegistro, riunioni: val('chiave_riunioni') ?? null })

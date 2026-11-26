@@ -9,7 +9,7 @@ export type Turno = keyof Omit<Giorno, 'g'>
 export type Cambio = { g: number; t: Turno; i: number; da: string; a: string; app?: boolean }
 /* Riga del registro dei cambi segnati nell'app (tabella emergenze_cambi) */
 export type Voce = Cambio & {
-  id: number; gruppo: string; mese: string; autore: string | null; creato_il: string; annullato_il: string | null; annullato_autore: string | null
+  id: number; gruppo: string; mese: string; pos?: string | null; autore: string | null; creato_il: string; annullato_il: string | null; annullato_autore: string | null
 }
 export type Mese = { mese: string; dati: { mese: string; giorni: Giorno[]; cambi?: Cambio[] }; registro?: Voce[] }
 export type Sigla = { s: string; agg: boolean; tvr: boolean; p?: string; barrato?: boolean; sub?: boolean; app?: boolean }
@@ -215,4 +215,43 @@ export function interpreta(testo: string, ctx: { mesi: Mese[]; visto: string; og
       { mese: dd.mese, g: dd.g, t: x2.t, i: x2.i, da: a, a: da, pos: x2.p || null, descr: `${dataBreve(dd.mese, dd.g)} · ${etichetta(x2.t, x2.p)} · ${a} → ${da}` },
     ],
   }
+}
+
+/* ---------- Cambio a tocchi ----------
+ * Si toccano i box nel calendario. Turni di una sola persona → li regala a chi si sceglie;
+ * turni di due persone → ognuno prende quelli dell'altro (anche 2 diurni contro 1 notte).
+ */
+export type Sel = { mese: string; g: number; t: Turno; i: number; s: string; p?: string }
+export type Composto =
+  | { tipo: 'vuoto' }
+  | { tipo: 'errore'; msg: string }
+  | { tipo: 'destinatario'; da: string }
+  | { tipo: 'ok'; cambi: Nuovo[]; avvisi: string[] }
+
+export const stessoBox = (a: Sel, b: Sel) => a.mese === b.mese && a.g === b.g && a.t === b.t && a.i === b.i
+const confronta = (a: Sel, b: Sel) => a.mese.localeCompare(b.mese) || a.g - b.g || TURNI.indexOf(a.t) - TURNI.indexOf(b.t)
+
+export function componi(sel: Sel[], mesi: Mese[], dest?: string | null, note?: Set<string>): Composto {
+  if (!sel.length) return { tipo: 'vuoto' }
+  const persone = [...new Set(sel.map((x) => x.s))]
+  if (persone.length > 2) return { tipo: 'errore', msg: `Hai toccato turni di ${persone.length} persone (${persone.join(', ')}): un cambio è tra due` }
+  if (persone.length === 1 && !dest) return { tipo: 'destinatario', da: persone[0] }
+  if (persone.length === 1 && dest === persone[0]) return { tipo: 'errore', msg: 'Il turno è già suo' }
+  const altro = (s: string) => (persone.length === 2 ? persone.find((p) => p !== s)! : dest!)
+  const avvisi: string[] = []
+  const cambi: Nuovo[] = []
+  for (const x of [...sel].sort(confronta)) {
+    const m = mesi.find((y) => y.mese === x.mese)
+    if (!m) return { tipo: 'errore', msg: 'Prospetto non trovato: ricarica la pagina' }
+    const a = altro(x.s)
+    const lascia = (s: string, t: Turno) => sel.some((y) => y.s === s && y.mese === x.mese && y.g === x.g && y.t === t)
+    if (lascia(a, x.t)) return { tipo: 'errore', msg: `${dataBreve(x.mese, x.g)}: ${x.s} e ${a} sono già entrambi in ${NOME_TURNO[x.t].toLowerCase()}` }
+    if (cella(m, x.g, x.t).some((y) => y.s === a && !y.barrato)) return { tipo: 'errore', msg: `${a} è già in ${NOME_TURNO[x.t].toLowerCase()} ${dataBreve(x.mese, x.g)}` }
+    const altri = turniDi(m, x.g, a, cambiDel(m)).filter((y) => y.t !== x.t && !lascia(a, y.t))
+    if (altri.length) avvisi.push(`${a} ${dataBreve(x.mese, x.g)} è anche in ${altri.map((y) => etichetta(y.t, y.p)).join(', ')}`)
+    cambi.push({ mese: x.mese, g: x.g, t: x.t, i: x.i, da: x.s, a, pos: x.p && (x.t === 'm' || x.t === 'p') ? x.p : null,
+      descr: `${dataBreve(x.mese, x.g)} · ${etichetta(x.t, x.t === 'm' || x.t === 'p' ? x.p : undefined)} · ${x.s} → ${a}` })
+  }
+  if (note) for (const s of new Set(cambi.map((c) => c.a))) if (!note.has(s)) avvisi.push(`${s} non compare nei turni caricati: controlla la sigla`)
+  return { tipo: 'ok', cambi, avvisi }
 }

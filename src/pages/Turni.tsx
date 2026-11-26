@@ -4,8 +4,8 @@ import { CHIAVE_DATI, CHIAVE_PIN, leggi, scarica } from './Rubrica'
 import { leggiNumeri, type Numero } from '../lib/rubrica'
 import SelettoreMese, { nomeMese, useMeseUrl } from '../components/SelettoreMese'
 
-import { cambiDel, conCambi, conPos, spezza, GIORNI, type Cambio, type Mese, type Sigla } from '../lib/turni'
-import RigaCambi from '../components/RigaCambi'
+import { cambiDel, conCambi, conPos, spezza, stessoBox, GIORNI, type Cambio, type Mese, type Sel, type Sigla, type Turno } from '../lib/turni'
+import { PannelloCambio, RegistroCambi } from '../components/Cambi'
 
 const CHIAVE_SIGLA = 'emergenze.turni.sigla'
 
@@ -87,27 +87,33 @@ const SCURO: Record<string, string> = {
   r: 'bg-[#3a3d3b] text-white border-[#3a3d3b]',
 }
 
-function Chip({ x, tono, mia, apri }: { x: Sigla; tono: string; mia: boolean; apri?: (s: string) => void }) {
+/* In modalità cambio ogni box si può toccare per sceglierlo (scelto = bordo e anello) */
+type Ctl = (t: Turno, i: number, x: Sigla) => { tocca?: () => void; scelto: boolean } | null
+
+function Chip({ x, tono, mia, apri, ctl }: { x: Sigla; tono: string; mia: boolean; apri?: (s: string) => void; ctl?: { tocca?: () => void; scelto: boolean } | null }) {
   const t = tono
   const colore = mia && !x.barrato ? 'bg-[#e8c34a] text-[#2b2410] border-[#b8902a] font-black shadow-sm' : x.sub ? `${SCURO[t]} font-black` : `${TONO[t]} font-bold`
-  const cls = `inline-flex items-baseline gap-1 rounded-lg border px-1.5 py-0.5 text-[13px] leading-tight ${colore} ${x.agg ? 'border-2 !border-current' : ''} ${x.barrato ? 'opacity-55' : ''} ${mia && x.barrato ? 'outline outline-2 outline-[#e8c34a]' : ''}`
+  const cls = `inline-flex items-baseline gap-1 rounded-lg border px-1.5 py-0.5 text-[13px] leading-tight ${colore} ${x.agg ? 'border-2 !border-current' : ''} ${x.barrato ? 'opacity-55' : ''} ${mia && x.barrato ? 'outline outline-2 outline-[#e8c34a]' : ''} ${ctl?.scelto ? 'ring-[3px] ring-[#c2410c] ring-offset-1 scale-105' : ''} ${ctl && !ctl.tocca ? 'opacity-40' : ''}`
   const title = x.barrato ? 'Cambio turno: sostituito' : x.sub ? (x.app ? 'Subentrato con cambio segnato nell’app (vedi registro)' : 'Subentrato con cambio turno') : x.agg ? 'Produttività aggiuntiva' : undefined
   const dentro = (<>
     {x.p && <span className="text-[9.5px] font-extrabold opacity-70">{x.p}</span>}
     <span className={`${x.s === 'YY' ? 'opacity-50' : ''} ${x.barrato ? 'line-through decoration-2' : ''} ${apri ? 'underline decoration-dotted decoration-1 underline-offset-2' : ''}`}>{x.s}</span>
     {x.app && <span className="text-[10px] font-black opacity-80" aria-label="cambio segnato nell'app">⇄</span>}
   </>)
+  if (ctl) return ctl.tocca
+    ? <button type="button" onClick={ctl.tocca} className={`${cls} cursor-pointer active:scale-95 ${ctl.scelto ? '' : 'border-dashed'}`} title="Tocca per scegliere">{dentro}</button>
+    : <span className={cls}>{dentro}</span>
   return apri
     ? <button type="button" onClick={() => apri(x.s)} className={`${cls} cursor-pointer active:scale-95`} title={title}>{dentro}</button>
     : <span className={cls} title={title}>{dentro}</span>
 }
 
-function Riga({ et, v, tono, mia, vuoto, apri }: { et: string; v: Sigla[]; tono: string; mia: (s: string) => boolean; vuoto?: string; apri: (s: string) => ((s: string) => void) | undefined }) {
+function Riga({ et, v, tono, mia, vuoto, apri, t, ctl }: { et: string; v: Sigla[]; tono: string; mia: (s: string) => boolean; vuoto?: string; apri: (s: string) => ((s: string) => void) | undefined; t: Turno; ctl: Ctl }) {
   return (
     <div className="flex gap-2 items-start">
       <span className="w-[62px] shrink-0 pt-1 text-[10.5px] font-extrabold uppercase tracking-wide text-tenue">{et}</span>
       <div className="flex flex-wrap gap-1">
-        {v.length ? v.map((x, i) => <Chip key={i} x={x} tono={tono} mia={mia(x.s)} apri={apri(x.s)} />) : <span className="pt-0.5 text-[12px] italic text-bordeaux">{vuoto ?? '—'}</span>}
+        {v.length ? v.map((x, i) => <Chip key={i} x={x} tono={tono} mia={mia(x.s)} apri={apri(x.s)} ctl={ctl(t, i, x)} />) : <span className="pt-0.5 text-[12px] italic text-bordeaux">{vuoto ?? '—'}</span>}
       </div>
     </div>
   )
@@ -139,6 +145,8 @@ export default function Turni() {
   const [aperto, setAperto] = useState<string | null>(null)
   const apri = (s: string) => (colleghi[s] ? setAperto : undefined)
   const rifOggi = useRef<HTMLDivElement>(null)
+  const [modo, setModo] = useState(false)
+  const [sel, setSel] = useState<Sel[]>([])
 
   useEffect(() => {
     const p = leggi(CHIAVE_PIN)
@@ -181,6 +189,14 @@ export default function Turni() {
   )
 
   const miei = giorni.filter((x) => x.mio)
+  const aggiorna = () => { setMesi(leggiTurni()); setColleghi(leggiColleghi()) }
+  const ctlGiorno = (g: number): Ctl => (t, i, x) => {
+    if (!modo) return null
+    const box: Sel = { mese: mese.mese, g, t, i, s: x.s, p: x.p }
+    const scelto = sel.some((y) => stessoBox(y, box))
+    if (x.barrato) return { scelto: false }
+    return { scelto, tocca: () => setSel(scelto ? sel.filter((y) => !stessoBox(y, box)) : sel.length >= 8 ? sel : [...sel, box]) }
+  }
   const io = (y: Sigla) => y.s === S && !y.barrato
   const turniMiei = (x: typeof giorni[number]) => [
     ...x.m.filter(io).map((y) => `M-${y.p}`), ...x.p.filter(io).map((y) => `P-${y.p}`),
@@ -200,10 +216,16 @@ export default function Turni() {
             placeholder="es. VR" className="w-20 rounded-lg border border-linea-forte bg-white px-2 py-1 text-center font-bold uppercase" />
           {S && <button onClick={() => setSoloMiei((v) => !v)} className={`rounded-full px-3 py-1 text-sm font-bold ${soloMiei ? 'bg-verde text-white' : 'border border-linea text-tenue'}`}>Solo i miei giorni</button>}
           {S && <span className="text-sm text-tenue">{miei.length} giorni con turni</span>}
+          <span className="flex-1" />
+          <button onClick={() => { setModo((v) => !v); setSel([]) }}
+            className={`rounded-full px-3 py-1 text-sm font-extrabold ${modo ? 'bg-verde text-white' : 'border-2 border-verde text-verde'}`}>⇄ Cambio</button>
         </section>
+        {modo && (
+          <div className="mt-1.5">
+            <PannelloCambio mesi={mesi} visto={mese.mese} sigla={S} sel={sel} setSel={setSel} esci={() => { setModo(false); setSel([]) }} aggiornato={aggiorna} />
+          </div>
+        )}
       </div>
-
-      <RigaCambi mesi={mesi} visto={mese.mese} sigla={S} aggiornato={() => { setMesi(leggiTurni()); setColleghi(leggiColleghi()) }} />
 
       {S && miei.length > 0 && (
         <section className="card !p-3 flex flex-wrap gap-1.5">
@@ -225,14 +247,14 @@ export default function Turni() {
                 <span className={`text-sm font-bold capitalize ${festivo ? 'text-bordeaux' : 'text-tenue'}`}>{GIORNI[x.d.getDay()]}</span>
                 {eOggi && <span className="rounded-full bg-verde px-2 text-[11px] font-bold text-white">oggi</span>}
               </div>
-              <Riga et="Mattina" v={x.m} tono="m" mia={mia} apri={apri} />
-              <Riga et="Pomer." v={x.p} tono="p" mia={mia} apri={apri} />
-              <Riga et="Notte" v={x.n} tono="n" mia={mia} apri={apri} />
-              <Riga et="Nottina" v={x.nn} tono="nn" mia={mia} apri={apri} vuoto="scoperta" />
+              <Riga et="Mattina" v={x.m} tono="m" mia={mia} apri={apri} t="m" ctl={ctlGiorno(x.g.g)} />
+              <Riga et="Pomer." v={x.p} tono="p" mia={mia} apri={apri} t="p" ctl={ctlGiorno(x.g.g)} />
+              <Riga et="Notte" v={x.n} tono="n" mia={mia} apri={apri} t="n" ctl={ctlGiorno(x.g.g)} />
+              <Riga et="Nottina" v={x.nn} tono="nn" mia={mia} apri={apri} vuoto="scoperta" t="nn" ctl={ctlGiorno(x.g.g)} />
               <div className="flex gap-2 items-start">
                 <span className="w-[62px] shrink-0 pt-1 text-[10.5px] font-extrabold uppercase tracking-wide text-tenue">Reper.</span>
                 <div className="flex flex-wrap gap-1">
-                  {([['M', x.rm], ['P', x.rp], ['N', x.rn]] as const).flatMap(([k, v]) => v.map((y, i) => <Chip key={k + i} x={{ ...y, p: k }} tono="r" mia={mia(y.s)} apri={apri(y.s)} />))}
+                  {([['M', x.rm, 'rm'], ['P', x.rp, 'rp'], ['N', x.rn, 'rn']] as const).flatMap(([k, v, t]) => v.map((y, i) => <Chip key={k + i} x={{ ...y, p: k }} tono="r" mia={mia(y.s)} apri={apri(y.s)} ctl={ctlGiorno(x.g.g)(t, i, y)} />))}
                 </div>
               </div>
             </div>
@@ -240,10 +262,12 @@ export default function Turni() {
         })}
       </div>
 
+      <RegistroCambi mesi={mesi} visto={mese.mese} sigla={S} aggiornato={aggiorna} />
+
       <section className="card !p-3 text-[12px] text-tenue leading-snug flex flex-wrap gap-x-4 gap-y-1">
         <span><b>F1/F2</b> flussi</span><span><b>A</b> alta</span><span><b>B</b> boarding</span><span><b>L</b> bassa</span><span><b>TVR</b></span>
         <span>bordo spesso = produttività aggiuntiva</span><span>sigla sottolineata: tocca per nome e numero</span><span>in giallo: la sigla scritta in «La mia sigla»</span><span>fuori turno e OBI non riportati</span>
-        <span><s>barrato</s> = ceduto con cambio turno; in colore scuro, in fondo alla riga, chi subentra; ⇄ = cambio segnato nell’app</span>
+        <span><s>barrato</s> = ceduto con cambio turno; in colore scuro, in fondo alla riga, chi subentra; ⇄ = cambio segnato nell’app (pulsante «⇄ Cambio» in alto, poi tocca i turni)</span>
         <span>Fonte: prospetto mensile (I. Grassi) + cambi turno segnalati.</span>
       </section>
     </div>
