@@ -4,38 +4,9 @@ import { CHIAVE_DATI, CHIAVE_PIN, leggi, scarica } from './Rubrica'
 import { leggiNumeri, type Numero } from '../lib/rubrica'
 import SelettoreMese, { nomeMese, useMeseUrl } from '../components/SelettoreMese'
 
-/*
- * Turni del PS dal prospetto mensile (scaricati con il PIN della rubrica, mai nel codice pubblico).
- * Ogni cella: sigle separate da spazio; «*» = produttività aggiuntiva (grassetto nel PDF), «~» = TVR (corsivo).
- * Postazioni per posizione — mattina: F1 F2 A A B B L L L; pomeriggio: TVR (se la prima è in corsivo) poi come la mattina.
- */
-type Giorno = { g: number; m: string; p: string; n: string; nn: string; rm: string; rp: string; rn: string }
-/* Cambio turno: nel giorno g, turno t, la sigla in posizione i (da) è sostituita da «a» */
-type Cambio = { g: number; t: keyof Omit<Giorno, 'g'>; i: number; da: string; a: string }
-type Mese = { mese: string; dati: { mese: string; giorni: Giorno[]; cambi?: Cambio[] } }
-type Sigla = { s: string; agg: boolean; tvr: boolean; p?: string; barrato?: boolean; sub?: boolean }
+import { cambiDel, conCambi, conPos, spezza, GIORNI, type Cambio, type Mese, type Sigla } from '../lib/turni'
+import RigaCambi from '../components/RigaCambi'
 
-const POS = ['F1', 'F2', 'A', 'A', 'B', 'B', 'L', 'L', 'L']
-const spezza = (t: string): Sigla[] => t.split(' ').filter(Boolean).map((x) => ({ s: x.replace(/[*~]/g, ''), agg: x.includes('*'), tvr: x.includes('~') }))
-const conPos = (t: string): Sigla[] => {
-  const v = spezza(t)
-  const pos = v[0]?.tvr ? ['TVR', ...POS] : POS
-  return v.map((x, i) => ({ ...x, p: pos[i] ?? '' }))
-}
-/* Applica i cambi: l'originale resta barrato, chi subentra va in fondo alla riga con la stessa postazione */
-const conCambi = (v: Sigla[], cambi: Cambio[]): Sigla[] => {
-  if (!cambi.length) return v
-  const out = v.map((x) => ({ ...x }))
-  const nuovi: Sigla[] = []
-  for (const c of cambi) {
-    const j = out[c.i]?.s === c.da ? c.i : out.findIndex((x) => x.s === c.da && !x.barrato)
-    if (j < 0) continue
-    out[j].barrato = true
-    nuovi.push({ s: c.a, agg: false, tvr: false, p: out[j].p, sub: true })
-  }
-  return [...out, ...nuovi]
-}
-const GIORNI = ['dom', 'lun', 'mar', 'mer', 'gio', 'ven', 'sab']
 const CHIAVE_SIGLA = 'emergenze.turni.sigla'
 
 const leggiTurni = (): Mese[] => { try { return JSON.parse(leggi(CHIAVE_DATI) ?? '{}').turni ?? [] } catch { return [] } }
@@ -120,10 +91,11 @@ function Chip({ x, tono, mia, apri }: { x: Sigla; tono: string; mia: boolean; ap
   const t = tono
   const colore = mia && !x.barrato ? 'bg-[#e8c34a] text-[#2b2410] border-[#b8902a] font-black shadow-sm' : x.sub ? `${SCURO[t]} font-black` : `${TONO[t]} font-bold`
   const cls = `inline-flex items-baseline gap-1 rounded-lg border px-1.5 py-0.5 text-[13px] leading-tight ${colore} ${x.agg ? 'border-2 !border-current' : ''} ${x.barrato ? 'opacity-55' : ''} ${mia && x.barrato ? 'outline outline-2 outline-[#e8c34a]' : ''}`
-  const title = x.barrato ? 'Cambio turno: sostituito' : x.sub ? 'Subentrato con cambio turno' : x.agg ? 'Produttività aggiuntiva' : undefined
+  const title = x.barrato ? 'Cambio turno: sostituito' : x.sub ? (x.app ? 'Subentrato con cambio segnato nell’app (vedi registro)' : 'Subentrato con cambio turno') : x.agg ? 'Produttività aggiuntiva' : undefined
   const dentro = (<>
     {x.p && <span className="text-[9.5px] font-extrabold opacity-70">{x.p}</span>}
     <span className={`${x.s === 'YY' ? 'opacity-50' : ''} ${x.barrato ? 'line-through decoration-2' : ''} ${apri ? 'underline decoration-dotted decoration-1 underline-offset-2' : ''}`}>{x.s}</span>
+    {x.app && <span className="text-[10px] font-black opacity-80" aria-label="cambio segnato nell'app">⇄</span>}
   </>)
   return apri
     ? <button type="button" onClick={() => apri(x.s)} className={`${cls} cursor-pointer active:scale-95`} title={title}>{dentro}</button>
@@ -180,7 +152,7 @@ export default function Turni() {
   const giorni = useMemo(() => {
     if (!mese) return []
     const [a, mm] = mese.mese.split('-').map(Number)
-    const cambi = mese.dati.cambi ?? []
+    const cambi = cambiDel(mese)
     return mese.dati.giorni.map((g) => {
       const d = new Date(a, mm - 1, g.g)
       const cc = (t: Cambio['t']) => cambi.filter((c) => c.g === g.g && c.t === t)
@@ -231,6 +203,8 @@ export default function Turni() {
         </section>
       </div>
 
+      <RigaCambi mesi={mesi} visto={mese.mese} sigla={S} aggiornato={() => { setMesi(leggiTurni()); setColleghi(leggiColleghi()) }} />
+
       {S && miei.length > 0 && (
         <section className="card !p-3 flex flex-wrap gap-1.5">
           {miei.map((x) => (
@@ -269,7 +243,7 @@ export default function Turni() {
       <section className="card !p-3 text-[12px] text-tenue leading-snug flex flex-wrap gap-x-4 gap-y-1">
         <span><b>F1/F2</b> flussi</span><span><b>A</b> alta</span><span><b>B</b> boarding</span><span><b>L</b> bassa</span><span><b>TVR</b></span>
         <span>bordo spesso = produttività aggiuntiva</span><span>sigla sottolineata: tocca per nome e numero</span><span>in giallo: la sigla scritta in «La mia sigla»</span><span>fuori turno e OBI non riportati</span>
-        <span><s>barrato</s> = ceduto con cambio turno; in colore scuro, in fondo alla riga, chi subentra</span>
+        <span><s>barrato</s> = ceduto con cambio turno; in colore scuro, in fondo alla riga, chi subentra; ⇄ = cambio segnato nell’app</span>
         <span>Fonte: prospetto mensile (I. Grassi) + cambi turno segnalati.</span>
       </section>
     </div>

@@ -20,6 +20,14 @@ Strumenti per il pronto soccorso, in un'app web installabile sul telefono: calco
 
 Le dosi riportate vanno sempre verificate su linee guida e scheda tecnica.
 
+## Cambi turno (scheda Turni)
+
+Riga «Segna un cambio» in cima alla scheda Turni (`src/components/RigaCambi.tsx`, sintassi in `src/lib/turni.ts` → `interpreta`):
+
+- `12/12 VR > BN` cessione · `12/12 VR <> BN` scambio nello stesso giorno · `12/12 VR <> BN 15/12` scambio tra due giorni. Anche «a» / «con», `->`, `<->`. Data: `12` (mese visualizzato), `12/12`, `oggi`, `domani`, `sab`. Il turno si ricava dall'orario; se la sigla ha più turni quel giorno l'app chiede quale (oppure `12 P VR > BN`: M, P, N, NN, RM, RP, RN).
+- Stesso PIN della Rubrica, nessun login: il cambio vale subito ed entra nel registro (tabella `emergenze_cambi`: autore dichiarato da «La mia sigla», ora, hash dell'indirizzo). Chiunque abbia il PIN può annullarlo; non si annulla un cambio già ceduto di nuovo a catena.
+- Funzione `supabase/functions/emergenze-cambi` (verify_jwt disattivato); `emergenze-rubrica` restituisce il registro per mese (`registro`). I cambi inseriti a mano in `emergenze_turni.dati.cambi` restano e vengono applicati prima di quelli dell'app; nel calendario quelli dell'app hanno il segno ⇄.
+
 ## Riconoscimenti delle card
 
 `src/lib/riconoscimenti.ts`, componente `src/components/Riconoscimenti.tsx`. Chiave della card: `<pagina>/<id>` (es. `linee-guida/colica-renale`, `percorsi/ebola`, `dimissione/scabbia`, `modulo/trasfusione`).
