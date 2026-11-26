@@ -90,15 +90,19 @@ const SCURO: Record<string, string> = {
 /* In modalità cambio ogni box si può toccare per sceglierlo (scelto = bordo e anello) */
 type Ctl = (t: Turno, i: number, x: Sigla) => { tocca?: () => void; scelto: boolean } | null
 
+/* Casella sbarrata (diagonale rossa) per chi ha ceduto il turno */
+const SBARRA = { background: 'linear-gradient(to top right, transparent calc(50% - 2px), #b91c1c calc(50% - 2px), #b91c1c calc(50% + 2px), transparent calc(50% + 2px))' }
+
 function Chip({ x, tono, mia, apri, ctl }: { x: Sigla; tono: string; mia: boolean; apri?: (s: string) => void; ctl?: { tocca?: () => void; scelto: boolean } | null }) {
   const t = tono
   const colore = mia && !x.barrato ? 'bg-[#e8c34a] text-[#2b2410] border-[#b8902a] font-black shadow-sm' : x.sub ? `${SCURO[t]} font-black` : `${TONO[t]} font-bold`
-  const cls = `inline-flex items-baseline gap-1 rounded-lg border px-1.5 py-0.5 text-[13px] leading-tight ${colore} ${x.agg ? 'border-2 !border-current' : ''} ${x.barrato ? 'opacity-55' : ''} ${mia && x.barrato ? 'outline outline-2 outline-[#e8c34a]' : ''} ${ctl?.scelto ? 'ring-[3px] ring-[#c2410c] ring-offset-1 scale-105' : ''} ${ctl && !ctl.tocca ? 'opacity-40' : ''}`
+  const cls = `inline-flex items-baseline gap-1 rounded-lg border px-1.5 py-0.5 text-[13px] leading-tight ${colore} ${x.agg ? 'border-2 !border-current' : ''} ${x.barrato ? 'relative overflow-hidden' : ''} ${mia && x.barrato ? 'outline outline-2 outline-[#e8c34a]' : ''} ${ctl?.scelto ? 'ring-[3px] ring-[#c2410c] ring-offset-1 scale-105' : ''} ${ctl && !ctl.tocca ? 'opacity-40' : ''}`
   const title = x.barrato ? 'Cambio turno: sostituito' : x.sub ? (x.app ? 'Subentrato con cambio segnato nell’app (vedi registro)' : 'Subentrato con cambio turno') : x.agg ? 'Produttività aggiuntiva' : undefined
   const dentro = (<>
     {x.p && <span className="text-[9.5px] font-extrabold opacity-70">{x.p}</span>}
     <span className={`${x.s === 'YY' ? 'opacity-50' : ''} ${x.barrato ? 'line-through decoration-2' : ''} ${apri ? 'underline decoration-dotted decoration-1 underline-offset-2' : ''}`}>{x.s}</span>
     {x.app && <span className="text-[10px] font-black opacity-80" aria-label="cambio segnato nell'app">⇄</span>}
+    {x.barrato && <span aria-hidden className="pointer-events-none absolute inset-0" style={SBARRA} />}
   </>)
   if (ctl) return ctl.tocca
     ? <button type="button" onClick={ctl.tocca} className={`${cls} cursor-pointer active:scale-95 ${ctl.scelto ? '' : 'border-dashed'}`} title="Tocca per scegliere">{dentro}</button>
@@ -267,7 +271,7 @@ export default function Turni() {
       <section className="card !p-3 text-[12px] text-tenue leading-snug flex flex-wrap gap-x-4 gap-y-1">
         <span><b>F1/F2</b> flussi</span><span><b>A</b> alta</span><span><b>B</b> boarding</span><span><b>L</b> bassa</span><span><b>TVR</b></span>
         <span>bordo spesso = produttività aggiuntiva</span><span>sigla sottolineata: tocca per nome e numero</span><span>in giallo: la sigla scritta in «La mia sigla»</span><span>fuori turno e OBI non riportati</span>
-        <span><s>barrato</s> = ceduto con cambio turno; in colore scuro, in fondo alla riga, chi subentra; ⇄ = cambio segnato nell’app (pulsante «⇄ Cambio» in alto, poi tocca i turni)</span>
+        <span>casella sbarrata = ha ceduto il turno; in colore scuro, in fondo alla riga, chi subentra; ⇄ = cambio segnato nell’app (pulsante «⇄ Cambio» in alto, poi tocca i turni)</span>
         <span>Fonte: prospetto mensile (I. Grassi) + cambi turno segnalati.</span>
       </section>
     </div>
