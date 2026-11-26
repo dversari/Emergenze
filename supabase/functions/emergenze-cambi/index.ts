@@ -2,6 +2,8 @@
 // Stesso PIN della rubrica (emergenze_config.pin_rubrica_sha256) e stesso blocco dei PIN errati (emergenze_accessi).
 // Nessun login: ogni cambio è subito valido, resta nel registro (emergenze_cambi) con autore dichiarato,
 // ora e hash dell'indirizzo, e chiunque abbia il PIN può annullarlo (annullato_il / annullato_autore).
+// Un trigger (emergenze_cambi_verso_turni) riporta i cambi che riguardano VR nella tabella turni del Cruscotto
+// e avvia la sincronizzazione con il calendario iCloud.
 // Deploy con verify_jwt disattivato (l'app non ha login).
 import { createClient } from 'npm:@supabase/supabase-js@2'
 
@@ -36,7 +38,7 @@ async function ipHash(req: Request) {
   return (await sha256('emergenze-ip:' + ip)).slice(0, 32)
 }
 
-type Cambio = { mese: string; g: number; t: string; i: number; da: string; a: string }
+type Cambio = { mese: string; g: number; t: string; i: number; da: string; a: string; pos?: string | null }
 type Riga = Cambio & { id: number; gruppo: string; annullato_il: string | null }
 
 Deno.serve(async (req) => {
@@ -69,7 +71,8 @@ Deno.serve(async (req) => {
       if (cambi.length < 1 || cambi.length > 2) return out(400, { error: 'Richiesta non valida' })
       for (const x of cambi) {
         if (typeof x?.mese !== 'string' || !/^\d{4}-\d{2}$/.test(x.mese) || !Number.isInteger(x.g) || !TURNI.has(x.t) || !Number.isInteger(x.i)
-          || typeof x.da !== 'string' || typeof x.a !== 'string' || !SIGLA.test(x.da) || !SIGLA.test(x.a) || x.da === x.a) return out(400, { error: 'Cambio non valido' })
+          || typeof x.da !== 'string' || typeof x.a !== 'string' || !SIGLA.test(x.da) || !SIGLA.test(x.a) || x.da === x.a
+          || (x.pos != null && !/^[A-Z0-9]{1,3}$/.test(String(x.pos)))) return out(400, { error: 'Cambio non valido' })
       }
       // Chi cede deve risultare in quel turno (prospetto + cambi già registrati)
       const mesi = [...new Set(cambi.map((x) => x.mese))]
@@ -84,7 +87,7 @@ Deno.serve(async (req) => {
         if (!presenti.has(x.da)) return out(409, { error: `${x.da} non risulta in quel turno il ${x.g}/${x.mese.slice(5)}: ricarica la pagina` })
       }
       const gruppo = crypto.randomUUID()
-      const { error } = await admin.from('emergenze_cambi').insert(cambi.map((x) => ({ ...x, gruppo, autore, ip_hash: ip })))
+      const { error } = await admin.from('emergenze_cambi').insert(cambi.map((x) => ({ mese: x.mese, g: x.g, t: x.t, i: x.i, da: x.da, a: x.a, pos: x.pos ?? null, gruppo, autore, ip_hash: ip })))
       if (error) return out(500, { error: error.message })
       return out(200, { ok: true, gruppo })
     }

@@ -62,7 +62,7 @@ export const dataBreve = (mese: string, g: number) => {
  * Facoltativo il turno dopo la data: 12 P VR > BN (M, P, N, NN, RM, RP, RN).
  * Date: 12 (mese visualizzato), 12/12, 12/12/26, oggi, domani, lun…dom (il prossimo).
  */
-export type Nuovo = { mese: string; g: number; t: Turno; i: number; da: string; a: string; descr: string }
+export type Nuovo = { mese: string; g: number; t: Turno; i: number; da: string; a: string; pos: string | null; descr: string }
 export type Esito =
   | { tipo: 'vuoto' }
   | { tipo: 'errore'; msg: string }
@@ -185,7 +185,7 @@ export function interpreta(testo: string, ctx: { mesi: Mese[]; visto: string; og
     if (al.length) avvisi.push(`${a} quel giorno è anche in ${al.map((y) => etichetta(y.t, y.p)).join(', ')}`)
     return {
       tipo: 'ok', avvisi,
-      cambi: [{ mese: d1.mese, g: d1.g, t: x1.t, i: x1.i, da, a, descr: `${dataBreve(d1.mese, d1.g)} · ${etichetta(x1.t, x1.p)} · ${da} → ${a}` }],
+      cambi: [{ mese: d1.mese, g: d1.g, t: x1.t, i: x1.i, da, a, pos: x1.p || null, descr: `${dataBreve(d1.mese, d1.g)} · ${etichetta(x1.t, x1.p)} · ${da} → ${a}` }],
     }
   }
 
@@ -211,8 +211,8 @@ export function interpreta(testo: string, ctx: { mesi: Mese[]; visto: string; og
   return {
     tipo: 'ok', avvisi,
     cambi: [
-      { mese: d1.mese, g: d1.g, t: x1.t, i: x1.i, da, a, descr: `${dataBreve(d1.mese, d1.g)} · ${etichetta(x1.t, x1.p)} · ${da} → ${a}` },
-      { mese: dd.mese, g: dd.g, t: x2.t, i: x2.i, da: a, a: da, descr: `${dataBreve(dd.mese, dd.g)} · ${etichetta(x2.t, x2.p)} · ${a} → ${da}` },
+      { mese: d1.mese, g: d1.g, t: x1.t, i: x1.i, da, a, pos: x1.p || null, descr: `${dataBreve(d1.mese, d1.g)} · ${etichetta(x1.t, x1.p)} · ${da} → ${a}` },
+      { mese: dd.mese, g: dd.g, t: x2.t, i: x2.i, da: a, a: da, pos: x2.p || null, descr: `${dataBreve(dd.mese, dd.g)} · ${etichetta(x2.t, x2.p)} · ${a} → ${da}` },
     ],
   }
 }
